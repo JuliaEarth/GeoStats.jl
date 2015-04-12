@@ -1,0 +1,8 @@
+language: julia
+os:
+  - linux
+  - osx
+julia:
+  - nightly
+notifications:
+  email: false
