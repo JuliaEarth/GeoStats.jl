@@ -15,7 +15,7 @@
 include("covmodels.jl")
 include("utils.jl")
 
-using CovarianceModel: gaussian
+using .CovarianceModel: gaussian
 
 ## 2nd-order stationary Kriging
 ##
