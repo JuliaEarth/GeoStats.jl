@@ -23,8 +23,4 @@ Algorithms
 Contributing
 ------------
 
-You're very encouraged to contribute patches and ideas, I'll be glad to apply them and
-add your name to the contributors list.
-
-If you published any material using this package, feel free to share. A reference will be
-added to this website for others interested in reading your work.
+You're very encouraged to contribute patches and ideas. If you have questions or suggestions, please [open an issue](https://github.com/juliohm/GeoStats.jl/issues).
