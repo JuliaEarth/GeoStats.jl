@@ -17,9 +17,17 @@ Algorithms
 ----------
 
 ### Estimation
-* Simple Kriging
-* Ordinary Kriging
-* Universal Kriging
+
+Method | Function
+:-----:|:--------:
+Simple Kriging | `kriging`
+Ordinary Kriging | `kriging`
+Universal Kriging | `unikrig`
+
+Documentation
+-------------
+
+The library is well documented. Type `?` in the Julia prompt followed by the name of the function (e.g. kriging).
 
 Contributing
 ------------
