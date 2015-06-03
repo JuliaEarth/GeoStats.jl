@@ -17,26 +17,31 @@ include("utils.jl")
 
 using .CovarianceModel: gaussian
 
-## 2nd-order stationary Kriging
-##
-## Polyalgorithm for 2nd-order stationary Kriging.
-## If μ is nothing, Ordinary Kriging is performed,
-## otherwise, Simple Kriging is triggered with μ
-## as the constant mean for the random field.
-##
-##   x₀ ∈ ℜᵐ      - estimation location
-##   X  ∈ ℜ^(mxn) - matrix of data locations
-##   z  ∈ ℜⁿ      - vector of observations for X
-##   μ  ∈ ℜ       - mean of z (or nothing)
-##   cov          - covariance model (default to Gaussian)
-##
-## The algorithm returns the estimate at x₀ and
-## the associated estimation variance.
-##
-## References
-## ----------
-## OLEA, R. A., 1999. Geostatistics for Engineers
-## and Earth Scientists.
+@doc doc"""
+  2nd-order stationary Kriging
+
+  Polyalgorithm for 2nd-order stationary Kriging.
+  If μ is nothing, Ordinary Kriging is performed,
+  otherwise, Simple Kriging is triggered with μ
+  as the constant mean for the random field.
+
+      kriging(x₀, X, z, μ=nothing, cov=gaussian)
+
+  where
+
+    * x₀ ∈ ℜᵐ      - estimation location
+    * X  ∈ ℜ^(mxn) - matrix of data locations
+    * z  ∈ ℜⁿ      - vector of observations for X
+    * μ  ∈ ℜ       - mean of z (or nothing)
+    * cov          - covariance model (default to standard Gaussian)
+
+  The algorithm returns the estimate at x₀ and
+  the associated estimation variance.
+
+  ### References
+  1. OLEA, R. A., 1999. Geostatistics for Engineers
+  and Earth Scientists.
+  """ ->
 function kriging(x₀, X, z; μ=nothing, cov=gaussian)
     @assert size(X) == (length(x₀), length(z))
 
@@ -58,4 +63,64 @@ function kriging(x₀, X, z; μ=nothing, cov=gaussian)
         # estimate and variance
         z'λ[1:n], cov(0) - c'λ
     end
+end
+
+
+# Gaussian variogram γ(h) for universal Kriging
+γgauss(h; a=1, b=1) = a - gaussian(h, a=a, b=b)
+
+
+@doc doc"""
+  Universal Kriging (a.k.a. Kriging with drift)
+
+  Kriging with polynomial drift for the mean.
+
+      unikrig(x₀, X, z, degree=1, γ=γgauss)
+
+    where
+
+    * x₀ ∈ ℜᵐ      - estimation location
+    * X  ∈ ℜ^(mxn) - matrix of data locations
+    * z  ∈ ℜⁿ      - vector of observations for X
+    * degree       - polynomial degree for the drift
+    * γ            - variogram model (default to standard Gaussian)
+
+  Ordinary Kriging is recovered for 0th degree polynomial.
+
+  The algorithm returns the estimate at x₀ and
+  the associated estimation variance.
+
+  ### References
+  1. OLEA, R. A., 1999. Geostatistics for Engineers
+  and Earth Scientists.
+  """ ->
+function unikrig(x₀, X, z; degree=1, γ=γgauss)
+    @assert size(X) == (length(x₀), length(z))
+    @assert degree ≥ 0
+
+    dim = length(x₀)
+
+    n = length(z)
+    Γ = pairwise(γ, X)
+    g = Float64[γ(norm(X[:,j]-x₀)) for j=1:n]
+
+    # multinomial expansion
+    exponents = zeros(0, dim)
+    for d=degree:-1:0
+      exponents = [exponents; multinom_exp(dim, d, sortdir="descend")]
+    end
+    exponents = exponents'
+
+    nterms = size(exponents, 2)
+
+    F = Float64[prod(X[:,i].^exponents[:,j]) for i=1:n, j=1:nterms]
+    f = Float64[prod(x₀.^exponents[:,j]) for j=1:nterms]
+
+    A = [Γ F; F' zeros(nterms,nterms)]
+    a = [g; f]
+
+    λ = A \ a
+
+    # estimate and variance
+    z'λ[1:n], a'λ
 end

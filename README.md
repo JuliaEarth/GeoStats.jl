@@ -19,6 +19,7 @@ Algorithms
 ### Estimation
 * Simple Kriging
 * Ordinary Kriging
+* Universal Kriging
 
 Contributing
 ------------
