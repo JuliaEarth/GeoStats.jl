@@ -27,7 +27,7 @@ Universal Kriging | `unikrig`
 Documentation
 -------------
 
-The library is well documented. Type `?` in the Julia prompt followed by the name of the function (e.g. kriging).
+The library is well documented. Type `?` in the Julia prompt followed by the name of the function (e.g. kriging) for help.
 
 Contributing
 ------------
