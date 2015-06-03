@@ -18,7 +18,7 @@ include("kriging.jl")
 
 export
   # functions
-  kriging
+  kriging,
   unikrig
 
 end
