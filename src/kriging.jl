@@ -25,7 +25,7 @@ using .CovarianceModel: gaussian
   otherwise, Simple Kriging is triggered with μ
   as the constant mean for the random field.
 
-      kriging(x₀, X, z, μ=nothing, cov=gaussian)
+      kriging(x₀, X, z; μ=nothing, cov=gaussian)
 
   where
 
@@ -54,14 +54,14 @@ function kriging(x₀, X, z; μ=nothing, cov=gaussian)
         λ = C \ c
 
         # estimate and variance
-        μ + y'λ, cov(0) - c'λ
+        μ + y⋅λ, cov(0) - c⋅λ
     else                        # Ordinary Kriging
         C = [C ones(n); ones(n)' 0]
         c = [c; 1]
         λ = C \ c
 
         # estimate and variance
-        z'λ[1:n], cov(0) - c'λ
+        z⋅λ[1:n], cov(0) - c⋅λ
     end
 end
 
@@ -75,7 +75,7 @@ end
 
   Kriging with polynomial drift for the mean.
 
-      unikrig(x₀, X, z, degree=1, γ=γgauss)
+      unikrig(x₀, X, z; degree=1, γ=γgauss)
 
     where
 
@@ -122,5 +122,5 @@ function unikrig(x₀, X, z; degree=1, γ=γgauss)
     λ = A \ a
 
     # estimate and variance
-    z'λ[1:n], a'λ
+    z⋅λ[1:n], a⋅λ
 end
