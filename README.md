@@ -1,5 +1,6 @@
 [![Build Status](https://travis-ci.org/juliohm/GeoStats.jl.svg?branch=master)](https://travis-ci.org/juliohm/GeoStats.jl)
 [![GeoStats](http://pkg.julialang.org/badges/GeoStats_nightly.svg)](http://pkg.julialang.org/?pkg=GeoStats&ver=nightly)
+[![Coverage Status](https://coveralls.io/repos/juliohm/GeoStats.jl/badge.svg?branch=master)](https://coveralls.io/r/juliohm/GeoStats.jl?branch=master)
 
 GeoStats.jl
 ===========
