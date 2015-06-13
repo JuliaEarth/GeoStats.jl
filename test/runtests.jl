@@ -1,12 +1,12 @@
 using GeoStats
 using Base.Test
 
+# floating point tolerance
+tol = 3eps()
+
 dim = 3; nobs = 10
 X = rand(dim,nobs); z = rand(nobs)
 x₀ = rand(dim)
-
-# floating point tolerance
-tol = 3eps()
 
 # Kriging is an interpolator
 for j=1:nobs
@@ -29,3 +29,9 @@ OKestimate, OKvar = kriging(x₀, X, z)
 UKestimate, UKvar = unikrig(x₀, X, z, degree=0)
 @test isapprox(OKestimate, UKestimate)
 @test isapprox(OKvar, UKvar)
+
+# covariance is decreasing
+h = linspace(0,100)
+@test all(CovarianceModel.gaussian(h) .≥ CovarianceModel.gaussian(h+1))
+@test all(CovarianceModel.spherical(h) .≥ CovarianceModel.spherical(h+1))
+@test all(CovarianceModel.exponential(h) .≥ CovarianceModel.exponential(h+1))

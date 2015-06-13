@@ -15,10 +15,11 @@
 module CovarianceModel
 
 ## Isotropic stationary
-gaussian(h; a=1, b=1) = a * exp(-(h/b)^2)
+
+gaussian(h; a=1, b=1) = a * exp(-(h/b).^2)
 
 exponential(h; a=1, b=1) = a * exp(-(h/b))
 
-spherical(h; a=1, b=1) = (h > b) ? 0 : a * (1 - 1.5h/b + 0.5(h/b)^3)
+spherical(h; a=1, b=1) = (h .≤ b) .* a .* (1 - 1.5h/b + 0.5(h/b).^3)
 
 end
