@@ -17,6 +17,9 @@ module GeoStats
 include("kriging.jl")
 
 export
+  # submodules
+  CovarianceModel,
+
   # functions
   kriging,
   unikrig
