@@ -33,4 +33,4 @@ The library is well documented. Type `?` in the Julia prompt followed by the nam
 Contributing
 ------------
 
-You're very encouraged to contribute patches and ideas. If you have questions or suggestions, please [open an issue](https://github.com/juliohm/GeoStats.jl/issues).
+You are encouraged to contribute patches and ideas. If you have questions or suggestions, please [open an issue](https://github.com/juliohm/GeoStats.jl/issues).
