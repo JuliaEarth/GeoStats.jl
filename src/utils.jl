@@ -12,6 +12,10 @@
 ## ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 ## OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
+if VERSION > v"0.5-"
+  using Combinatorics: combinations
+end
+
 @doc doc"""
   Evaluate a metric between all n² pairs of columns in a m-by-n matrix efficiently.
   """ ->
