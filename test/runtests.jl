@@ -2,10 +2,10 @@ using GeoStats
 using Base.Test
 
 # floating point tolerance
-tol = 3eps()
+tol = 10eps()
 
 dim = 3; nobs = 10
-X = rand(dim,nobs); z = rand(nobs)
+X = rand(dim, nobs); z = rand(nobs)
 x₀ = rand(dim)
 
 # Kriging is an interpolator
