@@ -14,6 +14,12 @@
 
 module GeoStats
 
+if VERSION > v"0.5-"
+  using Combinatorics: combinations
+end
+
+include("utils.jl")
+include("covmodels.jl")
 include("kriging.jl")
 
 export

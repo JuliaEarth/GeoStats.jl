@@ -12,9 +12,6 @@
 ## ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 ## OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
-include("covmodels.jl")
-include("utils.jl")
-
 using .CovarianceModel: gaussian
 
 @doc doc"""
