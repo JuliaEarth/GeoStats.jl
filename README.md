@@ -14,12 +14,6 @@ Installation
 Pkg.add("GeoStats")
 ```
 
-Optionally run the test suite with:
-
-```julia
-Pkg.test("GeoStats")
-```
-
 Algorithms
 ----------
 
