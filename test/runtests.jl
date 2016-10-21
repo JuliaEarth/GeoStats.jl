@@ -10,7 +10,7 @@ x₀ = rand(dim)
 
 # Kriging is an interpolator
 for j=1:nobs
-  SKestimate, SKvar = kriging(X[:,j], X, z, μ=(nobs+1)/2)
+  SKestimate, SKvar = kriging(X[:,j], X, z, μ=mean(z))
   OKestimate, OKvar = kriging(X[:,j], X, z)
   UKestimate, UKvar = unikrig(X[:,j], X, z, degree=1)
 
