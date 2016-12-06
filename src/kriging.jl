@@ -39,7 +39,7 @@ using .CovarianceModel: gaussian
   1. OLEA, R. A., 1999. Geostatistics for Engineers
   and Earth Scientists.
   """ ->
-function kriging(x₀::AbstractVector, X::AbstractArray, z::AbstractVector; μ=nothing, cov=gaussian)
+function kriging(x₀::AbstractVector, X::AbstractMatrix, z::AbstractVector; μ=nothing, cov=gaussian)
     @assert size(X) == (length(x₀), length(z))
 
     n = length(z)
@@ -91,7 +91,7 @@ end
   1. OLEA, R. A., 1999. Geostatistics for Engineers
   and Earth Scientists.
   """ ->
-function unikrig(x₀::AbstractVector, X::AbstractArray, z::AbstractVector; degree=1, γ=γgauss)
+function unikrig(x₀::AbstractVector, X::AbstractMatrix, z::AbstractVector; degree=1, γ=γgauss)
     @assert size(X) == (length(x₀), length(z))
     @assert degree ≥ 0
 
