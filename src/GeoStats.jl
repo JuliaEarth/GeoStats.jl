@@ -14,9 +14,7 @@
 
 module GeoStats
 
-if VERSION > v"0.5-"
-  using Combinatorics: combinations
-end
+using Combinatorics: combinations
 
 include("utils.jl")
 include("covmodels.jl")
