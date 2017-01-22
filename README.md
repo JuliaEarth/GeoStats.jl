@@ -34,3 +34,7 @@ Contributing
 ------------
 
 You are encouraged to contribute. If you have questions or suggestions, please [open an issue](https://github.com/juliohm/GeoStats.jl/issues).
+
+### TODO
+
+- [ ] Sequential simulation methods
