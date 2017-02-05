@@ -33,9 +33,13 @@ x₀ = rand(dim)
 end
 
 @testset "Covariance models" begin
-  # covariance is decreasing
   h = linspace(0,100)
-  @test all(CovarianceModel.gaussian(h) .≥ CovarianceModel.gaussian(h+1))
-  @test all(CovarianceModel.spherical(h) .≥ CovarianceModel.spherical(h+1))
-  @test all(CovarianceModel.exponential(h) .≥ CovarianceModel.exponential(h+1))
+  gaussian = GaussianCovariance()
+  spherical = SphericalCovariance()
+  exponential = ExponentialCovariance()
+
+  # covariance is a decreasing function
+  @test all(gaussian(h) .≥ gaussian(h+1))
+  @test all(spherical(h) .≥ spherical(h+1))
+  @test all(exponential(h) .≥ exponential(h+1))
 end

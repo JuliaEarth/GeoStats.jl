@@ -12,20 +12,24 @@
 ## ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 ## OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
+__precompile__(true)
+
 module GeoStats
 
 using Combinatorics: combinations
 
-include("utils.jl")
 include("covmodels.jl")
 include("kriging.jl")
+include("utils.jl")
 
 export
-  # submodules
-  CovarianceModel,
-
   # functions
   kriging,
-  unikrig
+  unikrig,
+
+  # types
+  GaussianCovariance,
+  SphericalCovariance,
+  ExponentialCovariance
 
 end

@@ -12,14 +12,26 @@
 ## ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 ## OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
-module CovarianceModel
+abstract CovarianceModel
+sill(c::CovarianceModel) = c.sill
 
-## Isotropic stationary
-
-gaussian(h; a=1, b=1) = a * exp(-(h/b).^2)
-
-exponential(h; a=1, b=1) = a * exp(-(h/b))
-
-spherical(h; a=1, b=1) = (h .≤ b) .* a .* (1 - 1.5h/b + 0.5(h/b).^3)
-
+immutable GaussianCovariance{T<:Real} <: CovarianceModel
+  sill::T
+  range::T
 end
+GaussianCovariance() = GaussianCovariance(1.,1.)
+(c::GaussianCovariance)(h) = c.sill * exp(-(h/c.range).^2)
+
+immutable SphericalCovariance{T<:Real} <: CovarianceModel
+  sill::T
+  range::T
+end
+SphericalCovariance() = SphericalCovariance(1.,1.)
+(c::SphericalCovariance)(h) = (h .≤ c.range) .* c.sill .* (1 - 1.5h/c.range + 0.5(h/c.range).^3)
+
+immutable ExponentialCovariance{T<:Real} <: CovarianceModel
+  sill::T
+  range::T
+end
+ExponentialCovariance() = ExponentialCovariance(1.,1.)
+(c::ExponentialCovariance)(h) = c.sill * exp(-(h/c.range))

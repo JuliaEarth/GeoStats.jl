@@ -12,8 +12,6 @@
 ## ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 ## OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
-using .CovarianceModel: gaussian
-
 @doc doc"""
   2nd-order stationary Kriging
 
@@ -39,7 +37,8 @@ using .CovarianceModel: gaussian
   1. OLEA, R. A., 1999. Geostatistics for Engineers
   and Earth Scientists.
   """ ->
-function kriging(x₀::AbstractVector, X::AbstractMatrix, z::AbstractVector; μ=nothing, cov=gaussian)
+function kriging(x₀::AbstractVector, X::AbstractMatrix, z::AbstractVector;
+                 μ=nothing, cov=GaussianCovariance())
     @assert size(X) == (length(x₀), length(z))
 
     n = length(z)
@@ -63,10 +62,6 @@ function kriging(x₀::AbstractVector, X::AbstractMatrix, z::AbstractVector; μ=
 end
 
 
-# Gaussian variogram γ(h) for universal Kriging
-γgauss(h; a=1, b=1) = a - gaussian(h, a=a, b=b)
-
-
 @doc doc"""
   Universal Kriging (a.k.a. Kriging with drift)
 
@@ -80,7 +75,7 @@ end
     * X  ∈ ℜ^(mxn) - matrix of data locations
     * z  ∈ ℜⁿ      - vector of observations for X
     * degree       - polynomial degree for the drift
-    * γ            - variogram model (default to standard Gaussian)
+    * cov          - covariance model (default to standard Gaussian)
 
   Ordinary Kriging is recovered for 0th degree polynomial.
 
@@ -91,9 +86,12 @@ end
   1. OLEA, R. A., 1999. Geostatistics for Engineers
   and Earth Scientists.
   """ ->
-function unikrig(x₀::AbstractVector, X::AbstractMatrix, z::AbstractVector; degree=1, γ=γgauss)
+function unikrig(x₀::AbstractVector, X::AbstractMatrix, z::AbstractVector;
+                 degree=1, cov=GaussianCovariance())
     @assert size(X) == (length(x₀), length(z))
     @assert degree ≥ 0
+
+    γ(h) = sill(cov) - cov(h)
 
     dim = length(x₀)
 
