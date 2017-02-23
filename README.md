@@ -10,7 +10,7 @@ GeoStats.jl
 Introduction
 ------------
 
-This project provides efficient geostatistical methods for the Julia programming language. It is in its initial development, and as such only contains Kriging estimation methods. More features will be added as the Julia type system matures.
+This project provides efficient geostatistical methods for the Julia programming language. It is in its initial development, and currently only implements Kriging estimation methods. More features will be added as the Julia type system matures.
 
 Installation
 ------------
