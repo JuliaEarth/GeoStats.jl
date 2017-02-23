@@ -15,6 +15,8 @@ This project provides efficient geostatistical methods for the Julia programming
 Installation
 ------------
 
+Get the latest stable release with Julia's package manager:
+
 ```julia
 Pkg.add("GeoStats")
 ```
