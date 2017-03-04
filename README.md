@@ -37,6 +37,26 @@ Documentation
 
 The library is well documented. Type `?` in the Julia prompt followed by the name of the function (e.g. kriging) for help.
 
+Below is a short example of usage:
+
+```julia
+using GeoStats
+
+# create some data
+dim, nobs = 3, 10
+X = rand(dim, nobs); z = rand(nobs)
+
+# target location
+x₀ = rand(dim)
+
+# define a covariance model
+cov = GaussianCovariance(1.,1.) # sill and range
+
+# estimation
+μ, σ² = kriging(x₀, X, z, cov=cov)
+μ, σ² = unikrig(x₀, X, z, cov=cov)
+```
+
 Contributing
 ------------
 
