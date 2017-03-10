@@ -21,7 +21,6 @@ using Combinatorics: combinations
 include("covmodels.jl")
 include("kriging.jl")
 include("utils.jl")
-include("addUtils.jl")
 
 export
   # functions
@@ -31,7 +30,6 @@ export
   # types
   GaussianCovariance,
   SphericalCovariance,
-  ExponentialCovariance,
-  CircularCovariance
+  ExponentialCovariance
 
 end

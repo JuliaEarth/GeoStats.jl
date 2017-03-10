@@ -37,11 +37,3 @@ immutable ExponentialCovariance{T<:Real} <: CovarianceModel
 end
 ExponentialCovariance() = ExponentialCovariance(1.,1.)
 (c::ExponentialCovariance)(h) = c.sill * exp(-(h/c.range))
-
-
-immutable CircularCovariance{T<:Real} <: CovarianceModel
-  sill::T
-  range::T
-end
-CircularCovariance() = CircularCovariance(1.,1.)
-(c::CircularCovariance)(h) =  (h .≤ c.range) .* c.sill .* ( 1 - ( (2*h/(pi*c.range)).*sqrt(1 - (h/c.range).^2) + (2/pi)*asin(h/c.range) ) ) 
