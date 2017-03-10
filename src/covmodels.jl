@@ -16,11 +16,13 @@ abstract CovarianceModel
 sill(c::CovarianceModel) = c.sill
 
 immutable GaussianCovariance{T<:Real} <: CovarianceModel
-  sill::T
+  nugget::T
+  sill::T # here "sill" refers to the total sill (which is nugget + partial sill)
   range::T
 end
-GaussianCovariance() = GaussianCovariance(1.,1.)
-(c::GaussianCovariance)(h) = c.sill * exp(-(h/c.range).^2)
+GaussianCovariance() = GaussianCovariance(0.,1.,1.)
+(c::GaussianCovariance)(h) = (c.sill - c.nugget) * exp(-(h/c.range).^2)
+
 
 immutable SphericalCovariance{T<:Real} <: CovarianceModel
   sill::T
