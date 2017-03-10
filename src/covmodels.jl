@@ -13,27 +13,30 @@
 ## OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
 abstract CovarianceModel
+
+# sill refers to the total sill, which is nugget + partial sill
 sill(c::CovarianceModel) = c.sill
 
 immutable GaussianCovariance{T<:Real} <: CovarianceModel
   nugget::T
-  sill::T # here "sill" refers to the total sill (which is nugget + partial sill)
+  sill::T
   range::T
 end
 GaussianCovariance() = GaussianCovariance(0.,1.,1.)
 (c::GaussianCovariance)(h) = (c.sill - c.nugget) * exp(-(h/c.range).^2)
 
-
 immutable SphericalCovariance{T<:Real} <: CovarianceModel
+  nugget::T
   sill::T
   range::T
 end
-SphericalCovariance() = SphericalCovariance(1.,1.)
-(c::SphericalCovariance)(h) = (h .≤ c.range) .* c.sill .* (1 - 1.5h/c.range + 0.5(h/c.range).^3)
+SphericalCovariance() = SphericalCovariance(0.,1.,1.)
+(c::SphericalCovariance)(h) = (h .≤ c.range) .* (c.sill - c.nugget) .* (1 - 1.5h/c.range + 0.5(h/c.range).^3)
 
 immutable ExponentialCovariance{T<:Real} <: CovarianceModel
+  nugget::T
   sill::T
   range::T
 end
-ExponentialCovariance() = ExponentialCovariance(1.,1.)
-(c::ExponentialCovariance)(h) = c.sill * exp(-(h/c.range))
+ExponentialCovariance() = ExponentialCovariance(0.,1.,1.)
+(c::ExponentialCovariance)(h) = (c.sill - c.nugget) * exp(-(h/c.range))
