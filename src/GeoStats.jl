@@ -30,6 +30,7 @@ export
   # types
   GaussianCovariance,
   SphericalCovariance,
-  ExponentialCovariance
+  ExponentialCovariance,
+  CircularCovariance
 
 end
