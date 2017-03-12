@@ -14,9 +14,6 @@
 
 abstract CovarianceModel
 
-# sill refers to the total sill, which is nugget + partial sill
-sill(c::CovarianceModel) = c.sill
-
 immutable GaussianCovariance{T<:Real} <: CovarianceModel
   nugget::T
   sill::T

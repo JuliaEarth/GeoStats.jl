@@ -16,19 +16,19 @@
   Evaluate a metric between all n² pairs of columns in a m-by-n matrix efficiently.
   """ ->
 function pairwise(metric, X::AbstractMatrix)
-    m, n = size(X)
-    D = zeros(n, n)
-    for j=1:n
-        for i=j+1:n
-            @inbounds D[i,j] = metric(norm(X[:,i] - X[:,j]))
-        end
-        @inbounds D[j,j] = metric(0)
-        for i=1:j-1
-            @inbounds D[i,j] = D[j,i] # leveraging the symmetry
-        end
+  m, n = size(X)
+  D = zeros(n, n)
+  for j=1:n
+    for i=j+1:n
+      @inbounds D[i,j] = metric(norm(X[:,i] - X[:,j]))
     end
+    @inbounds D[j,j] = metric(0)
+    for i=1:j-1
+      @inbounds D[i,j] = D[j,i] # leveraging the symmetry
+    end
+  end
 
-    D
+  D
 end
 
 

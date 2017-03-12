@@ -39,26 +39,26 @@
   """ ->
 function kriging(x₀::AbstractVector, X::AbstractMatrix, z::AbstractVector;
                  μ=nothing, cov=GaussianCovariance())
-    @assert size(X) == (length(x₀), length(z))
+  @assert size(X) == (length(x₀), length(z))
 
-    n = length(z)
-    C = pairwise(cov, X)
-    c = Float64[cov(norm(X[:,j]-x₀)) for j=1:n]
+  n = length(z)
+  C = pairwise(cov, X)
+  c = Float64[cov(norm(X[:,j]-x₀)) for j=1:n]
 
-    if μ ≠ nothing              # Simple Kriging
-        y = z - μ
-        λ = C \ c
+  if μ ≠ nothing              # Simple Kriging
+    y = z - μ
+    λ = C \ c
 
-        # estimate and variance
-        μ + y⋅λ, cov(0) - c⋅λ
-    else                        # Ordinary Kriging
-        C = [C ones(n); ones(n)' 0]
-        c = [c; 1]
-        λ = C \ c
+    # estimate and variance
+    μ + y⋅λ, cov(0) - c⋅λ
+  else                        # Ordinary Kriging
+    C = [C ones(n); ones(n)' 0]
+    c = [c; 1]
+    λ = C \ c
 
-        # estimate and variance
-        z⋅λ[1:n], cov(0) - c⋅λ
-    end
+    # estimate and variance
+    z⋅λ[1:n], cov(0) - c⋅λ
+  end
 end
 
 
@@ -88,34 +88,34 @@ end
   """ ->
 function unikrig(x₀::AbstractVector, X::AbstractMatrix, z::AbstractVector;
                  degree=1, cov=GaussianCovariance())
-    @assert size(X) == (length(x₀), length(z))
-    @assert degree ≥ 0
+  @assert size(X) == (length(x₀), length(z))
+  @assert degree ≥ 0
 
-    γ(h) = sill(cov) - cov(h)
+  γ(h) = cov(0) - cov(h)
 
-    dim = length(x₀)
+  dim = length(x₀)
 
-    n = length(z)
-    Γ = pairwise(γ, X)
-    g = Float64[γ(norm(X[:,j]-x₀)) for j=1:n]
+  n = length(z)
+  Γ = pairwise(γ, X)
+  g = Float64[γ(norm(X[:,j]-x₀)) for j=1:n]
 
-    # multinomial expansion
-    exponents = zeros(0, dim)
-    for d=0:degree
-      exponents = [exponents; multinom_exp(dim, d, sortdir="descend")]
-    end
-    exponents = exponents'
+  # multinomial expansion
+  exponents = zeros(0, dim)
+  for d=0:degree
+    exponents = [exponents; multinom_exp(dim, d, sortdir="descend")]
+  end
+  exponents = exponents'
 
-    nterms = size(exponents, 2)
+  nterms = size(exponents, 2)
 
-    F = Float64[prod(X[:,i].^exponents[:,j]) for i=1:n, j=1:nterms]
-    f = Float64[prod(x₀.^exponents[:,j]) for j=1:nterms]
+  F = Float64[prod(X[:,i].^exponents[:,j]) for i=1:n, j=1:nterms]
+  f = Float64[prod(x₀.^exponents[:,j]) for j=1:nterms]
 
-    A = [Γ F; F' zeros(nterms,nterms)]
-    a = [g; f]
+  A = [Γ F; F' zeros(nterms,nterms)]
+  a = [g; f]
 
-    λ = A \ a
+  λ = A \ a
 
-    # estimate and variance
-    z⋅λ[1:n], a⋅λ
+  # estimate and variance
+  z⋅λ[1:n], a⋅λ
 end
