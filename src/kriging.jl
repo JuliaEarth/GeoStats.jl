@@ -14,12 +14,16 @@
 
 abstract AbstractEstimator
 @doc doc"""
-  Evaluate estimator at a given location
+    estimate(est, xₒ)
+
+  Evaluate estimator `est` at location `xₒ`
 """ ->
 estimate(::AbstractEstimator, xₒ::AbstractVector) = nothing
 
 @doc doc"""
   Simple Kriging
+
+  *INPUTS*:
 
     * X  ∈ ℜ^(mxn) - matrix of data locations
     * z  ∈ ℜⁿ      - vector of observations for X
@@ -48,6 +52,8 @@ SimpleKriging(X, z, cov, μ) = SimpleKriging{eltype(z)}(X, z, cov, μ)
 @doc doc"""
   Ordinary Kriging
 
+  *INPUTS*:
+
     * X  ∈ ℜ^(mxn) - matrix of data locations
     * z  ∈ ℜⁿ      - vector of observations for X
     * cov          - covariance model
@@ -72,6 +78,8 @@ OrdinaryKriging(X, z, cov) = OrdinaryKriging{eltype(z)}(X, z, cov)
 
 @doc doc"""
   Universal Kriging (a.k.a. Kriging with drift)
+
+  *INPUTS*:
 
     * X  ∈ ℜ^(mxn) - matrix of data locations
     * z  ∈ ℜⁿ      - vector of observations for X
