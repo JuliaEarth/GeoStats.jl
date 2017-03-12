@@ -101,7 +101,7 @@ function unikrig(x₀::AbstractVector, X::AbstractMatrix, z::AbstractVector;
 
     # multinomial expansion
     exponents = zeros(0, dim)
-    for d=degree:-1:0
+    for d=0:degree
       exponents = [exponents; multinom_exp(dim, d, sortdir="descend")]
     end
     exponents = exponents'
