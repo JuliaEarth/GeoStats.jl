@@ -35,8 +35,6 @@ Universal Kriging | `unikrig`
 Documentation
 -------------
 
-The library is well documented. Type `?` in the Julia prompt followed by the name of the function (e.g. kriging) for help.
-
 Below is a short example of usage:
 
 ```julia
@@ -47,14 +45,20 @@ dim, nobs = 3, 10
 X = rand(dim, nobs); z = rand(nobs)
 
 # target location
-x₀ = rand(dim)
+xₒ = rand(dim)
 
 # define a covariance model
-cov = GaussianCovariance(1.,1.) # sill and range
+cov = GaussianCovariance(0.,1.,1.) # nugget, sill and range
 
-# estimation
-μ, σ² = kriging(x₀, X, z, cov=cov)
-μ, σ² = unikrig(x₀, X, z, cov=cov)
+# define an estimator (i.e. build the Kriging system)
+simkrig = SimpleKriging(X, z, cov, mean(z))
+ordkrig = OrdinaryKriging(X, z, cov)
+unikrig = UniversalKriging(X, z, cov, 1)
+
+# estimate at target location
+μ, σ² = estimate(simkrig, xₒ)
+μ, σ² = estimate(ordkrig, xₒ)
+μ, σ² = estimate(unikrig, xₒ)
 ```
 
 Contributing

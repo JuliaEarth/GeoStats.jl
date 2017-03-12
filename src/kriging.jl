@@ -12,110 +12,178 @@
 ## ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 ## OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
+abstract AbstractEstimator
 @doc doc"""
-  2nd-order stationary Kriging
+  Evaluate estimator at a given location
+""" ->
+estimate(::AbstractEstimator, xₒ::AbstractVector) = nothing
 
-  Polyalgorithm for 2nd-order stationary Kriging.
-  If μ is nothing, Ordinary Kriging is performed,
-  otherwise, Simple Kriging is triggered with μ
-  as the constant mean for the random field.
+@doc doc"""
+  Simple Kriging
 
-      kriging(x₀, X, z; μ=nothing, cov=gaussian)
-
-  where
-
-    * x₀ ∈ ℜᵐ      - estimation location
     * X  ∈ ℜ^(mxn) - matrix of data locations
     * z  ∈ ℜⁿ      - vector of observations for X
-    * μ  ∈ ℜ       - mean of z (or nothing)
-    * cov          - covariance model (default to standard Gaussian)
-
-  The algorithm returns the estimate at x₀ and
-  the associated estimation variance.
-
-  ### References
-  1. OLEA, R. A., 1999. Geostatistics for Engineers
-  and Earth Scientists.
+    * cov          - covariance model
+    * μ  ∈ ℜ       - mean of z
   """ ->
-function kriging(x₀::AbstractVector, X::AbstractMatrix, z::AbstractVector;
-                 μ=nothing, cov=GaussianCovariance())
-  @assert size(X) == (length(x₀), length(z))
+type SimpleKriging{T<:Real} <: AbstractEstimator
+  # input fields
+  X::AbstractMatrix{T}
+  z::AbstractVector{T}
+  cov::CovarianceModel
+  μ::T
 
-  n = length(z)
-  C = pairwise(cov, X)
-  c = Float64[cov(norm(X[:,j]-x₀)) for j=1:n]
+  # state fields
+  C::AbstractMatrix{T}
 
-  if μ ≠ nothing              # Simple Kriging
-    y = z - μ
-    λ = C \ c
-
-    # estimate and variance
-    μ + y⋅λ, cov(0) - c⋅λ
-  else                        # Ordinary Kriging
-    C = [C ones(n); ones(n)' 0]
-    c = [c; 1]
-    λ = C \ c
-
-    # estimate and variance
-    z⋅λ[1:n], cov(0) - c⋅λ
+  function SimpleKriging(X, z, cov, μ)
+    @assert size(X, 2) == length(z) "incorrect data configuration"
+    C = pairwise(cov, X)
+    new(X, z, cov, μ, C)
   end
 end
+SimpleKriging(X, z, cov, μ) = SimpleKriging{eltype(z)}(X, z, cov, μ)
+
+
+@doc doc"""
+  Ordinary Kriging
+
+    * X  ∈ ℜ^(mxn) - matrix of data locations
+    * z  ∈ ℜⁿ      - vector of observations for X
+    * cov          - covariance model
+  """ ->
+type OrdinaryKriging{T<:Real} <: AbstractEstimator
+  # input fields
+  X::AbstractMatrix{T}
+  z::AbstractVector{T}
+  cov::CovarianceModel
+
+  # state fields
+  C::AbstractMatrix{T}
+
+  function OrdinaryKriging(X, z, cov)
+    @assert size(X, 2) == length(z) "incorrect data configuration"
+    C = pairwise(cov, X)
+    new(X, z, cov, C)
+  end
+end
+OrdinaryKriging(X, z, cov) = OrdinaryKriging{eltype(z)}(X, z, cov)
 
 
 @doc doc"""
   Universal Kriging (a.k.a. Kriging with drift)
 
-  Kriging with polynomial drift for the mean.
-
-      unikrig(x₀, X, z; degree=1, γ=γgauss)
-
-    where
-
-    * x₀ ∈ ℜᵐ      - estimation location
     * X  ∈ ℜ^(mxn) - matrix of data locations
     * z  ∈ ℜⁿ      - vector of observations for X
-    * degree       - polynomial degree for the drift
-    * cov          - covariance model (default to standard Gaussian)
+    * cov          - covariance model
+    * degree       - polynomial degree for the mean
 
   Ordinary Kriging is recovered for 0th degree polynomial.
-
-  The algorithm returns the estimate at x₀ and
-  the associated estimation variance.
-
-  ### References
-  1. OLEA, R. A., 1999. Geostatistics for Engineers
-  and Earth Scientists.
   """ ->
-function unikrig(x₀::AbstractVector, X::AbstractMatrix, z::AbstractVector;
-                 degree=1, cov=GaussianCovariance())
-  @assert size(X) == (length(x₀), length(z))
-  @assert degree ≥ 0
+type UniversalKriging{T<:Real} <: AbstractEstimator
+  # input fields
+  X:: AbstractMatrix{T}
+  z::AbstractVector{T}
+  cov::CovarianceModel
+  degree::Integer
 
-  γ(h) = cov(0) - cov(h)
+  # state fields
+  Γ::AbstractMatrix{T}
+  F::AbstractMatrix{T}
+  exponents::AbstractMatrix{Float64}
 
-  dim = length(x₀)
+  function UniversalKriging(X, z, cov, degree)
+    @assert size(X, 2) == length(z) "incorrect data configuration"
+    @assert degree ≥ 0
 
-  n = length(z)
-  Γ = pairwise(γ, X)
-  g = Float64[γ(norm(X[:,j]-x₀)) for j=1:n]
+    dim = size(X, 1)
+    nobs = length(z)
 
-  # multinomial expansion
-  exponents = zeros(0, dim)
-  for d=0:degree
-    exponents = [exponents; multinom_exp(dim, d, sortdir="descend")]
+    γ(h) = cov(0) - cov(h)
+    Γ = pairwise(γ, X)
+
+    # multinomial expansion
+    exponents = zeros(0, dim)
+    for d=0:degree
+      exponents = [exponents; multinom_exp(dim, d, sortdir="descend")]
+    end
+    exponents = exponents'
+
+    nterms = size(exponents, 2)
+
+    F = Float64[prod(X[:,i].^exponents[:,j]) for i=1:nobs, j=1:nterms]
+
+    new(X, z, cov, degree, Γ, F, exponents)
   end
-  exponents = exponents'
+end
+UniversalKriging(X, z, cov, degree) = UniversalKriging{eltype(z)}(X, z, cov, degree)
 
+##########################
+### ESTIMATION METHODS ###
+##########################
+
+function estimate{T<:Real}(estimator::SimpleKriging{T}, xₒ::AbstractVector{T})
+  X = estimator.X; z = estimator.z
+  cov = estimator.cov; μ = estimator.μ
+  C = estimator.C
+
+  @assert size(X, 1) == length(xₒ) "incorrect location dimension"
+
+  # evaluate covariance at location
+  c = Float64[cov(norm(X[:,j]-xₒ)) for j=1:size(X,2)]
+
+  # solve linear system
+  y = z - μ
+  λ = C \ c
+
+  # return estimate and variance
+  μ + y⋅λ, cov(0) - c⋅λ
+end
+
+
+function estimate{T<:Real}(estimator::OrdinaryKriging{T}, xₒ::AbstractVector{T})
+  X = estimator.X; z = estimator.z; cov = estimator.cov
+  C = estimator.C
+
+  @assert size(X, 1) == length(xₒ) "incorrect location dimension"
+
+  nobs = length(z)
+
+  # evaluate covariance at location
+  c = Float64[cov(norm(X[:,j]-xₒ)) for j=1:nobs]
+
+  # solve linear system
+  A = [C ones(nobs); ones(nobs)' 0]
+  b = [c; 1]
+  λ = A \ b
+
+  # return estimate and variance
+  z⋅λ[1:nobs], cov(0) - b⋅λ
+end
+
+
+function estimate{T<:Real}(estimator::UniversalKriging{T}, xₒ::AbstractVector{T})
+  X = estimator.X; z = estimator.z
+  cov = estimator.cov; degree = estimator.degree
+  Γ = estimator.Γ; F = estimator.F; exponents = estimator.exponents
+
+  @assert size(X, 1) == length(xₒ) "incorrect location dimension"
+
+  nobs = length(z)
+
+  # evaluate variogram at location
+  γ(h) = cov(0) - cov(h)
+  g = Float64[γ(norm(X[:,j]-xₒ)) for j=1:nobs]
+
+  # evaluate multinomial at location
   nterms = size(exponents, 2)
+  f = Float64[prod(xₒ.^exponents[:,j]) for j=1:nterms]
 
-  F = Float64[prod(X[:,i].^exponents[:,j]) for i=1:n, j=1:nterms]
-  f = Float64[prod(x₀.^exponents[:,j]) for j=1:nterms]
-
+  # solve linear system
   A = [Γ F; F' zeros(nterms,nterms)]
-  a = [g; f]
-
-  λ = A \ a
+  b = [g; f]
+  λ = A \ b
 
   # estimate and variance
-  z⋅λ[1:n], a⋅λ
+  z⋅λ[1:nobs], b⋅λ
 end

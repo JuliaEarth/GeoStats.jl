@@ -6,14 +6,19 @@ tol = 10eps()
 
 dim = 3; nobs = 10
 X = rand(dim, nobs); z = rand(nobs)
-x₀ = rand(dim)
+xₒ = rand(dim)
 
 @testset "Basic checks" begin
+  cov = GaussianCovariance()
+  simkrig = SimpleKriging(X, z, cov, mean(z))
+  ordkrig = OrdinaryKriging(X, z, cov)
+  unikrig = UniversalKriging(X, z, cov, 1)
+
   # Kriging is an interpolator
   for j=1:nobs
-    SKestimate, SKvar = kriging(X[:,j], X, z, μ=mean(z))
-    OKestimate, OKvar = kriging(X[:,j], X, z)
-    UKestimate, UKvar = unikrig(X[:,j], X, z, degree=1)
+    SKestimate, SKvar = estimate(simkrig, X[:,j])
+    OKestimate, OKvar = estimate(ordkrig, X[:,j])
+    UKestimate, UKvar = estimate(unikrig, X[:,j])
 
     @test isapprox(SKestimate, z[j])
     @test isapprox(OKestimate, z[j])
@@ -26,8 +31,9 @@ x₀ = rand(dim)
   end
 
   # Ordinary Kriging ≡ Universal Kriging with 0th degree drift
-  OKestimate, OKvar = kriging(x₀, X, z)
-  UKestimate, UKvar = unikrig(x₀, X, z, degree=0)
+  unikrig = UniversalKriging(X, z, cov, 0)
+  OKestimate, OKvar = estimate(ordkrig, xₒ)
+  UKestimate, UKvar = estimate(unikrig, xₒ)
   @test isapprox(OKestimate, UKestimate)
   @test isapprox(OKvar, UKvar)
 end

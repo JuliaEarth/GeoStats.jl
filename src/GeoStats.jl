@@ -23,13 +23,17 @@ include("kriging.jl")
 include("utils.jl")
 
 export
-  # functions
-  kriging,
-  unikrig,
-
-  # types
+  # covariance models
   GaussianCovariance,
   SphericalCovariance,
-  ExponentialCovariance
+  ExponentialCovariance,
+
+  # estimators
+  SimpleKriging,
+  OrdinaryKriging,
+  UniversalKriging,
+
+  # functions
+  estimate
 
 end
