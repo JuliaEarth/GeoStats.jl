@@ -13,12 +13,14 @@
 ## OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
 abstract AbstractEstimator
+
 @doc doc"""
     estimate(est, xₒ)
 
   Evaluate estimator `est` at location `xₒ`
 """ ->
 estimate(::AbstractEstimator, xₒ::AbstractVector) = nothing
+
 
 @doc doc"""
   Simple Kriging
