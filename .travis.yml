@@ -13,7 +13,7 @@ notifications:
 
 script:
   - if [[ -a .git/shallow ]]; then git fetch --unshallow; fi
-  - julia --check-bounds=yes -e 'Pkg.clone(pwd()); Pkg.build("GeoStats"); Pkg.test("GeoStats"; coverage=true)'
+  - julia --check-bounds=yes --color=yes -e 'Pkg.clone(pwd()); Pkg.build("GeoStats"); Pkg.test("GeoStats"; coverage=true)'
 
 after_success:
   - julia -e 'cd(Pkg.dir("GeoStats")); Pkg.add("Coverage"); using Coverage; Codecov.submit(process_folder())'
