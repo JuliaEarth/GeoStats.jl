@@ -21,17 +21,6 @@ Get the latest stable release with Julia's package manager:
 Pkg.add("GeoStats")
 ```
 
-Algorithms
-----------
-
-### Estimation
-
-Method | Function
-:-----:|:--------:
-Simple Kriging | `kriging`
-Ordinary Kriging | `kriging`
-Universal Kriging | `unikrig`
-
 Documentation
 -------------
 
