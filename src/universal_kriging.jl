@@ -32,41 +32,52 @@ type UniversalKriging{T<:Real,V} <: AbstractEstimator
   degree::Integer
 
   # state fields
-  Γ::AbstractMatrix{T}
-  F::AbstractMatrix{T}
+  LU::Base.LinAlg.Factorization{T}
   exponents::AbstractMatrix{Float64}
 
   function UniversalKriging(X, z, cov, degree)
     @assert size(X, 2) == length(z) "incorrect data configuration"
-    @assert degree ≥ 0
-
-    dim = size(X, 1)
-    nobs = length(z)
-
-    γ(h) = cov(0) - cov(h)
-    Γ = pairwise(γ, X)
-
-    # multinomial expansion
-    exponents = zeros(0, dim)
-    for d=0:degree
-      exponents = [exponents; multinom_exp(dim, d, sortdir="descend")]
-    end
-    exponents = exponents'
-
-    nterms = size(exponents, 2)
-
-    F = Float64[prod(X[:,i].^exponents[:,j]) for i=1:nobs, j=1:nterms]
-
-    new(X, z, cov, degree, Γ, F, exponents)
+    @assert degree ≥ 0 "degree must be nonnegative"
+    UK = new(X, z, cov, degree)
+    fit!(UK, X)
+    UK
   end
 end
 
 UniversalKriging(X, z, cov, degree) = UniversalKriging{eltype(X),eltype(z)}(X, z, cov, degree)
 
+function fit!{T<:Real,V}(estimator::UniversalKriging{T,V}, X::AbstractMatrix{T})
+  estimator.X = X
+
+  dim, nobs = size(X)
+
+  # variogram matrix
+  γ(h) = estimator.cov(0) - estimator.cov(h)
+  Γ = pairwise(γ, X)
+
+  # multinomial expansion
+  exponents = zeros(0, dim)
+  for d=0:estimator.degree
+    exponents = [exponents; multinom_exp(dim, d, sortdir="descend")]
+  end
+  exponents = exponents'
+
+  estimator.exponents = exponents
+
+  # polynomial drift matrix
+  nterms = size(exponents, 2)
+  F = Float64[prod(X[:,i].^exponents[:,j]) for i=1:nobs, j=1:nterms]
+
+  # Universal Kriging matrix
+  A = [Γ F; F' zeros(nterms,nterms)]
+
+  estimator.LU = lufact(A)
+end
+
 function estimate{T<:Real,V}(estimator::UniversalKriging{T,V}, xₒ::AbstractVector{T})
-  X = estimator.X; z = estimator.z
-  cov = estimator.cov; degree = estimator.degree
-  Γ = estimator.Γ; F = estimator.F; exponents = estimator.exponents
+  X = estimator.X; z = estimator.z; cov = estimator.cov
+  exponents = estimator.exponents
+  LU = estimator.LU
   nobs = length(z)
 
   # evaluate variogram at location
@@ -78,9 +89,8 @@ function estimate{T<:Real,V}(estimator::UniversalKriging{T,V}, xₒ::AbstractVec
   f = Float64[prod(xₒ.^exponents[:,j]) for j=1:nterms]
 
   # solve linear system
-  A = [Γ F; F' zeros(nterms,nterms)]
   b = [g; f]
-  λ = A \ b
+  λ = LU \ b
 
   # estimate and variance
   z⋅λ[1:nobs], b⋅λ
