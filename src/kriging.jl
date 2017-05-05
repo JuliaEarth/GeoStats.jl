@@ -19,14 +19,14 @@ abstract AbstractEstimator
 
   Build Kriging system (and maybe perform Cholesky factorization)
 """ ->
-fit!(::AbstractEstimator, X::AbstractMatrix) = nothing
+fit!(::AbstractEstimator, X::AbstractMatrix) = error("not implemented")
 
 @doc doc"""
     estimate(est, xₒ)
 
   Evaluate estimator `est` at location `xₒ`
 """ ->
-estimate(::AbstractEstimator, xₒ::AbstractVector) = nothing
+estimate(::AbstractEstimator, xₒ::AbstractVector) = error("not implemented")
 
 
 @doc doc"""
@@ -39,15 +39,15 @@ estimate(::AbstractEstimator, xₒ::AbstractVector) = nothing
     * cov          - covariance model
     * μ  ∈ ℜ       - mean of z
   """ ->
-type SimpleKriging{T<:Real} <: AbstractEstimator
+type SimpleKriging{T<:Real,V} <: AbstractEstimator
   # input fields
   X::AbstractMatrix{T}
-  z::AbstractVector{T}
+  z::AbstractVector{V}
   cov::CovarianceModel
-  μ::T
+  μ::V
 
   # state fields
-  LLᵀ::Cholesky
+  LU::Base.LinAlg.Factorization{T}
 
   function SimpleKriging(X, z, cov, μ)
     @assert size(X, 2) == length(z) "incorrect data configuration"
@@ -56,12 +56,16 @@ type SimpleKriging{T<:Real} <: AbstractEstimator
     SK
   end
 end
-SimpleKriging(X, z, cov, μ) = SimpleKriging{eltype(z)}(X, z, cov, μ)
+SimpleKriging(X, z, cov, μ) = SimpleKriging{eltype(X),eltype(z)}(X, z, cov, μ)
 
-function fit!{T<:Real}(estimator::SimpleKriging{T}, X::AbstractMatrix{T})
-  C = pairwise(estimator.cov, X)
+function fit!{T<:Real,V}(estimator::SimpleKriging{T,V}, X::AbstractMatrix{T})
   estimator.X = X
-  estimator.LLᵀ = cholfact(C)
+  C = pairwise(estimator.cov, X)
+  if isposdef(C)
+    estimator.LU = cholfact(C)
+  else
+    estimator.LU = lufact(C)
+  end
 end
 
 
@@ -74,10 +78,10 @@ end
     * z  ∈ ℜⁿ      - vector of observations for X
     * cov          - covariance model
   """ ->
-type OrdinaryKriging{T<:Real} <: AbstractEstimator
+type OrdinaryKriging{T<:Real,V} <: AbstractEstimator
   # input fields
   X::AbstractMatrix{T}
-  z::AbstractVector{T}
+  z::AbstractVector{V}
   cov::CovarianceModel
 
   # state fields
@@ -89,7 +93,7 @@ type OrdinaryKriging{T<:Real} <: AbstractEstimator
     new(X, z, cov, C)
   end
 end
-OrdinaryKriging(X, z, cov) = OrdinaryKriging{eltype(z)}(X, z, cov)
+OrdinaryKriging(X, z, cov) = OrdinaryKriging{eltype(X),eltype(z)}(X, z, cov)
 
 
 @doc doc"""
@@ -104,10 +108,10 @@ OrdinaryKriging(X, z, cov) = OrdinaryKriging{eltype(z)}(X, z, cov)
 
   Ordinary Kriging is recovered for 0th degree polynomial.
   """ ->
-type UniversalKriging{T<:Real} <: AbstractEstimator
+type UniversalKriging{T<:Real,V} <: AbstractEstimator
   # input fields
   X:: AbstractMatrix{T}
-  z::AbstractVector{T}
+  z::AbstractVector{V}
   cov::CovarianceModel
   degree::Integer
 
@@ -140,16 +144,16 @@ type UniversalKriging{T<:Real} <: AbstractEstimator
     new(X, z, cov, degree, Γ, F, exponents)
   end
 end
-UniversalKriging(X, z, cov, degree) = UniversalKriging{eltype(z)}(X, z, cov, degree)
+UniversalKriging(X, z, cov, degree) = UniversalKriging{eltype(X),eltype(z)}(X, z, cov, degree)
 
 ##########################
 ### ESTIMATION METHODS ###
 ##########################
 
-function estimate{T<:Real}(estimator::SimpleKriging{T}, xₒ::AbstractVector{T})
+function estimate{T<:Real,V}(estimator::SimpleKriging{T,V}, xₒ::AbstractVector{T})
   X = estimator.X; z = estimator.z
   cov = estimator.cov; μ = estimator.μ
-  LLᵀ = estimator.LLᵀ
+  LU = estimator.LU
   nobs = length(z)
 
   # evaluate covariance at location
@@ -157,14 +161,14 @@ function estimate{T<:Real}(estimator::SimpleKriging{T}, xₒ::AbstractVector{T})
 
   # solve linear system
   y = z - μ
-  λ = LLᵀ \ c
+  λ = LU \ c
 
   # return estimate and variance
   μ + y⋅λ, cov(0) - c⋅λ
 end
 
 
-function estimate{T<:Real}(estimator::OrdinaryKriging{T}, xₒ::AbstractVector{T})
+function estimate{T<:Real,V}(estimator::OrdinaryKriging{T,V}, xₒ::AbstractVector{T})
   X = estimator.X; z = estimator.z; cov = estimator.cov
   C = estimator.C
   nobs = length(z)
@@ -182,7 +186,7 @@ function estimate{T<:Real}(estimator::OrdinaryKriging{T}, xₒ::AbstractVector{T
 end
 
 
-function estimate{T<:Real}(estimator::UniversalKriging{T}, xₒ::AbstractVector{T})
+function estimate{T<:Real,V}(estimator::UniversalKriging{T,V}, xₒ::AbstractVector{T})
   X = estimator.X; z = estimator.z
   cov = estimator.cov; degree = estimator.degree
   Γ = estimator.Γ; F = estimator.F; exponents = estimator.exponents

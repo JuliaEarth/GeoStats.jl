@@ -16,7 +16,6 @@ __precompile__(true)
 
 module GeoStats
 
-using Base.LinAlg: Cholesky
 using Combinatorics: combinations
 
 include("covmodels.jl")
