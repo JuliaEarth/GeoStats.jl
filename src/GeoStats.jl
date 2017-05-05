@@ -19,7 +19,7 @@ module GeoStats
 using Combinatorics: combinations
 
 include("covmodels.jl")
-include("kriging.jl")
+include("estimators.jl")
 include("utils.jl")
 
 export
