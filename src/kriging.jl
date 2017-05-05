@@ -15,6 +15,13 @@
 abstract AbstractEstimator
 
 @doc doc"""
+    fit!(est, X)
+
+  Build Kriging system (and maybe perform Cholesky factorization)
+""" ->
+fit!(::AbstractEstimator, X::AbstractMatrix) = nothing
+
+@doc doc"""
     estimate(est, xₒ)
 
   Evaluate estimator `est` at location `xₒ`
@@ -40,15 +47,22 @@ type SimpleKriging{T<:Real} <: AbstractEstimator
   μ::T
 
   # state fields
-  C::AbstractMatrix{T}
+  LLᵀ::Cholesky
 
   function SimpleKriging(X, z, cov, μ)
     @assert size(X, 2) == length(z) "incorrect data configuration"
-    C = pairwise(cov, X)
-    new(X, z, cov, μ, C)
+    SK = new(X, z, cov, μ)
+    fit!(SK, X)
+    SK
   end
 end
 SimpleKriging(X, z, cov, μ) = SimpleKriging{eltype(z)}(X, z, cov, μ)
+
+function fit!{T<:Real}(estimator::SimpleKriging{T}, X::AbstractMatrix{T})
+  C = pairwise(estimator.cov, X)
+  estimator.X = X
+  estimator.LLᵀ = cholfact(C)
+end
 
 
 @doc doc"""
@@ -135,16 +149,15 @@ UniversalKriging(X, z, cov, degree) = UniversalKriging{eltype(z)}(X, z, cov, deg
 function estimate{T<:Real}(estimator::SimpleKriging{T}, xₒ::AbstractVector{T})
   X = estimator.X; z = estimator.z
   cov = estimator.cov; μ = estimator.μ
-  C = estimator.C
-
-  @assert size(X, 1) == length(xₒ) "incorrect location dimension"
+  LLᵀ = estimator.LLᵀ
+  nobs = length(z)
 
   # evaluate covariance at location
-  c = Float64[cov(norm(X[:,j]-xₒ)) for j=1:size(X,2)]
+  c = Float64[cov(norm(X[:,j]-xₒ)) for j=1:nobs]
 
   # solve linear system
   y = z - μ
-  λ = C \ c
+  λ = LLᵀ \ c
 
   # return estimate and variance
   μ + y⋅λ, cov(0) - c⋅λ
@@ -154,9 +167,6 @@ end
 function estimate{T<:Real}(estimator::OrdinaryKriging{T}, xₒ::AbstractVector{T})
   X = estimator.X; z = estimator.z; cov = estimator.cov
   C = estimator.C
-
-  @assert size(X, 1) == length(xₒ) "incorrect location dimension"
-
   nobs = length(z)
 
   # evaluate covariance at location
@@ -176,9 +186,6 @@ function estimate{T<:Real}(estimator::UniversalKriging{T}, xₒ::AbstractVector{
   X = estimator.X; z = estimator.z
   cov = estimator.cov; degree = estimator.degree
   Γ = estimator.Γ; F = estimator.F; exponents = estimator.exponents
-
-  @assert size(X, 1) == length(xₒ) "incorrect location dimension"
-
   nobs = length(z)
 
   # evaluate variogram at location
