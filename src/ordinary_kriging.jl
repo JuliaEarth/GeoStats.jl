@@ -28,29 +28,37 @@ type OrdinaryKriging{T<:Real,V} <: AbstractEstimator
   cov::CovarianceModel
 
   # state fields
-  C::AbstractMatrix{T}
+  LU::Base.LinAlg.Factorization{T}
 
   function OrdinaryKriging(X, z, cov)
     @assert size(X, 2) == length(z) "incorrect data configuration"
-    C = pairwise(cov, X)
-    new(X, z, cov, C)
+    OK = new(X, z, cov)
+    fit!(OK, X)
+    OK
   end
 end
 
 OrdinaryKriging(X, z, cov) = OrdinaryKriging{eltype(X),eltype(z)}(X, z, cov)
 
+function fit!{T<:Real,V}(estimator::OrdinaryKriging{T,V}, X::AbstractMatrix{T})
+  estimator.X = X
+  nobs = size(X,2)
+  C = pairwise(estimator.cov, X)
+  A = [C ones(nobs); ones(nobs)' 0]
+  estimator.LU = lufact(A)
+end
+
 function estimate{T<:Real,V}(estimator::OrdinaryKriging{T,V}, xₒ::AbstractVector{T})
   X = estimator.X; z = estimator.z; cov = estimator.cov
-  C = estimator.C
+  LU = estimator.LU
   nobs = length(z)
 
   # evaluate covariance at location
   c = Float64[cov(norm(X[:,j]-xₒ)) for j=1:nobs]
 
   # solve linear system
-  A = [C ones(nobs); ones(nobs)' 0]
   b = [c; 1]
-  λ = A \ b
+  λ = LU \ b
 
   # return estimate and variance
   z⋅λ[1:nobs], cov(0) - b⋅λ

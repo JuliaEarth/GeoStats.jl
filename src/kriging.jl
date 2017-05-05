@@ -17,7 +17,7 @@ abstract AbstractEstimator
 @doc doc"""
     fit!(est, X)
 
-  Build covariance of `X` and save factorization in `estimator`.
+  Build Kriging system from locations `X` and save factorization in `estimator`.
 """ ->
 fit!(estimator::AbstractEstimator, X::AbstractMatrix) = error("not implemented")
 
