@@ -3,9 +3,7 @@ GeoStats.jl
 
 *Geostatistics in Julia.*
 
-[![Build Status](https://travis-ci.org/juliohm/GeoStats.jl.svg?branch=master)](https://travis-ci.org/juliohm/GeoStats.jl)
-[![GeoStats](http://pkg.julialang.org/badges/GeoStats_0.5.svg)](http://pkg.julialang.org/?pkg=GeoStats)
-[![Coverage Status](https://codecov.io/gh/juliohm/GeoStats.jl/branch/master/graph/badge.svg)](https://codecov.io/gh/juliohm/GeoStats.jl)
+[![][travis-img]][travis-url] [![][julia-pkg-img]][julia-pkg-url] [![][codecov-img]][codecov-url] [![][docs-stable-img]][docs-stable-url] [![][docs-latest-img]][docs-latest-url]
 
 Introduction
 ------------
@@ -56,3 +54,18 @@ Contributing
 Contributions are very welcome, as a feature requests and suggestions.
 
 Please [open an issue](https://github.com/juliohm/GeoStats.jl/issues) if you encounter any problems.
+
+[docs-stable-img]: https://img.shields.io/badge/docs-stable-blue.svg
+[docs-stable-url]: https://juliohm.github.io/GeoStats.jl/stable
+
+[docs-latest-img]: https://img.shields.io/badge/docs-latest-blue.svg
+[docs-latest-url]: https://juliohm.github.io/GeoStats.jl/latest
+
+[travis-img]: https://travis-ci.org/juliohm/GeoStats.jl.svg?branch=master
+[travis-url]: https://travis-ci.org/juliohm/GeoStats.jl
+
+[julia-pkg-img]: http://pkg.julialang.org/badges/GeoStats_0.5.svg
+[julia-pkg-url]: http://pkg.julialang.org/?pkg=GeoStats
+
+[codecov-img]: https://codecov.io/gh/juliohm/GeoStats.jl/branch/master/graph/badge.svg
+[codecov-url]: https://codecov.io/gh/juliohm/GeoStats.jl
