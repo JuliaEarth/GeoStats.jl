@@ -17,9 +17,9 @@ Get the latest stable release with Julia's package manager:
 Pkg.add("GeoStats")
 ```
 
-## Usage
+## Quick example
 
-Below is a short example of usage:
+Below is a quick example of usage:
 
 ```julia
 using GeoStats

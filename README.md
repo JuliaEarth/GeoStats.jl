@@ -19,31 +19,8 @@ Pkg.add("GeoStats")
 Documentation
 -------------
 
-Below is a short example of usage:
-
-```julia
-using GeoStats
-
-# create some data
-dim, nobs = 3, 10
-X = rand(dim, nobs); z = rand(nobs)
-
-# target location
-xₒ = rand(dim)
-
-# define a covariance model
-cov = GaussianCovariance(0.,1.,1.) # nugget, sill and range
-
-# define an estimator (i.e. build the Kriging system)
-simkrig = SimpleKriging(X, z, cov, mean(z))
-ordkrig = OrdinaryKriging(X, z, cov)
-unikrig = UniversalKriging(X, z, cov, 1)
-
-# estimate at target location
-μ, σ² = estimate(simkrig, xₒ)
-μ, σ² = estimate(ordkrig, xₒ)
-μ, σ² = estimate(unikrig, xₒ)
-```
+- [**STABLE**][docs-stable-url] &mdash; **most recently tagged version of the documentation.**
+- [**LATEST**][docs-latest-url] &mdash; *in-development version of the documentation.*
 
 Contributing
 ------------
