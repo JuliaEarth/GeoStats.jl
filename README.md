@@ -25,7 +25,7 @@ Documentation
 Contributing
 ------------
 
-Contributions are very welcome, as a feature requests and suggestions.
+Contributions are very welcome, as are feature requests and suggestions.
 
 Please [open an issue](https://github.com/juliohm/GeoStats.jl/issues) if you encounter any problems.
 
