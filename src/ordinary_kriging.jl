@@ -33,15 +33,16 @@ type OrdinaryKriging{T<:Real,V} <: AbstractEstimator
   function OrdinaryKriging(X, z, cov)
     @assert size(X, 2) == length(z) "incorrect data configuration"
     OK = new(X, z, cov)
-    fit!(OK, X)
+    fit!(OK, X, z)
     OK
   end
 end
 
 OrdinaryKriging(X, z, cov) = OrdinaryKriging{eltype(X),eltype(z)}(X, z, cov)
 
-function fit!{T<:Real,V}(estimator::OrdinaryKriging{T,V}, X::AbstractMatrix{T})
+function fit!{T<:Real,V}(estimator::OrdinaryKriging{T,V}, X::AbstractMatrix{T}, z::AbstractVector{V})
   estimator.X = X
+  estimator.z = z
   nobs = size(X,2)
   C = pairwise(estimator.cov, X)
   A = [C ones(nobs); ones(nobs)' 0]

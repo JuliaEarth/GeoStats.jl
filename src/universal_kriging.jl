@@ -39,15 +39,16 @@ type UniversalKriging{T<:Real,V} <: AbstractEstimator
     @assert size(X, 2) == length(z) "incorrect data configuration"
     @assert degree ≥ 0 "degree must be nonnegative"
     UK = new(X, z, cov, degree)
-    fit!(UK, X)
+    fit!(UK, X, z)
     UK
   end
 end
 
 UniversalKriging(X, z, cov, degree) = UniversalKriging{eltype(X),eltype(z)}(X, z, cov, degree)
 
-function fit!{T<:Real,V}(estimator::UniversalKriging{T,V}, X::AbstractMatrix{T})
+function fit!{T<:Real,V}(estimator::UniversalKriging{T,V}, X::AbstractMatrix{T}, z::AbstractVector{V})
   estimator.X = X
+  estimator.z = z
 
   dim, nobs = size(X)
 

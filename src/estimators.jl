@@ -17,9 +17,9 @@ abstract AbstractEstimator
 @doc doc"""
     fit!(est, X)
 
-  Build Kriging system from locations `X` and save factorization in `estimator`.
+  Build Kriging system from locations `X` with values `z` and save factorization in `estimator`.
 """ ->
-fit!(estimator::AbstractEstimator, X::AbstractMatrix) = error("not implemented")
+fit!(estimator::AbstractEstimator, X::AbstractMatrix, z::AbstractVector) = error("not implemented")
 
 @doc doc"""
     estimate(est, xₒ)

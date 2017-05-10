@@ -35,15 +35,16 @@ type SimpleKriging{T<:Real,V} <: AbstractEstimator
   function SimpleKriging(X, z, cov, μ)
     @assert size(X, 2) == length(z) "incorrect data configuration"
     SK = new(X, z, cov, μ)
-    fit!(SK, X)
+    fit!(SK, X, z)
     SK
   end
 end
 
 SimpleKriging(X, z, cov, μ) = SimpleKriging{eltype(X),eltype(z)}(X, z, cov, μ)
 
-function fit!{T<:Real,V}(estimator::SimpleKriging{T,V}, X::AbstractMatrix{T})
+function fit!{T<:Real,V}(estimator::SimpleKriging{T,V}, X::AbstractMatrix{T}, z::AbstractVector{V})
   estimator.X = X
+  estimator.z = z
   C = pairwise(estimator.cov, X)
   estimator.LLᵀ = cholfact(C)
 end
