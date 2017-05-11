@@ -21,8 +21,10 @@ Pkg.add("GeoStats")
 
 Below is a quick example of usage:
 
-```julia
+```@example
 using GeoStats
+
+srand(2017) # hide
 
 # create some data
 dim, nobs = 3, 10
@@ -41,6 +43,12 @@ unikrig = UniversalKriging(X, z, cov, 1)
 
 # estimate at target location
 μ, σ² = estimate(simkrig, xₒ)
+println("Simple Kriging:") # hide
+println("  μ = $μ, σ² = $σ²") # hide
 μ, σ² = estimate(ordkrig, xₒ)
+println("Ordinary Kriging:") # hide
+println("  μ = $μ, σ² = $σ²") # hide
 μ, σ² = estimate(unikrig, xₒ)
+println("Universal Kriging:") # hide
+println("  μ = $μ, σ² = $σ²") # hide
 ```

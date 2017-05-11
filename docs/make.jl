@@ -5,7 +5,9 @@ makedocs(
   sitename = "GeoStats.jl",
   authors = "Júlio Hoffimann Mendes",
   pages = [
-    "Home" => "index.md"
+    "Home" => "index.md",
+    "Variograms" => "variograms.md",
+    "Estimation" => "estimation.md"
   ]
 )
 

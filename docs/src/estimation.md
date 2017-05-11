@@ -1,0 +1,194 @@
+A Kriging estimator has the form:
+
+```math
+\newcommand{\x}{\boldsymbol{x}}
+\hat{Z}(\x_0) = \lambda_1 Z(\x_1) + \lambda_2 Z(\x_2) + \cdots + \lambda_n Z(\x_n),\quad \x_i \in \mathbb{R}^m, \lambda_i \in \mathbb{R}
+```
+
+with ``Z\colon \mathbb{R}^m \times \Omega \to \mathbb{R}`` a random field.
+
+This package implements the following Kriging variants:
+
+- Simple Kriging
+- Ordinary Kriging
+- Universal Kriging (polynomial drift for the mean)
+
+All these variants follow the same interface: an estimator object is first created with a given
+data configuration and covariance model, and then estimates are made at various locations.
+
+The object construction takes care of building the Kriging system and factorizing the LHS with
+an appropriate decomposition (e.g. Cholesky, LU). The `estimate` method performs the estimation
+at a given location:
+
+```julia
+# build and factorize the system
+simkrig = SimpleKriging(X, z, cov, mean(z))
+
+# estimate at various locations
+for xₒ in locations
+  μ, σ² = estimate(simkrig, xₒ)
+end
+```
+
+In case the data configuration needs to be changed in a loop (e.g. sequential Gaussian simulation),
+one can keep all the parameters fixed and only update the factorization with the `fit!` method:
+
+```julia
+fit!(simkrig, Xnew, znew)
+```
+
+## Simple Kriging
+
+In Simple Kriging, the mean ``\mu`` of the random field is assumed to be constant *and known*.
+The resulting linear system is:
+
+```math
+\newcommand{\C}{\boldsymbol{C}}
+\newcommand{\c}{\boldsymbol{c}}
+\newcommand{\l}{\boldsymbol{\lambda}}
+\newcommand{\1}{\boldsymbol{1}}
+\newcommand{\z}{\boldsymbol{z}}
+\begin{bmatrix}
+cov(\x_1,\x_2) & cov(\x_1,\x_2) & \cdots & cov(\x_1,\x_n) \\
+cov(\x_2,\x_1) & cov(\x_2,\x_2) & \cdots & cov(\x_2,\x_n) \\
+\vdots & \vdots & \ddots & \vdots \\
+cov(\x_n,\x_1) & cov(\x_n,\x_2) & \cdots & cov(\x_n,\x_n)
+\end{bmatrix}
+\begin{bmatrix}
+\lambda_1 \\
+\lambda_2 \\
+\vdots \\
+\lambda_n
+\end{bmatrix}
+=
+\begin{bmatrix}
+cov(\x_1,\x_0) \\
+cov(\x_2,\x_0) \\
+\vdots \\
+cov(\x_n,\x_0)
+\end{bmatrix}
+```
+or in matricial form ``\C\l = \c``. We subtract the given mean from the observations
+``\boldsymbol{y} = \z - \mu \1`` and compute the mean and variance at location ``\x_0``:
+
+```math
+\mu(\x_0) = \mu + \boldsymbol{y}^\top \l
+```
+```math
+\sigma^2(\x_0) = cov(\x_0,\x_0) - \c^\top \l
+```
+
+```@docs
+SimpleKriging
+```
+
+## Ordinary Kriging
+
+In Ordinary Kriging the mean of the random field is assumed to be constant *and unknown*. The resulting linear
+system is:
+
+```math
+\begin{bmatrix}
+\C & \1 \\
+\1^\top & 0
+\end{bmatrix}
+\begin{bmatrix}
+\l \\
+\nu
+\end{bmatrix}
+=
+\begin{bmatrix}
+\c \\
+1
+\end{bmatrix}
+```
+with ``\nu`` the Lagrange multiplier associated with the constraint ``\1^\top \l = 1``. The mean and variance at
+location ``\x_0`` are given by:
+
+```math
+\mu(\x_0) = \z^\top \lambda
+```
+```math
+\sigma^2(\x_0) =  cov(\x_0,\x_0) - \begin{bmatrix} \c \\ 1 \end{bmatrix}^\top \begin{bmatrix} \l \\ \nu \end{bmatrix}
+```
+
+```@docs
+OrdinaryKriging
+```
+
+## Universal Kriging
+
+In Universal Kriging, the mean of the random field is assumed to be a polynomial:
+
+```math
+\mu(\x) = \sum_{k=1}^{N_d} \beta_k f_k(\x)
+```
+with ``N_d`` monomials ``f_k`` of degree up to ``d``. For example, in 2D there are ``6`` monomials of degree up to ``2``:
+
+```math
+\mu(x_1,x_2) =  \beta_1 1 + \beta_2 x_1 + \beta_3 x_2 + \beta_4 x_1 x_2 + \beta_5 x_1^2 + \beta_6 x_2^2
+```
+
+The choice of the degree ``d`` determines the size of the polynomial matrix
+
+```math
+\newcommand{\F}{\boldsymbol{F}}
+\newcommand{\f}{\boldsymbol{f}}
+\F =
+\begin{bmatrix}
+f_1(\x_1) & f_2(\x_1) & \cdots & f_{N_d}(\x_1) \\
+f_1(\x_2) & f_2(\x_2) & \cdots & f_{N_d}(\x_2) \\
+\vdots & \vdots & \ddots & \vdots \\
+f_1(\x_n) & f_2(\x_n) & \cdots & f_{N_d}(\x_n)
+\end{bmatrix}
+```
+
+and polynomial vector ``\f = \begin{bmatrix} f_1(\x_0) & f_2(\x_0) & \cdots & f_{N_d}(\x_0) \end{bmatrix}^\top``.
+
+The variogram matrix is constructed instead of the covariance matrix:
+
+```math
+\newcommand{\G}{\boldsymbol{\Gamma}}
+\newcommand{\g}{\boldsymbol{\gamma}}
+\G =
+\begin{bmatrix}
+\gamma(\x_1,\x_1) & \gamma(\x_1,\x_2) & \cdots & \gamma(\x_1,\x_n) \\
+\gamma(\x_2,\x_1) & \gamma(\x_2,\x_2) & \cdots & \gamma(\x_2,\x_n) \\
+\vdots & \vdots & \ddots & \vdots \\
+\gamma(\x_n,\x_1) & \gamma(\x_n,\x_2) & \cdots & \gamma(\x_n,\x_n)
+\end{bmatrix}
+```
+with ``\gamma(\x_i,\x_j) = cov(\x_0,\x_0) - cov(\x_i,\x_j)``. The variogram is
+also evaluated at the estimation location
+``\g = \begin{bmatrix} \gamma(\x_1,\x_0) & \gamma(\x_2,\x_0) & \cdots & \gamma(\x_n,\x_0) \end{bmatrix}^\top``.
+
+The resulting linear system is:
+
+```math
+\begin{bmatrix}
+\G & \F \\
+\F^\top & \boldsymbol{0}
+\end{bmatrix}
+\begin{bmatrix}
+\l \\
+\boldsymbol{\nu}
+\end{bmatrix}
+=
+\begin{bmatrix}
+\g \\
+\f
+\end{bmatrix}
+```
+with ``\boldsymbol{\nu}`` the Lagrange multipliers associated with the universal constraints. The mean and
+variance at location ``\x_0`` are given by:
+
+```math
+\mu(\x_0) = \z^\top \l
+```
+```math
+\sigma^2(\x_0) = \begin{bmatrix}\g \\ \f\end{bmatrix}^\top \begin{bmatrix}\l \\ \boldsymbol{\nu}\end{bmatrix}
+```
+
+```@docs
+UniversalKriging
+```
