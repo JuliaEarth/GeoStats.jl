@@ -23,7 +23,6 @@ Below is a quick example of usage:
 
 ```@example
 using GeoStats
-
 srand(2017) # hide
 
 # create some data
