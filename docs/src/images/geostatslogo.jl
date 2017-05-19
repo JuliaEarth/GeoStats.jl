@@ -32,6 +32,18 @@ for i=1:200
     sethue(color[2]); circle(pos, .75*radius, :stroke)
 end
 
+# Draw ellipses
+a = 100; b = 50
+c = Point(0,0)
+translate(.75w, .15h)
+rotate(rand())
+sethue("black"); setopacity(.1)
+ellipse(c, a, b, :fill)
+sethue("black"); setopacity(1)
+ellipse(c, a, b, :stroke)
+arrow(c, c + Point(a/2,0))
+arrow(c, c + Point(0,b/2))
+
 # Draw GeoStats.jl
 origin()
 translate(oᵥ, oₕ)
