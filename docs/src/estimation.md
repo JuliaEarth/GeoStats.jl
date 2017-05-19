@@ -22,6 +22,10 @@ The object construction takes care of building the Kriging system and factorizin
 an appropriate decomposition (e.g. Cholesky, LU). The `estimate` method performs the estimation
 at a given location:
 
+```@docs
+estimate
+```
+
 ```julia
 # build and factorize the system
 simkrig = SimpleKriging(X, z, cov, mean(z))
@@ -35,8 +39,26 @@ end
 In case the data configuration needs to be changed in a loop (e.g. sequential Gaussian simulation),
 one can keep all the parameters fixed and only update the factorization with the `fit!` method:
 
+```@docs
+fit!
+```
+
 ```julia
 fit!(simkrig, Xnew, znew)
+```
+
+For advanced users, the Kriging weights and Lagrange multipliers at a given location can be accessed
+with the `weights` method. This method returns an `AbstractWeights` object containing a field `λ` for
+the weights and a field `ν` for the Lagrange multipliers:
+
+```@docs
+weights
+```
+
+```julia
+# weights and Lagrange multipliers
+OKweights = weights(ordkrig, xₒ)
+OKweights.λ, OKweights.ν
 ```
 
 ## Simple Kriging

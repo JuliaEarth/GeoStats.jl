@@ -33,7 +33,7 @@ X = rand(dim, nobs); z = rand(nobs)
 xₒ = rand(dim)
 
 # define a covariance model
-cov = GaussianCovariance(0.,1.,1.) # nugget, sill and range
+cov = GaussianCovariance(1.,1.,0.) # sill, range and nugget
 
 # define an estimator (i.e. build the Kriging system)
 simkrig = SimpleKriging(X, z, cov, mean(z))
