@@ -33,7 +33,7 @@ for i=1:200
 end
 
 # Draw ellipses
-a = 100; b = 50
+a = 140; b = 70
 c = Point(0,0)
 translate(.75w, .15h)
 rotate(rand())
