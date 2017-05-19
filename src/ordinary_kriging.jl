@@ -49,7 +49,7 @@ function fit!{T<:Real,V}(estimator::OrdinaryKriging{T,V}, X::AbstractMatrix{T}, 
   estimator.LU = lufact(A)
 end
 
-function estimate{T<:Real,V}(estimator::OrdinaryKriging{T,V}, xₒ::AbstractVector{T})
+function weights{T<:Real,V}(estimator::OrdinaryKriging{T,V}, xₒ::AbstractVector{T})
   X = estimator.X; z = estimator.z; cov = estimator.cov
   LU = estimator.LU
   nobs = length(z)
@@ -59,8 +59,35 @@ function estimate{T<:Real,V}(estimator::OrdinaryKriging{T,V}, xₒ::AbstractVect
 
   # solve linear system
   b = [c; 1]
-  λ = LU \ b
+  x = LU \ b
+
+  # return weights
+  OrdinaryKrigingWeights(estimator, x[1:nobs], x[nobs+1:end], b)
+end
+
+function estimate{T<:Real,V}(estimator::OrdinaryKriging{T,V}, xₒ::AbstractVector{T})
+  # compute weights
+  OKweights = weights(estimator, xₒ)
 
   # return estimate and variance
-  z⋅λ[1:nobs], cov(0) - b⋅λ
+  combine(OKweights)
+end
+
+@doc doc"""
+    OrdinaryKrigingWeights(estimator, λ, ν, b)
+
+  Container that holds weights `λ`, Lagrange multipliers `ν` and RHS `b` for `estimator`.
+""" ->
+immutable OrdinaryKrigingWeights{T<:Real,V} <: AbstractWeights{OrdinaryKriging{T,V}}
+  estimator::OrdinaryKriging{T,V}
+  λ::AbstractVector{T}
+  ν::AbstractVector{T}
+  b::AbstractVector{T}
+end
+
+function combine{T<:Real,V}(weights::OrdinaryKrigingWeights{T,V})
+  cov = weights.estimator.cov; z = weights.estimator.z
+  λ = weights.λ; ν = weights.ν; b = weights.b
+
+  z⋅λ, cov(0) - b⋅[λ;ν]
 end

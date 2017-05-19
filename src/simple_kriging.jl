@@ -49,7 +49,7 @@ function fit!{T<:Real,V}(estimator::SimpleKriging{T,V}, X::AbstractMatrix{T}, z:
   estimator.LLᵀ = cholfact(C)
 end
 
-function estimate{T<:Real,V}(estimator::SimpleKriging{T,V}, xₒ::AbstractVector{T})
+function weights{T<:Real,V}(estimator::SimpleKriging{T,V}, xₒ::AbstractVector{T})
   X = estimator.X; z = estimator.z
   cov = estimator.cov; μ = estimator.μ
   LLᵀ = estimator.LLᵀ
@@ -62,6 +62,33 @@ function estimate{T<:Real,V}(estimator::SimpleKriging{T,V}, xₒ::AbstractVector
   y = z - μ
   λ = LLᵀ \ c
 
+  # return weights
+  SimpleKrigingWeights(estimator, λ, y, c)
+end
+
+function estimate{T<:Real,V}(estimator::SimpleKriging{T,V}, xₒ::AbstractVector{T})
+  # compute weights
+  SKweights = weights(estimator, xₒ)
+
   # return estimate and variance
+  combine(SKweights)
+end
+
+@doc doc"""
+    SimpleKrigingWeights(estimator, λ, y, c)
+
+  Container that holds weights `λ`, centralized data `y` and RHS covariance `c` for `estimator`.
+""" ->
+immutable SimpleKrigingWeights{T<:Real,V} <: AbstractWeights{SimpleKriging{T,V}}
+  estimator::SimpleKriging{T,V}
+  λ::AbstractVector{T}
+  y::AbstractVector{V}
+  c::AbstractVector{T}
+end
+
+function combine{T<:Real,V}(weights::SimpleKrigingWeights{T,V})
+  cov = weights.estimator.cov; μ = weights.estimator.μ
+  λ = weights.λ; y = weights.y; c = weights.c
+
   μ + y⋅λ, cov(0) - c⋅λ
 end
