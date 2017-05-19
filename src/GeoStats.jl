@@ -34,6 +34,8 @@ export
   UniversalKriging,
 
   # functions
+  fit!,
+  weights,
   estimate
 
 end
