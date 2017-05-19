@@ -12,16 +12,16 @@
 ## ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 ## OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
-@doc doc"""
+"""
     SimpleKriging(X, z, cov, μ)
 
-  *INPUTS*:
+*INPUTS*:
 
-    * X ∈ ℜ^(mxn) - matrix of data locations
-    * z ∈ ℜⁿ      - vector of observations for X
-    * cov         - covariance model
-    * μ ∈ ℜ       - mean of z
-""" ->
+  * X ∈ ℜ^(mxn) - matrix of data locations
+  * z ∈ ℜⁿ      - vector of observations for X
+  * cov         - covariance model
+  * μ ∈ ℜ       - mean of z
+"""
 type SimpleKriging{T<:Real,V} <: AbstractEstimator
   # input fields
   X::AbstractMatrix{T}
@@ -74,11 +74,11 @@ function estimate{T<:Real,V}(estimator::SimpleKriging{T,V}, xₒ::AbstractVector
   combine(SKweights)
 end
 
-@doc doc"""
+"""
     SimpleKrigingWeights(estimator, λ, y, c)
 
-  Container that holds weights `λ`, centralized data `y` and RHS covariance `c` for `estimator`.
-""" ->
+Container that holds weights `λ`, centralized data `y` and RHS covariance `c` for `estimator`.
+"""
 immutable SimpleKrigingWeights{T<:Real,V} <: AbstractWeights{SimpleKriging{T,V}}
   estimator::SimpleKriging{T,V}
   λ::AbstractVector{T}

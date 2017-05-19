@@ -12,9 +12,11 @@
 ## ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 ## OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
-@doc doc"""
-  Evaluate a metric between all n² pairs of columns in a m-by-n matrix efficiently.
-  """ ->
+"""
+    pairwise(metric, X)
+
+Evaluate a metric between all n² pairs of columns in a m-by-n matrix efficiently.
+"""
 function pairwise(metric, X::AbstractMatrix)
   m, n = size(X)
   D = zeros(n, n)
@@ -32,26 +34,26 @@ function pairwise(metric, X::AbstractMatrix)
 end
 
 
-@doc doc"""
-  Returns the exponents in the multinomial expansion $(x1 + x2 + ... + xm)^n$.
+"""
+    multinom_exp(m, n, sortdir=nothing)
 
-      multinom_exp(m, n, sortdir=nothing)
+Returns the exponents in the multinomial expansion (x₁ + x₂ + ... + xₘ)ⁿ.
 
-  For example, the expansion $(x1 + x2 + x3)^2 = x1^2 + x1*x2 + x1*x3 + ...$
-  has the exponents:
+For example, the expansion (x₁ + x₂ + x₃)² = x₁² + x₁x₂ + x₁x₃ + ...
+has the exponents:
 
-      multinom_exp(3,2)
+    multinom_exp(3,2)
 
-      6x3 Array{Int64,2}:
-       2  0  0
-       1  1  0
-       1  0  1
-       0  2  0
-       0  1  1
-       0  0  2
+    6x3 Array{Int64,2}:
+     2  0  0
+     1  1  0
+     1  0  1
+     0  2  0
+     0  1  1
+     0  0  2
 
-  The argument `sortdir` can be "ascend" or "descend" for sorted output.
-  """ ->
+The argument `sortdir` can be "ascend" or "descend" for sorted output.
+"""
 function multinom_exp(m::Integer, n::Integer; sortdir=nothing)
   @assert m > 0 && n ≥ 0
   @assert sortdir in [nothing, "ascend", "descend"]

@@ -12,46 +12,46 @@
 ## ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 ## OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
-@doc doc"""
+"""
     AbstractEstimator
 
-  A spatial estimator (e.g. Simple Kriging).
-""" ->
+A spatial estimator (e.g. Simple Kriging).
+"""
 abstract AbstractEstimator
 
-@doc doc"""
+"""
     fit!(estimator, X, z)
 
-  Build Kriging system from locations `X` with values `z` and save factorization in `estimator`.
-""" ->
+Build Kriging system from locations `X` with values `z` and save factorization in `estimator`.
+"""
 fit!(estimator::AbstractEstimator, X::AbstractMatrix, z::AbstractVector) = error("not implemented")
 
-@doc doc"""
+"""
     weights(estimator, xₒ)
 
-  Compute the weights λ (and Lagrange multipliers ν) for the `estimator` at location `xₒ`.
-""" ->
+Compute the weights λ (and Lagrange multipliers ν) for the `estimator` at location `xₒ`.
+"""
 weights(estimator::AbstractEstimator, xₒ::AbstractVector) = error("not implemented")
 
-@doc doc"""
+"""
     estimate(estimator, xₒ)
 
-  Compute mean and variance for the `estimator` at location `xₒ`.
-""" ->
+Compute mean and variance for the `estimator` at location `xₒ`.
+"""
 estimate(estimator::AbstractEstimator, xₒ::AbstractVector) = error("not implemented")
 
-@doc doc"""
+"""
     AbstractWeights
 
-  An object to hold weights and related parameters for an estimator of type `E`.
-""" ->
+An object to hold weights and related parameters for an estimator of type `E`.
+"""
 abstract AbstractWeights{E}
 
-@doc doc"""
+"""
     combine(weights)
 
-  Combine weights (and related parameters) into mean and variance.
-""" ->
+Combine weights (and related parameters) into mean and variance.
+"""
 combine(weights::AbstractWeights) = error("not implemented")
 
 #------------------
