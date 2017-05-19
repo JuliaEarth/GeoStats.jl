@@ -55,7 +55,7 @@ xₒ = rand(dim)
   # Kriging estimate is invariant under covariance scaling
   # Kriging variance is multiplied by the same factor
   α = rand()
-  cov_α = GaussianCovariance(0., α, 1.)
+  cov_α = GaussianCovariance(α, 1.)
   simkrig_α = SimpleKriging(X, z, cov_α, mean(z))
   ordkrig_α = OrdinaryKriging(X, z, cov_α)
   unikrig_α = UniversalKriging(X, z, cov_α, 1)
