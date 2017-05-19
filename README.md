@@ -1,7 +1,4 @@
-GeoStats.jl
-===========
-
-*Geostatistics in Julia.*
+![GeoStatsLogo](docs/src/images/GeoStats.png)
 
 [![][travis-img]][travis-url] [![][julia-pkg-img]][julia-pkg-url] [![][codecov-img]][codecov-url] [![][docs-stable-img]][docs-stable-url] [![][docs-latest-img]][docs-latest-url]
 
