@@ -8,7 +8,7 @@ makedocs(
     "Home" => "index.md",
     "Estimation" => "estimation.md",
     "Variograms" => "variograms.md",
-    "Library" => "library.md"
+    "Function Reference" => "library.md"
   ]
 )
 
