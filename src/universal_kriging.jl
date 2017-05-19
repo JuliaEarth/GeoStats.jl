@@ -13,17 +13,17 @@
 ## OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
 @doc doc"""
-  Universal Kriging (a.k.a. Kriging with drift)
+    UniversalKriging(X, z, cov, degree)
 
   *INPUTS*:
 
-    * X  ∈ ℜ^(mxn) - matrix of data locations
-    * z  ∈ ℜⁿ      - vector of observations for X
-    * cov          - covariance model
-    * degree       - polynomial degree for the mean
+    * X ∈ ℜ^(mxn) - matrix of data locations
+    * z ∈ ℜⁿ      - vector of observations for X
+    * cov         - covariance model
+    * degree      - polynomial degree for the mean
 
   Ordinary Kriging is recovered for 0th degree polynomial.
-  """ ->
+""" ->
 type UniversalKriging{T<:Real,V} <: AbstractEstimator
   # input fields
   X:: AbstractMatrix{T}

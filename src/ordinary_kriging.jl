@@ -13,14 +13,14 @@
 ## OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
 @doc doc"""
-  Ordinary Kriging
+    OrdinaryKriging(X, z, cov)
 
   *INPUTS*:
 
-    * X  ∈ ℜ^(mxn) - matrix of data locations
-    * z  ∈ ℜⁿ      - vector of observations for X
-    * cov          - covariance model
-  """ ->
+    * X ∈ ℜ^(mxn) - matrix of data locations
+    * z ∈ ℜⁿ      - vector of observations for X
+    * cov         - covariance model
+""" ->
 type OrdinaryKriging{T<:Real,V} <: AbstractEstimator
   # input fields
   X::AbstractMatrix{T}

@@ -13,15 +13,15 @@
 ## OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
 @doc doc"""
-  Simple Kriging
+    SimpleKriging(X, z, cov, μ)
 
   *INPUTS*:
 
-    * X  ∈ ℜ^(mxn) - matrix of data locations
-    * z  ∈ ℜⁿ      - vector of observations for X
-    * cov          - covariance model
-    * μ  ∈ ℜ       - mean of z
-  """ ->
+    * X ∈ ℜ^(mxn) - matrix of data locations
+    * z ∈ ℜⁿ      - vector of observations for X
+    * cov         - covariance model
+    * μ ∈ ℜ       - mean of z
+""" ->
 type SimpleKriging{T<:Real,V} <: AbstractEstimator
   # input fields
   X::AbstractMatrix{T}

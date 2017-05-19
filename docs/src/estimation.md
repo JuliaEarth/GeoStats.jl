@@ -1,3 +1,5 @@
+# Estimation
+
 A Kriging estimator has the form:
 
 ```math

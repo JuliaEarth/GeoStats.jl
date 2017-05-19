@@ -14,6 +14,15 @@
 
 abstract CovarianceModel
 
+@doc doc"""
+    GaussianCovariance(n, s, r)
+
+  *INPUTS*:
+
+    * n ∈ ℜ - nugget
+    * s ∈ ℜ - sill
+    * r ∈ ℜ - range
+""" ->
 immutable GaussianCovariance{T<:Real} <: CovarianceModel
   nugget::T
   sill::T
@@ -22,6 +31,15 @@ end
 GaussianCovariance() = GaussianCovariance(0.,1.,1.)
 (c::GaussianCovariance)(h) = (c.sill - c.nugget) * exp(-(h/c.range).^2)
 
+@doc doc"""
+    SphericalCovariance(n, s, r)
+
+  *INPUTS*:
+
+    * n ∈ ℜ - nugget
+    * s ∈ ℜ - sill
+    * r ∈ ℜ - range
+""" ->
 immutable SphericalCovariance{T<:Real} <: CovarianceModel
   nugget::T
   sill::T
@@ -30,6 +48,15 @@ end
 SphericalCovariance() = SphericalCovariance(0.,1.,1.)
 (c::SphericalCovariance)(h) = (h .≤ c.range) .* (c.sill - c.nugget) .* (1 - 1.5h/c.range + 0.5(h/c.range).^3)
 
+@doc doc"""
+    ExponentialCovariance(n, s, r)
+
+  *INPUTS*:
+
+    * n ∈ ℜ - nugget
+    * s ∈ ℜ - sill
+    * r ∈ ℜ - range
+""" ->
 immutable ExponentialCovariance{T<:Real} <: CovarianceModel
   nugget::T
   sill::T
