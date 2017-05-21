@@ -26,6 +26,8 @@ at a given location:
 estimate
 ```
 
+A typical use of the interface is as follows:
+
 ```julia
 # build and factorize the system
 simkrig = SimpleKriging(X, z, cov, mean(z))
@@ -41,10 +43,6 @@ one can keep all the parameters fixed and only update the factorization with the
 
 ```@docs
 fit!
-```
-
-```julia
-fit!(simkrig, Xnew, znew)
 ```
 
 For advanced users, the Kriging weights and Lagrange multipliers at a given location can be accessed
