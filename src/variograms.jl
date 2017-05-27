@@ -30,7 +30,7 @@ immutable GaussianVariogram{T<:Real} <: AbstractVariogram
 end
 GaussianVariogram{T<:Real}(s::T, r::T) = GaussianVariogram(s, r, zero(T))
 GaussianVariogram() = GaussianVariogram(1.,1.)
-(v::GaussianVariogram)(h) = (v.sill - v.nugget) * (1 - exp(-(h/v.range).^2)) + v.nugget
+(γ::GaussianVariogram)(h) = (γ.sill - γ.nugget) * (1 - exp(-(h/γ.range).^2)) + γ.nugget
 
 """
     SphericalVariogram(s, r, n)
@@ -48,8 +48,8 @@ immutable SphericalVariogram{T<:Real} <: AbstractVariogram
 end
 SphericalVariogram{T<:Real}(s::T, r::T) = SphericalVariogram(s, r, zero(T))
 SphericalVariogram() = SphericalVariogram(1.,1.)
-(v::SphericalVariogram)(h) = (h .< v.range) .* (v.sill - v.nugget) .* (1 - 1.5h/v.range + 0.5(h/v.range).^3) +
-                             (h .≥ v.range) .* (v.sill - v.nugget) + v.nugget
+(γ::SphericalVariogram)(h) = (h .< γ.range) .* (γ.sill - γ.nugget) .* (1 - 1.5h/γ.range + 0.5(h/γ.range).^3) +
+                             (h .≥ γ.range) .* (γ.sill - γ.nugget) + γ.nugget
 
 """
     ExponentialVariogram(s, r, n)
@@ -67,4 +67,4 @@ immutable ExponentialVariogram{T<:Real} <: AbstractVariogram
 end
 ExponentialVariogram{T<:Real}(s::T, r::T) = ExponentialVariogram(s, r, zero(T))
 ExponentialVariogram() = ExponentialVariogram(1.,1.)
-(v::ExponentialVariogram)(h) = (v.sill - v.nugget) * (1 - exp(-(h/v.range))) + v.nugget
+(γ::ExponentialVariogram)(h) = (γ.sill - γ.nugget) * (1 - exp(-(h/γ.range))) + γ.nugget

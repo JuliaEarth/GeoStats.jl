@@ -18,7 +18,7 @@ module GeoStats
 
 using Combinatorics: combinations
 
-include("variomodels.jl")
+include("variograms.jl")
 include("estimators.jl")
 include("utils.jl")
 

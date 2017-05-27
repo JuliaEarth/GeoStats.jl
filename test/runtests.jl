@@ -11,7 +11,7 @@ xₒ = rand(dim)
 
 # list of tests
 testfiles = [
-  "variomodels.jl",
+  "variograms.jl",
   "estimators.jl"
 ]
 
