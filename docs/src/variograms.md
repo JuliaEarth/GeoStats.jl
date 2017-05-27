@@ -2,10 +2,11 @@
 
 ```math
 \newcommand{\x}{\boldsymbol{x}}
+\newcommand{\1}{\mathbb{1}}
 ```
 
-In a stationary isotropic model, the variogram is only a function of the distance
-between any two points ``\x_1,\x_2 \in \mathbb{R}^m``:
+In an intrinsically stationary isotropic model, the variogram is only a function of
+the distance between any two points ``\x_1,\x_2 \in \mathbb{R}^m``:
 
 ```math
 \gamma(\x_1,\x_2) = \gamma(||\x_1 - \x_2||) = \gamma(h)
@@ -17,33 +18,30 @@ This package implements a few commonly used stationary models:
 ## Gaussian
 
 ```math
-cov(h) = (s - n) \cdot \exp\left(-\left(\frac{h}{r}\right)^2\right)
+\gamma(h) = (s - n) \left[1 - \exp\left(-\left(\frac{h}{r}\right)^2\right)\right] + n \cdot \1_{(0,\infty)}(h)
 ```
 
 ```@docs
-GaussianCovariance
+GaussianVariogram
 ```
 
 ## Spherical
 
 ```math
-cov(h) =
-\begin{cases}
-(s - n) (1 - \frac{3}{2}\left(\frac{h}{r}\right) + \frac{1}{2}\left(\frac{h}{r}\right)^3) & \text{if } h \leq r \\
-0 & \text{otherwise}
-\end{cases}
+\gamma(h) = (s - n) \left[\left(\frac{3}{2}\left(\frac{h}{r}\right) + \frac{1}{2}\left(\frac{h}{r}\right)^3\right) \cdot \1_{(0,r)}(h) + \1_{[r,\infty)}(h)\right] + n \cdot \1_{(0,\infty)}(h)
 ```
 
 ```@docs
-SphericalCovariance
+SphericalVariogram
 ```
 
 ## Exponential
 
 ```math
-cov(h) = (s - n) \cdot \exp\left(-\frac{h}{r}\right)
+\gamma(h) = (s - n) \left[1 - \exp\left(-\frac{h}{r}\right)\right] + n \cdot \1_{(0,\infty)}(h)
+
 ```
 
 ```@docs
-ExponentialCovariance
+ExponentialVariogram
 ```

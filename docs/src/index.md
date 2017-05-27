@@ -32,13 +32,13 @@ X = rand(dim, nobs); z = rand(nobs)
 # target location
 xₒ = rand(dim)
 
-# define a covariance model
-cov = GaussianCovariance(1.,1.,0.) # sill, range and nugget
+# define a variogram model
+γ = GaussianVariogram(1.,1.,0.) # sill, range and nugget
 
 # define an estimator (i.e. build the Kriging system)
-simkrig = SimpleKriging(X, z, cov, mean(z))
-ordkrig = OrdinaryKriging(X, z, cov)
-unikrig = UniversalKriging(X, z, cov, 1)
+simkrig = SimpleKriging(X, z, γ, mean(z))
+ordkrig = OrdinaryKriging(X, z, γ)
+unikrig = UniversalKriging(X, z, γ, 1)
 
 # estimate at target location
 μ, σ² = estimate(simkrig, xₒ)

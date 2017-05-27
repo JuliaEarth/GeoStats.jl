@@ -6,8 +6,8 @@ makedocs(
   authors = "Júlio Hoffimann Mendes",
   pages = [
     "Home" => "index.md",
-    "Estimation" => "estimation.md",
     "Variograms" => "variograms.md",
+    "Estimation" => "estimation.md",
     "Function Reference" => "library.md"
   ]
 )

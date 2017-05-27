@@ -12,10 +12,10 @@
 ## ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 ## OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
-abstract CovarianceModel
+abstract AbstractVariogram
 
 """
-    GaussianCovariance(s, r, n)
+    GaussianVariogram(s, r, n)
 
 *INPUTS*:
 
@@ -23,17 +23,17 @@ abstract CovarianceModel
   * r ∈ ℜ - range
   * n ∈ ℜ - nugget
 """
-immutable GaussianCovariance{T<:Real} <: CovarianceModel
+immutable GaussianVariogram{T<:Real} <: AbstractVariogram
   sill::T
   range::T
   nugget::T
 end
-GaussianCovariance{T<:Real}(s::T, r::T) = GaussianCovariance(s, r, zero(T))
-GaussianCovariance() = GaussianCovariance(1.,1.)
-(c::GaussianCovariance)(h) = (c.sill - c.nugget) * exp(-(h/c.range).^2)
+GaussianVariogram{T<:Real}(s::T, r::T) = GaussianVariogram(s, r, zero(T))
+GaussianVariogram() = GaussianVariogram(1.,1.)
+(v::GaussianVariogram)(h) = (v.sill - v.nugget) * (1 - exp(-(h/v.range).^2)) + v.nugget
 
 """
-    SphericalCovariance(s, r, n)
+    SphericalVariogram(s, r, n)
 
 *INPUTS*:
 
@@ -41,17 +41,18 @@ GaussianCovariance() = GaussianCovariance(1.,1.)
   * r ∈ ℜ - range
   * n ∈ ℜ - nugget
 """
-immutable SphericalCovariance{T<:Real} <: CovarianceModel
+immutable SphericalVariogram{T<:Real} <: AbstractVariogram
   sill::T
   range::T
   nugget::T
 end
-SphericalCovariance{T<:Real}(s::T, r::T) = SphericalCovariance(s, r, zero(T))
-SphericalCovariance() = SphericalCovariance(1.,1.)
-(c::SphericalCovariance)(h) = (h .≤ c.range) .* (c.sill - c.nugget) .* (1 - 1.5h/c.range + 0.5(h/c.range).^3)
+SphericalVariogram{T<:Real}(s::T, r::T) = SphericalVariogram(s, r, zero(T))
+SphericalVariogram() = SphericalVariogram(1.,1.)
+(v::SphericalVariogram)(h) = (h .< v.range) .* (v.sill - v.nugget) .* (1 - 1.5h/v.range + 0.5(h/v.range).^3) +
+                             (h .≥ v.range) .* (v.sill - v.nugget) + v.nugget
 
 """
-    ExponentialCovariance(s, r, n)
+    ExponentialVariogram(s, r, n)
 
 *INPUTS*:
 
@@ -59,11 +60,11 @@ SphericalCovariance() = SphericalCovariance(1.,1.)
   * r ∈ ℜ - range
   * n ∈ ℜ - nugget
 """
-immutable ExponentialCovariance{T<:Real} <: CovarianceModel
+immutable ExponentialVariogram{T<:Real} <: AbstractVariogram
   sill::T
   range::T
   nugget::T
 end
-ExponentialCovariance{T<:Real}(s::T, r::T) = ExponentialCovariance(s, r, zero(T))
-ExponentialCovariance() = ExponentialCovariance(1.,1.)
-(c::ExponentialCovariance)(h) = (c.sill - c.nugget) * exp(-(h/c.range))
+ExponentialVariogram{T<:Real}(s::T, r::T) = ExponentialVariogram(s, r, zero(T))
+ExponentialVariogram() = ExponentialVariogram(1.,1.)
+(v::ExponentialVariogram)(h) = (v.sill - v.nugget) * (1 - exp(-(h/v.range))) + v.nugget

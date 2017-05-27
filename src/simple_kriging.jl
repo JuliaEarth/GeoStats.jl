@@ -13,45 +13,55 @@
 ## OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
 """
-    SimpleKriging(X, z, cov, μ)
+    SimpleKriging(X, z, γ, μ)
 
 *INPUTS*:
 
   * X ∈ ℜ^(mxn) - matrix of data locations
   * z ∈ ℜⁿ      - vector of observations for X
-  * cov         - covariance model
+  * γ           - variogram model
   * μ ∈ ℜ       - mean of z
 """
 type SimpleKriging{T<:Real,V} <: AbstractEstimator
   # input fields
   X::AbstractMatrix{T}
   z::AbstractVector{V}
-  cov::CovarianceModel
+  γ::AbstractVariogram
   μ::V
 
   # state fields
   LLᵀ::Base.LinAlg.Factorization{T}
 
-  function SimpleKriging(X, z, cov, μ)
+  function SimpleKriging(X, z, γ, μ)
     @assert size(X, 2) == length(z) "incorrect data configuration"
-    SK = new(X, z, cov, μ)
+    SK = new(X, z, γ, μ)
     fit!(SK, X, z)
     SK
   end
 end
 
-SimpleKriging(X, z, cov, μ) = SimpleKriging{eltype(X),eltype(z)}(X, z, cov, μ)
+SimpleKriging(X, z, γ, μ) = SimpleKriging{eltype(X),eltype(z)}(X, z, γ, μ)
 
 function fit!{T<:Real,V}(estimator::SimpleKriging{T,V}, X::AbstractMatrix{T}, z::AbstractVector{V})
+  # update data
   estimator.X = X
   estimator.z = z
-  C = pairwise(estimator.cov, X)
+
+  # variogram/covariance
+  γ = estimator.γ
+  cov(h) = γ.sill - γ(h)
+
+  # LHS of Kriging system
+  C = pairwise(cov, X)
+
+  # factorize
   estimator.LLᵀ = cholfact(C)
 end
 
 function weights{T<:Real,V}(estimator::SimpleKriging{T,V}, xₒ::AbstractVector{T})
   X = estimator.X; z = estimator.z
-  cov = estimator.cov; μ = estimator.μ
+  γ = estimator.γ; μ = estimator.μ
+  cov(h) = γ.sill - γ(h)
   LLᵀ = estimator.LLᵀ
   nobs = length(z)
 
@@ -87,8 +97,8 @@ immutable SimpleKrigingWeights{T<:Real,V} <: AbstractWeights{SimpleKriging{T,V}}
 end
 
 function combine{T<:Real,V}(weights::SimpleKrigingWeights{T,V})
-  cov = weights.estimator.cov; μ = weights.estimator.μ
+  γ = weights.estimator.γ; μ = weights.estimator.μ
   λ = weights.λ; y = weights.y; c = weights.c
 
-  μ + y⋅λ, cov(0) - c⋅λ
+  μ + y⋅λ, γ.sill - c⋅λ
 end

@@ -18,15 +18,15 @@ module GeoStats
 
 using Combinatorics: combinations
 
-include("covmodels.jl")
+include("variomodels.jl")
 include("estimators.jl")
 include("utils.jl")
 
 export
   # covariance models
-  GaussianCovariance,
-  SphericalCovariance,
-  ExponentialCovariance,
+  GaussianVariogram,
+  SphericalVariogram,
+  ExponentialVariogram,
 
   # estimators
   SimpleKriging,

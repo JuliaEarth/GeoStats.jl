@@ -13,44 +13,56 @@
 ## OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
 """
-    OrdinaryKriging(X, z, cov)
+    OrdinaryKriging(X, z, γ)
 
 *INPUTS*:
 
   * X ∈ ℜ^(mxn) - matrix of data locations
   * z ∈ ℜⁿ      - vector of observations for X
-  * cov         - covariance model
+  * γ           - variogram model
 """
 type OrdinaryKriging{T<:Real,V} <: AbstractEstimator
   # input fields
   X::AbstractMatrix{T}
   z::AbstractVector{V}
-  cov::CovarianceModel
+  γ::AbstractVariogram
 
   # state fields
   LU::Base.LinAlg.Factorization{T}
 
-  function OrdinaryKriging(X, z, cov)
+  function OrdinaryKriging(X, z, γ)
     @assert size(X, 2) == length(z) "incorrect data configuration"
-    OK = new(X, z, cov)
+    OK = new(X, z, γ)
     fit!(OK, X, z)
     OK
   end
 end
 
-OrdinaryKriging(X, z, cov) = OrdinaryKriging{eltype(X),eltype(z)}(X, z, cov)
+OrdinaryKriging(X, z, γ) = OrdinaryKriging{eltype(X),eltype(z)}(X, z, γ)
 
 function fit!{T<:Real,V}(estimator::OrdinaryKriging{T,V}, X::AbstractMatrix{T}, z::AbstractVector{V})
+  # udpate data
   estimator.X = X
   estimator.z = z
+
   nobs = size(X,2)
-  C = pairwise(estimator.cov, X)
+
+  # variogram/covariance
+  γ = estimator.γ
+  cov(h) = γ.sill - γ(h)
+
+  # LHS of Kriging system
+  C = pairwise(cov, X)
   A = [C ones(nobs); ones(nobs)' 0]
+
+  # factorize
   estimator.LU = lufact(A)
 end
 
 function weights{T<:Real,V}(estimator::OrdinaryKriging{T,V}, xₒ::AbstractVector{T})
-  X = estimator.X; z = estimator.z; cov = estimator.cov
+  X = estimator.X; z = estimator.z
+  γ = estimator.γ
+  cov(h) = γ.sill - γ(h)
   LU = estimator.LU
   nobs = length(z)
 
@@ -86,8 +98,8 @@ immutable OrdinaryKrigingWeights{T<:Real,V} <: AbstractWeights{OrdinaryKriging{T
 end
 
 function combine{T<:Real,V}(weights::OrdinaryKrigingWeights{T,V})
-  cov = weights.estimator.cov; z = weights.estimator.z
+  γ = weights.estimator.γ; z = weights.estimator.z
   λ = weights.λ; ν = weights.ν; b = weights.b
 
-  z⋅λ, cov(0) - b⋅[λ;ν]
+  z⋅λ, γ.sill - b⋅[λ;ν]
 end
