@@ -33,7 +33,7 @@ type UniversalKriging{T<:Real,V} <: AbstractEstimator
 
   # state fields
   LU::Base.LinAlg.Factorization{T}
-  exponents::AbstractMatrix{Float64}
+  exponents::AbstractMatrix{Int}
 
   function UniversalKriging(X, z, γ, degree)
     @assert size(X, 2) == length(z) "incorrect data configuration"
@@ -57,7 +57,7 @@ function fit!{T<:Real,V}(estimator::UniversalKriging{T,V}, X::AbstractMatrix{T},
   Γ = pairwise(estimator.γ, X)
 
   # multinomial expansion
-  exponents = zeros(0, dim)
+  exponents = zeros(Int, 0, dim)
   for d=0:estimator.degree
     exponents = [exponents; multinom_exp(dim, d, sortdir="descend")]
   end
@@ -67,7 +67,7 @@ function fit!{T<:Real,V}(estimator::UniversalKriging{T,V}, X::AbstractMatrix{T},
 
   # polynomial drift matrix
   nterms = size(exponents, 2)
-  F = Float64[prod(X[:,i].^exponents[:,j]) for i=1:nobs, j=1:nterms]
+  F = [prod(X[:,i].^exponents[:,j]) for i=1:nobs, j=1:nterms]
 
   # LHS of Kriging system
   A = [Γ F; F' zeros(nterms,nterms)]
@@ -83,11 +83,11 @@ function weights{T<:Real,V}(estimator::UniversalKriging{T,V}, xₒ::AbstractVect
   nobs = length(z)
 
   # evaluate variogram at location
-  g = T[γ(norm(X[:,j]-xₒ)) for j=1:nobs]
+  g = [γ(norm(X[:,j]-xₒ)) for j=1:nobs]
 
   # evaluate multinomial at location
   nterms = size(exponents, 2)
-  f = T[prod(xₒ.^exponents[:,j]) for j=1:nterms]
+  f = [prod(xₒ.^exponents[:,j]) for j=1:nterms]
 
   # solve linear system
   b = [g; f]

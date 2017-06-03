@@ -66,7 +66,7 @@ function weights{T<:Real,V}(estimator::SimpleKriging{T,V}, xₒ::AbstractVector{
   nobs = length(z)
 
   # evaluate covariance at location
-  c = T[cov(norm(X[:,j]-xₒ)) for j=1:nobs]
+  c = [cov(norm(X[:,j]-xₒ)) for j=1:nobs]
 
   # solve linear system
   y = z - μ
