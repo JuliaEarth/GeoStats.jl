@@ -83,11 +83,11 @@ function weights{T<:Real,V}(estimator::UniversalKriging{T,V}, xₒ::AbstractVect
   nobs = length(z)
 
   # evaluate variogram at location
-  g = Float64[γ(norm(X[:,j]-xₒ)) for j=1:nobs]
+  g = T[γ(norm(X[:,j]-xₒ)) for j=1:nobs]
 
   # evaluate multinomial at location
   nterms = size(exponents, 2)
-  f = Float64[prod(xₒ.^exponents[:,j]) for j=1:nterms]
+  f = T[prod(xₒ.^exponents[:,j]) for j=1:nterms]
 
   # solve linear system
   b = [g; f]
