@@ -67,7 +67,7 @@ function weights{T<:Real,V}(estimator::OrdinaryKriging{T,V}, xₒ::AbstractVecto
   nobs = length(z)
 
   # evaluate covariance at location
-  c = Float64[cov(norm(X[:,j]-xₒ)) for j=1:nobs]
+  c = T[cov(norm(X[:,j]-xₒ)) for j=1:nobs]
 
   # solve linear system
   b = [c; 1]
