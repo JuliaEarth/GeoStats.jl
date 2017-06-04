@@ -77,4 +77,17 @@
   UKestimate, UKvar = estimate(unikrig_0th, xₒ)
   @test OKestimate ≈ UKestimate
   @test OKvar ≈ UKvar
+
+  # Floating point precision checks
+  X_f = Float32.(X); z_f = Float32.(z); xₒ_f = Float32.(xₒ)
+  γ_f = GaussianVariogram{Float32}(1., 1., 0.)
+  simkrig_f = SimpleKriging(X_f, z_f, γ_f, mean(z_f))
+  ordkrig_f = OrdinaryKriging(X_f, z_f, γ_f)
+  SKestimate_f, SKvar_f = estimate(simkrig_f, xₒ_f)
+  OKestimate_f, OKvar_f = estimate(ordkrig_f, xₒ_f)
+  @test SKestimate_f ≈ SKestimate
+  @test SKvar_f ≈ SKvar
+  @test OKestimate_f ≈ OKestimate
+  @test OKvar_f ≈ OKvar
+  # NOTE: Universal Kriging is sensitive to machine precision
 end
