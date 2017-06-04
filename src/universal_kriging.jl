@@ -26,7 +26,7 @@ Ordinary Kriging is recovered for 0th degree polynomial.
 """
 type UniversalKriging{T<:Real,V} <: AbstractEstimator
   # input fields
-  X:: AbstractMatrix{T}
+  X::AbstractMatrix{T}
   z::AbstractVector{V}
   γ::AbstractVariogram
   degree::Integer
