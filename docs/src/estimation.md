@@ -16,7 +16,7 @@ This package implements the following Kriging variants:
 - Universal Kriging (polynomial drift for the mean)
 
 All these variants follow the same interface: an estimator object is first created with a given
-data configuration and covariance model, and then estimates are made at various locations.
+data configuration and variogram model, and then estimates are made at various locations.
 
 The object construction takes care of building the Kriging system and factorizing the LHS with
 an appropriate decomposition (e.g. Cholesky, LU). The `estimate` method performs the estimation
