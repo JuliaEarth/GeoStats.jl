@@ -52,7 +52,7 @@ function fit!{T<:Real,V}(estimator::OrdinaryKriging{T,V}, X::AbstractMatrix{T}, 
   cov(h) = γ.sill - γ(h)
 
   # LHS of Kriging system
-  C = pairwise(cov, X)
+  C = pairwise((x,y) -> cov(norm(x-y)), X)
   A = [C ones(nobs); ones(nobs)' 0]
 
   # factorize

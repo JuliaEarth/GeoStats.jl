@@ -15,16 +15,16 @@
 """
     pairwise(metric, X)
 
-Evaluate a metric between all n² pairs of columns in a m-by-n matrix efficiently.
+Evaluate `metric` between all n² pairs of columns in a m-by-n matrix `X` efficiently.
 """
-function pairwise(metric, X::AbstractMatrix)
+function pairwise(metric::Function, X::AbstractMatrix)
   m, n = size(X)
   D = zeros(n, n)
   for j=1:n
     for i=j+1:n
-      @inbounds D[i,j] = metric(norm(X[:,i] - X[:,j]))
+      @inbounds D[i,j] = metric(X[:,i], X[:,j])
     end
-    @inbounds D[j,j] = metric(0)
+    @inbounds D[j,j] = metric(X[:,j], X[:,j])
     for i=1:j-1
       @inbounds D[i,j] = D[j,i] # leveraging the symmetry
     end

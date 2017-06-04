@@ -52,9 +52,10 @@ function fit!{T<:Real,V}(estimator::UniversalKriging{T,V}, X::AbstractMatrix{T},
   estimator.z = z
 
   dim, nobs = size(X)
+  γ = estimator.γ
 
   # variogram matrix
-  Γ = pairwise(estimator.γ, X)
+  Γ = pairwise((x,y) -> γ(norm(x-y)), X)
 
   # multinomial expansion
   exponents = zeros(Int, 0, dim)

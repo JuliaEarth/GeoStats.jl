@@ -52,7 +52,7 @@ function fit!{T<:Real,V}(estimator::SimpleKriging{T,V}, X::AbstractMatrix{T}, z:
   cov(h) = γ.sill - γ(h)
 
   # LHS of Kriging system
-  C = pairwise(cov, X)
+  C = pairwise((x,y) -> cov(norm(x-y)), X)
 
   # factorize
   estimator.LLᵀ = cholfact(C)
