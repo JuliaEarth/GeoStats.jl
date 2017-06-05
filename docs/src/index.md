@@ -39,7 +39,7 @@ xₒ = rand(dim)
 # define an estimator (i.e. build the Kriging system)
 simkrig = SimpleKriging(X, z, γ, mean(z))
 ordkrig = OrdinaryKriging(X, z, γ)
-unikrig = UniversalKriging(X, z, γ, 1)
+unikrig = UniversalKriging(X, z, γ, 0)
 
 # estimate at target location
 μ, σ² = estimate(simkrig, xₒ)
