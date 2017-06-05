@@ -2,9 +2,9 @@
 
 [![][travis-img]][travis-url] [![][julia-pkg-img]][julia-pkg-url] [![][codecov-img]][codecov-url] [![][docs-stable-img]][docs-stable-url] [![][docs-latest-img]][docs-latest-url]
 
-This package provides high-performance implementations of geostatistical algorithms for the Julia
-programming language. It is in its initial development, and currently only implements Kriging
-estimation methods. More features will be added as the Julia type system matures.
+High-performance implementations of geostatistical algorithms for the Julia programming language.
+This package is in its initial development, and currently only contains Kriging estimation methods.
+More features will be added as the Julia type system matures.
 
 Installation
 ------------
