@@ -99,10 +99,10 @@
   SKestimate_d, SKvar_d = estimate(simkrig_d, xₒ_d)
   OKestimate_d, OKvar_d = estimate(ordkrig_d, xₒ_d)
   UKestimate_d, UKvar_d = estimate(unikrig_d, xₒ_d)
-  @test SKestimate_f ≈ SKestimate_d
-  @test SKvar_f ≈ SKvar_d
-  @test OKestimate_f ≈ OKestimate_d
-  @test OKvar_f ≈ OKvar_d
-  @test UKestimate_f ≈ UKestimate_d
-  @test UKvar_f ≈ UKvar_d
+  @test isapprox(SKestimate_f, SKestimate_d, atol=1e-4)
+  @test isapprox(SKvar_f, SKvar_d, atol=1e-4)
+  @test isapprox(OKestimate_f, OKestimate_d, atol=1e-4)
+  @test isapprox(OKvar_f, OKvar_d, atol=1e-4)
+  @test isapprox(UKestimate_f, UKestimate_d, atol=1e-4)
+  @test isapprox(UKvar_f, UKvar_d, atol=1e-4)
 end
