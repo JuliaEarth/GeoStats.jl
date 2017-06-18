@@ -12,6 +12,11 @@
 ## ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 ## OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
+"""
+    AbstractVariogram
+
+A variogram model (e.g. Gaussian variogram).
+"""
 abstract AbstractVariogram
 
 """

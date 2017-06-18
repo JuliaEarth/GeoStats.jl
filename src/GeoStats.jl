@@ -23,7 +23,7 @@ include("estimators.jl")
 include("utils.jl")
 
 export
-  # covariance models
+  # variogram models
   GaussianVariogram,
   SphericalVariogram,
   ExponentialVariogram,
