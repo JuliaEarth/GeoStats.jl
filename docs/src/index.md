@@ -28,7 +28,8 @@ srand(2017) # hide
 
 # create some data
 dim, nobs = 3, 10
-X = rand(dim, nobs); z = rand(nobs)
+X = rand(dim, nobs)
+z = rand(nobs)
 
 # target location
 xₒ = rand(dim)

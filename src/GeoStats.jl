@@ -27,6 +27,7 @@ export
   GaussianVariogram,
   SphericalVariogram,
   ExponentialVariogram,
+  MaternVariogram,
 
   # estimators
   SimpleKriging,

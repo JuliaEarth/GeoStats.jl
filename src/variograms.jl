@@ -54,7 +54,8 @@ end
 SphericalVariogram{T<:Real}(s::T, r::T) = SphericalVariogram(s, r, zero(T))
 SphericalVariogram() = SphericalVariogram(1.,1.)
 (γ::SphericalVariogram)(h) = (h .< γ.range) .* (γ.sill - γ.nugget) .* (1 - 1.5h/γ.range + 0.5(h/γ.range).^3) +
-                             (h .≥ γ.range) .* (γ.sill - γ.nugget) + γ.nugget
+                             (h .≥ γ.range) .* (γ.sill - γ.nugget) +
+                             γ.nugget
 
 """
     ExponentialVariogram(s, r, n)
@@ -73,3 +74,36 @@ end
 ExponentialVariogram{T<:Real}(s::T, r::T) = ExponentialVariogram(s, r, zero(T))
 ExponentialVariogram() = ExponentialVariogram(1.,1.)
 (γ::ExponentialVariogram)(h) = (γ.sill - γ.nugget) * (1 - exp(-(h/γ.range))) + γ.nugget
+
+"""
+    MaternVariogram(s, r, n, ν)
+
+*INPUTS*:
+
+  * s ∈ ℜ - sill
+  * r ∈ ℜ - range
+  * n ∈ ℜ - nugget
+  * ν ∈ ℜ - order of Bessel function
+"""
+immutable MaternVariogram{T<:Real} <: AbstractVariogram
+  sill::T
+  range::T
+  nugget::T
+  order::T
+end
+MaternVariogram{T<:Real}(s::T, r::T, n::T) = MaternVariogram(s, r, n, one(T))
+MaternVariogram{T<:Real}(s::T, r::T) = MaternVariogram(s, r, zero(T))
+MaternVariogram() = MaternVariogram(1.,1.)
+(γ::MaternVariogram)(h) = begin
+  s = γ.sill
+  r = γ.range
+  n = γ.nugget
+  ν = γ.order
+
+  # shift lag by machine precision to
+  # avoid explosion at the origin
+  h2 = h + eps(eltype(h))
+  h3 = √(2.0ν)h2/r
+
+  (s - n) * (1 - 2.0^(1 - ν)/gamma(ν) * h3.^ν .* besselk(ν, h3))
+end
