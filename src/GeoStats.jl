@@ -18,6 +18,10 @@ module GeoStats
 
 using Combinatorics: combinations
 
+if VERSION ≥ v"0.6-"
+  using SpecialFunctions: besselk
+end
+
 include("variograms.jl")
 include("estimators.jl")
 include("utils.jl")
