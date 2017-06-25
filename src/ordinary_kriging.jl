@@ -30,7 +30,7 @@ type OrdinaryKriging{T<:Real,V} <: AbstractEstimator
   # state fields
   LU::Base.LinAlg.Factorization{T}
 
-  function OrdinaryKriging(X, z, γ)
+  function OrdinaryKriging{T,V}(X, z, γ) where {T<:Real,V}
     @assert size(X, 2) == length(z) "incorrect data configuration"
     OK = new(X, z, γ)
     fit!(OK, X, z)
@@ -40,7 +40,8 @@ end
 
 OrdinaryKriging(X, z, γ) = OrdinaryKriging{eltype(X),eltype(z)}(X, z, γ)
 
-function fit!{T<:Real,V}(estimator::OrdinaryKriging{T,V}, X::AbstractMatrix{T}, z::AbstractVector{V})
+function fit!(estimator::OrdinaryKriging{T,V},
+              X::AbstractMatrix{T}, z::AbstractVector{V}) where {T<:Real,V}
   # udpate data
   estimator.X = X
   estimator.z = z
@@ -59,7 +60,7 @@ function fit!{T<:Real,V}(estimator::OrdinaryKriging{T,V}, X::AbstractMatrix{T}, 
   estimator.LU = lufact(A)
 end
 
-function weights{T<:Real,V}(estimator::OrdinaryKriging{T,V}, xₒ::AbstractVector{T})
+function weights(estimator::OrdinaryKriging{T,V}, xₒ::AbstractVector{T}) where {T<:Real,V}
   X = estimator.X; z = estimator.z
   γ = estimator.γ
   cov(h) = γ.sill - γ(h)
@@ -77,7 +78,7 @@ function weights{T<:Real,V}(estimator::OrdinaryKriging{T,V}, xₒ::AbstractVecto
   OrdinaryKrigingWeights(estimator, x[1:nobs], x[nobs+1:end], b)
 end
 
-function estimate{T<:Real,V}(estimator::OrdinaryKriging{T,V}, xₒ::AbstractVector{T})
+function estimate(estimator::OrdinaryKriging{T,V}, xₒ::AbstractVector{T}) where {T<:Real,V}
   # compute weights
   OKweights = weights(estimator, xₒ)
 
@@ -97,7 +98,7 @@ immutable OrdinaryKrigingWeights{T<:Real,V} <: AbstractWeights{OrdinaryKriging{T
   b::AbstractVector{T}
 end
 
-function combine{T<:Real,V}(weights::OrdinaryKrigingWeights{T,V})
+function combine(weights::OrdinaryKrigingWeights{T,V}) where {T<:Real,V}
   γ = weights.estimator.γ; z = weights.estimator.z
   λ = weights.λ; ν = weights.ν; b = weights.b
 

@@ -17,7 +17,7 @@
 
 A variogram model (e.g. Gaussian variogram).
 """
-abstract AbstractVariogram
+abstract type AbstractVariogram end
 
 """
     GaussianVariogram(s, r, n)
@@ -35,7 +35,7 @@ immutable GaussianVariogram{T<:Real} <: AbstractVariogram
 end
 GaussianVariogram{T<:Real}(s::T, r::T) = GaussianVariogram(s, r, zero(T))
 GaussianVariogram() = GaussianVariogram(1.,1.)
-(γ::GaussianVariogram)(h) = (γ.sill - γ.nugget) * (1 - exp(-(h/γ.range).^2)) + γ.nugget
+(γ::GaussianVariogram)(h) = (γ.sill - γ.nugget) * (1 - exp.(-(h/γ.range).^2)) + γ.nugget
 
 """
     SphericalVariogram(s, r, n)
@@ -73,7 +73,7 @@ immutable ExponentialVariogram{T<:Real} <: AbstractVariogram
 end
 ExponentialVariogram{T<:Real}(s::T, r::T) = ExponentialVariogram(s, r, zero(T))
 ExponentialVariogram() = ExponentialVariogram(1.,1.)
-(γ::ExponentialVariogram)(h) = (γ.sill - γ.nugget) * (1 - exp(-(h/γ.range))) + γ.nugget
+(γ::ExponentialVariogram)(h) = (γ.sill - γ.nugget) * (1 - exp.(-(h/γ.range))) + γ.nugget
 
 """
     MaternVariogram(s, r, n, ν)
@@ -103,7 +103,7 @@ MaternVariogram() = MaternVariogram(1.,1.)
   # shift lag by machine precision to
   # avoid explosion at the origin
   h2 = h + eps(eltype(h))
-  h3 = √(2.0ν)h2/r
+  h3 = sqrt.(2.0ν)h2/r
 
-  (s - n) * (1 - 2.0^(1 - ν)/gamma(ν) * h3.^ν .* besselk(ν, h3))
+  (s - n) * (1 - 2.0^(1 - ν)/gamma(ν) * h3.^ν .* besselk.(ν, h3))
 end

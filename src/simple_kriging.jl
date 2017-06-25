@@ -32,7 +32,7 @@ type SimpleKriging{T<:Real,V} <: AbstractEstimator
   # state fields
   LLᵀ::Base.LinAlg.Factorization{T}
 
-  function SimpleKriging(X, z, γ, μ)
+  function SimpleKriging{T,V}(X, z, γ, μ) where {T<:Real,V}
     @assert size(X, 2) == length(z) "incorrect data configuration"
     SK = new(X, z, γ, μ)
     fit!(SK, X, z)
@@ -42,7 +42,8 @@ end
 
 SimpleKriging(X, z, γ, μ) = SimpleKriging{eltype(X),eltype(z)}(X, z, γ, μ)
 
-function fit!{T<:Real,V}(estimator::SimpleKriging{T,V}, X::AbstractMatrix{T}, z::AbstractVector{V})
+function fit!(estimator::SimpleKriging{T,V},
+              X::AbstractMatrix{T}, z::AbstractVector{V}) where {T<:Real,V}
   # update data
   estimator.X = X
   estimator.z = z
@@ -58,7 +59,7 @@ function fit!{T<:Real,V}(estimator::SimpleKriging{T,V}, X::AbstractMatrix{T}, z:
   estimator.LLᵀ = cholfact(C)
 end
 
-function weights{T<:Real,V}(estimator::SimpleKriging{T,V}, xₒ::AbstractVector{T})
+function weights(estimator::SimpleKriging{T,V}, xₒ::AbstractVector{T}) where {T<:Real,V}
   X = estimator.X; z = estimator.z
   γ = estimator.γ; μ = estimator.μ
   cov(h) = γ.sill - γ(h)
@@ -76,7 +77,7 @@ function weights{T<:Real,V}(estimator::SimpleKriging{T,V}, xₒ::AbstractVector{
   SimpleKrigingWeights(estimator, λ, y, c)
 end
 
-function estimate{T<:Real,V}(estimator::SimpleKriging{T,V}, xₒ::AbstractVector{T})
+function estimate(estimator::SimpleKriging{T,V}, xₒ::AbstractVector{T}) where {T<:Real,V}
   # compute weights
   SKweights = weights(estimator, xₒ)
 
@@ -96,7 +97,7 @@ immutable SimpleKrigingWeights{T<:Real,V} <: AbstractWeights{SimpleKriging{T,V}}
   c::AbstractVector{T}
 end
 
-function combine{T<:Real,V}(weights::SimpleKrigingWeights{T,V})
+function combine(weights::SimpleKrigingWeights{T,V}) where {T<:Real,V}
   γ = weights.estimator.γ; μ = weights.estimator.μ
   λ = weights.λ; y = weights.y; c = weights.c
 

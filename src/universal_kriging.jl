@@ -35,7 +35,7 @@ type UniversalKriging{T<:Real,V} <: AbstractEstimator
   LU::Base.LinAlg.Factorization{T}
   exponents::AbstractMatrix{Int}
 
-  function UniversalKriging(X, z, γ, degree)
+  function UniversalKriging{T,V}(X, z, γ, degree) where {T<:Real,V}
     @assert size(X, 2) == length(z) "incorrect data configuration"
     @assert degree ≥ 0 "degree must be nonnegative"
     UK = new(X, z, γ, degree)
@@ -46,7 +46,8 @@ end
 
 UniversalKriging(X, z, γ, degree) = UniversalKriging{eltype(X),eltype(z)}(X, z, γ, degree)
 
-function fit!{T<:Real,V}(estimator::UniversalKriging{T,V}, X::AbstractMatrix{T}, z::AbstractVector{V})
+function fit!(estimator::UniversalKriging{T,V},
+              X::AbstractMatrix{T}, z::AbstractVector{V}) where {T<:Real,V}
   # update data
   estimator.X = X
   estimator.z = z
@@ -77,7 +78,7 @@ function fit!{T<:Real,V}(estimator::UniversalKriging{T,V}, X::AbstractMatrix{T},
   estimator.LU = lufact(A)
 end
 
-function weights{T<:Real,V}(estimator::UniversalKriging{T,V}, xₒ::AbstractVector{T})
+function weights(estimator::UniversalKriging{T,V}, xₒ::AbstractVector{T}) where {T<:Real,V}
   X = estimator.X; z = estimator.z; γ = estimator.γ
   exponents = estimator.exponents
   LU = estimator.LU
@@ -98,7 +99,7 @@ function weights{T<:Real,V}(estimator::UniversalKriging{T,V}, xₒ::AbstractVect
   UniversalKrigingWeights(estimator, x[1:nobs], x[nobs+1:end], b)
 end
 
-function estimate{T<:Real,V}(estimator::UniversalKriging{T,V}, xₒ::AbstractVector{T})
+function estimate(estimator::UniversalKriging{T,V}, xₒ::AbstractVector{T}) where {T<:Real,V}
   # compute weights
   UKweights = weights(estimator, xₒ)
 
@@ -118,7 +119,7 @@ immutable UniversalKrigingWeights{T<:Real,V} <: AbstractWeights{UniversalKriging
   b::AbstractVector{T}
 end
 
-function combine{T<:Real,V}(weights::UniversalKrigingWeights{T,V})
+function combine(weights::UniversalKrigingWeights{T,V}) where {T<:Real,V}
   z = weights.estimator.z
   λ = weights.λ; ν = weights.ν; b = weights.b
 

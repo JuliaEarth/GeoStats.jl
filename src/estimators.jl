@@ -17,7 +17,7 @@
 
 A spatial estimator (e.g. Simple Kriging).
 """
-abstract AbstractEstimator
+abstract type AbstractEstimator end
 
 """
     fit!(estimator, X, z)
@@ -45,7 +45,7 @@ estimate(estimator::AbstractEstimator, xₒ::AbstractVector) = error("not implem
 
 An object to hold weights and related parameters for an estimator of type `E`.
 """
-abstract AbstractWeights{E}
+abstract type AbstractWeights{E} end
 
 """
     combine(weights)
