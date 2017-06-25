@@ -37,7 +37,7 @@ Please [open an issue](https://github.com/juliohm/GeoStats.jl/issues) if you enc
 [travis-img]: https://travis-ci.org/juliohm/GeoStats.jl.svg?branch=master
 [travis-url]: https://travis-ci.org/juliohm/GeoStats.jl
 
-[julia-pkg-img]: http://pkg.julialang.org/badges/GeoStats_0.5.svg
+[julia-pkg-img]: http://pkg.julialang.org/badges/GeoStats_0.6.svg
 [julia-pkg-url]: http://pkg.julialang.org/?pkg=GeoStats
 
 [codecov-img]: https://codecov.io/gh/juliohm/GeoStats.jl/branch/master/graph/badge.svg
