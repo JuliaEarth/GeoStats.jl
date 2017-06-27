@@ -22,37 +22,25 @@ abstract type AbstractVariogram end
 """
     GaussianVariogram(s, r, n)
 
-*INPUTS*:
-
-  * s ∈ ℜ - sill
-  * r ∈ ℜ - range
-  * n ∈ ℜ - nugget
+A Gaussian variogram with sill `s`, range `r` and nugget `n`.
 """
-immutable GaussianVariogram{T<:Real} <: AbstractVariogram
-  sill::T
-  range::T
-  nugget::T
+@with_kw immutable GaussianVariogram{T<:Real} <: AbstractVariogram
+  sill::T   = 1.
+  range::T  = 1.
+  nugget::T = 0.
 end
-GaussianVariogram{T<:Real}(s::T, r::T) = GaussianVariogram(s, r, zero(T))
-GaussianVariogram() = GaussianVariogram(1.,1.)
 (γ::GaussianVariogram)(h) = (γ.sill - γ.nugget) * (1 - exp.(-(h/γ.range).^2)) + γ.nugget
 
 """
     SphericalVariogram(s, r, n)
 
-*INPUTS*:
-
-  * s ∈ ℜ - sill
-  * r ∈ ℜ - range
-  * n ∈ ℜ - nugget
+A spherical variogram with sill `s`, range `r` and nugget `n`.
 """
-immutable SphericalVariogram{T<:Real} <: AbstractVariogram
-  sill::T
-  range::T
-  nugget::T
+@with_kw immutable SphericalVariogram{T<:Real} <: AbstractVariogram
+  sill::T   = 1.
+  range::T  = 1.
+  nugget::T = 0.
 end
-SphericalVariogram{T<:Real}(s::T, r::T) = SphericalVariogram(s, r, zero(T))
-SphericalVariogram() = SphericalVariogram(1.,1.)
 (γ::SphericalVariogram)(h) = (h .< γ.range) .* (γ.sill - γ.nugget) .* (1 - 1.5h/γ.range + 0.5(h/γ.range).^3) +
                              (h .≥ γ.range) .* (γ.sill - γ.nugget) +
                              γ.nugget
@@ -60,40 +48,27 @@ SphericalVariogram() = SphericalVariogram(1.,1.)
 """
     ExponentialVariogram(s, r, n)
 
-*INPUTS*:
-
-  * s ∈ ℜ - sill
-  * r ∈ ℜ - range
-  * n ∈ ℜ - nugget
+An exponential variogram with sill `s`, range `r` and nugget `n`.
 """
-immutable ExponentialVariogram{T<:Real} <: AbstractVariogram
-  sill::T
-  range::T
-  nugget::T
+@with_kw immutable ExponentialVariogram{T<:Real} <: AbstractVariogram
+  sill::T   = 1.
+  range::T  = 1.
+  nugget::T = 0.
 end
-ExponentialVariogram{T<:Real}(s::T, r::T) = ExponentialVariogram(s, r, zero(T))
-ExponentialVariogram() = ExponentialVariogram(1.,1.)
 (γ::ExponentialVariogram)(h) = (γ.sill - γ.nugget) * (1 - exp.(-(h/γ.range))) + γ.nugget
 
 """
     MaternVariogram(s, r, n, ν)
 
-*INPUTS*:
-
-  * s ∈ ℜ - sill
-  * r ∈ ℜ - range
-  * n ∈ ℜ - nugget
-  * ν ∈ ℜ - order of Bessel function
+A Matérn variogram with sill `s`, range `r` and nugget `n`. The parameter
+ν is the order of the Bessel function.
 """
-immutable MaternVariogram{T<:Real} <: AbstractVariogram
-  sill::T
-  range::T
-  nugget::T
-  order::T
+@with_kw immutable MaternVariogram{T<:Real} <: AbstractVariogram
+  sill::T   = 1.
+  range::T  = 1.
+  nugget::T = 0.
+  order::T  = 1.
 end
-MaternVariogram{T<:Real}(s::T, r::T, n::T) = MaternVariogram(s, r, n, one(T))
-MaternVariogram{T<:Real}(s::T, r::T) = MaternVariogram(s, r, zero(T))
-MaternVariogram() = MaternVariogram(1.,1.)
 (γ::MaternVariogram)(h) = begin
   s = γ.sill
   r = γ.range

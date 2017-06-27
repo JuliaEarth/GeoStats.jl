@@ -1,5 +1,5 @@
 @testset "Kriging" begin
-  γ = GaussianVariogram(1., 1., 0.)
+  γ = GaussianVariogram(sill=1., range=1., nugget=0.)
   simkrig = SimpleKriging(X, z, γ, mean(z))
   ordkrig = OrdinaryKriging(X, z, γ)
   unikrig = UniversalKriging(X, z, γ, 1)
@@ -44,7 +44,7 @@
   # Kriging estimate is invariant under covariance scaling
   # Kriging variance is multiplied by the same factor
   α = rand()
-  γ_α = GaussianVariogram(α, 1., 0.)
+  γ_α = GaussianVariogram(sill=α, range=1., nugget=0.)
   simkrig_α = SimpleKriging(X, z, γ_α, mean(z))
   ordkrig_α = OrdinaryKriging(X, z, γ_α)
   unikrig_α = UniversalKriging(X, z, γ_α, 1)
@@ -82,11 +82,11 @@
   X_f  = rand(Float32, dim, nobs)
   z_f  = rand(Float32, nobs)
   xₒ_f = rand(Float32, dim)
-  γ_f = GaussianVariogram{Float32}(1., 1., 0.)
+  γ_f = GaussianVariogram{Float32}(sill=1., range=1., nugget=0.)
   X_d  = Float64.(X_f)
   z_d  = Float64.(z_f)
   xₒ_d = Float64.(xₒ_f)
-  γ_d = GaussianVariogram{Float64}(1., 1., 0.)
+  γ_d = GaussianVariogram{Float64}(sill=1., range=1., nugget=0.)
   simkrig_f = SimpleKriging(X_f, z_f, γ_f, mean(z_f))
   ordkrig_f = OrdinaryKriging(X_f, z_f, γ_f)
   unikrig_f = UniversalKriging(X_f, z_f, γ_f, 1)

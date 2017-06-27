@@ -17,10 +17,8 @@ __precompile__(true)
 module GeoStats
 
 using Combinatorics: combinations
-
-if VERSION ≥ v"0.6-"
-  using SpecialFunctions: besselk
-end
+using SpecialFunctions: besselk
+using Parameters: @with_kw
 
 include("variograms.jl")
 include("estimators.jl")

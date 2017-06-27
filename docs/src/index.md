@@ -35,7 +35,7 @@ z = rand(nobs)
 xₒ = rand(dim)
 
 # define a variogram model
-γ = GaussianVariogram(1.,1.,0.) # sill, range and nugget
+γ = GaussianVariogram(sill=1., range=1., nugget=0.)
 
 # define an estimator (i.e. build the Kriging system)
 simkrig = SimpleKriging(X, z, γ, mean(z))
