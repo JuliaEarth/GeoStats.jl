@@ -4,7 +4,7 @@
   spherical = SphericalVariogram()
   exponential = ExponentialVariogram()
   matern = MaternVariogram()
-  composite = CompositeVariogram([gaussian, spherical, exponential, matern])
+  composite = CompositeVariogram(gaussian, spherical, exponential, matern)
 
   # variograms are increasing functions
   @test all(gaussian(h) .≤ gaussian(h+1))

@@ -96,12 +96,14 @@ end
 (γ::MaternVariogram)(x, y) = γ(γ.distance(x, y))
 
 """
-    CompositeVariogram
+    CompositeVariogram(γ₁, γ₂, ..., γₙ)
 
-A composite model of variograms γ(h) = γ₁(h) + γ₂(h) + ⋯ + γₙ(h).
+A composite (additive) model of variograms γ(h) = γ₁(h) + γ₂(h) + ⋯ + γₙ(h).
 """
 type CompositeVariogram <: AbstractVariogram
   γs::Vector{AbstractVariogram}
+
+  CompositeVariogram(g, gs...) = new([g, gs...])
 end
 (c::CompositeVariogram)(h) = sum(γ(h) for γ in c.γs)
 (c::CompositeVariogram)(x, y) = sum(γ(x,y) for γ in c.γs)
