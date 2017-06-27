@@ -38,6 +38,17 @@ GaussianVariogram(nugget=.1) # add nugget effect
 MaternVariogram(order=1) # set order of Bessel function
 ```
 
+Additionally, a composite (additive) variogram model ``\gamma(h) = \gamma_1(h) + \gamma_2(h) + \cdots \gamma_n(h)``
+can be constructed from a vector of variogram models:
+
+```julia
+CompositeVariogram([GaussianVariogram(), ExponentialVariogram()])
+```
+
+Like the other variogram models, a composite variogram ``\gamma`` can be evaluated as an isotropic model
+``\gamma(h)`` or as a model with a custom distance defined by taking into account its components
+``\gamma(\x_1,\x_2)``.
+
 ## Gaussian
 
 ```math
@@ -77,4 +88,10 @@ ExponentialVariogram
 
 ```@docs
 MaternVariogram
+```
+
+## Composite
+
+```@docs
+CompositeVariogram
 ```
