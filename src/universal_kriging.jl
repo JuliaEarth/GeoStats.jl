@@ -56,7 +56,7 @@ function fit!(estimator::UniversalKriging{T,V},
   γ = estimator.γ
 
   # variogram matrix
-  Γ = pairwise((x,y) -> γ(norm(x-y)), X)
+  Γ = pairwise((x,y) -> γ(x,y), X)
 
   # multinomial expansion
   exponents = zeros(Int, 0, dim)
@@ -85,7 +85,7 @@ function weights(estimator::UniversalKriging{T,V}, xₒ::AbstractVector{T}) wher
   nobs = length(z)
 
   # evaluate variogram at location
-  g = [γ(norm(X[:,j]-xₒ)) for j=1:nobs]
+  g = [γ(X[:,j],xₒ) for j=1:nobs]
 
   # evaluate multinomial at location
   nterms = size(exponents, 2)

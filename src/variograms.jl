@@ -20,54 +20,65 @@ A variogram model (e.g. Gaussian variogram).
 abstract type AbstractVariogram end
 
 """
-    GaussianVariogram(s, r, n)
+    GaussianVariogram(sill=s, range=r, nugget=n, distance=d)
 
 A Gaussian variogram with sill `s`, range `r` and nugget `n`.
+For anisotropic model, use a custom distance function `d`.
 """
 @with_kw immutable GaussianVariogram{T<:Real} <: AbstractVariogram
   sill::T   = 1.
   range::T  = 1.
   nugget::T = 0.
+  distance::Function = (x,y) -> norm(x-y)
 end
 (γ::GaussianVariogram)(h) = (γ.sill - γ.nugget) * (1 - exp.(-(h/γ.range).^2)) + γ.nugget
+(γ::GaussianVariogram)(x, y) = γ(γ.distance(x, y))
 
 """
-    SphericalVariogram(s, r, n)
+    SphericalVariogram(sill=s, range=r, nugget=n, distance=d)
 
 A spherical variogram with sill `s`, range `r` and nugget `n`.
+For anisotropic model, use a custom distance function `d`.
 """
 @with_kw immutable SphericalVariogram{T<:Real} <: AbstractVariogram
   sill::T   = 1.
   range::T  = 1.
   nugget::T = 0.
+  distance::Function = (x,y) -> norm(x-y)
 end
 (γ::SphericalVariogram)(h) = (h .< γ.range) .* (γ.sill - γ.nugget) .* (1 - 1.5h/γ.range + 0.5(h/γ.range).^3) +
                              (h .≥ γ.range) .* (γ.sill - γ.nugget) +
                              γ.nugget
+(γ::SphericalVariogram)(x, y) = γ(γ.distance(x, y))
 
 """
-    ExponentialVariogram(s, r, n)
+    ExponentialVariogram(sill=s, range=r, nugget=n, distance=d)
 
 An exponential variogram with sill `s`, range `r` and nugget `n`.
+For anisotropic model, use a custom distance function `d`.
 """
 @with_kw immutable ExponentialVariogram{T<:Real} <: AbstractVariogram
   sill::T   = 1.
   range::T  = 1.
   nugget::T = 0.
+  distance::Function = (x,y) -> norm(x-y)
 end
 (γ::ExponentialVariogram)(h) = (γ.sill - γ.nugget) * (1 - exp.(-(h/γ.range))) + γ.nugget
+(γ::ExponentialVariogram)(x, y) = γ(γ.distance(x, y))
 
 """
-    MaternVariogram(s, r, n, ν)
+    MaternVariogram(sill=s, range=r, nugget=n, order=ν, distance=d)
 
 A Matérn variogram with sill `s`, range `r` and nugget `n`. The parameter
-ν is the order of the Bessel function.
+ν is the order of the Bessel function. For anisotropic model, use a custom
+distance function `d`.
 """
 @with_kw immutable MaternVariogram{T<:Real} <: AbstractVariogram
   sill::T   = 1.
   range::T  = 1.
   nugget::T = 0.
   order::T  = 1.
+  distance::Function = (x,y) -> norm(x-y)
 end
 (γ::MaternVariogram)(h) = begin
   s = γ.sill
@@ -82,3 +93,4 @@ end
 
   (s - n) * (1 - 2.0^(1 - ν)/gamma(ν) * h3.^ν .* besselk.(ν, h3))
 end
+(γ::MaternVariogram)(x, y) = γ(γ.distance(x, y))

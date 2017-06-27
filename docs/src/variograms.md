@@ -2,18 +2,41 @@
 
 ```math
 \newcommand{\x}{\boldsymbol{x}}
+\newcommand{\R}{\mathbb{R}}
 \newcommand{\1}{\mathbb{1}}
 ```
 
 In an intrinsically stationary isotropic model, the variogram is only a function of
-the distance between any two points ``\x_1,\x_2 \in \mathbb{R}^m``:
+the distance between any two points ``\x_1,\x_2 \in \R^m``:
 
 ```math
 \gamma(\x_1,\x_2) = \gamma(||\x_1 - \x_2||) = \gamma(h)
 ```
 
-The same holds for the covariance, which is directly related ``\gamma(h) = cov(0) - cov(h)``.
+The same holds for the covariance, which is directly related via ``\gamma(h) = cov(0) - cov(h)``.
+
+Anisotropic models are easily obtained by defining an anisotropic distance function
+``d \colon \R^m \times \R^m \mapsto \R`` that maps any two points ``\x_1,\x_2 \in \R^m`` into a
+scalar ``d(\x_1,\x_2) \in \R``.
+
+Custom distance functions are particularly useful if the data is embedded on a map by means of a
+non-trivial projection. In this case, a geodesic distance can be defined to properly account for
+spatial distortions.
+
 This package implements a few commonly used and other more excentric stationary models:
+
+- Gaussian
+- Spherical
+- Exponential
+- Matérn (see [Matérn covariance functions](https://en.wikipedia.org/wiki/Mat%C3%A9rn_covariance_function))
+
+They all share the same default parameters of `sill=1`, `range=1`, `nugget=0`, `distance=Euclidean`. Some of
+them have extra parameters that can be set with keyword arguments:
+
+```julia
+GaussianVariogram(nugget=.1) # add nugget effect
+MaternVariogram(order=1) # set order of Bessel function
+```
 
 ## Gaussian
 
@@ -51,8 +74,6 @@ ExponentialVariogram
 ```math
 \gamma(h) = (s - n) \left[1 - \frac{2^{1-\nu}}{\Gamma(\nu)} \left(\sqrt{2\nu}\frac{h}{r}\right)^\nu K_\nu\left(\sqrt{2\nu}\frac{h}{r}\right)\right]
 ```
-
-See the Wikipedia page on [Matérn covariance functions](https://en.wikipedia.org/wiki/Mat%C3%A9rn_covariance_function).
 
 ```@docs
 MaternVariogram

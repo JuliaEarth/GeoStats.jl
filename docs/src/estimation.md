@@ -4,10 +4,11 @@ A Kriging estimator has the form:
 
 ```math
 \newcommand{\x}{\boldsymbol{x}}
-\hat{Z}(\x_0) = \lambda_1 Z(\x_1) + \lambda_2 Z(\x_2) + \cdots + \lambda_n Z(\x_n),\quad \x_i \in \mathbb{R}^m, \lambda_i \in \mathbb{R}
+\newcommand{\R}{\mathbb{R}}
+\hat{Z}(\x_0) = \lambda_1 Z(\x_1) + \lambda_2 Z(\x_2) + \cdots + \lambda_n Z(\x_n),\quad \x_i \in \R^m, \lambda_i \in \R
 ```
 
-with ``Z\colon \mathbb{R}^m \times \Omega \to \mathbb{R}`` a random field.
+with ``Z\colon \R^m \times \Omega \to \R`` a random field.
 
 This package implements the following Kriging variants:
 
