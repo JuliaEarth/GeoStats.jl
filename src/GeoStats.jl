@@ -30,6 +30,7 @@ export
   SphericalVariogram,
   ExponentialVariogram,
   MaternVariogram,
+  CompositeVariogram,
 
   # estimators
   SimpleKriging,

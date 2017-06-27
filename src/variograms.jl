@@ -94,3 +94,14 @@ end
   (s - n) * (1 - 2.0^(1 - ν)/gamma(ν) * h3.^ν .* besselk.(ν, h3))
 end
 (γ::MaternVariogram)(x, y) = γ(γ.distance(x, y))
+
+"""
+    CompositeVariogram
+
+A composite model of variograms γ(h) = γ₁(h) + γ₂(h) + ⋯ + γₙ(h).
+"""
+type CompositeVariogram <: AbstractVariogram
+  γs::Vector{AbstractVariogram}
+end
+(c::CompositeVariogram)(h) = sum(γ(h) for γ in c.γs)
+(c::CompositeVariogram)(x, y) = sum(γ(x,y) for γ in c.γs)
