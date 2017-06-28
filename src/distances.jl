@@ -1,4 +1,4 @@
-## Copyright (c) 2015, Júlio Hoffimann Mendes <juliohm@stanford.edu>
+## Copyright (c) 2017, Júlio Hoffimann Mendes <juliohm@stanford.edu>
 ##
 ## Permission to use, copy, modify, and/or distribute this software for any
 ## purpose with or without fee is hereby granted, provided that the above
@@ -12,38 +12,17 @@
 ## ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 ## OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
-__precompile__(true)
+"""
+    AbstractDistance
 
-module GeoStats
+A metric or distance function.
+"""
+abstract type AbstractDistance end
 
-using Combinatorics: combinations
-using SpecialFunctions: besselk
-using Parameters: @with_kw
+"""
+    EuclideanDistance
 
-include("distances.jl")
-include("variograms.jl")
-include("estimators.jl")
-include("utils.jl")
-
-export
-  # distance functions
-  EuclideanDistance,
-
-  # variogram models
-  GaussianVariogram,
-  SphericalVariogram,
-  ExponentialVariogram,
-  MaternVariogram,
-  CompositeVariogram,
-
-  # estimators
-  SimpleKriging,
-  OrdinaryKriging,
-  UniversalKriging,
-
-  # functions
-  fit!,
-  weights,
-  estimate
-
-end
+The Euclidean distance ||x-y||₂
+"""
+immutable EuclideanDistance <: AbstractDistance end
+(d::EuclideanDistance)(x, y) = norm(x - y)
