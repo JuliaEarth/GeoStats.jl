@@ -1,4 +1,4 @@
-@testset "Variogram" begin
+@testset "Variograms" begin
   h = linspace(0,100)
   gaussian = GaussianVariogram()
   spherical = SphericalVariogram()
@@ -6,7 +6,7 @@
   matern = MaternVariogram()
   composite = CompositeVariogram(gaussian, spherical, exponential, matern)
 
-  # variograms are increasing functions
+  # variograms are increasing
   @test all(gaussian(h) .≤ gaussian(h+1))
   @test all(spherical(h) .≤ spherical(h+1))
   @test all(exponential(h) .≤ exponential(h+1))
