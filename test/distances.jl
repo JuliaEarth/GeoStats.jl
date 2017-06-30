@@ -13,6 +13,11 @@
     @test d(a, c) ≤ d(a, b) + d(b, c)
   end
 
+  # Euclidean distance
+  d = EuclideanDistance()
+  @test d([1.,1.,0.], [0.,0.,0.]) ≈ √2
+  @test d([-1.,1.,0.], [0.,0.,0.]) ≈ √2
+
   # ellipsoid distance
   d = EllipsoidDistance([1.,.5,.5], [π/4,0.,0.])
   @test d([1.,1.,0.], [0.,0.,0.]) ≈ √2
