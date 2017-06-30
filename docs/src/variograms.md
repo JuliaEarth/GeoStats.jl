@@ -15,13 +15,12 @@ the distance between any two points ``\x_1,\x_2 \in \R^m``:
 
 The same holds for the covariance, which is directly related via ``\gamma(h) = cov(0) - cov(h)``.
 
-Anisotropic models are easily obtained by defining an anisotropic distance function
-``d \colon \R^m \times \R^m \mapsto \R`` that maps any two points ``\x_1,\x_2 \in \R^m`` into a
-scalar ``d(\x_1,\x_2) \in \R``.
+Anisotropic models are easily obtained by defining an ellipsoid distance in place of the Euclidean
+distance. For a list of available distances, please see [Distances](distances.md).
 
-Custom distance functions are particularly useful if the data is embedded on a map by means of a
-non-trivial projection. In this case, a geodesic distance can be defined to properly account for
-spatial distortions.
+Custom distance functions are particularly useful if 3D locations are projected on a 2D map by means
+of a non-trivial transformation. In this case, a geodesic distance can be defined to properly account
+for spatial distortions at large scales.
 
 This package implements a few commonly used and other more excentric stationary models:
 
@@ -30,8 +29,8 @@ This package implements a few commonly used and other more excentric stationary 
 - Exponential
 - Matérn (see [Matérn covariance functions](https://en.wikipedia.org/wiki/Mat%C3%A9rn_covariance_function))
 
-They all share the same default parameters of `sill=1`, `range=1`, `nugget=0`, `distance=Euclidean`. Some of
-them have extra parameters that can be set with keyword arguments:
+They all share the same default parameters of `sill=1`, `range=1`, `nugget=0`, `distance=EuclideanDistance()`.
+Some of them have extra parameters that can be set with keyword arguments:
 
 ```julia
 GaussianVariogram(nugget=.1) # add nugget effect
@@ -39,15 +38,15 @@ MaternVariogram(order=1) # set order of Bessel function
 ```
 
 Additionally, a composite (additive) variogram model ``\gamma(h) = \gamma_1(h) + \gamma_2(h) + \cdots \gamma_n(h)``
-can be constructed from a vector of variogram models:
+can be constructed from a list of variogram models:
 
 ```julia
-CompositeVariogram([GaussianVariogram(), ExponentialVariogram()])
+CompositeVariogram(GaussianVariogram(), ExponentialVariogram())
 ```
 
 Like the other variogram models, a composite variogram ``\gamma`` can be evaluated as an isotropic model
-``\gamma(h)`` or as a model with a custom distance defined by taking into account its components
-``\gamma(\x_1,\x_2)``.
+``\gamma(h)`` or as a model with a custom distance implicitly defined by taking into account its individual
+components ``\gamma(\x_1,\x_2)``.
 
 ## Gaussian
 

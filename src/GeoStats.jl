@@ -28,6 +28,7 @@ include("utils.jl")
 export
   # distance functions
   EuclideanDistance,
+  EllipsoidDistance,
 
   # variogram models
   GaussianVariogram,
