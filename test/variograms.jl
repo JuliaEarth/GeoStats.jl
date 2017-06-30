@@ -1,15 +1,15 @@
 @testset "Variograms" begin
   h = linspace(0,100)
-  gaussian = GaussianVariogram()
-  spherical = SphericalVariogram()
-  exponential = ExponentialVariogram()
-  matern = MaternVariogram()
-  composite = CompositeVariogram(gaussian, spherical, exponential, matern)
+  x, y = rand(3), rand(3)
 
-  # variograms are increasing
-  @test all(gaussian(h) .≤ gaussian(h+1))
-  @test all(spherical(h) .≤ spherical(h+1))
-  @test all(exponential(h) .≤ exponential(h+1))
-  @test all(matern(h) .≤ matern(h+1))
-  @test all(composite(h) .≤ composite(h+1))
+  γs = [GaussianVariogram(), SphericalVariogram(),
+        ExponentialVariogram(), MaternVariogram()]
+
+  for γ in [γs..., CompositeVariogram(γs...)]
+    # variograms are increasing
+    @test all(γ(h) .≤ γ(h+1))
+
+    # variograms are symmetric
+    @test γ(x, y) ≈ γ(y, x)
+  end
 end
