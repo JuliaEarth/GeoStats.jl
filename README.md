@@ -28,12 +28,6 @@ Contributions are very welcome, as are feature requests and suggestions.
 
 Please [open an issue](https://github.com/juliohm/GeoStats.jl/issues) if you encounter any problems.
 
-[docs-stable-img]: https://img.shields.io/badge/docs-stable-blue.svg
-[docs-stable-url]: https://juliohm.github.io/GeoStats.jl/stable
-
-[docs-latest-img]: https://img.shields.io/badge/docs-latest-blue.svg
-[docs-latest-url]: https://juliohm.github.io/GeoStats.jl/latest
-
 [travis-img]: https://travis-ci.org/juliohm/GeoStats.jl.svg?branch=master
 [travis-url]: https://travis-ci.org/juliohm/GeoStats.jl
 
@@ -42,3 +36,9 @@ Please [open an issue](https://github.com/juliohm/GeoStats.jl/issues) if you enc
 
 [codecov-img]: https://codecov.io/gh/juliohm/GeoStats.jl/branch/master/graph/badge.svg
 [codecov-url]: https://codecov.io/gh/juliohm/GeoStats.jl
+
+[docs-stable-img]: https://img.shields.io/badge/docs-stable-blue.svg
+[docs-stable-url]: https://juliohm.github.io/GeoStats.jl/stable
+
+[docs-latest-img]: https://img.shields.io/badge/docs-latest-blue.svg
+[docs-latest-url]: https://juliohm.github.io/GeoStats.jl/latest
