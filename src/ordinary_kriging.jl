@@ -91,7 +91,7 @@ end
 
 Container that holds weights `λ`, Lagrange multipliers `ν` and RHS `b` for `estimator`.
 """
-immutable OrdinaryKrigingWeights{T<:Real,V} <: AbstractWeights{OrdinaryKriging{T,V}}
+struct OrdinaryKrigingWeights{T<:Real,V} <: AbstractWeights{OrdinaryKriging{T,V}}
   estimator::OrdinaryKriging{T,V}
   λ::AbstractVector{T}
   ν::AbstractVector{T}

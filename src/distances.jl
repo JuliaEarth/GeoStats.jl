@@ -24,7 +24,7 @@ abstract type AbstractDistance end
 
 The Euclidean distance ||x-y||₂
 """
-immutable EuclideanDistance <: AbstractDistance end
+struct EuclideanDistance <: AbstractDistance end
 (d::EuclideanDistance)(x, y) = norm(x - y)
 
 """
@@ -54,7 +54,7 @@ julia> EllipsoidDistance([1.0,0.5,0.5], [π/2,0.0,0.0])
 The positive definite matrix representing the ellipsoid is assembled
 once during object construction and cached for fast evaluation.
 """
-immutable EllipsoidDistance{N,T<:Real} <: AbstractDistance
+struct EllipsoidDistance{N,T<:Real} <: AbstractDistance
   A::Matrix{T}
 
   function EllipsoidDistance{N,T}(semiaxes, angles) where {N,T<:Real}
@@ -113,7 +113,7 @@ between two points at the surface of the Earth. The error from approximating
 the Earth as a sphere is typically negligible for most applications. It is
 no more than 0.3%.
 """
-immutable HaversineDistance{T<:Real} <: AbstractDistance
+struct HaversineDistance{T<:Real} <: AbstractDistance
   radius::T
 end
 HaversineDistance() = HaversineDistance(6371.) # Earth radius ≈ 6371km

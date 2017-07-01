@@ -90,7 +90,7 @@ end
 
 Container that holds weights `λ`, centralized data `y` and RHS covariance `c` for `estimator`.
 """
-immutable SimpleKrigingWeights{T<:Real,V} <: AbstractWeights{SimpleKriging{T,V}}
+struct SimpleKrigingWeights{T<:Real,V} <: AbstractWeights{SimpleKriging{T,V}}
   estimator::SimpleKriging{T,V}
   λ::AbstractVector{T}
   y::AbstractVector{V}

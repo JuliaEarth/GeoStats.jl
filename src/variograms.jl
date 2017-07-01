@@ -25,7 +25,7 @@ abstract type AbstractVariogram end
 A Gaussian variogram with sill `s`, range `r` and nugget `n`.
 For anisotropic model, use a custom distance function `d`.
 """
-@with_kw immutable GaussianVariogram{T<:Real,D<:AbstractDistance} <: AbstractVariogram
+@with_kw struct GaussianVariogram{T<:Real,D<:AbstractDistance} <: AbstractVariogram
   sill::T   = 1.
   range::T  = 1.
   nugget::T = 0.
@@ -40,7 +40,7 @@ end
 A spherical variogram with sill `s`, range `r` and nugget `n`.
 For anisotropic model, use a custom distance function `d`.
 """
-@with_kw immutable SphericalVariogram{T<:Real,D<:AbstractDistance} <: AbstractVariogram
+@with_kw struct SphericalVariogram{T<:Real,D<:AbstractDistance} <: AbstractVariogram
   sill::T   = 1.
   range::T  = 1.
   nugget::T = 0.
@@ -57,7 +57,7 @@ end
 An exponential variogram with sill `s`, range `r` and nugget `n`.
 For anisotropic model, use a custom distance function `d`.
 """
-@with_kw immutable ExponentialVariogram{T<:Real,D<:AbstractDistance} <: AbstractVariogram
+@with_kw struct ExponentialVariogram{T<:Real,D<:AbstractDistance} <: AbstractVariogram
   sill::T   = 1.
   range::T  = 1.
   nugget::T = 0.
@@ -73,7 +73,7 @@ A Matérn variogram with sill `s`, range `r` and nugget `n`. The parameter
 ν is the order of the Bessel function. For anisotropic model, use a custom
 distance function `d`.
 """
-@with_kw immutable MaternVariogram{T<:Real,D<:AbstractDistance} <: AbstractVariogram
+@with_kw struct MaternVariogram{T<:Real,D<:AbstractDistance} <: AbstractVariogram
   sill::T   = 1.
   range::T  = 1.
   nugget::T = 0.
