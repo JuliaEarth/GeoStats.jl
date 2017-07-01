@@ -29,6 +29,7 @@ export
   # distance functions
   EuclideanDistance,
   EllipsoidDistance,
+  HaversineDistance,
 
   # variogram models
   GaussianVariogram,

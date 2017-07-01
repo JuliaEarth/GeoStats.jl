@@ -96,3 +96,40 @@ end
 EllipsoidDistance(semiaxes::Vector{T}, angles::Vector{T}) where {T<:Real} =
   EllipsoidDistance{length(semiaxes),T}(semiaxes, angles)
 (d::EllipsoidDistance)(x, y) = (z = x-y; √(z'*d.A*z))
+
+"""
+    HaversineDistance(radius)
+
+The haversine distance between two locations on a sphere of given `radius`.
+
+Locations are described with latitude and longitude in degrees and
+the radius of the Earth is used by default (≈ 6371km). The computed
+distance has the same units as that of the radius.
+
+### Notes
+
+The haversine formula is widely used to approximate the geodesic distance
+between two points at the surface of the Earth. The error from approximating
+the Earth as a sphere is typically negligible for most applications. It is
+no more than 0.3%.
+"""
+immutable HaversineDistance{T<:Real} <: AbstractDistance
+  radius::T
+end
+HaversineDistance() = HaversineDistance(6371.) # Earth radius ≈ 6371km
+(d::HaversineDistance)(x, y) = begin
+  # latitudes
+  φ₁ = deg2rad(x[1])
+  φ₂ = deg2rad(y[1])
+  Δφ = φ₂ - φ₁
+
+  # longitudes
+  Δλ = deg2rad(y[2] - x[2])
+
+  # haversine formula
+  a = sin(Δφ/2)^2 + cos(φ₁)*cos(φ₂)*sin(Δλ/2)^2
+  c = 2atan2(√a, √(1-a))
+
+  # distance on the sphere
+  c*d.radius
+end
