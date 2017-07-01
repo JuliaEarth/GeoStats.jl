@@ -24,7 +24,7 @@
 
 Ordinary Kriging is recovered for 0th degree polynomial.
 """
-type UniversalKriging{T<:Real,V} <: AbstractEstimator
+mutable struct UniversalKriging{T<:Real,V} <: AbstractEstimator
   # input fields
   X::AbstractMatrix{T}
   z::AbstractVector{V}

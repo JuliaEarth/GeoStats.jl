@@ -22,7 +22,7 @@
   * γ           - variogram model
   * μ ∈ ℜ       - mean of z
 """
-type SimpleKriging{T<:Real,V} <: AbstractEstimator
+mutable struct SimpleKriging{T<:Real,V} <: AbstractEstimator
   # input fields
   X::AbstractMatrix{T}
   z::AbstractVector{V}

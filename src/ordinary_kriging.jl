@@ -21,7 +21,7 @@
   * z ∈ ℜⁿ      - vector of observations for X
   * γ           - variogram model
 """
-type OrdinaryKriging{T<:Real,V} <: AbstractEstimator
+mutable struct OrdinaryKriging{T<:Real,V} <: AbstractEstimator
   # input fields
   X::AbstractMatrix{T}
   z::AbstractVector{V}

@@ -100,7 +100,7 @@ end
 
 A composite (additive) model of variograms γ(h) = γ₁(h) + γ₂(h) + ⋯ + γₙ(h).
 """
-type CompositeVariogram <: AbstractVariogram
+struct CompositeVariogram <: AbstractVariogram
   γs::Vector{AbstractVariogram}
 
   CompositeVariogram(g, gs...) = new([g, gs...])
