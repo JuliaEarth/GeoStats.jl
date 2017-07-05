@@ -46,7 +46,7 @@ Optionally, use a custom distance `d`.
   nugget::T = 0.
   distance::D = EuclideanDistance()
 end
-(γ::SphericalVariogram)(h) = (h .< γ.range) .* (γ.sill - γ.nugget) .* (1 - 1.5h/γ.range + 0.5(h/γ.range).^3) +
+(γ::SphericalVariogram)(h) = (h .< γ.range) .* (γ.sill - γ.nugget) .* (1.5h/γ.range - 0.5(h/γ.range).^3) +
                              (h .≥ γ.range) .* (γ.sill - γ.nugget) +
                              γ.nugget
 (γ::SphericalVariogram)(x, y) = γ(γ.distance(x, y))
