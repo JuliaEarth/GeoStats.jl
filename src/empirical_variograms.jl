@@ -40,7 +40,9 @@ struct EmpiricalVariogram{T<:Real,V,D<:AbstractDistance}
                                      distance) where {T<:Real,V,D<:AbstractDistance}
     # sanity checks
     @assert nbins > 0 "number of bins must be positive"
-    @assert maxlag > 0 "maximum lag distance must be positive"
+    if maxlag ≠ nothing
+      @assert maxlag > 0 "maximum lag distance must be positive"
+    end
 
     # number of point pairs
     npoints = size(X, 2)
