@@ -19,12 +19,16 @@ module GeoStats
 using Combinatorics: combinations
 using SpecialFunctions: besselk
 using Parameters: @with_kw
+using RecipesBase
 
 include("utils.jl")
 include("distances.jl")
 include("empirical_variograms.jl")
 include("theoretical_variograms.jl")
 include("estimators.jl")
+
+# plot recipes
+include("plotrecipes/empirical_variograms.jl")
 
 export
   # distance functions

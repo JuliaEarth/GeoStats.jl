@@ -54,8 +54,8 @@ struct EmpiricalVariogram{T<:Real,V,D<:AbstractDistance}
     idx = 1
     for j=1:npoints
       for i=j+1:npoints
-        lags[idx] = distance(X[:,i], X[:,j])
-        zdiff[idx] = (z[i] - z[j])^2
+        @inbounds lags[idx] = distance(X[:,i], X[:,j])
+        @inbounds zdiff[idx] = (z[i] - z[j])^2
         idx += 1
       end
     end

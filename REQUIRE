@@ -2,3 +2,4 @@ julia 0.6
 Combinatorics
 SpecialFunctions
 Parameters
+RecipesBase
