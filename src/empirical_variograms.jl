@@ -21,7 +21,7 @@ Computes the empirical (a.k.a. experimental) ominidirectional
 ## Optional parameters
 
   * nbins - number of bins (default to 20)
-  * maxlag - maximum lag distance (default to 3/4 of maximum lag of data)
+  * maxlag - maximum lag distance (default to maximum lag of data)
   * distance - an instance of `AbstractDistance`
 """
 struct EmpiricalVariogram{T<:Real,V,D<:AbstractDistance}
@@ -61,7 +61,7 @@ struct EmpiricalVariogram{T<:Real,V,D<:AbstractDistance}
     end
 
     # default maximum lag
-    maxlag == nothing && (maxlag == 0.75maximum(lags))
+    maxlag == nothing && (maxlag = maximum(lags))
 
     # find bin for the pair
     binsize = maxlag / nbins
@@ -107,7 +107,7 @@ function values(γ::EmpiricalVariogram{T,V,D}) where {T<:Real,V,D<:AbstractDista
   binsize = γ.maxlag / γ.nbins
 
   x = linspace(zero(T) + binsize/2, γ.maxlag - binsize/2, nbins)
-  y = [length(bin) > 0 ? mean(bin)/2 : nan(T) for bin in bins]
+  y = [length(bin) > 0 ? mean(bin)/2 : T(NaN) for bin in bins]
   n = length.(bins)
 
   x, y, n

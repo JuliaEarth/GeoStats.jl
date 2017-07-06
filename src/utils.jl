@@ -13,13 +13,6 @@
 ## OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
 """
-    nan(type)
-
-Returns the NaN value for the `type` for stability purposes.
-"""
-nan{T<:AbstractFloat}(::Type{T}) = T(NaN)
-
-"""
     pairwise(metric, X)
 
 Evaluate `metric` between all n² pairs of columns in a m-by-n matrix `X` efficiently.
