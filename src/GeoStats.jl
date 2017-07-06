@@ -20,10 +20,11 @@ using Combinatorics: combinations
 using SpecialFunctions: besselk
 using Parameters: @with_kw
 
-include("distances.jl")
-include("variograms.jl")
-include("estimators.jl")
 include("utils.jl")
+include("distances.jl")
+include("empirical_variograms.jl")
+include("theoretical_variograms.jl")
+include("estimators.jl")
 
 export
   # distance functions
@@ -31,7 +32,10 @@ export
   EllipsoidDistance,
   HaversineDistance,
 
-  # variogram models
+  # empirical variograms
+  EmpiricalVariogram,
+
+  # theoretical variograms
   GaussianVariogram,
   SphericalVariogram,
   ExponentialVariogram,
