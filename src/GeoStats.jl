@@ -29,6 +29,7 @@ include("estimators.jl")
 
 # plot recipes
 include("plotrecipes/empirical_variograms.jl")
+include("plotrecipes/theoretical_variograms.jl")
 
 export
   # distance functions

@@ -12,34 +12,15 @@
 ## ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 ## OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
-@recipe function f(γ::EmpiricalVariogram; bincounts=true)
-  # get the data
-  x, y, n = values(γ)
+@recipe function f(γ::AbstractVariogram; maxlag=3.)
+  # discretize
+  h = linspace(0, maxlag, 100)
 
-  # discard empty bins
-  x = x[n .> 0]; y = y[n .> 0]; n = n[n .> 0]
-
-  # draw bin counts as a measure of confidence
-  if bincounts
-    @series begin
-      # plot a "frequency" instead of raw counts
-      f = n*(maximum(y) / maximum(n)) / 10.
-
-      seriestype := :bar
-      fillalpha := .5
-      color --> :blue
-      label --> "bin counts"
-
-      x, f
-    end
-  end
-
-  seriestype := :scatter
-  xlim := (0, γ.maxlag)
-  color --> :orange
+  seriestype := :path
+  color --> :green
   xlabel --> "Lag h"
   ylabel --> "Variogram(h)"
   label --> "variogram"
 
-  x, y
+  h, γ(h)
 end
