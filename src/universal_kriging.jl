@@ -15,7 +15,7 @@
 """
     UniversalKriging(X, z, γ, degree)
 
-*INPUTS*:
+## Parameters
 
   * X ∈ ℜ^(mxn) - matrix of data locations
   * z ∈ ℜⁿ      - vector of observations for X

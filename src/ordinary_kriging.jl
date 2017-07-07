@@ -15,7 +15,7 @@
 """
     OrdinaryKriging(X, z, γ)
 
-*INPUTS*:
+## Parameters
 
   * X ∈ ℜ^(mxn) - matrix of data locations
   * z ∈ ℜⁿ      - vector of observations for X

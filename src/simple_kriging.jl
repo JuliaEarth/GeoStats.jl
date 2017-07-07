@@ -15,7 +15,7 @@
 """
     SimpleKriging(X, z, γ, μ)
 
-*INPUTS*:
+## Parameters
 
   * X ∈ ℜ^(mxn) - matrix of data locations
   * z ∈ ℜⁿ      - vector of observations for X
