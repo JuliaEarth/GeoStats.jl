@@ -1,4 +1,4 @@
-# Distances
+# Distance functions
 
 ```math
 \newcommand{\x}{\boldsymbol{x}}
@@ -7,7 +7,7 @@
 
 A set of commonly used distance functions is provided in this package
 for use in geostatistical algorithms. They can be passed to
-[variograms](variograms.md) in order to:
+[variograms](theoretical_variograms.md) in order to:
 
 - Model anisotropy (e.g. ellipsoid distance)
 - Perform geostatistical simulation on non-Euclidean coordinate systems (e.g. haversine distance)

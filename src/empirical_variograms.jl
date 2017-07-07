@@ -15,14 +15,14 @@
 """
     EmpiricalVariogram(X, z, [optional parameters])
 
-Computes the empirical (a.k.a. experimental) ominidirectional
+Computes the empirical (a.k.a. experimental) omnidirectional
 (semi-)variogram from data locations `X` and values `z`.
 
 ## Optional parameters
 
   * nbins - number of bins (default to 20)
   * maxlag - maximum lag distance (default to maximum lag of data)
-  * distance - an instance of `AbstractDistance`
+  * distance - custom distance function
 """
 struct EmpiricalVariogram{T<:Real,V,D<:AbstractDistance}
   # input fields

@@ -1,4 +1,4 @@
-# Estimation
+# Kriging estimation
 
 A Kriging estimator has the form:
 

@@ -6,10 +6,20 @@ makedocs(
   authors = "Júlio Hoffimann Mendes",
   pages = [
     "Home" => "index.md",
-    "Variograms" => "variograms.md",
-    "Estimation" => "estimation.md",
-    "Distances"  => "distances.md",
-    "Function Reference" => "library.md"
+    "Manual" => [
+      "Variograms" => [
+        "empirical_variograms.md",
+        "theoretical_variograms.md"
+      ],
+      "Kriging estimation" => "estimation.md",
+      "Distance functions"  => "distances.md"
+    ],
+    "Library" => "library.md",
+    "Contributing" => "contributing.md",
+    "About" => [
+      "Author" => "about/author.md",
+      "License" => "about/license.md"
+    ]
   ]
 )
 

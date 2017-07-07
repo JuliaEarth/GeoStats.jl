@@ -1,4 +1,4 @@
-# Variograms
+# Theoretical variograms
 
 ```math
 \newcommand{\x}{\boldsymbol{x}}
@@ -16,7 +16,7 @@ the distance between any two points ``\x_1,\x_2 \in \R^m``:
 The same holds for the covariance, which is directly related via ``\gamma(h) = cov(0) - cov(h)``.
 
 Anisotropic models are easily obtained by defining an ellipsoid distance in place of the Euclidean
-distance. For a list of available distances, please see [Distances](distances.md).
+distance. For a list of available distances, please see [Distance functions](distances.md).
 
 Custom distance functions are particularly useful if 3D locations are projected on a 2D map by means
 of a non-trivial transformation. In this case, a geodesic distance can be defined to properly account
