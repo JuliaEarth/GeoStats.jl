@@ -14,6 +14,7 @@ makedocs(
       "Kriging estimation" => "estimation.md",
       "Distance functions"  => "distances.md"
     ],
+    "Examples" => "examples.md",
     "Library" => "library.md",
     "Contributing" => "contributing.md",
     "About" => [
