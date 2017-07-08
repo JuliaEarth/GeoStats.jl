@@ -1,4 +1,4 @@
-@testset "Distances" begin
+@testset "Distance functions" begin
   # basic distance properties
   a, b, c = rand(2), rand(2), rand(2)
   for d in [EuclideanDistance(),

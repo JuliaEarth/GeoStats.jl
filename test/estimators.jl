@@ -1,4 +1,4 @@
-@testset "Kriging" begin
+@testset "Kriging estimators" begin
   γ = GaussianVariogram(sill=1., range=1., nugget=0.)
   simkrig = SimpleKriging(X, z, γ, mean(z))
   ordkrig = OrdinaryKriging(X, z, γ)
