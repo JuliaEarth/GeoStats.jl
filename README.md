@@ -9,18 +9,20 @@ More features will be added as the Julia type system matures.
 ### Related packages
 
 - [GaussianProcesses.jl](https://github.com/STOR-i/GaussianProcesses.jl) &mdash; Gaussian processes
-and simple Kriging are essentially [two names for the same concept](https://en.wikipedia.org/wiki/Kriging).
-This distinction only exists due to historical reasons. [Matheron](https://en.wikipedia.org/wiki/Georges_Matheron)
+and Simple Kriging are essentially [two names for the same concept](https://en.wikipedia.org/wiki/Kriging),
+and this distinction only exists due to historical reasons. [Matheron](https://en.wikipedia.org/wiki/Georges_Matheron)
 and other important geostatisticians have generalized Gaussian processes to random fields with non-zero mean and
-for situations where the mean is unknown. Therefore, GeoStats.jl includes Gaussian processes as a special case as
-well as other more practical Kriging variants.
+for situations where the mean is unknown. GeoStats.jl includes Gaussian processes as a special case as
+well as other more practical Kriging variants, see the [Gaussian processes example](examples).
 
 - [MLKernels.jl](https://github.com/trthatcher/MLKernels.jl) &mdash; Spatial structure can be
 represented in many different forms: covariance, variogram, correlogram, etc. Variograms are more
 general than covariance kernels according to the intrinsically stationary property. This means that
 there are variogram models with no covariance counterpart. Furthermore, empirical variograms can be
 easily estimated from the data (in various directions) with an efficient procedure. GeoStats.jl treats
-variograms as first-class objects.
+variograms as first-class objects, see the [Variogram modeling example](examples).
+
+- [celerite.jl](https://github.com/ericagol/celerite.jl) &mdash; For 1D Gaussian processes, this project was originally written in C++/Python and is now ported to Julia.
 
 Installation
 ------------
