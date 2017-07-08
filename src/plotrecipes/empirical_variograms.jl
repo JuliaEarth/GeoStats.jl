@@ -27,8 +27,8 @@
 
       seriestype := :bar
       fillalpha := .5
-      color --> :blue
-      label --> "bin counts"
+      color := :blue
+      label := "bin counts"
 
       x, f
     end
