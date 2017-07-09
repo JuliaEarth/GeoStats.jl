@@ -60,6 +60,7 @@ struct EllipsoidDistance{N,T<:Real} <: AbstractDistance
   function EllipsoidDistance{N,T}(semiaxes, angles) where {N,T<:Real}
     @assert length(semiaxes) == N "number of semiaxes must match spatial dimension"
     @assert all(semiaxes .> zero(T)) "semiaxes must be positive"
+    @assert N ∈ [2,3] "dimension must be either 2 or 3"
 
     # scaling matrix
     Λ = spdiagm(one(T)./semiaxes.^2)
@@ -70,8 +71,8 @@ struct EllipsoidDistance{N,T<:Real} <: AbstractDistance
       θ = angles[1]
       P = [cos(θ) -sin(θ)
            sin(θ)  cos(θ)]
-    elseif N == 3
-      @assert length(angles) == 3 "there must be three angles in 3D"
+    end
+    if N == 3
       θxy, θyz, θzx = angles
       Rxy = [cos(θxy) -sin(θxy) zero(T)
              sin(θxy)  cos(θxy) zero(T)
@@ -83,8 +84,6 @@ struct EllipsoidDistance{N,T<:Real} <: AbstractDistance
               zero(T)  one(T)  zero(T)
             -sin(θzx) zero(T) cos(θzx)]
       P = Rzx*Ryz*Rxy
-    else
-      error("ellipsoid distance not implemented for dimension > 3D")
     end
 
     # ellipsoid matrix
