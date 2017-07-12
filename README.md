@@ -45,7 +45,7 @@ Examples
 
 A set of Jupyter notebooks demonstrating the current functionality of the package is available
 in the [examples](examples) folder. These notebooks are distributed with GeoStats.jl and can be
-run locally with `GeoStats.examples()`.
+launched locally with `GeoStats.examples()`.
 
 Contributing
 ------------
