@@ -31,6 +31,12 @@ include("estimators.jl")
 include("plotrecipes/empirical_variograms.jl")
 include("plotrecipes/theoretical_variograms.jl")
 
+# helper function to launch examples from Julia prompt
+function examples()
+  @eval using IJulia
+  @eval notebook(dir=joinpath(Pkg.dir("GeoStats"),"examples"))
+end
+
 export
   # distance functions
   EuclideanDistance,

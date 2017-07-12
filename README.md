@@ -22,7 +22,8 @@ there are variogram models with no covariance counterpart. Furthermore, empirica
 easily estimated from the data (in various directions) with an efficient procedure. GeoStats.jl treats
 variograms as first-class objects, see the [Variogram modeling example](examples).
 
-- [celerite.jl](https://github.com/ericagol/celerite.jl) &mdash; For 1D Gaussian processes, this project was originally written in C++/Python and is now ported to Julia.
+- [celerite.jl](https://github.com/ericagol/celerite.jl) &mdash; For 1D Gaussian processes, this project
+was originally written in C++/Python and is now ported to Julia.
 
 Installation
 ------------
@@ -44,7 +45,7 @@ Examples
 
 A set of Jupyter notebooks demonstrating the current functionality of the package is available
 in the [examples](examples) folder. These notebooks are distributed with GeoStats.jl and can be
-run locally for better interaction.
+run locally with `GeoStats.examples()`.
 
 Contributing
 ------------
