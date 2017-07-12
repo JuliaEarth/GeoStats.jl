@@ -39,6 +39,13 @@ Documentation
 - [**STABLE**][docs-stable-url] &mdash; **most recently tagged version of the documentation.**
 - [**LATEST**][docs-latest-url] &mdash; *in-development version of the documentation.*
 
+Examples
+--------
+
+A set of Jupyter notebooks demonstrating the current functionality of the package is available
+in the [examples](examples) folder. These notebooks are distributed with GeoStats.jl and can be
+run locally for better interaction.
+
 Contributing
 ------------
 
