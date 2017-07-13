@@ -33,8 +33,9 @@ include("plotrecipes/theoretical_variograms.jl")
 
 # helper function to launch examples from Julia prompt
 function examples()
+  path = joinpath(@__DIR__,"..","examples")
   @eval using IJulia
-  @eval notebook(dir=Pkg.dir("GeoStats","examples"))
+  @eval notebook(dir=$path)
 end
 
 export
