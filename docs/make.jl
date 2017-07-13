@@ -1,5 +1,10 @@
 using Documenter, GeoStats
 
+# manually handle dependencies until
+# Documenter.jl issue #534 is solved
+Pkg.add("Plots")
+Pkg.add("GR")
+
 makedocs(
   format = :html,
   sitename = "GeoStats.jl",
@@ -15,6 +20,7 @@ makedocs(
       "Distance functions"  => "distances.md"
     ],
     "Examples" => "examples.md",
+    "Plotting" => "plotting.md",
     "Library" => "library.md",
     "Contributing" => "contributing.md",
     "About" => [

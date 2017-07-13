@@ -1,9 +1,9 @@
 # Examples
 
-A set of examples in the form of Jupyter notebook is made available
-in the [examples](https://github.com/juliohm/GeoStats.jl/tree/master/examples)
-folder of the project. They are distributed with GeoStats.jl and can
-be run locally for full interactivity.
+A set of Jupyter notebooks demonstrating the current functionality of the package
+is available in the [examples](https://github.com/juliohm/GeoStats.jl/tree/master/examples)
+folder. These notebooks are distributed with GeoStats.jl and can be run locally with
+`GeoStats.examples()`.
 
-We are always happy to include new use cases. Please check
-[Contributing](contributing.md) before submitting a pull request.
+We are always happy to include new use cases. Please check [Contributing](contributing.md)
+before submitting a pull request.
