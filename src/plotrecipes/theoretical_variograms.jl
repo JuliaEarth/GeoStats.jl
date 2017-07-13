@@ -17,7 +17,6 @@
   h = linspace(0, maxlag, 100)
 
   seriestype := :path
-  color --> :green
   xlabel --> "Lag h"
   ylabel --> "Variogram(h)"
   label --> "variogram"
