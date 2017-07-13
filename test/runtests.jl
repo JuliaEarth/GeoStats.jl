@@ -1,5 +1,15 @@
 using GeoStats
 using Base.Test
+using Plots; gr(size=(600,400))
+using VisualRegressionTests
+
+# list of maintainers
+maintainers = ["juliohm"]
+
+# environment settings
+istravis = "TRAVIS" ∈ keys(ENV)
+ismaintainer = "USER" ∈ keys(ENV) && ENV["USER"] ∈ maintainers
+datadir = joinpath(@__DIR__,"data")
 
 # floating point tolerance
 tol = 10eps()

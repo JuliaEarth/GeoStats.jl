@@ -13,4 +13,18 @@
     # variograms are symmetric
     @test γ(x, y) ≈ γ(y, x)
   end
+
+  if ismaintainer || istravis
+    @testset "Plot recipe" begin
+      function plot_variograms(fname)
+        plt = plot()
+        for γ ∈ γs
+          plot!(plt, γ, maxlag=3.)
+        end
+        png(fname)
+      end
+      refimg = joinpath(datadir, "TheoreticalVariograms.png")
+      @test test_images(VisualTest(plot_variograms, refimg), popup=!istravis) |> success
+    end
+  end
 end
