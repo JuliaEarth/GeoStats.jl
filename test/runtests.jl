@@ -1,6 +1,7 @@
 using GeoStats
-using Base.Test
+using GeoStatsImages
 using Plots; gr(size=(600,400))
+using Base.Test
 using VisualRegressionTests
 
 # list of maintainers
