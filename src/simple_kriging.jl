@@ -17,10 +17,10 @@
 
 ## Parameters
 
-  * X ∈ ℜ^(mxn) - matrix of data locations
-  * z ∈ ℜⁿ      - vector of observations for X
-  * γ           - variogram model
-  * μ ∈ ℜ       - mean of z
+* X ∈ ℜ^(mxn) - matrix of data locations
+* z ∈ ℜⁿ      - vector of observations for X
+* γ           - variogram model
+* μ ∈ ℜ       - mean of z
 """
 mutable struct SimpleKriging{T<:Real,V} <: AbstractEstimator
   # input fields

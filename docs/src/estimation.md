@@ -14,7 +14,8 @@ This package implements the following Kriging variants:
 
 - Simple Kriging
 - Ordinary Kriging
-- Universal Kriging (polynomial drift for the mean)
+- Universal Kriging
+- External Drift Kriging
 
 All these variants follow the same interface: an estimator object is first created with a given
 data configuration and variogram model, and then estimates are made at various locations.
@@ -214,4 +215,22 @@ variance at location ``\x_0`` are given by:
 
 ```@docs
 UniversalKriging
+```
+
+## External Drift Kriging
+
+In External Drift Kriging, the mean of the random field is assumed to be a combination of known smooth functions:
+
+```math
+\mu(\x) = \sum_k \beta_k m_k(\x)
+```
+
+Differently than Universal Kriging, the functions ``m_k`` are not necessarily polynomials of the spatial coordinates.
+In practice, they represent a list of variables that is strongly correlated (and co-located) with the variable being
+estimated.
+
+External drifts are known to cause numerical instability. Give preference to other Kriging variants if possible.
+
+```@docs
+ExternalDriftKriging
 ```

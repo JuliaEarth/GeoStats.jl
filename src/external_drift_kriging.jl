@@ -13,43 +13,43 @@
 ## OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
 """
-    UniversalKriging(X, z, γ, degree)
+    ExternalDriftKriging(X, z, γ, ms)
 
 ## Parameters
 
 * X ∈ ℜ^(mxn) - matrix of data locations
 * z ∈ ℜⁿ      - vector of observations for X
 * γ           - variogram model
-* degree      - polynomial degree for the mean
+* ms          - vector of external drift functions m: ℜᵐ ↦ ℜ
 
 ### Notes
 
-* [`OrdinaryKriging`](@ref) is recovered for 0th degree polynomial
-* For non-polynomial mean, see [`ExternalDriftKriging`](@ref)
+* External drift functions should be smooth
+* Kriging system with external drift is often unstable
+* [`OrdinaryKriging`](@ref) is recovered for `ms = [x->1]`
+* For polynomial mean, see [`UniversalKriging`](@ref)
 """
-mutable struct UniversalKriging{T<:Real,V} <: AbstractEstimator
+mutable struct ExternalDriftKriging{T<:Real,V} <: AbstractEstimator
   # input fields
   X::AbstractMatrix{T}
   z::AbstractVector{V}
   γ::AbstractVariogram
-  degree::Integer
+  ms::AbstractVector{Function}
 
   # state fields
   LU::Base.LinAlg.Factorization{T}
-  exponents::AbstractMatrix{Int}
 
-  function UniversalKriging{T,V}(X, z, γ, degree) where {T<:Real,V}
+  function ExternalDriftKriging{T,V}(X, z, γ, ms) where {T<:Real,V}
     @assert size(X, 2) == length(z) "incorrect data configuration"
-    @assert degree ≥ 0 "degree must be nonnegative"
-    UK = new(X, z, γ, degree)
-    fit!(UK, X, z)
-    UK
+    EDK = new(X, z, γ, ms)
+    fit!(EDK, X, z)
+    EDK
   end
 end
 
-UniversalKriging(X, z, γ, degree) = UniversalKriging{eltype(X),eltype(z)}(X, z, γ, degree)
+ExternalDriftKriging(X, z, γ, ms) = ExternalDriftKriging{eltype(X),eltype(z)}(X, z, γ, ms)
 
-function fit!(estimator::UniversalKriging{T,V},
+function fit!(estimator::ExternalDriftKriging{T,V},
               X::AbstractMatrix{T}, z::AbstractVector{V}) where {T<:Real,V}
   # update data
   estimator.X = X
@@ -57,72 +57,63 @@ function fit!(estimator::UniversalKriging{T,V},
 
   dim, nobs = size(X)
   γ = estimator.γ
+  ms = estimator.ms
 
   # variogram matrix
   Γ = pairwise((x,y) -> γ(x,y), X)
 
-  # multinomial expansion
-  exponents = zeros(Int, 0, dim)
-  for d=0:estimator.degree
-    exponents = [exponents; multinom_exp(dim, d, sortdir="descend")]
-  end
-  exponents = exponents'
-
-  estimator.exponents = exponents
-
   # polynomial drift matrix
-  nterms = size(exponents, 2)
-  F = [prod(X[:,i].^exponents[:,j]) for i=1:nobs, j=1:nterms]
+  ndrifts = length(ms)
+  F = [m(X[:,i]) for i=1:nobs, m in ms]
 
   # LHS of Kriging system
-  A = [Γ F; F' zeros(nterms,nterms)]
+  A = [Γ F; F' zeros(ndrifts,ndrifts)]
 
   # factorize
   estimator.LU = lufact(A)
 end
 
-function weights(estimator::UniversalKriging{T,V}, xₒ::AbstractVector{T}) where {T<:Real,V}
-  X = estimator.X; z = estimator.z; γ = estimator.γ
-  exponents = estimator.exponents
+function weights(estimator::ExternalDriftKriging{T,V}, xₒ::AbstractVector{T}) where {T<:Real,V}
+  X = estimator.X; z = estimator.z
+  γ = estimator.γ; ms = estimator.ms
   LU = estimator.LU
   nobs = length(z)
 
   # evaluate variogram at location
   g = [γ(X[:,j],xₒ) for j=1:nobs]
 
-  # evaluate multinomial at location
-  nterms = size(exponents, 2)
-  f = [prod(xₒ.^exponents[:,j]) for j=1:nterms]
+  # evaluate drift at location
+  f = [m(xₒ) for m in ms]
 
   # solve linear system
   b = [g; f]
   x = LU \ b
 
   # return weights
-  UniversalKrigingWeights(estimator, x[1:nobs], x[nobs+1:end], b)
+  ExternalDriftKrigingWeights(estimator, x[1:nobs], x[nobs+1:end], b)
 end
 
-function estimate(estimator::UniversalKriging{T,V}, xₒ::AbstractVector{T}) where {T<:Real,V}
+function estimate(estimator::ExternalDriftKriging{T,V}, xₒ::AbstractVector{T}) where {T<:Real,V}
   # compute weights
-  UKweights = weights(estimator, xₒ)
+  EDKweights = weights(estimator, xₒ)
 
   # estimate and variance
-  combine(UKweights)
+  combine(EDKweights)
 end
 
 """
-    UniversalKrigingWeights(estimator, λ, ν, b)
+    ExternalDriftKrigingWeights(estimator, λ, ν, b)
 
 Container that holds weights `λ`, Lagrange multipliers `ν` and RHS `b` for `estimator`.
 """
-struct UniversalKrigingWeights{T<:Real,V} <: AbstractWeights{UniversalKriging{T,V}}
-  estimator::UniversalKriging{T,V}
+struct ExternalDriftKrigingWeights{T<:Real,V} <: AbstractWeights{ExternalDriftKriging{T,V}}
+  estimator::ExternalDriftKriging{T,V}
   λ::AbstractVector{T}
   ν::AbstractVector{T}
   b::AbstractVector{T}
 end
 
-function combine(weights::UniversalKrigingWeights{T,V}) where {T<:Real,V}
+function combine(weights::ExternalDriftKrigingWeights{T,V}) where {T<:Real,V}
   z = weights.estimator.z
   λ = weights.λ; ν = weights.ν; b = weights.b
 

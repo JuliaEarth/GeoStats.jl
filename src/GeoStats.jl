@@ -58,6 +58,7 @@ export
   SimpleKriging,
   OrdinaryKriging,
   UniversalKriging,
+  ExternalDriftKriging,
 
   # functions
   fit!,
