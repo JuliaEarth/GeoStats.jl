@@ -75,14 +75,6 @@ function weights(estimator::SimpleKriging{T,V}, xₒ::AbstractVector{T}) where {
   SimpleKrigingWeights(estimator, λ, y, g)
 end
 
-function estimate(estimator::SimpleKriging{T,V}, xₒ::AbstractVector{T}) where {T<:Real,V}
-  # compute weights
-  SKweights = weights(estimator, xₒ)
-
-  # return estimate and variance
-  combine(SKweights)
-end
-
 """
     SimpleKrigingWeights(estimator, λ, y, g)
 

@@ -102,14 +102,6 @@ function weights(estimator::UniversalKriging{T,V}, xₒ::AbstractVector{T}) wher
   UniversalKrigingWeights(estimator, x[1:nobs], x[nobs+1:end], b)
 end
 
-function estimate(estimator::UniversalKriging{T,V}, xₒ::AbstractVector{T}) where {T<:Real,V}
-  # compute weights
-  UKweights = weights(estimator, xₒ)
-
-  # estimate and variance
-  combine(UKweights)
-end
-
 """
     UniversalKrigingWeights(estimator, λ, ν, b)
 

@@ -38,7 +38,7 @@ weights(estimator::AbstractEstimator, xₒ::AbstractVector) = error("not impleme
 
 Compute mean and variance for the `estimator` at location `xₒ`.
 """
-estimate(estimator::AbstractEstimator, xₒ::AbstractVector) = error("not implemented")
+estimate(estimator::AbstractEstimator, xₒ::AbstractVector) = combine(weights(estimator, xₒ))
 
 """
     AbstractWeights

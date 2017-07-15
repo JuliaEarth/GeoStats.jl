@@ -75,14 +75,6 @@ function weights(estimator::OrdinaryKriging{T,V}, xₒ::AbstractVector{T}) where
   OrdinaryKrigingWeights(estimator, x[1:nobs], x[nobs+1:end], b)
 end
 
-function estimate(estimator::OrdinaryKriging{T,V}, xₒ::AbstractVector{T}) where {T<:Real,V}
-  # compute weights
-  OKweights = weights(estimator, xₒ)
-
-  # return estimate and variance
-  combine(OKweights)
-end
-
 """
     OrdinaryKrigingWeights(estimator, λ, ν, b)
 

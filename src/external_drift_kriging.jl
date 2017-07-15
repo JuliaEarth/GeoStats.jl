@@ -93,14 +93,6 @@ function weights(estimator::ExternalDriftKriging{T,V}, xₒ::AbstractVector{T}) 
   ExternalDriftKrigingWeights(estimator, x[1:nobs], x[nobs+1:end], b)
 end
 
-function estimate(estimator::ExternalDriftKriging{T,V}, xₒ::AbstractVector{T}) where {T<:Real,V}
-  # compute weights
-  EDKweights = weights(estimator, xₒ)
-
-  # estimate and variance
-  combine(EDKweights)
-end
-
 """
     ExternalDriftKrigingWeights(estimator, λ, ν, b)
 
