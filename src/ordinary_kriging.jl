@@ -50,9 +50,16 @@ function fit!(estimator::OrdinaryKriging{T,V},
 
   # variogram/covariance
   γ = estimator.γ
+  cov(x,y) = γ.sill - γ(x,y)
+
+  # use covariance matrix if possible
+  if isstationary(γ)
+    Γ = pairwise((x,y) -> cov(x,y), X)
+  else
+    Γ = pairwise((x,y) -> γ(x,y), X)
+  end
 
   # LHS of Kriging system
-  Γ = pairwise((x,y) -> γ(x,y), X)
   A = [Γ ones(nobs); ones(nobs)' 0]
 
   # factorize
@@ -60,12 +67,20 @@ function fit!(estimator::OrdinaryKriging{T,V},
 end
 
 function weights(estimator::OrdinaryKriging{T,V}, xₒ::AbstractVector{T}) where {T<:Real,V}
-  X = estimator.X; z = estimator.z; γ = estimator.γ
+  X = estimator.X; z = estimator.z
   LU = estimator.LU
   nobs = length(z)
 
+  # variogram/covariance
+  γ = estimator.γ
+  cov(x,y) = γ.sill - γ(x,y)
+
   # evaluate variogram/covariance at location
-  g = [γ(X[:,j],xₒ) for j=1:nobs]
+  if isstationary(γ)
+    g = [cov(X[:,j],xₒ) for j=1:nobs]
+  else
+    g = [γ(X[:,j],xₒ) for j=1:nobs]
+  end
 
   # solve linear system
   b = [g; 1]
@@ -91,5 +106,9 @@ function combine(weights::OrdinaryKrigingWeights{T,V}) where {T<:Real,V}
   γ = weights.estimator.γ; z = weights.estimator.z
   λ = weights.λ; ν = weights.ν; b = weights.b
 
-  z⋅λ, b⋅[λ;ν]
+  if isstationary(γ)
+    z⋅λ, γ.sill - b⋅[λ;ν]
+  else
+    z⋅λ, b⋅[λ;ν]
+  end
 end

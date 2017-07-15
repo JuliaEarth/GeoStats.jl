@@ -67,16 +67,16 @@ In Simple Kriging, the mean ``\mu`` of the random field is assumed to be constan
 The resulting linear system is:
 
 ```math
-\newcommand{\G}{\boldsymbol{\Gamma}}
-\newcommand{\g}{\boldsymbol{\gamma}}
+\newcommand{\C}{\boldsymbol{C}}
+\newcommand{\c}{\boldsymbol{c}}
 \newcommand{\l}{\boldsymbol{\lambda}}
 \newcommand{\1}{\boldsymbol{1}}
 \newcommand{\z}{\boldsymbol{z}}
 \begin{bmatrix}
-\gamma(\x_1,\x_2) & \gamma(\x_1,\x_2) & \cdots & \gamma(\x_1,\x_n) \\
-\gamma(\x_2,\x_1) & \gamma(\x_2,\x_2) & \cdots & \gamma(\x_2,\x_n) \\
+cov(\x_1,\x_2) & cov(\x_1,\x_2) & \cdots & cov(\x_1,\x_n) \\
+cov(\x_2,\x_1) & cov(\x_2,\x_2) & \cdots & cov(\x_2,\x_n) \\
 \vdots & \vdots & \ddots & \vdots \\
-\gamma(\x_n,\x_1) & \gamma(\x_n,\x_2) & \cdots & \gamma(\x_n,\x_n)
+cov(\x_n,\x_1) & cov(\x_n,\x_2) & \cdots & cov(\x_n,\x_n)
 \end{bmatrix}
 \begin{bmatrix}
 \lambda_1 \\
@@ -86,20 +86,20 @@ The resulting linear system is:
 \end{bmatrix}
 =
 \begin{bmatrix}
-\gamma(\x_1,\x_0) \\
-\gamma(\x_2,\x_0) \\
+cov(\x_1,\x_0) \\
+cov(\x_2,\x_0) \\
 \vdots \\
-\gamma(\x_n,\x_0)
+cov(\x_n,\x_0)
 \end{bmatrix}
 ```
-or in matricial form ``\G\l = \g``. We subtract the given mean from the observations
+or in matricial form ``\C\l = \c``. We subtract the given mean from the observations
 ``\boldsymbol{y} = \z - \mu \1`` and compute the mean and variance at location ``\x_0``:
 
 ```math
 \mu(\x_0) = \mu + \boldsymbol{y}^\top \l
 ```
 ```math
-\sigma^2(\x_0) = \g^\top \l
+\sigma^2(\x_0) = cov(0) - \c^\top \l
 ```
 
 ```@docs
@@ -112,6 +112,8 @@ In Ordinary Kriging the mean of the random field is assumed to be constant *and 
 system is:
 
 ```math
+\newcommand{\G}{\boldsymbol{\Gamma}}
+\newcommand{\g}{\boldsymbol{\gamma}}
 \begin{bmatrix}
 \G & \1 \\
 \1^\top & 0

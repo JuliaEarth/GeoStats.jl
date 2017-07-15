@@ -20,6 +20,16 @@ A variogram model (e.g. Gaussian variogram).
 abstract type AbstractVariogram end
 
 """
+    isstationary(γ)
+
+Check if variogram `γ` possesses the 2nd order stationary property.
+"""
+isstationary(::AbstractVariogram) = false
+
+#------------------
+# IMPLEMENTATIONS
+#------------------
+"""
     GaussianVariogram(sill=s, range=r, nugget=n, distance=d)
 
 A Gaussian variogram with sill `s`, range `r` and nugget `n`.
@@ -33,6 +43,7 @@ Optionally, use a custom distance `d`.
 end
 (γ::GaussianVariogram)(h) = (γ.sill - γ.nugget) * (1 - exp.(-(h/γ.range).^2)) + γ.nugget
 (γ::GaussianVariogram)(x, y) = γ(γ.distance(x, y))
+isstationary(::GaussianVariogram) = true
 
 """
     SphericalVariogram(sill=s, range=r, nugget=n, distance=d)
@@ -50,6 +61,7 @@ end
                              (h .≥ γ.range) .* (γ.sill - γ.nugget) +
                              γ.nugget
 (γ::SphericalVariogram)(x, y) = γ(γ.distance(x, y))
+isstationary(::SphericalVariogram) = true
 
 """
     ExponentialVariogram(sill=s, range=r, nugget=n, distance=d)
@@ -65,6 +77,7 @@ Optionally, use a custom distance `d`.
 end
 (γ::ExponentialVariogram)(h) = (γ.sill - γ.nugget) * (1 - exp.(-(h/γ.range))) + γ.nugget
 (γ::ExponentialVariogram)(x, y) = γ(γ.distance(x, y))
+isstationary(::ExponentialVariogram) = true
 
 """
     MaternVariogram(sill=s, range=r, nugget=n, order=ν, distance=d)
@@ -93,6 +106,7 @@ end
   (s - n) * (1 - 2.0^(1 - ν)/gamma(ν) * h3.^ν .* besselk.(ν, h3))
 end
 (γ::MaternVariogram)(x, y) = γ(γ.distance(x, y))
+isstationary(::MaternVariogram) = true
 
 """
     CompositeVariogram(γ₁, γ₂, ..., γₙ)

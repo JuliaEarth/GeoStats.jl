@@ -26,6 +26,7 @@
 
 * External drift functions should be smooth
 * Kriging system with external drift is often unstable
+* Include a constant drift (e.g. `x->1`) for unbiased estimation
 * [`OrdinaryKriging`](@ref) is recovered for `ms = [x->1]`
 * For polynomial mean, see [`UniversalKriging`](@ref)
 """
@@ -56,11 +57,18 @@ function fit!(estimator::ExternalDriftKriging{T,V},
   estimator.z = z
 
   dim, nobs = size(X)
-  γ = estimator.γ
   ms = estimator.ms
 
-  # variogram matrix
-  Γ = pairwise((x,y) -> γ(x,y), X)
+  # variogram/covariance
+  γ = estimator.γ
+  cov(x,y) = γ.sill - γ(x,y)
+
+  # use covariance matrix if possible
+  if isstationary(γ)
+    Γ = pairwise((x,y) -> cov(x,y), X)
+  else
+    Γ = pairwise((x,y) -> γ(x,y), X)
+  end
 
   # polynomial drift matrix
   ndrifts = length(ms)
@@ -74,13 +82,20 @@ function fit!(estimator::ExternalDriftKriging{T,V},
 end
 
 function weights(estimator::ExternalDriftKriging{T,V}, xₒ::AbstractVector{T}) where {T<:Real,V}
-  X = estimator.X; z = estimator.z
-  γ = estimator.γ; ms = estimator.ms
+  X = estimator.X; z = estimator.z; ms = estimator.ms
   LU = estimator.LU
   nobs = length(z)
 
+  # variogram/covariance
+  γ = estimator.γ
+  cov(x,y) = γ.sill - γ(x,y)
+
   # evaluate variogram at location
-  g = [γ(X[:,j],xₒ) for j=1:nobs]
+  if isstationary(γ)
+    g = [cov(X[:,j],xₒ) for j=1:nobs]
+  else
+    g = [γ(X[:,j],xₒ) for j=1:nobs]
+  end
 
   # evaluate drift at location
   f = [m(xₒ) for m in ms]
@@ -106,8 +121,12 @@ struct ExternalDriftKrigingWeights{T<:Real,V} <: AbstractWeights{ExternalDriftKr
 end
 
 function combine(weights::ExternalDriftKrigingWeights{T,V}) where {T<:Real,V}
-  z = weights.estimator.z
+  z = weights.estimator.z; γ = weights.estimator.γ
   λ = weights.λ; ν = weights.ν; b = weights.b
 
-  z⋅λ, b⋅[λ;ν]
+  if isstationary(γ)
+    z⋅λ, γ.sill - b⋅[λ;ν]
+  else
+    z⋅λ, b⋅[λ;ν]
+  end
 end

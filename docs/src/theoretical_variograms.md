@@ -6,23 +6,19 @@
 \newcommand{\1}{\mathbb{1}}
 ```
 
-In an intrinsically stationary isotropic model, the variogram is only a function of
-the distance between any two points ``\x_1,\x_2 \in \R^m``:
+In an intrinsic isotropic model, the variogram is only a function of the
+distance between any two points ``\x_1,\x_2 \in \R^m``:
 
 ```math
 \gamma(\x_1,\x_2) = \gamma(||\x_1 - \x_2||) = \gamma(h)
 ```
 
-The same holds for the covariance, which is directly related via ``\gamma(h) = cov(0) - cov(h)``.
-
-Anisotropic models are easily obtained by defining an ellipsoid distance in place of the Euclidean
+Under the additional assumption of 2nd order stationarity, the well-known
+covariance is directly related via ``\gamma(h) = cov(0) - cov(h)``. Anisotropic
+models are easily obtained by defining an ellipsoid distance in place of the Euclidean
 distance. For a list of available distances, please see [Distance functions](distances.md).
 
-Custom distance functions are particularly useful if 3D locations are projected on a 2D map by means
-of a non-trivial transformation. In this case, a geodesic distance can be defined to properly account
-for spatial distortions at large scales.
-
-This package implements a few commonly used and other more excentric stationary models:
+This package implements a few commonly used and other more excentric variogram models:
 
 - Gaussian
 - Spherical

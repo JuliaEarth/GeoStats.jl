@@ -56,10 +56,17 @@ function fit!(estimator::UniversalKriging{T,V},
   estimator.z = z
 
   dim, nobs = size(X)
-  γ = estimator.γ
 
-  # variogram matrix
-  Γ = pairwise((x,y) -> γ(x,y), X)
+  # variogram/covariance
+  γ = estimator.γ
+  cov(x,y) = γ.sill - γ(x,y)
+
+  # use covariance matrix if possible
+  if isstationary(γ)
+    Γ = pairwise((x,y) -> cov(x,y), X)
+  else
+    Γ = pairwise((x,y) -> γ(x,y), X)
+  end
 
   # multinomial expansion
   exponents = zeros(Int, 0, dim)
@@ -82,13 +89,22 @@ function fit!(estimator::UniversalKriging{T,V},
 end
 
 function weights(estimator::UniversalKriging{T,V}, xₒ::AbstractVector{T}) where {T<:Real,V}
-  X = estimator.X; z = estimator.z; γ = estimator.γ
+  X = estimator.X; z = estimator.z
   exponents = estimator.exponents
   LU = estimator.LU
+
   nobs = length(z)
 
+  # variogram/covariance
+  γ = estimator.γ
+  cov(x,y) = γ.sill - γ(x,y)
+
   # evaluate variogram at location
-  g = [γ(X[:,j],xₒ) for j=1:nobs]
+  if isstationary(γ)
+    g = [cov(X[:,j],xₒ) for j=1:nobs]
+  else
+    g = [γ(X[:,j],xₒ) for j=1:nobs]
+  end
 
   # evaluate multinomial at location
   nterms = size(exponents, 2)
@@ -115,8 +131,12 @@ struct UniversalKrigingWeights{T<:Real,V} <: AbstractWeights{UniversalKriging{T,
 end
 
 function combine(weights::UniversalKrigingWeights{T,V}) where {T<:Real,V}
-  z = weights.estimator.z
+  z = weights.estimator.z; γ = weights.estimator.γ
   λ = weights.λ; ν = weights.ν; b = weights.b
 
-  z⋅λ, b⋅[λ;ν]
+  if isstationary(γ)
+    z⋅λ, γ.sill - b⋅[λ;ν]
+  else
+    z⋅λ, b⋅[λ;ν]
+  end
 end

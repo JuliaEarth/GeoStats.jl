@@ -1,21 +1,21 @@
 # Distance functions
 
-```math
-\newcommand{\x}{\boldsymbol{x}}
-\newcommand{\y}{\boldsymbol{y}}
-```
-
 A set of commonly used distance functions is provided in this package
 for use in geostatistical algorithms. They can be passed to
 [variograms](theoretical_variograms.md) in order to:
 
 - Model anisotropy (e.g. ellipsoid distance)
 - Perform geostatistical simulation on non-Euclidean coordinate systems (e.g. haversine distance)
-- etc.
+
+Custom distance functions are particularly useful if 3D locations are projected on a 2D map by means
+of a non-trivial transformation. In this case, a geodesic distance can be defined to properly account
+for spatial distortions at large scales.
 
 ## Euclidean
 
 ```math
+\newcommand{\x}{\boldsymbol{x}}
+\newcommand{\y}{\boldsymbol{y}}
 d(\x,\y) = \sqrt{(\x-\y)^\top (\x-\y)}
 ```
 

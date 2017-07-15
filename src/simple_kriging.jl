@@ -21,6 +21,10 @@
 * z ∈ ℜⁿ      - vector of observations for X
 * γ           - variogram model
 * μ ∈ ℜ       - mean of z
+
+### Notes
+
+* Simple Kriging requires stationary variograms
 """
 mutable struct SimpleKriging{T<:Real,V} <: AbstractEstimator
   # input fields
@@ -30,10 +34,11 @@ mutable struct SimpleKriging{T<:Real,V} <: AbstractEstimator
   μ::V
 
   # state fields
-  LU::Base.LinAlg.Factorization{T}
+  LLᵀ::Base.LinAlg.Factorization{T}
 
   function SimpleKriging{T,V}(X, z, γ, μ) where {T<:Real,V}
     @assert size(X, 2) == length(z) "incorrect data configuration"
+    @assert isstationary(γ) "Simple Kriging requires stationary variogram"
     SK = new(X, z, γ, μ)
     fit!(SK, X, z)
     SK
@@ -50,46 +55,50 @@ function fit!(estimator::SimpleKriging{T,V},
 
   # variogram/covariance
   γ = estimator.γ
+  cov(x,y) = γ.sill - γ(x,y)
 
   # LHS of Kriging system
-  Γ = pairwise((x,y) -> γ(x,y), X)
+  C = pairwise((x,y) -> cov(x,y), X)
 
   # factorize
-  estimator.LU = lufact(Γ)
+  estimator.LLᵀ = cholfact(C)
 end
 
 function weights(estimator::SimpleKriging{T,V}, xₒ::AbstractVector{T}) where {T<:Real,V}
   X = estimator.X; z = estimator.z
   γ = estimator.γ; μ = estimator.μ
-  LU = estimator.LU
+  LLᵀ = estimator.LLᵀ
   nobs = length(z)
 
+  # variogram/covariance
+  cov(x,y) = γ.sill - γ(x,y)
+
   # evaluate variogram/covariance at location
-  g = [γ(X[:,j],xₒ) for j=1:nobs]
+  c = [cov(X[:,j],xₒ) for j=1:nobs]
 
   # solve linear system
   y = z - μ
-  λ = LU \ g
+  λ = LLᵀ \ c
 
   # return weights
-  SimpleKrigingWeights(estimator, λ, y, g)
+  SimpleKrigingWeights(estimator, λ, y, c)
 end
 
 """
-    SimpleKrigingWeights(estimator, λ, y, g)
+    SimpleKrigingWeights(estimator, λ, y, c)
 
-Container that holds weights `λ`, centralized data `y` and RHS variogram/covariance `g` for `estimator`.
+Container that holds weights `λ`, centralized data `y` and RHS variogram/covariance `c` for `estimator`.
 """
 struct SimpleKrigingWeights{T<:Real,V} <: AbstractWeights{SimpleKriging{T,V}}
   estimator::SimpleKriging{T,V}
   λ::AbstractVector{T}
   y::AbstractVector{V}
-  g::AbstractVector{T}
+  c::AbstractVector{T}
 end
 
 function combine(weights::SimpleKrigingWeights{T,V}) where {T<:Real,V}
   γ = weights.estimator.γ; μ = weights.estimator.μ
-  λ = weights.λ; y = weights.y; g = weights.g
+  λ = weights.λ; y = weights.y; c = weights.c
 
-  μ + y⋅λ, g⋅λ
+  μ + y⋅λ, γ.sill - c⋅λ
 end
