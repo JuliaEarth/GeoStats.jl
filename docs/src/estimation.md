@@ -32,7 +32,7 @@ A typical use of the interface is as follows:
 
 ```julia
 # build and factorize the system
-simkrig = SimpleKriging(X, z, cov, mean(z))
+simkrig = SimpleKriging(X, z, γ, mean(z))
 
 # estimate at various locations
 for xₒ in locations
@@ -67,16 +67,16 @@ In Simple Kriging, the mean ``\mu`` of the random field is assumed to be constan
 The resulting linear system is:
 
 ```math
-\newcommand{\C}{\boldsymbol{C}}
-\newcommand{\c}{\boldsymbol{c}}
+\newcommand{\G}{\boldsymbol{\Gamma}}
+\newcommand{\g}{\boldsymbol{\gamma}}
 \newcommand{\l}{\boldsymbol{\lambda}}
 \newcommand{\1}{\boldsymbol{1}}
 \newcommand{\z}{\boldsymbol{z}}
 \begin{bmatrix}
-cov(\x_1,\x_2) & cov(\x_1,\x_2) & \cdots & cov(\x_1,\x_n) \\
-cov(\x_2,\x_1) & cov(\x_2,\x_2) & \cdots & cov(\x_2,\x_n) \\
+\gamma(\x_1,\x_2) & \gamma(\x_1,\x_2) & \cdots & \gamma(\x_1,\x_n) \\
+\gamma(\x_2,\x_1) & \gamma(\x_2,\x_2) & \cdots & \gamma(\x_2,\x_n) \\
 \vdots & \vdots & \ddots & \vdots \\
-cov(\x_n,\x_1) & cov(\x_n,\x_2) & \cdots & cov(\x_n,\x_n)
+\gamma(\x_n,\x_1) & \gamma(\x_n,\x_2) & \cdots & \gamma(\x_n,\x_n)
 \end{bmatrix}
 \begin{bmatrix}
 \lambda_1 \\
@@ -86,20 +86,20 @@ cov(\x_n,\x_1) & cov(\x_n,\x_2) & \cdots & cov(\x_n,\x_n)
 \end{bmatrix}
 =
 \begin{bmatrix}
-cov(\x_1,\x_0) \\
-cov(\x_2,\x_0) \\
+\gamma(\x_1,\x_0) \\
+\gamma(\x_2,\x_0) \\
 \vdots \\
-cov(\x_n,\x_0)
+\gamma(\x_n,\x_0)
 \end{bmatrix}
 ```
-or in matricial form ``\C\l = \c``. We subtract the given mean from the observations
+or in matricial form ``\G\l = \g``. We subtract the given mean from the observations
 ``\boldsymbol{y} = \z - \mu \1`` and compute the mean and variance at location ``\x_0``:
 
 ```math
 \mu(\x_0) = \mu + \boldsymbol{y}^\top \l
 ```
 ```math
-\sigma^2(\x_0) = cov(\x_0,\x_0) - \c^\top \l
+\sigma^2(\x_0) = \g^\top \l
 ```
 
 ```@docs
@@ -113,7 +113,7 @@ system is:
 
 ```math
 \begin{bmatrix}
-\C & \1 \\
+\G & \1 \\
 \1^\top & 0
 \end{bmatrix}
 \begin{bmatrix}
@@ -122,7 +122,7 @@ system is:
 \end{bmatrix}
 =
 \begin{bmatrix}
-\c \\
+\g \\
 1
 \end{bmatrix}
 ```
@@ -133,7 +133,7 @@ location ``\x_0`` are given by:
 \mu(\x_0) = \z^\top \lambda
 ```
 ```math
-\sigma^2(\x_0) =  cov(\x_0,\x_0) - \begin{bmatrix} \c \\ 1 \end{bmatrix}^\top \begin{bmatrix} \l \\ \nu \end{bmatrix}
+\sigma^2(\x_0) =  \begin{bmatrix} \g \\ 1 \end{bmatrix}^\top \begin{bmatrix} \l \\ \nu \end{bmatrix}
 ```
 
 ```@docs
@@ -142,7 +142,7 @@ OrdinaryKriging
 
 ## Universal Kriging
 
-In Universal Kriging, the mean of the random field is assumed to be a polynomial:
+In Universal Kriging, the mean of the random field is assumed to be a polynomial of the spatial coordinates:
 
 ```math
 \mu(\x) = \sum_{k=1}^{N_d} \beta_k f_k(\x)
@@ -169,11 +169,9 @@ f_1(\x_n) & f_2(\x_n) & \cdots & f_{N_d}(\x_n)
 
 and polynomial vector ``\f = \begin{bmatrix} f_1(\x_0) & f_2(\x_0) & \cdots & f_{N_d}(\x_0) \end{bmatrix}^\top``.
 
-The variogram matrix is constructed instead of the covariance matrix:
+The variogram determines the variogram matrix:
 
 ```math
-\newcommand{\G}{\boldsymbol{\Gamma}}
-\newcommand{\g}{\boldsymbol{\gamma}}
 \G =
 \begin{bmatrix}
 \gamma(\x_1,\x_1) & \gamma(\x_1,\x_2) & \cdots & \gamma(\x_1,\x_n) \\
@@ -182,8 +180,7 @@ The variogram matrix is constructed instead of the covariance matrix:
 \gamma(\x_n,\x_1) & \gamma(\x_n,\x_2) & \cdots & \gamma(\x_n,\x_n)
 \end{bmatrix}
 ```
-with ``\gamma(\x_i,\x_j) = cov(\x_0,\x_0) - cov(\x_i,\x_j)``. The variogram is
-also evaluated at the estimation location
+and the variogram vector
 ``\g = \begin{bmatrix} \gamma(\x_1,\x_0) & \gamma(\x_2,\x_0) & \cdots & \gamma(\x_n,\x_0) \end{bmatrix}^\top``.
 
 The resulting linear system is:
