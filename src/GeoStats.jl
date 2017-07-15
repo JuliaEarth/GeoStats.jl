@@ -63,6 +63,7 @@ export
   # functions
   fit!,
   weights,
-  estimate
+  estimate,
+  isstationary
 
 end

@@ -13,7 +13,7 @@ distance between any two points ``\x_1,\x_2 \in \R^m``:
 \gamma(\x_1,\x_2) = \gamma(||\x_1 - \x_2||) = \gamma(h)
 ```
 
-Under the additional assumption of 2nd order stationarity, the well-known
+Under the additional assumption of 2nd-order stationarity, the well-known
 covariance is directly related via ``\gamma(h) = cov(0) - cov(h)``. Anisotropic
 models are easily obtained by defining an ellipsoid distance in place of the Euclidean
 distance. For a list of available distances, please see [Distance functions](distances.md).
@@ -25,11 +25,17 @@ This package implements a few commonly used and other more excentric variogram m
 - Exponential
 - Matérn (see [Matérn covariance functions](https://en.wikipedia.org/wiki/Mat%C3%A9rn_covariance_function))
 
-They all share the same default parameters of `sill=1`, `range=1`, `nugget=0`, `distance=EuclideanDistance()`.
+They all share the same default parameters of
+
+- `sill=1`
+- `range=1`
+- `nugget=0`
+- `distance=EuclideanDistance()`
+
 Some of them have extra parameters that can be set with keyword arguments:
 
 ```julia
-GaussianVariogram(nugget=.1) # add nugget effect
+GaussianVariogram(nugget=.1) # set nugget effect
 MaternVariogram(order=1) # set order of Bessel function
 ```
 
@@ -43,6 +49,12 @@ CompositeVariogram(GaussianVariogram(), ExponentialVariogram())
 Like the other variogram models, a composite variogram ``\gamma`` can be evaluated as an isotropic model
 ``\gamma(h)`` or as a model with a custom distance implicitly defined by taking into account its individual
 components ``\gamma(\x_1,\x_2)``.
+
+Finally, the 2nd-order stationarity property of a variogram can be checked with the `isstationary` method:
+
+```@docs
+isstationary
+```
 
 ## Gaussian
 

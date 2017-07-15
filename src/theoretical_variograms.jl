@@ -22,7 +22,7 @@ abstract type AbstractVariogram end
 """
     isstationary(γ)
 
-Check if variogram `γ` possesses the 2nd order stationary property.
+Check if variogram `γ` possesses the 2nd-order stationary property.
 """
 isstationary(::AbstractVariogram) = false
 

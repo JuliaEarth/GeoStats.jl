@@ -2,9 +2,13 @@
   h = linspace(0,10)
   x, y = rand(3), rand(3)
 
+  # stationary variogram models
   γs = [GaussianVariogram(), SphericalVariogram(),
         ExponentialVariogram(), MaternVariogram(),
         SphericalVariogram(range=2.)]
+
+  # check stationarity
+  @test all(isstationary(γ) for γ ∈ γs)
 
   for γ in [γs..., CompositeVariogram(γs...)]
     # variograms are increasing
