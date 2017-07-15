@@ -30,7 +30,7 @@ mutable struct SimpleKriging{T<:Real,V} <: AbstractEstimator
   μ::V
 
   # state fields
-  LLᵀ::Base.LinAlg.Factorization{T}
+  LU::Base.LinAlg.Factorization{T}
 
   function SimpleKriging{T,V}(X, z, γ, μ) where {T<:Real,V}
     @assert size(X, 2) == length(z) "incorrect data configuration"
@@ -50,31 +50,29 @@ function fit!(estimator::SimpleKriging{T,V},
 
   # variogram/covariance
   γ = estimator.γ
-  cov(x,y) = γ.sill - γ(x,y)
 
   # LHS of Kriging system
-  C = pairwise((x,y) -> cov(x,y), X)
+  Γ = pairwise((x,y) -> γ(x,y), X)
 
   # factorize
-  estimator.LLᵀ = cholfact(C)
+  estimator.LU = lufact(Γ)
 end
 
 function weights(estimator::SimpleKriging{T,V}, xₒ::AbstractVector{T}) where {T<:Real,V}
   X = estimator.X; z = estimator.z
   γ = estimator.γ; μ = estimator.μ
-  cov(x,y) = γ.sill - γ(x,y)
-  LLᵀ = estimator.LLᵀ
+  LU = estimator.LU
   nobs = length(z)
 
-  # evaluate covariance at location
-  c = [cov(X[:,j],xₒ) for j=1:nobs]
+  # evaluate variogram/covariance at location
+  g = [γ(X[:,j],xₒ) for j=1:nobs]
 
   # solve linear system
   y = z - μ
-  λ = LLᵀ \ c
+  λ = LU \ g
 
   # return weights
-  SimpleKrigingWeights(estimator, λ, y, c)
+  SimpleKrigingWeights(estimator, λ, y, g)
 end
 
 function estimate(estimator::SimpleKriging{T,V}, xₒ::AbstractVector{T}) where {T<:Real,V}
@@ -86,20 +84,20 @@ function estimate(estimator::SimpleKriging{T,V}, xₒ::AbstractVector{T}) where 
 end
 
 """
-    SimpleKrigingWeights(estimator, λ, y, c)
+    SimpleKrigingWeights(estimator, λ, y, g)
 
-Container that holds weights `λ`, centralized data `y` and RHS covariance `c` for `estimator`.
+Container that holds weights `λ`, centralized data `y` and RHS variogram/covariance `g` for `estimator`.
 """
 struct SimpleKrigingWeights{T<:Real,V} <: AbstractWeights{SimpleKriging{T,V}}
   estimator::SimpleKriging{T,V}
   λ::AbstractVector{T}
   y::AbstractVector{V}
-  c::AbstractVector{T}
+  g::AbstractVector{T}
 end
 
 function combine(weights::SimpleKrigingWeights{T,V}) where {T<:Real,V}
   γ = weights.estimator.γ; μ = weights.estimator.μ
-  λ = weights.λ; y = weights.y; c = weights.c
+  λ = weights.λ; y = weights.y; g = weights.g
 
-  μ + y⋅λ, γ.sill - c⋅λ
+  μ + y⋅λ, g⋅λ
 end

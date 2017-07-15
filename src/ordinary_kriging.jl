@@ -50,28 +50,25 @@ function fit!(estimator::OrdinaryKriging{T,V},
 
   # variogram/covariance
   γ = estimator.γ
-  cov(x,y) = γ.sill - γ(x,y)
 
   # LHS of Kriging system
-  C = pairwise((x,y) -> cov(x,y), X)
-  A = [C ones(nobs); ones(nobs)' 0]
+  Γ = pairwise((x,y) -> γ(x,y), X)
+  A = [Γ ones(nobs); ones(nobs)' 0]
 
   # factorize
   estimator.LU = lufact(A)
 end
 
 function weights(estimator::OrdinaryKriging{T,V}, xₒ::AbstractVector{T}) where {T<:Real,V}
-  X = estimator.X; z = estimator.z
-  γ = estimator.γ
-  cov(x,y) = γ.sill - γ(x,y)
+  X = estimator.X; z = estimator.z; γ = estimator.γ
   LU = estimator.LU
   nobs = length(z)
 
-  # evaluate covariance at location
-  c = [cov(X[:,j],xₒ) for j=1:nobs]
+  # evaluate variogram/covariance at location
+  g = [γ(X[:,j],xₒ) for j=1:nobs]
 
   # solve linear system
-  b = [c; 1]
+  b = [g; 1]
   x = LU \ b
 
   # return weights
@@ -102,5 +99,5 @@ function combine(weights::OrdinaryKrigingWeights{T,V}) where {T<:Real,V}
   γ = weights.estimator.γ; z = weights.estimator.z
   λ = weights.λ; ν = weights.ν; b = weights.b
 
-  z⋅λ, γ.sill - b⋅[λ;ν]
+  z⋅λ, b⋅[λ;ν]
 end
