@@ -52,6 +52,7 @@ export
   SphericalVariogram,
   ExponentialVariogram,
   MaternVariogram,
+  PowerVariogram,
   CompositeVariogram,
 
   # estimators

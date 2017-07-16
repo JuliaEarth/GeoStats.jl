@@ -18,14 +18,8 @@ covariance is directly related via ``\gamma(h) = cov(0) - cov(h)``. Anisotropic
 models are easily obtained by defining an ellipsoid distance in place of the Euclidean
 distance. For a list of available distances, please see [Distance functions](distances.md).
 
-This package implements a few commonly used and other more excentric variogram models:
-
-- Gaussian
-- Spherical
-- Exponential
-- Matérn (see [Matérn covariance functions](https://en.wikipedia.org/wiki/Mat%C3%A9rn_covariance_function))
-
-They all share the same default parameters of
+This package implements a few commonly used and other more excentric variogram models.
+They all share the same default parameters:
 
 - `sill=1`
 - `range=1`
@@ -95,6 +89,16 @@ ExponentialVariogram
 
 ```@docs
 MaternVariogram
+```
+
+## Power
+
+```math
+\gamma(h) = sh^a + n
+```
+
+```@docs
+PowerVariogram
 ```
 
 ## Composite

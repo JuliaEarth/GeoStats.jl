@@ -7,8 +7,14 @@
         ExponentialVariogram(), MaternVariogram(),
         SphericalVariogram(range=2.)]
 
+  # non-stationary variogram models
+  γn = [PowerVariogram()]
+
   # check stationarity
   @test all(isstationary(γ) for γ ∈ γs)
+
+  # check non-stationarity
+  @test all(!isstationary(γ) for γ ∈ γn)
 
   for γ in [γs..., CompositeVariogram(γs...)]
     # variograms are increasing

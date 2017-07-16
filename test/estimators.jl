@@ -102,6 +102,27 @@
   @test OKestimate ≈ DKestimate
   @test OKvar ≈ DKvar
 
+  # Non-stationary variograms are allowed
+  γ_ns = PowerVariogram()
+  ordkrig_ns = OrdinaryKriging(X, z, γ_ns)
+  unikrig_ns = UniversalKriging(X, z, γ_ns, 1)
+  driftkrig_ns = ExternalDriftKriging(X, z, γ_ns, [x->1.])
+  for j=1:nobs
+    OKestimate, OKvar = estimate(ordkrig, X[:,j])
+    UKestimate, UKvar = estimate(unikrig, X[:,j])
+    DKestimate, DKvar = estimate(driftkrig, X[:,j])
+
+    # estimate checks
+    @test OKestimate ≈ z[j]
+    @test UKestimate ≈ z[j]
+    @test DKestimate ≈ z[j]
+
+    # variance checks
+    @test OKvar + tol ≥ 0
+    @test UKvar + tol ≥ 0
+    @test DKvar + tol ≥ 0
+  end
+
   # Floating point precision checks
   X_f  = rand(Float32, dim, nobs)
   z_f  = rand(Float32, nobs)

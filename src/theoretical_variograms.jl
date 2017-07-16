@@ -109,6 +109,21 @@ end
 isstationary(::MaternVariogram) = true
 
 """
+    PowerVariogram(scaling=s, exponent=a, nugget=n, distance=d)
+
+A power variogram with scaling `s`, exponent `a` and nugget `n`.
+Optionally, use a custom distance `d`.
+"""
+@with_kw struct PowerVariogram{T<:Real,D<:AbstractDistance} <: AbstractVariogram
+  scaling::T  = 1.
+  exponent::T = 1.
+  nugget::T   = 0.
+  distance::D = EuclideanDistance()
+end
+(γ::PowerVariogram)(h) = γ.scaling*h^γ.exponent + γ.nugget
+(γ::PowerVariogram)(x, y) = γ(γ.distance(x, y))
+
+"""
     CompositeVariogram(γ₁, γ₂, ..., γₙ)
 
 A composite (additive) model of variograms γ(h) = γ₁(h) + γ₂(h) + ⋯ + γₙ(h).
