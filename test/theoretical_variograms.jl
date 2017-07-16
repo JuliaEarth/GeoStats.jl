@@ -3,9 +3,9 @@
   x, y = rand(3), rand(3)
 
   # stationary variogram models
-  γs = [GaussianVariogram(), SphericalVariogram(),
-        ExponentialVariogram(), MaternVariogram(),
-        SphericalVariogram(range=2.)]
+  γs = [GaussianVariogram(), ExponentialVariogram(),
+        MaternVariogram(), SphericalVariogram(),
+        SphericalVariogram(range=2.), CubicVariogram()]
 
   # non-stationary variogram models
   γn = [PowerVariogram()]

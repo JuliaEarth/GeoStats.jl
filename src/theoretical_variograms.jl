@@ -46,24 +46,6 @@ end
 isstationary(::GaussianVariogram) = true
 
 """
-    SphericalVariogram(sill=s, range=r, nugget=n, distance=d)
-
-A spherical variogram with sill `s`, range `r` and nugget `n`.
-Optionally, use a custom distance `d`.
-"""
-@with_kw struct SphericalVariogram{T<:Real,D<:AbstractDistance} <: AbstractVariogram
-  sill::T   = 1.
-  range::T  = 1.
-  nugget::T = 0.
-  distance::D = EuclideanDistance()
-end
-(γ::SphericalVariogram)(h) = (h .< γ.range) .* (γ.sill - γ.nugget) .* (1.5h/γ.range - 0.5(h/γ.range).^3) +
-                             (h .≥ γ.range) .* (γ.sill - γ.nugget) +
-                             γ.nugget
-(γ::SphericalVariogram)(x, y) = γ(γ.distance(x, y))
-isstationary(::SphericalVariogram) = true
-
-"""
     ExponentialVariogram(sill=s, range=r, nugget=n, distance=d)
 
 An exponential variogram with sill `s`, range `r` and nugget `n`.
@@ -103,10 +85,55 @@ end
   h2 = h + eps(eltype(h))
   h3 = sqrt.(2.0ν)h2/r
 
-  (s - n) * (1 - 2.0^(1 - ν)/gamma(ν) * h3.^ν .* besselk.(ν, h3))
+  (s - n) * (1 - 2.0^(1 - ν)/gamma(ν) * h3.^ν .* besselk.(ν, h3)) + n
 end
 (γ::MaternVariogram)(x, y) = γ(γ.distance(x, y))
 isstationary(::MaternVariogram) = true
+
+"""
+    SphericalVariogram(sill=s, range=r, nugget=n, distance=d)
+
+A spherical variogram with sill `s`, range `r` and nugget `n`.
+Optionally, use a custom distance `d`.
+"""
+@with_kw struct SphericalVariogram{T<:Real,D<:AbstractDistance} <: AbstractVariogram
+  sill::T   = 1.
+  range::T  = 1.
+  nugget::T = 0.
+  distance::D = EuclideanDistance()
+end
+(γ::SphericalVariogram)(h) = begin
+  s = γ.sill
+  r = γ.range
+  n = γ.nugget
+
+  (h .< r) .* (s - n) .* (1.5(h/r) - 0.5(h/r).^3) + (h .≥ r) .* (s - n) + n
+end
+(γ::SphericalVariogram)(x, y) = γ(γ.distance(x, y))
+isstationary(::SphericalVariogram) = true
+
+"""
+    CubicVariogram(sill=s, range=r, nugget=n, distance=d)
+
+A cubic variogram with sill `s`, range `r` and nugget `n`.
+Optionally, use a custom distance `d`.
+"""
+@with_kw struct CubicVariogram{T<:Real,D<:AbstractDistance} <: AbstractVariogram
+  sill::T   = 1.
+  range::T  = 1.
+  nugget::T = 0.
+  distance::D = EuclideanDistance()
+end
+(γ::CubicVariogram)(h) = begin
+  s = γ.sill
+  r = γ.range
+  n = γ.nugget
+
+  (h .< r) .* (s - n) .* (7*(h/r).^2 - (35/4)*(h/r).^3 + (7/2)*(h/r).^5 - (3/4)*(h/r).^7) +
+  (h .≥ r) .* (s - n) + n
+end
+(γ::CubicVariogram)(x, y) = γ(γ.distance(x, y))
+isstationary(::CubicVariogram) = true
 
 """
     PowerVariogram(scaling=s, exponent=a, nugget=n, distance=d)
@@ -120,7 +147,7 @@ Optionally, use a custom distance `d`.
   nugget::T   = 0.
   distance::D = EuclideanDistance()
 end
-(γ::PowerVariogram)(h) = γ.scaling*h^γ.exponent + γ.nugget
+(γ::PowerVariogram)(h) = γ.scaling*h.^γ.exponent + γ.nugget
 (γ::PowerVariogram)(x, y) = γ(γ.distance(x, y))
 
 """

@@ -49,9 +49,10 @@ export
 
   # theoretical variograms
   GaussianVariogram,
-  SphericalVariogram,
   ExponentialVariogram,
   MaternVariogram,
+  SphericalVariogram,
+  CubicVariogram,
   PowerVariogram,
   CompositeVariogram,
 
