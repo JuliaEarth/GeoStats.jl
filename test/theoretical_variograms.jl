@@ -5,32 +5,44 @@
   # stationary variogram models
   γs = [GaussianVariogram(), ExponentialVariogram(),
         MaternVariogram(), SphericalVariogram(),
-        SphericalVariogram(range=2.), CubicVariogram()]
+        SphericalVariogram(range=2.), CubicVariogram(),
+        PentasphericalVariogram(), SineHoleVariogram()]
 
   # non-stationary variogram models
-  γn = [PowerVariogram()]
+  γn = [PowerVariogram(), PowerVariogram(exponent=.4)]
+
+  # non-decreasing variogram models
+  γnd = [GaussianVariogram(), ExponentialVariogram(),
+         MaternVariogram(), SphericalVariogram(),
+         SphericalVariogram(range=2.), CubicVariogram(),
+         PentasphericalVariogram(), PowerVariogram()]
 
   # check stationarity
   @test all(isstationary(γ) for γ ∈ γs)
-
-  # check non-stationarity
   @test all(!isstationary(γ) for γ ∈ γn)
 
-  for γ in [γs..., CompositeVariogram(γs...)]
-    # variograms are increasing
-    @test all(γ(h) .≤ γ(h+1))
-
-    # variograms are symmetric
+  # variograms are symmetric under Euclidean distance
+  for γ ∈ (γs ∪ γn ∪ γnd ∪ [CompositeVariogram(γs..., γn..., γnd...)])
     @test γ(x, y) ≈ γ(y, x)
+  end
+
+  # some variograms are non-decreasing
+  for γ ∈ (γnd ∪ [CompositeVariogram(γnd...)])
+    @test all(γ(h) .≤ γ(h+1))
   end
 
   if ismaintainer || istravis
     @testset "Plot recipe" begin
       function plot_variograms(fname)
-        plt = plot()
+        plt1 = plot()
         for γ ∈ γs
-          plot!(plt, γ, maxlag=3.)
+          plot!(plt1, γ, maxlag=3.)
         end
+        plt2 = plot()
+        for γ ∈ γn
+          plot!(plt2, γ, maxlag=3.)
+        end
+        plot(plt1, plt2, size=(1000,400))
         png(fname)
       end
       refimg = joinpath(datadir,"TheoreticalVariograms.png")

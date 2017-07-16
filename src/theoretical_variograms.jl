@@ -136,6 +136,29 @@ end
 isstationary(::CubicVariogram) = true
 
 """
+    PentasphericalVariogram
+
+A pentaspherical variogram with sill `s`, range `r` and nugget `n`.
+Optionally, use a custom distance `d`.
+"""
+@with_kw struct PentasphericalVariogram{T<:Real,D<:AbstractDistance} <: AbstractVariogram
+  sill::T   = 1.
+  range::T  = 1.
+  nugget::T = 0.
+  distance::D = EuclideanDistance()
+end
+(γ::PentasphericalVariogram)(h) = begin
+  s = γ.sill
+  r = γ.range
+  n = γ.nugget
+
+  (h .< r) .* (s - n) .* ((15/8)*(h/r) - (5/4)*(h/r).^3 + (3/8)*(h/r).^5) +
+  (h .≥ r) .* (s - n) + n
+end
+(γ::PentasphericalVariogram)(x, y) = γ(γ.distance(x, y))
+isstationary(::PentasphericalVariogram) = true
+
+"""
     PowerVariogram(scaling=s, exponent=a, nugget=n, distance=d)
 
 A power variogram with scaling `s`, exponent `a` and nugget `n`.
@@ -149,6 +172,22 @@ Optionally, use a custom distance `d`.
 end
 (γ::PowerVariogram)(h) = γ.scaling*h.^γ.exponent + γ.nugget
 (γ::PowerVariogram)(x, y) = γ(γ.distance(x, y))
+
+"""
+    SineHoleVariogram(sill=s, range=r, nugget=n, distance=d)
+
+A sine hole variogram with sill `s`, range `r` and nugget `n`.
+Optionally, use a custom distance `d`.
+"""
+@with_kw struct SineHoleVariogram{T<:Real,D<:AbstractDistance} <: AbstractVariogram
+  sill::T   = 1.
+  range::T  = 1.
+  nugget::T = 0.
+  distance::D = EuclideanDistance()
+end
+(γ::SineHoleVariogram)(h) = (γ.sill - γ.nugget) * (1 - sin.(π*h/γ.range)./(π*h/γ.range)) + γ.nugget
+(γ::SineHoleVariogram)(x, y) = γ(γ.distance(x, y))
+isstationary(::SineHoleVariogram) = true
 
 """
     CompositeVariogram(γ₁, γ₂, ..., γₙ)

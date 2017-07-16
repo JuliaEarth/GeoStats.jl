@@ -101,6 +101,16 @@ SphericalVariogram
 CubicVariogram
 ```
 
+## Pentaspherical
+
+```math
+\gamma(h) = (s - n) \left[\left(\frac{15}{8}\left(\frac{h}{r}\right) - \frac{5}{4}\left(\frac{h}{r}\right)^3 + \frac{3}{8}\left(\frac{h}{r}\right)^5\right) \cdot \1_{(0,r)}(h) + \1_{[r,\infty)}(h)\right] + n \cdot \1_{(0,\infty)}(h)
+```
+
+```@docs
+PentasphericalVariogram
+```
+
 ## Power
 
 ```math
@@ -109,6 +119,16 @@ CubicVariogram
 
 ```@docs
 PowerVariogram
+```
+
+## Sine hole
+
+```math
+\gamma(h) = (s - n) \left[1 - \frac{\sin(\pi h / r)}{\pi h / r}\right] + n \cdot \1_{(0,\infty)}(h)
+```
+
+```@docs
+SineHoleVariogram
 ```
 
 ## Composite

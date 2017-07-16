@@ -53,7 +53,9 @@ export
   MaternVariogram,
   SphericalVariogram,
   CubicVariogram,
+  PentasphericalVariogram,
   PowerVariogram,
+  SineHoleVariogram,
   CompositeVariogram,
 
   # estimators
