@@ -6,6 +6,13 @@ High-performance implementations of geostatistical algorithms for the Julia prog
 This package is in its initial development, and currently only contains Kriging estimation methods.
 More features will be added as the Julia type system matures.
 
+# Project goals
+
+- Design a comprehensive framework for geostatistics (or spatial statistics) in a modern programming language.
+- Address the lack of a platform for scientific comparison of different geostatistical algorithms in the literature.
+- Exploit modern hardware aggressively, including GPUs and computer clusters.
+- Educate people outside of the field about the existence of geostatistics.
+
 ### Related packages
 
 - [GaussianProcesses.jl](https://github.com/STOR-i/GaussianProcesses.jl) &mdash; Gaussian processes
