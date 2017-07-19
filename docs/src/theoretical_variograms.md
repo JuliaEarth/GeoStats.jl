@@ -114,7 +114,7 @@ PentasphericalVariogram
 ## Power
 
 ```math
-\gamma(h) = sh^a + n
+\gamma(h) = sh^a + n \cdot \1_{(0,\infty)}(h)
 ```
 
 ```@docs
