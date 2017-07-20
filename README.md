@@ -41,6 +41,19 @@ Get the latest stable release with Julia's package manager:
 Pkg.add("GeoStats")
 ```
 
+Project organization
+--------------------
+
+The project is split into various packages:
+
+| Package           | Description |
+|:-----------------:| ----------- |
+| [GeoStats.jl](https://github.com/juliohm/GeoStats.jl) | Main package containing problem definitions, Kriging-based solvers, and other geostatistical tools. |
+| [GeoStatsImages.jl](https://github.com/juliohm/GeoStatsImages.jl) | Training images for multiple-point geostatistical simulation. |
+| [GslibIO.jl](https://github.com/juliohm/GslibIO.jl) | Utilities to read/write *extended* GSLIB files. |
+
+The main package (i.e. GeoStats.jl) is self-contained, and provides high-performance Kriging-based estimation/simulation algorithms over N-dimensional domains. Other packages can be installed from the list above for additional functionality.
+
 Documentation
 -------------
 
