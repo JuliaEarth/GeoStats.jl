@@ -59,7 +59,7 @@ export
   PowerVariogram,
   SineHoleVariogram,
   CompositeVariogram,
-  # methods
+  # interface
   isstationary,
 
   # estimators
@@ -67,12 +67,14 @@ export
   OrdinaryKriging,
   UniversalKriging,
   ExternalDriftKriging,
-  # methods
+  # interface
   fit!,
   weights,
   estimate,
 
   # geodata
-  GeoData
+  GeoData,
+  # interface
+  readtable
 
 end

@@ -69,4 +69,4 @@ end
 
 Return the column names of `geodata`.
 """
-names(geodata::GeoData) = DataFrames.names(geodata.data)
+Base.names(geodata::GeoData) = DataFrames.names(geodata.data)
