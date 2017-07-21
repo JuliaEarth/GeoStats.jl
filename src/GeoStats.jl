@@ -16,6 +16,7 @@ __precompile__(true)
 
 module GeoStats
 
+using DataFrames
 using Combinatorics: combinations
 using SpecialFunctions: besselk
 using Parameters: @with_kw
@@ -26,6 +27,7 @@ include("distances.jl")
 include("empirical_variograms.jl")
 include("theoretical_variograms.jl")
 include("estimators.jl")
+include("geodata.jl")
 
 # plot recipes
 include("plotrecipes/empirical_variograms.jl")
@@ -57,17 +59,20 @@ export
   PowerVariogram,
   SineHoleVariogram,
   CompositeVariogram,
+  # methods
+  isstationary,
 
   # estimators
   SimpleKriging,
   OrdinaryKriging,
   UniversalKriging,
   ExternalDriftKriging,
-
-  # functions
+  # methods
   fit!,
   weights,
   estimate,
-  isstationary
+
+  # geodata
+  GeoData
 
 end

@@ -28,7 +28,8 @@ testfiles = [
   "distances.jl",
   "empirical_variograms.jl",
   "theoretical_variograms.jl",
-  "estimators.jl"
+  "estimators.jl",
+  "geodata.jl"
 ]
 
 # run
