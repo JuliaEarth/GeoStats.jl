@@ -1,4 +1,4 @@
-@testset "GeoData" begin
+@testset "Spatial data" begin
   fname = joinpath(datadir,"data3D.tsv")
   geodata = readtable(fname)
   @test names(geodata) == [:x,:y,:z,:value]

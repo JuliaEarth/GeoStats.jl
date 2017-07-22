@@ -22,11 +22,17 @@ using SpecialFunctions: besselk
 using Parameters: @with_kw
 using RecipesBase
 
+# core
 include("utils.jl")
 include("distances.jl")
 include("empirical_variograms.jl")
 include("theoretical_variograms.jl")
 include("estimators.jl")
+
+# spatial domains
+include("domains.jl")
+
+# spatial data
 include("geodata.jl")
 
 # plot recipes
@@ -71,6 +77,10 @@ export
   fit!,
   weights,
   estimate,
+
+  # domains
+  RegularGrid,
+  dimension,
 
   # geodata
   GeoData,

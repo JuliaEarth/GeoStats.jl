@@ -29,6 +29,7 @@ testfiles = [
   "empirical_variograms.jl",
   "theoretical_variograms.jl",
   "estimators.jl",
+  "domains.jl",
   "geodata.jl"
 ]
 
