@@ -32,6 +32,13 @@ variograms as first-class objects, see the [Variogram modeling example](examples
 - [celerite.jl](https://github.com/ericagol/celerite.jl) &mdash; For 1D Gaussian processes, this project
 was originally written in C++/Python and is now ported to Julia.
 
+- [Interpolations.jl](https://github.com/JuliaMath/Interpolations.jl) &mdash; Kriging and Spline interpolation
+have different purposes, yet these two methods are sometimes listed as competing alternatives. Kriging estimation
+is about minimizing variance (or estimation error), whereas Spline interpolation is about forcedly smooth estimators
+derived for *computer visualization*. [Kriging is a generalization of Splines](http://www.sciencedirect.com/science/article/pii/009830048490030X)
+in which one has the freedom to customize spatial structure based on data. Besides the estimate itself, Kriging
+also provides the variance map as a function of knots configuration.
+
 Installation
 ------------
 
