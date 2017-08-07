@@ -42,7 +42,7 @@
         for γ ∈ γn
           plot!(plt2, γ, maxlag=3.)
         end
-        plot(plt1, plt2, size=(1000,400))
+        plot(plt1, plt2, size=(600,800), layout=(2,1))
         png(fname)
       end
       refimg = joinpath(datadir,"TheoreticalVariograms.png")
