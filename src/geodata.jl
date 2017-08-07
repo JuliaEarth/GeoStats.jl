@@ -70,3 +70,17 @@ end
 Return the column names of `geodata`.
 """
 Base.names(geodata::GeoData) = DataFrames.names(geodata.data)
+
+"""
+    coordnames(geodata)
+
+Return the column names of `geodata` representing spatial coordinates.
+"""
+coordnames(geodata::GeoData) = geodata.coordnames
+
+"""
+    coordinates(geodata)
+
+Return the columns of `geodata` representing spatial coordinates.
+"""
+coordinates(geodata::GeoData) = convert(Array, geodata.data[geodata.coordnames])

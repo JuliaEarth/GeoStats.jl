@@ -22,18 +22,18 @@ using SpecialFunctions: besselk
 using Parameters: @with_kw
 using RecipesBase
 
-# core
+# Kriging estimators
 include("utils.jl")
 include("distances.jl")
 include("empirical_variograms.jl")
 include("theoretical_variograms.jl")
 include("estimators.jl")
 
-# spatial domains
+# geostatistical problems
 include("domains.jl")
-
-# spatial data
 include("geodata.jl")
+include("problems.jl")
+include("solvers.jl")
 
 # plot recipes
 include("plotrecipes/empirical_variograms.jl")
@@ -80,11 +80,22 @@ export
 
   # domains
   RegularGrid,
+  # interface
   dimension,
 
   # geodata
   GeoData,
   # interface
-  readtable
+  coordnames,
+  coordinates,
+  readtable,
+
+  # problems
+  EstimationProblem,
+
+  # solvers
+  Kriging,
+  # interface
+  solve
 
 end
