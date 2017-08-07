@@ -28,27 +28,32 @@
 """
 mutable struct SimpleKriging{T<:Real,V} <: AbstractEstimator
   # input fields
-  X::AbstractMatrix{T}
-  z::AbstractVector{V}
   γ::AbstractVariogram
   μ::V
 
   # state fields
+  X::AbstractMatrix{T}
+  z::AbstractVector{V}
   LLᵀ::Base.LinAlg.Factorization{T}
 
-  function SimpleKriging{T,V}(X, z, γ, μ) where {T<:Real,V}
-    @assert size(X, 2) == length(z) "incorrect data configuration"
+  function SimpleKriging{T,V}(γ, μ; X=nothing, z=nothing) where {T<:Real,V}
     @assert isstationary(γ) "Simple Kriging requires stationary variogram"
-    SK = new(X, z, γ, μ)
-    fit!(SK, X, z)
+    SK = new(γ, μ)
+    if X ≠ nothing && z ≠ nothing
+      fit!(SK, X, z)
+    end
+
     SK
   end
 end
 
-SimpleKriging(X, z, γ, μ) = SimpleKriging{eltype(X),eltype(z)}(X, z, γ, μ)
+SimpleKriging(X, z, γ, μ) = SimpleKriging{eltype(X),eltype(z)}(γ, μ, X=X, z=z)
 
 function fit!(estimator::SimpleKriging{T,V},
               X::AbstractMatrix{T}, z::AbstractVector{V}) where {T<:Real,V}
+  # sanity check
+  @assert size(X, 2) == length(z) "incorrect data configuration"
+
   # update data
   estimator.X = X
   estimator.z = z

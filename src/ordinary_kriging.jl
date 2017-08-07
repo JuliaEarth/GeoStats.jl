@@ -23,25 +23,30 @@
 """
 mutable struct OrdinaryKriging{T<:Real,V} <: AbstractEstimator
   # input fields
-  X::AbstractMatrix{T}
-  z::AbstractVector{V}
   γ::AbstractVariogram
 
   # state fields
+  X::AbstractMatrix{T}
+  z::AbstractVector{V}
   LU::Base.LinAlg.Factorization{T}
 
-  function OrdinaryKriging{T,V}(X, z, γ) where {T<:Real,V}
-    @assert size(X, 2) == length(z) "incorrect data configuration"
-    OK = new(X, z, γ)
-    fit!(OK, X, z)
+  function OrdinaryKriging{T,V}(γ; X=nothing, z=nothing) where {T<:Real,V}
+    OK = new(γ)
+    if X ≠ nothing && z ≠ nothing
+      fit!(OK, X, z)
+    end
+
     OK
   end
 end
 
-OrdinaryKriging(X, z, γ) = OrdinaryKriging{eltype(X),eltype(z)}(X, z, γ)
+OrdinaryKriging(X, z, γ) = OrdinaryKriging{eltype(X),eltype(z)}(γ, X=X, z=z)
 
 function fit!(estimator::OrdinaryKriging{T,V},
               X::AbstractMatrix{T}, z::AbstractVector{V}) where {T<:Real,V}
+  # sanity check
+  @assert size(X, 2) == length(z) "incorrect data configuration"
+
   # udpate data
   estimator.X = X
   estimator.z = z
