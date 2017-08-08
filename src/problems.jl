@@ -40,3 +40,13 @@ end
 
 EstimationProblem(domain, geodata, targetvars) =
   EstimationProblem{typeof(domain)}(domain, geodata, targetvars)
+
+# ------------
+# IO methods
+# ------------
+function Base.show(io::IO, ::MIME"text/plain", problem::EstimationProblem{D}) where {D<:AbstractDomain}
+  println(io, "EstimationProblem:")
+  println(io, "  domain:    ", problem.domain)
+  println(io, "  geodata:   ", problem.geodata)
+  println(io, "  variables: ", join(problem.targetvars, ", ", " and "))
+end
