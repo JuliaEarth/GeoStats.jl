@@ -103,3 +103,12 @@ end
 Delete rows in `geodata` that contain NAs.
 """
 completecases!(geodata::GeoData) = DataFrames.completecases!(geodata.data)
+
+# ------------
+# IO methods
+# ------------
+Base.show(io::IO, geodata::GeoData) = begin
+  dims = join(size(geodata.data), "×")
+  cnames = join(geodata.coordnames, ", ", " and ")
+  print(io, "$dims GeoData ($cnames)")
+end
