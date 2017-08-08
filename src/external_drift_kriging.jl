@@ -13,35 +13,35 @@
 ## OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
 """
-    ExternalDriftKriging(X, z, γ, ms)
+    ExternalDriftKriging(X, z, γ, drifts)
 
 ## Parameters
 
 * X ∈ ℜ^(mxn) - matrix of data locations
 * z ∈ ℜⁿ      - vector of observations for X
 * γ           - variogram model
-* ms          - vector of external drift functions m: ℜᵐ ↦ ℜ
+* drifts      - vector of external drift functions m: ℜᵐ ↦ ℜ
 
 ### Notes
 
 * External drift functions should be smooth
 * Kriging system with external drift is often unstable
 * Include a constant drift (e.g. `x->1`) for unbiased estimation
-* [`OrdinaryKriging`](@ref) is recovered for `ms = [x->1]`
+* [`OrdinaryKriging`](@ref) is recovered for `drifts = [x->1]`
 * For polynomial mean, see [`UniversalKriging`](@ref)
 """
 mutable struct ExternalDriftKriging{T<:Real,V} <: AbstractEstimator
   # input fields
   γ::AbstractVariogram
-  ms::AbstractVector{Function}
+  drifts::AbstractVector{Function}
 
   # state fields
   X::AbstractMatrix{T}
   z::AbstractVector{V}
   LU::Base.LinAlg.Factorization{T}
 
-  function ExternalDriftKriging{T,V}(γ, ms; X=nothing, z=nothing) where {T<:Real,V}
-    EDK = new(γ, ms)
+  function ExternalDriftKriging{T,V}(γ, drifts; X=nothing, z=nothing) where {T<:Real,V}
+    EDK = new(γ, drifts)
     if X ≠ nothing && z ≠ nothing
       fit!(EDK, X, z)
     end
@@ -50,7 +50,7 @@ mutable struct ExternalDriftKriging{T<:Real,V} <: AbstractEstimator
   end
 end
 
-ExternalDriftKriging(X, z, γ, ms) = ExternalDriftKriging{eltype(X),eltype(z)}(γ, ms, X=X, z=z)
+ExternalDriftKriging(X, z, γ, drifts) = ExternalDriftKriging{eltype(X),eltype(z)}(γ, drifts, X=X, z=z)
 
 function fit!(estimator::ExternalDriftKriging{T,V},
               X::AbstractMatrix{T}, z::AbstractVector{V}) where {T<:Real,V}
@@ -62,7 +62,7 @@ function fit!(estimator::ExternalDriftKriging{T,V},
   estimator.z = z
 
   dim, nobs = size(X)
-  ms = estimator.ms
+  drifts = estimator.drifts
 
   # variogram/covariance
   γ = estimator.γ
@@ -76,8 +76,8 @@ function fit!(estimator::ExternalDriftKriging{T,V},
   end
 
   # polynomial drift matrix
-  ndrifts = length(ms)
-  F = [m(X[:,i]) for i=1:nobs, m in ms]
+  ndrifts = length(drifts)
+  F = [m(X[:,i]) for i=1:nobs, m in drifts]
 
   # LHS of Kriging system
   A = [Γ F; F' zeros(ndrifts,ndrifts)]
@@ -87,7 +87,7 @@ function fit!(estimator::ExternalDriftKriging{T,V},
 end
 
 function weights(estimator::ExternalDriftKriging{T,V}, xₒ::AbstractVector{T}) where {T<:Real,V}
-  X = estimator.X; z = estimator.z; ms = estimator.ms
+  X = estimator.X; z = estimator.z; drifts = estimator.drifts
   LU = estimator.LU
   nobs = length(z)
 
@@ -103,7 +103,7 @@ function weights(estimator::ExternalDriftKriging{T,V}, xₒ::AbstractVector{T}) 
   end
 
   # evaluate drift at location
-  f = [m(xₒ) for m in ms]
+  f = [m(xₒ) for m in drifts]
 
   # solve linear system
   b = [g; f]
