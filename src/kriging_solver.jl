@@ -13,11 +13,11 @@
 ## OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
 """
-    Kriging(variogram=v, mean=m, degree=d, drifts=ds)
+    KrigParam(variogram=v, mean=m, degree=d, drifts=ds)
 
-A polyalgorithm Kriging estimation solver with variogram `v`.
+A set of parameters for a Kriging variable.
 
-## Options
+## Parameters
 
 * Set the mean `m` to use Simple Kriging
 * Set the degree `d` to use Universal Kriging
@@ -27,29 +27,68 @@ Latter options override former options. For example, by specifying
 `ds`, the user is telling the algorithm to ignore `d` and `m`.
 If no option is specified, Ordinary Kriging is used by default.
 """
-@with_kw struct Kriging <: AbstractEstimationSolver
+@with_kw struct KrigParam
   variogram = GaussianVariogram()
-  mean   = nothing
+  mean = nothing
   degree = nothing
   drifts = nothing
 end
 
-function solve(problem::EstimationProblem{D}, solver::Kriging) where {D<:AbstractDomain}
-  # determine coordinate and value types
-  geodata = problem.geodata
-  datacoords = coordinates(geodata)
-  coordtype = eltype(datacoords)
+"""
+    Kriging(params...)
 
-  # determine which Kriging variant to use
-  if solver.drifts ≠ nothing
-    #krig = ExternalDriftKriging()
-  elseif solver.degree ≠ nothing
-    #krig = UniversalKriging()
-  elseif solver.mean ≠ nothing
-    #krig = SimpleKriging()
-  else
-    #krig = OrdinaryKriging()
+A polyalgorithm Kriging estimation solver.
+"""
+struct Kriging <: AbstractEstimationSolver
+  params::Dict{Symbol,KrigParam}
+
+  function Kriging(params...)
+    new(Dict(params...))
   end
+end
 
-  # TODO: implement solver
+function solve(problem::EstimationProblem{D}, solver::Kriging) where {D<:AbstractDomain}
+  # sanity checks
+  @assert keys(solver.params) ⊆ problem.targetvars "invalid variable names in solver parameters"
+
+  # determine coordinate type
+  geodata = problem.geodata
+  coordtypes = DataFrames.eltypes(coordinates(geodata))
+  T = promote_type(coordtypes...)
+
+  # loop over target variables
+  for var in problem.targetvars
+    # retrieve valid data
+    vardata = geodata[[var]]
+    completecases!(vardata)
+
+    # determine value type
+    V = eltype(vardata.data[var])
+
+    # get user parameters
+    if var ∈ keys(solver.params)
+      varparams = solver.params[var]
+    else
+      info("No parameters found for variable '$var'. Using variogram=GaussianVariogram()")
+      varparams = KrigParam(variogram=GaussianVariogram())
+    end
+
+    # determine which Kriging method to use
+    if varparams.drifts ≠ nothing
+      krigmethod = ExternalDriftKriging{T,V}(varaparams.variogram, varparams.drifts)
+    elseif varparams.degree ≠ nothing
+      krigmethod = UniversalKriging{T,V}(varparams.variogram, varparams.degree)
+    elseif varparams.mean ≠ nothing
+      krigmethod = SimpleKriging{T,V}(varparams.variogram, varparams.mean)
+    else
+      krigmethod = OrdinaryKriging{T,V}(varparams.variogram)
+    end
+
+    # perform estimation
+    solve(problem, krigmethod)
+  end
+end
+
+function solve(problem::EstimationProblem{D}, krigmethod::K) where {D<:AbstractDomain,K<:AbstractEstimator}
+  # TODO: implement estimation loop
 end

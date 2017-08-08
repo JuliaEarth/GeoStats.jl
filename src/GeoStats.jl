@@ -88,6 +88,7 @@ export
   # interface
   coordnames,
   coordinates,
+  completecases!,
   readtable,
 
   # problems
@@ -95,6 +96,7 @@ export
 
   # solvers
   Kriging,
+  KrigParam,
   # interface
   solve
 

@@ -32,7 +32,8 @@ struct EstimationProblem{D<:AbstractDomain} <: AbstractProblem
   targetvars::Vector{Symbol}
 
   function EstimationProblem{D}(domain, geodata, targetvars) where {D<:AbstractDomain}
-    @assert targetvars ⊆ names(geodata)
+    @assert targetvars ⊆ names(geodata) "target variables must be columns of geodata"
+    @assert isempty(targetvars ∩ coordnames(geodata)) "target variables can't be coordinates"
     new(domain, geodata, targetvars)
   end
 end

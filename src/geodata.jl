@@ -83,4 +83,23 @@ coordnames(geodata::GeoData) = geodata.coordnames
 
 Return the columns of `geodata` representing spatial coordinates.
 """
-coordinates(geodata::GeoData) = convert(Array, geodata.data[geodata.coordnames])
+coordinates(geodata::GeoData) = geodata.data[geodata.coordnames]
+
+"""
+    getindex(geodata, colnames)
+
+Return a `GeoData` object with the columns in `colnames` plus the columns
+in `geodata` representing spatial coordinates.
+"""
+Base.getindex(geodata::GeoData, colnames) = begin
+  isempty(colnames ∩ geodata.coordnames) || warn("indexing with columns that represent spatial coordinates")
+  data = geodata.data[[geodata.coordnames...,colnames...]]
+  GeoData(data, geodata.coordnames)
+end
+
+"""
+    completecases!(geodata)
+
+Delete rows in `geodata` that contain NAs.
+"""
+completecases!(geodata::GeoData) = DataFrames.completecases!(geodata.data)
