@@ -112,3 +112,8 @@ Base.show(io::IO, geodata::GeoData) = begin
   cnames = join(geodata.coordnames, ", ", " and ")
   print(io, "$dims GeoData ($cnames)")
 end
+
+Base.show(io::IO, ::MIME"text/plain", geodata::GeoData) = begin
+  println(io, geodata)
+  show(io, geodata.data, true, :Row, false)
+end
