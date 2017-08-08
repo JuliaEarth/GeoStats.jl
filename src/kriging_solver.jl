@@ -73,22 +73,22 @@ function solve(problem::EstimationProblem{D}, solver::Kriging) where {D<:Abstrac
       varparams = KrigParam(variogram=GaussianVariogram())
     end
 
-    # determine which Kriging method to use
+    # determine which Kriging variant to use
     if varparams.drifts ≠ nothing
-      krigmethod = ExternalDriftKriging{T,V}(varaparams.variogram, varparams.drifts)
+      estimator = ExternalDriftKriging{T,V}(varaparams.variogram, varparams.drifts)
     elseif varparams.degree ≠ nothing
-      krigmethod = UniversalKriging{T,V}(varparams.variogram, varparams.degree)
+      estimator = UniversalKriging{T,V}(varparams.variogram, varparams.degree)
     elseif varparams.mean ≠ nothing
-      krigmethod = SimpleKriging{T,V}(varparams.variogram, varparams.mean)
+      estimator = SimpleKriging{T,V}(varparams.variogram, varparams.mean)
     else
-      krigmethod = OrdinaryKriging{T,V}(varparams.variogram)
+      estimator = OrdinaryKriging{T,V}(varparams.variogram)
     end
 
     # perform estimation
-    solve(problem, krigmethod)
+    solve(problem, estimator)
   end
 end
 
-function solve(problem::EstimationProblem{D}, krigmethod::K) where {D<:AbstractDomain,K<:AbstractEstimator}
+function solve(problem::EstimationProblem{D}, estimator::E) where {D<:AbstractDomain,E<:AbstractEstimator}
   # TODO: implement estimation loop
 end
