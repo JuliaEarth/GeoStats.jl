@@ -66,6 +66,11 @@ RegularGrid(dims::Vector{Int}, origin::Vector{T}, spacing::Vector{T}) where {T<:
 # ------------
 # IO methods
 # ------------
+function Base.show(io::IO, grid::RegularGrid{T,N}) where {N,T<:Real}
+  dims = join(grid.dims, "×")
+  print(io, "$dims RegularGrid{$T,$N}")
+end
+
 function Base.show(io::IO, ::MIME"text/plain", grid::RegularGrid{T,N}) where {N,T<:Real}
   println(io, "RegularGrid{$T,$N}")
   println(io, "  dimensions: ", grid.dims)
