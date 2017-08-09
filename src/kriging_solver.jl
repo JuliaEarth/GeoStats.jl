@@ -35,7 +35,7 @@ If no option is specified, Ordinary Kriging is used by default.
 end
 
 """
-    Kriging(params...)
+    Kriging(var1=>param1, var2=>param2, ...)
 
 A polyalgorithm Kriging estimation solver.
 """
@@ -49,15 +49,15 @@ end
 
 function solve(problem::EstimationProblem{D}, solver::Kriging) where {D<:AbstractDomain}
   # sanity checks
-  @assert keys(solver.params) ⊆ problem.targetvars "invalid variable names in solver parameters"
+  @assert keys(solver.params) ⊆ variables(problem) "invalid variable names in solver parameters"
 
   # determine coordinate type
-  geodata = problem.geodata
-  coordtypes = DataFrames.eltypes(coordinates(geodata))
+  geodata = data(problem)
+  coordtypes = eltypes(coordinates(geodata))
   T = promote_type(coordtypes...)
 
   # loop over target variables
-  for var in problem.targetvars
+  for var in variables(problem)
     # retrieve valid data
     vardata = geodata[[var]]
     completecases!(vardata)
@@ -69,8 +69,7 @@ function solve(problem::EstimationProblem{D}, solver::Kriging) where {D<:Abstrac
     if var ∈ keys(solver.params)
       varparams = solver.params[var]
     else
-      info("No parameters found for variable '$var'. Using variogram=GaussianVariogram()")
-      varparams = KrigParam(variogram=GaussianVariogram())
+      varparams = KrigParam()
     end
 
     # determine which Kriging variant to use
@@ -85,10 +84,11 @@ function solve(problem::EstimationProblem{D}, solver::Kriging) where {D<:Abstrac
     end
 
     # perform estimation
-    solve(problem, estimator)
+    solve(problem, estimator, var)
   end
 end
 
-function solve(problem::EstimationProblem{D}, estimator::E) where {D<:AbstractDomain,E<:AbstractEstimator}
+function solve(problem::EstimationProblem{D},
+               estimator::E, var::Symbol) where {D<:AbstractDomain,E<:AbstractEstimator}
   # TODO: implement estimation loop
 end

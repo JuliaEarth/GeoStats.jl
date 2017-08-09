@@ -20,33 +20,27 @@ A generic problem in geostatistics.
 abstract type AbstractProblem end
 
 """
-    EstimationProblem(domain, geodata, targetvars)
+    data(problem)
 
-A geoestimation problem on a given `domain` in which the
-variables to be estimated are listed in `targetvars`. The
-data of the problem is stored in `geodata`.
+Return the spatial data of the `problem`.
 """
-struct EstimationProblem{D<:AbstractDomain} <: AbstractProblem
-  domain::D
-  geodata::GeoData
-  targetvars::Vector{Symbol}
+data(problem::P) where {P<:AbstractProblem} = problem.geodata
 
-  function EstimationProblem{D}(domain, geodata, targetvars) where {D<:AbstractDomain}
-    @assert targetvars ⊆ names(geodata) "target variables must be columns of geodata"
-    @assert isempty(targetvars ∩ coordnames(geodata)) "target variables can't be coordinates"
-    new(domain, geodata, targetvars)
-  end
-end
+"""
+    domain(problem)
 
-EstimationProblem(domain, geodata, targetvars) =
-  EstimationProblem{typeof(domain)}(domain, geodata, targetvars)
+Return the spatial domain of the `problem`.
+"""
+domain(problem::P) where {P<:AbstractProblem} = problem.domain
 
-# ------------
-# IO methods
-# ------------
-function Base.show(io::IO, ::MIME"text/plain", problem::EstimationProblem{D}) where {D<:AbstractDomain}
-  println(io, "EstimationProblem:")
-  println(io, "  domain:    ", problem.domain)
-  println(io, "  geodata:   ", problem.geodata)
-  println(io, "  variables: ", join(problem.targetvars, ", ", " and "))
-end
+"""
+    variables(problem)
+
+Return the target variables of the `problem`.
+"""
+variables(problem::P) where {P<:AbstractProblem} = problem.targetvars
+
+#------------------
+# IMPLEMENTATIONS
+#------------------
+include("estimation_problem.jl")

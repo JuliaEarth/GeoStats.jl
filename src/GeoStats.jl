@@ -93,10 +93,14 @@ export
 
   # problems
   EstimationProblem,
+  # interface
+  data,
+  domain,
+  variables,
 
   # solvers
-  Kriging,
   KrigParam,
+  Kriging,
   # interface
   solve
 
