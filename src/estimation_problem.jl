@@ -13,33 +13,33 @@
 ## OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
 """
-    EstimationProblem(domain, geodata, targetvars)
+    EstimationProblem(geodata, domain, targetvars)
 
 A spatial estimation problem on a given `domain` in which the
 variables to be estimated are listed in `targetvars`. The
 data of the problem is stored in `geodata`.
 """
 struct EstimationProblem{D<:AbstractDomain} <: AbstractProblem
-  domain::D
   geodata::GeoData
+  domain::D
   targetvars::Vector{Symbol}
 
-  function EstimationProblem{D}(domain, geodata, targetvars) where {D<:AbstractDomain}
+  function EstimationProblem{D}(geodata, domain, targetvars) where {D<:AbstractDomain}
     @assert targetvars ⊆ names(geodata) "target variables must be columns of geodata"
     @assert isempty(targetvars ∩ coordnames(geodata)) "target variables can't be coordinates"
-    new(domain, geodata, targetvars)
+    new(geodata, domain, targetvars)
   end
 end
 
-EstimationProblem(domain, geodata, targetvars) =
-  EstimationProblem{typeof(domain)}(domain, geodata, targetvars)
+EstimationProblem(geodata, domain, targetvars) =
+  EstimationProblem{typeof(domain)}(geodata, domain, targetvars)
 
 # ------------
 # IO methods
 # ------------
 function Base.show(io::IO, ::MIME"text/plain", problem::EstimationProblem{D}) where {D<:AbstractDomain}
   println(io, "EstimationProblem:")
+  println(io, "  data:      ", problem.geodata)
   println(io, "  domain:    ", problem.domain)
-  println(io, "  geodata:   ", problem.geodata)
   println(io, "  variables: ", join(problem.targetvars, ", ", " and "))
 end
