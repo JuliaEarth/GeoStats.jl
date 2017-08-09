@@ -41,6 +41,11 @@ with the columns names representing spatial coordinates.
 struct GeoDataFrame{DF<:AbstractDataFrame}
   data::DF
   coordnames::Vector{Symbol}
+
+  function GeoDataFrame{DF}(data, coordnames) where {DF<:AbstractDataFrame}
+    @assert coordnames ⊆ names(data) "coordnames must contain valid column names"
+    new(data, coordnames)
+  end
 end
 
 GeoDataFrame(data, coordnames) = GeoDataFrame{typeof(data)}(data, coordnames)
@@ -59,8 +64,6 @@ This function returns a [`GeoDataFrame`](@ref) object.
 """
 function readtable(args...; coordnames=[:x,:y,:z], kwargs...)
   data = DataFrames.readtable(args...; kwargs...)
-  @assert coordnames ⊆ DataFrames.names(data) "coordnames must contain valid column names"
-
   GeoDataFrame(data, coordnames)
 end
 
