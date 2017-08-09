@@ -13,7 +13,7 @@
 ## OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
 """
-    GeoData(data, coordnames)
+    GeoDataFrame(data, coordnames)
 
 A dataframe object `data` with additional metadata for tracking
 the columns `coordnames` that represent spatial coordinates.
@@ -25,10 +25,10 @@ and there exists columns named `x`, `y` and `z`, wrap the
 data and specify the column names:
 
 ```julia
-julia> GeoData(data, [:x,:y,:z])
+julia> GeoDataFrame(data, [:x,:y,:z])
 ```
 
-Alternatively, load the data directly into a `GeoData` object
+Alternatively, load the data directly into a `GeoDataFrame` object
 by using the method [`readtable`](@ref).
 
 ### Notes
@@ -38,12 +38,12 @@ No additional storage is required other than a vector of symbols
 with the columns names representing spatial coordinates.
 
 """
-struct GeoData{DF<:AbstractDataFrame}
+struct GeoDataFrame{DF<:AbstractDataFrame}
   data::DF
   coordnames::Vector{Symbol}
 end
 
-GeoData(data, coordnames) = GeoData{typeof(data)}(data, coordnames)
+GeoDataFrame(data, coordnames) = GeoDataFrame{typeof(data)}(data, coordnames)
 
 """
     readtable(args; coordnames=[:x,:y,:z], kwargs)
@@ -55,13 +55,13 @@ The arguments `args` and keyword arguments `kwargs` are
 forwarded to the `DataFrames.readtable` function, please
 check their documentation for more details.
 
-This function returns a [`GeoData`](@ref) object.
+This function returns a [`GeoDataFrame`](@ref) object.
 """
 function readtable(args...; coordnames=[:x,:y,:z], kwargs...)
   data = DataFrames.readtable(args...; kwargs...)
   @assert coordnames ⊆ DataFrames.names(data) "coordnames must contain valid column names"
 
-  GeoData(data, coordnames)
+  GeoDataFrame(data, coordnames)
 end
 
 """
@@ -69,32 +69,32 @@ end
 
 Return the column names of `geodata`.
 """
-Base.names(geodata::GeoData) = DataFrames.names(geodata.data)
+Base.names(geodata::GeoDataFrame) = DataFrames.names(geodata.data)
 
 """
     coordnames(geodata)
 
 Return the column names of `geodata` representing spatial coordinates.
 """
-coordnames(geodata::GeoData) = geodata.coordnames
+coordnames(geodata::GeoDataFrame) = geodata.coordnames
 
 """
     coordinates(geodata)
 
 Return the columns of `geodata` representing spatial coordinates.
 """
-coordinates(geodata::GeoData) = geodata.data[geodata.coordnames]
+coordinates(geodata::GeoDataFrame) = geodata.data[geodata.coordnames]
 
 """
     getindex(geodata, colnames)
 
-Return a `GeoData` object with the columns in `colnames` plus the columns
+Return a `GeoDataFrame` object with the columns in `colnames` plus the columns
 in `geodata` representing spatial coordinates.
 """
-Base.getindex(geodata::GeoData, colnames) = begin
+Base.getindex(geodata::GeoDataFrame, colnames) = begin
   isempty(colnames ∩ geodata.coordnames) || warn("indexing with columns that represent spatial coordinates")
   data = geodata.data[[geodata.coordnames...,colnames...]]
-  GeoData(data, geodata.coordnames)
+  GeoDataFrame(data, geodata.coordnames)
 end
 
 """
@@ -102,18 +102,18 @@ end
 
 Delete rows in `geodata` that contain NAs.
 """
-completecases!(geodata::GeoData) = DataFrames.completecases!(geodata.data)
+completecases!(geodata::GeoDataFrame) = DataFrames.completecases!(geodata.data)
 
 # ------------
 # IO methods
 # ------------
-Base.show(io::IO, geodata::GeoData) = begin
+Base.show(io::IO, geodata::GeoDataFrame) = begin
   dims = join(size(geodata.data), "×")
   cnames = join(geodata.coordnames, ", ", " and ")
-  print(io, "$dims GeoData ($cnames)")
+  print(io, "$dims GeoDataFrame ($cnames)")
 end
 
-Base.show(io::IO, ::MIME"text/plain", geodata::GeoData) = begin
+Base.show(io::IO, ::MIME"text/plain", geodata::GeoDataFrame) = begin
   println(io, geodata)
   show(io, geodata.data, true, :Row, false)
 end

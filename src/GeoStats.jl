@@ -30,8 +30,8 @@ include("theoretical_variograms.jl")
 include("estimators.jl")
 
 # geostatistical problems
+include("geodataframe.jl")
 include("domains.jl")
-include("geodata.jl")
 include("problems.jl")
 include("solvers.jl")
 
@@ -83,8 +83,8 @@ export
   # interface
   dimension,
 
-  # geodata
-  GeoData,
+  # data types
+  GeoDataFrame,
   # interface
   coordnames,
   coordinates,

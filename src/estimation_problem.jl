@@ -20,7 +20,7 @@ variables to be estimated are listed in `targetvars`. The
 data of the problem is stored in `geodata`.
 """
 struct EstimationProblem{D<:AbstractDomain} <: AbstractProblem
-  geodata::GeoData
+  geodata::GeoDataFrame
   domain::D
   targetvars::Vector{Symbol}
 
