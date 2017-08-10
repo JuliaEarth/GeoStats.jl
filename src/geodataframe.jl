@@ -101,3 +101,8 @@ Base.show(io::IO, ::MIME"text/plain", geodata::GeoDataFrame) = begin
   println(io, geodata)
   show(io, geodata.data, true, :Row, false)
 end
+
+Base.show(io::IO, ::MIME"text/html", geodata::GeoDataFrame) = begin
+  println(io, geodata)
+  show(io, MIME"text/html"(), geodata.data)
+end
