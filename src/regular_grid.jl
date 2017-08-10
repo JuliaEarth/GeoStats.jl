@@ -63,7 +63,7 @@ RegularGrid{T}(dims::Vararg{<:Integer,N}) where {N,T<:Real} = RegularGrid{T}(dim
 RegularGrid(dims::Vector{Int}, origin::Vector{T}, spacing::Vector{T}) where {T<:Real} =
   RegularGrid{T,length(dims)}((dims...), (origin...), (spacing...))
 
-function coords(grid::RegularGrid{T,N}, location::I) where {N,T<:Real,I<:Integer}
+function coords(grid::RegularGrid, location::I) where {I<:Integer}
   intcoords = ind2sub(grid.dims, location)
   [grid.origin...] .+ ([intcoords...] .- one(I)).*[grid.spacing...]
 end

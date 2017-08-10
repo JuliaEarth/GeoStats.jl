@@ -13,22 +13,29 @@
 ## OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
 """
-    KrigParam(variogram=v, mean=m, degree=d, drifts=ds)
+    KrigParam(variogram=v, mean=m, degree=d, drifts=ds, path=p)
 
 A set of parameters for a Kriging variable.
 
 ## Parameters
 
-* Set the mean `m` to use Simple Kriging
-* Set the degree `d` to use Universal Kriging
-* Set the drifts `ds` to use External Drift Kriging
+* `v`  - the variogram model (default to `GaussianVariogram()`)
+* `m`  - Simple Kriging mean
+* `d`  - Universal Kriging degree
+* `ds` - External Drift Kriging drift functions
+* `p`  - estimation path (default to `:simple`)
 
 Latter options override former options. For example, by specifying
 `ds`, the user is telling the algorithm to ignore `d` and `m`.
-If no option is specified, Ordinary Kriging is used by default.
+If no option is specified, Ordinary Kriging is used by default with
+the variogram `v` only.
+
+Path options `p` depend on the domain type. Paths that work with any
+domain are `:simple` and `:random`.
 """
 @with_kw struct KrigParam
   variogram = GaussianVariogram()
+  path = :simple
   mean = nothing
   degree = nothing
   drifts = nothing
@@ -38,6 +45,9 @@ end
     Kriging(var1=>param1, var2=>param2, ...)
 
 A polyalgorithm Kriging estimation solver.
+
+Each pair `var=>param` specifies the [`KrigParam`](@ref) `param`
+for the Kriging variable `var`.
 """
 struct Kriging <: AbstractEstimationSolver
   params::Dict{Symbol,KrigParam}
@@ -82,13 +92,22 @@ function solve(problem::EstimationProblem{D}, solver::Kriging) where {D<:Abstrac
       estimator = OrdinaryKriging{T,V}(varparams.variogram)
     end
 
-    # perform variable estimation
-    solve(problem, var, estimator)
+    # determine estimation path
+    if varparams.path == :simple
+      path = SimplePath(domain(problem))
+    elseif varparams.path == :random
+      path = RandomPath(domain(problem))
+    else
+      error("path type $path does not exist")
+    end
+
+    # perform estimation
+    solve(problem, var, estimator, path)
   end
 end
 
 function solve(problem::EstimationProblem{D}, var::Symbol,
-               estimator::E) where {D<:AbstractDomain,E<:AbstractEstimator}
+               estimator::E, path::P) where {D<:AbstractDomain,E<:AbstractEstimator,P<:AbstractPath}
   # retrieve data
   geodata = data(problem)
   rawdata = data(geodata)
@@ -106,11 +125,11 @@ function solve(problem::EstimationProblem{D}, var::Symbol,
   fit!(estimator, X, z)
 
   # retrieve spatial domain
-  domain = problem.domain
+  pdomain = domain(problem)
 
   # estimation loop
-  for location in SimplePath(domain)
-    x = coords(domain, location)
+  for location in path
+    x = coords(pdomain, location)
     μ, σ² = estimate(estimator, x)
   end
 end

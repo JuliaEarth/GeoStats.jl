@@ -39,21 +39,21 @@ coordtype(::AbstractDomain{T,N}) where {N,T<:Real} = T
 
 Return the size (a tuple) of a spatial domain.
 """
-Base.size(domain::AbstractDomain{T,N}) where {N,T<:Real} = domain.dims
+Base.size(domain::AbstractDomain) = domain.dims
 
 """
     npoints(domain)
 
 Return the number of points of a spatial domain.
 """
-npoints(domain::AbstractDomain{T,N}) where {N,T<:Real} = prod(size(domain))
+npoints(domain::AbstractDomain) = prod(size(domain))
 
 """
     coords(domain, location)
 
 Return the coordinates of the `location` in the `domain`.
 """
-coords(::AbstractDomain{T,N}, location::I) where {N,T<:Real,I<:Integer} = error("not implemented")
+coords(::AbstractDomain, location::I) where {I<:Integer} = error("not implemented")
 
 #------------------
 # IMPLEMENTATIONS

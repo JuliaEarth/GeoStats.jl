@@ -59,6 +59,25 @@ struct SimplePath{D<:AbstractDomain} <: AbstractPath{D}
   domain::D
 end
 SimplePath(domain) = SimplePath{typeof(domain)}(domain)
-Base.start(p::SimplePath) = 1
+Base.start(p::SimplePath)       = 1
 Base.next(p::SimplePath, state) = state, state + 1
 Base.done(p::SimplePath, state) = state == npoints(p.domain) + 1
+
+"""
+    RandomPath(domain)
+
+A random path on a spatial `domain`.
+"""
+struct RandomPath{D<:AbstractDomain} <: AbstractPath{D}
+  domain::D
+  permut::Vector{Int}
+
+  function RandomPath{D}(domain, permut) where {D<:AbstractDomain}
+    @assert length(permut) == npoints(domain) "incorrect dimension"
+    new(domain, permut)
+  end
+end
+RandomPath(domain) = RandomPath{typeof(domain)}(domain, randperm(npoints(domain)))
+Base.start(p::RandomPath)       = Base.start(p.permut)
+Base.next(p::RandomPath, state) = Base.next(p.permut, state)
+Base.done(p::RandomPath, state) = Base.done(p.permut, state)
