@@ -32,6 +32,7 @@ include("estimators.jl")
 # geostatistical problems
 include("geodataframe.jl")
 include("domains.jl")
+include("paths.jl")
 include("problems.jl")
 include("solvers.jl")
 
@@ -65,7 +66,6 @@ export
   PowerVariogram,
   SineHoleVariogram,
   CompositeVariogram,
-  # interface
   isstationary,
 
   # estimators
@@ -73,19 +73,19 @@ export
   OrdinaryKriging,
   UniversalKriging,
   ExternalDriftKriging,
-  # interface
   fit!,
   weights,
   estimate,
 
   # domains
   RegularGrid,
-  # interface
-  dimension,
+  # Base.ndims
+  # Base.size
+  coordtype,
+  npoints,
 
   # data types
   GeoDataFrame,
-  # interface
   data,
   coordnames,
   coordinates,
@@ -93,7 +93,6 @@ export
 
   # problems
   EstimationProblem,
-  # interface
   data,
   domain,
   variables,
@@ -101,7 +100,6 @@ export
   # solvers
   KrigParam,
   Kriging,
-  # interface
   solve
 
 end
