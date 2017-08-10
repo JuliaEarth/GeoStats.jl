@@ -15,17 +15,45 @@
 """
     AbstractDomain{N,T}
 
-A spatial domain of dimension `N` in which points
-are represented with coordinates of type `T`.
+A spatial domain with `N` dimensions in which
+points are represented with coordinates of type `T`.
 """
 abstract type AbstractDomain{T<:Real,N} end
 
 """
-    dimension(domain)
+    ndims(domain)
 
-Return the dimension of a spatial domain.
+Return the number of dimensions of a spatial domain.
 """
-dimension(::AbstractDomain{T,N}) where {N,T<:Real} = N
+Base.ndims(::AbstractDomain{T,N}) where {N,T<:Real} = N
+
+"""
+    coordtype(domain)
+
+Return the coordinate type of a spatial domain.
+"""
+coordtype(::AbstractDomain{T,N}) where {N,T<:Real} = T
+
+"""
+    size(domain)
+
+Return the size (a tuple) of a spatial domain.
+"""
+Base.size(domain::AbstractDomain{T,N}) where {N,T<:Real} = domain.dims
+
+"""
+    npoints(domain)
+
+Return the number of points of a spatial domain.
+"""
+npoints(domain::AbstractDomain{T,N}) where {N,T<:Real} = prod(size(domain))
+
+"""
+    coords(domain, location)
+
+Return the coordinates of the `location` in the `domain`.
+"""
+coords(::AbstractDomain{T,N}, location::I) where {N,T<:Real,I<:Integer} = error("not implemented")
 
 #------------------
 # IMPLEMENTATIONS
