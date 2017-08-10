@@ -68,11 +68,11 @@ function readtable(args...; coordnames=[:x,:y,:z], kwargs...)
 end
 
 """
-    names(geodata)
+    data(geodata)
 
-Return the column names of `geodata`.
+Return the underlying `DataFrame` object wrapped in `geodata`.
 """
-Base.names(geodata::GeoDataFrame) = DataFrames.names(geodata.data)
+data(geodata::GeoDataFrame) = geodata.data
 
 """
     coordnames(geodata)
@@ -87,25 +87,6 @@ coordnames(geodata::GeoDataFrame) = geodata.coordnames
 Return the columns of `geodata` representing spatial coordinates.
 """
 coordinates(geodata::GeoDataFrame) = geodata.data[geodata.coordnames]
-
-"""
-    getindex(geodata, colnames)
-
-Return a `GeoDataFrame` object with the columns in `colnames` plus the columns
-in `geodata` representing spatial coordinates.
-"""
-Base.getindex(geodata::GeoDataFrame, colnames) = begin
-  isempty(colnames ∩ geodata.coordnames) || warn("indexing with columns that represent spatial coordinates")
-  data = geodata.data[[geodata.coordnames...,colnames...]]
-  GeoDataFrame(data, geodata.coordnames)
-end
-
-"""
-    completecases!(geodata)
-
-Delete rows in `geodata` that contain NAs.
-"""
-completecases!(geodata::GeoDataFrame) = DataFrames.completecases!(geodata.data)
 
 # ------------
 # IO methods

@@ -86,9 +86,9 @@ export
   # data types
   GeoDataFrame,
   # interface
+  data,
   coordnames,
   coordinates,
-  completecases!,
   readtable,
 
   # problems

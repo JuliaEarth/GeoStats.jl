@@ -51,19 +51,18 @@ function solve(problem::EstimationProblem{D}, solver::Kriging) where {D<:Abstrac
   # sanity checks
   @assert keys(solver.params) ⊆ variables(problem) "invalid variable names in solver parameters"
 
-  # determine coordinate type
+  # retrieve data
   geodata = data(problem)
+  rawdata = data(geodata)
+
+  # determine coordinate type
   coordtypes = eltypes(coordinates(geodata))
   T = promote_type(coordtypes...)
 
   # loop over target variables
   for var in variables(problem)
-    # retrieve valid data
-    vardata = geodata[[var]]
-    completecases!(vardata)
-
     # determine value type
-    V = eltype(vardata.data[var])
+    V = eltype(rawdata[var])
 
     # get user parameters
     if var ∈ keys(solver.params)
@@ -83,12 +82,31 @@ function solve(problem::EstimationProblem{D}, solver::Kriging) where {D<:Abstrac
       estimator = OrdinaryKriging{T,V}(varparams.variogram)
     end
 
-    # perform estimation
-    solve(problem, estimator, var)
+    # perform variable estimation
+    solve(problem, var, estimator, :none)
   end
 end
 
-function solve(problem::EstimationProblem{D},
-               estimator::E, var::Symbol) where {D<:AbstractDomain,E<:AbstractEstimator}
+function solve(problem::EstimationProblem{D}, var::Symbol, estimator::E,
+               approxmethod::Symbol) where {D<:AbstractDomain,E<:AbstractEstimator}
+  # retrieve data
+  geodata = data(problem)
+  rawdata = data(geodata)
+  cnames = coordnames(geodata)
+
+  # find valid data for variable
+  vardata = rawdata[[cnames...,var]]
+  completecases!(vardata)
+
+  # convert data into arrays
+  X = convert(Array, vardata[cnames])'
+  z = convert(Array, vardata[var])
+
+  # approximation methods
+  if approxmethod == :none
+    # fit estimator to data
+    fit!(estimator, X, z)
+  end
+
   # TODO: implement estimation loop
 end
