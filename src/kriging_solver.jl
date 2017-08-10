@@ -83,12 +83,12 @@ function solve(problem::EstimationProblem{D}, solver::Kriging) where {D<:Abstrac
     end
 
     # perform variable estimation
-    solve(problem, var, estimator, :none)
+    solve(problem, var, estimator)
   end
 end
 
-function solve(problem::EstimationProblem{D}, var::Symbol, estimator::E,
-               approxmethod::Symbol) where {D<:AbstractDomain,E<:AbstractEstimator}
+function solve(problem::EstimationProblem{D}, var::Symbol,
+               estimator::E) where {D<:AbstractDomain,E<:AbstractEstimator}
   # retrieve data
   geodata = data(problem)
   rawdata = data(geodata)
@@ -102,11 +102,15 @@ function solve(problem::EstimationProblem{D}, var::Symbol, estimator::E,
   X = convert(Array, vardata[cnames])'
   z = convert(Array, vardata[var])
 
-  # approximation methods
-  if approxmethod == :none
-    # fit estimator to data
-    fit!(estimator, X, z)
-  end
+  # fit estimator to data
+  fit!(estimator, X, z)
 
-  # TODO: implement estimation loop
+  # retrieve spatial domain
+  domain = problem.domain
+
+  # estimation loop
+  for location in SimplePath(domain)
+    x = coords(domain, location)
+    μ, σ² = estimate(estimator, x)
+  end
 end
