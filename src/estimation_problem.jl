@@ -27,6 +27,8 @@ struct EstimationProblem{D<:AbstractDomain} <: AbstractProblem
   function EstimationProblem{D}(geodata, domain, targetvars) where {D<:AbstractDomain}
     @assert targetvars ⊆ names(data(geodata)) "target variables must be columns of geodata"
     @assert isempty(targetvars ∩ coordnames(geodata)) "target variables can't be coordinates"
+    @assert ndims(domain) == length(coordnames(geodata)) "data and domain must have the same number of dimensions"
+
     new(geodata, domain, targetvars)
   end
 end

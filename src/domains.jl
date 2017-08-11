@@ -53,7 +53,7 @@ npoints(domain::AbstractDomain) = prod(size(domain))
 
 Return the coordinates of the `location` in the `domain`.
 """
-coords(::AbstractDomain, location::I) where {I<:Integer} = error("not implemented")
+coordinates(::AbstractDomain, location::I) where {I<:Integer} = error("not implemented")
 
 #------------------
 # IMPLEMENTATIONS

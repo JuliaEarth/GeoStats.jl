@@ -1,7 +1,6 @@
 @testset "Spatial data" begin
-  fname = joinpath(datadir,"data3D.tsv")
-  geodata = readtable(fname)
-  @test names(data(geodata)) == [:x,:y,:z,:value]
-  @test coordnames(geodata) == [:x,:y,:z]
+  @test names(data(data3D)) == [:x,:y,:z,:value]
+  @test coordnames(data3D) == [:x,:y,:z]
+  @test names(coordinates(data3D)) == coordnames(data3D)
   @test_throws AssertionError readtable(fname, coordnames=[:a])
 end

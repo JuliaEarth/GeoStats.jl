@@ -83,6 +83,7 @@ export
   # Base.size
   coordtype,
   npoints,
+  coordinates,
 
   # data types
   GeoDataFrame,

@@ -20,7 +20,13 @@ dim = 3; nobs = 10
 X = rand(dim, nobs)
 z = rand(nobs)
 
-# target location
+# load some geodataframes
+fname = joinpath(datadir,"data2D.tsv")
+data2D = readtable(fname, coordnames=[:x,:y])
+fname = joinpath(datadir,"data3D.tsv")
+data3D = readtable(fname)
+
+# some target location
 xₒ = rand(dim)
 
 # list of tests
@@ -30,7 +36,10 @@ testfiles = [
   "theoretical_variograms.jl",
   "estimators.jl",
   "geodataframe.jl",
-  "domains.jl"
+  "domains.jl",
+  "paths.jl",
+  "problems.jl",
+  "solvers.jl"
 ]
 
 # run

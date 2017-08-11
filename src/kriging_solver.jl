@@ -129,7 +129,7 @@ function solve(problem::EstimationProblem{D}, var::Symbol,
 
   # estimation loop
   for location in SimplePath(pdomain)
-    x = coords(pdomain, location)
+    x = coordinates(pdomain, location)
     μ, σ² = estimate(estimator, x)
 
     varμ[location] = μ
