@@ -40,6 +40,13 @@ Return the target variables of the `problem`.
 """
 variables(problem::P) where {P<:AbstractProblem} = problem.targetvars
 
+"""
+    AbstractSolution
+
+A generic solution to a problem in geostatistics.
+"""
+abstract type AbstractSolution end
+
 #------------------
 # IMPLEMENTATIONS
 #------------------

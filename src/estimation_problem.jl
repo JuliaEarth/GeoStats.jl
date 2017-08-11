@@ -34,6 +34,20 @@ end
 EstimationProblem(geodata, domain, targetvars) =
   EstimationProblem{typeof(domain)}(geodata, domain, targetvars)
 
+"""
+    EstimationSolution
+
+A solution to a spatial estimation problem.
+"""
+struct EstimationSolution{D<:AbstractDomain} <: AbstractSolution
+  domain::D
+  mean::Dict{Symbol,Vector}
+  variance::Dict{Symbol,Vector}
+end
+
+EstimationSolution(domain, mean, variance) =
+  EstimationSolution{typeof(domain)}(domain, mean, variance)
+
 # ------------
 # IO methods
 # ------------
