@@ -58,4 +58,4 @@ coords(::AbstractDomain, location::I) where {I<:Integer} = error("not implemente
 #------------------
 # IMPLEMENTATIONS
 #------------------
-include("regular_grid.jl")
+include("domains/regular_grid.jl")
