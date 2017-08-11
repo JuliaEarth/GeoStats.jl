@@ -57,7 +57,7 @@ combine(weights::AbstractWeights) = error("not implemented")
 #------------------
 # IMPLEMENTATIONS
 #------------------
-include("simple_kriging.jl")
-include("ordinary_kriging.jl")
-include("universal_kriging.jl")
-include("external_drift_kriging.jl")
+include("estimators/simple_kriging.jl")
+include("estimators/ordinary_kriging.jl")
+include("estimators/universal_kriging.jl")
+include("estimators/external_drift_kriging.jl")
