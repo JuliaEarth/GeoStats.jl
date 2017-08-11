@@ -22,15 +22,17 @@ using SpecialFunctions: besselk
 using Parameters: @with_kw
 using RecipesBase
 
-# Kriging estimators
+# utilities and datatypes
 include("utils.jl")
+include("geodataframe.jl")
+
+# geostatistical concepts
 include("distances.jl")
 include("empirical_variograms.jl")
 include("theoretical_variograms.jl")
 include("estimators.jl")
 
 # geostatistical problems
-include("geodataframe.jl")
 include("domains.jl")
 include("paths.jl")
 include("problems.jl")

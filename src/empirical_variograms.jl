@@ -14,11 +14,15 @@
 
 """
     EmpiricalVariogram(X, z, [optional parameters])
+    EmpiricalVariogram(geodata, var, [optional parameters])
 
 Computes the empirical (a.k.a. experimental) omnidirectional
 (semi-)variogram from data locations `X` and values `z`.
 
-## Optional parameters
+Alternatively, compute the variogram the variable `var` stored on a
+[`GeoDataFrame`](@ref) object `geodata`.
+
+## Parameters
 
   * nbins - number of bins (default to 20)
   * maxlag - maximum lag distance (default to maximum lag of data)
@@ -78,12 +82,15 @@ struct EmpiricalVariogram{T<:Real,V,D<:AbstractDistance}
   end
 end
 
-EmpiricalVariogram(X, z;
-                   nbins=20, maxlag=nothing,
-                   distance=EuclideanDistance()) =
-  EmpiricalVariogram{eltype(X),
-                     eltype(z),
-                     typeof(distance)}(X, z, nbins, maxlag, distance)
+EmpiricalVariogram(X, z; nbins=20, maxlag=nothing, distance=EuclideanDistance()) =
+  EmpiricalVariogram{eltype(X),eltype(z),typeof(distance)}(X, z, nbins, maxlag, distance)
+
+function EmpiricalVariogram(geodata::GeoDataFrame, var::Symbol; kwargs...)
+  X = convert(Array, coordinates(geodata))'
+  z = convert(Array, data(geodata)[var])
+
+  EmpiricalVariogram(X, z; kwargs...)
+end
 
 """
     values(empirical_variogram)
@@ -101,7 +108,7 @@ julia> plot(x, y, label="semi-variogram")
 julia> bar!(x, n, label="histogram")
 ```
 """
-function values(γ::EmpiricalVariogram{T,V,D}) where {T<:Real,V,D<:AbstractDistance}
+function Base.values(γ::EmpiricalVariogram{T,V,D}) where {T<:Real,V,D<:AbstractDistance}
   bins = γ.bins
   nbins = γ.nbins
   binsize = γ.maxlag / γ.nbins

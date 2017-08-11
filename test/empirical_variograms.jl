@@ -1,10 +1,17 @@
 @testset "Empirical variograms" begin
   # homogeneous field has zero variogram
   γ = EmpiricalVariogram(eye(3), ones(3), nbins=2, maxlag=2.)
-  x, y, n = GeoStats.values(γ)
+  x, y, n = values(γ)
   @test x ≈ [1/2, 3/2]
   @test isnan(y[1]) && y[2] == 0.
   @test n == [0, 3]
+
+  # test geodataframe interface
+  γ = EmpiricalVariogram(data2D, :value, nbins=20, maxlag=1.)
+  x, y, n = values(γ)
+  @test length(x) == 20
+  @test length(y) == 20
+  @test length(n) == 20
 
   if ismaintainer || istravis
     @testset "Plot recipe" begin
