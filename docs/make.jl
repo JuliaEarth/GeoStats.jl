@@ -16,7 +16,7 @@ makedocs(
         "empirical_variograms.md",
         "theoretical_variograms.md"
       ],
-      "Kriging estimation" => "estimation.md",
+      "Kriging estimators" => "estimators.md",
       "Distance functions"  => "distances.md"
     ],
     "Examples" => "examples.md",
