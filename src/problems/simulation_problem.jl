@@ -14,10 +14,19 @@
 
 """
     SimulationProblem(geodata, domain, targetvars)
+    SimulationProblem(domain, targetvars)
 
 A spatial simulation problem on a given `domain` in which the
-variables to be estimated are listed in `targetvars`. The
-data of the problem is stored in `geodata`.
+variables to be estimated are listed in `targetvars`. For
+conditional simulation, the data of the problem is stored in
+`geodata`.
+
+### Notes
+
+For unconditional simulation, an empty `geodata` object is
+automatically created by the constructor. Therefore, all
+simulation solvers can assume that a valid (possibly empty)
+[`GeoDataFrame`](@ref) exists.
 """
 struct SimulationProblem{D<:AbstractDomain} <: AbstractProblem
   geodata::GeoDataFrame
@@ -38,6 +47,21 @@ SimulationProblem(geodata, domain, targetvars) =
 
 SimulationProblem(geodata, domain, targetvar::Symbol) =
   SimulationProblem(geodata, domain, [targetvar])
+
+function SimulationProblem(domain, targetvars)
+  dim = ndims(domain)
+  ctypes = [coordtype(domain) for i=1:dim]
+  vtypes = [Float64 for i=1:length(targetvars)]
+  cnames = [Symbol("x$i") for i=1:dim]
+  vnames = targetvars
+  nodata = DataFrame([ctypes...,vtypes...], [cnames...,vnames...], 0)
+
+  geodata = GeoDataFrame(nodata, cnames)
+
+  SimulationProblem(geodata, domain, targetvars)
+end
+
+SimulationProblem(domain, targetvar::Symbol) = SimulationProblem(domain, [targetvar])
 
 """
     SimulationSolution
