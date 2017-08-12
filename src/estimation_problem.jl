@@ -53,9 +53,14 @@ EstimationSolution(domain, mean, variance) =
 # ------------
 # IO methods
 # ------------
+function Base.show(io::IO, problem::EstimationProblem{D}) where {D<:AbstractDomain}
+  dim = ndims(problem.domain)
+  print(io, "$(dim)D EstimationProblem")
+end
+
 function Base.show(io::IO, ::MIME"text/plain", problem::EstimationProblem{D}) where {D<:AbstractDomain}
-  println(io, "EstimationProblem:")
+  println(io, problem)
   println(io, "  data:      ", problem.geodata)
   println(io, "  domain:    ", problem.domain)
-  println(io, "  variables: ", join(problem.targetvars, ", ", " and "))
+  print(  io, "  variables: ", join(problem.targetvars, ", ", " and "))
 end
