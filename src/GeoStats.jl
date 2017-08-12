@@ -95,12 +95,18 @@ export
   npoints,
   readtable,
 
-  # problems
+  # estimation problem
   EstimationProblem,
+  data,
+  domain,
+  variables,
+
+  # simulation problem
   SimulationProblem,
   data,
   domain,
   variables,
+  hasdata,
 
   # solvers
   KrigParam,

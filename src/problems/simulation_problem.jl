@@ -64,6 +64,14 @@ end
 SimulationProblem(domain, targetvar::Symbol) = SimulationProblem(domain, [targetvar])
 
 """
+    hasdata(simproblem)
+
+Return true if simulation problem `simproblem` has data
+(i.e. conditional simulation) and false otherwise.
+"""
+hasdata(problem::SimulationProblem) = npoints(problem.geodata) > 0
+
+"""
     SimulationSolution
 
 A solution to a spatial simulation problem.
@@ -81,7 +89,8 @@ SimulationSolution(domain, realizations) =
 # ------------
 function Base.show(io::IO, problem::SimulationProblem{D}) where {D<:AbstractDomain}
   dim = ndims(problem.domain)
-  print(io, "$(dim)D SimulationProblem")
+  kind = hasdata(problem) ? "conditional" : "unconditional"
+  print(io, "$(dim)D SimulationProblem ($kind)")
 end
 
 function Base.show(io::IO, ::MIME"text/plain", problem::SimulationProblem{D}) where {D<:AbstractDomain}
