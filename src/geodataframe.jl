@@ -88,6 +88,13 @@ Return the columns of `geodata` representing spatial coordinates.
 """
 coordinates(geodata::GeoDataFrame) = geodata.data[geodata.coordnames]
 
+"""
+    npoints(geodata)
+
+Return the number of points (or rows) in `geodata`.
+"""
+npoints(geodata::GeoDataFrame) = nrow(geodata.data)
+
 # ------------
 # IO methods
 # ------------

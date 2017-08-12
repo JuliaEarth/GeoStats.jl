@@ -81,8 +81,8 @@ export
 
   # domains
   RegularGrid,
-  # Base.ndims
-  # Base.size
+  # Base.ndims,
+  # Base.size,
   coordtype,
   npoints,
   coordinates,
@@ -92,6 +92,7 @@ export
   data,
   coordnames,
   coordinates,
+  npoints,
   readtable,
 
   # problems
