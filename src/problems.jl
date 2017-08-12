@@ -51,3 +51,4 @@ abstract type AbstractSolution end
 # IMPLEMENTATIONS
 #------------------
 include("estimation_problem.jl")
+include("simulation_problem.jl")

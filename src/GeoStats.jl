@@ -96,6 +96,7 @@ export
 
   # problems
   EstimationProblem,
+  SimulationProblem,
   data,
   domain,
   variables,
