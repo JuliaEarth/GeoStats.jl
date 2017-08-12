@@ -5,5 +5,5 @@ is available in the [examples](https://github.com/juliohm/GeoStats.jl/tree/maste
 folder. These notebooks are distributed with GeoStats.jl and can be run locally with
 `GeoStats.examples()`.
 
-We are always happy to include new use cases. Please check [Contributing](contributing.md)
-before submitting a pull request.
+Want to contribute an example? Please check [Contributing](contributing.md) before
+submitting a pull request.

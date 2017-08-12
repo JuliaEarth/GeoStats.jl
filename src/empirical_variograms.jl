@@ -14,13 +14,14 @@
 
 """
     EmpiricalVariogram(X, z, [optional parameters])
-    EmpiricalVariogram(geodata, var, [optional parameters])
 
 Computes the empirical (a.k.a. experimental) omnidirectional
 (semi-)variogram from data locations `X` and values `z`.
 
-Alternatively, compute the variogram the variable `var` stored on a
-[`GeoDataFrame`](@ref) object `geodata`.
+    EmpiricalVariogram(geodata, var, [optional parameters])
+
+Alternatively, compute the variogram for the variable `var` stored
+on a [`GeoDataFrame`](@ref) object `geodata`.
 
 ## Parameters
 
