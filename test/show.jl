@@ -15,7 +15,7 @@
 
   @testset "EstimationProblem" begin
     grid2D = RegularGrid{Float64}(100,200)
-    problem = EstimationProblem(data2D, grid2D, [:value])
+    problem = EstimationProblem(data2D, grid2D, :value)
     @test sprint(show, problem) == "2D EstimationProblem"
     @test sprint(show, MIME"text/plain"(), problem) == "2D EstimationProblem\n  data:      3×3 GeoDataFrame (x and y)\n  domain:    100×200 RegularGrid{Float64,2}\n  variables: value"
   end
