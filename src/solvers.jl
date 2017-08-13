@@ -50,5 +50,5 @@ solve(::SimulationProblem, ::AbstractSimulationSolver) = error("not implemented"
 #------------------
 # IMPLEMENTATIONS
 #------------------
-include("kriging_solver.jl")
-include("sgsim_solver.jl")
+include("solvers/kriging_solver.jl")
+include("solvers/sgsim_solver.jl")
