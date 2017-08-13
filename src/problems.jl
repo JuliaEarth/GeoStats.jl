@@ -24,21 +24,28 @@ abstract type AbstractProblem end
 
 Return the spatial data of the `problem`.
 """
-data(problem::P) where {P<:AbstractProblem} = problem.geodata
+data(problem::AbstractProblem) = problem.geodata
 
 """
     domain(problem)
 
 Return the spatial domain of the `problem`.
 """
-domain(problem::P) where {P<:AbstractProblem} = problem.domain
+domain(problem::AbstractProblem) = problem.domain
 
 """
     variables(problem)
 
 Return the target variables of the `problem`.
 """
-variables(problem::P) where {P<:AbstractProblem} = problem.targetvars
+variables(problem::AbstractProblem) = problem.targetvars
+
+"""
+    hasdata(problem)
+
+Return `true` if `problem` has data.
+"""
+hasdata(problem::AbstractProblem) = npoints(problem.geodata) > 0
 
 """
     AbstractSolution

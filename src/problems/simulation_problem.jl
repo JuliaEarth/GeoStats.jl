@@ -64,14 +64,6 @@ end
 SimulationProblem(domain, targetvar::Symbol) = SimulationProblem(domain, [targetvar])
 
 """
-    hasdata(simproblem)
-
-Return true if simulation problem `simproblem` has data
-(i.e. conditional simulation) and false otherwise.
-"""
-hasdata(problem::SimulationProblem) = npoints(problem.geodata) > 0
-
-"""
     SimulationSolution
 
 A solution to a spatial simulation problem.

@@ -95,13 +95,8 @@ export
   npoints,
   readtable,
 
-  # estimation problem
+  # geostatistical problems
   EstimationProblem,
-  data,
-  domain,
-  variables,
-
-  # simulation problem
   SimulationProblem,
   data,
   domain,
