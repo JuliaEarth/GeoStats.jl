@@ -106,6 +106,8 @@ export
   # solvers
   KrigParam,
   Kriging,
+  SGSParam,
+  SGSim,
   solve
 
 end

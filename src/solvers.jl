@@ -22,7 +22,7 @@ abstract type AbstractSolver end
 """
     AbstractEstimationSolver
 
-A solver for geostatistical estimation.
+A solver for a geostatistical estimation problem.
 """
 abstract type AbstractEstimationSolver <: AbstractSolver end
 
@@ -33,7 +33,22 @@ Solve the estimation `problem` with estimation `solver`.
 """
 solve(::EstimationProblem, ::AbstractEstimationSolver) = error("not implemented")
 
+"""
+    AbstractSimulationSolver
+
+A solver for a geostatistical simulation problem.
+"""
+abstract type AbstractSimulationSolver <: AbstractSolver end
+
+"""
+    solve(problem, solver)
+
+Solve the simulation `problem` with simulation `solver`.
+"""
+solve(::SimulationProblem, ::AbstractSimulationSolver) = error("not implemented")
+
 #------------------
 # IMPLEMENTATIONS
 #------------------
 include("kriging_solver.jl")
+include("sgsim_solver.jl")
