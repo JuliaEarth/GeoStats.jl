@@ -20,7 +20,7 @@ The number of rows is the dimensionality of the domain
 whereas the number of columns is the number of points.
 """
 struct PointCollection{T<:Real,N} <: AbstractDomain{T,N}
-  coords::Matrix{T}
+  coords::AbstractMatrix{T}
 
   function PointCollection{T,N}(coords) where {N,T<:Real}
     @assert !isempty(coords) "coordinates must be non-empty"
@@ -28,7 +28,8 @@ struct PointCollection{T<:Real,N} <: AbstractDomain{T,N}
   end
 end
 
-PointCollection(coords::Matrix{T}) where {T<:Real} = PointCollection{T,size(coords,1)}(coords)
+PointCollection(coords::AbstractMatrix{T}) where {T<:Real} =
+  PointCollection{T,size(coords,1)}(coords)
 
 npoints(pc::PointCollection) = size(pc.coords, 2)
 
