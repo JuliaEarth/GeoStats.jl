@@ -7,12 +7,12 @@
   # TODO: test solution correctness
 
   # conditional simulation with SGSim
-  problem = SimulationProblem(data2D, grid, :value)
+  problem = SimulationProblem(data2D, grid, :value, 3)
   solution = solve(problem, SGSim())
   # TODO: test solution correctness
 
   # unconditional simulation with SGSim
-  problem = SimulationProblem(grid, :value)
+  problem = SimulationProblem(grid, :value, 3)
   solution = solve(problem, SGSim())
   # TODO: test solution correctness
 end

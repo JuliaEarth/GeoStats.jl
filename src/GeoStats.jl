@@ -102,6 +102,7 @@ export
   domain,
   variables,
   hasdata,
+  nreals,
 
   # solvers
   KrigParam,
