@@ -81,6 +81,7 @@ export
 
   # domains
   RegularGrid,
+  PointCollection,
   coordtype,
   npoints,
   coordinates,

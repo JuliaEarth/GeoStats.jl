@@ -52,3 +52,4 @@ coordinates(::AbstractDomain, location::I) where {I<:Integer} = error("not imple
 # IMPLEMENTATIONS
 #------------------
 include("domains/regular_grid.jl")
+include("domains/point_collection.jl")
