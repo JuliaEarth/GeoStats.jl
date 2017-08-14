@@ -81,8 +81,6 @@ export
 
   # domains
   RegularGrid,
-  # Base.ndims,
-  # Base.size,
   coordtype,
   npoints,
   coordinates,
