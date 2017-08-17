@@ -25,3 +25,23 @@ end
 
 EstimationSolution(domain, mean, variance) =
   EstimationSolution{typeof(domain)}(domain, mean, variance)
+
+function digest(solution::EstimationSolution{<:RegularGrid})
+  # get the size of the grid
+  sdomain = domain(solution)
+  sz = size(sdomain)
+
+  # solution variables
+  variables = keys(solution.mean)
+
+  # output dictionary
+  digested = Dict{Symbol,Dict{Symbol,<:Array}}()
+  for var in variables
+    M = reshape(solution.mean[var], sz)
+    V = reshape(solution.variance[var], sz)
+
+    push!(digested, var => Dict(:mean => M, :variance => V))
+  end
+
+  digested
+end
