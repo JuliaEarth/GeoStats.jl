@@ -35,7 +35,7 @@ function digest(solution::EstimationSolution{<:RegularGrid})
   variables = keys(solution.mean)
 
   # output dictionary
-  digested = Dict{Symbol,Dict{Symbol,<:Array}}()
+  digested = Dict{Symbol,Dict{Symbol,Array}}()
   for var in variables
     M = reshape(solution.mean[var], sz)
     V = reshape(solution.variance[var], sz)
