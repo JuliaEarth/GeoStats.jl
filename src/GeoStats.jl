@@ -94,7 +94,7 @@ export
   npoints,
   readtable,
 
-  # geostatistical problems
+  # problems and solutions
   EstimationProblem,
   SimulationProblem,
   data,

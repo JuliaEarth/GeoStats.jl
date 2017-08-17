@@ -54,6 +54,13 @@ A generic solution to a problem in geostatistics.
 """
 abstract type AbstractSolution end
 
+"""
+    domain(solution)
+
+Return the spatial domain of the `solution`.
+"""
+domain(solution::AbstractSolution) = solution.domain
+
 #------------------
 # IMPLEMENTATIONS
 #------------------
