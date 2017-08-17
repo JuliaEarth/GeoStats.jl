@@ -37,12 +37,14 @@
       @series begin
         subplot := 2i - 1
         seriestype := :path
+        legend := false
         title := string(var, " mean")
         M
       end
       @series begin
         subplot := 2i
         seriestype := :path
+        legend := false
         title := string(var, " variance")
         V
       end
