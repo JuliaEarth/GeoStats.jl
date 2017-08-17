@@ -66,12 +66,14 @@
         subplot := 2i - 1
         seriestype := :volume
         title := string(var, " mean")
+        color --> :bluesreds
         M
       end
       @series begin
         subplot := 2i
         seriestype := :volume
         title := string(var, " variance")
+        color --> :bluesreds
         V
       end
     else
