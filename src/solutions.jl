@@ -13,42 +13,29 @@
 ## OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
 """
-    AbstractProblem
+    AbstractSolution
 
-A generic problem in geostatistics.
+A generic solution to a problem in geostatistics.
 """
-abstract type AbstractProblem end
-
-"""
-    data(problem)
-
-Return the spatial data of the `problem`.
-"""
-data(problem::AbstractProblem) = problem.geodata
+abstract type AbstractSolution end
 
 """
-    domain(problem)
+    domain(solution)
 
-Return the spatial domain of the `problem`.
+Return the spatial domain of the `solution`.
 """
-domain(problem::AbstractProblem) = problem.domain
-
-"""
-    variables(problem)
-
-Return the target variables of the `problem`.
-"""
-variables(problem::AbstractProblem) = problem.targetvars
+domain(solution::AbstractSolution) = solution.domain
 
 """
-    hasdata(problem)
+    digest(solution)
 
-Return `true` if `problem` has data.
+Convert solution to a dictionary-like format where the
+keys of the dictionary are the variables of the problem.
 """
-hasdata(problem::AbstractProblem) = npoints(problem.geodata) > 0
+digest(solution::AbstractSolution) = error("not implemented")
 
 #------------------
 # IMPLEMENTATIONS
 #------------------
-include("problems/estimation_problem.jl")
-include("problems/simulation_problem.jl")
+include("solutions/estimation_solution.jl")
+include("solutions/simulation_solution.jl")

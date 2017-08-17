@@ -37,6 +37,7 @@ include("domains.jl")
 include("paths.jl")
 include("problems.jl")
 include("solvers.jl")
+include("solutions.jl")
 
 # plot recipes
 include("plotrecipes/empirical_variograms.jl")
@@ -103,6 +104,7 @@ export
   variables,
   hasdata,
   nreals,
+  digest,
 
   # solvers
   KrigParam,

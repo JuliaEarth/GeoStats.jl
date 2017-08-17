@@ -13,42 +13,15 @@
 ## OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
 """
-    AbstractProblem
+    EstimationSolution
 
-A generic problem in geostatistics.
+A solution to a spatial estimation problem.
 """
-abstract type AbstractProblem end
+struct EstimationSolution{D<:AbstractDomain} <: AbstractSolution
+  domain::D
+  mean::Dict{Symbol,Vector}
+  variance::Dict{Symbol,Vector}
+end
 
-"""
-    data(problem)
-
-Return the spatial data of the `problem`.
-"""
-data(problem::AbstractProblem) = problem.geodata
-
-"""
-    domain(problem)
-
-Return the spatial domain of the `problem`.
-"""
-domain(problem::AbstractProblem) = problem.domain
-
-"""
-    variables(problem)
-
-Return the target variables of the `problem`.
-"""
-variables(problem::AbstractProblem) = problem.targetvars
-
-"""
-    hasdata(problem)
-
-Return `true` if `problem` has data.
-"""
-hasdata(problem::AbstractProblem) = npoints(problem.geodata) > 0
-
-#------------------
-# IMPLEMENTATIONS
-#------------------
-include("problems/estimation_problem.jl")
-include("problems/simulation_problem.jl")
+EstimationSolution(domain, mean, variance) =
+  EstimationSolution{typeof(domain)}(domain, mean, variance)

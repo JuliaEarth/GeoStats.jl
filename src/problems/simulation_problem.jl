@@ -74,19 +74,6 @@ Return the number of realizations of the simulation problem `simprob`.
 """
 nreals(problem::SimulationProblem) = problem.nreals
 
-"""
-    SimulationSolution
-
-A solution to a spatial simulation problem.
-"""
-struct SimulationSolution{D<:AbstractDomain} <: AbstractSolution
-  domain::D
-  realizations::Dict{Symbol,Vector{Vector}}
-end
-
-SimulationSolution(domain, realizations) =
-  SimulationSolution{typeof(domain)}(domain, realizations)
-
 # ------------
 # IO methods
 # ------------
