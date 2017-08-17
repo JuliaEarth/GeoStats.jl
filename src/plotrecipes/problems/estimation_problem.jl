@@ -51,12 +51,14 @@
         subplot := 2i - 1
         seriestype := :contourf
         title := string(var, " mean")
+        color --> :bluesreds
         M
       end
       @series begin
         subplot := 2i
         seriestype := :contourf
         title := string(var, " variance")
+        color --> :bluesreds
         V
       end
     elseif dim == 3 # plot a volume
