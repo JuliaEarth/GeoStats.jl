@@ -107,10 +107,8 @@ export
   digest,
 
   # solvers
-  KrigParam,
-  Kriging,
-  SGSParam,
-  SGSim,
+  Kriging, KrigParam,
+  SeqGaussSim, SGSParam,
   solve
 
 end

@@ -37,21 +37,21 @@ the variogram `v` only.
 end
 
 """
-    SGSim(var1=>param1, var2=>param2, ...)
+    SeqGaussSim(var1=>param1, var2=>param2, ...)
 
 A polyalgorithm sequential Gaussian simulation solver.
 
 Each pair `var=>param` specifies the [`SGSParam`](@ref) `param`
 for the simulation variable `var`.
 """
-struct SGSim <: AbstractSimulationSolver
+struct SeqGaussSim <: AbstractSimulationSolver
   params::Dict{Symbol,SGSParam}
 
-  function SGSim(params...)
+  function SeqGaussSim(params...)
     new(Dict(params...))
   end
 end
 
-function solve(problem::SimulationProblem{D}, solver::SGSim) where {D<:AbstractDomain}
+function solve(problem::SimulationProblem{D}, solver::SeqGaussSim) where {D<:AbstractDomain}
   # TODO
 end
