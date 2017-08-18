@@ -52,7 +52,7 @@ struct Kriging <: AbstractEstimationSolver
   end
 end
 
-function solve(problem::EstimationProblem{D}, solver::Kriging) where {D<:AbstractDomain}
+function solve(problem::EstimationProblem{<:AbstractDomain}, solver::Kriging)
   # sanity checks
   @assert keys(solver.params) ⊆ variables(problem) "invalid variable names in solver parameters"
 
@@ -102,8 +102,8 @@ function solve(problem::EstimationProblem{D}, solver::Kriging) where {D<:Abstrac
   EstimationSolution(domain(problem), μdict, σdict)
 end
 
-function solve(problem::EstimationProblem{D}, var::Symbol,
-               estimator::E) where {D<:AbstractDomain,E<:AbstractEstimator}
+function solve(problem::EstimationProblem{<:AbstractDomain},
+               var::Symbol, estimator::E) where {E<:AbstractEstimator}
   # retrieve data
   geodata = data(problem)
   rawdata = data(geodata)
@@ -124,8 +124,8 @@ function solve(problem::EstimationProblem{D}, var::Symbol,
   pdomain = domain(problem)
 
   # pre-allocate memory for result
-  varμ = Array{eltype(z)}(npoints(pdomain))
-  varσ = Array{eltype(z)}(npoints(pdomain))
+  varμ = Vector{eltype(z)}(npoints(pdomain))
+  varσ = Vector{eltype(z)}(npoints(pdomain))
 
   # estimation loop
   for location in SimplePath(pdomain)

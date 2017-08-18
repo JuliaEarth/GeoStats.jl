@@ -13,13 +13,26 @@
 ## OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
 """
+    Realization(var1 => values1, var2 => values2, ...)
+
+A realization of the variables `var1`, `var2`, ... where
+the simulated values are stored in one-dimensional vectors
+`values1`, `values2`, ...
+
+### Notes
+
+A `Realization` object is simply a Julia `Dict{Symbol,Vector}`.
+"""
+const Realization = Dict{Symbol,Vector}
+
+"""
     SimulationSolution
 
 A solution to a spatial simulation problem.
 """
 struct SimulationSolution{D<:AbstractDomain} <: AbstractSolution
   domain::D
-  realizations::Dict{Symbol,Vector{Vector}}
+  realizations::Vector{Realization}
 end
 
 SimulationSolution(domain, realizations) =

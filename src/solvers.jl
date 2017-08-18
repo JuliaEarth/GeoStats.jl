@@ -44,8 +44,34 @@ abstract type AbstractSimulationSolver <: AbstractSolver end
     solve(problem, solver)
 
 Solve the simulation `problem` with simulation `solver`.
+
+### Notes
+
+Default implementation calls `solve_single` in parallel.
 """
-solve(::SimulationProblem, ::AbstractSimulationSolver) = error("not implemented")
+function solve(problem::SimulationProblem{<:AbstractDomain}, solver::AbstractSimulationSolver)
+  # sanity checks
+  @assert keys(solver.params) ⊆ variables(problem) "invalid variable names in solver parameters"
+
+  realizations = [solve_single(problem, solver) for i=1:nreals(problem)]
+
+  SimulationSolution(domain(problem), realizations)
+end
+
+"""
+    solve_single(problem, solver)
+
+Solve a single realization of the `problem` with simulation `solver`.
+
+### Notes
+
+In most cases, this is the function that solver writers should write.
+By implementing it, the developer is informing the package that realizations
+generated with his/her solver are indenpendent one from another. The package
+will then automatically trigger the algorithm in parallel at the top-level
+`solve` call.
+"""
+solve_single(::SimulationProblem, ::AbstractSimulationSolver) = error("not implemented")
 
 #------------------
 # IMPLEMENTATIONS

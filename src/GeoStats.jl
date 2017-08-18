@@ -36,8 +36,8 @@ include("estimators.jl")
 include("domains.jl")
 include("paths.jl")
 include("problems.jl")
-include("solvers.jl")
 include("solutions.jl")
+include("solvers.jl")
 
 # plot recipes
 include("plotrecipes/empirical_variograms.jl")

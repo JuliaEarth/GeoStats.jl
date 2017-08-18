@@ -52,6 +52,52 @@ struct SeqGaussSim <: AbstractSimulationSolver
   end
 end
 
-function solve(problem::SimulationProblem{D}, solver::SeqGaussSim) where {D<:AbstractDomain}
-  # TODO
+function solve_single(problem::SimulationProblem{<:AbstractDomain}, solver::SeqGaussSim)
+  # retrieve data
+  geodata = data(problem)
+  rawdata = data(geodata)
+
+  # determine coordinate type
+  coordtypes = eltypes(coordinates(geodata))
+  T = promote_type(coordtypes...)
+
+  # store results on dictionary
+  realization = Realization()
+
+  # loop over target variables
+  for var in variables(problem)
+    # determine value type
+    V = eltype(rawdata[var])
+
+    # get user parameters
+    if var ∈ keys(solver.params)
+      varparams = solver.params[var]
+    else
+      varparams = SGSParam()
+    end
+
+    # determine which Kriging variant to use
+    if varparams.drifts ≠ nothing
+      estimator = ExternalDriftKriging{T,V}(varaparams.variogram, varparams.drifts)
+    elseif varparams.degree ≠ nothing
+      estimator = UniversalKriging{T,V}(varparams.variogram, varparams.degree)
+    elseif varparams.mean ≠ nothing
+      estimator = SimpleKriging{T,V}(varparams.variogram, varparams.mean)
+    else
+      estimator = OrdinaryKriging{T,V}(varparams.variogram)
+    end
+
+    # perform simulation
+    varreal = solve_single(problem, var, estimator)
+
+    # save result for variable
+    realization[var] = varreal
+  end
+
+  realization
+end
+
+function solve_single(problem::SimulationProblem{<:AbstractDomain},
+               var::Symbol, estimator::E) where {E<:AbstractEstimator}
+  [] # TODO
 end
