@@ -87,6 +87,8 @@ export
   coordtype,
   npoints,
   coordinates,
+  origin,
+  spacing,
 
   # data types
   GeoDataFrame,

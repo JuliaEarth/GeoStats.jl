@@ -65,12 +65,14 @@ RegularGrid(dims::Vector{Int}, origin::Vector{T}, spacing::Vector{T}) where {T<:
 
 npoints(grid::RegularGrid) = prod(grid.dims)
 
+Base.size(grid::RegularGrid) = grid.dims
+origin(grid::RegularGrid) = grid.origin
+spacing(grid::RegularGrid) = grid.spacing
+
 function coordinates(grid::RegularGrid, location::I) where {I<:Integer}
   intcoords = ind2sub(grid.dims, location)
   [grid.origin...] .+ ([intcoords...] .- one(I)).*[grid.spacing...]
 end
-
-Base.size(grid::RegularGrid) = grid.dims
 
 # ------------
 # IO methods
