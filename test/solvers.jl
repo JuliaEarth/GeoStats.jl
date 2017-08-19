@@ -1,18 +1,33 @@
-@testset "Geostatistical solvers" begin
+@testset "Problem solvers" begin
   grid = RegularGrid{Float64}(100,100)
 
-  # estimation with Kriging
-  problem = EstimationProblem(data2D, grid, :value)
-  solution = solve(problem, Kriging())
-  # TODO: test solution correctness
+  @testset "Kriging solver" begin
+    problem = EstimationProblem(data2D, grid, :value)
+    solver = Kriging(:value => KrigParam(variogram=GaussianVariogram(range=20.)))
 
-  # conditional simulation with SeqGaussSim
-  problem = SimulationProblem(data2D, grid, :value, 3)
-  solution = solve(problem, SeqGaussSim())
-  # TODO: test solution correctness
+    solution = solve(problem, solver)
 
-  # unconditional simulation with SeqGaussSim
-  problem = SimulationProblem(grid, :value, 3)
-  solution = solve(problem, SeqGaussSim())
-  # TODO: test solution correctness
+    if ismaintainer || istravis
+      @testset "Plot recipe" begin
+        function plot_solution(fname)
+          plot(solution, size=(800,400))
+          png(fname)
+        end
+        refimg = joinpath(datadir,"KrigingSolution.png")
+        @test test_images(VisualTest(plot_solution, refimg), popup=!istravis) |> success
+      end
+    end
+  end
+
+  @testset "SeqGaussSim solver" begin
+    # conditional simulation with SeqGaussSim
+    problem = SimulationProblem(data2D, grid, :value, 3)
+    solution = solve(problem, SeqGaussSim())
+    # TODO: test solution correctness
+
+    # unconditional simulation with SeqGaussSim
+    problem = SimulationProblem(grid, :value, 3)
+    solution = solve(problem, SeqGaussSim())
+    # TODO: test solution correctness
+  end
 end

@@ -1,4 +1,4 @@
-@testset "Geostatistical problems" begin
+@testset "Problems" begin
   grid2D = RegularGrid{Float64}(100,100)
   grid3D = RegularGrid{Float64}(100,100,100)
 
