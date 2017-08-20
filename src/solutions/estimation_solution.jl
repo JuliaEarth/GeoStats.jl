@@ -45,3 +45,18 @@ function digest(solution::EstimationSolution{<:RegularGrid})
 
   digested
 end
+
+# ------------
+# IO methods
+# ------------
+function Base.show(io::IO, solution::EstimationSolution)
+  dim = ndims(solution.domain)
+  print(io, "$(dim)D EstimationSolution")
+end
+
+function Base.show(io::IO, ::MIME"text/plain", solution::EstimationSolution)
+  println(io, solution)
+  for varname in keys(solution.mean)
+    println(io, "  - $varname")
+  end
+end
