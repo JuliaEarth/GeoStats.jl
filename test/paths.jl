@@ -1,4 +1,4 @@
-@testset "Spatial paths" begin
+@testset "Paths" begin
   grid = RegularGrid{Float64}(100,100)
 
   # make sure iteration works

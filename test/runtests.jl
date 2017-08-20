@@ -39,8 +39,7 @@ testfiles = [
   "domains.jl",
   "paths.jl",
   "problems.jl",
-  "solvers.jl",
-  "show.jl"
+  "solvers.jl"
 ]
 
 # run

@@ -1,4 +1,4 @@
-@testset "Problem solvers" begin
+@testset "Solvers" begin
   grid = RegularGrid{Float64}(100,100)
 
   @testset "Kriging solver" begin
@@ -6,6 +6,10 @@
     solver = Kriging(:value => KrigParam(variogram=GaussianVariogram(range=20.)))
 
     solution = solve(problem, solver)
+
+    # basic checks
+    result = digest(solution)
+    @test :value ∈ keys(result)
 
     if ismaintainer || istravis
       @testset "Plot recipe" begin
