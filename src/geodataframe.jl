@@ -98,18 +98,18 @@ npoints(geodata::GeoDataFrame) = nrow(geodata.data)
 # ------------
 # IO methods
 # ------------
-Base.show(io::IO, geodata::GeoDataFrame) = begin
+function Base.show(io::IO, geodata::GeoDataFrame)
   dims = join(size(geodata.data), "×")
   cnames = join(geodata.coordnames, ", ", " and ")
   print(io, "$dims GeoDataFrame ($cnames)")
 end
 
-Base.show(io::IO, ::MIME"text/plain", geodata::GeoDataFrame) = begin
+function Base.show(io::IO, ::MIME"text/plain", geodata::GeoDataFrame)
   println(io, geodata)
   show(io, geodata.data, true, :Row, false)
 end
 
-Base.show(io::IO, ::MIME"text/html", geodata::GeoDataFrame) = begin
+function Base.show(io::IO, ::MIME"text/html", geodata::GeoDataFrame)
   println(io, geodata)
   show(io, MIME"text/html"(), geodata.data)
 end
