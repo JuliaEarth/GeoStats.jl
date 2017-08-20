@@ -74,6 +74,29 @@ A set of Jupyter notebooks demonstrating the current functionality of the packag
 in the [examples](examples) folder. These notebooks are distributed with GeoStats.jl and can be
 launched locally with `GeoStats.examples()`.
 
+Below is a quick preview of the high-level API:
+
+```julia
+using GeoStats
+using Plots
+
+# read spreadsheet file containing spatial data
+geodata = readtable("data.csv", coordnames=[:x,:y])
+
+# define spatial domain
+grid = RegularGrid{Float64}(100, 100)
+
+# define estimation problem for any column(s) (e.g. :precipitation)
+problem = EstimationProblem(geodata, grid, :precipitation)
+
+# solve the problem with any solver
+solution = solve(problem, Kriging())
+
+# plot the solution
+plot(solution)
+```
+![EstimationSolution](docs/src/images/EstimationSolution.png)
+
 Contributing
 ------------
 
