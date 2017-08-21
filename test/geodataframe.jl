@@ -1,4 +1,4 @@
-@testset "Spatial data" begin
+@testset "Data" begin
   @test names(data(data3D)) == [:x,:y,:z,:value]
   @test coordnames(data3D) == [:x,:y,:z]
   @test names(coordinates(data3D)) == coordnames(data3D)

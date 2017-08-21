@@ -31,6 +31,7 @@ xₒ = rand(dim)
 
 # list of tests
 testfiles = [
+  "utils.jl",
   "distances.jl",
   "empirical_variograms.jl",
   "theoretical_variograms.jl",
