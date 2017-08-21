@@ -21,10 +21,12 @@ function pairwise(metric::Function, X::AbstractMatrix)
   m, n = size(X)
   D = zeros(n, n)
   for j=1:n
+    xj = view(X, :, j)
     for i=j+1:n
-      @inbounds D[i,j] = metric(X[:,i], X[:,j])
+      xi = view(X, :, i)
+      @inbounds D[i,j] = metric(xi, xj)
     end
-    @inbounds D[j,j] = metric(X[:,j], X[:,j])
+    @inbounds D[j,j] = metric(xj, xj)
     for i=1:j-1
       @inbounds D[i,j] = D[j,i] # leveraging the symmetry
     end
