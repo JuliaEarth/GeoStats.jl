@@ -80,13 +80,19 @@ Below is a quick preview of the high-level API:
 using GeoStats
 using Plots
 
+# data.csv:
+#    x,    y,       station, precipitation
+# 25.0, 25.0,     palo alto,           1.0
+# 50.0, 75.0,  redwood city,           0.0
+# 75.0, 50.0, mountain view,           1.0
+
 # read spreadsheet file containing spatial data
 geodata = readtable("data.csv", coordnames=[:x,:y])
 
-# define spatial domain
+# define spatial domain (e.g. regular grid, point collection)
 grid = RegularGrid{Float64}(100, 100)
 
-# define estimation problem for any column(s) (e.g. :precipitation)
+# define estimation problem for any data column(s) (e.g. :precipitation)
 problem = EstimationProblem(geodata, grid, :precipitation)
 
 # solve the problem with any solver
