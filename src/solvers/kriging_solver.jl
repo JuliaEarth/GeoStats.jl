@@ -42,14 +42,52 @@ end
 A polyalgorithm Kriging estimation solver.
 
 Each pair `var=>param` specifies the [`KrigParam`](@ref) `param`
-for the Kriging variable `var`.
+for the Kriging variable `var`. In order to avoid boilerplate
+code, the constructor expects pairs of `Symbol` and `NamedTuple`
+instead.
+
+## Examples
+
+Solve the variable `:var1` with Simple Kriging by specifying
+the `mean`, and the variable `:var2` with Universal Kriging
+by specifying the `degree` and the `variogram` model.
+
+```julia
+julia> Kriging(
+  :var1 => @NT(mean=1.),
+  :var2 => @NT(degree=1, variogram=SphericalVariogram(range=20.))
+)
+```
+
+Solve all variables of the problem with the default parameters
+(i.e. Ordinary Kriging with unit Gaussian variogram):
+
+```julia
+julia> Kriging()
+```
+
+### Notes
+
+The prefix `@NT` extends for `NamedTuple`. It won't be necessary
+in Julia v0.7 and beyond.
 """
 struct Kriging <: AbstractEstimationSolver
   params::Dict{Symbol,KrigParam}
 
-  function Kriging(params...)
-    new(Dict(params...))
+  Kriging(params::Dict{Symbol,KrigParam}) = new(params)
+end
+
+function Kriging(params...)
+  # build dictionary for inner constructor
+  dict = Dict{Symbol,KrigParam}()
+
+  # convert named tuples to Kriging parameters
+  for (varname, varparams) in params
+    kwargs = [k => v for (k,v) in zip(keys(varparams), varparams)]
+    push!(dict, varname => KrigParam(; kwargs...))
   end
+
+  Kriging(dict)
 end
 
 function solve(problem::EstimationProblem{<:AbstractDomain}, solver::Kriging)
@@ -138,4 +176,26 @@ function solve(problem::EstimationProblem{<:AbstractDomain},
 
   # return mean and variance
   varμ, varσ
+end
+
+# ------------
+# IO methods
+# ------------
+function Base.show(io::IO, solver::Kriging)
+  print(io, "Kriging solver")
+end
+
+function Base.show(io::IO, ::MIME"text/plain", solver::Kriging)
+  println(io, solver)
+  for (varname, varparams) in solver.params
+    if varparams.drifts ≠ nothing
+      println(io, "  - $varname => External Drift Kriging")
+    elseif varparams.degree ≠ nothing
+      println(io, "  - $varname => Universal Kriging")
+    elseif varparams.mean ≠ nothing
+      println(io, "  - $varname => Simple Kriging")
+    else
+      println(io, "  - $varname => Ordinary Kriging")
+    end
+  end
 end

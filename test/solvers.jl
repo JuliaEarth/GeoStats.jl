@@ -3,13 +3,13 @@
 
   @testset "Kriging solver" begin
     problem = EstimationProblem(data2D, grid, :value)
-    solver = Kriging(:value => KrigParam(variogram=GaussianVariogram(range=20.)))
+    solver = Kriging(:value => @NT(variogram=GaussianVariogram(range=20.)))
 
     solution = solve(problem, solver)
 
     # basic checks
     result = digest(solution)
-    @test :value ∈ keys(result)
+    @test Set(keys(result)) == Set([:value])
 
     if ismaintainer || istravis
       @testset "Plot recipe" begin

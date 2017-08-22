@@ -16,11 +16,15 @@ __precompile__(true)
 
 module GeoStats
 
+using Reexport
 using DataFrames
 using Combinatorics: combinations
 using SpecialFunctions: besselk
-using Parameters: @with_kw
 using RecipesBase
+
+# won't be needed in Julia v0.7
+using Parameters: @with_kw
+@reexport using NamedTuples
 
 # utilities and datatypes
 include("utils.jl")
@@ -109,7 +113,7 @@ export
   digest,
 
   # solvers
-  Kriging, KrigParam,
+  Kriging,
   SeqGaussSim, SGSParam,
   solve
 

@@ -56,7 +56,6 @@ end
 
 function Base.show(io::IO, ::MIME"text/plain", solution::EstimationSolution)
   println(io, solution)
-  for varname in keys(solution.mean)
-    println(io, "  - $varname")
-  end
+  println(io, "  domain: ", solution.domain)
+  print(  io, "  variables: ", join(keys(solution.mean), ", ", " and "))
 end
