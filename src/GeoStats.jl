@@ -46,7 +46,7 @@ include("solvers.jl")
 # plot recipes
 include("plotrecipes/empirical_variograms.jl")
 include("plotrecipes/theoretical_variograms.jl")
-include("plotrecipes/problems/estimation_problem.jl")
+include("plotrecipes/solutions/estimation_solution.jl")
 
 # helper function to launch examples from Julia prompt
 function examples()
