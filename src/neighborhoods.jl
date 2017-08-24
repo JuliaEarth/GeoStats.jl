@@ -13,27 +13,14 @@
 ## OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
 """
-    Realization(var1 => values1, var2 => values2, ...)
+    AbstractNeighborhood
 
-A realization of the variables `var1`, `var2`, ... where
-the simulated values are stored in one-dimensional vectors
-`values1`, `values2`, ...
-
-### Notes
-
-A `Realization` is simply a Julia `Dict{Symbol,Vector}`.
+A neighborhood on a spatial domain of type `D`.
 """
-const Realization = Dict{Symbol,Vector}
+abstract type AbstractNeighborhood{D<:AbstractDomain} end
 
-"""
-    SimulationSolution
-
-A solution to a spatial simulation problem.
-"""
-struct SimulationSolution{D<:AbstractDomain} <: AbstractSolution
-  domain::D
-  realizations::Vector{Realization}
-end
-
-SimulationSolution(domain, realizations) =
-  SimulationSolution{typeof(domain)}(domain, realizations)
+#------------------
+# IMPLEMENTATIONS
+#------------------
+include("neighborhoods/cube_neighborhood.jl")
+include("neighborhoods/sphere_neighborhood.jl")

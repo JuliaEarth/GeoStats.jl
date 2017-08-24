@@ -39,6 +39,8 @@ include("estimators.jl")
 # geostatistical problems
 include("domains.jl")
 include("paths.jl")
+include("neighborhoods.jl")
+include("mappers.jl")
 include("problems.jl")
 include("solutions.jl")
 include("solvers.jl")
@@ -114,7 +116,7 @@ export
 
   # solvers
   Kriging,
-  SeqGaussSim, SGSParam,
+  SeqGaussSim,
   solve
 
 end

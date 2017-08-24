@@ -65,20 +65,26 @@ function SeqGaussSim(params...)
   SeqGaussSim(dict)
 end
 
-function solve_single(problem::SimulationProblem{<:AbstractDomain}, solver::SeqGaussSim)
-  # retrieve data
+function solve(problem::SimulationProblem{<:AbstractDomain}, solver::SeqGaussSim)
+  # sanity checks
+  @assert keys(solver.params) ⊆ variables(problem) "invalid variable names in solver parameters"
+
+  # retrieve problem info
   geodata = data(problem)
   rawdata = data(geodata)
+  pdomain = domain(problem)
+  targetvars = variables(problem)
+
+  # map spatial data onto domain
+  mapper = SimpleMapper(geodata, pdomain, targetvars)
 
   # determine coordinate type
   coordtypes = eltypes(coordinates(geodata))
   T = promote_type(coordtypes...)
 
-  # store results on dictionary
-  realization = Realization()
-
-  # loop over target variables
-  for var in variables(problem)
+  # create estimators for each variable
+  estimdict = Dict()
+  for var in targetvars
     # determine value type
     V = eltype(rawdata[var])
 
@@ -100,17 +106,94 @@ function solve_single(problem::SimulationProblem{<:AbstractDomain}, solver::SeqG
       estimator = OrdinaryKriging{T,V}(varparams.variogram)
     end
 
-    # perform simulation
-    varreal = solve_single(problem, var, estimator)
+    estimdict[var] = estimator
+  end
 
-    # save result for variable
+  # realization loop
+  realizations = [solve_single(problem, estimdict, mapper) for i=1:nreals(problem)]
+
+  # return solution
+  SimulationSolution(pdomain, realizations)
+end
+
+function solve_single(problem::SimulationProblem{<:AbstractDomain},
+                      estimdict::Dict, mapper::M) where {M<:AbstractMapper}
+  # retrieve problem info
+  geodata = data(problem)
+  rawdata = data(geodata)
+  pdomain = domain(problem)
+
+  # determine coordinate type
+  coordtypes = eltypes(coordinates(geodata))
+  T = promote_type(coordtypes...)
+
+  # define neighborhood
+  neighborhood = SphereNeighborhood(pdomain, 8.)
+
+  # save results on dictionary
+  realization = Realization()
+
+  # generate realization for each variable
+  for var in variables(problem)
+    # determine value type
+    V = eltype(rawdata[var])
+
+    # results for variable
+    varreal = Vector{V}(npoints(pdomain))
+
+    # keep track of simulated locations
+    simulated = falses(npoints(pdomain))
+
+    # consider data locations as already simulated
+    varmapping = mapping(mapper, var)
+    for (loc,val) in varmapping
+      simulated[loc] = true
+      varreal[loc] = val
+    end
+
+    # retrieve estimator
+    estimator = estimdict[var]
+
+    # simulation loop
+    for location in SimplePath(pdomain)
+      if !simulated[location]
+        # find neighbors
+        neighbors = neighborhood(location)
+
+        # neighbors with previously simulated values
+        neighbors = neighbors[view(simulated, neighbors)]
+
+        # check if there are previously simulated values
+        if isempty(neighbors)
+          # draw from marginal
+          varreal[location] = .5
+        else
+          # build coordinates and observation arrays
+          X = Matrix{T}(ndims(pdomain), length(neighbors))
+          z = Vector{V}(length(neighbors))
+          for (j, neighbor) in enumerate(neighbors)
+            X[:,j] = coordinates(pdomain, neighbor)
+            z[j]   = varreal[neighbor]
+          end
+
+          # build Kriging system
+          fit!(estimator, X, z)
+
+          # estimate mean and variance
+          μ, σ² = estimate(estimator, coordinates(pdomain, location))
+
+          # draw from conditional
+          varreal[location] = μ + √σ²*randn(V)
+        end
+
+        # mark location as simulated and continue
+        simulated[location] = true
+      end
+    end
+
+    # save realization for variable
     realization[var] = varreal
   end
 
   realization
-end
-
-function solve_single(problem::SimulationProblem{<:AbstractDomain},
-               var::Symbol, estimator::E) where {E<:AbstractEstimator}
-  [] # TODO
 end

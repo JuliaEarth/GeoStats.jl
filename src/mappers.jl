@@ -13,27 +13,20 @@
 ## OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
 """
-    Realization(var1 => values1, var2 => values2, ...)
+    AbstractMapper
 
-A realization of the variables `var1`, `var2`, ... where
-the simulated values are stored in one-dimensional vectors
-`values1`, `values2`, ...
-
-### Notes
-
-A `Realization` is simply a Julia `Dict{Symbol,Vector}`.
+A mapping strategy for mapping spatial data onto a domain of type `D`.
 """
-const Realization = Dict{Symbol,Vector}
+abstract type AbstractMapper{D<:AbstractDomain} end
 
 """
-    SimulationSolution
+    mapping(mapper, variable)
 
-A solution to a spatial simulation problem.
+Return the mapping from data locations to `variable` values.
 """
-struct SimulationSolution{D<:AbstractDomain} <: AbstractSolution
-  domain::D
-  realizations::Vector{Realization}
-end
+mapping(::AbstractMapper, variable::Symbol) = error("not implemented")
 
-SimulationSolution(domain, realizations) =
-  SimulationSolution{typeof(domain)}(domain, realizations)
+#------------------
+# IMPLEMENTATIONS
+#------------------
+include("mappers/simple_mapper.jl")
