@@ -27,7 +27,8 @@ is requested.
 For unconditional simulation, an empty `geodata` object is
 automatically created by the constructor. Therefore, all
 simulation solvers can assume that a valid (possibly empty)
-[`GeoDataFrame`](@ref) exists.
+[`GeoDataFrame`](@ref) exists. To check if a problem has
+data use the [`hasdata`](@ref) method.
 """
 struct SimulationProblem{D<:AbstractDomain} <: AbstractProblem
   geodata::GeoDataFrame
@@ -45,13 +46,16 @@ struct SimulationProblem{D<:AbstractDomain} <: AbstractProblem
   end
 end
 
-SimulationProblem(geodata, domain, targetvars, nreals) =
-  SimulationProblem{typeof(domain)}(geodata, domain, targetvars, nreals)
+SimulationProblem(geodata::GeoDataFrame, domain::D, targetvars::Vector{Symbol},
+                  nreals::Int) where {D<:AbstractDomain} =
+  SimulationProblem{D}(geodata, domain, targetvars, nreals)
 
-SimulationProblem(geodata, domain, targetvar::Symbol, nreals) =
+SimulationProblem(geodata::GeoDataFrame, domain::D, targetvar::Symbol,
+                  nreals::Int) where {D<:AbstractDomain} =
   SimulationProblem(geodata, domain, [targetvar], nreals)
 
-function SimulationProblem(domain, targetvars, nreals)
+function SimulationProblem(domain::D, targetvars::Vector{Symbol},
+                           nreals::Int) where {D<:AbstractDomain}
   dim = ndims(domain)
   ctypes = [coordtype(domain) for i=1:dim]
   vtypes = [Float64 for i=1:length(targetvars)]
@@ -64,7 +68,8 @@ function SimulationProblem(domain, targetvars, nreals)
   SimulationProblem(geodata, domain, targetvars, nreals)
 end
 
-SimulationProblem(domain, targetvar::Symbol, nreals) =
+SimulationProblem(domain::D, targetvar::Symbol,
+                  nreals::Int) where {D<:AbstractDomain} =
   SimulationProblem(domain, [targetvar], nreals)
 
 """

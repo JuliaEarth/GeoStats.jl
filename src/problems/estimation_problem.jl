@@ -33,10 +33,12 @@ struct EstimationProblem{D<:AbstractDomain} <: AbstractProblem
   end
 end
 
-EstimationProblem(geodata, domain, targetvars) =
-  EstimationProblem{typeof(domain)}(geodata, domain, targetvars)
+EstimationProblem(geodata::GeoDataFrame, domain::D,
+                  targetvars::Vector{Symbol}) where {D<:AbstractDomain} =
+  EstimationProblem{D}(geodata, domain, targetvars)
 
-EstimationProblem(geodata, domain, targetvar::Symbol) =
+EstimationProblem(geodata::GeoDataFrame, domain::D,
+                  targetvar::Symbol) where {D<:AbstractDomain} =
   EstimationProblem(geodata, domain, [targetvar])
 
 # ------------
