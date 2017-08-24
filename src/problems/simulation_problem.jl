@@ -70,7 +70,7 @@ SimulationProblem(domain, targetvar::Symbol, nreals) =
 """
     nreals(simproblem)
 
-Return the number of realizations of the simulation problem `simprob`.
+Return the number of realizations of the simulation problem `simproblem`.
 """
 nreals(problem::SimulationProblem) = problem.nreals
 
