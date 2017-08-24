@@ -42,14 +42,27 @@ end
 A polyalgorithm sequential Gaussian simulation solver.
 
 Each pair `var=>param` specifies the [`SGSParam`](@ref) `param`
-for the simulation variable `var`.
+for the simulation variable `var`. In order to avoid boilerplate
+code, the constructor expects pairs of `Symbol` and `NamedTuple`
+instead. See [`Kriging`](@ref) documentation for examples.
 """
 struct SeqGaussSim <: AbstractSimulationSolver
   params::Dict{Symbol,SGSParam}
 
-  function SeqGaussSim(params...)
-    new(Dict(params...))
+  SeqGaussSim(params::Dict{Symbol,SGSParam}) = new(params)
+end
+
+function SeqGaussSim(params...)
+  # build dictionary for inner constructor
+  dict = Dict{Symbol,SGSParam}()
+
+  # convert named tuples to SGS parameters
+  for (varname, varparams) in params
+    kwargs = [k => v for (k,v) in zip(keys(varparams), varparams)]
+    push!(dict, varname => SGSParam(; kwargs...))
   end
+
+  SeqGaussSim(dict)
 end
 
 function solve_single(problem::SimulationProblem{<:AbstractDomain}, solver::SeqGaussSim)
