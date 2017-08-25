@@ -59,7 +59,9 @@ The main package (i.e. GeoStats.jl) is self-contained, and provides high-perform
 
 ### Problems and solvers
 
-Solvers for geostatistical problems can be installed separately depending on the application. They are automatically registered in the GeoStats.jl framework:
+Solvers for geostatistical problems can be installed separately depending on the application. They are automatically integrated with GeoStats.jl thanks to Julia's multiple dispatch features.
+
+OBS: Simulation solvers generate realizations in parallel unless otherwise noted.
 
 #### Estimation problems
 
