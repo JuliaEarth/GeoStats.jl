@@ -29,14 +29,14 @@ fit!(estimator::AbstractEstimator, X::AbstractMatrix, z::AbstractVector) = error
 """
     weights(estimator, xₒ)
 
-Compute the weights λ (and Lagrange multipliers ν) for the `estimator` at location `xₒ`.
+Compute the weights λ (and Lagrange multipliers ν) for the `estimator` at coordinates `xₒ`.
 """
 weights(estimator::AbstractEstimator, xₒ::AbstractVector) = error("not implemented")
 
 """
     estimate(estimator, xₒ)
 
-Compute mean and variance for the `estimator` at location `xₒ`.
+Compute mean and variance for the `estimator` at coordinates `xₒ`.
 """
 estimate(estimator::AbstractEstimator, xₒ::AbstractVector) = combine(weights(estimator, xₒ))
 
