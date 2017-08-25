@@ -197,3 +197,25 @@ function solve_single(problem::SimulationProblem{<:AbstractDomain},
 
   realization
 end
+
+# ------------
+# IO methods
+# ------------
+function Base.show(io::IO, solver::SeqGaussSim)
+  print(io, "SeqGaussSim solver")
+end
+
+function Base.show(io::IO, ::MIME"text/plain", solver::SeqGaussSim)
+  println(io, solver)
+  for (varname, varparams) in solver.params
+    if varparams.drifts ≠ nothing
+      println(io, "  - $varname => External Drift Kriging")
+    elseif varparams.degree ≠ nothing
+      println(io, "  - $varname => Universal Kriging")
+    elseif varparams.mean ≠ nothing
+      println(io, "  - $varname => Simple Kriging")
+    else
+      println(io, "  - $varname => Ordinary Kriging")
+    end
+  end
+end
