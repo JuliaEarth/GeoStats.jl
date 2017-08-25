@@ -139,10 +139,9 @@ function combine(weights::UniversalKrigingWeights{T,V}) where {T<:Real,V}
   z = weights.estimator.z; γ = weights.estimator.γ
   λ = weights.λ; ν = weights.ν; b = weights.b
 
-  # max(σ²,0) takes care of floating point errors
   if isstationary(γ)
-    z⋅λ, max(γ.sill - b⋅[λ;ν], zero(V))
+    z⋅λ, γ.sill - b⋅[λ;ν]
   else
-    z⋅λ, max(b⋅[λ;ν], zero(V))
+    z⋅λ, b⋅[λ;ν]
   end
 end

@@ -105,6 +105,5 @@ function combine(weights::SimpleKrigingWeights{T,V}) where {T<:Real,V}
   γ = weights.estimator.γ; μ = weights.estimator.μ
   λ = weights.λ; y = weights.y; c = weights.c
 
-  # max(σ²,0) takes care of floating point errors
-  μ + y⋅λ, max(γ.sill - c⋅λ, zero(V))
+  μ + y⋅λ, γ.sill - c⋅λ
 end
