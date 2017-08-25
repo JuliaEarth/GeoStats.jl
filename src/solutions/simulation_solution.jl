@@ -37,3 +37,41 @@ end
 
 SimulationSolution(domain, realizations) =
   SimulationSolution{typeof(domain)}(domain, realizations)
+
+function digest(solution::SimulationSolution{<:RegularGrid})
+  # get the size of the grid
+  sdomain = domain(solution)
+  sz = size(sdomain)
+
+  # solution variables and number of realizations
+  variables = keys(solution.realizations[1])
+  nreals = length(solution.realizations)
+
+  # output dictionary
+  digested = Dict{Symbol,Vector{Array}}()
+  for var in variables
+    reals = []
+    for i=1:nreals
+      real = reshape(solution.realizations[i][var], sz)
+      push!(reals, real)
+    end
+
+    push!(digested, var => reals)
+  end
+
+  digested
+end
+
+# ------------
+# IO methods
+# ------------
+function Base.show(io::IO, solution::SimulationSolution)
+  dim = ndims(solution.domain)
+  print(io, "$(dim)D SimulationSolution")
+end
+
+function Base.show(io::IO, ::MIME"text/plain", solution::SimulationSolution)
+  println(io, solution)
+  println(io, "  domain: ", solution.domain)
+  print(  io, "  variables: ", join(keys(solution.realizations[1]), ", ", " and "))
+end
