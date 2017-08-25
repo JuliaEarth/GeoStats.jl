@@ -3,8 +3,6 @@
 [![][travis-img]][travis-url] [![][julia-pkg-img]][julia-pkg-url] [![][codecov-img]][codecov-url] [![][docs-stable-img]][docs-stable-url] [![][docs-latest-img]][docs-latest-url]
 
 High-performance implementations of geostatistical algorithms for the Julia programming language.
-This package is in its initial development, and currently only contains Kriging estimation methods.
-More features will be added as the Julia type system matures.
 
 # Project goals
 
@@ -39,8 +37,7 @@ derived for *computer visualization*. [Kriging is a generalization of Splines](h
 in which one has the freedom to customize spatial structure based on data. Besides the estimate itself, Kriging
 also provides the variance map as a function of knots configuration.
 
-Installation
-------------
+## Installation
 
 Get the latest stable release with Julia's package manager:
 
@@ -48,27 +45,42 @@ Get the latest stable release with Julia's package manager:
 Pkg.add("GeoStats")
 ```
 
-Project organization
---------------------
+## Project organization
 
 The project is split into various packages:
 
-| Package           | Description |
-|:-----------------:| ----------- |
+| Package  | Description |
+|:--------:| ----------- |
 | [GeoStats.jl](https://github.com/juliohm/GeoStats.jl) | Main package containing problem definitions, Kriging-based solvers, and other geostatistical tools. |
 | [GeoStatsImages.jl](https://github.com/juliohm/GeoStatsImages.jl) | Training images for multiple-point geostatistical simulation. |
 | [GslibIO.jl](https://github.com/juliohm/GslibIO.jl) | Utilities to read/write *extended* GSLIB files. |
 
 The main package (i.e. GeoStats.jl) is self-contained, and provides high-performance Kriging-based estimation/simulation algorithms over arbitrary domains. Other packages can be installed from the list above for additional functionality.
 
-Documentation
--------------
+### Problems and solvers
+
+Solvers for geostatistical problems can be installed separately depending on the application. They are automatically registered in the GeoStats.jl framework:
+
+#### Estimation problems
+
+| Solver | Description | References |
+|:------:|-------------|------------|
+| [Kriging](https://github.com/juliohm/GeoStats.jl/tree/master/src/solvers) | Polyalgorithm Kriging (SK, OK, UK, EDK) | [Matheron 1971](https://books.google.com/books/about/The_Theory_of_Regionalized_Variables_and.html?id=TGhGAAAAYAAJ), [Journel 1978](https://www.amazon.com/Mining-Geostatistics-G-Journel/dp/1930665911) |
+
+#### Simulation problems
+
+| Solver | Description | References |
+|:------:|-------------|------------|
+| [SeqGaussSim](https://github.com/juliohm/GeoStats.jl/tree/master/src/solvers) | Sequential Gaussian simulation | [Deutsch 1997](https://www.amazon.com/GSLIB-Geostatistical-Software-Library-Geostatistics/dp/0195100158), [Olea 1999](https://www.amazon.com/Geostatistics-Engineers-Earth-Scientists-Ricardo/dp/0792385233) |
+
+If you are a developer and your solver is not listed above, please open a pull request and we will be happy to review and add it to the list. If you have questions on how to write your own solver, please [open an issue](https://github.com/juliohm/GeoStats.jl/issues) and ask for help.
+
+## Documentation
 
 - [**STABLE**][docs-stable-url] &mdash; **most recently tagged version of the documentation.**
 - [**LATEST**][docs-latest-url] &mdash; *in-development version of the documentation.*
 
-Examples
---------
+## Examples
 
 A set of Jupyter notebooks demonstrating the current functionality of the package is available
 in the [examples](examples) folder. These notebooks are distributed with GeoStats.jl and can be
@@ -103,8 +115,7 @@ plot(solution)
 ```
 ![EstimationSolution](docs/src/images/EstimationSolution.png)
 
-Contributing and supporting
----------------------------
+## Contributing and supporting
 
 Contributions are very welcome, as are feature requests and suggestions. Please
 [open an issue](https://github.com/juliohm/GeoStats.jl/issues) if you encounter
