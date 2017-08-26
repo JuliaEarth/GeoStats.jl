@@ -34,6 +34,9 @@ the variogram `v` only.
   mean = nothing
   degree = nothing
   drifts = nothing
+  path = :simple
+  neighradius = 10.
+  maxneighbors = 10
 end
 
 """
@@ -75,15 +78,15 @@ function solve(problem::SimulationProblem{<:AbstractDomain}, solver::SeqGaussSim
   pdomain = domain(problem)
   targetvars = variables(problem)
 
-  # map spatial data onto domain
+  # map spatial data to domain
   mapper = SimpleMapper(geodata, pdomain, targetvars)
 
   # determine coordinate type
   coordtypes = eltypes(coordinates(geodata))
   T = promote_type(coordtypes...)
 
-  # create estimators for each variable
-  estimdict = Dict()
+  # process user input
+  params = Dict()
   for var in targetvars
     # determine value type
     V = eltype(rawdata[var])
@@ -106,37 +109,54 @@ function solve(problem::SimulationProblem{<:AbstractDomain}, solver::SeqGaussSim
       estimator = OrdinaryKriging{T,V}(varparams.variogram)
     end
 
-    estimdict[var] = estimator
+    # determine which path to use
+    if varparams.path == :simple
+      path = SimplePath(pdomain)
+    elseif varparams.path == :random
+      path = RandomPath(pdomain)
+    else
+      error("invalid path type")
+    end
+
+    # determine which neighborhood to use
+    neighborhood = SphereNeighborhood(pdomain, varparams.neighradius)
+
+    # determine maximum number of conditioning neighbors
+    maxneighbors = varparams.maxneighbors
+
+    # save parameters for variable
+    params[var] = Dict(:estimator    => estimator,
+                       :path         => path,
+                       :neighborhood => neighborhood,
+                       :maxneighbors => maxneighbors,
+                       :coordtype    => T,
+                       :valuetype    => V)
   end
 
   # realization loop
-  realizations = [solve_single(problem, estimdict, mapper) for i=1:nreals(problem)]
+  realizations = [solve_single(problem, params, mapper) for i=1:nreals(problem)]
 
   # return solution
   SimulationSolution(pdomain, realizations)
 end
 
 function solve_single(problem::SimulationProblem{<:AbstractDomain},
-                      estimdict::Dict, mapper::M) where {M<:AbstractMapper}
+                      params::Dict, mapper::M) where {M<:AbstractMapper}
   # retrieve problem info
-  geodata = data(problem)
-  rawdata = data(geodata)
   pdomain = domain(problem)
-
-  # determine coordinate type
-  coordtypes = eltypes(coordinates(geodata))
-  T = promote_type(coordtypes...)
-
-  # define neighborhood
-  neighborhood = SphereNeighborhood(pdomain, 8.)
 
   # save results on dictionary
   realization = Realization()
 
   # generate realization for each variable
   for var in variables(problem)
-    # determine value type
-    V = eltype(rawdata[var])
+    # retrieve variable parameters
+    estimator    = params[var][:estimator]
+    path         = params[var][:path]
+    neighborhood = params[var][:neighborhood]
+    maxneighbors = params[var][:maxneighbors]
+    T            = params[var][:coordtype]
+    V            = params[var][:valuetype]
 
     # results for variable
     varreal = Vector{V}(npoints(pdomain))
@@ -145,17 +165,13 @@ function solve_single(problem::SimulationProblem{<:AbstractDomain},
     simulated = falses(npoints(pdomain))
 
     # consider data locations as already simulated
-    varmapping = mapping(mapper, var)
-    for (loc,val) in varmapping
+    for (loc,val) in mapping(mapper, var)
       simulated[loc] = true
       varreal[loc] = val
     end
 
-    # retrieve estimator
-    estimator = estimdict[var]
-
     # simulation loop
-    for location in SimplePath(pdomain)
+    for location in path
       if !simulated[location]
         # find neighbors
         neighbors = neighborhood(location)
@@ -163,7 +179,12 @@ function solve_single(problem::SimulationProblem{<:AbstractDomain},
         # neighbors with previously simulated values
         neighbors = neighbors[view(simulated, neighbors)]
 
-        # check if there are previously simulated values
+        # sample a subset of neighbors for computational purposes
+        if length(neighbors) > maxneighbors
+          neighbors = sample(neighbors, maxneighbors, replace=false)
+        end
+
+        # choose between marginal and conditional distribution
         if isempty(neighbors)
           # draw from marginal
           varreal[location] = .5
