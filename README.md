@@ -73,8 +73,6 @@ Solvers for geostatistical problems can be installed separately depending on the
 |:------:|-------------|------------|
 | [SeqGaussSim](https://github.com/juliohm/GeoStats.jl/tree/master/src/solvers) | Sequential Gaussian simulation | [Deutsch 1997](https://www.amazon.com/GSLIB-Geostatistical-Software-Library-Geostatistics/dp/0195100158), [Olea 1999](https://www.amazon.com/Geostatistics-Engineers-Earth-Scientists-Ricardo/dp/0792385233) |
 
-OBS: Simulation solvers generate realizations in parallel unless otherwise noted.
-
 If you are a developer and your solver is not listed above, please open a pull request and we will be happy to review and add it to the list. If you have questions on how to write your own solver, please [open an issue](https://github.com/juliohm/GeoStats.jl/issues) and ask for help.
 
 ## Documentation
