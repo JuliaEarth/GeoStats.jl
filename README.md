@@ -14,11 +14,13 @@ High-performance implementations of geostatistical algorithms for the Julia prog
 ### Related packages
 
 - [GaussianProcesses.jl](https://github.com/STOR-i/GaussianProcesses.jl) &mdash; Gaussian processes
-and Simple Kriging are essentially [two names for the same concept](https://en.wikipedia.org/wiki/Kriging),
-and this distinction only exists due to historical reasons. [Matheron](https://en.wikipedia.org/wiki/Georges_Matheron)
-and other important geostatisticians have generalized Gaussian processes to random fields with non-zero mean and
-for situations where the mean is unknown. GeoStats.jl includes Gaussian processes as a special case as
-well as other more practical Kriging variants, see the [Gaussian processes example](examples).
+and Simple Kriging are essentially [two names for the same concept](https://en.wikipedia.org/wiki/Kriging).
+The derivation of Kriging estimators, however; does **not** require distributional assumptions. It is a
+beautiful coincidence that for multivariate Gaussian distributions, Simple Kriging gives the conditional
+expectation. [Matheron](https://en.wikipedia.org/wiki/Georges_Matheron)
+and other important geostatisticians have generalized Gaussian processes to more general random fields with
+smooth-varying mean and for situations where the mean is unknown. GeoStats.jl includes Gaussian processes as a special
+case as well as other more practical Kriging variants, see the [Gaussian processes example](examples).
 
 - [MLKernels.jl](https://github.com/trthatcher/MLKernels.jl) &mdash; Spatial structure can be
 represented in many different forms: covariance, variogram, correlogram, etc. Variograms are more
