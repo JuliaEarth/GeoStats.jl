@@ -29,9 +29,6 @@ there are variogram models with no covariance counterpart. Furthermore, empirica
 easily estimated from the data (in various directions) with an efficient procedure. GeoStats.jl treats
 variograms as first-class objects, see the [Variogram modeling example](examples).
 
-- [celerite.jl](https://github.com/ericagol/celerite.jl) &mdash; For 1D Gaussian processes, this project
-was originally written in C++/Python and is now ported to Julia.
-
 - [Interpolations.jl](https://github.com/JuliaMath/Interpolations.jl) &mdash; Kriging and Spline interpolation
 have different purposes, yet these two methods are sometimes listed as competing alternatives. Kriging estimation
 is about minimizing variance (or estimation error), whereas Spline interpolation is about forcedly smooth estimators
