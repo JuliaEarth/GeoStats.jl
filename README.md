@@ -19,8 +19,8 @@ The derivation of Kriging estimators, however; does **not** require distribution
 beautiful coincidence that for multivariate Gaussian distributions, Simple Kriging gives the conditional
 expectation. [Matheron](https://en.wikipedia.org/wiki/Georges_Matheron)
 and other important geostatisticians have generalized Gaussian processes to more general random fields with
-smooth-varying mean and for situations where the mean is unknown. GeoStats.jl includes Gaussian processes as a special
-case as well as other more practical Kriging variants, see the [Gaussian processes example](examples).
+locally-varying mean and for situations where the mean is unknown. GeoStats.jl includes Gaussian processes as
+a special case as well as other more practical Kriging variants, see the [Gaussian processes example](examples).
 
 - [MLKernels.jl](https://github.com/trthatcher/MLKernels.jl) &mdash; Spatial structure can be
 represented in many different forms: covariance, variogram, correlogram, etc. Variograms are more
