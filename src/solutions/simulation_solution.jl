@@ -13,26 +13,13 @@
 ## OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
 """
-    Realization(var1 => values1, var2 => values2, ...)
-
-A realization of the variables `var1`, `var2`, ... where
-the simulated values are stored in one-dimensional vectors
-`values1`, `values2`, ...
-
-### Notes
-
-A `Realization` is simply a Julia `Dict{Symbol,Vector}`.
-"""
-const Realization = Dict{Symbol,Vector}
-
-"""
     SimulationSolution
 
 A solution to a spatial simulation problem.
 """
 struct SimulationSolution{D<:AbstractDomain} <: AbstractSolution
   domain::D
-  realizations::Vector{Realization}
+  realizations::Dict{Symbol,Vector{Vector}}
 end
 
 SimulationSolution(domain, realizations) =
@@ -40,21 +27,16 @@ SimulationSolution(domain, realizations) =
 
 function digest(solution::SimulationSolution{<:RegularGrid})
   # get the size of the grid
-  sdomain = domain(solution)
-  sz = size(sdomain)
+  sz = size(domain(solution))
 
   # solution variables and number of realizations
-  variables = keys(solution.realizations[1])
-  nreals = length(solution.realizations)
+  variables = collect(keys(solution.realizations))
+  nreals = length(solution.realizations[variables[1]])
 
   # output dictionary
   digested = Dict{Symbol,Vector{Array}}()
   for var in variables
-    reals = []
-    for i=1:nreals
-      real = reshape(solution.realizations[i][var], sz)
-      push!(reals, real)
-    end
+    reals = map(r -> reshape(r, sz), solution.realizations[var])
 
     push!(digested, var => reals)
   end
@@ -73,5 +55,5 @@ end
 function Base.show(io::IO, ::MIME"text/plain", solution::SimulationSolution)
   println(io, solution)
   println(io, "  domain: ", solution.domain)
-  print(  io, "  variables: ", join(keys(solution.realizations[1]), ", ", " and "))
+  print(  io, "  variables: ", join(keys(solution.realizations), ", ", " and "))
 end

@@ -53,15 +53,21 @@ function solve(problem::SimulationProblem{<:AbstractDomain}, solver::AbstractSim
   # sanity checks
   @assert keys(solver.params) ⊆ variables(problem) "invalid variable names in solver parameters"
 
-  realizations = [solve_single(problem, solver) for i=1:nreals(problem)]
+  realizations = Dict{Symbol,Vector{Vector}}()
+  for var in variables(problem)
+      # TODO: run in parallel
+      varreals = [solve_single(problem, var, solver) for i=1:nreals(problem)]
+
+      push!(realizations, var => varreals)
+  end
 
   SimulationSolution(domain(problem), realizations)
 end
 
 """
-    solve_single(problem, solver)
+    solve_single(problem, var, solver)
 
-Solve a single realization of the `problem` with simulation `solver`.
+Solve a single realization of `var` in the `problem` with simulation `solver`.
 
 ### Notes
 
@@ -71,7 +77,7 @@ generated with his/her solver are indenpendent one from another. The package
 will then automatically trigger the algorithm in parallel at the top-level
 `solve` call.
 """
-solve_single(::SimulationProblem, ::AbstractSimulationSolver) = error("not implemented")
+solve_single(::SimulationProblem, ::Symbol, ::AbstractSimulationSolver) = error("not implemented")
 
 #------------------
 # IMPLEMENTATIONS

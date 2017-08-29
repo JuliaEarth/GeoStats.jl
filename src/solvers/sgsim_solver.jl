@@ -72,151 +72,135 @@ function solve(problem::SimulationProblem{<:AbstractDomain}, solver::SeqGaussSim
   # sanity checks
   @assert keys(solver.params) ⊆ variables(problem) "invalid variable names in solver parameters"
 
+  # map spatial data to domain
+  mapper = SimpleMapper(data(problem), domain(problem), variables(problem))
+
+  realizations = Dict{Symbol,Vector{Vector}}()
+  for var in variables(problem)
+    varreals = [solve_single(problem, var, solver, mapper) for i=1:nreals(problem)]
+
+    push!(realizations, var => varreals)
+  end
+
+  # return solution
+  SimulationSolution(domain(problem), realizations)
+end
+
+function solve_single(problem::SimulationProblem{<:AbstractDomain},
+                      var::Symbol, solver::SeqGaussSim, mapper::SimpleMapper)
   # retrieve problem info
   geodata = data(problem)
   rawdata = data(geodata)
   pdomain = domain(problem)
-  targetvars = variables(problem)
 
-  # map spatial data to domain
-  mapper = SimpleMapper(geodata, pdomain, targetvars)
+  #-------------------------
+  # START SIMULATION SETUP
+  #-------------------------
 
   # determine coordinate type
   coordtypes = eltypes(coordinates(geodata))
   T = promote_type(coordtypes...)
 
-  # process user input
-  params = Dict()
-  for var in targetvars
-    # determine value type
-    V = eltype(rawdata[var])
+  # determine value type
+  V = eltype(rawdata[var])
 
-    # get user parameters
-    if var ∈ keys(solver.params)
-      varparams = solver.params[var]
-    else
-      varparams = SGSParam()
-    end
-
-    # determine which Kriging variant to use
-    if varparams.drifts ≠ nothing
-      estimator = ExternalDriftKriging{T,V}(varaparams.variogram, varparams.drifts)
-    elseif varparams.degree ≠ nothing
-      estimator = UniversalKriging{T,V}(varparams.variogram, varparams.degree)
-    elseif varparams.mean ≠ nothing
-      estimator = SimpleKriging{T,V}(varparams.variogram, varparams.mean)
-    else
-      estimator = OrdinaryKriging{T,V}(varparams.variogram)
-    end
-
-    # determine which path to use
-    if varparams.path == :simple
-      path = SimplePath(pdomain)
-    elseif varparams.path == :random
-      path = RandomPath(pdomain)
-    else
-      error("invalid path type")
-    end
-
-    # determine which neighborhood to use
-    neighborhood = SphereNeighborhood(pdomain, varparams.neighradius)
-
-    # determine maximum number of conditioning neighbors
-    maxneighbors = varparams.maxneighbors
-
-    # save parameters for variable
-    params[var] = Dict(:estimator    => estimator,
-                       :path         => path,
-                       :neighborhood => neighborhood,
-                       :maxneighbors => maxneighbors,
-                       :coordtype    => T,
-                       :valuetype    => V)
+  # get user parameters
+  if var ∈ keys(solver.params)
+    varparams = solver.params[var]
+  else
+    varparams = SGSParam()
   end
 
-  # realization loop
-  realizations = [solve_single(problem, params, mapper) for i=1:nreals(problem)]
+  # determine which Kriging variant to use
+  if varparams.drifts ≠ nothing
+    estimator = ExternalDriftKriging{T,V}(varaparams.variogram, varparams.drifts)
+  elseif varparams.degree ≠ nothing
+    estimator = UniversalKriging{T,V}(varparams.variogram, varparams.degree)
+  elseif varparams.mean ≠ nothing
+    estimator = SimpleKriging{T,V}(varparams.variogram, varparams.mean)
+  else
+    estimator = OrdinaryKriging{T,V}(varparams.variogram)
+  end
 
-  # return solution
-  SimulationSolution(pdomain, realizations)
-end
+  # determine which path to use
+  if varparams.path == :simple
+    path = SimplePath(pdomain)
+  elseif varparams.path == :random
+    path = RandomPath(pdomain)
+  else
+    error("invalid path type")
+  end
 
-function solve_single(problem::SimulationProblem{<:AbstractDomain},
-                      params::Dict, mapper::M) where {M<:AbstractMapper}
-  # retrieve problem info
-  pdomain = domain(problem)
+  # determine which neighborhood to use
+  neighborhood = SphereNeighborhood(pdomain, varparams.neighradius)
 
-  # save results on dictionary
-  realization = Realization()
+  # determine maximum number of conditioning neighbors
+  maxneighbors = varparams.maxneighbors
 
-  # generate realization for each variable
-  for var in variables(problem)
-    # retrieve variable parameters
-    estimator    = params[var][:estimator]
-    path         = params[var][:path]
-    neighborhood = params[var][:neighborhood]
-    maxneighbors = params[var][:maxneighbors]
-    T            = params[var][:coordtype]
-    V            = params[var][:valuetype]
+  #-----------------------
+  # END SIMULATION SETUP
+  #-----------------------
 
-    # results for variable
-    varreal = Vector{V}(npoints(pdomain))
+  # result for variable
+  varreal = Vector{V}(npoints(pdomain))
 
-    # keep track of simulated locations
-    simulated = falses(npoints(pdomain))
+  # keep track of simulated locations
+  simulated = falses(npoints(pdomain))
 
-    # consider data locations as already simulated
-    for (loc,val) in mapping(mapper, var)
-      simulated[loc] = true
-      varreal[loc] = val
-    end
+  # consider data locations as already simulated
+  for (loc, val) in mapping(mapper, var)
+    simulated[loc] = true
+    varreal[loc] = val
+  end
 
-    # simulation loop
-    for location in path
-      if !simulated[location]
-        # find neighbors
-        neighbors = neighborhood(location)
+  # simulation loop
+  for location in path
+    if !simulated[location]
+      # find neighbors
+      neighbors = neighborhood(location)
 
-        # neighbors with previously simulated values
-        neighbors = neighbors[view(simulated, neighbors)]
+      # neighbors with previously simulated values
+      neighbors = neighbors[view(simulated, neighbors)]
 
-        # sample a subset of neighbors for computational purposes
-        if length(neighbors) > maxneighbors
-          neighbors = sample(neighbors, maxneighbors, replace=false)
-        end
-
-        # choose between marginal and conditional distribution
-        if isempty(neighbors)
-          # draw from marginal
-          varreal[location] = .5
-        else
-          # build coordinates and observation arrays
-          X = Matrix{T}(ndims(pdomain), length(neighbors))
-          z = Vector{V}(length(neighbors))
-          for (j, neighbor) in enumerate(neighbors)
-            X[:,j] = coordinates(pdomain, neighbor)
-            z[j]   = varreal[neighbor]
-          end
-
-          # build Kriging system
-          fit!(estimator, X, z)
-
-          # estimate mean and variance
-          μ, σ² = estimate(estimator, coordinates(pdomain, location))
-
-          # draw from conditional
-          varreal[location] = μ + √σ²*randn(V)
-        end
-
-        # mark location as simulated and continue
-        simulated[location] = true
+      # sample a subset of neighbors for computational purposes
+      if length(neighbors) > maxneighbors
+        neighbors = sample(neighbors, maxneighbors, replace=false)
       end
-    end
 
-    # save realization for variable
-    realization[var] = varreal
+      # choose between marginal and conditional distribution
+      if isempty(neighbors)
+        # TODO: draw from marginal
+        varreal[location] = .5
+      else
+        # build coordinates and observation arrays
+        X = Matrix{T}(ndims(pdomain), length(neighbors))
+        z = Vector{V}(length(neighbors))
+        for (j, neighbor) in enumerate(neighbors)
+          X[:,j] = coordinates(pdomain, neighbor)
+          z[j]   = varreal[neighbor]
+        end
+
+        # build Kriging system
+        fit!(estimator, X, z)
+
+        try
+          # draw from conditional
+          μ, σ² = estimate(estimator, coordinates(pdomain, location))
+          varreal[location] = μ + √σ²*randn(V)
+        catch e
+          if e isa SingularException
+            # TODO: draw from marginal
+            varreal[location] = .5
+          end
+        end
+      end
+
+      # mark location as simulated and continue
+      simulated[location] = true
+    end
   end
 
-  realization
+  varreal
 end
 
 # ------------
