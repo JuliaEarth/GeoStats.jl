@@ -69,6 +69,4 @@ function findclosest(domain::D, coordinates) where {D<:RegularGrid}
   sub2ind(dims, intcoords...)
 end
 
-#hasdata(m::SimpleMapper, variable::Symbol, location::I) where {I<:Integer} = location ∈ keys(m.dict[variable])
-#getdata(m::SimpleMapper, variable::Symbol, location::I) where {I<:Integer} = m.dict[variable][location]
 mapping(m::SimpleMapper, variable::Symbol) = m.dict[variable]
