@@ -2,7 +2,7 @@
 
 [![][travis-img]][travis-url] [![][julia-pkg-img]][julia-pkg-url] [![][codecov-img]][codecov-url] [![][docs-stable-img]][docs-stable-url] [![][docs-latest-img]][docs-latest-url]
 
-High-performance implementations of geostatistical algorithms for the Julia programming language.
+*High-performance implementations of geostatistical algorithms for the Julia programming language.*
 
 # Project goals
 
