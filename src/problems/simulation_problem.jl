@@ -17,10 +17,31 @@
     SimulationProblem(domain, targetvars, nreals)
 
 A spatial simulation problem on a given `domain` in which the
-variables to be simulated are listed in `targetvars`. For
-conditional simulation, the data of the problem is stored in
-`spatialdata`. In both cases, a number `nreals` of realizations
-is requested.
+variables to be simulated are listed in `targetvars`.
+
+For conditional simulation, the data of the problem is stored in
+`spatialdata`.
+
+For unconditional simulation, a dictionary `targetvars` must be
+provided mapping variable names to their types.
+
+In both cases, a number `nreals` of realizations is requested.
+
+## Examples
+
+Create a conditional simulation problem for porosity and permeability
+with 100 realizations:
+
+```julia
+julia> SimulationProblem(spatialdata, domain, [:porosity,:permeability], 100)
+```
+
+Create an unconditional simulation problem for porosity and facies type
+with 100 realizations:
+
+```julia
+julia> SimulationProblem(domain, Dict(:porosity => Float64, :facies => Int), 100)
+```
 
 ### Notes
 
