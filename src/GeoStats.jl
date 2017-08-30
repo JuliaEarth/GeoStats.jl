@@ -104,10 +104,10 @@ export
 
   # data types
   GeoDataFrame,
-  data,
-  coordnames,
   coordinates,
+  variables,
   npoints,
+  valid,
   readtable,
 
   # problems and solutions

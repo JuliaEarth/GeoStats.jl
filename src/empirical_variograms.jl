@@ -18,10 +18,10 @@
 Computes the empirical (a.k.a. experimental) omnidirectional
 (semi-)variogram from data locations `X` and values `z`.
 
-    EmpiricalVariogram(geodata, var, [optional parameters])
+    EmpiricalVariogram(spatialdata, var, [optional parameters])
 
 Alternatively, compute the variogram for the variable `var` stored
-on a [`GeoDataFrame`](@ref) object `geodata`.
+in a `spatialdata` object.
 
 ## Parameters
 
@@ -86,10 +86,8 @@ end
 EmpiricalVariogram(X, z; nbins=20, maxlag=nothing, distance=EuclideanDistance()) =
   EmpiricalVariogram{eltype(X),eltype(z),typeof(distance)}(X, z, nbins, maxlag, distance)
 
-function EmpiricalVariogram(geodata::GeoDataFrame, var::Symbol; kwargs...)
-  X = convert(Array, coordinates(geodata))'
-  z = convert(Array, data(geodata)[var])
-
+function EmpiricalVariogram(spatialdata::S, var::Symbol; kwargs...) where {S<:AbstractSpatialData}
+  X, z = valid(spatialdata, var)
   EmpiricalVariogram(X, z; kwargs...)
 end
 

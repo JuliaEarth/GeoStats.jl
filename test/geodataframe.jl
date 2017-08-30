@@ -1,9 +1,11 @@
 @testset "Data" begin
-  @test names(data(data3D)) == [:x,:y,:z,:value]
-  @test coordnames(data3D) == [:x,:y,:z]
-  @test names(coordinates(data3D)) == coordnames(data3D)
+  @test coordinates(data3D) == Dict(var => Float64 for var in [:x,:y,:z])
+  @test variables(data3D) == Dict(:value => Float64)
   @test npoints(data3D) == 100
-  @test_throws AssertionError readtable(fname, coordnames=[:a])
+  X, z = valid(data3D, :value)
+  @test size(X,2) == 100
+  @test length(z) == 100
+  @test_throws AssertionError readtable(fname3D, coordnames=[:a])
 
   # show methods
   rawdata = DataFrames.DataFrame(x=[1,2,3],y=[4,5,6])

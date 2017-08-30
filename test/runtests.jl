@@ -24,10 +24,10 @@ z = rand(nobs)
 xₒ = rand(dim)
 
 # load some geodataframes
-fname = joinpath(datadir,"data2D.tsv")
-data2D = readtable(fname, coordnames=[:x,:y])
-fname = joinpath(datadir,"data3D.tsv")
-data3D = readtable(fname)
+fname2D = joinpath(datadir,"data2D.tsv")
+data2D = readtable(fname2D, coordnames=[:x,:y])
+fname3D = joinpath(datadir,"data3D.tsv")
+data3D = readtable(fname3D)
 
 # list of tests
 testfiles = [

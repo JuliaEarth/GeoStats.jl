@@ -52,12 +52,8 @@ function SimulationProblem(spatialdata::S, domain::D, targetvarnames::Vector{Sym
   @assert ndims(domain) == length(datacnames) "data and domain must have the same number of dimensions"
 
   # build dictionary of target variables
-  rawdata = data(spatialdata)
-  targetvars = Dict{Symbol,DataType}()
-  for varname in targetvarnames
-    V = eltype(rawdata[varname])
-    push!(targetvars, varname => V)
-  end
+  datavars = variables(spatialdata)
+  targetvars = Dict(var => T for (var,T) in datavars if var ∈ targetvarnames)
 
   SimulationProblem{S,D}(spatialdata, domain, targetvars, nreals)
 end
@@ -98,6 +94,20 @@ Return the target variables of the simulation `problem` and their types.
 variables(problem::SimulationProblem) = problem.targetvars
 
 """
+    coordinates(problem)
+
+Return the name of the coordinates of the simulation `problem` and their types.
+"""
+function coordinates(problem::SimulationProblem)
+  if problem.spatialdata ≠ nothing
+    coordinates(problem.spatialdata)
+  else
+    T = coordtype(problem.domain)
+    Dict("x$i" => T for i=1:ndims(problem.domain))
+  end
+end
+
+"""
     hasdata(problem)
 
 Return `true` if simulation `problem` has data.
@@ -122,9 +132,10 @@ function Base.show(io::IO, problem::SimulationProblem)
 end
 
 function Base.show(io::IO, ::MIME"text/plain", problem::SimulationProblem)
+  vars = ["$var ($T)" for (var,T) in problem.targetvars]
   println(io, problem)
   println(io, "  data:      ", problem.spatialdata)
   println(io, "  domain:    ", problem.domain)
-  println(io, "  variables: ", join(keys(problem.targetvars), ", ", " and "))
+  println(io, "  variables: ", join(vars, ", ", " and "))
   print(  io, "  N° reals:  ", problem.nreals)
 end
