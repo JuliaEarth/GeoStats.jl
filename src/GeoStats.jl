@@ -26,23 +26,29 @@ using RecipesBase
 using Parameters: @with_kw
 @reexport using NamedTuples
 
-# utilities and datatypes
+# utilities
 include("utils.jl")
-include("geodataframe.jl")
 
-# geostatistical concepts
+# spatial data
+include("spatialdata.jl")
+
+# variograms and Kriging estimators
 include("distances.jl")
 include("empirical_variograms.jl")
 include("theoretical_variograms.jl")
 include("estimators.jl")
 
-# geostatistical problems
+# domains
 include("domains.jl")
 include("paths.jl")
 include("neighborhoods.jl")
 include("mappers.jl")
+
+# problems and solutions
 include("problems.jl")
 include("solutions.jl")
+
+# solvers
 include("solvers.jl")
 
 # plot recipes

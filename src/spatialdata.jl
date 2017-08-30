@@ -13,14 +13,41 @@
 ## OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
 """
-    AbstractProblem
+    AbstractSpatialData
 
-A generic problem in geostatistics.
+A container with spatial data.
 """
-abstract type AbstractProblem end
+abstract type AbstractSpatialData end
+
+"""
+    data(spatialdata)
+
+Return the underlying data wrapped in `spatialdata`.
+"""
+data(::AbstractSpatialData) = error("not implemented")
+
+"""
+    coordnames(spatialdata)
+
+Return the names of the coordinates in `spatialdata`.
+"""
+coordnames(::AbstractSpatialData) = error("not implemented")
+
+"""
+    coordinates(spatialdata)
+
+Return the coordinates of `spatialdata`.
+"""
+coordinates(::AbstractSpatialData) = error("not implemented")
+
+"""
+    npoints(spatialdata)
+
+Return the number of points in `spatialdata`.
+"""
+npoints(::AbstractSpatialData) = error("not implemented")
 
 #------------------
 # IMPLEMENTATIONS
 #------------------
-include("problems/estimation_problem.jl")
-include("problems/simulation_problem.jl")
+include("spatialdata/geodataframe.jl")

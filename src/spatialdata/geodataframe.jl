@@ -38,7 +38,7 @@ No additional storage is required other than a vector of symbols
 with the columns names representing spatial coordinates.
 
 """
-struct GeoDataFrame{DF<:AbstractDataFrame}
+struct GeoDataFrame{DF<:AbstractDataFrame} <: AbstractSpatialData
   data::DF
   coordnames::Vector{Symbol}
 
@@ -68,30 +68,30 @@ function readtable(args...; coordnames=[:x,:y,:z], kwargs...)
 end
 
 """
-    data(geodata)
+    data(geodataframe)
 
-Return the underlying `DataFrame` object wrapped in `geodata`.
+Return the underlying `DataFrame` object wrapped in `geodataframe`.
 """
 data(geodata::GeoDataFrame) = geodata.data
 
 """
-    coordnames(geodata)
+    coordnames(geodataframe)
 
-Return the column names of `geodata` representing spatial coordinates.
+Return the column names of `geodataframe` representing spatial coordinates.
 """
 coordnames(geodata::GeoDataFrame) = geodata.coordnames
 
 """
-    coordinates(geodata)
+    coordinates(geodataframe)
 
-Return the columns of `geodata` representing spatial coordinates.
+Return the columns of `geodataframe` representing spatial coordinates.
 """
 coordinates(geodata::GeoDataFrame) = geodata.data[geodata.coordnames]
 
 """
-    npoints(geodata)
+    npoints(geodataframe)
 
-Return the number of points (or rows) in `geodata`.
+Return the number of points (or rows) in `geodataframe`.
 """
 npoints(geodata::GeoDataFrame) = nrow(geodata.data)
 

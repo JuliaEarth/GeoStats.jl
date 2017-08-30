@@ -49,7 +49,7 @@ Solve the simulation `problem` with simulation `solver`.
 
 Default implementation calls `solve_single` in parallel.
 """
-function solve(problem::SimulationProblem{<:AbstractDomain}, solver::AbstractSimulationSolver)
+function solve(problem::SimulationProblem, solver::AbstractSimulationSolver)
   # sanity checks
   @assert keys(solver.params) ⊆ variables(problem) "invalid variable names in solver parameters"
 

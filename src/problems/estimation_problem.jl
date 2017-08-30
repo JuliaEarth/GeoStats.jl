@@ -13,45 +13,66 @@
 ## OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
 """
-    EstimationProblem(geodata, domain, targetvars)
+    EstimationProblem(spatialdata, domain, targetvars)
 
 A spatial estimation problem on a given `domain` in which the
 variables to be estimated are listed in `targetvars`. The
-data of the problem is stored in `geodata`.
+data of the problem is stored in `spatialdata`.
 """
-struct EstimationProblem{D<:AbstractDomain} <: AbstractProblem
-  geodata::GeoDataFrame
+struct EstimationProblem{S<:AbstractSpatialData,D<:AbstractDomain} <: AbstractProblem
+  spatialdata::S
   domain::D
   targetvars::Vector{Symbol}
 
-  function EstimationProblem{D}(geodata, domain, targetvars) where {D<:AbstractDomain}
-    @assert targetvars ⊆ names(data(geodata)) "target variables must be columns of geodata"
-    @assert isempty(targetvars ∩ coordnames(geodata)) "target variables can't be coordinates"
-    @assert ndims(domain) == length(coordnames(geodata)) "data and domain must have the same number of dimensions"
+  function EstimationProblem{S,D}(spatialdata, domain, targetvars) where {S<:AbstractSpatialData,D<:AbstractDomain}
+    @assert targetvars ⊆ names(data(spatialdata)) "target variables must be present in spatial data"
+    @assert isempty(targetvars ∩ coordnames(spatialdata)) "target variables can't be coordinates"
+    @assert ndims(domain) == length(coordnames(spatialdata)) "data and domain must have the same number of dimensions"
 
-    new(geodata, domain, targetvars)
+    new(spatialdata, domain, targetvars)
   end
 end
 
-EstimationProblem(geodata::GeoDataFrame, domain::D,
-                  targetvars::Vector{Symbol}) where {D<:AbstractDomain} =
-  EstimationProblem{D}(geodata, domain, targetvars)
+EstimationProblem(spatialdata::S, domain::D, targetvars::Vector{Symbol}
+                 ) where {S<:AbstractSpatialData,D<:AbstractDomain} =
+  EstimationProblem{S,D}(spatialdata, domain, targetvars)
 
-EstimationProblem(geodata::GeoDataFrame, domain::D,
-                  targetvar::Symbol) where {D<:AbstractDomain} =
-  EstimationProblem(geodata, domain, [targetvar])
+EstimationProblem(spatialdata::S, domain::D, targetvar::Symbol
+                 ) where {S<:AbstractSpatialData,D<:AbstractDomain} =
+  EstimationProblem(spatialdata, domain, [targetvar])
+
+"""
+    data(problem)
+
+Return the spatial data of the estimation `problem`.
+"""
+data(problem::EstimationProblem) = problem.spatialdata
+
+"""
+    domain(problem)
+
+Return the spatial domain of the estimation `problem`.
+"""
+domain(problem::EstimationProblem) = problem.domain
+
+"""
+    variables(problem)
+
+Return the target variables of the estimation `problem`.
+"""
+variables(problem::EstimationProblem) = problem.targetvars
 
 # ------------
 # IO methods
 # ------------
-function Base.show(io::IO, problem::EstimationProblem{D}) where {D<:AbstractDomain}
+function Base.show(io::IO, problem::EstimationProblem)
   dim = ndims(problem.domain)
   print(io, "$(dim)D EstimationProblem")
 end
 
-function Base.show(io::IO, ::MIME"text/plain", problem::EstimationProblem{D}) where {D<:AbstractDomain}
+function Base.show(io::IO, ::MIME"text/plain", problem::EstimationProblem)
   println(io, problem)
-  println(io, "  data:      ", problem.geodata)
+  println(io, "  data:      ", problem.spatialdata)
   println(io, "  domain:    ", problem.domain)
   print(  io, "  variables: ", join(problem.targetvars, ", ", " and "))
 end

@@ -90,16 +90,16 @@ function Kriging(params...)
   Kriging(dict)
 end
 
-function solve(problem::EstimationProblem{<:AbstractDomain}, solver::Kriging)
+function solve(problem::EstimationProblem, solver::Kriging)
   # sanity checks
   @assert keys(solver.params) ⊆ variables(problem) "invalid variable names in solver parameters"
 
   # retrieve data
-  geodata = data(problem)
-  rawdata = data(geodata)
+  spatialdata = data(problem)
+  rawdata = data(spatialdata)
 
   # determine coordinate type
-  coordtypes = eltypes(coordinates(geodata))
+  coordtypes = eltypes(coordinates(spatialdata))
   T = promote_type(coordtypes...)
 
   # store results on dictionary
@@ -140,12 +140,11 @@ function solve(problem::EstimationProblem{<:AbstractDomain}, solver::Kriging)
   EstimationSolution(domain(problem), μdict, σdict)
 end
 
-function solve(problem::EstimationProblem{<:AbstractDomain},
-               var::Symbol, estimator::E) where {E<:AbstractEstimator}
+function solve(problem::EstimationProblem, var::Symbol, estimator::E) where {E<:AbstractEstimator}
   # retrieve data
-  geodata = data(problem)
-  rawdata = data(geodata)
-  cnames = coordnames(geodata)
+  spatialdata = data(problem)
+  rawdata = data(spatialdata)
+  cnames = coordnames(spatialdata)
 
   # find valid data for variable
   vardata = rawdata[[cnames...,var]]

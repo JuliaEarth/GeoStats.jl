@@ -13,85 +13,115 @@
 ## OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
 """
-    SimulationProblem(geodata, domain, targetvars, nreals)
+    SimulationProblem(spatialdata, domain, targetvars, nreals)
     SimulationProblem(domain, targetvars, nreals)
 
 A spatial simulation problem on a given `domain` in which the
 variables to be simulated are listed in `targetvars`. For
 conditional simulation, the data of the problem is stored in
-`geodata`. In both cases, a number `nreals` of realizations
+`spatialdata`. In both cases, a number `nreals` of realizations
 is requested.
 
 ### Notes
 
-For unconditional simulation, an empty `geodata` object is
-automatically created by the constructor. Therefore, all
-simulation solvers can assume that a valid (possibly empty)
-[`GeoDataFrame`](@ref) exists. To check if a problem has
-data use the [`hasdata`](@ref) method.
+To check if a simulation problem has data (i.e. conditional vs.
+unconditional) use the [`hasdata`](@ref) method.
 """
-struct SimulationProblem{D<:AbstractDomain} <: AbstractProblem
-  geodata::GeoDataFrame
+struct SimulationProblem{S<:Union{AbstractSpatialData,Void},D<:AbstractDomain} <: AbstractProblem
+  spatialdata::S
   domain::D
-  targetvars::Vector{Symbol}
+  targetvars::Dict{Symbol,DataType}
   nreals::Int
 
-  function SimulationProblem{D}(geodata, domain, targetvars, nreals) where {D<:AbstractDomain}
-    @assert targetvars ⊆ names(data(geodata)) "target variables must be columns of geodata"
-    @assert isempty(targetvars ∩ coordnames(geodata)) "target variables can't be coordinates"
-    @assert ndims(domain) == length(coordnames(geodata)) "data and domain must have the same number of dimensions"
+  function SimulationProblem{S,D}(spatialdata, domain, targetvars, nreals
+                                 ) where {S<:Union{AbstractSpatialData,Void},D<:AbstractDomain}
+    @assert !isempty(targetvars) "target variables must be specified"
     @assert nreals > 0 "number of realizations must be positive"
 
-    new(geodata, domain, targetvars, nreals)
+    new(spatialdata, domain, targetvars, nreals)
   end
 end
 
-SimulationProblem(geodata::GeoDataFrame, domain::D, targetvars::Vector{Symbol},
-                  nreals::Int) where {D<:AbstractDomain} =
-  SimulationProblem{D}(geodata, domain, targetvars, nreals)
+function SimulationProblem(spatialdata::S, domain::D, targetvarnames::Vector{Symbol}, nreals::Int
+                          ) where {S<:AbstractSpatialData,D<:AbstractDomain}
+  @assert targetvarnames ⊆ names(data(spatialdata)) "target variables must be present in spatial data"
+  @assert isempty(targetvarnames ∩ coordnames(spatialdata)) "target variables can't be coordinates"
+  @assert ndims(domain) == length(coordnames(spatialdata)) "data and domain must have the same number of dimensions"
 
-SimulationProblem(geodata::GeoDataFrame, domain::D, targetvar::Symbol,
-                  nreals::Int) where {D<:AbstractDomain} =
-  SimulationProblem(geodata, domain, [targetvar], nreals)
+  # build dictionary of target variables
+  rawdata = data(spatialdata)
+  targetvars = Dict{Symbol,DataType}()
+  for varname in targetvarnames
+    V = eltype(rawdata[varname])
+    push!(targetvars, varname => V)
+  end
 
-function SimulationProblem(domain::D, targetvars::Vector{Symbol},
-                           nreals::Int) where {D<:AbstractDomain}
-  dim = ndims(domain)
-  ctypes = [coordtype(domain) for i=1:dim]
-  vtypes = [Float64 for i=1:length(targetvars)]
-  cnames = [Symbol("x$i") for i=1:dim]
-  vnames = targetvars
-  nodata = DataFrame([ctypes...,vtypes...], [cnames...,vnames...], 0)
-
-  geodata = GeoDataFrame(nodata, cnames)
-
-  SimulationProblem(geodata, domain, targetvars, nreals)
+  SimulationProblem{S,D}(spatialdata, domain, targetvars, nreals)
 end
 
-SimulationProblem(domain::D, targetvar::Symbol,
+SimulationProblem(spatialdata::S, domain::D, targetvarname::Symbol,
+                  nreals::Int) where {S<:AbstractSpatialData,D<:AbstractDomain} =
+  SimulationProblem(spatialdata, domain, [targetvarname], nreals)
+
+function SimulationProblem(domain::D, targetvars::Dict{Symbol,DataType},
+                           nreals::Int) where {D<:AbstractDomain}
+
+  SimulationProblem{Void,D}(nothing, domain, targetvars, nreals)
+end
+
+SimulationProblem(domain::D, targetvar::Pair{Symbol,DataType},
                   nreals::Int) where {D<:AbstractDomain} =
-  SimulationProblem(domain, [targetvar], nreals)
+  SimulationProblem(domain, Dict(targetvar), nreals)
 
 """
-    nreals(simproblem)
+    data(problem)
 
-Return the number of realizations of the simulation problem `simproblem`.
+Return the spatial data of the simulation `problem`.
+"""
+data(problem::SimulationProblem) = problem.spatialdata
+
+"""
+    domain(problem)
+
+Return the spatial domain of the simulation `problem`.
+"""
+domain(problem::SimulationProblem) = problem.domain
+
+"""
+    variables(problem)
+
+Return the target variables of the simulation `problem` and their types.
+"""
+variables(problem::SimulationProblem) = problem.targetvars
+
+"""
+    hasdata(problem)
+
+Return `true` if simulation `problem` has data.
+"""
+hasdata(problem::SimulationProblem) = (problem.spatialdata ≠ nothing &&
+                                       npoints(problem.spatialdata) > 0)
+
+"""
+    nreals(problem)
+
+Return the number of realizations of the simulation `problem`.
 """
 nreals(problem::SimulationProblem) = problem.nreals
 
 # ------------
 # IO methods
 # ------------
-function Base.show(io::IO, problem::SimulationProblem{D}) where {D<:AbstractDomain}
+function Base.show(io::IO, problem::SimulationProblem)
   dim = ndims(problem.domain)
   kind = hasdata(problem) ? "conditional" : "unconditional"
   print(io, "$(dim)D SimulationProblem ($kind)")
 end
 
-function Base.show(io::IO, ::MIME"text/plain", problem::SimulationProblem{D}) where {D<:AbstractDomain}
+function Base.show(io::IO, ::MIME"text/plain", problem::SimulationProblem)
   println(io, problem)
-  println(io, "  data:      ", problem.geodata)
+  println(io, "  data:      ", problem.spatialdata)
   println(io, "  domain:    ", problem.domain)
-  println(io, "  variables: ", join(problem.targetvars, ", ", " and "))
+  println(io, "  variables: ", join(keys(problem.targetvars), ", ", " and "))
   print(  io, "  N° reals:  ", problem.nreals)
 end
