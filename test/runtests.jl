@@ -20,14 +20,14 @@ dim = 3; nobs = 10
 X = rand(dim, nobs)
 z = rand(nobs)
 
+# some target location
+xₒ = rand(dim)
+
 # load some geodataframes
 fname = joinpath(datadir,"data2D.tsv")
 data2D = readtable(fname, coordnames=[:x,:y])
 fname = joinpath(datadir,"data3D.tsv")
 data3D = readtable(fname)
-
-# some target location
-xₒ = rand(dim)
 
 # list of tests
 testfiles = [
