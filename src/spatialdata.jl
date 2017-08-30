@@ -20,25 +20,18 @@ A container with spatial data.
 abstract type AbstractSpatialData end
 
 """
-    data(spatialdata)
-
-Return the underlying data wrapped in `spatialdata`.
-"""
-data(::AbstractSpatialData) = error("not implemented")
-
-"""
-    coordnames(spatialdata)
-
-Return the names of the coordinates in `spatialdata`.
-"""
-coordnames(::AbstractSpatialData) = error("not implemented")
-
-"""
     coordinates(spatialdata)
 
-Return the coordinates of `spatialdata`.
+Return the name of the coordinates in `spatialdata` and their types.
 """
 coordinates(::AbstractSpatialData) = error("not implemented")
+
+"""
+    variables(spatialdata)
+
+Return the variable names in `spatialdata` and their types.
+"""
+variables(::AbstractSpatialData) = error("not implemented")
 
 """
     npoints(spatialdata)
@@ -46,6 +39,15 @@ coordinates(::AbstractSpatialData) = error("not implemented")
 Return the number of points in `spatialdata`.
 """
 npoints(::AbstractSpatialData) = error("not implemented")
+
+"""
+    valid(spatialdata, var)
+
+Return the valid data for the variable `var` in `spatialdata`
+as a tuple `(X, z)` where `X` is a matrix with data coordinates
+as columns and `z` are the corresponding variable values.
+"""
+valid(::AbstractSpatialData, var::Symbol) = error("not implemented")
 
 #------------------
 # IMPLEMENTATIONS

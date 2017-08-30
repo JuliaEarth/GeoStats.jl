@@ -44,9 +44,12 @@ end
 
 function SimulationProblem(spatialdata::S, domain::D, targetvarnames::Vector{Symbol}, nreals::Int
                           ) where {S<:AbstractSpatialData,D<:AbstractDomain}
-  @assert targetvarnames ⊆ names(data(spatialdata)) "target variables must be present in spatial data"
-  @assert isempty(targetvarnames ∩ coordnames(spatialdata)) "target variables can't be coordinates"
-  @assert ndims(domain) == length(coordnames(spatialdata)) "data and domain must have the same number of dimensions"
+  datavnames = [var for (var,T) in variables(spatialdata)]
+  datacnames = [var for (var,T) in coordinates(spatialdata)]
+
+  @assert targetvarnames ⊆ datavnames "target variables must be present in spatial data"
+  @assert isempty(targetvarnames ∩ datacnames) "target variables can't be coordinates"
+  @assert ndims(domain) == length(datacnames) "data and domain must have the same number of dimensions"
 
   # build dictionary of target variables
   rawdata = data(spatialdata)

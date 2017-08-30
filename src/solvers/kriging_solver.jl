@@ -92,25 +92,18 @@ end
 
 function solve(problem::EstimationProblem, solver::Kriging)
   # sanity checks
-  @assert keys(solver.params) ⊆ variables(problem) "invalid variable names in solver parameters"
+  @assert keys(solver.params) ⊆ keys(variables(problem)) "invalid variable names in solver parameters"
 
-  # retrieve data
-  spatialdata = data(problem)
-  rawdata = data(spatialdata)
-
-  # determine coordinate type
-  coordtypes = eltypes(coordinates(spatialdata))
-  T = promote_type(coordtypes...)
+  # determine problem coordinate type
+  probcoords = coordinates(problem)
+  T = promote_type([T for (var,T) in probcoords]...)
 
   # store results on dictionary
   μdict = Dict{Symbol,Vector}()
   σdict = Dict{Symbol,Vector}()
 
   # loop over target variables
-  for var in variables(problem)
-    # determine value type
-    V = eltype(rawdata[var])
-
+  for (var,V) in variables(problem)
     # get user parameters
     if var ∈ keys(solver.params)
       varparams = solver.params[var]
@@ -143,16 +136,9 @@ end
 function solve(problem::EstimationProblem, var::Symbol, estimator::E) where {E<:AbstractEstimator}
   # retrieve data
   spatialdata = data(problem)
-  rawdata = data(spatialdata)
-  cnames = coordnames(spatialdata)
 
   # find valid data for variable
-  vardata = rawdata[[cnames...,var]]
-  completecases!(vardata)
-
-  # convert data into arrays
-  X = convert(Array, vardata[cnames])'
-  z = convert(Array, vardata[var])
+  X, z = valid(spatialdata, var)
 
   # fit estimator to data
   fit!(estimator, X, z)

@@ -67,33 +67,37 @@ function readtable(args...; coordnames=[:x,:y,:z], kwargs...)
   GeoDataFrame(data, coordnames)
 end
 
-"""
-    data(geodataframe)
+function coordinates(geodata::GeoDataFrame)
+  rawdata = geodata.data
+  cnames = geodata.coordnames
+  ctypes = eltypes(rawdata[cnames])
 
-Return the underlying `DataFrame` object wrapped in `geodataframe`.
-"""
-data(geodata::GeoDataFrame) = geodata.data
+  Dict(var => T for (var,T) in zip(cnames,ctypes))
+end
 
-"""
-    coordnames(geodataframe)
+function variables(geodata::GeoDataFrame)
+  rawdata = geodata.data
+  cnames = geodata.coordnames
+  vnames = [var for var in names(rawdata) if var ∉ cnames]
+  vtypes = eltypes(rawdata[vnames])
 
-Return the column names of `geodataframe` representing spatial coordinates.
-"""
-coordnames(geodata::GeoDataFrame) = geodata.coordnames
+  Dict(var => T for (var,T) in zip(vnames,vtypes))
+end
 
-"""
-    coordinates(geodataframe)
-
-Return the columns of `geodataframe` representing spatial coordinates.
-"""
-coordinates(geodata::GeoDataFrame) = geodata.data[geodata.coordnames]
-
-"""
-    npoints(geodataframe)
-
-Return the number of points (or rows) in `geodataframe`.
-"""
 npoints(geodata::GeoDataFrame) = nrow(geodata.data)
+
+function valid(geodata::GeoDataFrame, var::Symbol)
+  rawdata = geodata.data
+  cnames = geodata.coordnames
+
+  vardata = rawdata[[cnames...,var]]
+  completecases!(vardata)
+
+  X = convert(Array, vardata[cnames])'
+  z = convert(Vector, vardata[var])
+
+  X, z
+end
 
 # ------------
 # IO methods
