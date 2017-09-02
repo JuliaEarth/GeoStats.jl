@@ -72,6 +72,8 @@ function solve(problem::SimulationProblem, solver::SeqGaussSim)
   # sanity checks
   @assert keys(solver.params) ⊆ keys(variables(problem)) "invalid variable names in solver parameters"
 
+  warn("SGSIM is not fully implemented")
+
   # map spatial data to domain
   mapper = SimpleMapper(data(problem), domain(problem), variables(problem))
 
