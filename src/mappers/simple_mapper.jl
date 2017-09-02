@@ -13,10 +13,10 @@
 ## OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
 """
-    SimpleMapper(geodata, domain, targetvars)
+    SimpleMapper(spatialdata, domain, targetvars)
 
-A mapping strategy that maps `targetvars` in `geodata` onto
-an arbitrary `domain` using a closest-point algorithm.
+A mapping strategy that maps `targetvars` in `spatialdata`
+onto an arbitrary `domain` using a closest-point algorithm.
 """
 struct SimpleMapper{D<:AbstractDomain} <: AbstractMapper{D}
   dict::Dict{Symbol,Dict{Int,<:Any}}
@@ -24,27 +24,19 @@ struct SimpleMapper{D<:AbstractDomain} <: AbstractMapper{D}
   SimpleMapper{D}(dict) where {D<:AbstractDomain} = new(dict)
 end
 
-function SimpleMapper(geodata::GeoDataFrame, domain::D,
-                      targetvars::Vector{Symbol}) where {D<:AbstractDomain}
-  # retrieve data
-  rawdata = data(geodata)
-  cnames = coordnames(geodata)
-
+function SimpleMapper(spatialdata::S, domain::D, targetvars::Dict{Symbol,DataType}
+                     ) where {S<:AbstractSpatialData,D<:AbstractDomain}
   # build dictionary with mappings
   dict = Dict()
-  for var in targetvars
+  for (var,V) in targetvars
     # retrieve data for variable
-    vardata = rawdata[[cnames...,var]]
-    completecases!(vardata)
-
-    # determine value type
-    V = eltype(rawdata[var])
+    X, z = valid(spatialdata, var)
 
     # map locations to values
-    mapping = Dict{Int,V}()
-    for row in eachrow(vardata)
-      coords = vec(convert(Array, row[cnames]))
-      value  = row[var]
+    mapping = Dict{Int,eltype(z)}()
+    for j=1:size(X,2)
+      coords = view(X, :, j)
+      value  = z[j]
 
       # find closest point in the domain
       location = findclosest(domain, coords)

@@ -2,6 +2,7 @@
 
 First off, thank you for considering contributing to GeoStats.jl.
 It’s people like you that make this project so much fun.
+Below are a few suggestions to speed up the collaboration process.
 
 ## Reporting issues
 

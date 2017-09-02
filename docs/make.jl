@@ -12,6 +12,9 @@ makedocs(
   pages = [
     "Home" => "index.md",
     "Manual" => [
+      "Problems and solvers" => "problems_and_solvers.md",
+      "Spatial data" => "spatialdata.md",
+      "Domains" => "domains.md",
       "Variograms" => [
         "empirical_variograms.md",
         "theoretical_variograms.md"

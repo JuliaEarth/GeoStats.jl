@@ -34,7 +34,7 @@ the variogram `v` only.
   mean = nothing
   degree = nothing
   drifts = nothing
-  path = :simple
+  path = :random
   neighradius = 10.
   maxneighbors = 10
 end
@@ -68,15 +68,18 @@ function SeqGaussSim(params...)
   SeqGaussSim(dict)
 end
 
-function solve(problem::SimulationProblem{<:AbstractDomain}, solver::SeqGaussSim)
+function solve(problem::SimulationProblem, solver::SeqGaussSim)
   # sanity checks
-  @assert keys(solver.params) ⊆ variables(problem) "invalid variable names in solver parameters"
+  @assert keys(solver.params) ⊆ keys(variables(problem)) "invalid variable names in solver parameters"
 
   # map spatial data to domain
   mapper = SimpleMapper(data(problem), domain(problem), variables(problem))
 
+  # save results in a dictionary
   realizations = Dict{Symbol,Vector{Vector}}()
-  for var in variables(problem)
+
+  # loop over target variables
+  for (var,V) in variables(problem)
     varreals = [solve_single(problem, var, solver, mapper) for i=1:nreals(problem)]
 
     push!(realizations, var => varreals)
@@ -86,23 +89,16 @@ function solve(problem::SimulationProblem{<:AbstractDomain}, solver::SeqGaussSim
   SimulationSolution(domain(problem), realizations)
 end
 
-function solve_single(problem::SimulationProblem{<:AbstractDomain},
-                      var::Symbol, solver::SeqGaussSim, mapper::SimpleMapper)
+function solve_single(problem::SimulationProblem, var::Symbol,
+                      solver::SeqGaussSim, mapper::SimpleMapper)
   # retrieve problem info
-  geodata = data(problem)
-  rawdata = data(geodata)
   pdomain = domain(problem)
 
-  #-------------------------
-  # START SIMULATION SETUP
-  #-------------------------
-
   # determine coordinate type
-  coordtypes = eltypes(coordinates(geodata))
-  T = promote_type(coordtypes...)
+  T = promote_type([T for (var,T) in coordinates(problem)]...)
 
   # determine value type
-  V = eltype(rawdata[var])
+  V = variables(problem)[var]
 
   # get user parameters
   if var ∈ keys(solver.params)
@@ -137,9 +133,9 @@ function solve_single(problem::SimulationProblem{<:AbstractDomain},
   # determine maximum number of conditioning neighbors
   maxneighbors = varparams.maxneighbors
 
-  #-----------------------
-  # END SIMULATION SETUP
-  #-----------------------
+  #-------------------
+  # START SIMULATION
+  #-------------------
 
   # result for variable
   varreal = Vector{V}(npoints(pdomain))
@@ -169,8 +165,8 @@ function solve_single(problem::SimulationProblem{<:AbstractDomain},
 
       # choose between marginal and conditional distribution
       if isempty(neighbors)
-        # TODO: draw from marginal
-        varreal[location] = .5
+        # draw from marginal
+        varreal[location] = randn(V)
       else
         # build coordinates and observation arrays
         X = Matrix{T}(ndims(pdomain), length(neighbors))
@@ -189,8 +185,8 @@ function solve_single(problem::SimulationProblem{<:AbstractDomain},
           varreal[location] = μ + √σ²*randn(V)
         catch e
           if e isa SingularException
-            # TODO: draw from marginal
-            varreal[location] = .5
+            # draw from marginal
+            varreal[location] = randn(V)
           end
         end
       end

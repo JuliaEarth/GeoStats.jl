@@ -50,15 +50,19 @@ The project is split into various packages:
 
 | Package  | Description |
 |:--------:| ----------- |
-| [GeoStats.jl](https://github.com/juliohm/GeoStats.jl) | Main package containing problem definitions, Kriging-based solvers, and other geostatistical tools. |
+| [GeoStats.jl](https://github.com/juliohm/GeoStats.jl) | Main package containing Kriging-based solvers, and other geostatistical tools. |
 | [GeoStatsImages.jl](https://github.com/juliohm/GeoStatsImages.jl) | Training images for multiple-point geostatistical simulation. |
 | [GslibIO.jl](https://github.com/juliohm/GslibIO.jl) | Utilities to read/write *extended* GSLIB files. |
+| [GeoStatsBase.jl](https://github.com/juliohm/GeoStatsBase.jl) | Base package for developers. |
 
-The main package (i.e. GeoStats.jl) is self-contained, and provides high-performance Kriging-based estimation/simulation algorithms over arbitrary domains. Other packages can be installed from the list above for additional functionality.
+The main package (i.e. GeoStats.jl) is self-contained, and provides high-performance
+Kriging-based estimation/simulation algorithms over arbitrary domains. Other packages
+can be installed from the list above for additional functionality.
 
 ### Problems and solvers
 
-Solvers for geostatistical problems can be installed separately depending on the application. They are automatically integrated with GeoStats.jl thanks to Julia's multiple dispatch features.
+Solvers for geostatistical problems can be installed separately depending on the application.
+They are automatically integrated with GeoStats.jl thanks to Julia's multiple dispatch features.
 
 #### Estimation problems
 
@@ -72,7 +76,10 @@ Solvers for geostatistical problems can be installed separately depending on the
 |:------:|-------------|------------|
 | [SeqGaussSim](https://github.com/juliohm/GeoStats.jl/tree/master/src/solvers) | Sequential Gaussian simulation | [Deutsch 1997](https://www.amazon.com/GSLIB-Geostatistical-Software-Library-Geostatistics/dp/0195100158), [Olea 1999](https://www.amazon.com/Geostatistics-Engineers-Earth-Scientists-Ricardo/dp/0792385233) |
 
-If you are a developer and your solver is not listed above, please open a pull request and we will be happy to review and add it to the list. If you have questions on how to write your own solver, please [open an issue](https://github.com/juliohm/GeoStats.jl/issues) and ask for help.
+If you are a developer and your solver is not listed above, please open a pull request and we
+will be happy to review and add it to the list.
+Please check [GeoStatsBase.jl](https://github.com/juliohm/GeoStatsBase.jl) for instructions on
+how to write your own solvers.
 
 ## Documentation
 
@@ -85,7 +92,8 @@ A set of Jupyter notebooks demonstrating the current functionality of the packag
 in the [examples](examples) folder. These notebooks are distributed with GeoStats.jl and can be
 launched locally with `GeoStats.examples()`.
 
-Below is a quick preview of the high-level API:
+Below is a quick preview of the high-level API, for the full example, please check
+[this notebook](examples/EstimationProblems.ipynb).
 
 ```julia
 using GeoStats

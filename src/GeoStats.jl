@@ -12,15 +12,20 @@
 ## ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 ## OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
-__precompile__(true)
+__precompile__()
 
 module GeoStats
 
 using Reexport
-using DataFrames
+using DataFrames: AbstractDataFrame, eltypes, nrow, completecases!, sample
+import DataFrames
 using Combinatorics: combinations
 using SpecialFunctions: besselk
 using RecipesBase
+
+# extend base package
+@reexport using GeoStatsBase
+import GeoStatsBase: coordinates, variables, npoints, valid, domain, digest, solve
 
 # won't be needed in Julia v0.7
 using Parameters: @with_kw
@@ -30,7 +35,11 @@ using Parameters: @with_kw
 include("utils.jl")
 
 # spatial data
-include("spatialdata.jl")
+include("spatialdata/geodataframe.jl")
+
+# domains
+include("domains/regular_grid.jl")
+include("domains/point_collection.jl")
 
 # variograms and Kriging estimators
 include("distances.jl")
@@ -38,15 +47,18 @@ include("empirical_variograms.jl")
 include("theoretical_variograms.jl")
 include("estimators.jl")
 
-# domains
-include("domains.jl")
+# geometrical concepts
 include("paths.jl")
 include("neighborhoods.jl")
 include("mappers.jl")
 
-# problems and solutions
-include("problems.jl")
-include("solutions.jl")
+# problems
+include("problems/estimation_problem.jl")
+include("problems/simulation_problem.jl")
+
+# solutions
+include("solutions/estimation_solution.jl")
+include("solutions/simulation_solution.jl")
 
 # solvers
 include("solvers.jl")
@@ -84,7 +96,7 @@ export
   CompositeVariogram,
   isstationary,
 
-  # estimators
+  # Kriging estimators
   SimpleKriging,
   OrdinaryKriging,
   UniversalKriging,
@@ -93,36 +105,18 @@ export
   weights,
   estimate,
 
+  # spatial data
+  GeoDataFrame,
+  readtable,
+
   # domains
   RegularGrid,
   PointCollection,
-  coordtype,
-  npoints,
-  coordinates,
   origin,
   spacing,
 
-  # data types
-  GeoDataFrame,
-  coordinates,
-  variables,
-  npoints,
-  valid,
-  readtable,
-
-  # problems and solutions
-  EstimationProblem,
-  SimulationProblem,
-  data,
-  domain,
-  variables,
-  hasdata,
-  nreals,
-  digest,
-
   # solvers
   Kriging,
-  SeqGaussSim,
-  solve
+  SeqGaussSim
 
 end

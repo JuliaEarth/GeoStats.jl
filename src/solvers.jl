@@ -13,37 +13,9 @@
 ## OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
 """
-    AbstractSolver
-
-A solver for geostatistical problems.
-"""
-abstract type AbstractSolver end
-
-"""
-    AbstractEstimationSolver
-
-A solver for a geostatistical estimation problem.
-"""
-abstract type AbstractEstimationSolver <: AbstractSolver end
-
-"""
     solve(problem, solver)
 
-Solve the estimation `problem` with estimation `solver`.
-"""
-solve(::EstimationProblem, ::AbstractEstimationSolver) = error("not implemented")
-
-"""
-    AbstractSimulationSolver
-
-A solver for a geostatistical simulation problem.
-"""
-abstract type AbstractSimulationSolver <: AbstractSolver end
-
-"""
-    solve(problem, solver)
-
-Solve the simulation `problem` with simulation `solver`.
+Solve the simulation `problem` with the simulation `solver`.
 
 ### Notes
 
@@ -63,21 +35,6 @@ function solve(problem::SimulationProblem, solver::AbstractSimulationSolver)
 
   SimulationSolution(domain(problem), realizations)
 end
-
-"""
-    solve_single(problem, var, solver)
-
-Solve a single realization of `var` in the `problem` with simulation `solver`.
-
-### Notes
-
-In most cases, this is the function that solver writers should write.
-By implementing it, the developer is informing the package that realizations
-generated with his/her solver are indenpendent one from another. The package
-will then automatically trigger the algorithm in parallel at the top-level
-`solve` call.
-"""
-solve_single(::SimulationProblem, ::Symbol, ::AbstractSimulationSolver) = error("not implemented")
 
 #------------------
 # IMPLEMENTATIONS

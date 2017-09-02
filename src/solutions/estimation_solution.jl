@@ -13,18 +13,11 @@
 ## OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
 """
-    EstimationSolution
+    domain(solution)
 
-A solution to a spatial estimation problem.
+Return the domain of the estimation `solution`.
 """
-struct EstimationSolution{D<:AbstractDomain} <: AbstractSolution
-  domain::D
-  mean::Dict{Symbol,Vector}
-  variance::Dict{Symbol,Vector}
-end
-
-EstimationSolution(domain, mean, variance) =
-  EstimationSolution{typeof(domain)}(domain, mean, variance)
+domain(solution::EstimationSolution) = solution.domain
 
 function digest(solution::EstimationSolution{<:RegularGrid})
   # get the size of the grid

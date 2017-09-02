@@ -13,17 +13,11 @@
 ## OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
 """
-    SimulationSolution
+    domain(solution)
 
-A solution to a spatial simulation problem.
+Return the domain of a simulation `solution`.
 """
-struct SimulationSolution{D<:AbstractDomain} <: AbstractSolution
-  domain::D
-  realizations::Dict{Symbol,Vector{Vector}}
-end
-
-SimulationSolution(domain, realizations) =
-  SimulationSolution{typeof(domain)}(domain, realizations)
+domain(solution::SimulationSolution) = solution.domain
 
 function digest(solution::SimulationSolution{<:RegularGrid})
   # get the size of the grid
