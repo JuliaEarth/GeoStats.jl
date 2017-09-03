@@ -13,23 +13,23 @@
 ## OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
 """
-    CubeNeighborhood(domain, side)
+    CubeNeighborhood(domain, radius)
 
-A cube neighborhood with a given `side` on a spatial `domain`.
+A cube (∞-norm ball) neighborhood with a given `radius` on a spatial `domain`.
 """
 struct CubeNeighborhood{D<:AbstractDomain} <: AbstractNeighborhood{D}
   domain::D
-  side # we cannot use coordtype(D) here yet in Julia v0.6
+  radius # we cannot use coordtype(D) here yet in Julia v0.6
 
-  function CubeNeighborhood{D}(domain, side) where {D<:AbstractDomain}
-    @assert side > 0 "cube side must be positive"
-    @assert typeof(side) == coordtype(domain) "radius and domain coordinate type must match"
+  function CubeNeighborhood{D}(domain, radius) where {D<:AbstractDomain}
+    @assert radius > 0 "neighborhood radius must be positive"
+    @assert typeof(radius) == coordtype(domain) "radius and domain coordinate type must match"
 
-    new(domain, side)
+    new(domain, radius)
   end
 end
 
-CubeNeighborhood(domain::D, side) where {D<:AbstractDomain} = CubeNeighborhood{D}(domain, side)
+CubeNeighborhood(domain::D, radius) where {D<:AbstractDomain} = CubeNeighborhood{D}(domain, radius)
 
 function (neigh::CubeNeighborhood{<:RegularGrid})(location::I) where {I<:Integer}
   # grid size
@@ -39,7 +39,7 @@ function (neigh::CubeNeighborhood{<:RegularGrid})(location::I) where {I<:Integer
   center = [ind2sub(sz, location)...]
 
   # number of units to reach the sides of the cube
-  units = floor.(Int, (neigh.side ./ 2) ./ [spacing(neigh.domain)...])
+  units = floor.(Int, neigh.radius ./ [spacing(neigh.domain)...])
 
   # cube spans from top left to bottom right
   topleft     = max.(center .- units, 1)
