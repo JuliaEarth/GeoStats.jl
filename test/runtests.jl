@@ -39,6 +39,7 @@ testfiles = [
   "geodataframe.jl",
   "domains.jl",
   "paths.jl",
+  "neighborhoods.jl",
   "problems.jl",
   "solvers.jl"
 ]

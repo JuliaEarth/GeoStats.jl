@@ -58,7 +58,6 @@ A simple (or default) path on a spatial `domain`.
 struct SimplePath{D<:AbstractDomain} <: AbstractPath{D}
   domain::D
 end
-SimplePath(domain) = SimplePath{typeof(domain)}(domain)
 Base.start(p::SimplePath)       = 1
 Base.next(p::SimplePath, state) = state, state + 1
 Base.done(p::SimplePath, state) = state == npoints(p.domain) + 1

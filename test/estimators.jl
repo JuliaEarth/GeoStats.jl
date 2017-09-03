@@ -108,9 +108,9 @@
   unikrig_ns = UniversalKriging(X, z, γ_ns, 1)
   driftkrig_ns = ExternalDriftKriging(X, z, γ_ns, [x->1.])
   for j=1:nobs
-    OKestimate, OKvar = estimate(ordkrig, X[:,j])
-    UKestimate, UKvar = estimate(unikrig, X[:,j])
-    DKestimate, DKvar = estimate(driftkrig, X[:,j])
+    OKestimate, OKvar = estimate(ordkrig_ns, X[:,j])
+    UKestimate, UKvar = estimate(unikrig_ns, X[:,j])
+    DKestimate, DKvar = estimate(driftkrig_ns, X[:,j])
 
     # estimate checks
     @test OKestimate ≈ z[j]
