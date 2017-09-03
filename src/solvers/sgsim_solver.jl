@@ -130,7 +130,7 @@ function solve_single(problem::SimulationProblem, var::Symbol,
   end
 
   # determine which neighborhood to use
-  neighborhood = SphereNeighborhood(pdomain, varparams.neighradius)
+  neighborhood = BallNeighborhood(pdomain, varparams.neighradius)
 
   # determine maximum number of conditioning neighbors
   maxneighbors = varparams.maxneighbors

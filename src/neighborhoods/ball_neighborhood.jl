@@ -13,11 +13,11 @@
 ## OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
 """
-    SphereNeighborhood(domain, radius)
+    BallNeighborhood(domain, radius)
 
 A ball neighborhood of a given `radius` on a spatial `domain`.
 """
-struct SphereNeighborhood{D<:AbstractDomain} <: AbstractNeighborhood{D}
+struct BallNeighborhood{D<:AbstractDomain} <: AbstractNeighborhood{D}
   # input fields
   domain::D
   radius # we cannot use coordtype(D) here yet in Julia v0.6
@@ -25,7 +25,7 @@ struct SphereNeighborhood{D<:AbstractDomain} <: AbstractNeighborhood{D}
   # state fields
   cube::CubeNeighborhood{D}
 
-  function SphereNeighborhood{D}(domain, radius) where D<:AbstractDomain
+  function BallNeighborhood{D}(domain, radius) where D<:AbstractDomain
     @assert radius > 0 "radius must be positive"
     @assert typeof(radius) == coordtype(domain) "radius and domain coordinate type must match"
 
@@ -36,9 +36,9 @@ struct SphereNeighborhood{D<:AbstractDomain} <: AbstractNeighborhood{D}
   end
 end
 
-SphereNeighborhood(domain::D, radius) where {D<:AbstractDomain} = SphereNeighborhood{D}(domain, radius)
+BallNeighborhood(domain::D, radius) where {D<:AbstractDomain} = BallNeighborhood{D}(domain, radius)
 
-function (neigh::SphereNeighborhood{<:RegularGrid})(location::I) where {I<:Integer}
+function (neigh::BallNeighborhood{<:RegularGrid})(location::I) where {I<:Integer}
   # get neighbors in cube of same radius
   cneighbors = neigh.cube(location)
 

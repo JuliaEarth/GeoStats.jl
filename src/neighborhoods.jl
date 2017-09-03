@@ -23,4 +23,4 @@ abstract type AbstractNeighborhood{D<:AbstractDomain} end
 # IMPLEMENTATIONS
 #------------------
 include("neighborhoods/cube_neighborhood.jl")
-include("neighborhoods/sphere_neighborhood.jl")
+include("neighborhoods/ball_neighborhood.jl")
