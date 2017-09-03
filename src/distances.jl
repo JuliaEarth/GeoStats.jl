@@ -25,7 +25,15 @@ abstract type AbstractDistance end
 The Euclidean distance ||x-y||₂
 """
 struct EuclideanDistance <: AbstractDistance end
-(d::EuclideanDistance)(x, y) = norm(x - y)
+(d::EuclideanDistance)(x, y) = begin
+  # compute norm by hand to avoid memory allocations
+  s = zero(eltype(x))
+  for i=1:length(x)
+    s += (x[i] - y[i])^2
+  end
+
+  √s
+end
 
 """
     EllipsoidDistance(semiaxes, angles)
