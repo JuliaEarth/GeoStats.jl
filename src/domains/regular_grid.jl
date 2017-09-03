@@ -71,7 +71,7 @@ spacing(grid::RegularGrid) = grid.spacing
 
 function coordinates(grid::RegularGrid, location::I) where {I<:Integer}
   intcoords = ind2sub(grid.dims, location)
-  [grid.origin...] .+ ([intcoords...] .- one(I)).*[grid.spacing...]
+  [grid.origin[i] + (intcoords[i] - one(I))*grid.spacing[i] for i=1:ndims(grid)]
 end
 
 # ------------

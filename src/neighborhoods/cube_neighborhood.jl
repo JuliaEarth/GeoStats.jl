@@ -34,26 +34,53 @@ CubeNeighborhood(domain::D, radius) where {D<:AbstractDomain} = CubeNeighborhood
 function (neigh::CubeNeighborhood{<:RegularGrid})(location::I) where {I<:Integer}
   # grid size
   sz = size(neigh.domain)
+  nd = ndims(neigh.domain)
 
   # cube center in multi-dimensional index format
   center = [ind2sub(sz, location)...]
 
   # number of units to reach the sides of the cube
-  units = floor.(Int, neigh.radius ./ [spacing(neigh.domain)...])
+  units = [floor(I, neigh.radius / sp) for sp in spacing(neigh.domain)]
 
   # cube spans from top left to bottom right
-  topleft     = max.(center .- units, 1)
-  bottomright = min.(center .+ units, [sz...])
+  topleft     = [max(center[i] - units[i], one(I)) for i=1:nd]
+  bottomright = [min(center[i] + units[i],  sz[i]) for i=1:nd]
 
-  istart = CartesianIndex(tuple(topleft...))
-  iend   = CartesianIndex(tuple(bottomright...))
-  cartesian_range = CartesianRange(istart, iend)
+  # number of points in the cube
+  ncubepoints = prod(bottomright[i] - topleft[i] + one(I) for i=1:nd)
 
   # pre-allocate memory
-  neighbors = Vector{I}(length(cartesian_range))
+  neighbors = Vector{I}(ncubepoints)
 
-  for (i,idx) in enumerate(cartesian_range)
-    neighbors[i] = sub2ind(sz, idx.I...)
+  if nd == 1
+    n = 1
+    for i=topleft[1]:bottomright[1]
+      @inbounds neighbors[n] = i
+      n += 1
+    end
+  elseif nd == 2
+    n = 1
+    nx = sz[1]
+    for j=topleft[2]:bottomright[2], i=topleft[1]:bottomright[1]
+      @inbounds neighbors[n] = i + nx*(j-1)
+      n += 1
+    end
+  elseif nd == 3
+    n = 1
+    nx = sz[1]
+    nxny = sz[1]*sz[2]
+    for k=topleft[3]:bottomright[3], j=topleft[2]:bottomright[2], i=topleft[1]:bottomright[1]
+      @inbounds neighbors[n] = i + nx*(j-1) + nxny*(k-1)
+      n += 1
+    end
+  else # higher dimensions
+    istart = CartesianIndex(tuple(topleft...))
+    iend   = CartesianIndex(tuple(bottomright...))
+    cartesian_range = CartesianRange(istart, iend)
+
+    for (n,idx) in enumerate(cartesian_range)
+      neighbors[n] = sub2ind(sz, idx.I...)
+    end
   end
 
   neighbors
