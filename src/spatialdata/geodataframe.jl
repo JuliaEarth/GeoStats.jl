@@ -38,7 +38,7 @@ No additional storage is required other than a vector of symbols
 with the columns names representing spatial coordinates.
 
 """
-struct GeoDataFrame{DF<:DataFrames.AbstractDataFrame} <: AbstractSpatialData
+struct GeoDataFrame{DF<:AbstractDataFrame} <: AbstractSpatialData
   data::DF
   coordnames::Vector{Symbol}
 
