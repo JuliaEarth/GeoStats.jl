@@ -13,21 +13,25 @@
 ## OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
 """
-    SGSParam(variogram=v, mean=m, degree=d, drifts=ds)
+    SGSParam
 
 A set of parameters for a simulation variable.
 
 ## Parameters
 
-* `v`  - the variogram model (default to `GaussianVariogram()`)
-* `m`  - Simple Kriging mean
-* `d`  - Universal Kriging degree
-* `ds` - External Drift Kriging drift functions
+* `variogram` - Variogram model (default to `GaussianVariogram()`)
+* `mean`      - Simple Kriging mean
+* `degree`    - Universal Kriging degree
+* `drifts`    - External Drift Kriging drift functions
 
 Latter options override former options. For example, by specifying
 `ds`, the user is telling the algorithm to ignore `d` and `m`.
 If no option is specified, Ordinary Kriging is used by default with
 the variogram `v` only.
+
+* `path`         - Simulation path (default to :random)
+* `neighradius`  - Radius of search neighborhood (default to 10.)
+* `maxneighbors` - Maximum number of neighbors (default to 10)
 """
 @with_kw struct SGSParam
   variogram = GaussianVariogram()
@@ -40,7 +44,7 @@ the variogram `v` only.
 end
 
 """
-    SeqGaussSim(var1=>param1, var2=>param2, ...)
+    SeqGaussSim(var₁=>param₁, var₂=>param₂, ...)
 
 A polyalgorithm sequential Gaussian simulation solver.
 
@@ -72,7 +76,7 @@ function solve(problem::SimulationProblem, solver::SeqGaussSim)
   # sanity checks
   @assert keys(solver.params) ⊆ keys(variables(problem)) "invalid variable names in solver parameters"
 
-  warn("SGSIM is not fully implemented")
+  warn("SeqGaussSim is not fully implemented")
 
   # map spatial data to domain
   mapper = SimpleMapper(data(problem), domain(problem), variables(problem))

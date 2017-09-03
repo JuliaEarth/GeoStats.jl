@@ -13,16 +13,16 @@
 ## OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
 """
-    KrigParam(variogram=v, mean=m, degree=d, drifts=ds)
+    KrigParam
 
 A set of parameters for a Kriging variable.
 
 ## Parameters
 
-* `v`  - the variogram model (default to `GaussianVariogram()`)
-* `m`  - Simple Kriging mean
-* `d`  - Universal Kriging degree
-* `ds` - External Drift Kriging drift functions
+* `variogram` - Variogram model (default to `GaussianVariogram()`)
+* `mean`      - Simple Kriging mean
+* `degree`    - Universal Kriging degree
+* `drifts`    - External Drift Kriging drift functions
 
 Latter options override former options. For example, by specifying
 `ds`, the user is telling the algorithm to ignore `d` and `m`.
@@ -37,7 +37,7 @@ the variogram `v` only.
 end
 
 """
-    Kriging(var1=>param1, var2=>param2, ...)
+    Kriging(var₁=>param₁, var₂=>param₂, ...)
 
 A polyalgorithm Kriging estimation solver.
 
@@ -48,14 +48,14 @@ instead.
 
 ## Examples
 
-Solve the variable `:var1` with Simple Kriging by specifying
-the `mean`, and the variable `:var2` with Universal Kriging
+Solve the variable `:var₁` with Simple Kriging by specifying
+the `mean`, and the variable `:var₂` with Universal Kriging
 by specifying the `degree` and the `variogram` model.
 
 ```julia
 julia> Kriging(
-  :var1 => @NT(mean=1.),
-  :var2 => @NT(degree=1, variogram=SphericalVariogram(range=20.))
+  :var₁ => @NT(mean=1.),
+  :var₂ => @NT(degree=1, variogram=SphericalVariogram(range=20.))
 )
 ```
 

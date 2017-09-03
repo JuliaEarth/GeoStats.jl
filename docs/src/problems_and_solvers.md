@@ -50,12 +50,20 @@ hasdata
 
 ### Estimation
 
-| Solver | Description | References |
-|:------:|-------------|------------|
-| [Kriging](https://github.com/juliohm/GeoStats.jl/tree/master/src/solvers) | Polyalgorithm Kriging (SK, OK, UK, EDK) | [Matheron 1971](https://books.google.com/books/about/The_Theory_of_Regionalized_Variables_and.html?id=TGhGAAAAYAAJ), [Journel 1978](https://www.amazon.com/Mining-Geostatistics-G-Journel/dp/1930665911) |
+```@docs
+Kriging
+```
+
+```@docs
+GeoStats.KrigParam
+```
 
 ### Simulation
 
-| Solver | Description | References |
-|:------:|-------------|------------|
-| [SeqGaussSim](https://github.com/juliohm/GeoStats.jl/tree/master/src/solvers) | Sequential Gaussian simulation | [Deutsch 1997](https://www.amazon.com/GSLIB-Geostatistical-Software-Library-Geostatistics/dp/0195100158), [Olea 1999](https://www.amazon.com/Geostatistics-Engineers-Earth-Scientists-Ricardo/dp/0792385233) |
+```@docs
+SeqGaussSim
+```
+
+```@docs
+GeoStats.SGSParam
+```
