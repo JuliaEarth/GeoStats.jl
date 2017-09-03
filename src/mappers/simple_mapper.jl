@@ -41,7 +41,7 @@ function SimpleMapper(spatialdata::S, domain::D, targetvars::Dict{Symbol,DataTyp
       # find closest point in the domain
       location = findclosest(domain, coords)
 
-      push!(mapping, location => value)
+      1 ≤ location ≤ npoints(domain) && push!(mapping, location => value)
     end
 
     # save mapping for variable
@@ -56,7 +56,8 @@ function findclosest(domain::D, coordinates) where {D<:RegularGrid}
   dorigin = origin(domain)
   dspacing = spacing(domain)
 
-  intcoords = round.(Int, (coordinates .- [dorigin...]) ./ [dspacing...])
+  units = round.(Int, (coordinates .- [dorigin...]) ./ [dspacing...])
+  intcoords = ones(Int, ndims(domain)) .+ units
 
   sub2ind(dims, intcoords...)
 end

@@ -186,13 +186,21 @@ function solve_single(problem::SimulationProblem, var::Symbol,
         fit!(estimator, X, z)
 
         try
-          # draw from conditional
+          # estimate mean and variance
           μ, σ² = estimate(estimator, coordinates(pdomain, location))
+
+          # fix possible numerical issues
+          O = zero(typeof(σ²))
+          σ² < O && (σ² = O)
+
+          # draw from conditional
           varreal[location] = μ + √σ²*randn(V)
         catch e
-          if e isa SingularException
+          if e isa LinAlg.SingularException
             # draw from marginal
             varreal[location] = randn(V)
+          else
+            rethrow(e)
           end
         end
       end
