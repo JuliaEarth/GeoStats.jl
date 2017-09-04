@@ -86,7 +86,14 @@ function solve(problem::SimulationProblem, solver::SeqGaussSim)
 
   # loop over target variables
   for (var,V) in variables(problem)
-    varreals = [solve_single(problem, var, solver, mapper) for i=1:nreals(problem)]
+    if nprocs() > 2
+      # generate realizations in parallel
+      λ = _ -> solve_single(problem, var, solver, mapper)
+      varreals = pmap(λ, 1:nreals(problem))
+    else
+      # fallback to serial execution
+      varreals = [solve_single(problem, var, solver, mapper) for i=1:nreals(problem)]
+    end
 
     push!(realizations, var => varreals)
   end
