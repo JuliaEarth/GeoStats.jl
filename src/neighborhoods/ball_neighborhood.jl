@@ -64,3 +64,19 @@ function (neigh::BallNeighborhood{<:RegularGrid})(location::I) where {I<:Integer
 
   neighbors
 end
+
+function (neigh::BallNeighborhood{<:PointCollection})(location::I) where {I<:Integer}
+  # retrieve domain
+  ndomain = neigh.domain
+
+  # center in real coordinates
+  xₒ = coordinates(ndomain, location)
+
+  neighbors = I[]
+  for loc in 1:npoints(ndomain)
+    x = coordinates(ndomain, loc)
+    norm(x .- xₒ) ≤ neigh.radius && push!(neighbors, loc)
+  end
+
+  neighbors
+end
