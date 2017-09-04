@@ -72,6 +72,8 @@ They are automatically integrated with GeoStats.jl thanks to Julia's multiple di
 
 #### Simulation problems
 
+All simulation solvers generate realizations in parallel unless otherwise noted.
+
 | Solver | Description | References |
 |:------:|-------------|------------|
 | [SeqGaussSim](https://github.com/juliohm/GeoStats.jl/tree/master/src/solvers) | Sequential Gaussian simulation | [Deutsch 1997](https://www.amazon.com/GSLIB-Geostatistical-Software-Library-Geostatistics/dp/0195100158), [Olea 1999](https://www.amazon.com/Geostatistics-Engineers-Earth-Scientists-Ricardo/dp/0792385233) |
