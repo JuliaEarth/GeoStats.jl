@@ -24,28 +24,28 @@ abstract type AbstractPath{D<:AbstractDomain} end
 
 Return the start of the `path`.
 """
-Base.start(::AbstractPath{D}) where {D<:AbstractDomain} = error("not implemented")
+Base.start(::AbstractPath) = error("not implemented")
 
 """
     Base.next(path, state)
 
 Advance in the `path` from current `state`.
 """
-Base.next(::AbstractPath{D}, state) where {D<:AbstractDomain} = error("not implemented")
+Base.next(::AbstractPath, state) = error("not implemented")
 
 """
     Base.done(path, state)
 
 Return true if `state` is the end of the `path`.
 """
-Base.done(::AbstractPath{D}, state) where {D<:AbstractDomain} = error("not implemented")
+Base.done(::AbstractPath, state) = error("not implemented")
 
 """
     Base.length(path)
 
 Return the length of a `path`.
 """
-Base.length(p::AbstractPath{D}) where {D<:AbstractDomain} = npoints(p.domain)
+Base.length(p::AbstractPath) = npoints(p.domain)
 
 #------------------
 # IMPLEMENTATIONS
