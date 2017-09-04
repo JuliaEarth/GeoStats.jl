@@ -31,6 +31,10 @@
         @test test_images(VisualTest(plot_sol2D, refimg2D), popup=!istravis) |> success
       end
     end
+
+    # show methods
+    @test sprint(show, solver) == "Kriging solver"
+    @test sprint(show, MIME"text/plain"(), solver) == "Kriging solver\n  - value => Ordinary Kriging\n"
   end
 
   @testset "SeqGaussSim" begin
@@ -64,6 +68,10 @@
           #@test test_images(VisualTest(plot_sol2D, refimg2D), popup=!istravis) |> success
         end
       end
+
+      # show methods
+      @test sprint(show, solver) == "SeqGaussSim solver"
+      @test sprint(show, MIME"text/plain"(), solver) == "SeqGaussSim solver\n  - value => Ordinary Kriging\n"
     end
 
     @testset "Unconditional" begin
@@ -73,6 +81,10 @@
 
       #solution2D = solve(problem2D, SeqGaussSim())
       # TODO: test solution correctness
+
+      # show methods
+      @test sprint(show, solver) == "SeqGaussSim solver"
+      @test sprint(show, MIME"text/plain"(), solver) == "SeqGaussSim solver\n  - value => Ordinary Kriging\n"
     end
   end
 end
