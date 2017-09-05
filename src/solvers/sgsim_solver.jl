@@ -79,7 +79,7 @@ function solve(problem::SimulationProblem, solver::SeqGaussSim)
   warn("SeqGaussSim is not fully implemented, assuming data is already ~ Normal(0,1)")
 
   # map spatial data to domain
-  mapper = SimpleMapper(data(problem), domain(problem), variables(problem))
+  mapper = hasdata(problem) ? SimpleMapper(data(problem), domain(problem), variables(problem)) : nothing
 
   # save results in a dictionary
   realizations = Dict{Symbol,Vector{Vector}}()
@@ -103,7 +103,7 @@ function solve(problem::SimulationProblem, solver::SeqGaussSim)
 end
 
 function solve_single(problem::SimulationProblem, var::Symbol,
-                      solver::SeqGaussSim, mapper::SimpleMapper)
+                      solver::SeqGaussSim, mapper::Union{SimpleMapper,Void})
   # retrieve problem info
   pdomain = domain(problem)
 
@@ -157,9 +157,11 @@ function solve_single(problem::SimulationProblem, var::Symbol,
   simulated = falses(npoints(pdomain))
 
   # consider data locations as already simulated
-  for (loc, val) in mapping(mapper, var)
-    simulated[loc] = true
-    varreal[loc] = val
+  if hasdata(problem)
+    for (loc, val) in mapping(mapper, var)
+      simulated[loc] = true
+      varreal[loc] = val
+    end
   end
 
   # simulation loop
