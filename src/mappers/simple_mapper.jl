@@ -51,15 +51,19 @@ function SimpleMapper(spatialdata::S, domain::D, targetvars::Dict{Symbol,DataTyp
   SimpleMapper{D}(dict)
 end
 
-function findclosest(domain::D, coordinates) where {D<:RegularGrid}
+function findclosest(domain::D, coords::AbstractVector{T}) where {T<:Real,D<:RegularGrid{T}}
   dims = size(domain)
   dorigin = origin(domain)
   dspacing = spacing(domain)
 
-  units = round.(Int, (coordinates .- [dorigin...]) ./ [dspacing...])
+  units = round.(Int, (coords .- [dorigin...]) ./ [dspacing...])
   intcoords = ones(Int, ndims(domain)) .+ units
 
   sub2ind(dims, intcoords...)
+end
+
+function findclosest(domain::D, coords::AbstractVector{T}) where {T<:Real,D<:PointCollection{T,<:Any}}
+  indmin(norm(coords .- coordinates(domain, loc)) for loc in 1:npoints(domain))
 end
 
 mapping(m::SimpleMapper, variable::Symbol) = m.dict[variable]
