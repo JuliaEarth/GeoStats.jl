@@ -4,6 +4,9 @@ using Plots; gr(size=(600,400))
 using Base.Test
 using VisualRegressionTests
 
+# setup GR backend for Travis CI
+ENV["GKSwstype"] = "100"
+
 # list of maintainers
 maintainers = ["juliohm"]
 
