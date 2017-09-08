@@ -12,43 +12,22 @@
 ## ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 ## OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
-"""
-    domain(solution)
-
-Return the domain of the estimation `solution`.
-"""
-domain(solution::EstimationSolution) = solution.domain
-
 function digest(solution::EstimationSolution{<:RegularGrid})
-  # get the size of the grid
-  sdomain = domain(solution)
-  sz = size(sdomain)
-
   # solution variables
   variables = keys(solution.mean)
 
-  # output dictionary
-  digested = Dict{Symbol,Dict{Symbol,Array}}()
+  # get the size of the grid
+  sz = size(solution.domain)
+
+  # build dictionary pairs
+  pairs = []
   for var in variables
     M = reshape(solution.mean[var], sz)
     V = reshape(solution.variance[var], sz)
 
-    push!(digested, var => Dict(:mean => M, :variance => V))
+    push!(pairs, var => Dict(:mean => M, :variance => V))
   end
 
-  digested
-end
-
-# ------------
-# IO methods
-# ------------
-function Base.show(io::IO, solution::EstimationSolution)
-  dim = ndims(solution.domain)
-  print(io, "$(dim)D EstimationSolution")
-end
-
-function Base.show(io::IO, ::MIME"text/plain", solution::EstimationSolution)
-  println(io, solution)
-  println(io, "  domain: ", solution.domain)
-  print(  io, "  variables: ", join(keys(solution.mean), ", ", " and "))
+  # output dictionary
+  Dict(pairs)
 end

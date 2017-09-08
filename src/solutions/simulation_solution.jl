@@ -12,42 +12,20 @@
 ## ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 ## OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
-"""
-    domain(solution)
-
-Return the domain of a simulation `solution`.
-"""
-domain(solution::SimulationSolution) = solution.domain
-
 function digest(solution::SimulationSolution{<:RegularGrid})
-  # get the size of the grid
-  sz = size(domain(solution))
-
-  # solution variables and number of realizations
+  # solution variables
   variables = collect(keys(solution.realizations))
-  nreals = length(solution.realizations[variables[1]])
 
-  # output dictionary
-  digested = Dict{Symbol,Vector{Array}}()
+  # get the size of the grid
+  sz = size(solution.domain)
+
+  # build dictionary pairs
+  pairs = []
   for var in variables
     reals = map(r -> reshape(r, sz), solution.realizations[var])
-
-    push!(digested, var => reals)
+    push!(pairs, var => reals)
   end
 
-  digested
-end
-
-# ------------
-# IO methods
-# ------------
-function Base.show(io::IO, solution::SimulationSolution)
-  dim = ndims(solution.domain)
-  print(io, "$(dim)D SimulationSolution")
-end
-
-function Base.show(io::IO, ::MIME"text/plain", solution::SimulationSolution)
-  println(io, solution)
-  println(io, "  domain: ", solution.domain)
-  print(  io, "  variables: ", join(keys(solution.realizations), ", ", " and "))
+  # output dictionary
+  Dict(pairs)
 end
