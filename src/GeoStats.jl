@@ -52,10 +52,6 @@ include("paths.jl")
 include("neighborhoods.jl")
 include("mappers.jl")
 
-# problems
-include("problems/estimation_problem.jl")
-include("problems/simulation_problem.jl")
-
 # solutions
 include("solutions/estimation_solution.jl")
 include("solutions/simulation_solution.jl")
