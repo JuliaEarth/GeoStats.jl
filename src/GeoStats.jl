@@ -41,6 +41,10 @@ include("spatialdata/geodataframe.jl")
 include("domains/regular_grid.jl")
 include("domains/point_collection.jl")
 
+# digest solutions
+include("solutions/estimation_solution.jl")
+include("solutions/simulation_solution.jl")
+
 # variograms and Kriging estimators
 include("distances.jl")
 include("empirical_variograms.jl")
@@ -51,10 +55,6 @@ include("estimators.jl")
 include("paths.jl")
 include("neighborhoods.jl")
 include("mappers.jl")
-
-# solutions
-include("solutions/estimation_solution.jl")
-include("solutions/simulation_solution.jl")
 
 # solvers
 include("solvers.jl")
