@@ -17,33 +17,24 @@ __precompile__()
 module GeoStats
 
 using Reexport
-using DataFrames: AbstractDataFrame, eltypes, nrow, completecases!, sample
-import DataFrames
+using StatsBase: sample
 using Combinatorics: combinations
 using SpecialFunctions: besselk
 using RecipesBase
-
-# extend base package
-@reexport using GeoStatsBase
-import GeoStatsBase: coordinates, variables, npoints, valid, domain, digest, solve
 
 # won't be needed in Julia v0.7
 using Parameters: @with_kw
 @reexport using NamedTuples
 
+# export project components
+@reexport using GeoStatsBase
+@reexport using GeoStatsDevTools
+
+# extend base package
+import GeoStatsBase: digest, solve
+
 # utilities
 include("utils.jl")
-
-# spatial data
-include("spatialdata/geodataframe.jl")
-
-# domains
-include("domains/regular_grid.jl")
-include("domains/point_collection.jl")
-
-# digest solutions
-include("solutions/estimation_solution.jl")
-include("solutions/simulation_solution.jl")
 
 # variograms and Kriging estimators
 include("distances.jl")
@@ -51,13 +42,12 @@ include("empirical_variograms.jl")
 include("theoretical_variograms.jl")
 include("estimators.jl")
 
-# geometrical concepts
-include("paths.jl")
-include("neighborhoods.jl")
-include("mappers.jl")
-
 # solvers
 include("solvers.jl")
+
+# digest solutions
+include("solutions/estimation_solution.jl")
+include("solutions/simulation_solution.jl")
 
 # plot recipes
 include("plotrecipes/empirical_variograms.jl")
@@ -102,18 +92,8 @@ export
   weights,
   estimate,
 
-  # spatial data
-  GeoDataFrame,
-  readtable,
-
-  # domains
-  RegularGrid,
-  PointCollection,
-  origin,
-  spacing,
-
   # solvers
   Kriging,
   SeqGaussSim
 
-end
+end # module
