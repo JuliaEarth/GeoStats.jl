@@ -23,17 +23,20 @@ Default implementation calls `solve_single` in parallel.
 """
 function solve(problem::SimulationProblem, solver::AbstractSimulationSolver)
   # sanity checks
-  @assert keys(solver.params) ⊆ variables(problem) "invalid variable names in solver parameters"
+  @assert keys(solver.params) ⊆ keys(variables(problem)) "invalid variable names in solver parameters"
+
+  # map spatial data to domain
+  mapper = SimpleMapper(problem)
 
   realizations = Dict{Symbol,Vector{Vector}}()
-  for var in variables(problem)
+  for (var,V) in variables(problem)
     if nprocs() > 2
       # generate realizations in parallel
-      λ = _ -> solve_single(problem, var, solver)
+      λ = _ -> solve_single(problem, var, solver, mapper)
       varreals = pmap(λ, 1:nreals(problem))
     else
       # fallback to serial execution
-      varreals = [solve_single(problem, var, solver) for i=1:nreals(problem)]
+      varreals = [solve_single(problem, var, solver, mapper) for i=1:nreals(problem)]
     end
 
     push!(realizations, var => varreals)

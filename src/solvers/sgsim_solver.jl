@@ -60,6 +60,8 @@ struct SeqGaussSim <: AbstractSimulationSolver
 end
 
 function SeqGaussSim(params...)
+  warn("SeqGaussSim is not fully implemented, assuming data is already ~ Normal(0,1)")
+
   # build dictionary for inner constructor
   dict = Dict{Symbol,SGSParam}()
 
@@ -72,38 +74,7 @@ function SeqGaussSim(params...)
   SeqGaussSim(dict)
 end
 
-function solve(problem::SimulationProblem, solver::SeqGaussSim)
-  # sanity checks
-  @assert keys(solver.params) ⊆ keys(variables(problem)) "invalid variable names in solver parameters"
-
-  warn("SeqGaussSim is not fully implemented, assuming data is already ~ Normal(0,1)")
-
-  # map spatial data to domain
-  mapper = hasdata(problem) ? SimpleMapper(data(problem), domain(problem), variables(problem)) : nothing
-
-  # save results in a dictionary
-  realizations = Dict{Symbol,Vector{Vector}}()
-
-  # loop over target variables
-  for (var,V) in variables(problem)
-    if nprocs() > 2
-      # generate realizations in parallel
-      λ = _ -> solve_single(problem, var, solver, mapper)
-      varreals = pmap(λ, 1:nreals(problem))
-    else
-      # fallback to serial execution
-      varreals = [solve_single(problem, var, solver, mapper) for i=1:nreals(problem)]
-    end
-
-    push!(realizations, var => varreals)
-  end
-
-  # return solution
-  SimulationSolution(domain(problem), realizations)
-end
-
-function solve_single(problem::SimulationProblem, var::Symbol,
-                      solver::SeqGaussSim, mapper::Union{SimpleMapper,Void})
+function solve_single(problem::SimulationProblem, var::Symbol, solver::SeqGaussSim, mapper::AbstractMapper)
   # retrieve problem info
   pdomain = domain(problem)
 
@@ -157,11 +128,9 @@ function solve_single(problem::SimulationProblem, var::Symbol,
   simulated = falses(npoints(pdomain))
 
   # consider data locations as already simulated
-  if hasdata(problem)
-    for (loc, val) in mapping(mapper, var)
-      simulated[loc] = true
-      varreal[loc] = val
-    end
+  for (loc, val) in mapping(mapper, var)
+    simulated[loc] = true
+    varreal[loc] = val
   end
 
   # simulation loop
