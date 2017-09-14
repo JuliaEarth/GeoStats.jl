@@ -137,25 +137,3 @@ function solve(problem::EstimationProblem, var::Symbol, estimator::E) where {E<:
   # return mean and variance
   varμ, varσ
 end
-
-# ------------
-# IO methods
-# ------------
-function Base.show(io::IO, solver::Kriging)
-  print(io, "Kriging solver")
-end
-
-function Base.show(io::IO, ::MIME"text/plain", solver::Kriging)
-  println(io, solver)
-  for (varname, varparams) in solver.params
-    if varparams.drifts ≠ nothing
-      println(io, "  - $varname => External Drift Kriging")
-    elseif varparams.degree ≠ nothing
-      println(io, "  - $varname => Universal Kriging")
-    elseif varparams.mean ≠ nothing
-      println(io, "  - $varname => Simple Kriging")
-    else
-      println(io, "  - $varname => Ordinary Kriging")
-    end
-  end
-end
