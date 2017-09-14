@@ -61,9 +61,9 @@ in Julia v0.7 and beyond.
 """
 @estimsolver Kriging begin
   @param variogram = GaussianVariogram()
-  @param mean
-  @param degree
-  @param drifts
+  @param mean = nothing
+  @param degree = nothing
+  @param drifts = nothing
 end
 
 function solve(problem::EstimationProblem, solver::Kriging)

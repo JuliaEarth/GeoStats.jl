@@ -41,9 +41,9 @@ default with the `variogram` only.
 """
 @simsolver SeqGaussSim begin
   @param variogram = GaussianVariogram()
-  @param mean
-  @param degree
-  @param drifts
+  @param mean = nothing
+  @param degree = nothing
+  @param drifts = nothing
   @param path = :random
   @param neighradius = 10.
   @param maxneighbors = 10

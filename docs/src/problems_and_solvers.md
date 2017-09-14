@@ -48,22 +48,17 @@ hasdata
 
 ## Solvers
 
+Below is the list of solvers distributed with GeoStats.jl. For more solvers, please check
+the main project page.
+
 ### Estimation
 
 ```@docs
 Kriging
 ```
 
-```@docs
-GeoStats.KrigParam
-```
-
 ### Simulation
 
 ```@docs
 SeqGaussSim
-```
-
-```@docs
-GeoStats.SGSParam
 ```
