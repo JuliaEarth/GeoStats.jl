@@ -13,9 +13,14 @@
 ## OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
 """
-    KrigParam
+    Kriging(var₁=>param₁, var₂=>param₂, ...)
 
-A set of parameters for a Kriging variable.
+A polyalgorithm Kriging estimation solver.
+
+Each pair `var=>param` specifies the `KrigingParam` `param`
+for the Kriging variable `var`. In order to avoid boilerplate
+code, the constructor expects pairs of `Symbol` and `NamedTuple`
+instead.
 
 ## Parameters
 
@@ -25,26 +30,9 @@ A set of parameters for a Kriging variable.
 * `drifts`    - External Drift Kriging drift functions
 
 Latter options override former options. For example, by specifying
-`ds`, the user is telling the algorithm to ignore `d` and `m`.
-If no option is specified, Ordinary Kriging is used by default with
-the variogram `v` only.
-"""
-@with_kw struct KrigParam
-  variogram = GaussianVariogram()
-  mean = nothing
-  degree = nothing
-  drifts = nothing
-end
-
-"""
-    Kriging(var₁=>param₁, var₂=>param₂, ...)
-
-A polyalgorithm Kriging estimation solver.
-
-Each pair `var=>param` specifies the [`KrigParam`](@ref) `param`
-for the Kriging variable `var`. In order to avoid boilerplate
-code, the constructor expects pairs of `Symbol` and `NamedTuple`
-instead.
+`drifts`, the user is telling the algorithm to ignore `degree` and
+`mean`. If no option is specified, Ordinary Kriging is used by
+default with the `variogram` only.
 
 ## Examples
 
@@ -71,23 +59,11 @@ julia> Kriging()
 The prefix `@NT` extends for `NamedTuple`. It won't be necessary
 in Julia v0.7 and beyond.
 """
-struct Kriging <: AbstractEstimationSolver
-  params::Dict{Symbol,KrigParam}
-
-  Kriging(params::Dict{Symbol,KrigParam}) = new(params)
-end
-
-function Kriging(params...)
-  # build dictionary for inner constructor
-  dict = Dict{Symbol,KrigParam}()
-
-  # convert named tuples to Kriging parameters
-  for (varname, varparams) in params
-    kwargs = [k => v for (k,v) in zip(keys(varparams), varparams)]
-    push!(dict, varname => KrigParam(; kwargs...))
-  end
-
-  Kriging(dict)
+@estimsolver Kriging begin
+  @param variogram = GaussianVariogram()
+  @param mean
+  @param degree
+  @param drifts
 end
 
 function solve(problem::EstimationProblem, solver::Kriging)
@@ -98,9 +74,8 @@ function solve(problem::EstimationProblem, solver::Kriging)
   probcoords = coordinates(problem)
   T = promote_type([T for (var,T) in probcoords]...)
 
-  # store results on dictionary
-  μdict = Dict{Symbol,Vector}()
-  σdict = Dict{Symbol,Vector}()
+  # results for each variable
+  μs = []; σs = []
 
   # loop over target variables
   for (var,V) in variables(problem)
@@ -108,7 +83,7 @@ function solve(problem::EstimationProblem, solver::Kriging)
     if var ∈ keys(solver.params)
       varparams = solver.params[var]
     else
-      varparams = KrigParam()
+      varparams = KrigingParam()
     end
 
     # determine which Kriging variant to use
@@ -126,11 +101,11 @@ function solve(problem::EstimationProblem, solver::Kriging)
     varμ, varσ = solve(problem, var, estimator)
 
     # save result for variable
-    μdict[var] = varμ
-    σdict[var] = varσ
+    push!(μs, var => varμ)
+    push!(σs, var => varσ)
   end
 
-  EstimationSolution(domain(problem), μdict, σdict)
+  EstimationSolution(domain(problem), Dict(μs), Dict(σs))
 end
 
 function solve(problem::EstimationProblem, var::Symbol, estimator::E) where {E<:AbstractEstimator}

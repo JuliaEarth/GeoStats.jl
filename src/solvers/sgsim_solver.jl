@@ -13,9 +13,15 @@
 ## OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
 """
-    SGSParam
+    SeqGaussSim(var₁=>param₁, var₂=>param₂, ...)
 
-A set of parameters for a simulation variable.
+A polyalgorithm sequential Gaussian simulation solver.
+
+Each pair `var=>param` specifies the `SeqGaussSimParam`
+`param` for the simulation variable `var`. In order to avoid
+boilerplate code, the constructor expects pairs of `Symbol`
+and `NamedTuple` instead. See [`Kriging`](@ref) documentation
+for examples.
 
 ## Parameters
 
@@ -25,53 +31,22 @@ A set of parameters for a simulation variable.
 * `drifts`    - External Drift Kriging drift functions
 
 Latter options override former options. For example, by specifying
-`ds`, the user is telling the algorithm to ignore `d` and `m`.
-If no option is specified, Ordinary Kriging is used by default with
-the variogram `v` only.
+`drifts`, the user is telling the algorithm to ignore `degree` and
+`mean`. If no option is specified, Ordinary Kriging is used by
+default with the `variogram` only.
 
 * `path`         - Simulation path (default to :random)
 * `neighradius`  - Radius of search neighborhood (default to 10.)
 * `maxneighbors` - Maximum number of neighbors (default to 10)
 """
-@with_kw struct SGSParam
-  variogram = GaussianVariogram()
-  mean = nothing
-  degree = nothing
-  drifts = nothing
-  path = :random
-  neighradius = 10.
-  maxneighbors = 10
-end
-
-"""
-    SeqGaussSim(var₁=>param₁, var₂=>param₂, ...)
-
-A polyalgorithm sequential Gaussian simulation solver.
-
-Each pair `var=>param` specifies the [`SGSParam`](@ref) `param`
-for the simulation variable `var`. In order to avoid boilerplate
-code, the constructor expects pairs of `Symbol` and `NamedTuple`
-instead. See [`Kriging`](@ref) documentation for examples.
-"""
-struct SeqGaussSim <: AbstractSimulationSolver
-  params::Dict{Symbol,SGSParam}
-
-  SeqGaussSim(params::Dict{Symbol,SGSParam}) = new(params)
-end
-
-function SeqGaussSim(params...)
-  warn("SeqGaussSim is not fully implemented, assuming data is already ~ Normal(0,1)")
-
-  # build dictionary for inner constructor
-  dict = Dict{Symbol,SGSParam}()
-
-  # convert named tuples to SGS parameters
-  for (varname, varparams) in params
-    kwargs = [k => v for (k,v) in zip(keys(varparams), varparams)]
-    push!(dict, varname => SGSParam(; kwargs...))
-  end
-
-  SeqGaussSim(dict)
+@simsolver SeqGaussSim begin
+  @param variogram = GaussianVariogram()
+  @param mean
+  @param degree
+  @param drifts
+  @param path = :random
+  @param neighradius = 10.
+  @param maxneighbors = 10
 end
 
 function solve_single(problem::SimulationProblem, var::Symbol, solver::SeqGaussSim, mapper::AbstractMapper)
@@ -88,7 +63,7 @@ function solve_single(problem::SimulationProblem, var::Symbol, solver::SeqGaussS
   if var ∈ keys(solver.params)
     varparams = solver.params[var]
   else
-    varparams = SGSParam()
+    varparams = SeqGaussSimParam()
   end
 
   # determine which Kriging variant to use
