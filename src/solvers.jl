@@ -25,24 +25,21 @@ function solve(problem::SimulationProblem, solver::AbstractSimulationSolver)
   # sanity checks
   @assert keys(solver.params) ⊆ keys(variables(problem)) "invalid variable names in solver parameters"
 
-  # map spatial data to domain
-  mapper = SimpleMapper(problem)
-
-  realizations = Dict{Symbol,Vector{Vector}}()
+  realizations = []
   for (var,V) in variables(problem)
     if nprocs() > 2
       # generate realizations in parallel
-      λ = _ -> solve_single(problem, var, solver, mapper)
+      λ = _ -> solve_single(problem, var, solver)
       varreals = pmap(λ, 1:nreals(problem))
     else
       # fallback to serial execution
-      varreals = [solve_single(problem, var, solver, mapper) for i=1:nreals(problem)]
+      varreals = [solve_single(problem, var, solver) for i=1:nreals(problem)]
     end
 
     push!(realizations, var => varreals)
   end
 
-  SimulationSolution(domain(problem), realizations)
+  SimulationSolution(domain(problem), Dict(realizations))
 end
 
 #------------------

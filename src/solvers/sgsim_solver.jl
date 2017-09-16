@@ -49,8 +49,9 @@ default with the `variogram` only.
   @param maxneighbors = 10
 end
 
-function solve_single(problem::SimulationProblem, var::Symbol, solver::SeqGaussSim, mapper::AbstractMapper)
+function solve_single(problem::SimulationProblem, var::Symbol, solver::SeqGaussSim)
   # retrieve problem info
+  pdata = data(problem)
   pdomain = domain(problem)
 
   # determine coordinate type
@@ -103,9 +104,9 @@ function solve_single(problem::SimulationProblem, var::Symbol, solver::SeqGaussS
   simulated = falses(npoints(pdomain))
 
   # consider data locations as already simulated
-  for (loc, val) in mapping(mapper, var)
+  for (loc, datloc) in datamap(problem, var)
     simulated[loc] = true
-    varreal[loc] = val
+    varreal[loc] = value(pdata, datloc, var)
   end
 
   # simulation loop
