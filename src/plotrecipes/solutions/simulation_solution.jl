@@ -53,7 +53,7 @@
     elseif dim == 2 # plot a heat map
       @series begin
         subplot := (i-1)*N + j
-        seriestype := :contourf
+        seriestype := :heatmap
         title := string(var, " $j")
         color --> :bluesreds
         flipdim(rotr90(R), 2)
