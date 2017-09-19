@@ -70,7 +70,7 @@ They are automatically integrated with GeoStats.jl thanks to Julia's multiple di
 | Solver | Description | References |
 |:------:|-------------|------------|
 | [Kriging](https://github.com/juliohm/GeoStats.jl/tree/master/src/solvers) | Polyalgorithm Kriging (SK, OK, UK, EDK) | [Matheron 1971](https://books.google.com/books/about/The_Theory_of_Regionalized_Variables_and.html?id=TGhGAAAAYAAJ), [Journel 1978](https://www.amazon.com/Mining-Geostatistics-G-Journel/dp/1930665911) |
-| [InvDistWeights](https://github.com/juliohm/InverseDistanceWeighting.jl) | Inverse distance weighting with k-d trees | [Isaaks 1990](https://www.amazon.com/Introduction-Applied-Geostatistics-Edward-Isaaks/dp/0195050134), [Hastie 2016](https://www.amazon.com/Elements-Statistical-Learning-Prediction-Statistics/dp/0387848576) |
+| [InvDistWeight](https://github.com/juliohm/InverseDistanceWeighting.jl) | Inverse distance weighting with k-d trees | [Isaaks 1990](https://www.amazon.com/Introduction-Applied-Geostatistics-Edward-Isaaks/dp/0195050134), [Hastie 2016](https://www.amazon.com/Elements-Statistical-Learning-Prediction-Statistics/dp/0387848576) |
 
 #### Simulation problems
 
