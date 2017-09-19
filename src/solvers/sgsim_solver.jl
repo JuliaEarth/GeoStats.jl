@@ -50,6 +50,7 @@ default with the `variogram` only.
 end
 
 function solve_single(problem::SimulationProblem, var::Symbol, solver::SeqGaussSim)
+  warn("SeqGaussSim not fully implemented, sorry!")
   # retrieve problem info
   pdata = data(problem)
   pdomain = domain(problem)
