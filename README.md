@@ -14,7 +14,7 @@
 ### Related packages
 
 - [GaussianProcesses.jl](https://github.com/STOR-i/GaussianProcesses.jl) &mdash; Gaussian processes
-and Simple Kriging are essentially [two names for the same concept](https://en.wikipedia.org/wiki/Kriging).
+(the method) and Simple Kriging are essentially [two names for the same concept](https://en.wikipedia.org/wiki/Kriging).
 The derivation of Kriging estimators, however; does **not** require distributional assumptions. It is a
 beautiful coincidence that for multivariate Gaussian distributions, Simple Kriging gives the conditional
 expectation. [Matheron](https://en.wikipedia.org/wiki/Georges_Matheron)
