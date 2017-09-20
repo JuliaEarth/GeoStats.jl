@@ -44,9 +44,6 @@ OrdinaryKriging(X, z, γ) = OrdinaryKriging{eltype(X),eltype(z)}(γ, X=X, z=z)
 
 function fit!(estimator::OrdinaryKriging{T,V},
               X::AbstractMatrix{T}, z::AbstractVector{V}) where {T<:Real,V}
-  # sanity check
-  @assert size(X, 2) == length(z) "incorrect data configuration"
-
   # udpate data
   estimator.X = X
   estimator.z = z

@@ -54,9 +54,6 @@ ExternalDriftKriging(X, z, γ, drifts) = ExternalDriftKriging{eltype(X),eltype(z
 
 function fit!(estimator::ExternalDriftKriging{T,V},
               X::AbstractMatrix{T}, z::AbstractVector{V}) where {T<:Real,V}
-  # sanity check
-  @assert size(X, 2) == length(z) "incorrect data configuration"
-
   # update data
   estimator.X = X
   estimator.z = z

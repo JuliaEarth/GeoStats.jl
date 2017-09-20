@@ -51,9 +51,6 @@ SimpleKriging(X, z, γ, μ) = SimpleKriging{eltype(X),eltype(z)}(γ, μ, X=X, z=
 
 function fit!(estimator::SimpleKriging{T,V},
               X::AbstractMatrix{T}, z::AbstractVector{V}) where {T<:Real,V}
-  # sanity check
-  @assert size(X, 2) == length(z) "incorrect data configuration"
-
   # update data
   estimator.X = X
   estimator.z = z
