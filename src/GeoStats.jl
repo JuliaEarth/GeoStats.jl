@@ -31,7 +31,7 @@ using Parameters: @with_kw
 @reexport using GeoStatsDevTools
 
 # extend base package
-import GeoStatsBase: digest, solve
+import GeoStatsBase: digest, solve, solve_single
 
 # utilities
 include("utils.jl")
