@@ -1,6 +1,6 @@
 ![GeoStatsLogo](docs/src/images/GeoStats.png)
 
-[![][travis-img]][travis-url] [![][julia-pkg-img]][julia-pkg-url] [![][codecov-img]][codecov-url] [![][docs-stable-img]][docs-stable-url] [![][docs-latest-img]][docs-latest-url]
+[![][travis-img]][travis-url] [![][julia-pkg-img]][julia-pkg-url] [![][codecov-img]][codecov-url] [![][docs-stable-img]][docs-stable-url] [![][docs-latest-img]][docs-latest-url] [![][license-img]][license-url]
 
 *High-performance implementations of geostatistical algorithms for the Julia programming language.*
 
@@ -150,3 +150,6 @@ your colleagues.
 
 [docs-latest-img]: https://img.shields.io/badge/docs-latest-blue.svg
 [docs-latest-url]: https://juliohm.github.io/GeoStats.jl/latest
+
+[license-img]: https://img.shields.io/badge/license-ISC-blue.svg
+[license-url]: LICENSE
