@@ -17,6 +17,8 @@
   sdomain = domain(solution)
   dim = ndims(sdomain)
   sz  = size(sdomain)
+  or  = origin(sdomain)
+  sp  = spacing(sdomain)
 
   # valid variables
   validvars = sort(collect(keys(solution.mean)))
@@ -34,19 +36,20 @@
     V = reshape(solution.variance[var], sz)
 
     if dim == 1 # plot a line
+      x = or[1]:sp[1]:or[1]+(sz[1]-1)*sp[1]
       @series begin
         subplot := 2i - 1
         seriestype := :path
         legend := false
         title := string(var, " mean")
-        M
+        x, M
       end
       @series begin
         subplot := 2i
         seriestype := :path
         legend := false
         title := string(var, " variance")
-        V
+        x, V
       end
     elseif dim == 2 # plot a heat map
       @series begin

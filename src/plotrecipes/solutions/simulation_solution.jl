@@ -17,6 +17,8 @@
   sdomain = domain(solution)
   dim = ndims(sdomain)
   sz  = size(sdomain)
+  or  = origin(sdomain)
+  sp  = spacing(sdomain)
 
   # valid variables
   validvars = sort(collect(keys(solution.realizations)))
@@ -43,12 +45,13 @@
     R = reshape(real, sz)
 
     if dim == 1 # plot a line
+      x = or[1]:sp[1]:or[1]+(sz[1]-1)*sp[1]
       @series begin
         subplot := (i-1)*N + j
         seriestype := :path
         legend := false
         title := string(var, " $j")
-        R
+        x, R
       end
     elseif dim == 2 # plot a heat map
       @series begin
