@@ -50,14 +50,14 @@
         subplot := (i-1)*N + j
         seriestype := :path
         legend := false
-        title := string(var, " $j")
+        title --> string(var, " $j")
         x, R
       end
     elseif dim == 2 # plot a heat map
       @series begin
         subplot := (i-1)*N + j
         seriestype := :heatmap
-        title := string(var, " $j")
+        title --> string(var, " $j")
         color --> :bluesreds
         flipdim(rotr90(R), 2)
       end
@@ -65,7 +65,7 @@
       @series begin
         subplot := (i-1)*N + j
         seriestype := :volume
-        title := string(var, " $j")
+        title --> string(var, " $j")
         color --> :bluesreds
         R
       end

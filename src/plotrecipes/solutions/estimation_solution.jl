@@ -41,28 +41,28 @@
         subplot := 2i - 1
         seriestype := :path
         legend := false
-        title := string(var, " mean")
+        title --> string(var, " mean")
         x, M
       end
       @series begin
         subplot := 2i
         seriestype := :path
         legend := false
-        title := string(var, " variance")
+        title --> string(var, " variance")
         x, V
       end
     elseif dim == 2 # plot a heat map
       @series begin
         subplot := 2i - 1
         seriestype := :contourf
-        title := string(var, " mean")
+        title --> string(var, " mean")
         color --> :bluesreds
         flipdim(rotr90(M), 2)
       end
       @series begin
         subplot := 2i
         seriestype := :contourf
-        title := string(var, " variance")
+        title --> string(var, " variance")
         color --> :bluesreds
         flipdim(rotr90(V), 2)
       end
@@ -70,14 +70,14 @@
       @series begin
         subplot := 2i - 1
         seriestype := :volume
-        title := string(var, " mean")
+        title --> string(var, " mean")
         color --> :bluesreds
         M
       end
       @series begin
         subplot := 2i
         seriestype := :volume
-        title := string(var, " variance")
+        title --> string(var, " variance")
         color --> :bluesreds
         V
       end
