@@ -41,7 +41,7 @@ Optionally, use a custom distance `d`.
   nugget::V = zero(Float64)
   distance::D = EuclideanDistance()
 end
-(γ::GaussianVariogram)(h) = (γ.sill - γ.nugget) * (1 - exp.(-(h/γ.range).^2)) + γ.nugget
+(γ::GaussianVariogram)(h) = (γ.sill - γ.nugget) * (1 - exp.(-3(h/γ.range).^2)) + γ.nugget
 (γ::GaussianVariogram)(x, y) = γ(γ.distance(x, y))
 isstationary(::GaussianVariogram) = true
 
@@ -57,7 +57,7 @@ Optionally, use a custom distance `d`.
   nugget::V = zero(Float64)
   distance::D = EuclideanDistance()
 end
-(γ::ExponentialVariogram)(h) = (γ.sill - γ.nugget) * (1 - exp.(-(h/γ.range))) + γ.nugget
+(γ::ExponentialVariogram)(h) = (γ.sill - γ.nugget) * (1 - exp.(-3(h/γ.range))) + γ.nugget
 (γ::ExponentialVariogram)(x, y) = γ(γ.distance(x, y))
 isstationary(::ExponentialVariogram) = true
 

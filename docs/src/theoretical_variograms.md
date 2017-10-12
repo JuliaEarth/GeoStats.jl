@@ -53,7 +53,7 @@ isstationary
 ## Gaussian
 
 ```math
-\gamma(h) = (s - n) \left[1 - \exp\left(-\left(\frac{h}{r}\right)^2\right)\right] + n \cdot \1_{(0,\infty)}(h)
+\gamma(h) = (s - n) \left[1 - \exp\left(-3\left(\frac{h}{r}\right)^2\right)\right] + n \cdot \1_{(0,\infty)}(h)
 ```
 
 ```@docs
@@ -63,7 +63,7 @@ GaussianVariogram
 ## Exponential
 
 ```math
-\gamma(h) = (s - n) \left[1 - \exp\left(-\frac{h}{r}\right)\right] + n \cdot \1_{(0,\infty)}(h)
+\gamma(h) = (s - n) \left[1 - \exp\left(-3\left(\frac{h}{r}\right)\right)\right] + n \cdot \1_{(0,\infty)}(h)
 
 ```
 
