@@ -5,6 +5,9 @@ using Documenter, GeoStats
 Pkg.installed("Plots") == nothing && Pkg.add("Plots")
 Pkg.installed("GR") == nothing && Pkg.add("GR")
 
+# setup GR backend for Travis CI
+ENV["GKSwstype"] = "100"
+
 makedocs(
   format = :html,
   sitename = "GeoStats.jl",
