@@ -124,7 +124,7 @@ struct HaversineDistance{T<:Real} <: AbstractDistance
   radius::T
 end
 HaversineDistance() = HaversineDistance(6371.) # Earth radius ≈ 6371km
-(d::HaversineDistance)(x, y) = begin
+(d::HaversineDistance{T})(x, y) where{T} = begin
   # longitudes
   Δλ = deg2rad(y[1] - x[1])
 
@@ -135,8 +135,10 @@ HaversineDistance() = HaversineDistance(6371.) # Earth radius ≈ 6371km
 
   # haversine formula
   a = sin(Δφ/2)^2 + cos(φ₁)*cos(φ₂)*sin(Δλ/2)^2
-  c = 2atan2(√a, √(1-a))
+
+  # takes care of floating point errors
+  a = min(a, one(T))
 
   # distance on the sphere
-  c*d.radius
+  2*d.radius*atan2(√a, √(1-a))
 end

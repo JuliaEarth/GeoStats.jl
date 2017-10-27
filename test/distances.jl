@@ -30,4 +30,7 @@
   hoover_tower = [37.427698, -122.166977] # Hoover tower, Stanford
   sather_tower = [37.872197, -122.257834] # Sather tower, Berkeley
   @test d(hoover_tower, sather_tower) < 60.
+  d = HaversineDistance(1.)
+  @test d([-180., 0.], [180., 0.]) ≈ 0. atol=1e-12
+  @test d([0., -90.],  [0., 90.]) ≈ π atol=1e-12
 end
