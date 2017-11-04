@@ -5,6 +5,7 @@
 [![Coverage Status](https://codecov.io/gh/juliohm/GeoStats.jl/branch/master/graph/badge.svg)](https://codecov.io/gh/juliohm/GeoStats.jl)
 [![Stable Documentation](https://img.shields.io/badge/docs-stable-blue.svg)](https://juliohm.github.io/GeoStats.jl/stable)
 [![Latest Documentation](https://img.shields.io/badge/docs-latest-blue.svg)](https://juliohm.github.io/GeoStats.jl/latest)
+[![License File](https://img.shields.io/badge/license-ISC-blue.svg)](https://github.com/juliohm/GeoStats.jl/blob/master/LICENSE)
 
 *High-performance implementations of geostatistical algorithms for the Julia programming language.*
 
