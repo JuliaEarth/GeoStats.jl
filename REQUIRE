@@ -2,6 +2,7 @@ julia 0.6
 Reexport
 GeoStatsBase
 GeoStatsDevTools
+Distances
 StatsBase
 Combinatorics
 SpecialFunctions

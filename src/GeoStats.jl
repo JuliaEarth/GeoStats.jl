@@ -17,6 +17,7 @@ __precompile__()
 module GeoStats
 
 using Reexport
+using Distances
 using StatsBase: sample
 using Combinatorics: combinations
 using SpecialFunctions: besselk
@@ -37,7 +38,6 @@ import GeoStatsBase: digest, solve, solve_single
 include("utils.jl")
 
 # variograms and Kriging estimators
-include("distances.jl")
 include("empirical_variograms.jl")
 include("theoretical_variograms.jl")
 include("estimators.jl")
@@ -63,11 +63,6 @@ function examples()
 end
 
 export
-  # distance functions
-  EuclideanDistance,
-  EllipsoidDistance,
-  HaversineDistance,
-
   # empirical variograms
   EmpiricalVariogram,
 

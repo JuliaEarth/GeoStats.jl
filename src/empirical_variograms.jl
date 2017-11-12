@@ -29,7 +29,7 @@ in a `spatialdata` object.
   * maxlag - maximum lag distance (default to maximum lag of data)
   * distance - custom distance function
 """
-struct EmpiricalVariogram{T<:Real,V,D<:AbstractDistance}
+struct EmpiricalVariogram{T<:Real,V,D<:Metric}
   # input fields
   X::AbstractMatrix{T}
   z::AbstractVector{V}
@@ -42,7 +42,7 @@ struct EmpiricalVariogram{T<:Real,V,D<:AbstractDistance}
 
   function EmpiricalVariogram{T,V,D}(X, z,
                                      nbins, maxlag,
-                                     distance) where {T<:Real,V,D<:AbstractDistance}
+                                     distance) where {T<:Real,V,D<:Metric}
     # sanity checks
     @assert nbins > 0 "number of bins must be positive"
     if maxlag ≠ nothing
@@ -58,8 +58,10 @@ struct EmpiricalVariogram{T<:Real,V,D<:AbstractDistance}
     zdiff = Vector{V}(npairs)
     idx = 1
     for j=1:npoints
+      xj = view(X, :, j)
       for i=j+1:npoints
-        @inbounds lags[idx] = distance(X[:,i], X[:,j])
+        xi = view(X, :, i)
+        @inbounds lags[idx] = evaluate(distance, xi, xj)
         @inbounds zdiff[idx] = (z[i] - z[j])^2
         idx += 1
       end
@@ -83,7 +85,7 @@ struct EmpiricalVariogram{T<:Real,V,D<:AbstractDistance}
   end
 end
 
-EmpiricalVariogram(X, z; nbins=20, maxlag=nothing, distance=EuclideanDistance()) =
+EmpiricalVariogram(X, z; nbins=20, maxlag=nothing, distance=Euclidean()) =
   EmpiricalVariogram{eltype(X),eltype(z),typeof(distance)}(X, z, nbins, maxlag, distance)
 
 function EmpiricalVariogram(spatialdata::S, var::Symbol; kwargs...) where {S<:AbstractSpatialData}
@@ -107,7 +109,7 @@ julia> plot(x, y, label="semi-variogram")
 julia> bar!(x, n, label="histogram")
 ```
 """
-function Base.values(γ::EmpiricalVariogram{T,V,D}) where {T<:Real,V,D<:AbstractDistance}
+function Base.values(γ::EmpiricalVariogram{T,V,D}) where {T<:Real,V,D<:Metric}
   bins = γ.bins
   nbins = γ.nbins
   binsize = γ.maxlag / γ.nbins

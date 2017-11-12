@@ -37,7 +37,6 @@ data3D = readtable(fname3D)
 # list of tests
 testfiles = [
   "utils.jl",
-  "distances.jl",
   "empirical_variograms.jl",
   "theoretical_variograms.jl",
   "estimators.jl",
