@@ -16,7 +16,8 @@ distance between any two points ``\x_1,\x_2 \in \R^m``:
 Under the additional assumption of 2nd-order stationarity, the well-known
 covariance is directly related via ``\gamma(h) = cov(0) - cov(h)``. Anisotropic
 models are easily obtained by defining an ellipsoid distance in place of the Euclidean
-distance. For a list of available distances, please see [Distance functions](distances.md).
+distance. For a list of available distances, please see
+[Distances.jl](https://github.com/JuliaStats/Distances.jl).
 
 This package implements a few commonly used and other more excentric variogram models.
 They all share the same default parameters:
@@ -24,7 +25,7 @@ They all share the same default parameters:
 - `sill=1`
 - `range=1`
 - `nugget=0`
-- `distance=EuclideanDistance()`
+- `distance=Euclidean()`
 
 Some of them have extra parameters that can be set with keyword arguments:
 
