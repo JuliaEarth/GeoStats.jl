@@ -115,7 +115,7 @@ function Base.values(γ::EmpiricalVariogram{T,V,D}) where {T<:Real,V,D<:Metric}
   binsize = γ.maxlag / γ.nbins
 
   x = linspace(zero(T) + binsize/2, γ.maxlag - binsize/2, nbins)
-  y = [length(bin) > 0 ? mean(bin)/2 : T(NaN) for bin in bins]
+  y = [length(bin) > 0 ? mean(bin)/2 : V(NaN) for bin in bins]
   n = length.(bins)
 
   x, y, n
