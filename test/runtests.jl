@@ -46,7 +46,8 @@ testfiles = [
   "neighborhoods.jl",
   "mappers.jl",
   "problems.jl",
-  "solvers.jl"
+  "solvers.jl",
+  "comparisons.jl"
 ]
 
 # run

@@ -49,6 +49,9 @@ include("solvers.jl")
 include("solutions/estimation_solution.jl")
 include("solutions/simulation_solution.jl")
 
+# solver comparisons
+include("comparisons.jl")
+
 # plot recipes
 include("plotrecipes/empirical_variograms.jl")
 include("plotrecipes/theoretical_variograms.jl")
@@ -89,6 +92,10 @@ export
 
   # solvers
   Kriging,
-  SeqGaussSim
+  SeqGaussSim,
+
+  # solver comparisons
+  VisualComparison,
+  compare
 
 end # module
