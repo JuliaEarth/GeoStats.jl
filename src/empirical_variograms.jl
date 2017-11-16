@@ -13,15 +13,15 @@
 ## OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
 """
-    EmpiricalVariogram(X, z, [optional parameters])
+    EmpiricalVariogram(X, z₁, z₂=z₁; [optional parameters])
 
 Computes the empirical (a.k.a. experimental) omnidirectional
-(semi-)variogram from data locations `X` and values `z`.
+(cross-)variogram from data locations `X` and values `z₁` and `z₂`.
 
-    EmpiricalVariogram(spatialdata, var, [optional parameters])
+    EmpiricalVariogram(spatialdata, var₁, var₂=var₁; [optional parameters])
 
-Alternatively, compute the variogram for the variable `var` stored
-in a `spatialdata` object.
+Alternatively, compute the (cross-)variogram for the variables
+`var₁` and `var₂` stored in a `spatialdata` object.
 
 ## Parameters
 
@@ -32,7 +32,8 @@ in a `spatialdata` object.
 struct EmpiricalVariogram{T<:Real,V,D<:Metric}
   # input fields
   X::AbstractMatrix{T}
-  z::AbstractVector{V}
+  z₁::AbstractVector{V}
+  z₂::AbstractVector{V}
   nbins::Int
   maxlag::Union{T,Void}
   distance::D
@@ -40,7 +41,7 @@ struct EmpiricalVariogram{T<:Real,V,D<:Metric}
   # state fields
   bins::Vector{Vector{V}}
 
-  function EmpiricalVariogram{T,V,D}(X, z,
+  function EmpiricalVariogram{T,V,D}(X, z₁, z₂,
                                      nbins, maxlag,
                                      distance) where {T<:Real,V,D<:Metric}
     # sanity checks
@@ -62,7 +63,7 @@ struct EmpiricalVariogram{T<:Real,V,D<:Metric}
       for i=j+1:npoints
         xi = view(X, :, i)
         @inbounds lags[idx] = evaluate(distance, xi, xj)
-        @inbounds zdiff[idx] = (z[i] - z[j])^2
+        @inbounds zdiff[idx] = (z₁[i] - z₁[j])*(z₂[i] - z₂[j])
         idx += 1
       end
     end
@@ -81,16 +82,22 @@ struct EmpiricalVariogram{T<:Real,V,D<:Metric}
     # place squared differences at the bins
     bins = [zdiff[binidx .== i] for i=1:nbins]
 
-    new(X, z, nbins, maxlag, distance, bins)
+    new(X, z₁, z₂, nbins, maxlag, distance, bins)
   end
 end
 
-EmpiricalVariogram(X, z; nbins=20, maxlag=nothing, distance=Euclidean()) =
-  EmpiricalVariogram{eltype(X),eltype(z),typeof(distance)}(X, z, nbins, maxlag, distance)
+EmpiricalVariogram(X, z₁, z₂=z₁; nbins=20, maxlag=nothing, distance=Euclidean()) =
+  EmpiricalVariogram{eltype(X),eltype(z₁),typeof(distance)}(X, z₁, z₂, nbins, maxlag, distance)
 
-function EmpiricalVariogram(spatialdata::S, var::Symbol; kwargs...) where {S<:AbstractSpatialData}
-  X, z = valid(spatialdata, var)
-  EmpiricalVariogram(X, z; kwargs...)
+function EmpiricalVariogram(spatialdata::S, var₁::Symbol, var₂::Symbol=var₁;
+                            kwargs...) where {S<:AbstractSpatialData}
+  npts = npoints(spatialdata)
+
+  X = hcat([coordinates(spatialdata, i) for i in 1:npts]...)
+  z₁ = [value(spatialdata, i, var₁) for i in 1:npts]
+  z₂ = var₁ ≠ var₂ ? [value(spatialdata, i, var₂) for i in 1:npts] : z₁
+
+  EmpiricalVariogram(X, z₁, z₂; kwargs...)
 end
 
 """
