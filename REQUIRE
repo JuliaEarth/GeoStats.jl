@@ -1,7 +1,7 @@
 julia 0.6
 Reexport
-GeoStatsBase
-GeoStatsDevTools
+GeoStatsBase 0.0.5
+GeoStatsDevTools 0.0.5
 Distances
 StatsBase
 Combinatorics

@@ -45,3 +45,4 @@ compare(::AbstractVector{S}, ::AbstractProblem,
 # IMPLEMENTATIONS
 #------------------
 include("comparisons/visual_comparison.jl")
+include("comparisons/cross_validation.jl")

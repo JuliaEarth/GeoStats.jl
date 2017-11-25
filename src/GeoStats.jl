@@ -96,6 +96,7 @@ export
 
   # solver comparisons
   VisualComparison,
+  CrossValidation,
   compare
 
 end # module
