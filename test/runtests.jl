@@ -28,11 +28,11 @@ xₒ = rand(dim)
 
 # load some geodataframes
 fname1D = joinpath(datadir,"data1D.tsv")
-data1D = readtable(fname1D, coordnames=[:x])
+data1D = readtable(fname1D, delim='\t', coordnames=[:x])
 fname2D = joinpath(datadir,"data2D.tsv")
-data2D = readtable(fname2D, coordnames=[:x,:y])
+data2D = readtable(fname2D, delim='\t', coordnames=[:x,:y])
 fname3D = joinpath(datadir,"data3D.tsv")
-data3D = readtable(fname3D)
+data3D = readtable(fname3D, delim='\t')
 
 # list of tests
 testfiles = [
