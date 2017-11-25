@@ -40,7 +40,7 @@ testfiles = [
   "empirical_variograms.jl",
   "theoretical_variograms.jl",
   "estimators.jl",
-  "geodataframe.jl",
+  "spatialdata.jl",
   "domains.jl",
   "paths.jl",
   "neighborhoods.jl",
