@@ -22,7 +22,8 @@ makedocs(
         "empirical_variograms.md",
         "theoretical_variograms.md"
       ],
-      "Kriging estimators" => "estimators.md"
+      "Kriging estimators" => "estimators.md",
+      "Solver comparisons" => "comparisons.md"
     ],
     "Examples" => "examples.md",
     "Plotting" => "plotting.md",

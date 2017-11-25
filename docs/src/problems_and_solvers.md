@@ -49,7 +49,7 @@ hasdata
 ## Solvers
 
 Below is the list of solvers distributed with GeoStats.jl. For more solvers, please check
-the project page on GitHub.
+the [project page on GitHub](https://github.com/juliohm/GeoStats.jl#problems-and-solvers).
 
 ### Estimation
 
