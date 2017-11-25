@@ -13,9 +13,15 @@
 ## OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
 """
-    VisualComparison(plotspecs)
+    VisualComparison([plot options])
 
 Compare solvers by plotting the results side by side.
+
+## Examples
+
+```julia
+julia> compare([solver₁, solver₂], problem, VisualComparison())
+```
 """
 struct VisualComparison <: AbstractSolverComparison
   plotspecs
