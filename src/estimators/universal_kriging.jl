@@ -71,12 +71,14 @@ function fit!(estimator::UniversalKriging{T,V},
   end
 
   # multinomial expansion
-  exponents = zeros(Int, 0, dim)
-  for d=0:estimator.degree
-    exponents = [exponents; multinom_exp(dim, d, sortdir="descend")]
-  end
-  exponents = exponents'
+  expmats = [hcat(collect(multiexponents(dim, d))...) for d in 0:estimator.degree]
+  exponents = hcat(expmats...)
 
+  # sort expansion for better conditioned Kriging matrices
+  sorted = sortperm(vec(maximum(exponents, 1)), rev=true)
+  exponents = exponents[:,sorted]
+
+  # update object field
   estimator.exponents = exponents
 
   # polynomial drift matrix
