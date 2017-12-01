@@ -27,7 +27,6 @@ makedocs(
     ],
     "Examples" => "examples.md",
     "Plotting" => "plotting.md",
-    "Library" => "library.md",
     "Contributing" => "contributing.md",
     "About" => [
       "Author" => "about/author.md",
