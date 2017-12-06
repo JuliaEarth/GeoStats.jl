@@ -4,6 +4,7 @@ GeoStatsBase 0.0.5
 GeoStatsDevTools 0.0.6
 Distances
 StatsBase
+Distributions 0.15.0
 Combinatorics 0.5.0
 SpecialFunctions
 Parameters

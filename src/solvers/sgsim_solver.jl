@@ -99,15 +99,15 @@ function solve_single(problem::SimulationProblem, var::Symbol, solver::SeqGaussS
   #-------------------
 
   # result for variable
-  varreal = Vector{V}(npoints(pdomain))
+  realization = Vector{V}(npoints(pdomain))
 
   # keep track of simulated locations
   simulated = falses(npoints(pdomain))
 
   # consider data locations as already simulated
   for (loc, datloc) in datamap(problem, var)
+    realization[loc] = value(pdata, datloc, var)
     simulated[loc] = true
-    varreal[loc] = value(pdata, datloc, var)
   end
 
   # simulation loop
@@ -127,14 +127,14 @@ function solve_single(problem::SimulationProblem, var::Symbol, solver::SeqGaussS
       # choose between marginal and conditional distribution
       if isempty(neighbors)
         # draw from marginal
-        varreal[location] = randn(V)
+        realization[location] = randn(V)
       else
         # build coordinates and observation arrays
         X = Matrix{T}(ndims(pdomain), length(neighbors))
         z = Vector{V}(length(neighbors))
         for (j, neighbor) in enumerate(neighbors)
           X[:,j] = coordinates(pdomain, neighbor)
-          z[j]   = varreal[neighbor]
+          z[j]   = realization[neighbor]
         end
 
         # build Kriging system
@@ -144,16 +144,21 @@ function solve_single(problem::SimulationProblem, var::Symbol, solver::SeqGaussS
           # estimate mean and variance
           μ, σ² = estimate(estimator, coordinates(pdomain, location))
 
+          # TODO: this portion of the code will be rewritten after
+          # Julia v0.7. At the moment the linear algebra components
+          # of the language do not provide a consistent, exception-free
+          # way of checking for failure
+
           # fix possible numerical issues
           O = zero(typeof(σ²))
           σ² < O && (σ² = O)
 
           # draw from conditional
-          varreal[location] = μ + √σ²*randn(V)
+          realization[location] = μ + √σ²*randn(V)
         catch e
           if e isa LinAlg.SingularException
             # draw from marginal
-            varreal[location] = randn(V)
+            realization[location] = randn(V)
           else
             rethrow(e)
           end
@@ -165,5 +170,5 @@ function solve_single(problem::SimulationProblem, var::Symbol, solver::SeqGaussS
     end
   end
 
-  varreal
+  realization
 end

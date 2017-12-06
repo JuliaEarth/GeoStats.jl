@@ -19,6 +19,7 @@ module GeoStats
 using Reexport
 using Distances
 using StatsBase: sample
+using Distributions
 using Combinatorics: multiexponents
 using SpecialFunctions: besselk
 using RecipesBase
