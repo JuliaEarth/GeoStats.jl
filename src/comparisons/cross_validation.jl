@@ -108,10 +108,16 @@ function compare(solvers::AbstractVector{S}, problem::EstimationProblem,
 
       subproblem = EstimationProblem(view(pdata, train), pdomain, var)
 
-      for (s, solver) in enumerate(solvers)
-        # solve subproblem
-        solution = solve(subproblem, solver)
+      if nprocs() > 2
+        # run solvers in parallel
+        λ = solver -> solve(subproblem, solver)
+        solutions = pmap(λ, solvers)
+      else
+        # fallback to serial execution
+        solutions = [solve(subproblem, solver) for solver in solvers]
+      end
 
+      for (s, solution) in enumerate(solutions)
         # get solver estimates at holdout locations
         estimates = [solution.mean[var][j] for j in domhold]
 
