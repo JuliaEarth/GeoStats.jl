@@ -57,16 +57,16 @@
       @series begin
         subplot := (i-1)*N + j
         seriestype := :heatmap
+        seriescolor --> :bluesreds
         title --> string(var, " $j")
-        color --> :bluesreds
         flipdim(rotr90(R), 2)
       end
     elseif dim == 3 # plot a volume
       @series begin
         subplot := (i-1)*N + j
         seriestype := :volume
+        seriescolor --> :bluesreds
         title --> string(var, " $j")
-        color --> :bluesreds
         R
       end
     else
