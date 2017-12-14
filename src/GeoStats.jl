@@ -37,6 +37,7 @@ import GeoStatsBase: digest, solve, solve_single
 
 # utilities
 include("utils.jl")
+include("distances.jl")
 
 # variograms and Kriging estimators
 include("empirical_variograms.jl")
@@ -67,6 +68,10 @@ function examples()
 end
 
 export
+  # distances
+  Ellipsoidal,
+  evaluate,
+
   # empirical variograms
   EmpiricalVariogram,
 
