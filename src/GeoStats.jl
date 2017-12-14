@@ -68,6 +68,11 @@ function examples()
 end
 
 export
+  # utilities
+  EmpiricalDistribution,
+  quantile,
+  cdf,
+
   # distances
   Ellipsoidal,
   evaluate,
