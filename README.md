@@ -1,8 +1,27 @@
-![GeoStatsLogo](docs/src/images/GeoStats.png)
-
-[![][travis-img]][travis-url] [![][julia-pkg-img]][julia-pkg-url] [![][codecov-img]][codecov-url] [![][docs-stable-img]][docs-stable-url] [![][docs-latest-img]][docs-latest-url] [![][license-img]][license-url]
-
-*High-performance implementations of geostatistical algorithms for the Julia programming language.*
+<p align="center">
+  <img src="docs/src/images/GeoStats.png" height="280">
+  <a href="https://travis-ci.org/juliohm/GeoStats.jl">
+    <img src="https://travis-ci.org/juliohm/GeoStats.jl.svg?branch=master">
+  </a>
+  <a href="http://pkg.julialang.org/?pkg=GeoStats">
+    <img src="http://pkg.julialang.org/badges/GeoStats_0.6.svg">
+  </a>
+  <a href="https://codecov.io/gh/juliohm/GeoStats.jl">
+    <img src="https://codecov.io/gh/juliohm/GeoStats.jl/branch/master/graph/badge.svg">
+  </a>
+  <a href="https://juliohm.github.io/GeoStats.jl/stable">
+    <img src="https://img.shields.io/badge/docs-stable-blue.svg">
+  </a>
+  <a href="https://juliohm.github.io/GeoStats.jl/latest">
+    <img src="https://img.shields.io/badge/docs-latest-blue.svg">
+  </a>
+  <a href="LICENSE">
+    <img src="https://img.shields.io/badge/license-ISC-blue.svg">
+  </a>
+</p>
+<p align="center">
+  <i>High-performance implementations of geostatistical algorithms for the Julia programming language.</i>
+</p>
 
 # Project goals
 
