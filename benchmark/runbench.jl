@@ -1,5 +1,12 @@
 using PkgBenchmark
 
-results = judge("GeoStats","v0.4.4")
+function ask_version()
+  print("What version would you like to compare to? ")
+  String(chomp(strip(readline(STDIN))))
+end
+
+results = judge("GeoStats", ask_version())
 
 showall(PkgBenchmark.benchmarkgroup(results))
+
+println()
