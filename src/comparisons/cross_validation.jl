@@ -23,8 +23,8 @@ for each solver being compared.
 
 ## Parameters
 
-  * k       - number of folds for cross-validation
-  * shuffle - whether or not to shuffle the data
+* k       - number of folds for cross-validation
+* shuffle - whether or not to shuffle the data
 
 ## Examples
 
@@ -108,7 +108,7 @@ function compare(solvers::AbstractVector{S}, problem::EstimationProblem,
 
       subproblem = EstimationProblem(view(pdata, train), pdomain, var)
 
-      if nprocs() > 2
+      if nworkers() > 1
         # run solvers in parallel
         λ = solver -> solve(subproblem, solver)
         solutions = pmap(λ, solvers)

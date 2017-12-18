@@ -35,7 +35,7 @@ function compare(solvers::AbstractVector{S}, problem::AbstractProblem,
   # check if Plots.jl is loaded
   isdefined(Main, :Plots) || error("Please load Plots.jl for visual comparison")
 
-  if nprocs() > 2
+  if nworkers() > 1
     # run solvers in parallel
     λ = solver -> solve(problem, solver)
     solutions = pmap(λ, solvers)

@@ -27,7 +27,7 @@ function solve(problem::SimulationProblem, solver::AbstractSimulationSolver)
 
   realizations = []
   for (var,V) in variables(problem)
-    if nprocs() > 2
+    if nworkers() > 1
       # generate realizations in parallel
       λ = _ -> solve_single(problem, var, solver)
       varreals = pmap(λ, 1:nreals(problem))
