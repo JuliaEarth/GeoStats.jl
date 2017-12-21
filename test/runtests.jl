@@ -51,7 +51,8 @@ testfiles = [
   "comparisons.jl"
 ]
 
-# run
-for testfile in testfiles
-  include(testfile)
+@testset "GeoStats.jl" begin
+  for testfile in testfiles
+    include(testfile)
+  end
 end
