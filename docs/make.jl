@@ -12,6 +12,7 @@ makedocs(
   format = :html,
   sitename = "GeoStats.jl",
   authors = "Júlio Hoffimann Mendes",
+  assets = ["assets/style.css"],
   pages = [
     "Home" => "index.md",
     "Manual" => [
