@@ -24,10 +24,10 @@ makedocs(
         "theoretical_variograms.md"
       ],
       "Kriging estimators" => "estimators.md",
-      "Solver comparisons" => "comparisons.md"
+      "Solver comparisons" => "comparisons.md",
+      "Plotting" => "plotting.md"
     ],
     "Examples" => "examples.md",
-    "Plotting" => "plotting.md",
     "Contributing" => "contributing.md",
     "About" => [
       "Author" => "about/author.md",

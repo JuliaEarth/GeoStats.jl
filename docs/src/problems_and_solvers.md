@@ -14,7 +14,7 @@ Part of this issue is attributed to the fact that a general definition of the pr
 What is it that we call an "estimation problem" in geostatistics? What about "stochastic simulation"?
 The answer to these questions is given below in the form of code.
 
-## Estimation
+## Estimation problem
 
 An estimation problem in geostatitsics is a triplet:
 
@@ -32,7 +32,7 @@ EstimationProblem
 Please check [Spatial data](spatialdata.md) and [Domains](domains.md) for currently implemented
 data and domain types.
 
-## Simulation
+## Simulation problem
 
 Likewise, a stochastic simulation problem in geostatistics is represented with the same triplet.
 However, the spatial data in this case is optional in order to accomodate the concept of
@@ -46,7 +46,7 @@ SimulationProblem
 hasdata
 ```
 
-## Solvers
+## List of solvers
 
 Below is the list of solvers distributed with GeoStats.jl. For more solvers, please check
 the [project page on GitHub](https://github.com/juliohm/GeoStats.jl#problems-and-solvers).
