@@ -30,11 +30,11 @@
 mutable struct UniversalKriging{T<:Real,V} <: AbstractEstimator
   # input fields
   γ::AbstractVariogram
-  degree::Integer
+  degree::Int
 
   # state fields
-  X::AbstractMatrix{T}
-  z::AbstractVector{V}
+  X::Matrix{T}
+  z::Vector{V}
   LU::Base.LinAlg.Factorization{T}
   exponents::AbstractMatrix{Int}
 
@@ -129,9 +129,9 @@ Container that holds weights `λ`, Lagrange multipliers `ν` and RHS `b` for `es
 """
 struct UniversalKrigingWeights{T<:Real,V} <: AbstractWeights{UniversalKriging{T,V}}
   estimator::UniversalKriging{T,V}
-  λ::AbstractVector{T}
-  ν::AbstractVector{T}
-  b::AbstractVector{T}
+  λ::Vector{T}
+  ν::Vector{T}
+  b::Vector{T}
 end
 
 function combine(weights::UniversalKrigingWeights{T,V}) where {T<:Real,V}

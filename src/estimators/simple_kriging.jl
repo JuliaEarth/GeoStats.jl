@@ -32,8 +32,8 @@ mutable struct SimpleKriging{T<:Real,V} <: AbstractEstimator
   μ::V
 
   # state fields
-  X::AbstractMatrix{T}
-  z::AbstractVector{V}
+  X::Matrix{T}
+  z::Vector{V}
   LLᵀ::Base.LinAlg.Factorization{T}
 
   function SimpleKriging{T,V}(γ, μ; X=nothing, z=nothing) where {T<:Real,V}
@@ -93,9 +93,9 @@ Container that holds weights `λ`, centralized data `y` and RHS variogram/covari
 """
 struct SimpleKrigingWeights{T<:Real,V} <: AbstractWeights{SimpleKriging{T,V}}
   estimator::SimpleKriging{T,V}
-  λ::AbstractVector{T}
-  y::AbstractVector{V}
-  c::AbstractVector{T}
+  λ::Vector{T}
+  y::Vector{V}
+  c::Vector{T}
 end
 
 function combine(weights::SimpleKrigingWeights{T,V}) where {T<:Real,V}

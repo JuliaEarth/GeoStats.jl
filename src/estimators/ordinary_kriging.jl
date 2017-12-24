@@ -26,8 +26,8 @@ mutable struct OrdinaryKriging{T<:Real,V} <: AbstractEstimator
   γ::AbstractVariogram
 
   # state fields
-  X::AbstractMatrix{T}
-  z::AbstractVector{V}
+  X::Matrix{T}
+  z::Vector{V}
   LU::Base.LinAlg.Factorization{T}
 
   function OrdinaryKriging{T,V}(γ; X=nothing, z=nothing) where {T<:Real,V}
@@ -99,9 +99,9 @@ Container that holds weights `λ`, Lagrange multipliers `ν` and RHS `b` for `es
 """
 struct OrdinaryKrigingWeights{T<:Real,V} <: AbstractWeights{OrdinaryKriging{T,V}}
   estimator::OrdinaryKriging{T,V}
-  λ::AbstractVector{T}
-  ν::AbstractVector{T}
-  b::AbstractVector{T}
+  λ::Vector{T}
+  ν::Vector{T}
+  b::Vector{T}
 end
 
 function combine(weights::OrdinaryKrigingWeights{T,V}) where {T<:Real,V}

@@ -33,11 +33,11 @@
 mutable struct ExternalDriftKriging{T<:Real,V} <: AbstractEstimator
   # input fields
   γ::AbstractVariogram
-  drifts::AbstractVector{Function}
+  drifts::Vector{Function}
 
   # state fields
-  X::AbstractMatrix{T}
-  z::AbstractVector{V}
+  X::Matrix{T}
+  z::Vector{V}
   LU::Base.LinAlg.Factorization{T}
 
   function ExternalDriftKriging{T,V}(γ, drifts; X=nothing, z=nothing) where {T<:Real,V}
@@ -117,9 +117,9 @@ Container that holds weights `λ`, Lagrange multipliers `ν` and RHS `b` for `es
 """
 struct ExternalDriftKrigingWeights{T<:Real,V} <: AbstractWeights{ExternalDriftKriging{T,V}}
   estimator::ExternalDriftKriging{T,V}
-  λ::AbstractVector{T}
-  ν::AbstractVector{T}
-  b::AbstractVector{T}
+  λ::Vector{T}
+  ν::Vector{T}
+  b::Vector{T}
 end
 
 function combine(weights::ExternalDriftKrigingWeights{T,V}) where {T<:Real,V}
