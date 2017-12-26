@@ -24,7 +24,43 @@ abstract type AbstractEstimator end
 
 Build Kriging system from locations `X` with values `z` and save factorization in `estimator`.
 """
-fit!(estimator::AbstractEstimator, X::AbstractMatrix, z::AbstractVector) = error("not implemented")
+function fit!(estimator::AbstractEstimator, X::AbstractMatrix, z::AbstractVector)
+  # update data
+  estimator.X = X
+  estimator.z = z
+
+  # variogram/covariance
+  γ = estimator.γ
+  Γ = isstationary(γ) ? γ.sill - pairwise(γ, X) : pairwise(γ, X)
+
+  # build LHS
+  A = build_lhs!(estimator, Γ)
+
+  # save factorization
+  fact = factmethod(estimator)
+  estimator.LU = fact(A)
+end
+
+"""
+    build_lhs!(estimator, Γ)
+
+Augment variogram matrix `Γ` to produce LHS of Kriging system.
+"""
+build_lhs!(estimator::AbstractEstimator, Γ::AbstractMatrix) = error("not implemented")
+
+"""
+    build_rhs!(estimator, g, xₒ)
+
+Augment variogram vector `g` to produce RHS of Kriging system at point `xₒ`.
+"""
+build_rhs!(estimator::AbstractEstimator, g::AbstractVector, xₒ::AbstractVector) = error("not implemented")
+
+"""
+    factmethod(A)
+
+Return appropriate factorization method for `estimator`.
+"""
+factmethod(estimator::AbstractEstimator) = error("not implemented")
 
 """
     weights(estimator, xₒ)

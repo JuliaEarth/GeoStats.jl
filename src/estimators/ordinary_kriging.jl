@@ -28,7 +28,7 @@ mutable struct OrdinaryKriging{T<:Real,V} <: AbstractEstimator
   # state fields
   X::Matrix{T}
   z::Vector{V}
-  LU::Base.LinAlg.Factorization
+  LU::LinAlg.Factorization
 
   function OrdinaryKriging{T,V}(γ; X=nothing, z=nothing) where {T<:Real,V}
     OK = new(γ)
@@ -42,31 +42,15 @@ end
 
 OrdinaryKriging(X, z, γ) = OrdinaryKriging{eltype(X),eltype(z)}(γ, X=X, z=z)
 
-function fit!(estimator::OrdinaryKriging{T,V},
-              X::AbstractMatrix{T}, z::AbstractVector{V}) where {T<:Real,V}
-  # udpate data
-  estimator.X = X
-  estimator.z = z
-
-  nobs = size(X, 2)
-
-  # variogram/covariance
-  γ = estimator.γ
-
-  # use covariance matrix if possible
-  Γ = isstationary(γ) ? γ.sill - pairwise(γ, X) : pairwise(γ, X)
-
-  # constraint vectors
-  R = eltype(Γ)
-  _1 = ones(R, nobs)
-  _0 = zero(R)
-
-  # LHS of Kriging system
-  A = [Γ _1; _1' _0]
-
-  # factorize
-  estimator.LU = lufact(A)
+function build_lhs!(estimator::OrdinaryKriging, Γ::AbstractMatrix)
+  T = eltype(Γ); n = size(Γ, 1)
+  a = ones(T, n); b = zero(T)
+  [Γ a; a' b]
 end
+
+build_rhs!(estimator::OrdinaryKriging, g::AbstractVector, xₒ::AbstractVector) = [g; one(eltype(g))]
+
+factmethod(estimator::OrdinaryKriging) = lufact
 
 function weights(estimator::OrdinaryKriging{T,V}, xₒ::AbstractVector{T}) where {T<:Real,V}
   X = estimator.X; z = estimator.z; γ = estimator.γ
@@ -80,8 +64,10 @@ function weights(estimator::OrdinaryKriging{T,V}, xₒ::AbstractVector{T}) where
     g = [γ(X[:,j], xₒ) for j=1:nobs]
   end
 
+  # build RHS
+  b = build_rhs!(estimator, g, xₒ)
+
   # solve linear system
-  b = [g; one(eltype(g))]
   x = LU \ b
 
   # return weights

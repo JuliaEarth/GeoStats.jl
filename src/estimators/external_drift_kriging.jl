@@ -38,7 +38,7 @@ mutable struct ExternalDriftKriging{T<:Real,V} <: AbstractEstimator
   # state fields
   X::Matrix{T}
   z::Vector{V}
-  LU::Base.LinAlg.Factorization
+  LU::LinAlg.Factorization
 
   function ExternalDriftKriging{T,V}(γ, drifts; X=nothing, z=nothing) where {T<:Real,V}
     EDK = new(γ, drifts)
@@ -52,31 +52,23 @@ end
 
 ExternalDriftKriging(X, z, γ, drifts) = ExternalDriftKriging{eltype(X),eltype(z)}(γ, drifts, X=X, z=z)
 
-function fit!(estimator::ExternalDriftKriging{T,V},
-              X::AbstractMatrix{T}, z::AbstractVector{V}) where {T<:Real,V}
-  # update data
-  estimator.X = X
-  estimator.z = z
-
+function build_lhs!(estimator::ExternalDriftKriging, Γ::AbstractMatrix)
+  X = estimator.X; drifts = estimator.drifts
   dim, nobs = size(X)
-  drifts = estimator.drifts
-
-  # variogram/covariance
-  γ = estimator.γ
-
-  # use covariance matrix if possible
-  Γ = isstationary(γ) ? γ.sill - pairwise(γ, X) : pairwise(γ, X)
+  ndrifts = length(drifts)
 
   # polynomial drift matrix
-  ndrifts = length(drifts)
   F = [m(X[:,i]) for i=1:nobs, m in drifts]
 
-  # LHS of Kriging system
-  A = [Γ F; F' zeros(eltype(Γ), ndrifts, ndrifts)]
-
-  # factorize
-  estimator.LU = lufact(A)
+  [Γ F; F' zeros(eltype(Γ), ndrifts, ndrifts)]
 end
+
+function build_rhs!(estimator::ExternalDriftKriging, g::AbstractVector, xₒ::AbstractVector)
+  f = [m(xₒ) for m in estimator.drifts]
+  [g; f]
+end
+
+factmethod(estimator::ExternalDriftKriging) = lufact
 
 function weights(estimator::ExternalDriftKriging{T,V}, xₒ::AbstractVector{T}) where {T<:Real,V}
   X = estimator.X; z = estimator.z; γ = estimator.γ
@@ -91,11 +83,10 @@ function weights(estimator::ExternalDriftKriging{T,V}, xₒ::AbstractVector{T}) 
     g = [γ(X[:,j], xₒ) for j=1:nobs]
   end
 
-  # evaluate drift at location
-  f = [m(xₒ) for m in drifts]
+  # build RHS
+  b = build_rhs!(estimator, g, xₒ)
 
   # solve linear system
-  b = [g; f]
   x = LU \ b
 
   # return weights

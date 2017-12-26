@@ -35,7 +35,7 @@ mutable struct UniversalKriging{T<:Real,V} <: AbstractEstimator
   # state fields
   X::Matrix{T}
   z::Vector{V}
-  LU::Base.LinAlg.Factorization
+  LU::LinAlg.Factorization
   exponents::Matrix{Int}
 
   function UniversalKriging{T,V}(γ, degree; X=nothing, z=nothing) where {T<:Real,V}
@@ -51,22 +51,12 @@ end
 
 UniversalKriging(X, z, γ, degree) = UniversalKriging{eltype(X),eltype(z)}(γ, degree, X=X, z=z)
 
-function fit!(estimator::UniversalKriging{T,V},
-              X::AbstractMatrix{T}, z::AbstractVector{V}) where {T<:Real,V}
-  # update data
-  estimator.X = X
-  estimator.z = z
-
+function build_lhs!(estimator::UniversalKriging, Γ::AbstractMatrix)
+  X = estimator.X; degree = estimator.degree
   dim, nobs = size(X)
 
-  # variogram/covariance
-  γ = estimator.γ
-
-  # use covariance matrix if possible
-  Γ = isstationary(γ) ? γ.sill - pairwise(γ, X) : pairwise(γ, X)
-
   # multinomial expansion
-  expmats = [hcat(collect(multiexponents(dim, d))...) for d in 0:estimator.degree]
+  expmats = [hcat(collect(multiexponents(dim, d))...) for d in 0:degree]
   exponents = hcat(expmats...)
 
   # sort expansion for better conditioned Kriging matrices
@@ -80,12 +70,18 @@ function fit!(estimator::UniversalKriging{T,V},
   nterms = size(exponents, 2)
   F = [prod(X[:,i].^exponents[:,j]) for i=1:nobs, j=1:nterms]
 
-  # LHS of Kriging system
-  A = [Γ F; F' zeros(eltype(Γ), nterms, nterms)]
-
-  # factorize
-  estimator.LU = lufact(A)
+  [Γ F; F' zeros(eltype(Γ), nterms, nterms)]
 end
+
+function build_rhs!(estimator::UniversalKriging, g::AbstractVector, xₒ::AbstractVector)
+  exponents = estimator.exponents
+  nterms = size(exponents, 2)
+  f = [prod(xₒ.^exponents[:,j]) for j=1:nterms]
+
+  [g; f]
+end
+
+factmethod(estimator::UniversalKriging) = lufact
 
 function weights(estimator::UniversalKriging{T,V}, xₒ::AbstractVector{T}) where {T<:Real,V}
   X = estimator.X; z = estimator.z; γ = estimator.γ
@@ -100,12 +96,10 @@ function weights(estimator::UniversalKriging{T,V}, xₒ::AbstractVector{T}) wher
     g = [γ(X[:,j], xₒ) for j=1:nobs]
   end
 
-  # evaluate multinomial at location
-  nterms = size(exponents, 2)
-  f = [prod(xₒ.^exponents[:,j]) for j=1:nterms]
+  # build RHS
+  b = build_rhs!(estimator, g, xₒ)
 
   # solve linear system
-  b = [g; f]
   x = LU \ b
 
   # return weights

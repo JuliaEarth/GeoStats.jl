@@ -34,7 +34,7 @@ mutable struct SimpleKriging{T<:Real,V} <: AbstractEstimator
   # state fields
   X::Matrix{T}
   z::Vector{V}
-  LLᵀ::Base.LinAlg.Factorization
+  LU::LinAlg.Factorization
 
   function SimpleKriging{T,V}(γ, μ; X=nothing, z=nothing) where {T<:Real,V}
     @assert isstationary(γ) "Simple Kriging requires stationary variogram"
@@ -49,54 +49,46 @@ end
 
 SimpleKriging(X, z, γ, μ) = SimpleKriging{eltype(X),eltype(z)}(γ, μ, X=X, z=z)
 
-function fit!(estimator::SimpleKriging{T,V},
-              X::AbstractMatrix{T}, z::AbstractVector{V}) where {T<:Real,V}
-  # update data
-  estimator.X = X
-  estimator.z = z
-
-  # variogram/covariance
-  γ = estimator.γ
-
-  # LHS of Kriging system
-  C = γ.sill - pairwise(γ, X)
-
-  # factorize
-  estimator.LLᵀ = cholfact(C)
-end
+build_lhs!(estimator::SimpleKriging, Γ::AbstractMatrix) = Γ
+build_rhs!(estimator::SimpleKriging, g::AbstractVector, xₒ::AbstractVector) = g
+factmethod(estimator::SimpleKriging) = cholfact
 
 function weights(estimator::SimpleKriging{T,V}, xₒ::AbstractVector{T}) where {T<:Real,V}
   X = estimator.X; z = estimator.z
   γ = estimator.γ; μ = estimator.μ
-  LLᵀ = estimator.LLᵀ
+  LU = estimator.LU
   nobs = length(z)
 
   # evaluate variogram/covariance at location
-  c = γ.sill - [γ(X[:,j], xₒ) for j=1:nobs]
+  g = γ.sill - [γ(X[:,j], xₒ) for j=1:nobs]
+
+  # build RHS
+  b = build_rhs!(estimator, g, xₒ)
 
   # solve linear system
-  y = z - μ
-  λ = LLᵀ \ c
+  λ = LU \ b
 
   # return weights
-  SimpleKrigingWeights(estimator, λ, y, c)
+  SimpleKrigingWeights(estimator, λ, b)
 end
 
 """
-    SimpleKrigingWeights(estimator, λ, y, c)
+    SimpleKrigingWeights(estimator, λ, b)
 
-Container that holds weights `λ`, centralized data `y` and RHS variogram/covariance `c` for `estimator`.
+Container that holds weights `λ` and RHS `b` for `estimator`.
 """
 struct SimpleKrigingWeights{T<:Real,V} <: AbstractWeights{SimpleKriging{T,V}}
   estimator::SimpleKriging{T,V}
   λ::Vector{T}
-  y::Vector{V}
-  c::Vector{T}
+  b::Vector{T}
 end
 
 function combine(weights::SimpleKrigingWeights{T,V}) where {T<:Real,V}
-  γ = weights.estimator.γ; μ = weights.estimator.μ
-  λ = weights.λ; y = weights.y; c = weights.c
+  γ = weights.estimator.γ
+  z = weights.estimator.z
+  μ = weights.estimator.μ
+  λ = weights.λ; b = weights.b
+  y = z - μ
 
-  μ + y⋅λ, γ.sill - c⋅λ
+  μ + y⋅λ, γ.sill - b⋅λ
 end
