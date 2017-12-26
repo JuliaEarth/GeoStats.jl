@@ -38,7 +38,7 @@ mutable struct ExternalDriftKriging{T<:Real,V} <: AbstractEstimator
   # state fields
   X::Matrix{T}
   z::Vector{V}
-  LU::Base.LinAlg.Factorization{T}
+  LU::Base.LinAlg.Factorization
 
   function ExternalDriftKriging{T,V}(γ, drifts; X=nothing, z=nothing) where {T<:Real,V}
     EDK = new(γ, drifts)
@@ -72,7 +72,7 @@ function fit!(estimator::ExternalDriftKriging{T,V},
   F = [m(X[:,i]) for i=1:nobs, m in drifts]
 
   # LHS of Kriging system
-  A = [Γ F; F' zeros(ndrifts,ndrifts)]
+  A = [Γ F; F' zeros(eltype(Γ), ndrifts, ndrifts)]
 
   # factorize
   estimator.LU = lufact(A)

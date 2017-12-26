@@ -34,7 +34,7 @@ mutable struct SimpleKriging{T<:Real,V} <: AbstractEstimator
   # state fields
   X::Matrix{T}
   z::Vector{V}
-  LLᵀ::Base.LinAlg.Factorization{T}
+  LLᵀ::Base.LinAlg.Factorization
 
   function SimpleKriging{T,V}(γ, μ; X=nothing, z=nothing) where {T<:Real,V}
     @assert isstationary(γ) "Simple Kriging requires stationary variogram"

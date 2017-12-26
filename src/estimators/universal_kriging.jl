@@ -35,8 +35,8 @@ mutable struct UniversalKriging{T<:Real,V} <: AbstractEstimator
   # state fields
   X::Matrix{T}
   z::Vector{V}
-  LU::Base.LinAlg.Factorization{T}
-  exponents::AbstractMatrix{Int}
+  LU::Base.LinAlg.Factorization
+  exponents::Matrix{Int}
 
   function UniversalKriging{T,V}(γ, degree; X=nothing, z=nothing) where {T<:Real,V}
     @assert degree ≥ 0 "degree must be nonnegative"
@@ -81,7 +81,7 @@ function fit!(estimator::UniversalKriging{T,V},
   F = [prod(X[:,i].^exponents[:,j]) for i=1:nobs, j=1:nterms]
 
   # LHS of Kriging system
-  A = [Γ F; F' zeros(nterms,nterms)]
+  A = [Γ F; F' zeros(eltype(Γ), nterms, nterms)]
 
   # factorize
   estimator.LU = lufact(A)
