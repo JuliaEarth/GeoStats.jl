@@ -152,9 +152,9 @@ plot(solution)
 
 Contributions are very welcome, as are feature requests and suggestions. Please
 [open an issue](https://github.com/juliohm/GeoStats.jl/issues) if you encounter
-any problems. GeoStats.jl was developed as part of academic research. If you would
-like to help support the project, please star the repository and share it with
-your colleagues.
+any problems or if you have questions. GeoStats.jl was developed as part of
+academic research. If you would like to help support the project, please star
+the repository and share it with your colleagues.
 
 [travis-img]: https://travis-ci.org/juliohm/GeoStats.jl.svg?branch=master
 [travis-url]: https://travis-ci.org/juliohm/GeoStats.jl
