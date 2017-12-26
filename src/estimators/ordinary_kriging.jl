@@ -64,19 +64,15 @@ function fit!(estimator::OrdinaryKriging{T,V},
 end
 
 function weights(estimator::OrdinaryKriging{T,V}, xₒ::AbstractVector{T}) where {T<:Real,V}
-  X = estimator.X; z = estimator.z
+  X = estimator.X; z = estimator.z; γ = estimator.γ
   LU = estimator.LU
   nobs = length(z)
 
-  # variogram/covariance
-  γ = estimator.γ
-  cov(x,y) = γ.sill - γ(x,y)
-
   # evaluate variogram/covariance at location
   if isstationary(γ)
-    g = [cov(X[:,j],xₒ) for j=1:nobs]
+    g = γ.sill - [γ(X[:,j], xₒ) for j=1:nobs]
   else
-    g = [γ(X[:,j],xₒ) for j=1:nobs]
+    g = [γ(X[:,j], xₒ) for j=1:nobs]
   end
 
   # solve linear system

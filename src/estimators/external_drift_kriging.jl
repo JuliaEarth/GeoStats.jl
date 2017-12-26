@@ -79,19 +79,16 @@ function fit!(estimator::ExternalDriftKriging{T,V},
 end
 
 function weights(estimator::ExternalDriftKriging{T,V}, xₒ::AbstractVector{T}) where {T<:Real,V}
-  X = estimator.X; z = estimator.z; drifts = estimator.drifts
+  X = estimator.X; z = estimator.z; γ = estimator.γ
+  drifts = estimator.drifts
   LU = estimator.LU
   nobs = length(z)
 
-  # variogram/covariance
-  γ = estimator.γ
-  cov(x,y) = γ.sill - γ(x,y)
-
   # evaluate variogram at location
   if isstationary(γ)
-    g = [cov(X[:,j],xₒ) for j=1:nobs]
+    g = γ.sill - [γ(X[:,j], xₒ) for j=1:nobs]
   else
-    g = [γ(X[:,j],xₒ) for j=1:nobs]
+    g = [γ(X[:,j], xₒ) for j=1:nobs]
   end
 
   # evaluate drift at location

@@ -71,11 +71,8 @@ function weights(estimator::SimpleKriging{T,V}, xₒ::AbstractVector{T}) where {
   LLᵀ = estimator.LLᵀ
   nobs = length(z)
 
-  # variogram/covariance
-  cov(x,y) = γ.sill - γ(x,y)
-
   # evaluate variogram/covariance at location
-  c = [cov(X[:,j],xₒ) for j=1:nobs]
+  c = γ.sill - [γ(X[:,j], xₒ) for j=1:nobs]
 
   # solve linear system
   y = z - μ
