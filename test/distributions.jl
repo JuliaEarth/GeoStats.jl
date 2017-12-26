@@ -1,4 +1,4 @@
-@testset "Utilities" begin
+@testset "Distributions" begin
   # empirical distribution
   values = randn(1000)
   d = EmpiricalDistribution(values)

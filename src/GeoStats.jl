@@ -36,8 +36,8 @@ using Parameters: @with_kw
 import GeoStatsBase: digest, solve, solve_single
 
 # utilities
-include("utils.jl")
 include("distances.jl")
+include("distributions.jl")
 
 # variograms and Kriging estimators
 include("empirical_variograms.jl")
@@ -68,14 +68,14 @@ function examples()
 end
 
 export
-  # utilities
-  EmpiricalDistribution,
-  quantile,
-  cdf,
-
   # distances
   Ellipsoidal,
   evaluate,
+
+  # distributions
+  EmpiricalDistribution,
+  quantile,
+  cdf,
 
   # empirical variograms
   EmpiricalVariogram,
