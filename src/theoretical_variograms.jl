@@ -26,6 +26,38 @@ Check if variogram `γ` possesses the 2nd-order stationary property.
 """
 isstationary(::AbstractVariogram) = false
 
+"""
+    result_type(γ)
+
+Return the result type of the variogram `γ`.
+"""
+result_type(::AbstractVariogram) = error("not implemented")
+
+"""
+    pairwise(γ, X)
+
+Evaluate variogram `γ` between all n² pairs of columns in a
+m-by-n matrix `X` efficiently.
+"""
+function pairwise(γ::AbstractVariogram, X::AbstractMatrix{T}) where {T<:Real}
+  R = promote_type(result_type(γ), T)
+  m, n = size(X)
+  Γ = zeros(R, n, n)
+  for j=1:n
+    xj = view(X, :, j)
+    for i=j+1:n
+      xi = view(X, :, i)
+      @inbounds Γ[i,j] = γ(xi, xj)
+    end
+    @inbounds Γ[j,j] = γ(xj, xj)
+    for i=1:j-1
+      @inbounds Γ[i,j] = Γ[j,i] # leverage the symmetry
+    end
+  end
+
+  Γ
+end
+
 #------------------
 # IMPLEMENTATIONS
 #------------------
@@ -44,6 +76,7 @@ end
 (γ::GaussianVariogram)(h) = (γ.sill - γ.nugget) * (1 - exp.(-3(h/γ.range).^2)) + γ.nugget
 (γ::GaussianVariogram)(x, y) = γ(evaluate(γ.distance, x, y))
 isstationary(::GaussianVariogram) = true
+result_type(::GaussianVariogram{T,V,D}) where {T<:Real,V,D<:Metric} = promote_type(T, V)
 
 """
     ExponentialVariogram(sill=s, range=r, nugget=n, distance=d)
@@ -60,6 +93,7 @@ end
 (γ::ExponentialVariogram)(h) = (γ.sill - γ.nugget) * (1 - exp.(-3(h/γ.range))) + γ.nugget
 (γ::ExponentialVariogram)(x, y) = γ(evaluate(γ.distance, x, y))
 isstationary(::ExponentialVariogram) = true
+result_type(::ExponentialVariogram{T,V,D}) where {T<:Real,V,D<:Metric} = promote_type(T, V)
 
 """
     MaternVariogram(sill=s, range=r, nugget=n, order=ν, distance=d)
@@ -89,6 +123,7 @@ end
 end
 (γ::MaternVariogram)(x, y) = γ(evaluate(γ.distance, x, y))
 isstationary(::MaternVariogram) = true
+result_type(::MaternVariogram{T,V,D}) where {T<:Real,V,D<:Metric} = promote_type(T, V)
 
 """
     SphericalVariogram(sill=s, range=r, nugget=n, distance=d)
@@ -111,6 +146,7 @@ end
 end
 (γ::SphericalVariogram)(x, y) = γ(evaluate(γ.distance, x, y))
 isstationary(::SphericalVariogram) = true
+result_type(::SphericalVariogram{T,V,D}) where {T<:Real,V,D<:Metric} = promote_type(T, V)
 
 """
     CubicVariogram(sill=s, range=r, nugget=n, distance=d)
@@ -134,6 +170,7 @@ end
 end
 (γ::CubicVariogram)(x, y) = γ(evaluate(γ.distance, x, y))
 isstationary(::CubicVariogram) = true
+result_type(::CubicVariogram{T,V,D}) where {T<:Real,V,D<:Metric} = promote_type(T, V)
 
 """
     PentasphericalVariogram
@@ -157,6 +194,7 @@ end
 end
 (γ::PentasphericalVariogram)(x, y) = γ(evaluate(γ.distance, x, y))
 isstationary(::PentasphericalVariogram) = true
+result_type(::PentasphericalVariogram{T,V,D}) where {T<:Real,V,D<:Metric} = promote_type(T, V)
 
 """
     PowerVariogram(scaling=s, exponent=a, nugget=n, distance=d)
@@ -172,6 +210,7 @@ Optionally, use a custom distance `d`.
 end
 (γ::PowerVariogram)(h) = γ.scaling*h.^γ.exponent + γ.nugget
 (γ::PowerVariogram)(x, y) = γ(evaluate(γ.distance, x, y))
+result_type(::PowerVariogram{T,V,D}) where {T<:Real,V,D<:Metric} = promote_type(T, V)
 
 """
     SineHoleVariogram(sill=s, range=r, nugget=n, distance=d)
@@ -188,6 +227,7 @@ end
 (γ::SineHoleVariogram)(h) = (γ.sill - γ.nugget) * (1 - sin.(π*h/γ.range)./(π*h/γ.range)) + γ.nugget
 (γ::SineHoleVariogram)(x, y) = γ(evaluate(γ.distance, x, y))
 isstationary(::SineHoleVariogram) = true
+result_type(::SineHoleVariogram{T,V,D}) where {T<:Real,V,D<:Metric} = promote_type(T, V)
 
 """
     CompositeVariogram(γ₁, γ₂, ..., γₙ)
@@ -201,3 +241,4 @@ struct CompositeVariogram <: AbstractVariogram
 end
 (c::CompositeVariogram)(h) = sum(γ(h) for γ in c.γs)
 (c::CompositeVariogram)(x, y) = sum(γ(x,y) for γ in c.γs)
+result_type(c::CompositeVariogram) = promote_type([result_type(γ) for γ in c.γs]...)

@@ -57,10 +57,9 @@ function fit!(estimator::SimpleKriging{T,V},
 
   # variogram/covariance
   γ = estimator.γ
-  cov(x,y) = γ.sill - γ(x,y)
 
   # LHS of Kriging system
-  C = pairwise((x,y) -> cov(x,y), X)
+  C = γ.sill - pairwise(γ, X)
 
   # factorize
   estimator.LLᵀ = cholfact(C)

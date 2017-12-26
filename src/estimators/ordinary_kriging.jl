@@ -48,18 +48,13 @@ function fit!(estimator::OrdinaryKriging{T,V},
   estimator.X = X
   estimator.z = z
 
-  nobs = size(X,2)
+  nobs = size(X, 2)
 
   # variogram/covariance
   γ = estimator.γ
-  cov(x,y) = γ.sill - γ(x,y)
 
   # use covariance matrix if possible
-  if isstationary(γ)
-    Γ = pairwise((x,y) -> cov(x,y), X)
-  else
-    Γ = pairwise((x,y) -> γ(x,y), X)
-  end
+  Γ = isstationary(γ) ? γ.sill - pairwise(γ, X) : pairwise(γ, X)
 
   # LHS of Kriging system
   A = [Γ ones(nobs); ones(nobs)' 0]

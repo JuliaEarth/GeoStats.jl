@@ -63,14 +63,9 @@ function fit!(estimator::ExternalDriftKriging{T,V},
 
   # variogram/covariance
   γ = estimator.γ
-  cov(x,y) = γ.sill - γ(x,y)
 
   # use covariance matrix if possible
-  if isstationary(γ)
-    Γ = pairwise((x,y) -> cov(x,y), X)
-  else
-    Γ = pairwise((x,y) -> γ(x,y), X)
-  end
+  Γ = isstationary(γ) ? γ.sill - pairwise(γ, X) : pairwise(γ, X)
 
   # polynomial drift matrix
   ndrifts = length(drifts)

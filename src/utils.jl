@@ -13,29 +13,6 @@
 ## OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
 """
-    pairwise(covariance, X)
-
-Evaluate `covariance` between all n² pairs of columns in a m-by-n matrix `X` efficiently.
-"""
-function pairwise(covariance::Function, X::AbstractMatrix)
-  m, n = size(X)
-  C = zeros(n, n)
-  for j=1:n
-    xj = view(X, :, j)
-    for i=j+1:n
-      xi = view(X, :, i)
-      @inbounds C[i,j] = covariance(xi, xj)
-    end
-    @inbounds C[j,j] = covariance(xj, xj)
-    for i=1:j-1
-      @inbounds C[i,j] = C[j,i] # leverage the symmetry
-    end
-  end
-
-  C
-end
-
-"""
     EmpiricalDistribution(values)
 
 An empirical distribution holding continuous values.
