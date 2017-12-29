@@ -106,11 +106,22 @@ struct Weights{T<:Real}
 end
 
 """
-    combine(weights, z)
+    combine(estimator, weights, z)
 
 Combine `weights` with values `z` to produce mean and variance.
 """
-combine(estimator::AbstractEstimator, weights::Weights, z::AbstractVector) = error("not implemented")
+function combine(estimator::AbstractEstimator, weights::Weights, z::AbstractVector)
+  γ = estimator.γ
+  b = estimator.RHS
+  λ = weights.λ
+  ν = weights.ν
+
+  if isstationary(γ)
+    z⋅λ, γ.sill - b⋅[λ;ν]
+  else
+    z⋅λ, b⋅[λ;ν]
+  end
+end
 
 #------------------
 # IMPLEMENTATIONS

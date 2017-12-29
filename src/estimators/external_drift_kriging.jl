@@ -68,17 +68,3 @@ function build_rhs!(estimator::ExternalDriftKriging, g::AbstractVector, xₒ::Ab
   f = [m(xₒ) for m in estimator.drifts]
   [g; f]
 end
-
-function combine(estimator::ExternalDriftKriging{T,V},
-                 weights::Weights, z::AbstractVector) where {T<:Real,V}
-  γ = estimator.γ
-  b = estimator.RHS
-  λ = weights.λ
-  ν = weights.ν
-
-  if isstationary(γ)
-    z⋅λ, γ.sill - b⋅[λ;ν]
-  else
-    z⋅λ, b⋅[λ;ν]
-  end
-end

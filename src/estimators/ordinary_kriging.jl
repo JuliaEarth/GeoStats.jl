@@ -50,17 +50,3 @@ function build_lhs!(estimator::OrdinaryKriging, Γ::AbstractMatrix)
 end
 
 build_rhs!(estimator::OrdinaryKriging, g::AbstractVector, xₒ::AbstractVector) = [g; one(eltype(g))]
-
-function combine(estimator::OrdinaryKriging{T,V},
-                 weights::Weights, z::AbstractVector) where {T<:Real,V}
-  γ = estimator.γ
-  b = estimator.RHS
-  λ = weights.λ
-  ν = weights.ν
-
-  if isstationary(γ)
-    z⋅λ, γ.sill - b⋅[λ;ν]
-  else
-    z⋅λ, b⋅[λ;ν]
-  end
-end
