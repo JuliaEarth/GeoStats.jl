@@ -11,7 +11,7 @@ domain = bounding_grid(geodata, [100,100])
 problem = EstimationProblem(geodata, domain, :permeability)
 
 @benchgroup "Empirical variogram" begin
-  @bench "autovariogram" EmpiricalVariogram($geodata, :permeability)
+  @bench "Ominidirectional" EmpiricalVariogram($geodata, :permeability)
 end
 
 @benchgroup "Kriging" begin
