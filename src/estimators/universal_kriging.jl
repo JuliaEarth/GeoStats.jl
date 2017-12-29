@@ -53,7 +53,8 @@ end
 UniversalKriging(X, z, γ, degree) = UniversalKriging{eltype(X),eltype(z)}(γ, degree, X=X, z=z)
 
 function build_lhs!(estimator::UniversalKriging, Γ::AbstractMatrix)
-  X = estimator.X; degree = estimator.degree
+  X = estimator.X
+  degree = estimator.degree
   dim, nobs = size(X)
 
   # multinomial expansion
@@ -71,13 +72,20 @@ function build_lhs!(estimator::UniversalKriging, Γ::AbstractMatrix)
   nterms = size(exponents, 2)
   F = [prod(X[:,i].^exponents[:,j]) for i=1:nobs, j=1:nterms]
 
-  [Γ F; F' zeros(eltype(Γ), nterms, nterms)]
+  estimator.LHS = lufact([Γ F; F' zeros(eltype(Γ), nterms, nterms)])
+
+  nothing
 end
 
 function build_rhs!(estimator::UniversalKriging, g::AbstractVector, xₒ::AbstractVector)
   exponents = estimator.exponents
   nterms = size(exponents, 2)
-  f = [prod(xₒ.^exponents[:,j]) for j=1:nterms]
+  nobs = length(g)
 
-  [g; f]
+  estimator.RHS[1:nobs] = g[:]
+  for j in 1:nterms
+    estimator.RHS[nobs+j] = prod(xₒ.^exponents[:,j])
+  end
+
+  nothing
 end

@@ -28,11 +28,11 @@ using RecipesBase
 using Parameters: @with_kw
 @reexport using NamedTuples
 
-# export project components
+# export project modules
 @reexport using GeoStatsBase
 @reexport using GeoStatsDevTools
 
-# extend base package
+# extend base module
 import GeoStatsBase: digest, solve, solve_single
 
 # utilities

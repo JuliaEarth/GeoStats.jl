@@ -61,10 +61,19 @@ function build_lhs!(estimator::ExternalDriftKriging, Γ::AbstractMatrix)
   # polynomial drift matrix
   F = [m(X[:,i]) for i=1:nobs, m in drifts]
 
-  [Γ F; F' zeros(eltype(Γ), ndrifts, ndrifts)]
+  estimator.LHS = lufact([Γ F; F' zeros(eltype(Γ), ndrifts, ndrifts)])
+
+  nothing
 end
 
 function build_rhs!(estimator::ExternalDriftKriging, g::AbstractVector, xₒ::AbstractVector)
-  f = [m(xₒ) for m in estimator.drifts]
-  [g; f]
+  drifts =  estimator.drifts
+  nobs = length(g)
+
+  estimator.RHS[1:nobs] = g[:]
+  for (j, m) in enumerate(drifts)
+    estimator.RHS[nobs+j] = m(xₒ)
+  end
+
+  nothing
 end

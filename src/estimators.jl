@@ -34,7 +34,12 @@ function fit!(estimator::AbstractEstimator, X::AbstractMatrix, z::AbstractVector
   Γ = isstationary(γ) ? γ.sill - pairwise(γ, X) : pairwise(γ, X)
 
   # build and factorize LHS
-  estimator.LHS = factorize(estimator, build_lhs!(estimator, Γ))
+  build_lhs!(estimator, Γ)
+
+  # reserve memory for RHS
+  T = eltype(estimator.LHS)
+  n = size(estimator.LHS, 1)
+  estimator.RHS = Vector{T}(n)
 end
 
 """
@@ -55,7 +60,7 @@ function weights(estimator::AbstractEstimator, xₒ::AbstractVector)
   end
 
   # build RHS
-  estimator.RHS = build_rhs!(estimator, g, xₒ)
+  build_rhs!(estimator, g, xₒ)
 
   # solve linear system
   x = estimator.LHS \ estimator.RHS
@@ -84,13 +89,6 @@ build_lhs!(estimator::AbstractEstimator, Γ::AbstractMatrix) = error("not implem
 Augment variogram vector `g` to produce RHS of Kriging system at point `xₒ`.
 """
 build_rhs!(estimator::AbstractEstimator, g::AbstractVector, xₒ::AbstractVector) = error("not implemented")
-
-"""
-    factorize(estimator, LHS)
-
-Factorize `LHS` for `estimator` with appropriate factorization method.
-"""
-factorize(estimator::AbstractEstimator, LHS::AbstractMatrix) = lufact(LHS)
 
 """
     Weights(λ, ν)
