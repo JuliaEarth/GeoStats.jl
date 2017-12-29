@@ -33,11 +33,8 @@ function fit!(estimator::AbstractEstimator, X::AbstractMatrix, z::AbstractVector
   γ = estimator.γ
   Γ = isstationary(γ) ? γ.sill - pairwise(γ, X) : pairwise(γ, X)
 
-  # build LHS
-  LHS = build_lhs!(estimator, Γ)
-
-  # factorize
-  estimator.LHS = factorize(estimator, LHS)
+  # build and factorize LHS
+  estimator.LHS = factorize(estimator, build_lhs!(estimator, Γ))
 end
 
 """
