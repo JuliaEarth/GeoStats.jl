@@ -51,8 +51,6 @@ end
 
 build_rhs!(estimator::OrdinaryKriging, g::AbstractVector, xₒ::AbstractVector) = [g; one(eltype(g))]
 
-factmethod(estimator::OrdinaryKriging) = lufact
-
 function combine(estimator::OrdinaryKriging{T,V},
                  weights::Weights, z::AbstractVector) where {T<:Real,V}
   γ = estimator.γ

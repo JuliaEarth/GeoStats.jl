@@ -69,8 +69,6 @@ function build_rhs!(estimator::ExternalDriftKriging, g::AbstractVector, xₒ::Ab
   [g; f]
 end
 
-factmethod(estimator::ExternalDriftKriging) = lufact
-
 function combine(estimator::ExternalDriftKriging{T,V},
                  weights::Weights, z::AbstractVector) where {T<:Real,V}
   γ = estimator.γ

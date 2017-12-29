@@ -37,8 +37,7 @@ function fit!(estimator::AbstractEstimator, X::AbstractMatrix, z::AbstractVector
   LHS = build_lhs!(estimator, Γ)
 
   # factorize
-  fact = factmethod(estimator)
-  estimator.LHS = fact(LHS)
+  estimator.LHS = factorize(estimator, LHS)
 end
 
 """
@@ -90,11 +89,11 @@ Augment variogram vector `g` to produce RHS of Kriging system at point `xₒ`.
 build_rhs!(estimator::AbstractEstimator, g::AbstractVector, xₒ::AbstractVector) = error("not implemented")
 
 """
-    factmethod(estimator)
+    factorize(estimator, LHS)
 
-Return appropriate factorization method for `estimator`.
+Factorize `LHS` for `estimator` with appropriate factorization method.
 """
-factmethod(estimator::AbstractEstimator) = error("not implemented")
+factorize(estimator::AbstractEstimator, LHS::AbstractMatrix) = lufact(LHS)
 
 """
     Weights(λ, ν)

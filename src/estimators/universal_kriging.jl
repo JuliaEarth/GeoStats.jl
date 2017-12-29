@@ -82,8 +82,6 @@ function build_rhs!(estimator::UniversalKriging, g::AbstractVector, xₒ::Abstra
   [g; f]
 end
 
-factmethod(estimator::UniversalKriging) = lufact
-
 function combine(estimator::UniversalKriging{T,V},
                  weights::Weights, z::AbstractVector) where {T<:Real,V}
   γ = estimator.γ

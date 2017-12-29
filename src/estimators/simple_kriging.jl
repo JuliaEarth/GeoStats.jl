@@ -52,7 +52,7 @@ SimpleKriging(X, z, γ, μ) = SimpleKriging{eltype(X),eltype(z)}(γ, μ, X=X, z=
 
 build_lhs!(estimator::SimpleKriging, Γ::AbstractMatrix) = Γ
 build_rhs!(estimator::SimpleKriging, g::AbstractVector, xₒ::AbstractVector) = g
-factmethod(estimator::SimpleKriging) = cholfact
+factorize(estimator::SimpleKriging, LHS::AbstractMatrix) = cholfact(LHS)
 
 function combine(estimator::SimpleKriging{T,V},
                  weights::Weights, z::AbstractVector) where {T<:Real,V}
