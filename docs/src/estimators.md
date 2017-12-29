@@ -55,6 +55,8 @@ the weights and a field `ν` for the Lagrange multipliers:
 weights
 ```
 
+For example with Ordinary Kriging:
+
 ```julia
 # weights and Lagrange multipliers
 OKweights = weights(ordkrig, xₒ)

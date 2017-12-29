@@ -28,7 +28,8 @@ mutable struct OrdinaryKriging{T<:Real,V} <: AbstractEstimator
   # state fields
   X::Matrix{T}
   z::Vector{V}
-  LU::LinAlg.Factorization
+  LHS::LinAlg.Factorization
+  RHS::Vector
 
   function OrdinaryKriging{T,V}(γ; X=nothing, z=nothing) where {T<:Real,V}
     OK = new(γ)
@@ -52,43 +53,12 @@ build_rhs!(estimator::OrdinaryKriging, g::AbstractVector, xₒ::AbstractVector) 
 
 factmethod(estimator::OrdinaryKriging) = lufact
 
-function weights(estimator::OrdinaryKriging{T,V}, xₒ::AbstractVector{T}) where {T<:Real,V}
-  X = estimator.X; z = estimator.z; γ = estimator.γ
-  LU = estimator.LU
-  nobs = length(z)
-
-  # evaluate variogram/covariance at location
-  if isstationary(γ)
-    g = γ.sill - [γ(X[:,j], xₒ) for j=1:nobs]
-  else
-    g = [γ(X[:,j], xₒ) for j=1:nobs]
-  end
-
-  # build RHS
-  b = build_rhs!(estimator, g, xₒ)
-
-  # solve linear system
-  x = LU \ b
-
-  # return weights
-  OrdinaryKrigingWeights(estimator, x[1:nobs], x[nobs+1:end], b)
-end
-
-"""
-    OrdinaryKrigingWeights(estimator, λ, ν, b)
-
-Container that holds weights `λ`, Lagrange multipliers `ν` and RHS `b` for `estimator`.
-"""
-struct OrdinaryKrigingWeights{T<:Real,V} <: AbstractWeights{OrdinaryKriging{T,V}}
-  estimator::OrdinaryKriging{T,V}
-  λ::Vector{T}
-  ν::Vector{T}
-  b::Vector{T}
-end
-
-function combine(weights::OrdinaryKrigingWeights{T,V}) where {T<:Real,V}
-  γ = weights.estimator.γ; z = weights.estimator.z
-  λ = weights.λ; ν = weights.ν; b = weights.b
+function combine(estimator::OrdinaryKriging{T,V},
+                 weights::Weights, z::AbstractVector) where {T<:Real,V}
+  γ = estimator.γ
+  b = estimator.RHS
+  λ = weights.λ
+  ν = weights.ν
 
   if isstationary(γ)
     z⋅λ, γ.sill - b⋅[λ;ν]

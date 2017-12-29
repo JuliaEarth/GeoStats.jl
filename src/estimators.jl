@@ -34,12 +34,46 @@ function fit!(estimator::AbstractEstimator, X::AbstractMatrix, z::AbstractVector
   Γ = isstationary(γ) ? γ.sill - pairwise(γ, X) : pairwise(γ, X)
 
   # build LHS
-  A = build_lhs!(estimator, Γ)
+  LHS = build_lhs!(estimator, Γ)
 
-  # save factorization
+  # factorize
   fact = factmethod(estimator)
-  estimator.LU = fact(A)
+  estimator.LHS = fact(LHS)
 end
+
+"""
+    weights(estimator, xₒ)
+
+Compute the weights λ (and Lagrange multipliers ν) for the `estimator` at coordinates `xₒ`.
+"""
+function weights(estimator::AbstractEstimator, xₒ::AbstractVector)
+  X = estimator.X
+  γ = estimator.γ
+  nobs = size(X, 2)
+
+  # evaluate variogram/covariance at location
+  if isstationary(γ)
+    g = γ.sill - [γ(X[:,j], xₒ) for j=1:nobs]
+  else
+    g = [γ(X[:,j], xₒ) for j=1:nobs]
+  end
+
+  # build RHS
+  estimator.RHS = build_rhs!(estimator, g, xₒ)
+
+  # solve linear system
+  x = estimator.LHS \ estimator.RHS
+
+  # return weights
+  Weights(x[1:nobs], x[nobs+1:end])
+end
+
+"""
+    estimate(estimator, xₒ)
+
+Compute mean and variance for the `estimator` at coordinates `xₒ`.
+"""
+estimate(estimator::AbstractEstimator, xₒ::AbstractVector) = combine(estimator, weights(estimator, xₒ), estimator.z)
 
 """
     build_lhs!(estimator, Γ)
@@ -56,39 +90,28 @@ Augment variogram vector `g` to produce RHS of Kriging system at point `xₒ`.
 build_rhs!(estimator::AbstractEstimator, g::AbstractVector, xₒ::AbstractVector) = error("not implemented")
 
 """
-    factmethod(A)
+    factmethod(estimator)
 
 Return appropriate factorization method for `estimator`.
 """
 factmethod(estimator::AbstractEstimator) = error("not implemented")
 
 """
-    weights(estimator, xₒ)
+    Weights(λ, ν)
 
-Compute the weights λ (and Lagrange multipliers ν) for the `estimator` at coordinates `xₒ`.
+An object storing Kriging weights `λ` and Lagrange multipliers `ν`.
 """
-weights(estimator::AbstractEstimator, xₒ::AbstractVector) = error("not implemented")
-
-"""
-    estimate(estimator, xₒ)
-
-Compute mean and variance for the `estimator` at coordinates `xₒ`.
-"""
-estimate(estimator::AbstractEstimator, xₒ::AbstractVector) = combine(weights(estimator, xₒ))
+struct Weights{T<:Real}
+  λ::Vector{T}
+  ν::Vector{T}
+end
 
 """
-    AbstractWeights
+    combine(weights, z)
 
-An object to hold weights and related parameters for an estimator of type `E`.
+Combine `weights` with values `z` to produce mean and variance.
 """
-abstract type AbstractWeights{E} end
-
-"""
-    combine(weights)
-
-Combine weights (and related parameters) into mean and variance.
-"""
-combine(weights::AbstractWeights) = error("not implemented")
+combine(estimator::AbstractEstimator, weights::Weights, z::AbstractVector) = error("not implemented")
 
 #------------------
 # IMPLEMENTATIONS

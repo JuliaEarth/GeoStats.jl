@@ -38,7 +38,8 @@ mutable struct ExternalDriftKriging{T<:Real,V} <: AbstractEstimator
   # state fields
   X::Matrix{T}
   z::Vector{V}
-  LU::LinAlg.Factorization
+  LHS::LinAlg.Factorization
+  RHS::Vector
 
   function ExternalDriftKriging{T,V}(γ, drifts; X=nothing, z=nothing) where {T<:Real,V}
     EDK = new(γ, drifts)
@@ -70,44 +71,12 @@ end
 
 factmethod(estimator::ExternalDriftKriging) = lufact
 
-function weights(estimator::ExternalDriftKriging{T,V}, xₒ::AbstractVector{T}) where {T<:Real,V}
-  X = estimator.X; z = estimator.z; γ = estimator.γ
-  drifts = estimator.drifts
-  LU = estimator.LU
-  nobs = length(z)
-
-  # evaluate variogram at location
-  if isstationary(γ)
-    g = γ.sill - [γ(X[:,j], xₒ) for j=1:nobs]
-  else
-    g = [γ(X[:,j], xₒ) for j=1:nobs]
-  end
-
-  # build RHS
-  b = build_rhs!(estimator, g, xₒ)
-
-  # solve linear system
-  x = LU \ b
-
-  # return weights
-  ExternalDriftKrigingWeights(estimator, x[1:nobs], x[nobs+1:end], b)
-end
-
-"""
-    ExternalDriftKrigingWeights(estimator, λ, ν, b)
-
-Container that holds weights `λ`, Lagrange multipliers `ν` and RHS `b` for `estimator`.
-"""
-struct ExternalDriftKrigingWeights{T<:Real,V} <: AbstractWeights{ExternalDriftKriging{T,V}}
-  estimator::ExternalDriftKriging{T,V}
-  λ::Vector{T}
-  ν::Vector{T}
-  b::Vector{T}
-end
-
-function combine(weights::ExternalDriftKrigingWeights{T,V}) where {T<:Real,V}
-  z = weights.estimator.z; γ = weights.estimator.γ
-  λ = weights.λ; ν = weights.ν; b = weights.b
+function combine(estimator::ExternalDriftKriging{T,V},
+                 weights::Weights, z::AbstractVector) where {T<:Real,V}
+  γ = estimator.γ
+  b = estimator.RHS
+  λ = weights.λ
+  ν = weights.ν
 
   if isstationary(γ)
     z⋅λ, γ.sill - b⋅[λ;ν]
