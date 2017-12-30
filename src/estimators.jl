@@ -89,9 +89,9 @@ Set RHS of Kriging system at coodinates `xₒ`.
 """
 function set_rhs!(estimator::AbstractEstimator, xₒ::AbstractVector)
   X = estimator.X; γ = estimator.γ
-  RHS = estimator.RHS
 
   # RHS variogram/covariance
+  RHS = estimator.RHS
   for j in 1:size(X, 2)
     xj = view(X, :, j)
     RHS[j] = isstationary(γ) ? γ.sill - γ(xj, xₒ) : γ(xj, xₒ)
