@@ -53,7 +53,7 @@ end
 
 ExternalDriftKriging(X, z, γ, drifts) = ExternalDriftKriging{eltype(X),eltype(z)}(γ, drifts, X=X, z=z)
 
-function build_lhs!(estimator::ExternalDriftKriging, Γ::AbstractMatrix)
+function add_constraints_lhs!(estimator::ExternalDriftKriging, Γ::AbstractMatrix)
   X = estimator.X; drifts = estimator.drifts
   dim, nobs = size(X)
   ndrifts = length(drifts)
@@ -66,13 +66,13 @@ function build_lhs!(estimator::ExternalDriftKriging, Γ::AbstractMatrix)
   nothing
 end
 
-function build_rhs!(estimator::ExternalDriftKriging, g::AbstractVector, xₒ::AbstractVector)
-  drifts =  estimator.drifts
-  nobs = length(g)
+function add_constraints_rhs!(estimator::ExternalDriftKriging, xₒ::AbstractVector)
+  drifts = estimator.drifts
+  nobs = size(estimator.X, 2)
 
-  estimator.RHS[1:nobs] = g[:]
+  RHS = estimator.RHS
   for (j, m) in enumerate(drifts)
-    estimator.RHS[nobs+j] = m(xₒ)
+    RHS[nobs+j] = m(xₒ)
   end
 
   nothing

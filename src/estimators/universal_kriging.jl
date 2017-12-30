@@ -52,7 +52,7 @@ end
 
 UniversalKriging(X, z, γ, degree) = UniversalKriging{eltype(X),eltype(z)}(γ, degree, X=X, z=z)
 
-function build_lhs!(estimator::UniversalKriging, Γ::AbstractMatrix)
+function add_constraints_lhs!(estimator::UniversalKriging, Γ::AbstractMatrix)
   X = estimator.X
   degree = estimator.degree
   dim, nobs = size(X)
@@ -77,14 +77,14 @@ function build_lhs!(estimator::UniversalKriging, Γ::AbstractMatrix)
   nothing
 end
 
-function build_rhs!(estimator::UniversalKriging, g::AbstractVector, xₒ::AbstractVector)
+function add_constraints_rhs!(estimator::UniversalKriging, xₒ::AbstractVector)
   exponents = estimator.exponents
   nterms = size(exponents, 2)
-  nobs = length(g)
+  nobs = size(estimator.X, 2)
 
-  estimator.RHS[1:nobs] = g[:]
+  RHS = estimator.RHS
   for j in 1:nterms
-    estimator.RHS[nobs+j] = prod(xₒ.^exponents[:,j])
+    RHS[nobs+j] = prod(xₒ.^exponents[:,j])
   end
 
   nothing
