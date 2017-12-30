@@ -39,10 +39,9 @@ result_type(::AbstractVariogram) = error("not implemented")
 Evaluate variogram `γ` between all n² pairs of columns in a
 m-by-n matrix `X` efficiently.
 """
-function pairwise(γ::AbstractVariogram, X::AbstractMatrix{T}) where {T<:Real}
-  R = promote_type(result_type(γ), T)
+function pairwise(γ::AbstractVariogram, X::AbstractMatrix)
   m, n = size(X)
-  Γ = zeros(R, n, n)
+  Γ = zeros(result_type(γ), n, n)
   for j=1:n
     xj = view(X, :, j)
     for i=j+1:n
@@ -68,9 +67,9 @@ A Gaussian variogram with sill `s`, range `r` and nugget `n`.
 Optionally, use a custom distance `d`.
 """
 @with_kw struct GaussianVariogram{T<:Real,V,D<:Metric} <: AbstractVariogram
-  range::T  = one(Float64)
-  sill::V   = one(Float64)
-  nugget::V = zero(Float64)
+  range::T    = one(Float64)
+  sill::V     = one(Float64)
+  nugget::V   = zero(Float64)
   distance::D = Euclidean()
 end
 (γ::GaussianVariogram)(h) = (γ.sill - γ.nugget) * (1 - exp.(-3(h/γ.range).^2)) + γ.nugget
@@ -85,9 +84,9 @@ An exponential variogram with sill `s`, range `r` and nugget `n`.
 Optionally, use a custom distance `d`.
 """
 @with_kw struct ExponentialVariogram{T<:Real,V,D<:Metric} <: AbstractVariogram
-  range::T  = one(Float64)
-  sill::V   = one(Float64)
-  nugget::V = zero(Float64)
+  range::T    = one(Float64)
+  sill::V     = one(Float64)
+  nugget::V   = zero(Float64)
   distance::D = Euclidean()
 end
 (γ::ExponentialVariogram)(h) = (γ.sill - γ.nugget) * (1 - exp.(-3(h/γ.range))) + γ.nugget
@@ -102,10 +101,10 @@ A Matérn variogram with sill `s`, range `r` and nugget `n`. The parameter
 ν is the order of the Bessel function. Optionally, use a custom distance `d`.
 """
 @with_kw struct MaternVariogram{T<:Real,V,D<:Metric} <: AbstractVariogram
-  range::T  = one(Float64)
-  sill::V   = one(Float64)
-  nugget::V = zero(Float64)
-  order     = one(Float64)
+  range::T    = one(Float64)
+  sill::V     = one(Float64)
+  nugget::V   = zero(Float64)
+  order::T    = one(Float64)
   distance::D = Euclidean()
 end
 (γ::MaternVariogram)(h) = begin
@@ -132,9 +131,9 @@ A spherical variogram with sill `s`, range `r` and nugget `n`.
 Optionally, use a custom distance `d`.
 """
 @with_kw struct SphericalVariogram{T<:Real,V,D<:Metric} <: AbstractVariogram
-  range::T  = one(Float64)
-  sill::V   = one(Float64)
-  nugget::V = zero(Float64)
+  range::T    = one(Float64)
+  sill::V     = one(Float64)
+  nugget::V   = zero(Float64)
   distance::D = Euclidean()
 end
 (γ::SphericalVariogram)(h) = begin
@@ -155,9 +154,9 @@ A cubic variogram with sill `s`, range `r` and nugget `n`.
 Optionally, use a custom distance `d`.
 """
 @with_kw struct CubicVariogram{T<:Real,V,D<:Metric} <: AbstractVariogram
-  range::T  = one(Float64)
-  sill::V   = one(Float64)
-  nugget::V = zero(Float64)
+  range::T    = one(Float64)
+  sill::V     = one(Float64)
+  nugget::V   = zero(Float64)
   distance::D = Euclidean()
 end
 (γ::CubicVariogram)(h) = begin
@@ -179,9 +178,9 @@ A pentaspherical variogram with sill `s`, range `r` and nugget `n`.
 Optionally, use a custom distance `d`.
 """
 @with_kw struct PentasphericalVariogram{T<:Real,V,D<:Metric} <: AbstractVariogram
-  range::T  = one(Float64)
-  sill::V   = one(Float64)
-  nugget::V = zero(Float64)
+  range::T    = one(Float64)
+  sill::V     = one(Float64)
+  nugget::V   = zero(Float64)
   distance::D = Euclidean()
 end
 (γ::PentasphericalVariogram)(h) = begin
@@ -219,9 +218,9 @@ A sine hole variogram with sill `s`, range `r` and nugget `n`.
 Optionally, use a custom distance `d`.
 """
 @with_kw struct SineHoleVariogram{T<:Real,V,D<:Metric} <: AbstractVariogram
-  range::T  = one(Float64)
-  sill::V   = one(Float64)
-  nugget::V = zero(Float64)
+  range::T    = one(Float64)
+  sill::V     = one(Float64)
+  nugget::V   = zero(Float64)
   distance::D = Euclidean()
 end
 (γ::SineHoleVariogram)(h) = (γ.sill - γ.nugget) * (1 - sin.(π*h/γ.range)./(π*h/γ.range)) + γ.nugget
@@ -236,7 +235,6 @@ A composite (additive) model of variograms γ(h) = γ₁(h) + γ₂(h) + ⋯ + �
 """
 struct CompositeVariogram <: AbstractVariogram
   γs::Vector{AbstractVariogram}
-
   CompositeVariogram(g, gs...) = new([g, gs...])
 end
 (c::CompositeVariogram)(h) = sum(γ(h) for γ in c.γs)
