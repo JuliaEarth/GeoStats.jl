@@ -55,6 +55,7 @@ include("solutions/simulation_solution.jl")
 include("comparisons.jl")
 
 # plot recipes
+include("plotrecipes/hscatter.jl")
 include("plotrecipes/empirical_variograms.jl")
 include("plotrecipes/theoretical_variograms.jl")
 include("plotrecipes/solutions/estimation_solution.jl")

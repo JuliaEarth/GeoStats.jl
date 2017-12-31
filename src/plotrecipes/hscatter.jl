@@ -14,11 +14,47 @@
 
 @userplot HScatter
 
-@recipe function f(hs::HScatter; lag=1., distance=Euclidean())
+@recipe function f(hs::HScatter; lag=1., tol=1e-1, distance=Euclidean())
   # get inputs
   spatialdata = hs.args[1]
   var₁ = hs.args[2]
   var₂ = length(hs.args) == 3 ? hs.args[3] : var₁
 
-  var₁, var₂
+  X₁, z₁ = valid(spatialdata, var₁)
+  X₂, z₂ = valid(spatialdata, var₂)
+
+  inds = Vector{Tuple{Int,Int}}()
+  for i in 1:size(X₁, 2)
+    xi = view(X₁, :, i)
+    for j in 1:size(X₂, 2)
+      xj = view(X₂, :, j)
+      h = evaluate(distance, xi, xj)
+      abs(h - lag) < tol && push!(inds, (i,j))
+    end
+  end
+
+  x = z₁[first.(inds)]
+  y = z₂[last.(inds)]
+
+  # plot identity line
+  @series begin
+    seriestype := :path
+    primary := false
+    linestyle := :dash
+    color := :black
+
+    xmin, xmax = extrema(x)
+    ymin, ymax = extrema(y)
+    vmin = min(xmin, ymin)
+    vmax = max(xmax, ymax)
+
+    [vmin, vmax], [vmin, vmax]
+  end
+
+  seriestype := :scatter
+  xlabel := var₁
+  ylabel := var₂
+  label --> @sprintf "h-scatter (corr = %.2f)" cor(x, y)
+
+  x, y
 end
