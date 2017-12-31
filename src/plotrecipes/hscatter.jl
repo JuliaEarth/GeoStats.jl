@@ -41,9 +41,14 @@
   for (i, lag) in enumerate(lags)
     # find indices with given lag
     match = find(abs.(ds - lag) .< tol)
-    ind₁, ind₂ = ind2sub((m, n), inds[match])
+
+    if isempty(match)
+      warn("no points were found with lag = $lag, skipping...")
+      continue
+    end
 
     # scatter plot coordinates
+    ind₁, ind₂ = ind2sub((m, n), inds[match])
     x, y = z₁[ind₁], z₂[ind₂]
 
     # plot identity line
