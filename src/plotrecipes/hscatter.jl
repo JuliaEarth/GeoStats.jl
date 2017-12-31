@@ -14,7 +14,7 @@
 
 @userplot HScatter
 
-@recipe function f(hs::HScatter; lag=1., tol=1e-1, distance=Euclidean())
+@recipe function f(hs::HScatter; lags=[1.], tol=1e-1, distance=Euclidean())
   # get inputs
   spatialdata = hs.args[1]
   var₁ = hs.args[2]
@@ -23,38 +23,45 @@
   X₁, z₁ = valid(spatialdata, var₁)
   X₂, z₂ = valid(spatialdata, var₂)
 
-  inds = Vector{Tuple{Int,Int}}()
-  for i in 1:size(X₁, 2)
-    xi = view(X₁, :, i)
-    for j in 1:size(X₂, 2)
-      xj = view(X₂, :, j)
-      h = evaluate(distance, xi, xj)
-      abs(h - lag) < tol && push!(inds, (i,j))
-    end
-  end
+  m, n = length(z₁), length(z₂)
+  ds = [evaluate(distance, view(X₁,:,i), view(X₂,:,j)) for j in 1:n for i in j:m]
+  inds = [sub2ind((m, n), i, j) for j in 1:n for i in j:m]
 
-  x = z₁[first.(inds)]
-  y = z₂[last.(inds)]
-
-  # plot identity line
-  @series begin
-    seriestype := :path
-    primary := false
-    linestyle := :dash
-    color := :black
-
-    xmin, xmax = extrema(x)
-    ymin, ymax = extrema(y)
-    vmin = min(xmin, ymin)
-    vmax = max(xmax, ymax)
-
-    [vmin, vmax], [vmin, vmax]
-  end
-
-  seriestype := :scatter
   xlabel := var₁
   ylabel := var₂
-  label --> @sprintf "h-scatter (corr = %.2f)" cor(x, y)
+  legend := false
+  aspect_ratio := :equal
+  layout --> (1, length(lags))
 
-  x, y
+  for (i,lag) in enumerate(lags)
+    match = find(abs.(ds - lag) .< tol)
+    ind₁, ind₂ = ind2sub((m, n), inds[match])
+
+    x, y = z₁[ind₁], z₂[ind₂]
+
+    # plot identity line
+    @series begin
+      subplot := i
+      seriestype := :path
+      primary := false
+      linestyle := :dash
+      color := :black
+
+      xmin, xmax = extrema(x)
+      ymin, ymax = extrema(y)
+      vmin = min(xmin, ymin)
+      vmax = max(xmax, ymax)
+
+      [vmin, vmax], [vmin, vmax]
+    end
+
+    # plot h-scatter
+    @series begin
+      subplot := i
+      seriestype := :scatter
+      title --> @sprintf "h = %.1f, corr = %.2f" lag cor(x, y)
+
+      x, y
+    end
+  end
 end
