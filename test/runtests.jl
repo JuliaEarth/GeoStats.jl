@@ -18,21 +18,17 @@ datadir = joinpath(@__DIR__,"data")
 # floating point tolerance
 tol = 10eps()
 
-# create some data
-dim = 3; nobs = 10
-X = rand(dim, nobs)
-z = rand(nobs)
-
-# some target location
-xₒ = rand(dim)
-
-# load some geodataframes
+# very simple data
 fname1D = joinpath(datadir,"data1D.tsv")
 data1D = readtable(fname1D, delim='\t', coordnames=[:x])
 fname2D = joinpath(datadir,"data2D.tsv")
 data2D = readtable(fname2D, delim='\t', coordnames=[:x,:y])
 fname3D = joinpath(datadir,"data3D.tsv")
 data3D = readtable(fname3D, delim='\t')
+
+# more realistic data
+fname = joinpath(datadir,"samples2D.tsv")
+samples2D = readtable(fname, delim='\t', coordnames=[:x,:y])
 
 # list of tests
 testfiles = [
@@ -48,7 +44,8 @@ testfiles = [
   "mappers.jl",
   "problems.jl",
   "solvers.jl",
-  "comparisons.jl"
+  "comparisons.jl",
+  "plotrecipes.jl"
 ]
 
 @testset "GeoStats.jl" begin

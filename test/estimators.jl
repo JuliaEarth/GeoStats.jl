@@ -1,4 +1,12 @@
 @testset "Kriging estimators" begin
+  # create some data
+  dim = 3; nobs = 10
+  X = rand(dim, nobs)
+  z = rand(nobs)
+
+  # some target location
+  xₒ = rand(dim)
+
   γ = GaussianVariogram(sill=1., range=1., nugget=0.)
   simkrig = SimpleKriging(X, z, γ, mean(z))
   ordkrig = OrdinaryKriging(X, z, γ)
