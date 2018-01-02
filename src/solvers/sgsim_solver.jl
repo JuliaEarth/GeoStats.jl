@@ -56,7 +56,7 @@ function solve_single(problem::SimulationProblem, var::Symbol, solver::SeqGaussS
   pdomain = domain(problem)
 
   # determine coordinate type
-  T = promote_type([T for (var,T) in coordinates(problem)]...)
+  T = hasdata(problem) ? coordtype(pdata) : coordtype(pdomain)
 
   # determine value type
   V = variables(problem)[var]

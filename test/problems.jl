@@ -7,7 +7,6 @@
     @test data(problem) == data3D
     @test domain(problem) == grid3D
     @test variables(problem) == Dict(:value => Float64)
-    @test coordinates(problem) == Dict(:x => Float64, :y => Float64, :z => Float64)
     @test_throws AssertionError EstimationProblem(data3D, grid2D, :value)
 
     # show methods
@@ -22,7 +21,6 @@
     @test data(problem) == data3D
     @test domain(problem) == grid3D
     @test variables(problem) == Dict(:value => Float64)
-    @test coordinates(problem) == Dict(:x => Float64, :y => Float64, :z => Float64)
     @test hasdata(problem)
     @test nreals(problem) == 100
     @test_throws AssertionError SimulationProblem(data3D, grid2D, :value, 100)

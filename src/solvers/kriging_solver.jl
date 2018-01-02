@@ -71,8 +71,7 @@ function solve(problem::EstimationProblem, solver::Kriging)
   @assert keys(solver.params) ⊆ keys(variables(problem)) "invalid variable names in solver parameters"
 
   # determine problem coordinate type
-  probcoords = coordinates(problem)
-  T = promote_type([T for (var,T) in probcoords]...)
+  T = coordtype(data(problem))
 
   # results for each variable
   μs = []; σs = []
@@ -110,10 +109,10 @@ end
 
 function solve(problem::EstimationProblem, var::Symbol, estimator::E) where {E<:AbstractEstimator}
   # retrieve data
-  spatialdata = data(problem)
+  pdata = data(problem)
 
   # find valid data for variable
-  X, z = valid(spatialdata, var)
+  X, z = valid(pdata, var)
 
   # fit estimator to data
   fit!(estimator, X, z)
