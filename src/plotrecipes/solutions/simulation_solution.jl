@@ -35,42 +35,50 @@
   layout := (length(variables), N)
 
   # select realizations at random
-  reals = sample(1:nreals, N, replace=false)
+  inds = sample(1:nreals, N, replace=false)
 
-  for (i,var) in enumerate(variables), j=1:N
-    # select a realization at random
-    real = solution.realizations[var][reals[j]]
+  for (i,var) in enumerate(variables)
+    reals = solution.realizations[var][inds]
 
-    # results in grid format
-    R = reshape(real, sz)
+    # find value limits across realizations
+    minmax = extrema.(reals)
+    vmin = minimum(first.(minmax))
+    vmax = maximum(last.(minmax))
 
-    if dim == 1 # plot a line
-      x = or[1]:sp[1]:or[1]+(sz[1]-1)*sp[1]
-      @series begin
-        subplot := (i-1)*N + j
-        seriestype := :path
-        legend := false
-        title --> string(var, " $j")
-        x, R
+    for (j,real) in enumerate(reals)
+      # results in grid format
+      R = reshape(real, sz)
+
+      if dim == 1 # plot a line
+        x = or[1]:sp[1]:or[1]+(sz[1]-1)*sp[1]
+        @series begin
+          subplot := (i-1)*N + j
+          seriestype := :path
+          legend := false
+          title --> string(var, " $j")
+          x, R
+        end
+      elseif dim == 2 # plot a heat map
+        @series begin
+          subplot := (i-1)*N + j
+          seriestype := :heatmap
+          clims := (vmin, vmax)
+          seriescolor --> :bluesreds
+          title --> string(var, " $j")
+          flipdim(rotr90(R), 2)
+        end
+      elseif dim == 3 # plot a volume
+        @series begin
+          subplot := (i-1)*N + j
+          seriestype := :volume
+          clims := (vmin, vmax)
+          seriescolor --> :bluesreds
+          title --> string(var, " $j")
+          R
+        end
+      else
+        error("cannot plot solution in more than 3 dimensions")
       end
-    elseif dim == 2 # plot a heat map
-      @series begin
-        subplot := (i-1)*N + j
-        seriestype := :heatmap
-        seriescolor --> :bluesreds
-        title --> string(var, " $j")
-        flipdim(rotr90(R), 2)
-      end
-    elseif dim == 3 # plot a volume
-      @series begin
-        subplot := (i-1)*N + j
-        seriestype := :volume
-        seriescolor --> :bluesreds
-        title --> string(var, " $j")
-        R
-      end
-    else
-      error("cannot plot solution in more than 3 dimensions")
     end
   end
 end
