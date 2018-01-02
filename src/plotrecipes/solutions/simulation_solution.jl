@@ -62,8 +62,8 @@
         @series begin
           subplot := (i-1)*N + j
           seriestype := :heatmap
-          clims := (vmin, vmax)
           seriescolor --> :bluesreds
+          clims --> (vmin, vmax)
           title --> string(var, " $j")
           flipdim(rotr90(R), 2)
         end
@@ -71,8 +71,8 @@
         @series begin
           subplot := (i-1)*N + j
           seriestype := :volume
-          clims := (vmin, vmax)
           seriescolor --> :bluesreds
+          clims --> (vmin, vmax)
           title --> string(var, " $j")
           R
         end
