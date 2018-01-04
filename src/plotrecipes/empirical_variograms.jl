@@ -12,7 +12,7 @@
 ## ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 ## OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
-@recipe function f(γ::EmpiricalVariogram; bincounts=true)
+@recipe function f(γ::EmpiricalVariogram; showbins=true)
   # get the data
   x, y, n = values(γ)
 
@@ -20,7 +20,7 @@
   x = x[n .> 0]; y = y[n .> 0]; n = n[n .> 0]
 
   # draw bin counts as a measure of confidence
-  if bincounts
+  if showbins
     @series begin
       # plot a "frequency" instead of raw counts
       f = n*(maximum(y) / maximum(n)) / 10.
