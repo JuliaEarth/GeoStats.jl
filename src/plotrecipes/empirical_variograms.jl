@@ -26,8 +26,8 @@
       f = n*(maximum(y) / maximum(n)) / 10.
 
       seriestype := :bar
-      seriescolor := :blue
-      fillalpha := .5
+      seriescolor := :black
+      fillalpha := .1
       label := "bin counts"
 
       x, f
@@ -36,7 +36,6 @@
 
   seriestype := :scatter
   xlim := (0, γ.maxlag)
-  seriescolor --> :orange
   xlabel --> "Lag h"
   ylabel --> "Variogram(h)"
   label --> "variogram"
