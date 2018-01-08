@@ -31,6 +31,11 @@
     @test all(γ(h) .≤ γ(h+1))
   end
 
+  # variograms are valid at the origin
+  for γ ∈ (γs ∪ γn ∪ γnd)
+    @test !isnan(γ(0.)) && !isinf(γ(0.))
+  end
+
   if ismaintainer || istravis
     @testset "Plot recipe" begin
       function plot_variograms(fname)

@@ -223,7 +223,17 @@ Optionally, use a custom distance `d`.
   nugget::V   = zero(Float64)
   distance::D = Euclidean()
 end
-(γ::SineHoleVariogram)(h) = (γ.sill - γ.nugget) * (1 - sin.(π*h/γ.range)./(π*h/γ.range)) + γ.nugget
+(γ::SineHoleVariogram)(h) = begin
+  s = γ.sill
+  r = γ.range
+  n = γ.nugget
+
+  # shift lag by machine precision to
+  # avoid explosion at the origin
+  h = h + eps(eltype(h))
+
+  (s - n) * (1 - sin.(π*h/r)./(π*h/r)) + n
+end
 (γ::SineHoleVariogram)(x, y) = γ(evaluate(γ.distance, x, y))
 isstationary(::SineHoleVariogram) = true
 result_type(::SineHoleVariogram{T,V,D}) where {T<:Real,V,D<:Metric} = promote_type(T, V)
