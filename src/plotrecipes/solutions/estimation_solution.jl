@@ -12,7 +12,8 @@
 ## ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 ## OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
-@recipe function f(solution::EstimationSolution{<:RegularGrid}; variables=nothing)
+@recipe function f(solution::EstimationSolution{<:RegularGrid};
+                   variables=nothing, contour=true)
   # grid dimension and size
   sdomain = domain(solution)
   dim = ndims(sdomain)
@@ -29,6 +30,9 @@
 
   # plot layout: mean and variance for each variable
   layout := (length(variables), 2)
+
+  # contour type for 2D solutions
+  contourtype = contour == true ? :contourf : :heatmap
 
   for (i,var) in enumerate(variables)
     # results in grid format
@@ -54,14 +58,14 @@
     elseif dim == 2 # plot a heat map
       @series begin
         subplot := 2i - 1
-        seriestype := :contourf
+        seriestype := contourtype
         seriescolor --> :bluesreds
         title --> string(var, " mean")
         flipdim(rotr90(M), 2)
       end
       @series begin
         subplot := 2i
-        seriestype := :contourf
+        seriestype := contourtype
         seriescolor --> :bluesreds
         title --> string(var, " variance")
         flipdim(rotr90(V), 2)
