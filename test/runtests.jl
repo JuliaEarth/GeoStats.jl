@@ -6,6 +6,7 @@ using VisualRegressionTests
 
 # setup GR backend for Travis CI
 ENV["GKSwstype"] = "100"
+ENV["PLOTS_TEST"] = "true"
 
 # list of maintainers
 maintainers = ["juliohm"]

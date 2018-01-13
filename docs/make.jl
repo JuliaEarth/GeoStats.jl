@@ -7,6 +7,7 @@ Pkg.installed("GR") == nothing && Pkg.add("GR")
 
 # setup GR backend for Travis CI
 ENV["GKSwstype"] = "100"
+ENV["PLOTS_TEST"] = "true"
 
 makedocs(
   format = :html,
