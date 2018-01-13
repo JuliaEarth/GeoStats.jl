@@ -1,4 +1,5 @@
 @testset "Data" begin
+  # basic checks
   @test coordinates(data3D) == Dict(var => Float64 for var in [:x,:y,:z])
   @test variables(data3D) == Dict(:value => Float64)
   @test npoints(data3D) == 100
@@ -6,6 +7,11 @@
   @test size(X,2) == 100
   @test length(z) == 100
   @test_throws AssertionError readtable(fname3D, delim='\t', coordnames=[:a])
+
+  # missing data and NaN
+  X, z = valid(missdata, :value)
+  @test size(X) == (2,1)
+  @test length(z) == 1
 
   # show methods
   rawdata = DataFrames.DataFrame(x=[1,2,3],y=[4,5,6])

@@ -26,6 +26,10 @@ data2D = readtable(fname2D, delim='\t', coordnames=[:x,:y])
 fname3D = joinpath(datadir,"data3D.tsv")
 data3D = readtable(fname3D, delim='\t')
 
+# missing data and NaN
+fname = joinpath(datadir,"missing.tsv")
+missdata = readtable(fname, delim='\t', coordnames=[:x,:y])
+
 # more realistic data
 fname = joinpath(datadir,"samples2D.tsv")
 samples2D = readtable(fname, delim='\t', coordnames=[:x,:y])
