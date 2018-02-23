@@ -16,7 +16,7 @@
   # discretize
   h = linspace(0, maxlag, 100)
 
-  seriestype := :path
+  seriestype --> :path
   xlabel --> "Lag h"
   ylabel --> "Variogram(h)"
   label --> "variogram"

@@ -34,8 +34,8 @@
     end
   end
 
-  seriestype := :scatter
-  xlim := (0, γ.maxlag)
+  seriestype --> :scatter
+  xlim --> (0, γ.maxlag)
   xlabel --> "Lag h"
   ylabel --> "Variogram(h)"
   label --> "variogram"
