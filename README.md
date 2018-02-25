@@ -18,6 +18,9 @@
   <a href="LICENSE">
     <img src="https://img.shields.io/badge/license-ISC-blue.svg">
   </a>
+  <a href="https://gitter.im/JuliaEarth/GeoStats.jl">
+    <img src="https://img.shields.io/gitter/room/nwjs/nw.js.svg">
+  </a>
 </p>
 <p align="center">
   <i>High-performance implementations of geostatistical algorithms for the Julia programming language.</i>
@@ -174,3 +177,6 @@ the repository and share it with your colleagues.
 
 [license-img]: https://img.shields.io/badge/license-ISC-blue.svg
 [license-url]: LICENSE
+
+[gitter-img]: https://img.shields.io/gitter/room/nwjs/nw.js.svg
+[gitter-url]: https://gitter.im/JuliaEarth/GeoStats.jl
