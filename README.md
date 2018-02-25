@@ -19,7 +19,7 @@
     <img src="https://img.shields.io/badge/license-ISC-blue.svg">
   </a>
   <a href="https://gitter.im/JuliaEarth/GeoStats.jl">
-    <img src="https://img.shields.io/gitter/room/nwjs/nw.js.svg">
+    <img src="https://img.shields.io/badge/chat-on%20gitter-bc0067.svg">
   </a>
 </p>
 <p align="center">
@@ -178,5 +178,5 @@ the repository and share it with your colleagues.
 [license-img]: https://img.shields.io/badge/license-ISC-blue.svg
 [license-url]: LICENSE
 
-[gitter-img]: https://img.shields.io/gitter/room/nwjs/nw.js.svg
+[gitter-img]: https://img.shields.io/badge/chat-on%20gitter-bc0067.svg
 [gitter-url]: https://gitter.im/JuliaEarth/GeoStats.jl
