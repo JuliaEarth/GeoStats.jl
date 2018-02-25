@@ -152,7 +152,7 @@ plot(solution)
 ```
 ![EstimationSolution](docs/src/images/EstimationSolution.png)
 
-## Contributing and supporting [![Flattr](http://api.flattr.com/button/flattr-badge-large.png)](https://flattr.com/@juliohm)
+## Contributing and supporting
 
 Contributions are very welcome, as are feature requests and suggestions. Please
 [open an issue](https://github.com/juliohm/GeoStats.jl/issues) if you encounter
