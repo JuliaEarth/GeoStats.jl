@@ -1,7 +1,7 @@
 All GeoStats.jl users are welcome to join our community on
 the [gitter channel](https://gitter.im/JuliaEarth/GeoStats.jl).
 There you can ask questions, share issues, or just chat about
-geostatistics. =)
+geostatistics.
 
 If you are a developer, please check
 [GeoStatsBase.jl](https://github.com/juliohm/GeoStatsBase.jl)
