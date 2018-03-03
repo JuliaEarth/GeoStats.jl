@@ -7,6 +7,8 @@
   # get the data
   x, y, n = values(γ)
 
+  binsize = x[2] - x[1]
+
   # discard empty bins
   x = x[n .> 0]; y = y[n .> 0]; n = n[n .> 0]
 
@@ -26,7 +28,7 @@
   end
 
   seriestype --> :scatter
-  xlim --> (0, γ.maxlag)
+  xlim --> (0, maximum(x) + binsize/2)
   xlabel --> "Lag h"
   ylabel --> "Variogram(h)"
   label --> "variogram"

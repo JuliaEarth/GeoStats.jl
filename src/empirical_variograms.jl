@@ -21,9 +21,9 @@ Alternatively, compute the (cross-)variogram for the variables
   * distance - custom distance function
 """
 struct EmpiricalVariogram{T<:Real,V,D<:Metric}
-  nbins::Int
-  maxlag::Union{Float64,Void}
-  bins::Vector{Vector{V}}
+  abscissa::Vector{Float64}
+  ordinate::Vector{Float64}
+  counts::Vector{Int}
 
   function EmpiricalVariogram{T,V,D}(X, z₁, z₂,
                                      nbins, maxlag,
@@ -69,7 +69,12 @@ struct EmpiricalVariogram{T<:Real,V,D<:Metric}
     # place squared differences at the bins
     bins = [zdiff[binidx .== i] for i=1:nbins]
 
-    new(nbins, maxlag, bins)
+    # variogram abscissa, ordinate, and count
+    abscissa = linspace(binsize/2, maxlag - binsize/2, nbins)
+    ordinate = [length(bin) > 0 ? mean(bin)/2 : NaN for bin in bins]
+    counts   = length.(bins)
+
+    new(abscissa, ordinate, counts)
   end
 end
 
@@ -88,29 +93,20 @@ function EmpiricalVariogram(spatialdata::S, var₁::Symbol, var₂::Symbol=var�
 end
 
 """
-    values(empirical_variogram)
+    values(γemp)
 
 Returns the center of the bins, the mean squared differences divided by 2
-and the number of squared differences at the bins.
+and the number of squared differences at the bins for a given empirical
+variogram `γemp`.
 
 ## Examples
 
 Plotting empirical variogram manually:
 
 ```julia
-julia> x, y, n = values(empirical_variogram)
-julia> plot(x, y, label="semi-variogram")
+julia> x, y, n = values(γemp)
+julia> plot(x, y, label="variogram")
 julia> bar!(x, n, label="histogram")
 ```
 """
-function Base.values(γ::EmpiricalVariogram{T,V,D}) where {T<:Real,V,D<:Metric}
-  bins = γ.bins
-  nbins = γ.nbins
-  binsize = γ.maxlag / γ.nbins
-
-  x = linspace(zero(T) + binsize/2, γ.maxlag - binsize/2, nbins)
-  y = [length(bin) > 0 ? mean(bin)/2 : V(NaN) for bin in bins]
-  n = length.(bins)
-
-  x, y, n
-end
+Base.values(γ::EmpiricalVariogram) = γ.abscissa, γ.ordinate, γ.counts
