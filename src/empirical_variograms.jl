@@ -21,15 +21,8 @@ Alternatively, compute the (cross-)variogram for the variables
   * distance - custom distance function
 """
 struct EmpiricalVariogram{T<:Real,V,D<:Metric}
-  # input fields
-  X::AbstractMatrix{T}
-  z₁::AbstractVector{V}
-  z₂::AbstractVector{V}
   nbins::Int
-  maxlag::Union{T,Void}
-  distance::D
-
-  # state fields
+  maxlag::Union{Float64,Void}
   bins::Vector{Vector{V}}
 
   function EmpiricalVariogram{T,V,D}(X, z₁, z₂,
@@ -45,14 +38,17 @@ struct EmpiricalVariogram{T<:Real,V,D<:Metric}
     npoints = size(X, 2)
     npairs = (npoints * (npoints-1)) ÷ 2
 
+    # result type of distance between coordinates
+    R = result_type(distance, view(X,:,1), view(X,:,1))
+
     # compute pairwise distance
-    lags = Vector{T}(npairs)
+    lags = Vector{R}(npairs)
     zdiff = Vector{V}(npairs)
     idx = 1
     for j=1:npoints
-      xj = view(X, :, j)
+      xj = view(X,:,j)
       for i=j+1:npoints
-        xi = view(X, :, i)
+        xi = view(X,:,i)
         @inbounds lags[idx] = evaluate(distance, xi, xj)
         @inbounds zdiff[idx] = (z₁[i] - z₁[j])*(z₂[i] - z₂[j])
         idx += 1
@@ -73,7 +69,7 @@ struct EmpiricalVariogram{T<:Real,V,D<:Metric}
     # place squared differences at the bins
     bins = [zdiff[binidx .== i] for i=1:nbins]
 
-    new(X, z₁, z₂, nbins, maxlag, distance, bins)
+    new(nbins, maxlag, bins)
   end
 end
 

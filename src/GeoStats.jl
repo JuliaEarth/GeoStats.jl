@@ -26,6 +26,9 @@ using Parameters: @with_kw
 # extend base module
 import GeoStatsBase: digest, solve, solve_single
 
+# extend result_type for theoretical variograms
+import Distances: result_type
+
 # utilities
 include("distances.jl")
 include("distributions.jl")
