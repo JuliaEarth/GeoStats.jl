@@ -160,6 +160,8 @@ any problems or if you have questions. GeoStats.jl was developed as part of
 academic research. If you would like to help support the project, please star
 the repository and share it with your colleagues.
 
+Join our community on [gitter](https://gitter.im/JuliaEarth/GeoStats.jl).
+
 [travis-img]: https://travis-ci.org/juliohm/GeoStats.jl.svg?branch=master
 [travis-url]: https://travis-ci.org/juliohm/GeoStats.jl
 
