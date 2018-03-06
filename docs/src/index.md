@@ -6,6 +6,7 @@
 [![Stable Documentation](https://img.shields.io/badge/docs-stable-blue.svg)](https://juliohm.github.io/GeoStats.jl/stable)
 [![Latest Documentation](https://img.shields.io/badge/docs-latest-blue.svg)](https://juliohm.github.io/GeoStats.jl/latest)
 [![License File](https://img.shields.io/badge/license-ISC-blue.svg)](https://github.com/juliohm/GeoStats.jl/blob/master/LICENSE)
+[![Gitter](https://img.shields.io/badge/chat-on%20gitter-bc0067.svg)](https://gitter.im/JuliaEarth/GeoStats.jl)
 
 *High-performance implementations of geostatistical algorithms for the Julia programming language.*
 
@@ -15,7 +16,7 @@ Geostatistics (a.k.a. spatial statistics) is the branch of statistics that deals
 spatial data. In many fields of science, such as mining engineering, hidrogeology,
 petroleum engineering, and environmental sciences, traditional regression techniques
 fail to capture spatiotemporal correlation, and therefore are not satisfactory tools
-for decision making.
+for decision making involving spatial resources.
 
 GeoStats.jl is an attempt to bring together bleeding-edge research in the geostatistics
 community into a comprehensive framework, and to empower researchers and practioners
