@@ -10,7 +10,6 @@ module GeoStats
 using Reexport
 using Distances
 using StatsBase: sample
-using Distributions
 using Combinatorics: multiexponents
 using SpecialFunctions: besselk
 using RecipesBase
@@ -25,9 +24,6 @@ using Parameters: @with_kw
 
 # extend base module
 import GeoStatsBase: digest, solve, solve_single
-
-# utilities
-include("distributions.jl")
 
 # Kriging estimators
 include("estimators.jl")
@@ -57,11 +53,6 @@ function examples()
 end
 
 export
-  # distributions
-  EmpiricalDistribution,
-  quantile,
-  cdf,
-
   # Kriging estimators
   SimpleKriging,
   OrdinaryKriging,
