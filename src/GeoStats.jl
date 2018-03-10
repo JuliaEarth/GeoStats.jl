@@ -26,16 +26,10 @@ using Parameters: @with_kw
 # extend base module
 import GeoStatsBase: digest, solve, solve_single
 
-# extend result_type for theoretical variograms
-import Distances: result_type
-
 # utilities
-include("distances.jl")
 include("distributions.jl")
 
-# variograms and Kriging estimators
-include("empirical_variograms.jl")
-include("theoretical_variograms.jl")
+# Kriging estimators
 include("estimators.jl")
 
 # solvers
@@ -63,29 +57,10 @@ function examples()
 end
 
 export
-  # distances
-  Ellipsoidal,
-  evaluate,
-
   # distributions
   EmpiricalDistribution,
   quantile,
   cdf,
-
-  # empirical variograms
-  EmpiricalVariogram,
-
-  # theoretical variograms
-  GaussianVariogram,
-  ExponentialVariogram,
-  MaternVariogram,
-  SphericalVariogram,
-  CubicVariogram,
-  PentasphericalVariogram,
-  PowerVariogram,
-  SineHoleVariogram,
-  CompositeVariogram,
-  isstationary,
 
   # Kriging estimators
   SimpleKriging,
