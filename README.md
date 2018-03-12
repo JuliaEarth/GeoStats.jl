@@ -101,7 +101,7 @@ All simulation solvers generate realizations in parallel unless otherwise noted.
 
 | Solver | Description | Build | Coverage | References |
 |:------:|-------------|-------|----------|------------|
-| [SeqGaussSim](https://github.com/juliohm/GeoStats.jl/tree/master/src/solvers) | Sequential Gaussian simulation | [![][travis-img]][travis-url] | [![][codecov-img]][codecov-url] | [Deutsch 1997](https://www.amazon.com/GSLIB-Geostatistical-Software-Library-Geostatistics/dp/0195100158), [Olea 1999](https://www.amazon.com/Geostatistics-Engineers-Earth-Scientists-Ricardo/dp/0792385233) |
+| [SeqGaussSim](https://github.com/juliohm/GeoStats.jl/tree/master/src/solvers) | Sequential Gaussian simulation | [![][travis-img]][travis-url] | [![][codecov-img]][codecov-url] | [Isaaks 1990](https://searchworks.stanford.edu/view/709822) |
 | [ImgQuilt](https://github.com/juliohm/ImageQuilting.jl) | Fast 3D image quilting | [![](https://travis-ci.org/juliohm/ImageQuilting.jl.svg?branch=master)](https://travis-ci.org/juliohm/ImageQuilting.jl) | [![](https://codecov.io/gh/juliohm/ImageQuilting.jl/branch/master/graph/badge.svg)](https://codecov.io/gh/juliohm/ImageQuilting.jl) | [Hoffimann 2017](http://www.sciencedirect.com/science/article/pii/S0098300417301139) |
 
 If you are a developer and your solver is not listed above, please open a pull request and we
