@@ -10,26 +10,23 @@ module GeoStats
 using Reexport
 using Distances
 using StatsBase: sample
-using Combinatorics: multiexponents
-using SpecialFunctions: besselk
 using RecipesBase
 
 # won't be needed in Julia v0.7
-using Parameters: @with_kw
 @reexport using NamedTuples
 
 # export project modules
 @reexport using GeoStatsBase
 @reexport using GeoStatsDevTools
+@reexport using Variography
+@reexport using KrigingEstimators
 
 # extend base module
 import GeoStatsBase: digest, solve, solve_single
 
-# Kriging estimators
-include("estimators.jl")
-
-# solvers
-include("solvers.jl")
+# solvers installed by default
+include("solvers/kriging.jl")
+include("solvers/sgsim.jl")
 
 # digest solutions
 include("solutions/estimation_solution.jl")
@@ -40,8 +37,6 @@ include("comparisons.jl")
 
 # plot recipes
 include("plotrecipes/hscatter.jl")
-include("plotrecipes/empirical_variograms.jl")
-include("plotrecipes/theoretical_variograms.jl")
 include("plotrecipes/solutions/estimation_solution.jl")
 include("plotrecipes/solutions/simulation_solution.jl")
 
@@ -53,15 +48,6 @@ function examples()
 end
 
 export
-  # Kriging estimators
-  SimpleKriging,
-  OrdinaryKriging,
-  UniversalKriging,
-  ExternalDriftKriging,
-  fit!,
-  weights,
-  estimate,
-
   # solvers
   Kriging,
   SeqGaussSim,

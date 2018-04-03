@@ -16,9 +16,6 @@ istravis = "TRAVIS" ∈ keys(ENV)
 ismaintainer = "USER" ∈ keys(ENV) && ENV["USER"] ∈ maintainers
 datadir = joinpath(@__DIR__,"data")
 
-# floating point tolerance
-tol = 10eps()
-
 # very simple data
 fname1D = joinpath(datadir,"data1D.tsv")
 data1D = readtable(fname1D, delim='\t', coordnames=[:x])
@@ -39,9 +36,6 @@ samples2D = readtable(fname, delim='\t', coordnames=[:x,:y])
 testfiles = [
   "distances.jl",
   "distributions.jl",
-  "empirical_variograms.jl",
-  "theoretical_variograms.jl",
-  "estimators.jl",
   "spatialdata.jl",
   "domains.jl",
   "paths.jl",

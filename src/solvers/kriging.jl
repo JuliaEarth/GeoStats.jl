@@ -98,7 +98,7 @@ function solve(problem::EstimationProblem, solver::Kriging)
   EstimationSolution(domain(problem), Dict(μs), Dict(σs))
 end
 
-function solve(problem::EstimationProblem, var::Symbol, estimator::E) where {E<:AbstractEstimator}
+function solve(problem::EstimationProblem, var::Symbol, estimator::E) where {E<:KrigingEstimator}
   # retrieve data
   pdata = data(problem)
 
