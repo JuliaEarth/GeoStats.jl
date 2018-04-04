@@ -18,7 +18,6 @@ using RecipesBase
 # export project modules
 @reexport using GeoStatsBase
 @reexport using GeoStatsDevTools
-@reexport using Variography
 @reexport using KrigingEstimators
 
 # extend base module
