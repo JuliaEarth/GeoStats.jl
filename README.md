@@ -103,6 +103,7 @@ All simulation solvers generate realizations in parallel unless otherwise noted.
 
 | Solver | Description | Build | Coverage | References |
 |:------:|-------------|-------|----------|------------|
+| [DirectGaussSim](https://github.com/juliohm/DirectGaussianSimulation.jl) | Direct Gaussian simulation | [![](https://travis-ci.org/juliohm/DirectGaussianSimulation.jl.svg?branch=master)](https://travis-ci.org/juliohm/DirectGaussianSimulation.jl) | [![](https://codecov.io/gh/juliohm/DirectGaussianSimulation.jl/branch/master/graph/badge.svg)](https://codecov.io/gh/juliohm/DirectGaussianSimulation.jl) | [Alabert 1987](https://link.springer.com/article/10.1007/BF00897191) |
 | [SeqGaussSim](https://github.com/juliohm/GeoStats.jl/tree/master/src/solvers) | Sequential Gaussian simulation | [![][travis-img]][travis-url] | [![][codecov-img]][codecov-url] | [Isaaks 1990](https://searchworks.stanford.edu/view/709822) |
 | [ImgQuilt](https://github.com/juliohm/ImageQuilting.jl) | Fast 3D image quilting | [![](https://travis-ci.org/juliohm/ImageQuilting.jl.svg?branch=master)](https://travis-ci.org/juliohm/ImageQuilting.jl) | [![](https://codecov.io/gh/juliohm/ImageQuilting.jl/branch/master/graph/badge.svg)](https://codecov.io/gh/juliohm/ImageQuilting.jl) | [Hoffimann 2017](http://www.sciencedirect.com/science/article/pii/S0098300417301139) |
 
