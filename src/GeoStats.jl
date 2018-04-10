@@ -21,14 +21,15 @@ using RecipesBase
 @reexport using KrigingEstimators
 
 # extend base module
-import GeoStatsBase: digest, solve, solve_single
+import GeoStatsBase: solve, solve_single
 
 # solvers installed by default
 include("solvers/kriging.jl")
 include("solvers/sgsim.jl")
 
 # solver comparisons
-include("comparisons.jl")
+include("comparisons/cross_validation.jl")
+include("comparisons/visual_comparison.jl")
 
 # plot recipes
 include("plotrecipes/hscatter.jl")
@@ -49,7 +50,6 @@ export
 
   # solver comparisons
   VisualComparison,
-  CrossValidation,
-  compare
+  CrossValidation
 
 end # module
