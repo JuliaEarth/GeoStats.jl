@@ -18,3 +18,12 @@ GeoDataFrame
 ```@docs
 readtable
 ```
+
+## GeoGridData
+
+In the case that the data is regularly spaced in a grid, the `GeoGridData` object provides
+fast access across multiple overlaid maps.
+
+```@docs
+GeoGridData
+```
