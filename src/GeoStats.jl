@@ -27,10 +27,6 @@ import GeoStatsBase: digest, solve, solve_single
 include("solvers/kriging.jl")
 include("solvers/sgsim.jl")
 
-# digest solutions
-include("solutions/estimation_solution.jl")
-include("solutions/simulation_solution.jl")
-
 # solver comparisons
 include("comparisons.jl")
 
