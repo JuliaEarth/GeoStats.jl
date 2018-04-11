@@ -31,11 +31,6 @@ include("solvers/sgsim.jl")
 include("comparisons/cross_validation.jl")
 include("comparisons/visual_comparison.jl")
 
-# plot recipes
-include("plotrecipes/hscatter.jl")
-include("plotrecipes/solutions/estimation_solution.jl")
-include("plotrecipes/solutions/simulation_solution.jl")
-
 # helper function to launch examples from Julia prompt
 function examples()
   path = joinpath(@__DIR__,"..","examples")
