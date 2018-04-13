@@ -6,4 +6,5 @@ KrigingEstimators 0.0.1
 Distances 0.5.0
 StatsBase 0.20.1
 NamedTuples 4.0.0
+StaticArrays 0.7.0
 RecipesBase 0.2.3
