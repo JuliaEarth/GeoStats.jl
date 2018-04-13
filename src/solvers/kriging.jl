@@ -99,8 +99,9 @@ function solve(problem::EstimationProblem, solver::Kriging)
 end
 
 function solve(problem::EstimationProblem, var::Symbol, estimator::E) where {E<:KrigingEstimator}
-  # retrieve data
+  # retrieve problem info
   pdata = data(problem)
+  pdomain = domain(problem)
 
   # find valid data for variable
   X, z = valid(pdata, var)
@@ -108,17 +109,18 @@ function solve(problem::EstimationProblem, var::Symbol, estimator::E) where {E<:
   # fit estimator to data
   fit!(estimator, X, z)
 
-  # retrieve spatial domain
-  pdomain = domain(problem)
-
   # pre-allocate memory for result
   varμ = Vector{eltype(z)}(npoints(pdomain))
   varσ = Vector{eltype(z)}(npoints(pdomain))
 
+  # pre-allocate memory for coordinates
+  coords = MVector{ndims(pdomain),coordtype(pdomain)}()
+
   # estimation loop
   for location in SimplePath(pdomain)
-    x = coordinates(pdomain, location)
-    μ, σ² = estimate(estimator, x)
+    coordinates!(coords, pdomain, location)
+
+    μ, σ² = estimate(estimator, coords)
 
     varμ[location] = μ
     varσ[location] = σ²
