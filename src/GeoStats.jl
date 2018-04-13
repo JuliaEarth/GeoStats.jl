@@ -10,6 +10,7 @@ module GeoStats
 using Reexport
 using Distances
 using StatsBase: sample
+using StaticArrays
 using RecipesBase
 
 # won't be needed in Julia v0.7

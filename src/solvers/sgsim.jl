@@ -101,6 +101,9 @@ function solve_single(problem::SimulationProblem, var::Symbol, solver::SeqGaussS
     simulated[loc] = true
   end
 
+  # pre-allocate memory for coordinates
+  coords = MVector{ndims(pdomain),coordtype(pdomain)}()
+
   # simulation loop
   for location in path
     if !simulated[location]
@@ -122,18 +125,18 @@ function solve_single(problem::SimulationProblem, var::Symbol, solver::SeqGaussS
       else
         # build coordinates and observation arrays
         X = Matrix{T}(ndims(pdomain), length(neighbors))
-        z = Vector{V}(length(neighbors))
         for (j, neighbor) in enumerate(neighbors)
-          X[:,j] = coordinates(pdomain, neighbor)
-          z[j]   = realization[neighbor]
+          coordinates!(X[:,j], pdomain, neighbor)
         end
+        z = view(realization, neighbors)
 
         # build Kriging system
         fit!(estimator, X, z)
 
         try
           # estimate mean and variance
-          μ, σ² = estimate(estimator, coordinates(pdomain, location))
+          coordinates!(coords, pdomain, location)
+          μ, σ² = estimate(estimator, coords)
 
           # TODO: this portion of the code will be rewritten after
           # Julia v0.7. At the moment the linear algebra components
