@@ -42,14 +42,16 @@ beautiful coincidence that for multivariate Gaussian distributions, Simple Krigi
 expectation. [Matheron](https://en.wikipedia.org/wiki/Georges_Matheron)
 and other important geostatisticians have generalized Gaussian processes to more general random fields with
 locally-varying mean and for situations where the mean is unknown. GeoStats.jl includes Gaussian processes as
-a special case as well as other more practical Kriging variants, see the [Gaussian processes example](examples).
+a special case as well as other more practical Kriging variants, see the
+[Gaussian processes example](http://nbviewer.jupyter.org/github/juliohm/GeoStats.jl/tree/master/examples).
 
 - [MLKernels.jl](https://github.com/trthatcher/MLKernels.jl) &mdash; Spatial structure can be
 represented in many different forms: covariance, variogram, correlogram, etc. Variograms are more
 general than covariance kernels according to the intrinsically stationary property. This means that
 there are variogram models with no covariance counterpart. Furthermore, empirical variograms can be
 easily estimated from the data (in various directions) with an efficient procedure. GeoStats.jl treats
-variograms as first-class objects, see the [Variogram modeling example](examples).
+variograms as first-class objects, see the
+[Variogram modeling example](http://nbviewer.jupyter.org/github/juliohm/GeoStats.jl/tree/master/examples).
 
 - [Interpolations.jl](https://github.com/JuliaMath/Interpolations.jl) &mdash; Kriging and Spline interpolation
 have different purposes, yet these two methods are sometimes listed as competing alternatives. Kriging estimation
