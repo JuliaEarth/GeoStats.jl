@@ -38,12 +38,11 @@ Additionally, a composite (additive) variogram model ``\gamma(h) = \gamma_1(h) +
 can be constructed from a list of variogram models:
 
 ```julia
-CompositeVariogram(GaussianVariogram(), ExponentialVariogram())
+γ = GaussianVariogram() + ExponentialVariogram()
 ```
 
 Like the other variogram models, a composite variogram ``\gamma`` can be evaluated as an isotropic model
-``\gamma(h)`` or as a model with a custom distance implicitly defined by taking into account its individual
-components ``\gamma(\x_1,\x_2)``.
+``\gamma(h)`` or as a model with a custom distance ``\gamma(\x_1,\x_2)``.
 
 Finally, the 2nd-order stationarity property of a variogram can be checked with the `isstationary` method:
 
