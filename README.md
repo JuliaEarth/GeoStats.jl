@@ -101,7 +101,7 @@ They are automatically integrated with GeoStats.jl thanks to Julia's multiple di
 
 #### Simulation problems
 
-All simulation solvers generate realizations in parallel unless otherwise noted.
+All simulation solvers can generate realizations in parallel unless otherwise noted.
 
 | Solver | Description | Build | Coverage | References |
 |:------:|-------------|-------|----------|------------|
