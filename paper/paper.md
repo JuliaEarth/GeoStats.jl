@@ -23,7 +23,7 @@ bibliography: paper.bib
 
 # Summary
 
-[GeoStats.jl](https://github.com/juliohm/GeoStats.jl) is an extendable framework
+[GeoStats.jl](https://github.com/juliohm/GeoStats.jl) is an extensible framework
 for high-performance geostatistics in Julia, as well as a formal specification of
 statistical problems in the spatial setting. It provides highly optimized solvers
 for estimation and (conditional) simulation of variables defined over general spatial
