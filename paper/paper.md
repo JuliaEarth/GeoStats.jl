@@ -106,7 +106,7 @@ solution = solve(problem, Kriging())
 plot(solution)
 ```
 \begin{figure}[h!]\centering
-  {\includegraphics[width=\textwidth]{EstimationSolution.png}}
+  {\includegraphics[width=.7\textwidth]{EstimationSolution.png}}
   \caption{Estimation solution on a regular grid.}
 \end{figure}
 
