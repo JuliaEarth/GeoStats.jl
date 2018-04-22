@@ -33,7 +33,7 @@ hardware for parallel execution such as GPUs and computer clusters.
 Its unique design addresses the very important issue of scientific comparison
 between different geostatistical methods proposed by the research community.
 Unlike similar software (e.g. GSLIB, SGeMS, gstat), which implement algorithms
-for specific data and domain types with incompatible interfaces, GeoStats.jl
+for specific data and domain types with varying interfaces, GeoStats.jl
 introduces an abstraction layer with which users can define their problems
 precisely once, and switch between different solvers effortlessly. The same
 abstraction layer enables the development of higher-order routines that operate
