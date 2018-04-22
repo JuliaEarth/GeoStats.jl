@@ -112,7 +112,7 @@ plot(solution)
 
 # Usage in academia and industry
 
-The solvers and tools implemented in this project have been used in both academic and industrial endeavours.
+The solvers and tools implemented in the project have been used in both academic and industrial endeavours.
 To give an example, the [ImageQuilting.jl](https://github.com/juliohm/ImageQuilting.jl)
 [@Hoffimann2017] solver has been used inside [ENI](https://www.eni.com)
 to condition 3D process-based models to data acquired in Oil \& Gas fields.
@@ -124,13 +124,14 @@ and glaciers, among other spatial objects.
 
 # Acknowledgements
 
-I'd like to thank research colleagues for their feedback, feature requests, and
-bug reports, and the Julia community for helping with internal design decisions.
+I'd like to thank research colleagues in the School of Earth Sciences at Stanford for
+their feedback, feature requests, and bug reports, as well as the Julia community for
+helping with internal design decisions.
 
 # Funding
 
-The project is not funded by any organization currently given its quite recent conception.
-Please contact the author at \href{mailto:juliohm@stanford.edu}{juliohm@stanford.edu}
-regarding funding opportunities.
+GeoStats.jl will always be open source and free of charge. If you are an organization
+that supports open source initiatives, please contact the author at
+\href{mailto:juliohm@stanford.edu}{juliohm@stanford.edu} regarding funding opportunities.
 
 # References
