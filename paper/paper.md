@@ -124,9 +124,9 @@ and glaciers, among other spatial objects.
 
 # Acknowledgements
 
-I'd like to thank research colleagues in the School of Earth Sciences at Stanford for
-their feedback, feature requests, and bug reports, as well as the Julia community for
-helping with internal design decisions.
+I'd like to thank my research colleagues in the School of Earth, Energy \& Environmental Sciences
+at Stanford for their feedback, feature requests, and bug reports, as well as the Julia community
+for helping with internal design decisions.
 
 # Funding
 
