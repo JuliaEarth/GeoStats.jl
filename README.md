@@ -150,7 +150,9 @@ grid = RegularGrid{Float64}(100, 100)
 problem = EstimationProblem(geodata, grid, :precipitation)
 
 # choose a solver from the list of solvers
-solver = Kriging(:precipitation => @NT(variogram=GaussianVariogram(range=35.)))
+solver = Kriging(
+  :precipitation => @NT(variogram=GaussianVariogram(range=35.))
+)
 
 # solve the problem
 solution = solve(problem, solver)
@@ -164,11 +166,16 @@ plot(solution)
 
 Contributions are very welcome, as are feature requests and suggestions. Please
 [open an issue](https://github.com/juliohm/GeoStats.jl/issues) if you encounter
-any problems or if you have questions. GeoStats.jl was developed as part of
-academic research. If you would like to help support the project, please star
-the repository and share it with your colleagues.
+any problems. We have [written instructions](CONTRIBUTING.md) to help you with
+the reporting process.
 
-Join our community on [gitter](https://gitter.im/JuliaEarth/GeoStats.jl).
+If you have questions, don't hesitate to ask. Join our community in our
+[gitter channel](https://gitter.im/JuliaEarth/GeoStats.jl). We are always
+willing to help.
+
+GeoStats.jl was developed as part of academic research. It will always be open
+source and free of charge. If you would like to help support the project, please
+star the repository and share it with your colleagues.
 
 [travis-img]: https://travis-ci.org/juliohm/GeoStats.jl.svg?branch=master
 [travis-url]: https://travis-ci.org/juliohm/GeoStats.jl
