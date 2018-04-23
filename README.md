@@ -149,8 +149,11 @@ grid = RegularGrid{Float64}(100, 100)
 # define estimation problem for any data column(s) (e.g. :precipitation)
 problem = EstimationProblem(geodata, grid, :precipitation)
 
-# solve the problem with any solver
-solution = solve(problem, Kriging())
+# choose a solver from the list
+solver = Kriging(:precipitation => @NT(variogram=GaussianVariogram(range=35.)))
+
+# solve the problem
+solution = solve(problem, solver)
 
 # plot the solution
 plot(solution)
