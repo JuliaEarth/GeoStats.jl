@@ -167,7 +167,7 @@ plot(solution)
 Contributions are very welcome, as are feature requests and suggestions. Please
 [open an issue](https://github.com/juliohm/GeoStats.jl/issues) if you encounter
 any problems. We have [written instructions](CONTRIBUTING.md) to help you with
-the reporting process.
+the process.
 
 If you have questions, don't hesitate to ask. Join our community in our
 [gitter channel](https://gitter.im/JuliaEarth/GeoStats.jl). We are always
