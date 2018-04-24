@@ -71,18 +71,6 @@ As of version 0.6.0, the following solvers are available.
     * Sequential Gaussian Simulation [@Isaaks1990]
     * Fast Image Quilting [@Hoffimann2017]
 
-## Comparison methods
-
-Solvers adhering to the interface proposed in the framework can be
-easily compared on a given problem with different comparison methods.
-
-- Visual Comparison
-- k-fold Cross-Validation
-
-For example, the command `compare([solver1, solver2], problem, VisualComparison())`
-solves the `problem` with `solver1` and `solver2` and plots the solutions
-side by side.
-
 # Example of usage
 
 ```julia
@@ -116,9 +104,40 @@ solution = solve(problem, solver)
 plot(solution)
 ```
 \begin{figure}[h!]\centering
-  {\includegraphics[width=.6\textwidth]{EstimationSolution.png}}
+  {\includegraphics[width=\textwidth]{EstimationSolution.png}}
   \caption{Estimation solution on a regular grid.}
 \end{figure}
+
+# Straightforward scientific comparison of solvers
+
+Solvers adhering to the interface proposed in the framework can be
+easily compared on a given problem with different comparison methods.
+From a user's perspective, this feature facilitates the selection of
+solvers for a specific problem. From a researcher's perspective, this
+feature serves to guide the efforts of the geostatistics community.
+
+```julia
+using GeoStats
+using Plots
+
+# define solvers to be compared
+solver1 = Kriging(
+    :precipitation => @NT(variogram=GaussianVariogram(range=35.))
+)
+solver2 = InvDistWeight()
+
+# compare solvers with a comparison method (e.g. visual comparison)
+compare([solver1, solver2], problem, VisualComparison())
+```
+\begin{figure}[h!]\centering
+  {\includegraphics[width=.8\textwidth]{SolverComparison.png}}
+  \caption{Visual comparison of solvers.}
+\end{figure}
+
+As of version 0.6.0, the following comparison methods are available.
+
+- Visual Comparison
+- k-fold Cross-Validation
 
 # Usage in academia and industry
 
