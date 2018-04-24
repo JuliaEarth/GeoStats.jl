@@ -73,10 +73,15 @@ As of version 0.6.0, the following solvers are available.
 
 ## Comparison methods
 
-Solvers in the framework can be compared on a given problem with different methods.
+Solvers adhering to the interface proposed in the framework can be
+easily compared on a given problem with different comparison methods.
 
 - Visual Comparison
 - k-fold Cross-Validation
+
+For example, the command `compare([solver1, solver2], problem, VisualComparison())`
+solves the `problem` with `solver1` and `solver2` and plots the solutions
+side by side.
 
 # Example of usage
 
@@ -111,7 +116,7 @@ solution = solve(problem, solver)
 plot(solution)
 ```
 \begin{figure}[h!]\centering
-  {\includegraphics[width=.7\textwidth]{EstimationSolution.png}}
+  {\includegraphics[width=.6\textwidth]{EstimationSolution.png}}
   \caption{Estimation solution on a regular grid.}
 \end{figure}
 
@@ -129,8 +134,8 @@ and glaciers, among other spatial objects.
 
 # Acknowledgements
 
-I'd like to thank my research colleagues in the School of Earth, Energy \& Environmental Sciences
-at Stanford for their feedback, feature requests, and bug reports, as well as the Julia community
+I'd like to thank my research colleagues in the School of Earth Sciences at Stanford
+for their feedback, feature requests, and bug reports, as well as the Julia community
 for helping with internal design decisions.
 
 # Funding
