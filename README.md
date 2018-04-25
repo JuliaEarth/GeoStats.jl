@@ -193,6 +193,23 @@ If you find GeoStats.jl useful in your work, please consider citing it:
 [![JOSS][joss-img]][joss-url]
 [![DOI][zenodo-img]][zenodo-url]
 
+```latex
+@ARTICLE{Hoffimann2018,
+  title={GeoStats.jl – High-performance geostatistics in Julia},
+  author={Hoffimann, Júlio},
+  journal={Journal of Open Source Software},
+  publisher={The Open Journal},
+  volume={3},
+  pages={692},
+  number={24},
+  ISSN={2475-9066},
+  DOI={10.21105/joss.00692},
+  url={http://dx.doi.org/10.21105/joss.00692},
+  year={2018},
+  month={Apr}
+}
+```
+
 [travis-img]: https://travis-ci.org/juliohm/GeoStats.jl.svg?branch=master
 [travis-url]: https://travis-ci.org/juliohm/GeoStats.jl
 
