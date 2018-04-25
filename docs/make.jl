@@ -31,7 +31,6 @@ makedocs(
     "Examples" => "examples.md",
     "Contributing" => "contributing.md",
     "About" => [
-      "Author" => "about/author.md",
       "Community" => "about/community.md",
       "License" => "about/license.md"
     ]

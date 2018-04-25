@@ -1,10 +1,8 @@
-All GeoStats.jl users are welcome to join our community on
-the [gitter channel](https://gitter.im/JuliaEarth/GeoStats.jl).
-There you can ask questions, share issues, or just chat about
-geostatistics.
+Everyone is welcome to join our community in our
+[gitter channel](https://gitter.im/JuliaEarth/GeoStats.jl).
 
-If you are a developer, please check
-[GeoStatsBase.jl](https://github.com/juliohm/GeoStatsBase.jl)
-and [GeoStatsDevTools.jl](https://github.com/juliohm/GeoStatsDevTools.jl).
-There you can find documentation on how to write your own
-geostatistical solvers in a way that the community can readily use.
+Below are some other ways that we can connect:
+
+- [ResearchGate](https://www.researchgate.net/profile/Julio_Mendes2)
+- [LinkedIn](https://www.linkedin.com/in/júlio-hoffimann-834936116)
+- [GitHub](https://github.com/juliohm)
