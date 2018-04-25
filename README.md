@@ -24,6 +24,9 @@
 </p>
 <p align="center">
   Cite as &#8599;
+  <a href="https://doi.org/10.21105/joss.00692">
+    <img src="http://joss.theoj.org/papers/10.21105/joss.00692/status.svg">
+  </a>
   <a href="https://zenodo.org/badge/latestdoi/33827844">
     <img src="https://zenodo.org/badge/33827844.svg">
   </a>
@@ -187,6 +190,7 @@ star the repository and share it with your colleagues.
 
 If you find GeoStats.jl useful in your work, please consider citing it:
 
+[![JOSS][joss-img]][joss-url]
 [![DOI][zenodo-img]][zenodo-url]
 
 [travis-img]: https://travis-ci.org/juliohm/GeoStats.jl.svg?branch=master
@@ -209,6 +213,9 @@ If you find GeoStats.jl useful in your work, please consider citing it:
 
 [gitter-img]: https://img.shields.io/badge/chat-on%20gitter-bc0067.svg
 [gitter-url]: https://gitter.im/JuliaEarth/GeoStats.jl
+
+[joss-img]: http://joss.theoj.org/papers/10.21105/joss.00692/status.svg
+[joss-url]: https://doi.org/10.21105/joss.00692
 
 [zenodo-img]: https://zenodo.org/badge/33827844.svg
 [zenodo-url]: https://zenodo.org/badge/latestdoi/33827844
