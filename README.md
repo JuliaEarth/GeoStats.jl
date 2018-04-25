@@ -23,6 +23,12 @@
   </a>
 </p>
 <p align="center">
+  Cite as &#8599;
+  <a href="https://zenodo.org/badge/latestdoi/33827844">
+    <img src="https://zenodo.org/badge/33827844.svg">
+  </a>
+</p>
+<p align="center">
   <i>High-performance implementations of geostatistical algorithms for the Julia programming language.</i>
 </p>
 
@@ -177,6 +183,12 @@ GeoStats.jl was developed as part of academic research. It will always be open
 source and free of charge. If you would like to help support the project, please
 star the repository and share it with your colleagues.
 
+## Citation
+
+If you find GeoStats.jl useful in your work, please consider citing it:
+
+[![DOI][zenodo-img]][zenodo-url]
+
 [travis-img]: https://travis-ci.org/juliohm/GeoStats.jl.svg?branch=master
 [travis-url]: https://travis-ci.org/juliohm/GeoStats.jl
 
@@ -197,3 +209,6 @@ star the repository and share it with your colleagues.
 
 [gitter-img]: https://img.shields.io/badge/chat-on%20gitter-bc0067.svg
 [gitter-url]: https://gitter.im/JuliaEarth/GeoStats.jl
+
+[zenodo-img]: https://zenodo.org/badge/33827844.svg
+[zenodo-url]: https://zenodo.org/badge/latestdoi/33827844
