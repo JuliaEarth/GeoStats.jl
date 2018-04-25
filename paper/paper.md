@@ -57,7 +57,7 @@ of variable(s) matching previously existing data if present.
 
 ## Available solvers
 
-As of version 0.6.0, the following solvers are available.
+As of version 0.6, the following solvers are available.
 
 - Estimation solvers
 
@@ -134,7 +134,7 @@ compare([solver1, solver2], problem, VisualComparison())
   \caption{Visual comparison of solvers.}
 \end{figure}
 
-As of version 0.6.0, the following comparison methods are available.
+As of version 0.6, the following comparison methods are available.
 
 - Visual Comparison
 - k-fold Cross-Validation
