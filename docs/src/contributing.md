@@ -8,7 +8,7 @@ Below are a few suggestions to speed up the collaboration process.
 
 If you are experiencing issues or have discovered a bug, please
 report it on GitHub. To make the resolution process easier, please
-*include the version of Julia and GeoStats.jl in your writeup*.
+include the version of Julia and GeoStats.jl in your writeup.
 These can be found with two commands:
 
 ```julia
@@ -20,7 +20,7 @@ julia> Pkg.status("GeoStats")
 
 If you have suggestions of improvement or algorithms that you would like
 to see implemented in GeoStats.jl, please open an issue on GitHub.
-Suggestions as well as feature requests are *very* welcome.
+Suggestions as well as feature requests are very welcome.
 
 ## Code contribution
 
