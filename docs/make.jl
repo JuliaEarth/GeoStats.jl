@@ -30,10 +30,10 @@ makedocs(
     ],
     "Examples" => "examples.md",
     "Contributing" => "contributing.md",
-    "Citing" => "citing.md",
     "About" => [
       "Community" => "about/community.md",
-      "License" => "about/license.md"
+      "License" => "about/license.md",
+      "Citing" => "about/citing.md"
     ]
   ]
 )
