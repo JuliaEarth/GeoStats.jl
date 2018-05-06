@@ -5,6 +5,5 @@ is available in the [examples](http://nbviewer.jupyter.org/github/juliohm/GeoSta
 folder. These notebooks are distributed with GeoStats.jl and can be run locally with
 `GeoStats.examples()`.
 
-Want to contribute an example? Please check the [Contributing](contributing.md) page
-before submitting a pull request. Contributions are very welcome, specially if they
-educate other users.
+Want to contribute an example? Please check the [Contributing](contributing.md) page.
+Contributions are very welcome, specially if they are educational.
