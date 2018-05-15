@@ -22,11 +22,12 @@ using RecipesBase
 @reexport using KrigingEstimators
 
 # extend base module
-import GeoStatsBase: solve, solve_single
+import GeoStatsBase: solve, solve_single, preprocess
 
 # solvers installed by default
 include("solvers/kriging.jl")
 include("solvers/sgsim.jl")
+include("solvers/cookiecutter.jl")
 
 # solver comparisons
 include("comparisons/cross_validation.jl")
@@ -43,6 +44,7 @@ export
   # solvers
   Kriging,
   SeqGaussSim,
+  CookieCutter,
 
   # solver comparisons
   VisualComparison,
