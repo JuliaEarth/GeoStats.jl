@@ -58,6 +58,7 @@ function compare(solvers::AbstractVector{S}, problem::EstimationProblem,
   # retrieve problem info
   pdata = data(problem)
   pdomain = domain(problem)
+  pmapper = mapper(problem)
 
   nfolds = cmp.k
 
@@ -97,7 +98,7 @@ function compare(solvers::AbstractVector{S}, problem::EstimationProblem,
       # training set
       train = vcat(datlocs[1:iₛ-1], datlocs[iₑ+1:end])
 
-      subproblem = EstimationProblem(view(pdata, train), pdomain, var)
+      subproblem = EstimationProblem(view(pdata, train), pdomain, var, mapper=pmapper)
 
       if nworkers() > 1
         # run solvers in parallel
