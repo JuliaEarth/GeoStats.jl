@@ -75,4 +75,10 @@
       # TODO: test solution correctness
     end
   end
+
+  @testset "CookieCutter" begin
+    problem2D = SimulationProblem(grid2D, Dict(:facies => Int, :property => Float64), 3)
+
+    # TODO: test solution correctness
+  end
 end
