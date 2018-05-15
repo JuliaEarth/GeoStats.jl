@@ -40,7 +40,7 @@ default with the `variogram` only.
   @param maxneighbors = 10
 end
 
-function solve_single(problem::SimulationProblem, var::Symbol, solver::SeqGaussSim)
+function preprocess(problem::SimulationProblem, solver::SeqGaussSim)
   warn("SeqGaussSim not fully implemented, sorry!")
   # retrieve problem info
   pdata = data(problem)
@@ -49,45 +49,63 @@ function solve_single(problem::SimulationProblem, var::Symbol, solver::SeqGaussS
   # determine coordinate type
   T = hasdata(problem) ? coordtype(pdata) : coordtype(pdomain)
 
+  # result of preprocessing
+  preproc = Dict{Symbol,Tuple}()
+
+  for (var, V) in variables(problem)
+    # get user parameters
+    if var ∈ keys(solver.params)
+      varparams = solver.params[var]
+    else
+      varparams = SeqGaussSimParam()
+    end
+
+    # determine which Kriging variant to use
+    if varparams.drifts ≠ nothing
+      estimator = ExternalDriftKriging{T,V}(varaparams.variogram, varparams.drifts)
+    elseif varparams.degree ≠ nothing
+      estimator = UniversalKriging{T,V}(varparams.variogram, varparams.degree)
+    elseif varparams.mean ≠ nothing
+      estimator = SimpleKriging{T,V}(varparams.variogram, varparams.mean)
+    else
+      estimator = OrdinaryKriging{T,V}(varparams.variogram)
+    end
+
+    # determine which path to use
+    if varparams.path == :simple
+      path = SimplePath(pdomain)
+    elseif varparams.path == :random
+      path = RandomPath(pdomain)
+    else
+      error("invalid path type")
+    end
+
+    # determine which neighborhood to use
+    neighborhood = BallNeighborhood(pdomain, varparams.neighradius)
+
+    # determine maximum number of conditioning neighbors
+    maxneighbors = varparams.maxneighbors
+
+    preproc[var] = (estimator, path, neighborhood, maxneighbors)
+  end
+
+  preproc
+end
+
+function solve_single(problem::SimulationProblem, var::Symbol,
+                      solver::SeqGaussSim, preproc)
+  # retrieve problem info
+  pdata = data(problem)
+  pdomain = domain(problem)
+
+  # unpack preprocessed parameters
+  estimator, path, neighborhood, maxneighbors = preproc[var]
+
+  # determine coordinate type
+  T = hasdata(problem) ? coordtype(pdata) : coordtype(pdomain)
+
   # determine value type
   V = variables(problem)[var]
-
-  # get user parameters
-  if var ∈ keys(solver.params)
-    varparams = solver.params[var]
-  else
-    varparams = SeqGaussSimParam()
-  end
-
-  # determine which Kriging variant to use
-  if varparams.drifts ≠ nothing
-    estimator = ExternalDriftKriging{T,V}(varaparams.variogram, varparams.drifts)
-  elseif varparams.degree ≠ nothing
-    estimator = UniversalKriging{T,V}(varparams.variogram, varparams.degree)
-  elseif varparams.mean ≠ nothing
-    estimator = SimpleKriging{T,V}(varparams.variogram, varparams.mean)
-  else
-    estimator = OrdinaryKriging{T,V}(varparams.variogram)
-  end
-
-  # determine which path to use
-  if varparams.path == :simple
-    path = SimplePath(pdomain)
-  elseif varparams.path == :random
-    path = RandomPath(pdomain)
-  else
-    error("invalid path type")
-  end
-
-  # determine which neighborhood to use
-  neighborhood = BallNeighborhood(pdomain, varparams.neighradius)
-
-  # determine maximum number of conditioning neighbors
-  maxneighbors = varparams.maxneighbors
-
-  #-------------------
-  # START SIMULATION
-  #-------------------
 
   # result for variable
   realization = Vector{V}(npoints(pdomain))
