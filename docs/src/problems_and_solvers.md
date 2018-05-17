@@ -49,7 +49,8 @@ hasdata
 ## List of solvers
 
 Below is the list of solvers distributed with GeoStats.jl. For more solvers, please check
-the [project page on GitHub](https://github.com/juliohm/GeoStats.jl#problems-and-solvers).
+the [project page on GitHub](https://github.com/juliohm/GeoStats.jl#problems-and-solvers)
+where a table is provided with links to accompanying repositories.
 
 ### Estimation
 
@@ -61,4 +62,8 @@ Kriging
 
 ```@docs
 SeqGaussSim
+```
+
+```@docs
+CookieCutter
 ```
