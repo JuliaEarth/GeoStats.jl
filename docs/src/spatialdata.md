@@ -19,11 +19,11 @@ GeoDataFrame
 readtable
 ```
 
-## GeoGridData
+## RegularGridData
 
 In the case that the data is regularly spaced in a grid, the `GeoGridData` object provides
-fast access across multiple overlaid maps.
+fast access across multiple overlaid images.
 
 ```@docs
-GeoGridData
+RegularGridData
 ```
