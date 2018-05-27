@@ -1,11 +1,11 @@
 /* Links */
 
 a {
-    color: #4595D1;
+    color: #70c162;
 }
 
 a:hover, a:focus {
-    color: #194E82;
+    color: #343131;
 }
 
 /* Navigation */
@@ -13,7 +13,7 @@ a:hover, a:focus {
 nav.toc ul a:hover,
 nav.toc ul.internal a:hover {
     color: #FFFFFF;
-    background-color: #4595D1;
+    background-color: #70c162;
 }
 
 nav.toc ul .toctext {
@@ -23,25 +23,25 @@ nav.toc ul .toctext {
 nav.toc {
     box-shadow: none;
     color: #FFFFFF;
-    background-color: #194E82;
+    background-color: #343131;
 }
 
 nav.toc li.current > .toctext {
     color: #FFFFFF;
-    background-color: #4595D1;
+    background-color: #70c162;
     border-top-width: 0px;
     border-bottom-width: 0px;
 }
 
 nav.toc ul.internal a {
-    color: #194E82;
+    color: #343131;
     background-color: #FFFFFF;
 }
 
 /* Text */
 
 article#docs a.nav-anchor {
-    color: #194E82;
+    color: #401284;
 }
 
 article#docs blockquote {
@@ -50,15 +50,13 @@ article#docs blockquote {
 
 /* Code */
 
-/*
 code .hljs-meta {
-    color: #4595D1;
+    color: #70c162;
 }
 
 code .hljs-keyword {
-    color: #194E82;
+    color: #343131;
 }
-*/
 
 pre, code {
     font-family: "Liberation Mono", "Consolas", "DejaVu Sans Mono", "Ubuntu Mono", "Courier New", "andale mono", "lucida console", monospace;
