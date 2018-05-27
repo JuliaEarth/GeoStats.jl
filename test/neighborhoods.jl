@@ -22,8 +22,8 @@
       neigh1 = GeoStats.CubeNeighborhood(grid4D, .5)
       @test neigh1(1) == [1]
     end
-    @testset "2D point collection" begin
-      pc2D = PointCollection([0. 1. 0. 1.; 0. 0. 1. 1.])
+    @testset "2D point set" begin
+      pc2D = PointSet([0. 1. 0. 1.; 0. 0. 1. 1.])
       neigh1 = GeoStats.CubeNeighborhood(pc2D, 1.)
       @test neigh1(1) == [1,2,3,4]
     end
@@ -52,8 +52,8 @@
       neigh1 = GeoStats.BallNeighborhood(grid4D, .5)
       @test neigh1(1) == [1]
     end
-    @testset "2D point collection" begin
-      pc2D = PointCollection([0. 1. 0. 1.; 0. 0. 1. 1.])
+    @testset "2D point set" begin
+      pc2D = PointSet([0. 1. 0. 1.; 0. 0. 1. 1.])
       neigh1 = GeoStats.BallNeighborhood(pc2D, 1.)
       @test neigh1(1) == [1,2,3]
     end

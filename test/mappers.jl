@@ -9,8 +9,8 @@
       mappings = map(data2D, grid2D, [:value], SimpleMapper())
       @test mappings[:value] == Dict(5076=>3,2526=>1,7551=>2)
     end
-    @testset "PointCollection" begin
-      pc2D = PointCollection([25. 50. 75.; 25. 75. 50.])
+    @testset "PointSet" begin
+      pc2D = PointSet([25. 50. 75.; 25. 75. 50.])
       mappings = map(data2D, pc2D, [:value], SimpleMapper())
       @test mappings[:value] == Dict(2=>2,3=>3,1=>1)
     end
