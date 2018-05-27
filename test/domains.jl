@@ -23,14 +23,14 @@
     @test sprint(show, MIME"text/plain"(), grid3) == "RegularGrid{Float64,2}\n  dimensions: (100, 200)\n  origin:     (0.0, 0.0)\n  spacing:    (1.0, 1.0)"
   end
 
-  @testset "PointCollection" begin
-    pc = PointCollection(eye(3))
+  @testset "PointSet" begin
+    pc = PointSet(eye(3))
     @test npoints(pc) == 3
     @test coordinates(pc, 1) == [1., 0., 0.]
     @test coordinates(pc, 2) == [0., 1., 0.]
     @test coordinates(pc, 3) == [0., 0., 1.]
 
-    @test sprint(show, pc) == "3×3 PointCollection{Float64,3}"
-    @test sprint(show, MIME"text/plain"(), pc) == "3×3 PointCollection{Float64,3}\n 1.0  0.0  0.0\n 0.0  1.0  0.0\n 0.0  0.0  1.0"
+    @test sprint(show, pc) == "3×3 PointSet{Float64,3}"
+    @test sprint(show, MIME"text/plain"(), pc) == "3×3 PointSet{Float64,3}\n 1.0  0.0  0.0\n 0.0  1.0  0.0\n 0.0  0.0  1.0"
   end
 end

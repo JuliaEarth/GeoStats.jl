@@ -14,14 +14,14 @@ can perform search without ever constructing a grid.
 Below is the list of currently implemented domain types. More options will be available
 in future releases.
 
-## Regular grid
+## PointSet
+
+```@docs
+PointSet
+```
+
+## RegularGrid
 
 ```@docs
 RegularGrid
-```
-
-## Point collection
-
-```@docs
-PointCollection
 ```
