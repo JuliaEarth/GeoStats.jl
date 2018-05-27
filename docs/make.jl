@@ -20,7 +20,7 @@ makedocs(
       "Problems and solvers" => "problems_and_solvers.md",
       "Spatial data" => "spatialdata.md",
       "Domains" => "domains.md",
-      "Variograms" => [
+      "Variography" => [
         "empirical_variograms.md",
         "theoretical_variograms.md"
       ],
