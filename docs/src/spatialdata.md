@@ -36,3 +36,13 @@ fast access across multiple overlaid images.
 ```@docs
 RegularGridData
 ```
+
+## StructuredGridData
+
+A `StructuredGridData` is a direct generalization of `RegularGridData` in which points can
+be localized in space with indices `i,j,k...` even though they are not regularly spaced.
+This format is often found in satellite data, [NetCDF](https://en.wikipedia.org/wiki/NetCDF), etc.
+
+```@docs
+StructuredGridData
+```
