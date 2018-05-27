@@ -19,6 +19,15 @@ GeoDataFrame
 readtable
 ```
 
+## PointSetData
+
+The `PointSetData` object is equivalent to `GeoDataFrame` except that it stores the data
+in a simple Julia `Dict` instead of in a `DataFrame`.
+
+```@docs
+PointSetData
+```
+
 ## RegularGridData
 
 In the case that the data is regularly spaced in a grid, the `GeoGridData` object provides
