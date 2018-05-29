@@ -13,7 +13,7 @@ fit
 
 Currently the following fitting methods are implemented:
 
-## WeightedLeastSquares
+## Weighted least squares
 
 ```@docs
 WeightedLeastSquares

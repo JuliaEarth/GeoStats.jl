@@ -12,22 +12,22 @@ a:hover, a:focus {
 
 nav.toc ul a:hover,
 nav.toc ul.internal a:hover {
-    color: #FFFFFF;
+    color: #F5F5F5;
     background-color: #70c162;
 }
 
 nav.toc ul .toctext {
-    color: #FFFFFF;
+    color: #F5F5F5;
 }
 
 nav.toc {
     box-shadow: none;
-    color: #FFFFFF;
+    color: #F5F5F5;
     background-color: #343131;
 }
 
 nav.toc li.current > .toctext {
-    color: #FFFFFF;
+    color: #F5F5F5;
     background-color: #70c162;
     border-top-width: 0px;
     border-bottom-width: 0px;
@@ -35,7 +35,7 @@ nav.toc li.current > .toctext {
 
 nav.toc ul.internal a {
     color: #343131;
-    background-color: #FFFFFF;
+    background-color: #F5F5F5;
 }
 
 /* Text */
