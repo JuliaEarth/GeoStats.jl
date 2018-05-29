@@ -22,7 +22,8 @@ makedocs(
       "Domains" => "domains.md",
       "Variography" => [
         "empirical_variograms.md",
-        "theoretical_variograms.md"
+        "theoretical_variograms.md",
+        "fitting_variograms.md"
       ],
       "Kriging estimators" => "estimators.md",
       "Solver comparisons" => "comparisons.md",
