@@ -31,9 +31,6 @@
     <img src="https://zenodo.org/badge/33827844.svg">
   </a>
 </p>
-<p align="center">
-  <i>High-performance implementations of geostatistical algorithms for the Julia programming language.</i>
-</p>
 
 # Project goals
 
