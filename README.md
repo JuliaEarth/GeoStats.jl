@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="docs/src/images/GeoStats.png" height="280">
+  <img src="docs/src/images/GeoStats.png" height="200"><br>
   <a href="https://travis-ci.org/juliohm/GeoStats.jl">
     <img src="https://travis-ci.org/juliohm/GeoStats.jl.svg?branch=master">
   </a>
