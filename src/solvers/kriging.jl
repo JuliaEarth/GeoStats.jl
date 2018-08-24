@@ -33,8 +33,8 @@ by specifying the `degree` and the `variogram` model.
 
 ```julia
 julia> Kriging(
-  :var₁ => @NT(mean=1.),
-  :var₂ => @NT(degree=1, variogram=SphericalVariogram(range=20.))
+  :var₁ => (mean=1.,),
+  :var₂ => (degree=1, variogram=SphericalVariogram(range=20.))
 )
 ```
 
@@ -44,11 +44,6 @@ Solve all variables of the problem with the default parameters
 ```julia
 julia> Kriging()
 ```
-
-### Notes
-
-The prefix `@NT` extends for `NamedTuple`. It won't be necessary
-in Julia v0.7 and beyond.
 """
 @estimsolver Kriging begin
   @param variogram = GaussianVariogram()
@@ -110,11 +105,11 @@ function solve(problem::EstimationProblem, var::Symbol, estimator::E) where {E<:
   fit!(estimator, X, z)
 
   # pre-allocate memory for result
-  varμ = Vector{eltype(z)}(npoints(pdomain))
-  varσ = Vector{eltype(z)}(npoints(pdomain))
+  varμ = Vector{eltype(z)}(undef, npoints(pdomain))
+  varσ = Vector{eltype(z)}(undef, npoints(pdomain))
 
   # pre-allocate memory for coordinates
-  coords = MVector{ndims(pdomain),coordtype(pdomain)}()
+  coords = MVector{ndims(pdomain),coordtype(pdomain)}(undef)
 
   # estimation loop
   for location in SimplePath(pdomain)

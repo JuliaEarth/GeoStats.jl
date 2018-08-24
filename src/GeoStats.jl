@@ -3,18 +3,16 @@
 # Licensed under the ISC License. See LICENCE in the project root.
 # ------------------------------------------------------------------
 
-__precompile__()
-
 module GeoStats
 
 using Reexport
+using Random
 using Distances
+using Distributed
+using LinearAlgebra
 using StatsBase: sample
 using StaticArrays
 using RecipesBase
-
-# won't be needed in Julia v0.7
-@reexport using NamedTuples
 
 # export project modules
 @reexport using GeoStatsBase

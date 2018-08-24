@@ -1,11 +1,8 @@
 using GeoStats
+using Random
 using Plots; gr(size=(600,400))
 using VisualRegressionTests
-using Base.Test
-
-# setup GR backend for Travis CI
-ENV["GKSwstype"] = "100"
-ENV["PLOTS_TEST"] = "true"
+using Test, Pkg
 
 # list of maintainers
 maintainers = ["juliohm"]
@@ -16,15 +13,16 @@ ismaintainer = "USER" ∈ keys(ENV) && ENV["USER"] ∈ maintainers
 datadir = joinpath(@__DIR__,"data")
 
 # test project modules
-if !istravis
+# if !istravis
+if false
   println()
-  info("----- TESTING PROJECT MODULES -----")
+  @info "----- TESTING PROJECT MODULES -----"
   println()
   for pkg in ["GeoStatsBase","GeoStatsDevTools"]
     Pkg.test(pkg)
     println()
   end
-  info("----- TESTING DEFAULT SOLVERS -----")
+  @info "----- TESTING MAIN MODULE -----"
   println()
 end
 

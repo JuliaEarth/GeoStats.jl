@@ -1,8 +1,8 @@
 @testset "Comparisons" begin
   grid2D = RegularGrid{Float64}(100,100)
   problem2D = EstimationProblem(data2D, grid2D, :value)
-  solver₁ = Kriging(:value => @NT(variogram=GaussianVariogram(range=35.)))
-  solver₂ = Kriging(:value => @NT(variogram=SphericalVariogram(range=35.)))
+  solver₁ = Kriging(:value => (variogram=GaussianVariogram(range=35.),))
+  solver₂ = Kriging(:value => (variogram=SphericalVariogram(range=35.),))
 
   @testset "Visual comparison" begin
     if ismaintainer || istravis
