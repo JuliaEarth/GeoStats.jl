@@ -19,9 +19,9 @@ Simulate lithology facies with image quilting and fill property
 with direct Gaussian simulation:
 
 ```julia
-julia> fsolver  = ImgQuilt(:facies => @NT(TI=Strebelle, template=(30,30,1)))
-julia> psolver₀ = DirectGaussSim(:property => @NT(variogram=SphericalVariogram(range=10.)))
-julia> psolver₁ = DirectGaussSim(:property => @NT(variogram=SphericalVariogram(range=20.)))
+julia> fsolver  = ImgQuilt(:facies => (TI=Strebelle, template=(30,30,1)))
+julia> psolver₀ = DirectGaussSim(:property => (variogram=SphericalVariogram(range=10.),))
+julia> psolver₁ = DirectGaussSim(:property => (variogram=SphericalVariogram(range=20.),))
 julia> solver   = CookieCutter(fsolver, [0 => psolver₀, 1 => psolver₁])
 ```
 """

@@ -41,7 +41,7 @@ default with the `variogram` only.
 end
 
 function preprocess(problem::SimulationProblem, solver::SeqGaussSim)
-  warn("SeqGaussSim not fully implemented, sorry!")
+  @warn "SeqGaussSim not fully implemented, sorry!"
   # retrieve problem info
   pdata = data(problem)
   pdomain = domain(problem)
@@ -108,7 +108,7 @@ function solve_single(problem::SimulationProblem, var::Symbol,
   V = variables(problem)[var]
 
   # result for variable
-  realization = Vector{V}(npoints(pdomain))
+  realization = Vector{V}(undef, npoints(pdomain))
 
   # keep track of simulated locations
   simulated = falses(npoints(pdomain))
@@ -120,7 +120,7 @@ function solve_single(problem::SimulationProblem, var::Symbol,
   end
 
   # pre-allocate memory for coordinates
-  coords = MVector{ndims(pdomain),coordtype(pdomain)}()
+  coords = MVector{ndims(pdomain),coordtype(pdomain)}(undef)
 
   # simulation loop
   for location in path
@@ -142,7 +142,7 @@ function solve_single(problem::SimulationProblem, var::Symbol,
         realization[location] = randn(V)
       else
         # build coordinates and observation arrays
-        X = Matrix{T}(ndims(pdomain), length(neighbors))
+        X = Matrix{T}(undef, ndims(pdomain), length(neighbors))
         for (j, neighbor) in enumerate(neighbors)
           coordinates!(X[:,j], pdomain, neighbor)
         end
@@ -168,7 +168,7 @@ function solve_single(problem::SimulationProblem, var::Symbol,
           # draw from conditional
           realization[location] = μ + √σ²*randn(V)
         catch e
-          if e isa LinAlg.SingularException
+          if e isa SingularException
             # draw from marginal
             realization[location] = randn(V)
           else
