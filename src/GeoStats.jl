@@ -31,13 +31,6 @@ include("solvers/cookiecutter.jl")
 include("comparisons/cross_validation.jl")
 include("comparisons/visual_comparison.jl")
 
-# helper function to launch examples from Julia prompt
-function examples()
-  path = joinpath(@__DIR__,"..","examples")
-  @eval using IJulia
-  @eval notebook(dir=$path)
-end
-
 export
   # solvers
   Kriging,

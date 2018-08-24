@@ -1,8 +1,7 @@
 using GeoStats
-using Random
 using Plots; gr(size=(600,400))
 using VisualRegressionTests
-using Test, Pkg
+using Test, Random, Pkg
 
 # list of maintainers
 maintainers = ["juliohm"]
