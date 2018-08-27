@@ -8,9 +8,8 @@
 
 Compare estimation solvers using k-fold cross validation.
 
-The result of the comparison is a dictionary mapping each
-variable of the problem to a vector of validation errors
-for each solver being compared.
+The result of the comparison stores the errors for each
+variable of the problem.
 
 ## Parameters
 
@@ -23,21 +22,8 @@ Compare `solver₁` and `solver₂` on a `problem` with variable
 `:var` using 10 folds. Plot error distribution:
 
 ```julia
-julia> results = compare([solver₁, solver₂], problem, CrossValidation(10))
-
-julia> plt₁ = histogram(results[:var][1], label="solver₁")
-julia> plt₂ = histogram(results[:var][2], label="solver₂")
-
-julia> plot(plt₁, plt₂, title="Error distribution for each solver")
-```
-
-Select solver with smallest absolute mean validation error:
-
-```julia
-julia> mean_err₁ = abs(mean(results[:var][1]))
-julia> mean_err₂ = abs(mean(results[:var][2]))
-
-julia> solver = mean_err₁ < mean_err₂ ? solver₁ : solver₂
+julia> result = compare([solver₁, solver₂], problem, CrossValidation(10))
+julia> plot(result, bins=50)
 ```
 """
 struct CrossValidation <: AbstractEstimSolverComparison
