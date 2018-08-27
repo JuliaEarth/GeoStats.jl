@@ -16,11 +16,12 @@
   end
 
   @testset "Cross-validation" begin
-    results = compare([solver₁, solver₂], problem2D, CrossValidation(3))
+    result = compare([solver₁, solver₂], problem2D, CrossValidation(3))
+    errors4var = result.errors4var
 
     # data set with 3 points + 3-fold CV => 3 error values per solver
-    @test length(results[:value][1]) == 3
-    @test length(results[:value][2]) == 3
+    @test length(errors4var[:value][1]) == 3
+    @test length(errors4var[:value][2]) == 3
 
     # number of folds must be smaller than number of points, throw an error
     @test_throws AssertionError compare([solver₁, solver₂], problem2D, CrossValidation())
