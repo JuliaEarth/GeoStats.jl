@@ -76,7 +76,7 @@ using Plots
 # 75.0, 50.0, mountain view,           1.0
 
 # read spreadsheet file containing spatial data
-geodata = readtable("data.csv", coordnames=[:x,:y])
+geodata = readgeotable("data.csv", coordnames=[:x,:y])
 
 # define spatial domain (e.g. regular grid, point collection)
 grid = RegularGrid{Float64}(100, 100)

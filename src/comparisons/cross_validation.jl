@@ -53,6 +53,17 @@ end
 CrossValidation(k) = CrossValidation(k, true)
 CrossValidation() = CrossValidation(10)
 
+"""
+    CrossValidationResult(errors, solvernames)
+
+Stores the cross-validation errors for each variable of the
+problem and the solver names used in the comparison.
+"""
+struct CrossValidationResult
+  errors4var::Dict{Symbol,Vector}
+  solvernames::Vector{String}
+end
+
 function compare(solvers::AbstractVector{S}, problem::EstimationProblem,
                  cmp::CrossValidation) where {S<:AbstractEstimationSolver}
   # retrieve problem info
@@ -63,7 +74,7 @@ function compare(solvers::AbstractVector{S}, problem::EstimationProblem,
   nfolds = cmp.k
 
   # save results in a dictionary
-  results = Dict{Symbol,Vector}()
+  errors4var = Dict{Symbol,Vector}()
 
   for (var,V) in variables(problem)
     # mappings from domain to data locations
@@ -121,8 +132,53 @@ function compare(solvers::AbstractVector{S}, problem::EstimationProblem,
       end
     end
 
-    push!(results, var => errors)
+    push!(errors4var, var => errors)
   end
 
-  results
+  CrossValidationResult(errors4var, [string(s) for s in solvers])
+end
+
+@recipe function f(result::CrossValidationResult; labels=nothing)
+  # retrieve solver names
+  solvers = result.solvernames
+  nsolvers = length(solvers)
+
+  # provide default names if labels are not specified
+  labels == nothing && (labels = solvers)
+
+  for (var, errs) in result.errors4var
+    layout := (nsolvers, 1)
+    link := :x
+    for (s, err) in enumerate(errs)
+      @series begin
+        subplot := s
+        seriestype := :histogram
+        label := labels[s]
+        seriescolor --> :black
+        fillalpha --> 0.7
+        linecolor --> :white
+        err
+      end
+      @series begin
+        subplot := s
+        seriestype := :vline
+        label := "mean error"
+        linecolor := :green
+        linestyle := :dash
+        linewidth := 2
+        [sum(err)/length(err)]
+      end
+      @series begin
+        subplot := s
+        seriestype := :vline
+        label := "interquartile"
+        linecolor := :orange
+        linestyle := :dot
+        linewidth := 2
+        quantile(err, [.25,.75])
+      end
+      xlabel --> "errors = estimates - observations"
+      ylabel --> "histogram"
+    end
+  end
 end

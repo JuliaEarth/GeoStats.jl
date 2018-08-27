@@ -35,6 +35,7 @@ function compare(solvers::AbstractVector{S}, problem::AbstractProblem,
     solutions = [solve(problem, solver) for solver in solvers]
   end
 
+  # TODO: pass plot specs to recipe
   plts = [RecipesBase.plot(solution) for solution in solutions]
 
   RecipesBase.plot(plts..., layout=(length(solvers),1))

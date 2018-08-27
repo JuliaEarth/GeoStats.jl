@@ -8,9 +8,9 @@ module GeoStats
 using Reexport
 using Random
 using Distances
-using Distributed
+using Statistics
 using LinearAlgebra
-using StatsBase: sample
+using Distributed
 using StaticArrays
 using RecipesBase
 

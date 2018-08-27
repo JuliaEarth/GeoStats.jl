@@ -16,7 +16,7 @@ GeoDataFrame
 ```
 
 ```@docs
-readtable
+readgeotable
 ```
 
 ## PointSetData
