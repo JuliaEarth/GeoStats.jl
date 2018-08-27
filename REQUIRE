@@ -5,6 +5,5 @@ GeoStatsDevTools 0.1.6
 Variography 0.1.0
 KrigingEstimators 0.0.2
 Distances 0.5.0
-StatsBase 0.20.1
 StaticArrays 0.7.0
 RecipesBase 0.2.3
