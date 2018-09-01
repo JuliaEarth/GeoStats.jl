@@ -73,7 +73,7 @@ function solve(problem::EstimationProblem, solver::Kriging)
 
     # determine which Kriging variant to use
     if varparams.drifts ≠ nothing
-      estimator = ExternalDriftKriging{T,V}(varaparams.variogram, varparams.drifts)
+      estimator = ExternalDriftKriging{T,V}(varparams.variogram, varparams.drifts)
     elseif varparams.degree ≠ nothing
       estimator = UniversalKriging{T,V}(varparams.variogram, varparams.degree)
     elseif varparams.mean ≠ nothing
