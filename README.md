@@ -4,7 +4,7 @@
     <img src="https://travis-ci.org/juliohm/GeoStats.jl.svg?branch=master">
   </a>
   <a href="http://pkg.julialang.org/?pkg=GeoStats">
-    <img src="http://pkg.julialang.org/badges/GeoStats_0.6.svg">
+    <img src="http://pkg.julialang.org/badges/GeoStats_0.7.svg">
   </a>
   <a href="https://codecov.io/gh/juliohm/GeoStats.jl">
     <img src="https://codecov.io/gh/juliohm/GeoStats.jl/branch/master/graph/badge.svg">
@@ -71,7 +71,7 @@ also provides the variance map as a function of knots configuration.
 Get the latest stable release with Julia's package manager:
 
 ```julia
-Pkg.add("GeoStats")
+] add GeoStats
 ```
 
 ## Project organization
@@ -158,7 +158,7 @@ problem = EstimationProblem(geodata, grid, :precipitation)
 
 # choose a solver from the list of solvers
 solver = Kriging(
-  :precipitation => @NT(variogram=GaussianVariogram(range=35.))
+  :precipitation => (variogram=GaussianVariogram(range=35.),)
 )
 
 # solve the problem
@@ -211,7 +211,7 @@ If you find GeoStats.jl useful in your work, please consider citing it:
 [travis-img]: https://travis-ci.org/juliohm/GeoStats.jl.svg?branch=master
 [travis-url]: https://travis-ci.org/juliohm/GeoStats.jl
 
-[julia-pkg-img]: http://pkg.julialang.org/badges/GeoStats_0.6.svg
+[julia-pkg-img]: http://pkg.julialang.org/badges/GeoStats_0.7.svg
 [julia-pkg-url]: http://pkg.julialang.org/?pkg=GeoStats
 
 [codecov-img]: https://codecov.io/gh/juliohm/GeoStats.jl/branch/master/graph/badge.svg
