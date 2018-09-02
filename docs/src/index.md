@@ -104,7 +104,7 @@ can also be used directly:
 
 ```@example
 using GeoStats
-using Random # hide
+using Random, Statistics # hide
 Random.seed!(2017) # hide
 
 # create some data
@@ -119,18 +119,18 @@ xₒ = rand(dim)
 γ = GaussianVariogram(sill=1., range=1., nugget=0.)
 
 # define an estimator (i.e. build the Kriging system)
-simkrig = SimpleKriging(X, z, γ, mean(z))
-ordkrig = OrdinaryKriging(X, z, γ)
-unikrig = UniversalKriging(X, z, γ, 0)
+sk = SimpleKriging(X, z, γ, mean(z))
+ok = OrdinaryKriging(X, z, γ)
+uk = UniversalKriging(X, z, γ, 0)
 
 # estimate at target location
-μ, σ² = estimate(simkrig, xₒ)
+μ, σ² = estimate(sk, xₒ)
 println("Simple Kriging:") # hide
 println("  μ = $μ, σ² = $σ²") # hide
-μ, σ² = estimate(ordkrig, xₒ)
+μ, σ² = estimate(ok, xₒ)
 println("Ordinary Kriging:") # hide
 println("  μ = $μ, σ² = $σ²") # hide
-μ, σ² = estimate(unikrig, xₒ)
+μ, σ² = estimate(uk, xₒ)
 println("Universal Kriging:") # hide
 println("  μ = $μ, σ² = $σ²") # hide
 ```
