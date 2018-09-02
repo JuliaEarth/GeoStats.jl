@@ -11,7 +11,7 @@
         png(fname)
       end
       refimg = joinpath(datadir,"VisualComparison.png")
-      @test test_images(VisualTest(plot_comparison, refimg), popup=!istravis) |> success
+      @test test_images(VisualTest(plot_comparison, refimg), popup=!istravis, tol=0.1) |> success
     end
   end
 
