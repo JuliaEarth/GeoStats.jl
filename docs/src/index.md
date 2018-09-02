@@ -86,7 +86,7 @@ problem = EstimationProblem(geodata, grid, :precipitation)
 
 # choose a solver from the list of solvers
 solver = Kriging(
-  :precipitation => @NT(variogram=GaussianVariogram(range=35.))
+  :precipitation => (variogram=GaussianVariogram(range=35.),)
 )
 
 # solve the problem
