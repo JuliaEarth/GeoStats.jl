@@ -104,7 +104,8 @@ can also be used directly:
 
 ```@example
 using GeoStats
-srand(2017) # hide
+using Random # hide
+Random.seed!(2017) # hide
 
 # create some data
 dim, nobs = 3, 10
