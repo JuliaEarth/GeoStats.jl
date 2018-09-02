@@ -2,9 +2,7 @@ using Documenter, GeoStats
 
 # manually handle dependencies until
 # Documenter.jl issue #534 is solved
-using Pkg
-Pkg.installed("Plots") == nothing && Pkg.add("Plots")
-Pkg.installed("GR") == nothing && Pkg.add("GR")
+using Pkg; Pkg.add(["Plots","GR"])
 
 makedocs(
   format = :html,
