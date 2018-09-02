@@ -41,5 +41,5 @@ deploydocs(
   target = "build",
   deps = nothing,
   make = nothing,
-  julia = "0.7"
+  julia = "1.0"
 )

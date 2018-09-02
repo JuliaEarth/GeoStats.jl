@@ -39,7 +39,7 @@ and [GeoStatsDevTools.jl](https://github.com/juliohm/GeoStatsDevTools.jl).
 Get the latest stable release with Julia's package manager:
 
 ```julia
-Pkg.add("GeoStats")
+] add GeoStats
 ```
 
 ## Project organization
