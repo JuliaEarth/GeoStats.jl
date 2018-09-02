@@ -1,9 +1,5 @@
 using Documenter, GeoStats
 
-# manually handle dependencies until
-# Documenter.jl issue #534 is solved
-using Pkg; Pkg.add(["Plots","GR"])
-
 makedocs(
   format = :html,
   sitename = "GeoStats.jl",
