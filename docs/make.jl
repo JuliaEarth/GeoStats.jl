@@ -2,12 +2,9 @@ using Documenter, GeoStats
 
 # manually handle dependencies until
 # Documenter.jl issue #534 is solved
+using Pkg
 Pkg.installed("Plots") == nothing && Pkg.add("Plots")
 Pkg.installed("GR") == nothing && Pkg.add("GR")
-
-# setup GR backend for Travis CI
-ENV["GKSwstype"] = "100"
-ENV["PLOTS_TEST"] = "true"
 
 makedocs(
   format = :html,
@@ -44,5 +41,5 @@ deploydocs(
   target = "build",
   deps = nothing,
   make = nothing,
-  julia = "0.6"
+  julia = "0.7"
 )
