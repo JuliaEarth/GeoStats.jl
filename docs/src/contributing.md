@@ -13,7 +13,7 @@ These can be found with two commands:
 
 ```julia
 julia> versioninfo()
-julia> Pkg.status("GeoStats")
+pkg> status
 ```
 
 ## Feature requests
