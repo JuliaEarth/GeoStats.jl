@@ -10,8 +10,6 @@
 [![JOSS](http://joss.theoj.org/papers/10.21105/joss.00692/status.svg)](https://doi.org/10.21105/joss.00692)
 [![DOI](https://zenodo.org/badge/33827844.svg)](https://zenodo.org/badge/latestdoi/33827844)
 
-*High-performance implementations of geostatistical algorithms for the Julia programming language.*
-
 ## Overview
 
 Geostatistics (a.k.a. spatial statistics) is the branch of statistics that deals with

@@ -53,7 +53,7 @@ a special case as well as other more practical Kriging variants, see the
 
 - [MLKernels.jl](https://github.com/trthatcher/MLKernels.jl) &mdash; Spatial structure can be
 represented in many different forms: covariance, variogram, correlogram, etc. Variograms are more
-general than covariance kernels according to the intrinsically stationary property. This means that
+general than covariance kernels according to the intrinsic stationary property. This means that
 there are variogram models with no covariance counterpart. Furthermore, empirical variograms can be
 easily estimated from the data (in various directions) with an efficient procedure. GeoStats.jl treats
 variograms as first-class objects, see the
