@@ -63,7 +63,7 @@ function solve(problem::SimulationProblem, solver::CookieCutter)
   # pre-allocate memory for result
   realizations = msolution.realizations
   for (var, V) in others
-    realizations[var] = [Vector{V}(npoints(pdomain)) for i in 1:preals]
+    realizations[var] = [Vector{V}(undef, npoints(pdomain)) for i in 1:preals]
   end
 
   # use master solution as guide
