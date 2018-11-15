@@ -14,6 +14,8 @@ using Distributed
 using StaticArrays
 using RecipesBase
 
+using StatsBase: sample # TODO: remove this dependency
+
 # export project modules
 @reexport using GeoStatsBase
 @reexport using GeoStatsDevTools
