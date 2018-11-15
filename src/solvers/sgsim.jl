@@ -26,7 +26,7 @@ Latter options override former options. For example, by specifying
 `mean`. If no option is specified, Ordinary Kriging is used by
 default with the `variogram` only.
 
-* `path`         - Simulation path (default to :random)
+* `path`         - Simulation path (default to :simple)
 * `neighradius`  - Radius of search neighborhood (default to 10.)
 * `maxneighbors` - Maximum number of neighbors (default to 10)
 """
@@ -35,19 +35,18 @@ default with the `variogram` only.
   @param mean = nothing
   @param degree = nothing
   @param drifts = nothing
-  @param path = :random
+  @param path = :simple
   @param neighradius = 10.
   @param maxneighbors = 10
 end
 
 function preprocess(problem::SimulationProblem, solver::SeqGaussSim)
-  @warn "SeqGaussSim not fully implemented, sorry!"
   # retrieve problem info
   pdata = data(problem)
   pdomain = domain(problem)
 
   # determine coordinate type
-  T = hasdata(problem) ? coordtype(pdata) : coordtype(pdomain)
+  T = coordtype(pdomain)
 
   # result of preprocessing
   preproc = Dict{Symbol,Tuple}()
@@ -77,7 +76,7 @@ function preprocess(problem::SimulationProblem, solver::SeqGaussSim)
     elseif varparams.path == :random
       path = RandomPath(pdomain)
     else
-      error("invalid path type")
+      @error "invalid path type"
     end
 
     # determine which neighborhood to use
@@ -102,7 +101,7 @@ function solve_single(problem::SimulationProblem, var::Symbol,
   estimator, path, neighborhood, maxneighbors = preproc[var]
 
   # determine coordinate type
-  T = hasdata(problem) ? coordtype(pdata) : coordtype(pdomain)
+  T = coordtype(pdomain)
 
   # determine value type
   V = variables(problem)[var]
@@ -149,31 +148,18 @@ function solve_single(problem::SimulationProblem, var::Symbol,
         z = view(realization, neighbors)
 
         # build Kriging system
-        fit!(estimator, X, z)
+        status = fit!(estimator, X, z)
 
-        try
+        if status
           # estimate mean and variance
           coordinates!(coords, pdomain, location)
           μ, σ² = estimate(estimator, coords)
 
-          # TODO: this portion of the code will be rewritten after
-          # Julia v0.7. At the moment the linear algebra components
-          # of the language do not provide a consistent, exception-free
-          # way of checking for failure
-
-          # fix possible numerical issues
-          O = zero(typeof(σ²))
-          σ² < O && (σ² = O)
-
           # draw from conditional
           realization[location] = μ + √σ²*randn(V)
-        catch e
-          if e isa SingularException
-            # draw from marginal
-            realization[location] = randn(V)
-          else
-            rethrow(e)
-          end
+        else
+          # draw from marginal
+          realization[location] = randn(V)
         end
       end
 
