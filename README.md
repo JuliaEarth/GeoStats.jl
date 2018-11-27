@@ -131,8 +131,7 @@ for additional developer tools.
 
 A set of Jupyter notebooks demonstrating the current functionality of the package is available
 in the [examples](http://nbviewer.jupyter.org/github/juliohm/GeoStats.jl/tree/master/examples)
-folder. These notebooks are distributed with GeoStats.jl and can be launched locally with
-`GeoStats.examples()`.
+folder.
 
 Below is a quick preview of the high-level API, for the full example, please check
 [this notebook](http://nbviewer.jupyter.org/github/juliohm/GeoStats.jl/blob/master/examples/EstimationProblems.ipynb).
