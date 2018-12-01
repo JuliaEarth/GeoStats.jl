@@ -26,7 +26,7 @@ Latter options override former options. For example, by specifying
 `mean`. If no option is specified, Ordinary Kriging is used by
 default with the `variogram` only.
 
-* `path`         - Simulation path (default to :simple)
+* `path`         - Simulation path (default to :random)
 * `neighradius`  - Radius of search neighborhood (default to 10.)
 * `maxneighbors` - Maximum number of neighbors (default to 10)
 """
@@ -35,7 +35,7 @@ default with the `variogram` only.
   @param mean = nothing
   @param degree = nothing
   @param drifts = nothing
-  @param path = :simple
+  @param path = :random
   @param neighradius = 10.
   @param maxneighbors = 10
 end
@@ -128,7 +128,7 @@ function solve_single(problem::SimulationProblem, var::Symbol,
       neighbors = neighborhood(location)
 
       # neighbors with previously simulated values
-      neighbors = neighbors[view(simulated, neighbors)]
+      filter!(n -> simulated[n], neighbors)
 
       # sample a subset of neighbors for computational purposes
       if length(neighbors) > maxneighbors
@@ -143,7 +143,7 @@ function solve_single(problem::SimulationProblem, var::Symbol,
         # build coordinates and observation arrays
         X = Matrix{T}(undef, ndims(pdomain), length(neighbors))
         for (j, neighbor) in enumerate(neighbors)
-          coordinates!(X[:,j], pdomain, neighbor)
+          coordinates!(view(X,:,j), pdomain, neighbor)
         end
         z = view(realization, neighbors)
 
