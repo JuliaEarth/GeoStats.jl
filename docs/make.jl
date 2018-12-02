@@ -25,7 +25,7 @@ makedocs(
       "Solver comparisons" => "comparisons.md",
       "Plotting" => "plotting.md"
     ],
-    "Examples" => "examples.md",
+    "Tutorials" => "tutorials.md",
     "Contributing" => "contributing.md",
     "About" => [
       "Community" => "about/community.md",
