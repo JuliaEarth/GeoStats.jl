@@ -127,14 +127,13 @@ for additional developer tools.
 - [**STABLE**][docs-stable-url] &mdash; **most recently tagged version of the documentation.**
 - [**LATEST**][docs-latest-url] &mdash; *in-development version of the documentation.*
 
-## Examples
+## Tutorials
 
 A set of Jupyter notebooks demonstrating the current functionality of the package is available
-in the [examples](http://nbviewer.jupyter.org/github/juliohm/GeoStats.jl/tree/master/examples)
-folder.
+in the [GeoStatsTutorials](https://github.com/juliohm/GeoStatsTutorials) repository.
 
 Below is a quick preview of the high-level API, for the full example, please check
-[this notebook](http://nbviewer.jupyter.org/github/juliohm/GeoStats.jl/blob/master/examples/EstimationProblems.ipynb).
+[this notebook](http://nbviewer.jupyter.org/github/juliohm/GeoStatsTutorials/blob/master/notebooks/EstimationProblems.ipynb).
 
 ```julia
 using GeoStats
