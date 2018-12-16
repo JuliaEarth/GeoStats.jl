@@ -33,3 +33,17 @@ using Plots
 hscatter(geodata, :value, lags=[0.,1.,2.,3.])
 ```
 ![](images/HScatter.png)
+
+## varplane
+
+A variogram plane (i.e. `varplane`) plot is a visualization that displays a collection of directional
+variograms for all angles in a given plane for 2D or 3D spatial data.
+
+```julia
+using GeoStats
+using Plots
+
+# horizontal plane ==> theta=0, phi=90
+varplane(geodata, :value, theta=0, phi=90)
+```
+![](images/VarPlane.png)

@@ -13,7 +13,8 @@ of geostatistical solvers is an area of active research. Although a few comparis
 methods exist, their implementation is not necessarily straighforward.
 
 In this project, solvers can be compared without effort. Below is a list of currenlty
-implemented comparison methods. For examples of usage, please consult [Examples](examples.md).
+implemented comparison methods. For examples of usage, please consult the
+[GeoStatsTutorials](https://github.com/juliohm/GeoStatsTutorials) repository.
 
 ## Visual comparison
 

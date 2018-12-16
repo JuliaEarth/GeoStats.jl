@@ -6,7 +6,7 @@ end
 using Documenter, GeoStats
 
 makedocs(
-  format = :html,
+  format = Documenter.HTML(prettyurls=get(ENV,"TRAVIS",nothing)=="true"),
   sitename = "GeoStats.jl",
   authors = "Júlio Hoffimann Mendes",
   assets = ["assets/style.css"],
@@ -39,6 +39,5 @@ deploydocs(
   repo  = "github.com/juliohm/GeoStats.jl.git",
   target = "build",
   deps = nothing,
-  make = nothing,
-  julia = "1.0"
+  make = nothing
 )
