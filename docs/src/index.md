@@ -61,7 +61,7 @@ can be installed from the list above for additional functionality.
 ## Quick example
 
 Below is a quick preview of the high-level API, for the full example, please see
-[Examples](examples.md).
+the [GeoStatsTutorials](https://github.com/juliohm/GeoStatsTutorials) repository.
 
 ```julia
 using GeoStats

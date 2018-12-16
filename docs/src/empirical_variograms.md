@@ -9,13 +9,8 @@ An empirical variogram has the form:
 
 where ``N(h) = \left\{(i,j) \mid ||\x_i - \x_j|| = h\right\}`` is the set
 of pairs of locations at a distance ``h`` and ``|N(h)|`` is the cardinality
-of the set.
-
-This package currently implements a simple ominidirectional (cross-)variogram.
-Other more flexible types are planned for future releases.
-
-As a unique feature, empirical variograms can be estimated using general
-distance functions. These can be used in order to for example:
+of the set. Empirical variograms can be estimated using general distance
+functions. These can be used in order to for example:
 
 - Model anisotropy (e.g. ellipsoid distance)
 - Perform geostatistical simulation on spherical coordinate systems (e.g. haversine distance)
@@ -23,8 +18,16 @@ distance functions. These can be used in order to for example:
 Please see [Distances.jl](https://github.com/JuliaStats/Distances.jl)
 for a complete list of options.
 
-## Omnidirectional (cross-)variogram
+## Omnidirectional
 
 ```@docs
 EmpiricalVariogram
 ```
+
+## Directional
+
+```@docs
+DirectionalVariogram
+```
+
+Variogram plane plots are also available, please see [Plotting](plotting.md).
