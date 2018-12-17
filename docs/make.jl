@@ -8,7 +8,7 @@ using Documenter, GeoStats
 istravis = "TRAVIS" ∈ keys(ENV)
 
 makedocs(
-  format = HTML(prettyurls=istravis),
+  format = Documenter.HTML(prettyurls=istravis),
   sitename = "GeoStats.jl",
   authors = "Júlio Hoffimann Mendes",
   assets = ["assets/style.css"],
