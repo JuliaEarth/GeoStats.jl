@@ -37,9 +37,4 @@ makedocs(
   ]
 )
 
-deploydocs(
-  repo  = "github.com/juliohm/GeoStats.jl.git",
-  target = "build",
-  deps = nothing,
-  make = nothing
-)
+deploydocs(repo="github.com/juliohm/GeoStats.jl.git")
