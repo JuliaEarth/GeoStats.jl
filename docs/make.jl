@@ -5,8 +5,10 @@ end
 
 using Documenter, GeoStats
 
+istravis = "TRAVIS" ∈ keys(ENV)
+
 makedocs(
-  format = Documenter.HTML(prettyurls=get(ENV,"TRAVIS",nothing)=="true"),
+  format = HTML(prettyurls=istravis),
   sitename = "GeoStats.jl",
   authors = "Júlio Hoffimann Mendes",
   assets = ["assets/style.css"],
