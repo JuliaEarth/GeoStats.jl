@@ -25,8 +25,8 @@
         end
         plot_sol1D(fname) = plot_solution(fname, solution1D)
         plot_sol2D(fname) = plot_solution(fname, solution2D)
-        refimg1D = joinpath(datadir,"KrigingSolution1D.png")
-        refimg2D = joinpath(datadir,"KrigingSolution2D.png")
+        refimg1D = joinpath(datadir,"Kriging1D.png")
+        refimg2D = joinpath(datadir,"Kriging2D.png")
         @test test_images(VisualTest(plot_sol1D, refimg1D), popup=!istravis, tol=0.1) |> success
         @test test_images(VisualTest(plot_sol2D, refimg2D), popup=!istravis, tol=0.1) |> success
       end
