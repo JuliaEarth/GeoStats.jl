@@ -24,6 +24,13 @@ Latter options override former options. For example, by specifying
 `mean`. If no option is specified, Ordinary Kriging is used by
 default with the `variogram` only.
 
+* `neighborhood` - Search neighborhood (default to nothing)
+* `maxneighbors` - Maximum number of neighbors (default to 100)
+
+The `neighborhood` option can be used to perform local Kriging
+with a sliding neighborhood. In this case, the option `maxneighbors`
+determines the maximum number of neighbors in the Kriging system.
+
 ## Examples
 
 Solve the variable `:var₁` with Simple Kriging by specifying
@@ -49,6 +56,8 @@ julia> Kriging()
   @param mean = nothing
   @param degree = nothing
   @param drifts = nothing
+  @param neighborhood = nothing
+  @param maxneighbors = 100
 end
 
 function solve(problem::EstimationProblem, solver::Kriging)
@@ -108,13 +117,13 @@ function solve(problem::EstimationProblem, var::Symbol, estimator::E) where {E<:
   varσ = Vector{eltype(z)}(undef, npoints(pdomain))
 
   # pre-allocate memory for coordinates
-  coords = MVector{ndims(pdomain),coordtype(pdomain)}(undef)
+  xₒ = MVector{ndims(pdomain),coordtype(pdomain)}(undef)
 
   # estimation loop
   for location in SimplePath(pdomain)
-    coordinates!(coords, pdomain, location)
+    coordinates!(xₒ, pdomain, location)
 
-    μ, σ² = estimate(estimator, coords)
+    μ, σ² = predict(estimator, xₒ)
 
     varμ[location] = μ
     varσ[location] = σ²

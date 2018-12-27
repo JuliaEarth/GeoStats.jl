@@ -162,7 +162,7 @@ function solve_single(problem::SimulationProblem, var::Symbol,
         if status
           # estimate mean and variance
           coordinates!(xₒ, pdomain, location)
-          μ, σ² = estimate(estimator, xₒ)
+          μ, σ² = predict(estimator, xₒ)
 
           # draw from conditional
           realization[location] = μ + √σ²*randn(V)

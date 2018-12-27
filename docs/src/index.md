@@ -122,13 +122,13 @@ ok = OrdinaryKriging(X, z, γ)
 uk = UniversalKriging(X, z, γ, 0)
 
 # estimate at target location
-μ, σ² = estimate(sk, xₒ)
+μ, σ² = predict(sk, xₒ)
 println("Simple Kriging:") # hide
 println("  μ = $μ, σ² = $σ²") # hide
-μ, σ² = estimate(ok, xₒ)
+μ, σ² = predict(ok, xₒ)
 println("Ordinary Kriging:") # hide
 println("  μ = $μ, σ² = $σ²") # hide
-μ, σ² = estimate(uk, xₒ)
+μ, σ² = predict(uk, xₒ)
 println("Universal Kriging:") # hide
 println("  μ = $μ, σ² = $σ²") # hide
 ```

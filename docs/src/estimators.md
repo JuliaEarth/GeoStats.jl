@@ -21,11 +21,11 @@ All these variants follow the same interface: an estimator object is first creat
 data configuration and variogram model, and then estimates are made at various locations.
 
 The object construction takes care of building the Kriging system and factorizing the LHS with
-an appropriate decomposition (e.g. Cholesky, LU). The `estimate` method performs the estimation
+an appropriate decomposition (e.g. Cholesky, LU). The `predict` function performs the estimation
 at a given location:
 
 ```@docs
-estimate
+predict
 ```
 
 A typical use of the interface is as follows:
@@ -36,7 +36,7 @@ simkrig = SimpleKriging(X, z, γ, mean(z))
 
 # estimate at various locations
 for xₒ in locations
-  μ, σ² = estimate(simkrig, xₒ)
+  μ, σ² = predict(simkrig, xₒ)
 end
 ```
 
