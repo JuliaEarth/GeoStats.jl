@@ -26,8 +26,8 @@ Latter options override former options. For example, by specifying
 default with the `variogram` only.
 
 * `path`         - Simulation path (default to :random)
-* `neighradius`  - Radius of search neighborhood (default to 10.)
-* `maxneighbors` - Maximum number of neighbors (default to 10)
+* `neighborhood` - Search neighborhood (default to BallNeighborhood(domain, 5.))
+* `maxneighbors` - Maximum number of neighbors (default to 100)
 """
 @simsolver SeqGaussSim begin
   @param variogram = GaussianVariogram()
@@ -35,8 +35,8 @@ default with the `variogram` only.
   @param degree = nothing
   @param drifts = nothing
   @param path = :random
-  @param neighradius = 10.
-  @param maxneighbors = 10
+  @param neighborhood = nothing
+  @param maxneighbors = 100
 end
 
 function preprocess(problem::SimulationProblem, solver::SeqGaussSim)
@@ -79,7 +79,11 @@ function preprocess(problem::SimulationProblem, solver::SeqGaussSim)
     end
 
     # determine which neighborhood to use
-    neighborhood = BallNeighborhood(pdomain, varparams.neighradius)
+    if varparams.neighborhood ≠ nothing
+      neighborhood = varaparams.neighborhood
+    else
+      neighborhood = BallNeighborhood(pdomain, 5.)
+    end
 
     # determine maximum number of conditioning neighbors
     maxneighbors = varparams.maxneighbors
@@ -118,7 +122,10 @@ function solve_single(problem::SimulationProblem, var::Symbol,
   end
 
   # pre-allocate memory for coordinates
-  coords = MVector{ndims(pdomain),coordtype(pdomain)}(undef)
+  xₒ = MVector{ndims(pdomain),coordtype(pdomain)}(undef)
+
+  # pre-allocate memory for neighbors coordinates
+  X  = Matrix{coordtype(pdomain)}(undef, ndims(pdomain), maxneighbors)
 
   # simulation loop
   for location in path
@@ -129,9 +136,9 @@ function solve_single(problem::SimulationProblem, var::Symbol,
       # neighbors with previously simulated values
       filter!(n -> simulated[n], neighbors)
 
-      # sample a subset of neighbors for computational purposes
+      # retain a subset of neighbors for computational purposes
       if length(neighbors) > maxneighbors
-        neighbors = sample(neighbors, maxneighbors, replace=false)
+        resize!(neighbors, maxneighbors)
       end
 
       # choose between marginal and conditional distribution
@@ -139,20 +146,23 @@ function solve_single(problem::SimulationProblem, var::Symbol,
         # draw from marginal
         realization[location] = randn(V)
       else
-        # build coordinates and observation arrays
-        X = Matrix{T}(undef, ndims(pdomain), length(neighbors))
-        for (j, neighbor) in enumerate(neighbors)
-          coordinates!(view(X,:,j), pdomain, neighbor)
+        # count final number of neighbors
+        m = length(neighbors)
+
+        # update coordinates and observation arrays
+        for j in 1:m
+          coordinates!(view(X,:,j), pdomain, neighbors[j])
         end
-        z = view(realization, neighbors)
+        Xview = view(X,:,1:m)
+        zview = view(realization, neighbors)
 
         # build Kriging system
-        status = fit!(estimator, X, z)
+        status = fit!(estimator, Xview, zview)
 
         if status
           # estimate mean and variance
-          coordinates!(coords, pdomain, location)
-          μ, σ² = estimate(estimator, coords)
+          coordinates!(xₒ, pdomain, location)
+          μ, σ² = estimate(estimator, xₒ)
 
           # draw from conditional
           realization[location] = μ + √σ²*randn(V)
