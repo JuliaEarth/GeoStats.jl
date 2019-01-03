@@ -60,18 +60,17 @@ julia> Kriging()
   @param maxneighbors = 100
 end
 
-function solve(problem::EstimationProblem, solver::Kriging)
-  # sanity checks
-  @assert keys(solver.params) ⊆ keys(variables(problem)) "invalid variable names in solver parameters"
+function preprocess(problem::EstimationProblem, solver::Kriging)
+  # retrieve problem info
+  pdomain = domain(problem)
 
   # determine problem coordinate type
-  T = coordtype(data(problem))
+  T = coordtype(pdomain)
 
-  # results for each variable
-  μs = []; σs = []
+  # result of preprocessing
+  preproc = Dict{Symbol,Tuple}()
 
-  # loop over target variables
-  for (var,V) in variables(problem)
+  for (var, V) in variables(problem)
     # get user parameters
     if var ∈ keys(solver.params)
       varparams = solver.params[var]
@@ -90,10 +89,43 @@ function solve(problem::EstimationProblem, solver::Kriging)
       estimator = OrdinaryKriging{T,V}(varparams.variogram)
     end
 
-    # perform estimation
-    varμ, varσ = solve(problem, var, estimator)
+    # determine which neighborhood and path to use
+    if varparams.neighborhood ≠ nothing
+      neighborhood = varparams.neighborhood
+      sources = collect(keys(datamap(problem, var)))
+      path = SourcePath(pdomain, sources)
+    else
+      neighborhood = nothing
+      path = SimplePath(pdomain)
+    end
 
-    # save result for variable
+    # determine maximum number of conditioning neighbors
+    maxneighbors = varparams.maxneighbors
+
+    preproc[var] = (estimator, path, neighborhood, maxneighbors)
+  end
+
+  preproc
+end
+
+function solve(problem::EstimationProblem, solver::Kriging)
+  # preprocess user input
+  preproc = preprocess(problem, solver)
+
+  # results for each variable
+  μs = []; σs = []
+
+  for (var, V) in variables(problem)
+    neighborhood = preproc[var][3]
+
+    if neighborhood ≠ nothing
+      # perform local Kriging
+      varμ, varσ = solve_locally(problem, var, preproc)
+    else
+      # perform global Kriging
+      varμ, varσ = solve_globally(problem, var, preproc)
+    end
+
     push!(μs, var => varμ)
     push!(σs, var => varσ)
   end
@@ -101,34 +133,103 @@ function solve(problem::EstimationProblem, solver::Kriging)
   EstimationSolution(domain(problem), Dict(μs), Dict(σs))
 end
 
-function solve(problem::EstimationProblem, var::Symbol, estimator::E) where {E<:KrigingEstimator}
-  # retrieve problem info
-  pdata = data(problem)
-  pdomain = domain(problem)
+function solve_locally(problem::EstimationProblem, var::Symbol, preproc)
+    # retrieve problem info
+    pdata = data(problem)
+    pdomain = domain(problem)
 
-  # find valid data for variable
-  X, z = valid(pdata, var)
+    # unpack preprocessed parameters
+    estimator, path, neighborhood, maxneighbors = preproc[var]
 
-  # fit estimator to data
-  fit!(estimator, X, z)
+    # determine value type
+    V = variables(problem)[var]
 
-  # pre-allocate memory for result
-  varμ = Vector{eltype(z)}(undef, npoints(pdomain))
-  varσ = Vector{eltype(z)}(undef, npoints(pdomain))
+    # pre-allocate memory for result
+    varμ = Vector{V}(undef, npoints(pdomain))
+    varσ = Vector{V}(undef, npoints(pdomain))
 
-  # pre-allocate memory for coordinates
-  xₒ = MVector{ndims(pdomain),coordtype(pdomain)}(undef)
+    # pre-allocate memory for coordinates
+    xₒ = MVector{ndims(pdomain),coordtype(pdomain)}(undef)
 
-  # estimation loop
-  for location in SimplePath(pdomain)
-    coordinates!(xₒ, pdomain, location)
+    # keep track of estimated locations
+    estimated = falses(npoints(pdomain))
 
-    μ, σ² = predict(estimator, xₒ)
+    # consider data locations as already estimated
+    for (loc, datloc) in datamap(problem, var)
+      varμ[loc] = value(pdata, datloc, var)
+      varσ[loc] = zero(V)
+      estimated[loc] = true
+    end
 
-    varμ[location] = μ
-    varσ[location] = σ²
-  end
+    # pre-allocate memory for neighbors coordinates
+    X = Matrix{coordtype(pdomain)}(undef, ndims(pdomain), maxneighbors)
 
-  # return mean and variance
-  varμ, varσ
+    for location in path
+      if !estimated[location]
+        # find neighbors
+        neighbors = neighborhood(location)
+
+        # neighbors with previously estimated values
+        filter!(n -> estimated[n], neighbors)
+
+        # retain a subset of neighbors for computational purposes
+        if length(neighbors) > maxneighbors
+          resize!(neighbors, maxneighbors)
+        end
+
+        # update neighbors coordinates
+        coordinates!(X, pdomain, neighbors)
+
+        Xview = view(X,:,1:length(neighbors))
+        zview = view(varμ,neighbors)
+
+        # fit estimator to data
+        fit!(estimator, Xview, zview)
+
+        # mean and variance
+        coordinates!(xₒ, pdomain, location)
+        μ, σ² = predict(estimator, xₒ)
+
+        # save and continue
+        varμ[location] = μ
+        varσ[location] = σ²
+        estimated[location] = true
+      end
+    end
+
+    varμ, varσ
+end
+
+function solve_globally(problem::EstimationProblem, var::Symbol, preproc)
+    # retrieve problem info
+    pdata = data(problem)
+    pdomain = domain(problem)
+
+    # unpack preprocessed parameters
+    estimator, path, neighborhood, maxneighbors = preproc[var]
+
+    # determine value type
+    V = variables(problem)[var]
+
+    # pre-allocate memory for result
+    varμ = Vector{V}(undef, npoints(pdomain))
+    varσ = Vector{V}(undef, npoints(pdomain))
+
+    # pre-allocate memory for coordinates
+    xₒ = MVector{ndims(pdomain),coordtype(pdomain)}(undef)
+
+    # fit estimator to data
+    X, z = valid(pdata, var)
+    fit!(estimator, X, z)
+
+    for location in path
+      coordinates!(xₒ, pdomain, location)
+
+      μ, σ² = predict(estimator, xₒ)
+
+      varμ[location] = μ
+      varσ[location] = σ²
+    end
+
+    varμ, varσ
 end
