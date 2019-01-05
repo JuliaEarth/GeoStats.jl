@@ -64,9 +64,6 @@ function preprocess(problem::EstimationProblem, solver::Kriging)
   # retrieve problem info
   pdomain = domain(problem)
 
-  # determine problem coordinate type
-  T = coordtype(pdomain)
-
   # result of preprocessing
   preproc = Dict{Symbol,Tuple}()
 
@@ -80,13 +77,13 @@ function preprocess(problem::EstimationProblem, solver::Kriging)
 
     # determine which Kriging variant to use
     if varparams.drifts ≠ nothing
-      estimator = ExternalDriftKriging{T,V}(varparams.variogram, varparams.drifts)
+      estimator = ExternalDriftKriging(varparams.variogram, varparams.drifts)
     elseif varparams.degree ≠ nothing
-      estimator = UniversalKriging{T,V}(varparams.variogram, varparams.degree)
+      estimator = UniversalKriging(varparams.variogram, varparams.degree)
     elseif varparams.mean ≠ nothing
-      estimator = SimpleKriging{T,V}(varparams.variogram, varparams.mean)
+      estimator = SimpleKriging(varparams.variogram, varparams.mean)
     else
-      estimator = OrdinaryKriging{T,V}(varparams.variogram)
+      estimator = OrdinaryKriging(varparams.variogram)
     end
 
     # determine which neighborhood and path to use
@@ -184,11 +181,11 @@ function solve_locally(problem::EstimationProblem, var::Symbol, preproc)
         zview = view(varμ,neighbors)
 
         # fit estimator to data
-        fit!(estimator, Xview, zview)
+        krig = fit(estimator, Xview, zview)
 
         # mean and variance
         coordinates!(xₒ, pdomain, location)
-        μ, σ² = predict(estimator, xₒ)
+        μ, σ² = predict(krig, xₒ)
 
         # save and continue
         varμ[location] = μ
@@ -220,12 +217,12 @@ function solve_globally(problem::EstimationProblem, var::Symbol, preproc)
 
     # fit estimator to data
     X, z = valid(pdata, var)
-    fit!(estimator, X, z)
+    krig = fit(estimator, X, z)
 
     for location in path
       coordinates!(xₒ, pdomain, location)
 
-      μ, σ² = predict(estimator, xₒ)
+      μ, σ² = predict(krig, xₒ)
 
       varμ[location] = μ
       varσ[location] = σ²
