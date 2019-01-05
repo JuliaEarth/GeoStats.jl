@@ -17,38 +17,46 @@ This package implements the following Kriging variants:
 - Universal Kriging
 - External Drift Kriging
 
-All these variants follow the same interface: an estimator object is first created with a given
-data configuration and variogram model, and then estimates are made at various locations.
+All these variants follow the same interface: an `estimator` object is first created with a
+given set of parameters (e.g. `estimator = OrdinaryKriging(γ)`), it is then combined with the
+data `krig = fit(estimator, X, z)` to obtain predictions at new locations `predict(krig, xₒ)`.
 
-The object construction takes care of building the Kriging system and factorizing the LHS with
-an appropriate decomposition (e.g. Cholesky, LU). The `predict` function performs the estimation
-at a given location:
+The `fit` function takes care of building the Kriging system and factorizing the LHS with
+an appropriate decomposition (e.g. Cholesky, LU):
+
+```@docs
+fit
+```
+
+The `predict` function performs the estimation at a given location:
 
 ```@docs
 predict
 ```
 
+Alternative constructors are provided for convenience that will immediately fit the Kriging
+parameters to the data. In this case, the data is passed as the first argument. For example:
+
+```julia
+OrdinaryKriging(X, z, γ)
+```
+
+creates a `OrdinaryKriging(γ)` estimator and fits it to `(X,z)`.
+
 A typical use of the interface is as follows:
 
 ```julia
 # build and factorize the system
-simkrig = SimpleKriging(X, z, γ, mean(z))
+sk = SimpleKriging(X, z, γ, mean(z))
 
 # estimate at various locations
-for xₒ in locations
-  μ, σ² = predict(simkrig, xₒ)
+for xₒ in [x₁, x₂, x₃]
+  μ, σ² = predict(sk, xₒ)
 end
 ```
 
-In case the data configuration needs to be changed in a loop (e.g. sequential Gaussian simulation),
-one can keep all the parameters fixed and only update the factorization with the `fit!` method:
-
-```@docs
-fit!
-```
-
 For advanced users, the Kriging weights and Lagrange multipliers at a given location can be accessed
-with the `weights` method. This method returns an `AbstractWeights` object containing a field `λ` for
+with the `weights` method. This method returns a `KrigingWeights` object containing a field `λ` for
 the weights and a field `ν` for the Lagrange multipliers:
 
 ```@docs
@@ -58,9 +66,9 @@ weights
 For example with Ordinary Kriging:
 
 ```julia
-# weights and Lagrange multipliers
-OKweights = weights(ordkrig, xₒ)
-OKweights.λ, OKweights.ν
+ok = OrdinaryKriging(X, z, γ)
+w = weights(ok, xₒ)
+w.λ, w.ν
 ```
 
 ## Simple Kriging

@@ -14,7 +14,7 @@ makedocs(
   assets = ["assets/style.css"],
   pages = [
     "Home" => "index.md",
-    "Manual" => [
+    "User guide" => [
       "Problems and solvers" => "problems_and_solvers.md",
       "Spatial data" => "spatialdata.md",
       "Domains" => "domains.md",
@@ -33,7 +33,9 @@ makedocs(
       "Community" => "about/community.md",
       "License" => "about/license.md",
       "Citing" => "about/citing.md"
-    ]
+    ],
+    "Developer guide" => "developers.md",
+    "Index" => "links.md"
   ]
 )
 
