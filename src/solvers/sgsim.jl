@@ -43,9 +43,6 @@ function preprocess(problem::SimulationProblem, solver::SeqGaussSim)
   # retrieve problem info
   pdomain = domain(problem)
 
-  # determine coordinate type
-  T = coordtype(pdomain)
-
   # result of preprocessing
   preproc = Dict{Symbol,Tuple}()
 
@@ -59,13 +56,13 @@ function preprocess(problem::SimulationProblem, solver::SeqGaussSim)
 
     # determine which Kriging variant to use
     if varparams.drifts ≠ nothing
-      estimator = ExternalDriftKriging{T,V}(varparams.variogram, varparams.drifts)
+      estimator = ExternalDriftKriging(varparams.variogram, varparams.drifts)
     elseif varparams.degree ≠ nothing
-      estimator = UniversalKriging{T,V}(varparams.variogram, varparams.degree)
+      estimator = UniversalKriging(varparams.variogram, varparams.degree)
     elseif varparams.mean ≠ nothing
-      estimator = SimpleKriging{T,V}(varparams.variogram, varparams.mean)
+      estimator = SimpleKriging(varparams.variogram, varparams.mean)
     else
-      estimator = OrdinaryKriging{T,V}(varparams.variogram)
+      estimator = OrdinaryKriging(varparams.variogram)
     end
 
     # determine which path to use
@@ -156,12 +153,12 @@ function solve_single(problem::SimulationProblem, var::Symbol,
         zview = view(realization, neighbors)
 
         # build Kriging system
-        status = fit!(estimator, Xview, zview)
+        krig = fit(estimator, Xview, zview)
 
-        if status
+        if status(krig)
           # estimate mean and variance
           coordinates!(xₒ, pdomain, location)
-          μ, σ² = predict(estimator, xₒ)
+          μ, σ² = predict(krig, xₒ)
 
           # draw from conditional
           realization[location] = μ + √σ²*randn(V)
