@@ -25,7 +25,7 @@ The `fit` function takes care of building the Kriging system and factorizing the
 an appropriate decomposition (e.g. Cholesky, LU):
 
 ```@docs
-fit
+KrigingEstimators.fit
 ```
 
 The `predict` function performs the estimation at a given location:
