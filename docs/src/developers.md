@@ -115,10 +115,12 @@ HierarchicalPartitioner
 For illustration purposes, we write an estimation solver that, for each location of the domain, assigns the
 2-norm of the coordinates as the mean and the ∞-norm as the variance:
 
-```julia
+```@example
 using GeoStatsBase
 using GeoStatsDevTools
+using LinearAlgebra: norm
 
+# implement method for new solver
 import GeoStatsBase: solve
 
 @estimsolver NormSolver begin
@@ -140,9 +142,9 @@ function solve(problem::EstimationProblem, solver::NormSolver)
       varparams = NormSolverParam()
     end
 
-    # allocate memory
-    varμ = Vector{V}(npoints(pdomain))
-    varσ = Vector{V}(npoints(pdomain))
+    # allocate memory for result
+    varμ = Vector{V}(undef, npoints(pdomain))
+    varσ = Vector{V}(undef, npoints(pdomain))
 
     for location in SimplePath(pdomain)
       x = coordinates(pdomain, location)
@@ -157,4 +159,30 @@ function solve(problem::EstimationProblem, solver::NormSolver)
 
   EstimationSolution(pdomain, Dict(μs), Dict(σs))
 end
+
+#################################################################
+# Create an estimation problem and test our newly defined solver
+#################################################################
+
+using GeoStats
+using Plots
+gr(size=(600,400)) # hide
+
+# dummy spatial data with a single point and no value
+spatialdata = PointSetData(Dict(:z => [NaN]), reshape([0.,0.], 2, 1))
+
+# estimate on a regular grid
+spatialgrid = RegularGrid{Float64}(100,100)
+
+# the problem to be solved
+problem = EstimationProblem(spatialdata, spatialgrid, :z)
+
+# our new solver
+solver = NormSolver()
+
+solution = solve(problem, solver)
+
+plot(solution)
+png("images/normsolver.png") # hide
 ```
+![](images/normsolver.png)
