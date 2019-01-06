@@ -5,17 +5,31 @@
   @testset "Kriging" begin
     problem1D = EstimationProblem(data1D, grid1D, :value)
     problem2D = EstimationProblem(data2D, grid2D, :value)
-    solver = Kriging(:value => (variogram=GaussianVariogram(range=35.,nugget=0.),))
 
-    solution1D = solve(problem1D, solver)
-    solution2D = solve(problem2D, solver)
+    gsolver = Kriging(
+      :value => (variogram=GaussianVariogram(range=35.,nugget=0.),)
+    )
+    lsolver = Kriging(
+      :value => (variogram=GaussianVariogram(range=35.,nugget=0.),
+                 neighborhood=BallNeighborhood(grid2D, 5.))
+    )
+
+    # solve with global Kriging
+    gsol1D = solve(problem1D, gsolver)
+    gsol2D = solve(problem2D, gsolver)
+
+    # solve with local Kriging
+    lsol1D = solve(problem1D, lsolver)
+    lsol2D = solve(problem2D, lsolver)
 
     # basic checks
-    result = digest(solution2D)
-    @test Set(keys(result)) == Set([:value])
-    @test isapprox(result[:value][:mean][26,26], 1., atol=1e-8)
-    @test isapprox(result[:value][:mean][51,76], 0., atol=1e-8)
-    @test isapprox(result[:value][:mean][76,51], 1., atol=1e-8)
+    for sol in [gsol2D, lsol2D]
+      result = digest(sol)
+      @test Set(keys(result)) == Set([:value])
+      @test isapprox(result[:value][:mean][26,26], 1., atol=1e-8)
+      @test isapprox(result[:value][:mean][51,76], 0., atol=1e-8)
+      @test isapprox(result[:value][:mean][76,51], 1., atol=1e-8)
+    end
 
     if ismaintainer || istravis
       @testset "Plot recipe" begin
@@ -23,12 +37,19 @@
           plot(solution, size=(800,400))
           png(fname)
         end
-        plot_sol1D(fname) = plot_solution(fname, solution1D)
-        plot_sol2D(fname) = plot_solution(fname, solution2D)
-        refimg1D = joinpath(datadir,"Kriging1D.png")
-        refimg2D = joinpath(datadir,"Kriging2D.png")
-        @test test_images(VisualTest(plot_sol1D, refimg1D), popup=!istravis, tol=0.1) |> success
-        @test test_images(VisualTest(plot_sol2D, refimg2D), popup=!istravis, tol=0.1) |> success
+        plot_gsol1D(fname) = plot_solution(fname, gsol1D)
+        plot_gsol2D(fname) = plot_solution(fname, gsol2D)
+        refimg1D = joinpath(datadir,"GlobalKriging1D.png")
+        refimg2D = joinpath(datadir,"GlobalKriging2D.png")
+        @test test_images(VisualTest(plot_gsol1D, refimg1D), popup=!istravis, tol=0.1) |> success
+        @test test_images(VisualTest(plot_gsol2D, refimg2D), popup=!istravis, tol=0.1) |> success
+
+        plot_lsol1D(fname) = plot_solution(fname, lsol1D)
+        plot_lsol2D(fname) = plot_solution(fname, lsol2D)
+        refimg1D = joinpath(datadir,"LocalKriging1D.png")
+        refimg2D = joinpath(datadir,"LocalKriging2D.png")
+        @test test_images(VisualTest(plot_gsol1D, refimg1D), popup=!istravis, tol=0.1) |> success
+        @test test_images(VisualTest(plot_gsol2D, refimg2D), popup=!istravis, tol=0.1) |> success
       end
     end
   end

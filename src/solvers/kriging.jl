@@ -25,7 +25,7 @@ Latter options override former options. For example, by specifying
 default with the `variogram` only.
 
 * `neighborhood` - Search neighborhood (default to nothing)
-* `maxneighbors` - Maximum number of neighbors (default to 100)
+* `maxneighbors` - Maximum number of neighbors (default to 10)
 
 The `neighborhood` option can be used to perform local Kriging
 with a sliding neighborhood. In this case, the option `maxneighbors`
@@ -57,7 +57,7 @@ julia> Kriging()
   @param degree = nothing
   @param drifts = nothing
   @param neighborhood = nothing
-  @param maxneighbors = 100
+  @param maxneighbors = 10
 end
 
 function preprocess(problem::EstimationProblem, solver::Kriging)
@@ -147,6 +147,7 @@ function solve_locally(problem::EstimationProblem, var::Symbol, preproc)
 
     # pre-allocate memory for coordinates
     xₒ = MVector{ndims(pdomain),coordtype(pdomain)}(undef)
+    x  = MVector{ndims(pdomain),coordtype(pdomain)}(undef)
 
     # keep track of estimated locations
     estimated = falses(npoints(pdomain))
@@ -158,33 +159,41 @@ function solve_locally(problem::EstimationProblem, var::Symbol, preproc)
       estimated[loc] = true
     end
 
-    # pre-allocate memory for neighbors coordinates
+    # pre-allocate memory for neighbors
+    neighbors = Vector{Int}(undef, maxneighbors)
     X = Matrix{coordtype(pdomain)}(undef, ndims(pdomain), maxneighbors)
 
     for location in path
       if !estimated[location]
-        # find neighbors
-        neighbors = neighborhood(location)
+        # coordinates of neighborhood center
+        coordinates!(xₒ, pdomain, location)
 
-        # neighbors with previously estimated values
-        filter!(n -> estimated[n], neighbors)
-
-        # retain a subset of neighbors for computational purposes
-        if length(neighbors) > maxneighbors
-          resize!(neighbors, maxneighbors)
+        # find neighbors with previously estimated values
+        nneigh = 0
+        for l in path
+          if estimated[l]
+            coordinates!(x, pdomain, l)
+            if isneighbor(neighborhood, xₒ, x)
+              nneigh += 1
+              neighbors[nneigh] = l
+            end
+          end
+          nneigh == maxneighbors && break
         end
 
-        # update neighbors coordinates
-        coordinates!(X, pdomain, neighbors)
+        # final set of neighbors
+        nview = view(neighbors, 1:nneigh)
 
-        Xview = view(X,:,1:length(neighbors))
-        zview = view(varμ,neighbors)
+        # update neighbors coordinates
+        coordinates!(X, pdomain, nview)
+
+        Xview = view(X,:,1:nneigh)
+        zview = view(varμ, nview)
 
         # fit estimator to data
         krig = fit(estimator, Xview, zview)
 
         # mean and variance
-        coordinates!(xₒ, pdomain, location)
         μ, σ² = predict(krig, xₒ)
 
         # save and continue
