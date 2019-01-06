@@ -1,7 +1,7 @@
 julia 0.7
 Reexport 0.1.0
 GeoStatsBase 0.3.0
-GeoStatsDevTools 0.3.0
+GeoStatsDevTools 0.3.1
 Variography 0.3.2
 KrigingEstimators 0.2.0
 StaticArrays 0.7.0
