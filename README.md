@@ -132,7 +132,7 @@ for additional developer tools.
 A set of Jupyter notebooks demonstrating the current functionality of the package is available
 in [GeoStatsTutorials](https://github.com/juliohm/GeoStatsTutorials).
 
-Below is a quick preview of the high-level API, for the full example, please check
+Below is a quick preview of the high-level API. For the full example, please check
 [this notebook](http://nbviewer.jupyter.org/github/juliohm/GeoStatsTutorials/blob/master/notebooks/EstimationProblems.ipynb).
 
 ```julia
