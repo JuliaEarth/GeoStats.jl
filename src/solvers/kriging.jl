@@ -24,12 +24,14 @@ Latter options override former options. For example, by specifying
 `mean`. If no option is specified, Ordinary Kriging is used by
 default with the `variogram` only.
 
-* `neighborhood` - Search neighborhood (default to nothing)
-* `maxneighbors` - Maximum number of neighbors (default to 10)
+* `neighborhood` - Search neighborhood (default to `nothing`)
+* `maxneighbors` - Maximum number of neighbors (default to `10`)
+* `pathdelay`    - Delay to speed up neighbor lookup (default to `-maxneighbors`)
 
 The `neighborhood` option can be used to perform local Kriging
 with a sliding neighborhood. In this case, the option `maxneighbors`
 determines the maximum number of neighbors in the Kriging system.
+The option `pathdelay`
 
 ## Examples
 
@@ -58,6 +60,7 @@ julia> Kriging()
   @param drifts = nothing
   @param neighborhood = nothing
   @param maxneighbors = 10
+  @param pathdelay = -maxneighbors
 end
 
 function preprocess(problem::EstimationProblem, solver::Kriging)
@@ -99,7 +102,10 @@ function preprocess(problem::EstimationProblem, solver::Kriging)
     # determine maximum number of conditioning neighbors
     maxneighbors = varparams.maxneighbors
 
-    preproc[var] = (estimator, path, neighborhood, maxneighbors)
+    # determine path delay for faster neighborhood lookup
+    pathdelay = varparams.pathdelay
+
+    preproc[var] = (estimator, path, neighborhood, maxneighbors, pathdelay)
   end
 
   preproc
@@ -136,7 +142,7 @@ function solve_locally(problem::EstimationProblem, var::Symbol, preproc)
     pdomain = domain(problem)
 
     # unpack preprocessed parameters
-    estimator, path, neighborhood, maxneighbors = preproc[var]
+    estimator, path, neighborhood, maxneighbors, pathdelay = preproc[var]
 
     # determine value type
     V = variables(problem)[var]
@@ -170,7 +176,7 @@ function solve_locally(problem::EstimationProblem, var::Symbol, preproc)
 
         # find neighbors with previously estimated values
         nneigh = 0
-        for l in path
+        for l in ShiftIterator(path, pathdelay)
           if estimated[l]
             coordinates!(x, pdomain, l)
             if isneighbor(neighborhood, xₒ, x)
@@ -212,7 +218,7 @@ function solve_globally(problem::EstimationProblem, var::Symbol, preproc)
     pdomain = domain(problem)
 
     # unpack preprocessed parameters
-    estimator, path, neighborhood, maxneighbors = preproc[var]
+    estimator, path, neighborhood, maxneighbors, pathdelay = preproc[var]
 
     # determine value type
     V = variables(problem)[var]
