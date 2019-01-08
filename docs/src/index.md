@@ -60,7 +60,7 @@ can be installed from the list above for additional functionality.
 
 ## Quick example
 
-Below is a quick preview of the high-level API, for the full example, please see
+Below is a quick preview of the high-level API. For the full example, please see
 the [GeoStatsTutorials](https://github.com/juliohm/GeoStatsTutorials) repository.
 
 ```julia
