@@ -93,6 +93,11 @@ function preprocess(problem::EstimationProblem, solver::Kriging)
     if varparams.neighborhood ≠ nothing
       neighborhood = varparams.neighborhood
       sources = collect(keys(datamap(problem, var)))
+
+      # use at most 10^3 points to generate path
+      N = length(sources)
+      sources = sources[1:ceil(Int,N/10^3):N]
+
       path = SourcePath(pdomain, sources)
     else
       neighborhood = nothing
