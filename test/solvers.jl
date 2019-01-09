@@ -11,7 +11,7 @@
     )
     lsolver = Kriging(
       :value => (variogram=GaussianVariogram(range=35.,nugget=0.),
-                 neighborhood=BallNeighborhood(grid2D, 5.))
+                 maxneighbors=10, neighborhood=BallNeighborhood(grid2D, 5.))
     )
 
     # solve with global Kriging
