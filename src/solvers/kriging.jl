@@ -24,14 +24,13 @@ Latter options override former options. For example, by specifying
 `mean`. If no option is specified, Ordinary Kriging is used by
 default with the `variogram` only.
 
-* `neighborhood` - Search neighborhood (default to `nothing`)
 * `maxneighbors` - Maximum number of neighbors (default to `10`)
-* `pathdelay`    - Delay to speed up neighbor lookup (default to `-maxneighbors`)
+* `neighborhood` - Search neighborhood (default to `nothing`)
+* `searchoffset` - Offset to speed up neighborhood search (default to `-maxneighbors`)
 
 The `neighborhood` option can be used to perform local Kriging
 with a sliding neighborhood. In this case, the option `maxneighbors`
 determines the maximum number of neighbors in the Kriging system.
-The option `pathdelay`
 
 ## Examples
 
@@ -58,9 +57,10 @@ julia> Kriging()
   @param mean = nothing
   @param degree = nothing
   @param drifts = nothing
+  @param maxneighbors = nothing
+  @param metric = nothing
   @param neighborhood = nothing
-  @param maxneighbors = 10
-  @param pathdelay = -maxneighbors
+  @param searchoffset = nothing
 end
 
 function preprocess(problem::EstimationProblem, solver::Kriging)
@@ -68,7 +68,7 @@ function preprocess(problem::EstimationProblem, solver::Kriging)
   pdomain = domain(problem)
 
   # result of preprocessing
-  preproc = Dict{Symbol,Tuple}()
+  preproc = Dict{Symbol,NamedTuple}()
 
   for (var, V) in variables(problem)
     # get user parameters
@@ -89,28 +89,51 @@ function preprocess(problem::EstimationProblem, solver::Kriging)
       estimator = OrdinaryKriging(varparams.variogram)
     end
 
-    # determine which neighborhood and path to use
-    if varparams.neighborhood ≠ nothing
-      neighborhood = varparams.neighborhood
-      sources = collect(keys(datamap(problem, var)))
-
-      # use at most 10^3 points to generate path
-      N = length(sources)
-      sources = sources[1:ceil(Int,N/10^3):N]
-
-      path = SourcePath(pdomain, sources)
-    else
-      neighborhood = nothing
-      path = SimplePath(pdomain)
-    end
-
     # determine maximum number of conditioning neighbors
     maxneighbors = varparams.maxneighbors
 
-    # determine path delay for faster neighborhood lookup
-    pathdelay = varparams.pathdelay
+    # determine path and neighborhood search method
+    if varparams.maxneighbors ≠ nothing
+      # use a reduced number of neighbors per location
+      if varparams.neighborhood ≠ nothing
+        # local search with a neighborhood
+        neighborhood = varparams.neighborhood
 
-    preproc[var] = (estimator, path, neighborhood, maxneighbors, pathdelay)
+        # create a path from the data and outwards
+        datalocs = collect(keys(datamap(problem, var)))
+        N = length(datalocs) # use at most 10^3 points to generate path
+        datalocs = datalocs[1:ceil(Int,N/10^3):N]
+        path = SourcePath(pdomain, datalocs)
+
+        # offset to speedup neighborhood search
+        if varparams.searchoffset ≠ nothing
+          searchoffset = varparams.searchoffset
+        else
+          searchoffset = -maxneighbors
+        end
+
+        neighsearcher = LocalNeighborSearcher(pdomain, maxneighbors, neighborhood,
+                                              path, searchoffset)
+      else
+        # nearest neighbor search with a metric
+        if varparams.metric ≠ nothing
+          metric = varparams.metric
+        else
+          error("missing `metric` parameter for variable $var")
+        end
+        path = SimplePath(pdomain)
+        neighsearcher = NearestNeighborSearcher(pdomain, maxneighbors, metric)
+      end
+    else
+      # use all data points as neighbors
+      path = SimplePath(pdomain)
+      neighsearcher = nothing
+    end
+
+    # save preprocessed input
+    preproc[var] = (estimator=estimator, path=path,
+                    maxneighbors=maxneighbors,
+                    neighsearcher=neighsearcher)
   end
 
   preproc
@@ -124,13 +147,11 @@ function solve(problem::EstimationProblem, solver::Kriging)
   μs = []; σs = []
 
   for (var, V) in variables(problem)
-    neighborhood = preproc[var][3]
-
-    if neighborhood ≠ nothing
-      # perform local Kriging
+    if preproc[var].maxneighbors ≠ nothing
+      # perform Kriging with reduced number of neighbors
       varμ, varσ = solve_locally(problem, var, preproc)
     else
-      # perform global Kriging
+      # perform Kriging with all data points as neighbors
       varμ, varσ = solve_globally(problem, var, preproc)
     end
 
@@ -147,7 +168,7 @@ function solve_locally(problem::EstimationProblem, var::Symbol, preproc)
     pdomain = domain(problem)
 
     # unpack preprocessed parameters
-    estimator, path, neighborhood, maxneighbors, pathdelay = preproc[var]
+    estimator, path, maxneighbors, neighsearcher = preproc[var]
 
     # determine value type
     V = variables(problem)[var]
@@ -158,7 +179,6 @@ function solve_locally(problem::EstimationProblem, var::Symbol, preproc)
 
     # pre-allocate memory for coordinates
     xₒ = MVector{ndims(pdomain),coordtype(pdomain)}(undef)
-    x  = MVector{ndims(pdomain),coordtype(pdomain)}(undef)
 
     # keep track of estimated locations
     estimated = falses(npoints(pdomain))
@@ -174,44 +194,32 @@ function solve_locally(problem::EstimationProblem, var::Symbol, preproc)
     neighbors = Vector{Int}(undef, maxneighbors)
     X = Matrix{coordtype(pdomain)}(undef, ndims(pdomain), maxneighbors)
 
-    for location in path
-      if !estimated[location]
-        # coordinates of neighborhood center
-        coordinates!(xₒ, pdomain, location)
+    for location in Iterators.filter(l -> !estimated[l], path)
+      # coordinates of neighborhood center
+      coordinates!(xₒ, pdomain, location)
 
-        # find neighbors with previously estimated values
-        nneigh = 0
-        for l in ShiftIterator(path, pathdelay)
-          if estimated[l]
-            coordinates!(x, pdomain, l)
-            if isneighbor(neighborhood, xₒ, x)
-              nneigh += 1
-              neighbors[nneigh] = l
-            end
-          end
-          nneigh == maxneighbors && break
-        end
+      # find neighbors with previously estimated values
+      nneigh = search!(neighbors, pdomain, xₒ, neighsearcher, estimated)
 
-        # final set of neighbors
-        nview = view(neighbors, 1:nneigh)
+      # final set of neighbors
+      nview = view(neighbors, 1:nneigh)
 
-        # update neighbors coordinates
-        coordinates!(X, pdomain, nview)
+      # update neighbors coordinates
+      coordinates!(X, pdomain, nview)
 
-        Xview = view(X,:,1:nneigh)
-        zview = view(varμ, nview)
+      Xview = view(X,:,1:nneigh)
+      zview = view(varμ, nview)
 
-        # fit estimator to data
-        krig = fit(estimator, Xview, zview)
+      # fit estimator to data
+      krig = fit(estimator, Xview, zview)
 
-        # mean and variance
-        μ, σ² = predict(krig, xₒ)
+      # save mean and variance
+      μ, σ² = predict(krig, xₒ)
+      varμ[location] = μ
+      varσ[location] = σ²
 
-        # save and continue
-        varμ[location] = μ
-        varσ[location] = σ²
-        estimated[location] = true
-      end
+      # mark location as estimated and continue
+      estimated[location] = true
     end
 
     varμ, varσ
@@ -223,7 +231,7 @@ function solve_globally(problem::EstimationProblem, var::Symbol, preproc)
     pdomain = domain(problem)
 
     # unpack preprocessed parameters
-    estimator, path, neighborhood, maxneighbors, pathdelay = preproc[var]
+    estimator, path, maxneighbors, neighsearcher = preproc[var]
 
     # determine value type
     V = variables(problem)[var]
