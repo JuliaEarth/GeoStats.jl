@@ -58,7 +58,7 @@ julia> Kriging()
   @param degree = nothing
   @param drifts = nothing
   @param maxneighbors = nothing
-  @param metric = nothing
+  @param metric = Euclidean()
   @param neighborhood = nothing
   @param searchoffset = nothing
 end
