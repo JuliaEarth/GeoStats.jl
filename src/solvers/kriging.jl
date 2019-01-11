@@ -116,11 +116,7 @@ function preprocess(problem::EstimationProblem, solver::Kriging)
                                               path, searchoffset)
       else
         # nearest neighbor search with a metric
-        if varparams.metric ≠ nothing
-          metric = varparams.metric
-        else
-          error("missing `metric` parameter for variable $var")
-        end
+        metric = varparams.metric
         path = SimplePath(pdomain)
         neighsearcher = NearestNeighborSearcher(pdomain, maxneighbors, metric)
       end
@@ -182,8 +178,6 @@ function solve_locally(problem::EstimationProblem, var::Symbol, preproc)
 
     # keep track of estimated locations
     estimated = falses(npoints(pdomain))
-
-    # consider data locations as already estimated
     for (loc, datloc) in datamap(problem, var)
       varμ[loc] = value(pdata, datloc, var)
       varσ[loc] = zero(V)
