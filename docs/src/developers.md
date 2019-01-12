@@ -115,7 +115,7 @@ HierarchicalPartitioner
 For illustration purposes, we write an estimation solver that, for each location of the domain, assigns the
 2-norm of the coordinates as the mean and the ∞-norm as the variance:
 
-```@example
+```@example normsolver
 using GeoStatsBase
 using GeoStatsDevTools
 using LinearAlgebra: norm
@@ -158,12 +158,12 @@ function solve(problem::EstimationProblem, solver::NormSolver)
   end
 
   EstimationSolution(pdomain, Dict(μs), Dict(σs))
-end
+end;
+```
 
-#################################################################
-# Create an estimation problem and test our newly defined solver
-#################################################################
+We can test the newly defined solver on an estimation problem:
 
+```@example normsolver
 using GeoStats
 using Plots
 gr(size=(600,400)) # hide
