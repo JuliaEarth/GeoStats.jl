@@ -12,8 +12,7 @@ variable of the problem.
 
 ## Parameters
 
-* k       - number of folds for cross-validation
-* shuffle - whether or not to shuffle the data
+* partitioner - partitioning method for spatial data
 
 ## Examples
 
@@ -25,17 +24,12 @@ julia> result = compare([solver₁, solver₂], problem, CrossValidation(10))
 julia> plot(result, bins=50)
 ```
 """
-struct CrossValidation <: AbstractEstimSolverComparison
-  k::Int
-  shuffle::Bool
-
-  function CrossValidation(k::Int, shuffle::Bool)
-    @assert k > 1 "number of folds must be greater than 1"
-    new(k, shuffle)
-  end
+struct CrossValidation{P} <: AbstractEstimSolverComparison
+  partitioner::P
 end
 
-CrossValidation(k) = CrossValidation(k, true)
+CrossValidation(k::Int, shuffle::Bool) = CrossValidation(UniformPartitioner(k, shuffle))
+CrossValidation(k::Int) = CrossValidation(k, true)
 CrossValidation() = CrossValidation(10)
 
 """
@@ -54,47 +48,40 @@ function compare(solvers::AbstractVector{S}, problem::EstimationProblem,
   # retrieve problem info
   pdata = data(problem)
   pdomain = domain(problem)
-  pmapper = mapper(problem)
 
-  nfolds = cmp.k
+  # folds for cross-validation
+  folds = subsets(partition(pdata, cmp.partitioner))
+  nfolds = length(folds)
 
   # save results in a dictionary
   errors4var = Dict{Symbol,Vector}()
 
-  for (var,V) in variables(problem)
-    # mappings from domain to data locations
-    varmap = datamap(problem, var)
-    domlocs = collect(keys(varmap))
-    datlocs = collect(values(varmap))
-
-    # number of points for variable
-    npts = length(varmap)
-
-    # points per fold
-    m = npts ÷ nfolds
-
-    @assert nfolds ≤ npts "number of folds must be smaller or equal to number of points"
-
-    # shuffle points if necessary
-    perm = cmp.shuffle ? shuffle(1:npts) : sortperm(datlocs)
-    domlocs = domlocs[perm]
-    datlocs = datlocs[perm]
+  for (var, V) in variables(problem)
+    # mappings from data to domain locations
+    varmap = Dict(datloc => domloc for (domloc, datloc) in datamap(problem, var))
 
     # validation errors for each solver
-    errors = [V[] for s in 1:length(solvers)]
+    errors = [Vector{V}() for s in 1:length(solvers)]
 
     # k-fold validation loop
-    for i in 0:nfolds-1
-      iₛ, iₑ = i*m + 1, (i+1)*m
-
+    for k in 1:nfolds
       # holdout set
-      domhold = domlocs[iₛ:iₑ]
-      dathold = datlocs[iₛ:iₑ]
+      hold = folds[k]
 
       # training set
-      train = vcat(datlocs[1:iₛ-1], datlocs[iₑ+1:end])
+      train = [ind for i in vcat(1:k-1, k+1:nfolds) for ind in folds[i]]
 
-      subproblem = EstimationProblem(view(pdata, train), pdomain, var, mapper=pmapper)
+      # discard indices that were filtered out by mapping strategy (e.g. missing values)
+      hold  = filter(in(keys(varmap)), hold)
+      train = filter(in(keys(varmap)), train)
+
+      # skip in case of empty training set
+      isempty(train) && continue
+
+      # copy data to correct locations in domain
+      mapper = CopyMapper([varmap[ind] for ind in train])
+
+      subproblem = EstimationProblem(view(pdata, train), pdomain, var, mapper=mapper)
 
       if nworkers() > 1
         # run solvers in parallel
@@ -106,11 +93,11 @@ function compare(solvers::AbstractVector{S}, problem::EstimationProblem,
       end
 
       for (s, solution) in enumerate(solutions)
-        # get solver estimates at holdout locations
-        estimates = [solution.mean[var][j] for j in domhold]
-
         # get true holdout values
-        observations = [value(pdata, j, var) for j in dathold]
+        observations = [value(pdata, loc, var) for loc in hold]
+
+        # get solver estimate at holdout locations
+        estimates = [solution.mean[var][varmap[loc]] for loc in hold]
 
         # save error and continue
         append!(errors[s], estimates - observations)
