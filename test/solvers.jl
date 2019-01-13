@@ -1,4 +1,6 @@
 @testset "Solvers" begin
+  data1D = readgeotable(joinpath(datadir,"data1D.tsv"), delim='\t', coordnames=[:x])
+  data2D = readgeotable(joinpath(datadir,"data2D.tsv"), delim='\t', coordnames=[:x,:y])
   grid1D = RegularGrid{Float64}(100)
   grid2D = RegularGrid{Float64}(100,100)
 

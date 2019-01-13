@@ -16,10 +16,6 @@ if ismaintainer
   using Gtk
 end
 
-# load data sets
-data1D = readgeotable(joinpath(datadir,"data1D.tsv"), delim='\t', coordnames=[:x])
-data2D = readgeotable(joinpath(datadir,"data2D.tsv"), delim='\t', coordnames=[:x,:y])
-
 # list of tests
 testfiles = [
   "solvers.jl",
