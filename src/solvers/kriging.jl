@@ -24,13 +24,20 @@ Latter options override former options. For example, by specifying
 `mean`. If no option is specified, Ordinary Kriging is used by
 default with the `variogram` only.
 
-* `maxneighbors` - Maximum number of neighbors (default to `10`)
+* `maxneighbors` - Maximum number of neighbors (default to `nothing`)
 * `neighborhood` - Search neighborhood (default to `nothing`)
 * `searchoffset` - Offset to speed up neighborhood search (default to `-maxneighbors`)
 
-The `neighborhood` option can be used to perform local Kriging
-with a sliding neighborhood. In this case, the option `maxneighbors`
-determines the maximum number of neighbors in the Kriging system.
+The `maxneighbors` option can be used to perform approximate Kriging
+with a subset of data points per estimation location. Two neighborhood
+search methods are available depending on the value of `neighborhood`:
+
+If a `neighborhood` is provided, local Kriging is performed by
+sliding the `neighborhood` in the domain. All points inside of
+the neighborhood are considered in the estimation.
+
+If `neighborhood` is not provided, the Kriging system is built
+using only the nearest neighbors of the location in the domain.
 
 ## Examples
 
