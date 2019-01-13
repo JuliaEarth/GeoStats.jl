@@ -6,12 +6,14 @@ module GeoStats
 
 using Reexport
 using Random
-using Distances
 using Statistics
 using LinearAlgebra
 using Distributed
 using StaticArrays
 using RecipesBase
+
+# some default arguments for solvers
+using Distances: Euclidean
 
 # export project modules
 @reexport using GeoStatsBase
