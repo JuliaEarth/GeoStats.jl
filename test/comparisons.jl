@@ -7,13 +7,11 @@
     solver₁ = Kriging(:value => (variogram=GaussianVariogram(range=35.),))
     solver₂ = Kriging(:value => (variogram=SphericalVariogram(range=35.),))
 
-    if ismaintainer || istravis
-      function plot_comparison(fname)
+    if visualtests
+      @plottest begin
+        gr(size=(600,400))
         compare([solver₁, solver₂], problem2D, VisualComparison())
-        png(fname)
-      end
-      refimg = joinpath(datadir,"VisualComparison.png")
-      @test test_images(VisualTest(plot_comparison, refimg), popup=!istravis, tol=0.1) |> success
+      end joinpath(datadir,"VisualComparison.png") !istravis 0.1
     end
   end
 
@@ -41,14 +39,12 @@
     grid2D = boundgrid(data2D, (100,100))
     problem2D = EstimationProblem(data2D, grid2D, :value)
 
-    if ismaintainer || istravis
-      function plot_comparison(fname)
+    if visualtests
+      @plottest begin
+        gr(size=(600,400))
         result = compare([solver₁, solver₂], problem2D, CrossValidation(10))
         plot(result, bins=50)
-        png(fname)
-      end
-      refimg = joinpath(datadir,"CrossValidationn.png")
-      @test test_images(VisualTest(plot_comparison, refimg), popup=!istravis, tol=0.1) |> success
+      end joinpath(datadir,"CrossValidation.png") !istravis 0.1
     end
   end
 end
