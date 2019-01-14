@@ -34,15 +34,10 @@
 
     if visualtests
       gr(size=(800,400))
-      refimg1D = joinpath(datadir,"GlobalKriging1D.png")
-      refimg2D = joinpath(datadir,"GlobalKriging2D.png")
-      @plottest plot(gsol1D) refimg1D !istravis 0.1
-      @plottest plot(gsol2D) refimg2D !istravis 0.1
-
-      refimg1D = joinpath(datadir,"LocalKriging1D.png")
-      refimg2D = joinpath(datadir,"LocalKriging2D.png")
-      @plottest plot(lsol1D) refimg1D !istravis 0.1
-      @plottest plot(lsol2D) refimg2D !istravis 0.1
+      @plottest plot(gsol1D) joinpath(datadir,"GlobalKriging1D.png") !istravis 0.1
+      @plottest plot(gsol2D) joinpath(datadir,"GlobalKriging2D.png") !istravis 0.1
+      @plottest plot(lsol1D) joinpath(datadir,"LocalKriging1D.png") !istravis 0.1
+      @plottest plot(lsol2D) joinpath(datadir,"LocalKriging2D.png") !istravis 0.1
     end
   end
 
@@ -69,10 +64,8 @@
 
       if visualtests
         gr(size=(1000,300))
-        refimg1D = joinpath(datadir,"SGSCond1D.png")
-        refimg2D = joinpath(datadir,"SGSCond2D.png")
-        # @plottest plot(solution1D) refimg1D !istravis
-        # @plottest plot(solution2D) refimg2D !istravis
+        # @plottest plot(solution1D) joinpath(datadir,"SGSCond1D.png") !istravis
+        # @plottest plot(solution2D) joinpath(datadir,"SGSCond2D.png") !istravis
       end
     end
 
@@ -88,10 +81,8 @@
 
       if visualtests
         gr(size=(1000,300))
-        refimg1D = joinpath(datadir,"SGSUncond1D.png")
-        refimg2D = joinpath(datadir,"SGSUncond2D.png")
-        # @plottest plot(solution1D) refimg1D !istravis
-        # @plottest plot(solution2D) refimg2D !istravis
+        # @plottest plot(solution1D) joinpath(datadir,"SGSUncond1D.png") !istravis
+        # @plottest plot(solution2D) joinpath(datadir,"SGSUncond2D.png") !istravis
       end
     end
   end
