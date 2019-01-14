@@ -11,6 +11,8 @@ istravis = "TRAVIS" ∈ keys(ENV)
 ismaintainer = "USER" ∈ keys(ENV) && ENV["USER"] ∈ maintainers
 datadir = joinpath(@__DIR__,"data")
 
+visualtests = ismaintainer || istravis
+
 if ismaintainer
   Pkg.add("Gtk")
   using Gtk
