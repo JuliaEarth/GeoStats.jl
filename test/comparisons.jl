@@ -26,11 +26,11 @@
     solver₂ = Kriging(:value => (variogram=SphericalVariogram(range=20.),))
 
     result = compare([solver₁, solver₂], problem2D, CrossValidation(3))
-    errors4var = result.errors4var
+    errors = result.errors
 
     # data set with 3 points + 3-fold CV => 3 error values per solver
-    @test length(errors4var[:value][1]) == 3
-    @test length(errors4var[:value][2]) == 3
+    @test length(errors[:value][1]) == 3
+    @test length(errors[:value][2]) == 3
 
     # number of folds must be smaller than number of points, throw an error
     @test_throws AssertionError compare([solver₁, solver₂], problem2D, CrossValidation(10))

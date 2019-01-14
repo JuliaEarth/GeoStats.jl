@@ -3,16 +3,20 @@
 # ------------------------------------------------------------------
 
 """
-    CrossValidation(k, shuffle)
+    CrossValidation(k, [shuffle])
 
-Compare estimation solvers using k-fold cross validation.
+Compare estimation solvers using k-fold cross-validation.
+Optionally shuffle the data (default to true).
+
+    CrossValidation(partitioner)
+
+Compare estimation solvers using cross-validation by
+splitting the data with a `partitioner`. This method
+is a generalization of k-fold cross-validation, which
+uses a [`UniformPartitioner`](@ref) to split the data.
 
 The result of the comparison stores the errors for each
 variable of the problem.
-
-## Parameters
-
-* partitioner - partitioning method for spatial data
 
 ## Examples
 
@@ -33,13 +37,13 @@ CrossValidation(k::Int) = CrossValidation(k, true)
 CrossValidation() = CrossValidation(10)
 
 """
-    CrossValidationResult(errors, solvernames)
+    CVResult(errors, solvernames)
 
 Stores the cross-validation errors for each variable of the
 problem and the solver names used in the comparison.
 """
-struct CrossValidationResult
-  errors4var::Dict{Symbol,Vector}
+struct CVResult
+  errors::Dict{Symbol,Vector}
   solvernames::Vector{String}
 end
 
@@ -54,14 +58,14 @@ function compare(solvers::AbstractVector{S}, problem::EstimationProblem,
   nfolds = length(folds)
 
   # save results in a dictionary
-  errors4var = Dict{Symbol,Vector}()
+  errors = Dict{Symbol,Vector}()
 
   for (var, V) in variables(problem)
     # mappings from data to domain locations
     varmap = Dict(datloc => domloc for (domloc, datloc) in datamap(problem, var))
 
     # validation errors for each solver
-    errors = [Vector{V}() for s in 1:length(solvers)]
+    errors4solver = [Vector{V}() for s in 1:length(solvers)]
 
     # k-fold validation loop
     for k in 1:nfolds
@@ -100,17 +104,17 @@ function compare(solvers::AbstractVector{S}, problem::EstimationProblem,
         estimates = [solution.mean[var][varmap[loc]] for loc in hold]
 
         # save error and continue
-        append!(errors[s], estimates - observations)
+        append!(errors4solver[s], estimates - observations)
       end
     end
 
-    push!(errors4var, var => errors)
+    push!(errors, var => errors4solver)
   end
 
-  CrossValidationResult(errors4var, [string(s) for s in solvers])
+  CVResult(errors, [string(s) for s in solvers])
 end
 
-@recipe function f(result::CrossValidationResult; labels=nothing)
+@recipe function f(result::CVResult; labels=nothing)
   # retrieve solver names
   solvers = result.solvernames
   nsolvers = length(solvers)
@@ -118,7 +122,7 @@ end
   # provide default names if labels are not specified
   labels == nothing && (labels = solvers)
 
-  for (var, errs) in result.errors4var
+  for (var, errs) in result.errors
     layout := (nsolvers, 1)
     link := :x
     for (s, err) in enumerate(errs)
