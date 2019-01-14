@@ -34,10 +34,13 @@ search methods are available depending on the value of `neighborhood`:
 
 If a `neighborhood` is provided, local Kriging is performed by
 sliding the `neighborhood` in the domain. All points inside of
-the neighborhood are considered in the estimation.
+the neighborhood are considered in the estimation. The option
+`searchoffset` can be used to tune the performance of the
+neighborhood search.
 
 If `neighborhood` is not provided, the Kriging system is built
-using only the nearest neighbors of the location in the domain.
+using the nearest neighbors of the location in the domain,
+regardless of how far they are.
 
 ## Examples
 
