@@ -104,16 +104,15 @@ function preprocess(problem::EstimationProblem, solver::Kriging)
 
     # determine path and neighborhood search method
     if varparams.maxneighbors ≠ nothing
-      # use a reduced number of neighbors per location
+      # create a path from the data and outwards
+      locations = collect(keys(datamap(problem, var)))
+      # use at most 10^3 points to generate path
+      N = length(locations); M = ceil(Int, N/10^3)
+      path = SourcePath(pdomain, view(locations,1:M:N))
+
       if varparams.neighborhood ≠ nothing
         # local search with a neighborhood
         neighborhood = varparams.neighborhood
-
-        # create a path from the data and outwards
-        datalocs = collect(keys(datamap(problem, var)))
-        N = length(datalocs) # use at most 10^3 points to generate path
-        datalocs = datalocs[1:ceil(Int,N/10^3):N]
-        path = SourcePath(pdomain, datalocs)
 
         # offset to speedup neighborhood search
         if varparams.searchoffset ≠ nothing
@@ -122,13 +121,13 @@ function preprocess(problem::EstimationProblem, solver::Kriging)
           searchoffset = -maxneighbors
         end
 
-        neighsearcher = LocalNeighborSearcher(pdomain, maxneighbors, neighborhood,
-                                              path, searchoffset)
+        neighsearcher = LocalNeighborSearcher(pdomain, maxneighbors,
+                                              neighborhood, path, searchoffset)
       else
         # nearest neighbor search with a metric
         metric = varparams.metric
-        path = SimplePath(pdomain)
-        neighsearcher = NearestNeighborSearcher(pdomain, maxneighbors, metric)
+        neighsearcher = NearestNeighborSearcher(pdomain, maxneighbors,
+                                                metric, locations)
       end
     else
       # use all data points as neighbors
@@ -198,32 +197,34 @@ function solve_locally(problem::EstimationProblem, var::Symbol, preproc)
     neighbors = Vector{Int}(undef, maxneighbors)
     X = Matrix{coordtype(pdomain)}(undef, ndims(pdomain), maxneighbors)
 
-    for location in Iterators.filter(l -> !estimated[l], path)
-      # coordinates of neighborhood center
-      coordinates!(xₒ, pdomain, location)
+    for location in path
+      if !estimated[location]
+        # coordinates of neighborhood center
+        coordinates!(xₒ, pdomain, location)
 
-      # find neighbors with previously estimated values
-      nneigh = search!(neighbors, pdomain, xₒ, neighsearcher, estimated)
+        # find neighbors with previously estimated values
+        nneigh = search!(neighbors, xₒ, neighsearcher, estimated)
 
-      # final set of neighbors
-      nview = view(neighbors, 1:nneigh)
+        # final set of neighbors
+        nview = view(neighbors, 1:nneigh)
 
-      # update neighbors coordinates
-      coordinates!(X, pdomain, nview)
+        # update neighbors coordinates
+        coordinates!(X, pdomain, nview)
 
-      Xview = view(X,:,1:nneigh)
-      zview = view(varμ, nview)
+        Xview = view(X,:,1:nneigh)
+        zview = view(varμ, nview)
 
-      # fit estimator to data
-      krig = fit(estimator, Xview, zview)
+        # fit estimator to data
+        krig = fit(estimator, Xview, zview)
 
-      # save mean and variance
-      μ, σ² = predict(krig, xₒ)
-      varμ[location] = μ
-      varσ[location] = σ²
+        # save mean and variance
+        μ, σ² = predict(krig, xₒ)
+        varμ[location] = μ
+        varσ[location] = σ²
 
-      # mark location as estimated and continue
-      estimated[location] = true
+        # mark location as estimated and continue
+        estimated[location] = true
+      end
     end
 
     varμ, varσ
