@@ -8,36 +8,41 @@
     problem1D = EstimationProblem(data1D, grid1D, :value)
     problem2D = EstimationProblem(data2D, grid2D, :value)
 
-    gsolver = Kriging(
+    global_kriging = Kriging(
       :value => (variogram=GaussianVariogram(range=35.,nugget=0.),)
     )
-    lsolver = Kriging(
+    nearest_kriging = Kriging(
       :value => (variogram=GaussianVariogram(range=35.,nugget=0.), maxneighbors=3)
     )
+    local_kriging = Kriging(
+      :value => (variogram=GaussianVariogram(range=35.,nugget=0.),
+                 maxneighbors=3, neighborhood=BallNeighborhood(grid2D,100.))
+    )
 
-    # solve with global Kriging
-    gsol1D = solve(problem1D, gsolver)
-    gsol2D = solve(problem2D, gsolver)
+    solvers = [global_kriging, nearest_kriging, local_kriging]
+    snames  = ["GlobalKriging", "NearestKriging", "LocalKriging"]
 
-    # solve with local Kriging
-    lsol1D = solve(problem1D, lsolver)
-    lsol2D = solve(problem2D, lsolver)
+    solutions1D = [solve(problem1D, solver) for solver in solvers]
+    solutions2D = [solve(problem2D, solver) for solver in solvers]
 
     # basic checks
-    for sol in [gsol2D, lsol2D]
-      result = digest(sol)
+    for solution in solutions2D
+      result = digest(solution)
       @test Set(keys(result)) == Set([:value])
-      @test isapprox(result[:value][:mean][26,26], 1., atol=1e-8)
-      @test isapprox(result[:value][:mean][51,76], 0., atol=1e-8)
-      @test isapprox(result[:value][:mean][76,51], 1., atol=1e-8)
+      @test result[:value][:mean][26,26] == 1.
+      @test result[:value][:mean][51,76] == 0.
+      @test result[:value][:mean][76,51] == 1.
     end
 
     if visualtests
       gr(size=(800,400))
-      @plottest plot(gsol1D) joinpath(datadir,"GlobalKriging1D.png") !istravis 0.1
-      @plottest plot(gsol2D) joinpath(datadir,"GlobalKriging2D.png") !istravis 0.1
-      @plottest plot(lsol1D) joinpath(datadir,"LocalKriging1D.png") !istravis 0.1
-      @plottest plot(lsol2D) joinpath(datadir,"LocalKriging2D.png") !istravis 0.1
+      for i in 1:2
+        solution, sname = solutions1D[i], snames[i]
+        @plottest plot(solution) joinpath(datadir,sname*"1D.png") !istravis
+      end
+      for (solution, sname) in zip(solutions2D, snames)
+        @plottest plot(solution) joinpath(datadir,sname*"2D.png") !istravis
+      end
     end
   end
 

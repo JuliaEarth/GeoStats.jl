@@ -3,17 +3,12 @@ using Plots; gr(size=(600,400))
 using VisualRegressionTests
 using Test, Pkg, Random
 
-# list of maintainers
-maintainers = ["juliohm"]
-
 # environment settings
+islinux = Sys.islinux()
 istravis = "TRAVIS" ∈ keys(ENV)
-ismaintainer = "USER" ∈ keys(ENV) && ENV["USER"] ∈ maintainers
 datadir = joinpath(@__DIR__,"data")
-
-visualtests = ismaintainer || istravis
-
-if ismaintainer
+visualtests = !istravis || (istravis && islinux)
+if !istravis
   Pkg.add("Gtk")
   using Gtk
 end
