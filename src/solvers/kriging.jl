@@ -26,7 +26,6 @@ default with the `variogram` only.
 
 * `maxneighbors` - Maximum number of neighbors (default to `nothing`)
 * `neighborhood` - Search neighborhood (default to `nothing`)
-* `searchoffset` - Offset to speed up neighborhood search (default to `-maxneighbors`)
 
 The `maxneighbors` option can be used to perform approximate Kriging
 with a subset of data points per estimation location. Two neighborhood
@@ -34,9 +33,7 @@ search methods are available depending on the value of `neighborhood`:
 
 If a `neighborhood` is provided, local Kriging is performed by
 sliding the `neighborhood` in the domain. All points inside of
-the neighborhood are considered in the estimation. The option
-`searchoffset` can be used to tune the performance of the
-neighborhood search.
+the neighborhood are considered in the estimation.
 
 If `neighborhood` is not provided, the Kriging system is built
 using the nearest neighbors of the location in the domain,
@@ -70,7 +67,6 @@ julia> Kriging()
   @param maxneighbors = nothing
   @param metric = Euclidean()
   @param neighborhood = nothing
-  @param searchoffset = nothing
 end
 
 function preprocess(problem::EstimationProblem, solver::Kriging)
@@ -113,16 +109,8 @@ function preprocess(problem::EstimationProblem, solver::Kriging)
       if varparams.neighborhood ≠ nothing
         # local search with a neighborhood
         neighborhood = varparams.neighborhood
-
-        # offset to speedup neighborhood search
-        if varparams.searchoffset ≠ nothing
-          searchoffset = varparams.searchoffset
-        else
-          searchoffset = -maxneighbors
-        end
-
         neighsearcher = LocalNeighborSearcher(pdomain, maxneighbors,
-                                              neighborhood, path, searchoffset)
+                                              neighborhood, path)
       else
         # nearest neighbor search with a metric
         metric = varparams.metric
