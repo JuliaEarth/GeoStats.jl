@@ -100,22 +100,26 @@ function preprocess(problem::EstimationProblem, solver::Kriging)
 
     # determine path and neighborhood search method
     if varparams.maxneighbors ≠ nothing
-      # create a path from the data and outwards
-      locations = collect(keys(datamap(problem, var)))
-      # use at most 10^3 points to generate path
-      N = length(locations); M = ceil(Int, N/10^3)
-      path = SourcePath(pdomain, view(locations,1:M:N))
+      # locations with data for variable
+      varlocs = collect(keys(datamap(problem, var)))
 
       if varparams.neighborhood ≠ nothing
         # local search with a neighborhood
         neighborhood = varparams.neighborhood
+
+        # create a path from the data and outwards
+        # use at most 10^3 points to generate path
+        N = length(varlocs); M = ceil(Int, N/10^3)
+        path = SourcePath(pdomain, view(varlocs,1:M:N))
+
         neighsearcher = LocalNeighborSearcher(pdomain, maxneighbors,
                                               neighborhood, path)
       else
         # nearest neighbor search with a metric
         metric = varparams.metric
+        path = SimplePath(pdomain)
         neighsearcher = NearestNeighborSearcher(pdomain, maxneighbors,
-                                                metric, locations)
+                                                metric, varlocs)
       end
     else
       # use all data points as neighbors
