@@ -104,6 +104,7 @@ end
 Complex partition schemes can be produced hierarchically with a `HierarchicalPartitioner`.
 
 ```@docs
+UniformPartitioner
 PlanePartitioner
 DirectionPartitioner
 SpatialPredicatePartitioner

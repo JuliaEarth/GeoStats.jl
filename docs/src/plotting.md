@@ -6,7 +6,7 @@ conversions.
 
 For example, below we plot various theoretical variograms with the `plot` command from Plots.jl:
 
-```@example
+```@example plots
 using GeoStats
 using Plots
 gr(size=(600,400)) # hide
@@ -15,9 +15,23 @@ plot(GaussianVariogram(), maxlag=3., label="Gaussian")
 plot!(ExponentialVariogram(), maxlag=3., label="Exponential")
 plot!(SphericalVariogram(), maxlag=3., label="Spherical")
 plot!(MaternVariogram(), maxlag=3., label="Matern")
-png("images/variograms.png") # hide
+savefig("images/variograms.svg") # hide
 ```
-![](images/variograms.png)
+![](images/variograms.svg)
+
+and various spatial domains:
+
+```@example plots
+plot(RegularGrid{Float64}(10,10,10))
+savefig("images/regulargrid.svg") # hide
+```
+![](images/regulargrid.svg)
+
+```@example plots
+plot(PointSet(rand(3,10)))
+savefig("images/pointset.svg") # hide
+```
+![](images/pointset.svg)
 
 Besides plotting GeoStats.jl objects directly, a few other plots are provided for exploring spatial data.
 
