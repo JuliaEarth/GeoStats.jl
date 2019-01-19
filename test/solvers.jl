@@ -41,7 +41,7 @@
         @plottest plot(solution) joinpath(datadir,sname*"1D.png") !istravis
       end
       for (solution, sname) in zip(solutions2D, snames)
-        @plottest plot(solution) joinpath(datadir,sname*"2D.png") !istravis
+        @plottest contourf(solution) joinpath(datadir,sname*"2D.png") !istravis
       end
     end
   end
