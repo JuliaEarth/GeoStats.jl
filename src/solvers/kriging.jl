@@ -26,18 +26,17 @@ default with the `variogram` only.
 
 * `maxneighbors` - Maximum number of neighbors (default to `nothing`)
 * `neighborhood` - Search neighborhood (default to `nothing`)
+* `metric`       - Metric used to find nearest neighbors (default to `Euclidean()`)
 
 The `maxneighbors` option can be used to perform approximate Kriging
 with a subset of data points per estimation location. Two neighborhood
 search methods are available depending on the value of `neighborhood`:
 
-If a `neighborhood` is provided, local Kriging is performed by
-sliding the `neighborhood` in the domain. All points inside of
-the neighborhood are considered in the estimation.
+* If a `neighborhood` is provided, local Kriging is performed by sliding
+  the `neighborhood` in the domain.
 
-If `neighborhood` is not provided, the Kriging system is built
-using the nearest neighbors of the location in the domain,
-regardless of how far they are.
+* If `neighborhood` is not provided, the Kriging system is built using
+  `maxneighbors` nearest neighbors according to a `metric`.
 
 ## Examples
 
@@ -65,8 +64,8 @@ julia> Kriging()
   @param degree = nothing
   @param drifts = nothing
   @param maxneighbors = nothing
-  @param metric = Euclidean()
   @param neighborhood = nothing
+  @param metric = Euclidean()
 end
 
 function preprocess(problem::EstimationProblem, solver::Kriging)
@@ -177,6 +176,10 @@ function solve_locally(problem::EstimationProblem, var::Symbol, preproc)
     # pre-allocate memory for coordinates
     xₒ = MVector{ndims(pdomain),coordtype(pdomain)}(undef)
 
+    # pre-allocate memory for neighbors
+    neighbors = Vector{Int}(undef, maxneighbors)
+    X = Matrix{coordtype(pdomain)}(undef, ndims(pdomain), maxneighbors)
+
     # keep track of estimated locations
     estimated = falses(npoints(pdomain))
     for (loc, datloc) in datamap(problem, var)
@@ -185,10 +188,7 @@ function solve_locally(problem::EstimationProblem, var::Symbol, preproc)
       estimated[loc] = true
     end
 
-    # pre-allocate memory for neighbors
-    neighbors = Vector{Int}(undef, maxneighbors)
-    X = Matrix{coordtype(pdomain)}(undef, ndims(pdomain), maxneighbors)
-
+    # estimation loop
     for location in path
       if !estimated[location]
         # coordinates of neighborhood center
