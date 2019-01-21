@@ -25,18 +25,25 @@ Latter options override former options. For example, by specifying
 `mean`. If no option is specified, Ordinary Kriging is used by
 default with the `variogram` only.
 
-* `path`         - Simulation path (default to :random)
-* `neighborhood` - Search neighborhood (default to BallNeighborhood(domain, 5.))
-* `maxneighbors` - Maximum number of neighbors (default to 100)
+* `maxneighbors` - Maximum number of neighbors (default to 10)
+* `neighborhood` - Search neighborhood (default to `nothing`)
+* `metric`       - Metric used to find nearest neighbors (default to `Euclidean()`)
+* `path`         - Simulation path (default to `RandomPath`)
+
+For each location in the simulation `path`, a maximum number of
+neighbors `maxneighbors` is used to fit a Gaussian distribution.
+The nearest neighbors are searched according to a `metric`
+or according to a `neighborhood` when the latter is provided.
 """
 @simsolver SeqGaussSim begin
   @param variogram = GaussianVariogram()
   @param mean = nothing
   @param degree = nothing
   @param drifts = nothing
-  @param path = :random
+  @param maxneighbors = 10
   @param neighborhood = nothing
-  @param maxneighbors = 100
+  @param metric = Euclidean()
+  @param path = nothing
 end
 
 function preprocess(problem::SimulationProblem, solver::SeqGaussSim)
@@ -44,7 +51,7 @@ function preprocess(problem::SimulationProblem, solver::SeqGaussSim)
   pdomain = domain(problem)
 
   # result of preprocessing
-  preproc = Dict{Symbol,Tuple}()
+  preproc = Dict{Symbol,NamedTuple}()
 
   for (var, V) in variables(problem)
     # get user parameters
@@ -65,26 +72,34 @@ function preprocess(problem::SimulationProblem, solver::SeqGaussSim)
       estimator = OrdinaryKriging(varparams.variogram)
     end
 
-    # determine which path to use
-    if varparams.path == :simple
-      path = SimplePath(pdomain)
-    elseif varparams.path == :random
-      path = RandomPath(pdomain)
-    else
-      @error "invalid path type"
-    end
-
-    # determine which neighborhood to use
-    if varparams.neighborhood ≠ nothing
-      neighborhood = varaparams.neighborhood
-    else
-      neighborhood = BallNeighborhood(pdomain, 5.)
-    end
-
     # determine maximum number of conditioning neighbors
     maxneighbors = varparams.maxneighbors
 
-    preproc[var] = (estimator, path, neighborhood, maxneighbors)
+    # determine which path to use
+    if varparams.path ≠ nothing
+      path = varparams.path
+    else
+      path = RandomPath(pdomain)
+    end
+
+    # determine neighborhood search method
+    if varparams.neighborhood ≠ nothing
+      # local search with a neighborhood
+      neighborhood = varparams.neighborhood
+      neighsearcher = LocalNeighborSearcher(pdomain, maxneighbors,
+                                            neighborhood, path)
+    else
+      # nearest neighbor search with a metric
+      metric = varparams.metric
+      varlocs = collect(keys(datamap(problem, var)))
+      neighsearcher = NearestNeighborSearcher(pdomain, maxneighbors,
+                                              metric, varlocs)
+    end
+
+    # save preprocessed input
+    preproc[var] = (estimator=estimator, path=path,
+                    maxneighbors=maxneighbors,
+                    neighsearcher=neighsearcher)
   end
 
   preproc
@@ -97,67 +112,56 @@ function solve_single(problem::SimulationProblem, var::Symbol,
   pdomain = domain(problem)
 
   # unpack preprocessed parameters
-  estimator, path, neighborhood, maxneighbors = preproc[var]
-
-  # determine coordinate type
-  T = coordtype(pdomain)
+  estimator, path, maxneighbors, neighsearcher = preproc[var]
 
   # determine value type
   V = variables(problem)[var]
 
-  # result for variable
+  # pre-allocate memory for result
   realization = Vector{V}(undef, npoints(pdomain))
-
-  # keep track of simulated locations
-  simulated = falses(npoints(pdomain))
-
-  # consider data locations as already simulated
-  for (loc, datloc) in datamap(problem, var)
-    realization[loc] = value(pdata, datloc, var)
-    simulated[loc] = true
-  end
 
   # pre-allocate memory for coordinates
   xₒ = MVector{ndims(pdomain),coordtype(pdomain)}(undef)
 
   # pre-allocate memory for neighbors coordinates
-  X  = Matrix{coordtype(pdomain)}(undef, ndims(pdomain), maxneighbors)
+  neighbors = Vector{Int}(undef, maxneighbors)
+  X = Matrix{coordtype(pdomain)}(undef, ndims(pdomain), maxneighbors)
+
+  # keep track of simulated locations
+  simulated = falses(npoints(pdomain))
+  for (loc, datloc) in datamap(problem, var)
+    realization[loc] = value(pdata, datloc, var)
+    simulated[loc] = true
+  end
 
   # simulation loop
   for location in path
     if !simulated[location]
-      # find neighbors
-      neighbors = neighborhood(location)
+      # coordinates of neighborhood center
+      coordinates!(xₒ, pdomain, location)
 
-      # neighbors with previously simulated values
-      filter!(n -> simulated[n], neighbors)
-
-      # retain a subset of neighbors for computational purposes
-      if length(neighbors) > maxneighbors
-        resize!(neighbors, maxneighbors)
-      end
+      # find neighbors with previously simulated values
+      nneigh = search!(neighbors, xₒ, neighsearcher, simulated)
 
       # choose between marginal and conditional distribution
-      if isempty(neighbors)
+      if nneigh == 0
         # draw from marginal
         realization[location] = randn(V)
       else
-        # count final number of neighbors
-        m = length(neighbors)
+        # final set of neighbors
+        nview = view(neighbors, 1:nneigh)
 
-        # update coordinates and observation arrays
-        for j in 1:m
-          coordinates!(view(X,:,j), pdomain, neighbors[j])
-        end
-        Xview = view(X,:,1:m)
-        zview = view(realization, neighbors)
+        # update neighbors coordinates
+        coordinates!(X, pdomain, nview)
+
+        Xview = view(X,:,1:nneigh)
+        zview = view(realization, nview)
 
         # build Kriging system
         krig = fit(estimator, Xview, zview)
 
         if status(krig)
           # estimate mean and variance
-          coordinates!(xₒ, pdomain, location)
           μ, σ² = predict(krig, xₒ)
 
           # draw from conditional
