@@ -47,48 +47,58 @@
   end
 
   @testset "SeqGaussSim" begin
-      nreals = 3
-    @testset "Conditional" begin
-      problem1D = SimulationProblem(data1D, grid1D, :value, nreals)
-      problem2D = SimulationProblem(data2D, grid2D, :value, nreals)
+    nreals = 3
 
-      solver = SeqGaussSim(:value => (variogram=GaussianVariogram(range=35.),))
+    ###################
+    ##  CONDITIONAL  ##
+    ###################
+    problem1D = SimulationProblem(data1D, grid1D, :value, nreals)
+    problem2D = SimulationProblem(data2D, grid2D, :value, nreals)
 
-      Random.seed!(2017)
-      solution1D = solve(problem1D, solver)
-      solution2D = solve(problem2D, solver)
+    nearest_sgs = SeqGaussSim(
+      :value => (variogram=GaussianVariogram(range=35.),
+                 maxneighbors=3)
+     )
+    local_sgs = SeqGaussSim(
+      :value => (variogram=GaussianVariogram(range=35.),
+                 neighborhood=BallNeighborhood(grid2D,10.))
+    )
 
-      # basic checks
-      result = digest(solution2D)
+    solvers = [nearest_sgs, local_sgs]
+    snames  = ["NearestSGSCond", "LocalSGSCond"]
+
+    Random.seed!(2017)
+    solutions2D = [solve(problem2D, solver) for solver in solvers]
+
+    # basic checks
+    for solution in solutions2D
+      result = digest(solution)
       @test Set(keys(result)) == Set([:value])
-      for i=1:nreals
-        @test result[:value][i][26,26] == 1.
-        @test result[:value][i][51,76] == 0.
-        @test result[:value][i][76,51] == 1.
-      end
+      @test all(result[:value][i][26,26] == 1. for i in 1:nreals)
+      @test all(result[:value][i][51,76] == 0. for i in 1:nreals)
+      @test all(result[:value][i][76,51] == 1. for i in 1:nreals)
+    end
 
-      if visualtests
-        gr(size=(1000,300))
-        # @plottest plot(solution1D) joinpath(datadir,"SGSCond1D.png") !istravis
-        # @plottest plot(solution2D) joinpath(datadir,"SGSCond2D.png") !istravis
+    if visualtests
+      gr(size=(800,400))
+      for i in [2]
+        solution, sname = solutions2D[i], snames[i]
+        @plottest plot(solution) joinpath(datadir,sname*"2D.png") !istravis
       end
     end
 
-    @testset "Unconditional" begin
-      problem1D = SimulationProblem(grid1D, :value => Float64, nreals)
-      problem2D = SimulationProblem(grid2D, :value => Float64, nreals)
+    ###################
+    ## UNCONDITIONAL ##
+    ###################
+    problem1D = SimulationProblem(grid1D, :value => Float64, nreals)
+    problem2D = SimulationProblem(grid2D, :value => Float64, nreals)
 
-      solver = SeqGaussSim(:value => (variogram=GaussianVariogram(range=35.),))
+    Random.seed!(2017)
+    solution2D = solve(problem2D, local_sgs)
 
-      Random.seed!(2017)
-      solution1D = solve(problem1D, solver)
-      solution2D = solve(problem2D, solver)
-
-      if visualtests
-        gr(size=(1000,300))
-        # @plottest plot(solution1D) joinpath(datadir,"SGSUncond1D.png") !istravis
-        # @plottest plot(solution2D) joinpath(datadir,"SGSUncond2D.png") !istravis
-      end
+    if visualtests
+      gr(size=(800,400))
+      @plottest plot(solution2D) joinpath(datadir,"LocalSGSUncond2D.png") !istravis
     end
   end
 
