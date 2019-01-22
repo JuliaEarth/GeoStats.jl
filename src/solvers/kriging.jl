@@ -87,7 +87,7 @@ function preprocess(problem::EstimationProblem, solver::Kriging)
     if varparams.drifts ≠ nothing
       estimator = ExternalDriftKriging(varparams.variogram, varparams.drifts)
     elseif varparams.degree ≠ nothing
-      estimator = UniversalKriging(varparams.variogram, varparams.degree)
+      estimator = UniversalKriging(varparams.variogram, varparams.degree, ndims(pdomain))
     elseif varparams.mean ≠ nothing
       estimator = SimpleKriging(varparams.variogram, varparams.mean)
     else
