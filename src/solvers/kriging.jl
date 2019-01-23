@@ -107,8 +107,8 @@ function preprocess(problem::EstimationProblem, solver::Kriging)
         neighborhood = varparams.neighborhood
 
         # create a path from the data and outwards
-        # use at most 10^3 points to generate path
-        N = length(varlocs); M = ceil(Int, N/10^3)
+        # use at most 10^2 points to generate path
+        N = length(varlocs); M = ceil(Int, N/10^2)
         path = SourcePath(pdomain, view(varlocs,1:M:N))
 
         neighsearcher = LocalNeighborSearcher(pdomain, maxneighbors,
