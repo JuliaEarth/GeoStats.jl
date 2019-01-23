@@ -89,11 +89,20 @@ function preprocess(problem::SimulationProblem, solver::SeqGaussSim)
       neighsearcher = LocalNeighborSearcher(pdomain, maxneighbors,
                                             neighborhood, path)
     else
-      # nearest neighbor search with a metric
-      metric = varparams.metric
+      # find locations with data
       varlocs = collect(keys(datamap(problem, var)))
-      neighsearcher = NearestNeighborSearcher(pdomain, maxneighbors,
-                                              metric, varlocs)
+      if isempty(varlocs)
+        # fallback to local search wiith a neighborhood
+        T = coordtype(pdomain)
+        neighborhood = BallNeighborhood(pdomain, T(10))
+        neighsearcher = LocalNeighborSearcher(pdomain, maxneighbors,
+                                              neighborhood, path)
+      else
+        # nearest neighbor search with a metric
+        metric = varparams.metric
+        neighsearcher = NearestNeighborSearcher(pdomain, maxneighbors,
+                                                metric, varlocs)
+      end
     end
 
     # save preprocessed input
