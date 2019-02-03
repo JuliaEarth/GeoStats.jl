@@ -30,7 +30,7 @@ PointSetData
 
 ## RegularGridData
 
-In the case that the data is regularly spaced in a grid, the `GeoGridData` object provides
+In the case that the data is regularly spaced in a grid, the `RegularGridData` object provides
 fast access across multiple overlaid images.
 
 ```@docs
