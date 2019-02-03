@@ -33,27 +33,29 @@ function solve(problem::SimulationProblem, solver::CookieCutter)
   # retrieve problem info
   pdata   = data(problem)
   pdomain = domain(problem)
-  pmapper = mapper(problem)
   pvars   = variables(problem)
   preals  = nreals(problem)
+  pmaps   = datamap(problem)
 
-  mastervars = collect(keys(solver.master.params))
-  @assert length(mastervars) == 1 "only one variable can be specified in master solver"
+  # master variable
+  mvars = collect(keys(solver.master.params))
+  @assert length(mvars) == 1 "only one variable can be specified in master solver"
+  mvar = mvars[1]
+  @assert mvar ∈ keys(pvars) "invalid variable in master solver"
+  mtype = pvars[mvar]
 
-  mastervar = mastervars[1]
-  @assert mastervar ∈ keys(pvars) "invalid variable in master solver"
-  mastertype = pvars[mastervar]
+  # other variables
+  ovars = Dict(var => V for (var, V) in pvars if var ≠ mvar)
+  @assert length(ovars) > 0 "cookie-cutter requires problem with more than one target variable"
 
-  others = Dict(var => V for (var,V) in pvars if var ≠ mastervar)
-  @assert length(others) > 0 "cookie-cutter requires problem with more than one target variable"
+  # copy mappings for master variable
+  mmapper = CopyMapper(collect(values(pmaps[mvar])), collect(keys(pmaps[mvar])))
 
-  # define master and other problems
+  # define master problem
   if hasdata(problem)
-    mproblem = SimulationProblem(pdata, pdomain, mastervar, preals, mapper=pmapper)
-    oproblem = SimulationProblem(pdata, pdomain, keys(others), preals, mapper=pmapper)
+    mproblem = SimulationProblem(pdata, pdomain, mvar, preals, mapper=mmapper)
   else
-    mproblem = SimulationProblem(pdomain, mastervar => mastertype, preals, mapper=pmapper)
-    oproblem = SimulationProblem(pdomain, others, preals, mapper=pmapper)
+    mproblem = SimulationProblem(pdomain, mvar => mtype, preals, mapper=mmapper)
   end
 
   # solve master problem
@@ -61,20 +63,50 @@ function solve(problem::SimulationProblem, solver::CookieCutter)
 
   # pre-allocate memory for result
   realizations = msolution.realizations
-  for (var, V) in others
+  for (var, V) in ovars
     realizations[var] = [Vector{V}(undef, npoints(pdomain)) for i in 1:preals]
   end
 
-  # use master solution as guide
-  guides = realizations[mastervar]
+  # find mappings for all other variables
+  omaps = merge([pmaps[var] for var in keys(ovars)]...)
 
   # solve other problems
-  for (mval, osolver) in solver.others
-    osolution = solve(oproblem, osolver)
-    for (var, oreals) in osolution.realizations
-      for i in 1:preals
-        mask = guides[i] .≈ mval
-        realizations[var][i][mask] .= oreals[i][mask]
+  for (i, mreal) in enumerate(realizations[mvar])
+    for (mval, osolver) in solver.others
+      # lookup indices with given master value
+      inds = findall(isequal(mval), mreal)
+
+      if !isempty(inds)
+        # define subdomain
+        odomain = view(pdomain, inds)
+
+        # find mappings for subdomain
+        datlocs = Vector{Int}()
+        domlocs = Vector{Int}()
+        for (j, ind) in enumerate(inds)
+          if ind ∈ keys(omaps)
+            push!(datlocs, omaps[ind])
+            push!(domlocs, j)
+          end
+        end
+
+        # copy hard data if needed
+        omapper = CopyMapper(datlocs, domlocs)
+
+        # define subproblem
+        if hasdata(problem)
+          oproblem = SimulationProblem(pdata, odomain, collect(keys(ovars)), 1, mapper=omapper)
+        else
+          oproblem = SimulationProblem(odomain, ovars, 1, mapper=omapper)
+        end
+
+        # solve subproblem
+        osolution = solve(oproblem, osolver)
+
+        # save result and continue
+        for (var, V) in ovars
+          view(realizations[var][i], inds) .= osolution.realizations[var][1]
+        end
       end
     end
   end
@@ -90,9 +122,9 @@ function Base.show(io::IO, solver::CookieCutter)
 end
 
 function Base.show(io::IO, ::MIME"text/plain", solver::CookieCutter)
-  mastervar = collect(keys(solver.master.params))[1]
+  mvar = collect(keys(solver.master.params))[1]
   println(io, solver)
-  println(io, "  └─", mastervar, " ⇨ ", solver.master)
+  println(io, "  └─", mvar, " ⇨ ", solver.master)
   for (val, osolver) in solver.others
     println(io, "    └─", val, " ⇨ ", osolver)
   end
