@@ -39,7 +39,7 @@ function solve(problem::SimulationProblem, solver::CookieCutter)
 
   # master variable
   mvars = collect(keys(solver.master.params))
-  @assert length(mvars) == 1 "only one variable can be specified in master solver"
+  @assert length(mvars) == 1 "one single variable must be specified in master solver"
   mvar = mvars[1]
   @assert mvar ∈ keys(pvars) "invalid variable in master solver"
   mtype = pvars[mvar]
