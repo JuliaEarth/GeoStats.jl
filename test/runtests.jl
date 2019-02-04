@@ -13,6 +13,8 @@ if !istravis
   using Gtk
 end
 
+include("dummysolver.jl")
+
 # list of tests
 testfiles = [
   "solvers.jl",
