@@ -103,8 +103,24 @@
   end
 
   @testset "CookieCutter" begin
-    problem2D = SimulationProblem(grid2D, Dict(:facies => Int, :property => Float64), 3)
+    problem2D = SimulationProblem(grid2D, Dict(:facies => Int, :prop => Float64), 3)
 
-    # TODO: test solution correctness
+    solver₁ = CookieCutter(Dummy(:facies => NamedTuple()), [0 => Dummy(), 1 => Dummy()])
+
+    γ₀ = GaussianVariogram(distance=Ellipsoidal([30.,10.],[0.]))
+    γ₁ = GaussianVariogram(distance=Ellipsoidal([10.,30.],[0.]))
+    solver₂ = CookieCutter(Dummy(:facies => NamedTuple()),
+                           [0 => SeqGaussSim(:prop => (variogram=γ₀,)),
+                            1 => SeqGaussSim(:prop => (variogram=γ₁,))])
+
+    Random.seed!(1234)
+    solution₁ = solve(problem2D, solver₁)
+    solution₂ = solve(problem2D, solver₂)
+
+    if visualtests
+      gr(size=(800,400))
+      @plottest plot(solution₁) joinpath(datadir,"CookieCutter1.png") !istravis
+      @plottest plot(solution₂) joinpath(datadir,"CookieCutter2.png") !istravis
+    end
   end
 end
