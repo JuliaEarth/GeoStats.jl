@@ -3,9 +3,6 @@
   <a href="https://travis-ci.org/juliohm/GeoStats.jl">
     <img src="https://travis-ci.org/juliohm/GeoStats.jl.svg?branch=master">
   </a>
-  <a href="http://pkg.julialang.org/?pkg=GeoStats">
-    <img src="http://pkg.julialang.org/badges/GeoStats_0.7.svg">
-  </a>
   <a href="https://codecov.io/gh/juliohm/GeoStats.jl">
     <img src="https://codecov.io/gh/juliohm/GeoStats.jl/branch/master/graph/badge.svg">
   </a>
