@@ -6,7 +6,6 @@ module GeoStats
 
 using Reexport
 using Random
-using Statistics
 using LinearAlgebra
 using Distributed
 using StaticArrays

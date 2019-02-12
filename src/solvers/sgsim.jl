@@ -27,12 +27,12 @@ default with the `variogram` only.
 
 * `maxneighbors` - Maximum number of neighbors (default to 10)
 * `neighborhood` - Search neighborhood (default to `nothing`)
-* `metric`       - Metric used to find nearest neighbors (default to `Euclidean()`)
+* `distance`     - Distance used to find nearest neighbors (default to `Euclidean()`)
 * `path`         - Simulation path (default to `RandomPath`)
 
 For each location in the simulation `path`, a maximum number of
 neighbors `maxneighbors` is used to fit a Gaussian distribution.
-The nearest neighbors are searched according to a `metric`
+The nearest neighbors are searched according to a `distance`
 or according to a `neighborhood` when the latter is provided.
 """
 @simsolver SeqGaussSim begin
@@ -42,7 +42,7 @@ or according to a `neighborhood` when the latter is provided.
   @param drifts = nothing
   @param maxneighbors = 10
   @param neighborhood = nothing
-  @param metric = Euclidean()
+  @param distance = Euclidean()
   @param path = nothing
 end
 
@@ -98,10 +98,10 @@ function preprocess(problem::SimulationProblem, solver::SeqGaussSim)
         neighsearcher = LocalNeighborSearcher(pdomain, maxneighbors,
                                               neighborhood, path)
       else
-        # nearest neighbor search with a metric
-        metric = varparams.metric
+        # nearest neighbor search with a distance
+        distance = varparams.distance
         neighsearcher = NearestNeighborSearcher(pdomain, maxneighbors,
-                                                metric, varlocs)
+                                                distance, varlocs)
       end
     end
 
@@ -167,7 +167,7 @@ function solve_single(problem::SimulationProblem, var::Symbol,
         zview = view(realization, nview)
 
         # build Kriging system
-        krig = fit(estimator, Xview, zview)
+        krig = KrigingEstimators.fit(estimator, Xview, zview)
 
         if status(krig)
           # estimate mean and variance
