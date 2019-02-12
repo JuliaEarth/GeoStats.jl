@@ -24,6 +24,7 @@ import GeoStatsBase: solve, solve_single, preprocess
 
 # solvers installed by default
 include("solvers/kriging.jl")
+include("solvers/seqsim.jl")
 include("solvers/sgsim.jl")
 include("solvers/cookiecutter.jl")
 
