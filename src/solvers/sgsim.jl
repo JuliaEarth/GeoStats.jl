@@ -40,6 +40,7 @@ or according to a `neighborhood` when the latter is provided.
   @param mean = nothing
   @param degree = nothing
   @param drifts = nothing
+  @param marginal = Normal()
   @param maxneighbors = 10
   @param neighborhood = nothing
   @param distance = Euclidean()
@@ -71,6 +72,9 @@ function preprocess(problem::SimulationProblem, solver::SeqGaussSim)
     else
       estimator = OrdinaryKriging(varparams.variogram)
     end
+
+    # determine marginal distribution
+    marginal = varparams.marginal
 
     # determine maximum number of conditioning neighbors
     maxneighbors = varparams.maxneighbors
@@ -106,8 +110,8 @@ function preprocess(problem::SimulationProblem, solver::SeqGaussSim)
     end
 
     # save preprocessed input
-    preproc[var] = (estimator=estimator, path=path,
-                    maxneighbors=maxneighbors,
+    preproc[var] = (estimator=estimator, marginal=marginal,
+                    path=path, maxneighbors=maxneighbors,
                     neighsearcher=neighsearcher)
   end
 
@@ -121,7 +125,7 @@ function solve_single(problem::SimulationProblem, var::Symbol,
   pdomain = domain(problem)
 
   # unpack preprocessed parameters
-  estimator, path, maxneighbors, neighsearcher = preproc[var]
+  estimator, marginal, path, maxneighbors, neighsearcher = preproc[var]
 
   # determine value type
   V = variables(problem)[var]
@@ -155,7 +159,7 @@ function solve_single(problem::SimulationProblem, var::Symbol,
       # choose between marginal and conditional distribution
       if nneigh == 0
         # draw from marginal
-        realization[location] = randn(V)
+        realization[location] = rand(marginal)
       else
         # final set of neighbors
         nview = view(neighbors, 1:nneigh)
@@ -177,7 +181,7 @@ function solve_single(problem::SimulationProblem, var::Symbol,
           realization[location] = μ + √σ²*randn(V)
         else
           # draw from marginal
-          realization[location] = randn(V)
+          realization[location] = rand(marginal)
         end
       end
 
