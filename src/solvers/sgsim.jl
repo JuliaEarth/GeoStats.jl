@@ -5,13 +5,7 @@
 """
     SeqGaussSim(var₁=>param₁, var₂=>param₂, ...)
 
-A polyalgorithm sequential Gaussian simulation solver.
-
-Each pair `var=>param` specifies the `SeqGaussSimParam`
-`param` for the simulation variable `var`. In order to avoid
-boilerplate code, the constructor expects pairs of `Symbol`
-and `NamedTuple` instead. See [`Kriging`](@ref) documentation
-for examples.
+A sequential Gaussian simulation solver.
 
 ## Parameters
 
@@ -40,7 +34,6 @@ or according to a `neighborhood` when the latter is provided.
   @param mean = nothing
   @param degree = nothing
   @param drifts = nothing
-  @param marginal = Normal()
   @param maxneighbors = 10
   @param neighborhood = nothing
   @param distance = Euclidean()
@@ -51,9 +44,7 @@ function preprocess(problem::SimulationProblem, solver::SeqGaussSim)
   # retrieve problem info
   pdomain = domain(problem)
 
-  # result of preprocessing
-  preproc = Dict{Symbol,NamedTuple}()
-
+  params = []
   for (var, V) in variables(problem)
     # get user parameters
     if var ∈ keys(solver.params)
@@ -74,121 +65,22 @@ function preprocess(problem::SimulationProblem, solver::SeqGaussSim)
     end
 
     # determine marginal distribution
-    marginal = varparams.marginal
+    marginal = Normal()
 
-    # determine maximum number of conditioning neighbors
-    maxneighbors = varparams.maxneighbors
+    # equivalent parameters for SeqSim solver
+    param = SeqSimParam(estimator=estimator, marginal=marginal,
+                        maxneighbors=varparams.maxneighbors,
+                        neighborhood=varparams.neighborhood,
+                        distance=varparams.distance,
+                        path=varparams.path)
 
-    # determine which path to use
-    if varparams.path ≠ nothing
-      path = varparams.path
-    else
-      path = RandomPath(pdomain)
-    end
-
-    # determine neighborhood search method
-    if varparams.neighborhood ≠ nothing
-      # local search with a neighborhood
-      neighborhood = varparams.neighborhood
-      neighsearcher = LocalNeighborSearcher(pdomain, maxneighbors,
-                                            neighborhood, path)
-    else
-      # find locations with data
-      varlocs = collect(keys(datamap(problem, var)))
-      if isempty(varlocs)
-        # fallback to local search wiith a neighborhood
-        T = coordtype(pdomain)
-        neighborhood = BallNeighborhood(pdomain, T(10))
-        neighsearcher = LocalNeighborSearcher(pdomain, maxneighbors,
-                                              neighborhood, path)
-      else
-        # nearest neighbor search with a distance
-        distance = varparams.distance
-        neighsearcher = NearestNeighborSearcher(pdomain, maxneighbors,
-                                                distance, varlocs)
-      end
-    end
-
-    # save preprocessed input
-    preproc[var] = (estimator=estimator, marginal=marginal,
-                    path=path, maxneighbors=maxneighbors,
-                    neighsearcher=neighsearcher)
+    push!(params, var => param)
   end
 
-  preproc
+  preprocess(problem, SeqSim(Dict(params)))
 end
 
 function solve_single(problem::SimulationProblem, var::Symbol,
                       solver::SeqGaussSim, preproc)
-  # retrieve problem info
-  pdata = data(problem)
-  pdomain = domain(problem)
-
-  # unpack preprocessed parameters
-  estimator, marginal, path, maxneighbors, neighsearcher = preproc[var]
-
-  # determine value type
-  V = variables(problem)[var]
-
-  # pre-allocate memory for result
-  realization = Vector{V}(undef, npoints(pdomain))
-
-  # pre-allocate memory for coordinates
-  xₒ = MVector{ndims(pdomain),coordtype(pdomain)}(undef)
-
-  # pre-allocate memory for neighbors coordinates
-  neighbors = Vector{Int}(undef, maxneighbors)
-  X = Matrix{coordtype(pdomain)}(undef, ndims(pdomain), maxneighbors)
-
-  # keep track of simulated locations
-  simulated = falses(npoints(pdomain))
-  for (loc, datloc) in datamap(problem, var)
-    realization[loc] = value(pdata, datloc, var)
-    simulated[loc] = true
-  end
-
-  # simulation loop
-  for location in path
-    if !simulated[location]
-      # coordinates of neighborhood center
-      coordinates!(xₒ, pdomain, location)
-
-      # find neighbors with previously simulated values
-      nneigh = search!(neighbors, xₒ, neighsearcher, simulated)
-
-      # choose between marginal and conditional distribution
-      if nneigh == 0
-        # draw from marginal
-        realization[location] = rand(marginal)
-      else
-        # final set of neighbors
-        nview = view(neighbors, 1:nneigh)
-
-        # update neighbors coordinates
-        coordinates!(X, pdomain, nview)
-
-        Xview = view(X,:,1:nneigh)
-        zview = view(realization, nview)
-
-        # build Kriging system
-        krig = KrigingEstimators.fit(estimator, Xview, zview)
-
-        if status(krig)
-          # estimate mean and variance
-          μ, σ² = predict(krig, xₒ)
-
-          # draw from conditional
-          realization[location] = μ + √σ²*randn(V)
-        else
-          # draw from marginal
-          realization[location] = rand(marginal)
-        end
-      end
-
-      # mark location as simulated and continue
-      simulated[location] = true
-    end
-  end
-
-  realization
+  solve_single(problem, var, SeqSim(), preproc)
 end
