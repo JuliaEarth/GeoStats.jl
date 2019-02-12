@@ -26,7 +26,7 @@ default with the `variogram` only.
 
 * `maxneighbors` - Maximum number of neighbors (default to `nothing`)
 * `neighborhood` - Search neighborhood (default to `nothing`)
-* `metric`       - Metric used to find nearest neighbors (default to `Euclidean()`)
+* `distance`     - Distance used to find nearest neighbors (default to `Euclidean()`)
 
 The `maxneighbors` option can be used to perform approximate Kriging
 with a subset of data points per estimation location. Two neighborhood
@@ -36,7 +36,7 @@ search methods are available depending on the value of `neighborhood`:
   the `neighborhood` in the domain.
 
 * If `neighborhood` is not provided, the Kriging system is built using
-  `maxneighbors` nearest neighbors according to a `metric`.
+  `maxneighbors` nearest neighbors according to a `distance`.
 
 ## Examples
 
@@ -65,7 +65,7 @@ julia> Kriging()
   @param drifts = nothing
   @param maxneighbors = nothing
   @param neighborhood = nothing
-  @param metric = Euclidean()
+  @param distance = Euclidean()
 end
 
 function preprocess(problem::EstimationProblem, solver::Kriging)
@@ -114,11 +114,11 @@ function preprocess(problem::EstimationProblem, solver::Kriging)
         neighsearcher = LocalNeighborSearcher(pdomain, maxneighbors,
                                               neighborhood, path)
       else
-        # nearest neighbor search with a metric
-        metric = varparams.metric
+        # nearest neighbor search with a distance
+        distance = varparams.distance
         path = SimplePath(pdomain)
         neighsearcher = NearestNeighborSearcher(pdomain, maxneighbors,
-                                                metric, varlocs)
+                                                distance, varlocs)
       end
     else
       # use all data points as neighbors
@@ -207,7 +207,7 @@ function solve_locally(problem::EstimationProblem, var::Symbol, preproc)
         zview = view(varμ, nview)
 
         # fit estimator to data
-        krig = fit(estimator, Xview, zview)
+        krig = KrigingEstimators.fit(estimator, Xview, zview)
 
         # save mean and variance
         μ, σ² = predict(krig, xₒ)
@@ -242,7 +242,7 @@ function solve_globally(problem::EstimationProblem, var::Symbol, preproc)
 
     # fit estimator to data
     X, z = valid(pdata, var)
-    krig = fit(estimator, X, z)
+    krig = KrigingEstimators.fit(estimator, X, z)
 
     for location in path
       coordinates!(xₒ, pdomain, location)

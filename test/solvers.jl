@@ -103,15 +103,15 @@
   end
 
   @testset "CookieCutter" begin
-    problem2D = SimulationProblem(grid2D, Dict(:facies => Int, :prop => Float64), 3)
+    problem2D = SimulationProblem(grid2D, Dict(:facies => Int, :property => Float64), 3)
 
     solver₁ = CookieCutter(Dummy(:facies => NamedTuple()), [0 => Dummy(), 1 => Dummy()])
 
     γ₀ = GaussianVariogram(distance=Ellipsoidal([30.,10.],[0.]))
     γ₁ = GaussianVariogram(distance=Ellipsoidal([10.,30.],[0.]))
     solver₂ = CookieCutter(Dummy(:facies => NamedTuple()),
-                           [0 => SeqGaussSim(:prop => (variogram=γ₀,)),
-                            1 => SeqGaussSim(:prop => (variogram=γ₁,))])
+                           [0 => SeqGaussSim(:property => (variogram=γ₀,)),
+                            1 => SeqGaussSim(:property => (variogram=γ₁,))])
 
     Random.seed!(1234)
     solution₁ = solve(problem2D, solver₁)
