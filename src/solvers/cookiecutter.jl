@@ -64,7 +64,17 @@ function solve(problem::SimulationProblem, solver::CookieCutter)
   # pre-allocate memory for result
   realizations = msolution.realizations
   for (var, V) in ovars
-    realizations[var] = [Vector{V}(undef, npoints(pdomain)) for i in 1:preals]
+    reals = map(1:preals) do i
+      # find inactive locations in master variable
+      inactive = findall(isnan, realizations[mvar][i])
+
+      # copy inactive locations to other variable
+      real = Vector{V}(undef, npoints(pdomain))
+      view(real, inactive) .= V(NaN)
+
+      real
+    end
+    realizations[var] = reals
   end
 
   # find mappings for all other variables
