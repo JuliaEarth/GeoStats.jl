@@ -12,7 +12,7 @@
 ## Overview
 
 Geostatistics (a.k.a. spatial statistics) is the branch of statistics that deals with
-spatial data. In many fields of science, such as mining engineering, hidrogeology,
+spatial data. In many fields of science, such as mining engineering, hydrogeology,
 petroleum engineering, and environmental sciences, traditional regression techniques
 fail to capture spatiotemporal correlation, and therefore are not satisfactory tools
 for decision making involving spatial resources.
