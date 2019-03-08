@@ -107,7 +107,6 @@ Complex partition schemes can be produced hierarchically with a `HierarchicalPar
 UniformPartitioner
 PlanePartitioner
 DirectionPartitioner
-SpatialPredicatePartitioner
 HierarchicalPartitioner
 ```
 
