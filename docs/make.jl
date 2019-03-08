@@ -15,7 +15,7 @@ makedocs(
   pages = [
     "Home" => "index.md",
     "User guide" => [
-      "Problems and solvers" => "problems_and_solvers.md",
+      "Problems & solvers" => "problems_and_solvers.md",
       "Spatial data" => "spatialdata.md",
       "Domains" => "domains.md",
       "Variography" => [
@@ -25,6 +25,7 @@ makedocs(
       ],
       "Kriging estimators" => "estimators.md",
       "Solver comparisons" => "comparisons.md",
+      "Spatial statistics" => "statistics.md",
       "Plotting" => "plotting.md"
     ],
     "Tutorials" => "tutorials.md",
