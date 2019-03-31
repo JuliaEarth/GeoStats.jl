@@ -4,7 +4,7 @@ if Base.HOME_PROJECT[] !== nothing
 end
 
 # Workaround for GR warnings
-ENV["GSKwstype"] = "100"
+ENV["GKSwstype"] = "100"
 
 using Documenter, GeoStats
 
