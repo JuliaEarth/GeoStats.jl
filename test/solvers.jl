@@ -27,11 +27,10 @@
 
     # basic checks
     for solution in solutions2D
-      result = digest(solution)
-      @test Set(keys(result)) == Set([:value])
-      @test result[:value][:mean][26,26] == 1.
-      @test result[:value][:mean][51,76] == 0.
-      @test result[:value][:mean][76,51] == 1.
+      M, V = solution[:value]
+      @test M[26,26] == 1.
+      @test M[51,76] == 0.
+      @test M[76,51] == 1.
     end
 
     if visualtests
@@ -72,11 +71,10 @@
 
     # basic checks
     for solution in solutions2D
-      result = digest(solution)
-      @test Set(keys(result)) == Set([:value])
-      @test all(result[:value][i][26,26] == 1. for i in 1:nreals)
-      @test all(result[:value][i][51,76] == 0. for i in 1:nreals)
-      @test all(result[:value][i][76,51] == 1. for i in 1:nreals)
+      reals = solution[:value]
+      @test all(reals[i][26,26] == 1. for i in 1:nreals)
+      @test all(reals[i][51,76] == 0. for i in 1:nreals)
+      @test all(reals[i][76,51] == 1. for i in 1:nreals)
     end
 
     if visualtests
