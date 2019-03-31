@@ -3,6 +3,9 @@ if Base.HOME_PROJECT[] !== nothing
   Base.HOME_PROJECT[] = abspath(Base.HOME_PROJECT[])
 end
 
+# Workaround for GR warnings
+ENV["GSKwstype"] = "100"
+
 using Documenter, GeoStats
 
 istravis = "TRAVIS" ∈ keys(ENV)
