@@ -1,4 +1,4 @@
-# Problems and solvers
+# Problems & solvers
 
 One of the greatest features of GeoStats.jl is the ability to define geostatistical problems
 independently of the solution strategy. This design allows researchers and practioners to

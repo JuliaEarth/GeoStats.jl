@@ -11,10 +11,9 @@ using Documenter, GeoStats
 istravis = "TRAVIS" ∈ keys(ENV)
 
 makedocs(
-  format = Documenter.HTML(prettyurls=istravis),
+  format = Documenter.HTML(assets=["assets/style.css"], prettyurls=istravis),
   sitename = "GeoStats.jl",
-  authors = "Júlio Hoffimann Mendes",
-  assets = ["assets/style.css"],
+  authors = "Júlio Hoffimann",
   pages = [
     "Home" => "index.md",
     "User guide" => [
