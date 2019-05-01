@@ -1,0 +1,40 @@
+name = "GeoStats"
+uuid = "dcc97b0b-8ce5-5539-9008-bb190f959ef6"
+author = "Júlio Hoffimann <julio.hoffimann@gmail.com>"
+version = "0.8.9"
+
+[deps]
+Distances = "b4f34e82-e78d-54a5-968a-f98e89d6e8f7"
+Distributed = "8ba89e20-285c-5b6f-9357-94700520ee1b"
+GeoStatsBase = "323cb8eb-fbf6-51c0-afd0-f8fba70507b2"
+GeoStatsDevTools = "19e549d1-356f-5655-9f3d-c1d6136da705"
+KrigingEstimators = "d293930c-a38c-56c5-8ebb-12008647b47a"
+LinearAlgebra = "37e2e46d-f89d-539d-b4ee-838fcccc9c8e"
+Random = "9a3f8284-a2c9-5f02-9a11-845980a1fd5c"
+RecipesBase = "3cdcf5f2-1ef4-517c-9805-6587b60abb01"
+Reexport = "189a3867-3050-52da-a836-e630ba90ab69"
+StaticArrays = "90137ffa-7385-5640-81b9-e52037218182"
+Variography = "04a0146e-e6df-5636-8d7f-62fa9eb0b20c"
+
+[extras]
+ImageMagick = "6218d12a-5da1-5696-b52f-db25d2ecc6d1"
+Pkg = "44cfe95a-1eb2-52ea-b672-e2afdf69b78f"
+Plots = "91a5bcdd-55d7-5caf-9e0b-520d859cae80"
+QuartzImageIO = "dca85d43-d64c-5e67-8c65-017450d5d020"
+Random = "9a3f8284-a2c9-5f02-9a11-845980a1fd5c"
+Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
+VisualRegressionTests = "34922c18-7c2a-561c-bac1-01e79b2c4c92"
+
+[targets]
+test = ["Pkg", "VisualRegressionTests", "Test", "Plots", "ImageMagick", "QuartzImageIO", "Random"]
+
+[compat]
+Distances = "≥ 0.7.4"
+GeoStatsBase = "≥ 0.3.6"
+GeoStatsDevTools = "≥ 0.4.0"
+KrigingEstimators = "≥ 0.2.1"
+RecipesBase = "≥ 0.2.3"
+Reexport = "≥ 0.1.0"
+StaticArrays = "≥ 0.7.0"
+Variography = "≥ 0.3.4"
+julia = "≥ 1.0.0"
