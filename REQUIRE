@@ -1,9 +1,0 @@
-julia 0.7
-Reexport 0.1.0
-GeoStatsBase 0.3.6
-GeoStatsDevTools 0.4.0
-Variography 0.3.4
-KrigingEstimators 0.2.1
-Distances 0.7.4
-StaticArrays 0.7.0
-RecipesBase 0.2.3
