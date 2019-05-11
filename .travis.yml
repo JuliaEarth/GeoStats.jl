@@ -12,8 +12,8 @@ matrix:
 notifications:
   email: false
 after_success:
-  - julia --project=test/coverage -e 'using Pkg; Pkg.instantiate()'
-  - julia --project=test/coverage test/coverage/coverage.jl
+  - julia -e 'using Pkg; Pkg.add("Coverage")'
+  - julia -e 'using Coverage; Codecov.submit(process_folder())'
 jobs:
   include:
     - stage: "Documentation"
