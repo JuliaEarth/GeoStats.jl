@@ -83,7 +83,7 @@ The resulting linear system is:
 \newcommand{\1}{\boldsymbol{1}}
 \newcommand{\z}{\boldsymbol{z}}
 \begin{bmatrix}
-cov(\x_1,\x_2) & cov(\x_1,\x_2) & \cdots & cov(\x_1,\x_n) \\
+cov(\x_1,\x_1) & cov(\x_1,\x_2) & \cdots & cov(\x_1,\x_n) \\
 cov(\x_2,\x_1) & cov(\x_2,\x_2) & \cdots & cov(\x_2,\x_n) \\
 \vdots & \vdots & \ddots & \vdots \\
 cov(\x_n,\x_1) & cov(\x_n,\x_2) & \cdots & cov(\x_n,\x_n)
