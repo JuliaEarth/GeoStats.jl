@@ -25,3 +25,9 @@ PointSet
 ```@docs
 RegularGrid
 ```
+
+## StructuredGrid
+
+```@docs
+StructuredGrid
+```
