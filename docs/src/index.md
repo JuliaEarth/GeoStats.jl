@@ -62,24 +62,19 @@ can be installed from the list above for additional functionality.
 Below is a quick preview of the high-level API. For the full example, please see
 the [GeoStatsTutorials](https://github.com/juliohm/GeoStatsTutorials) repository.
 
-```julia
+```@example overview
 using GeoStats
 using Plots
+gr(size=(900,400)) # hide
 
-# data.csv:
-#    x,    y,       station, precipitation
-# 25.0, 25.0,     palo alto,           1.0
-# 50.0, 75.0,  redwood city,           0.0
-# 75.0, 50.0, mountain view,           1.0
+# define spatial data
+sdata = PointSetData(Dict(:precipitation => [1.,0.,1.]), [(25.,25.),(50.,75.),(75.,50.)])
 
-# read spreadsheet file containing spatial data
-geodata = readgeotable("data.csv", coordnames=[:x,:y])
-
-# define spatial domain (e.g. regular grid, point collection)
-grid = RegularGrid{Float64}(100, 100)
+# define spatial domain (e.g. regular grid, point set)
+sdomain = RegularGrid{Float64}(100, 100)
 
 # define estimation problem for any data column(s) (e.g. :precipitation)
-problem = EstimationProblem(geodata, grid, :precipitation)
+problem = EstimationProblem(sdata, sdomain, :precipitation)
 
 # choose a solver from the list of solvers
 solver = Kriging(
@@ -90,9 +85,10 @@ solver = Kriging(
 solution = solve(problem, solver)
 
 # plot the solution
-plot(solution)
+contourf(solution, contour_labels=true)
+png("images/EstimationSolution.png") # hide
 ```
-![EstimationSolution](images/EstimationSolution.png)
+![](images/EstimationSolution.png)
 
 ### Low-level API
 
