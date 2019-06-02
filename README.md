@@ -163,7 +163,7 @@ solver = Kriging(
 solution = solve(problem, solver)
 
 # plot the solution
-plot(solution)
+contourf(solution, contour_labels=true)
 ```
 ![EstimationSolution](docs/src/images/EstimationSolution.png)
 
