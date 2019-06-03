@@ -118,7 +118,7 @@ All simulation solvers can generate realizations in parallel unless otherwise no
 
 If you are a developer and your solver is not listed above, please open a pull request and
 we will be happy to review and add it to the list. Please check the developer guide in the
-GeoStats.jl documentation for instructions on how to write your own solvers.
+documentation below for instructions on how to write your own solvers.
 
 ## Documentation
 
