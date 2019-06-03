@@ -30,6 +30,6 @@ request on GitHub so that we make sure your idea is aligned with
 our goals for the project.
 
 You can also develop your own solver independently, under your own
-license terms. Please check [GeoStatsBase.jl](https://github.com/juliohm/GeoStatsBase.jl)
-and [GeoStatsDevTools.jl](https://github.com/juliohm/GeoStatsDevTools.jl) for
-information on how to write solvers that are compatible with the framework.
+license terms. Please check the [Developer guide](developer_basics.md)
+for information on how to write solvers that are compatible with the
+framework.
