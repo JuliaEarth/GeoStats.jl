@@ -37,7 +37,10 @@ makedocs(
       "License" => "about/license.md",
       "Citing" => "about/citing.md"
     ],
-    "Developer guide" => "developers.md",
+    "Developer guide" => [
+      "Basics" => "developer_basics.md",
+      "Dev tools" => "developer_tools.md"
+    ],
     "Index" => "links.md"
   ]
 )

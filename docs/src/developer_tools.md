@@ -1,8 +1,8 @@
-# Developer guide
+# Developer tools
 
-This guide provides an overview of the tools implemented in the framework that can be used by developers
-while writing new geostatistical solvers. If you have any question, please don't hesitate to ask in our
-[community](about/community.md) channel.
+Here we provide an overview of the tools implemented in the framework that can be used by developers
+to accelerate the process of writing new geostatistical solvers. If you have any question, please don't
+hesitate to ask in our [community](about/community.md) channel.
 
 ## Solver macros
 
