@@ -116,11 +116,9 @@ All simulation solvers can generate realizations in parallel unless otherwise no
 | [StratSim](https://github.com/juliohm/StratiGraphics.jl) | Stratigraphy simulation | [![](https://travis-ci.org/juliohm/StratiGraphics.jl.svg?branch=master)](https://travis-ci.org/juliohm/StratiGraphics.jl) | [![](https://codecov.io/gh/juliohm/StratiGraphics.jl/branch/master/graph/badge.svg)](https://codecov.io/gh/juliohm/StratiGraphics.jl) | [Hoffimann 2018](https://searchworks.stanford.edu/view/12746435) |
 | [CookieCutter](https://github.com/juliohm/GeoStats.jl/tree/master/src/solvers) | Cookie-cutter scheme | [![][travis-img]][travis-url] | [![][codecov-img]][codecov-url] | [Begg 1992](https://www.onepetro.org/conference-paper/SPE-24698-MS) |
 
-If you are a developer and your solver is not listed above, please open a pull request and we
-will be happy to review and add it to the list.
-Please check [GeoStatsBase.jl](https://github.com/juliohm/GeoStatsBase.jl) for instructions on
-how to write your own solvers and [GeoStatsDevTools.jl](https://github.com/juliohm/GeoStatsDevTools.jl)
-for additional developer tools.
+If you are a developer and your solver is not listed above, please open a pull request and
+we will be happy to review and add it to the list. Please check the developer guide in the
+GeoStats.jl documentation for instructions on how to write your own solvers.
 
 ## Documentation
 
