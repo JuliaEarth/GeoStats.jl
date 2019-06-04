@@ -38,8 +38,9 @@ makedocs(
       "Citing" => "about/citing.md"
     ],
     "Developer guide" => [
-      "Basics" => "developer_basics.md",
-      "Dev tools" => "developer_tools.md"
+      "The basics" => "developer_basics.md",
+      "Developer tools" => "developer_tools.md",
+      "Writing solvers" => "developer_example.md"
     ],
     "Index" => "links.md"
   ]
