@@ -1,8 +1,8 @@
-# Framework basics
+# The basics
 
 This guide provides an overview of the spatial problems and solution types
-defined in the framework. By the end of this read, you should be able to
-write your own geostatistical solver, and enjoy a large set of features
+defined in the framework. After reading this document, you should be able
+to write your own geostatistical solvers, and enjoy a large set of features
 *for free*, including distributed parallel execution, a suite of meta
 algorithms, and various plot recipes. If you have any questions, please
 don't hesitate to ask in our
@@ -10,11 +10,48 @@ don't hesitate to ask in our
 
 ## Spatial problems
 
+Currently, there are two types of spatial problems defined in the framework:
+
+```julia
+EstimationProblem
+SimulationProblem
+```
+
+For each problem type, there is a corresponding solution type:
+
+```julia
+EstimationSolution
+SimulationSolution
+```
+
+Any `EstimationSolver` in the framework returns an `EstimationSolution`, which
+consists of the domain of the `EstimationProblem` plus two dictionaries: `mdict`
+mapping the variable names (a `Symbol`) of the problem to mean values, and `vdict`
+mapping the same variable names to variance values:
+
+```julia
+EstimationSolution(domain, mdict, vdict)
+```
+
+Any `SimulationSolver` in the framework returns a `SimulationSolution`, which
+consists of the domain of the `SimulationProblem` plus a dictionary `rdict`
+mapping the variable names (a `Symbol`) of the problem to a vector of (flattened)
+realizations:
+
+```julia
+SimulationSolution(domain, rdict)
+```
+
+These definitions are implemented in the
+[GeoStatsBase.jl](https://github.com/juliohm/GeoStatsBase.jl)
+package alongside other important conceptual
+components of the project.
+
 ## Writing a solver
 
-The task of writing a solver for a spatial problem as defined above reduces to
+The task of writing a solver for a spatial problem as defined consists of
 writing a simple function in Julia that takes the problem as input and returns
-the solution. In this section, I write an estimation solver that is not very
+the solution. In this section, an estimation solver is written that is not very
 useful (it fills the domain with random numbers), but that illustrates the
 development process.
 

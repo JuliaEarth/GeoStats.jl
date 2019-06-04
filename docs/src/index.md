@@ -91,7 +91,7 @@ png("images/EstimationSolution.png") # hide
 
 ### Low-level API
 
-If you are interested in finer control, Kriging estimators
+If you are interested in finer control, some estimators
 can also be used directly:
 
 ```@example

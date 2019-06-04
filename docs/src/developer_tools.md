@@ -1,12 +1,13 @@
 # Developer tools
 
-Here we provide an overview of the tools implemented in the framework that can be used by developers
-to accelerate the process of writing new geostatistical solvers. If you have any question, please don't
-hesitate to ask in our [community](about/community.md) channel.
+Various tools are made available that can be used to accelerate the process of writing
+new geostatistical solvers. They are implemented in the
+[GeoStatsDevTools.jl](https://github.com/juliohm/GeoStatsDevTools.jl) package.
 
 ## Solver macros
 
-To define a new solver with the same interface of built-in solvers, the developer can use solver macros:
+To define a new solver with the same interface of built-in solvers, the developer
+can use solver macros:
 
 ```julia
 @estimsolver MySolver begin
@@ -16,8 +17,9 @@ To define a new solver with the same interface of built-in solvers, the develope
 end
 ```
 
-The `@estimsolver` macro defines a new estimation solver `MySolver`, a parameter type `MySolverParam`, and an
-outer constructor that accepts parameters for each variable as well as global parameters.
+The `@estimsolver` macro defines a new estimation solver `MySolver`, a parameter type
+`MySolverParam`, and an outer constructor that accepts parameters for each variable as
+well as global parameters.
 
 Similarly, simulation solvers can be created with the `@simsolver` macro.
 
@@ -28,8 +30,9 @@ Similarly, simulation solvers can be created with the `@simsolver` macro.
 
 ## Domain navigation
 
-To navigate through all locations of a (finite) spatial domain, we introduce the concept of paths. This package
-defines various path types such as `SimplePath` and `RandomPath` that can be used for iteration over any domain:
+To navigate through all locations of a (finite) spatial domain, we introduce the concept
+of paths. This package defines various path types such as `SimplePath` and `RandomPath`
+that can be used for iteration over any domain:
 
 ```julia
 # prints 1, 2, ..., npoints(domain)
@@ -44,8 +47,9 @@ RandomPath
 SourcePath
 ```
 
-At a given location of a domain, we can query neighboring locations with the concept of neighborhoods. Various
-neighborhood types such as `BallNeighborhood` can be used to find all locations within a specified radius:
+At a given location of a domain, we can query neighboring locations with the concept of
+neighborhoods. Various neighborhood types such as `BallNeighborhood` can be used to find
+all locations within a specified radius:
 
 ```julia
 # define ball neighborhood with radius 10
@@ -109,80 +113,3 @@ PlanePartitioner
 DirectionPartitioner
 HierarchicalPartitioner
 ```
-
-## Solver example
-
-For illustration purposes, we write an estimation solver that, for each location of the domain, assigns the
-2-norm of the coordinates as the mean and the ∞-norm as the variance:
-
-```@example normsolver
-using GeoStatsBase
-using GeoStatsDevTools
-using LinearAlgebra: norm
-
-# implement method for new solver
-import GeoStatsBase: solve
-
-@estimsolver NormSolver begin
-  @param pmean = 2
-  @param pvar  = Inf
-end
-
-function solve(problem::EstimationProblem, solver::NormSolver)
-  pdomain = domain(problem)
-
-  # results for each variable
-  μs = []; σs = []
-
-  for (var,V) in variables(problem)
-    # get user parameters
-    if var in keys(solver.params)
-      varparams = solver.params[var]
-    else
-      varparams = NormSolverParam()
-    end
-
-    # allocate memory for result
-    varμ = Vector{V}(undef, npoints(pdomain))
-    varσ = Vector{V}(undef, npoints(pdomain))
-
-    for location in SimplePath(pdomain)
-      x = coordinates(pdomain, location)
-
-      varμ[location] = norm(x, varparams.pmean)
-      varσ[location] = norm(x, varparams.pvar)
-    end
-
-    push!(μs, var => varμ)
-    push!(σs, var => varσ)
-  end
-
-  EstimationSolution(pdomain, Dict(μs), Dict(σs))
-end;
-```
-
-We can test the newly defined solver on an estimation problem:
-
-```@example normsolver
-using GeoStats
-using Plots
-gr(size=(600,400)) # hide
-
-# dummy spatial data with a single point and no value
-spatialdata = PointSetData(Dict(:z => [NaN]), reshape([0.,0.], 2, 1))
-
-# estimate on a regular grid
-spatialgrid = RegularGrid{Float64}(100,100)
-
-# the problem to be solved
-problem = EstimationProblem(spatialdata, spatialgrid, :z)
-
-# our new solver
-solver = NormSolver()
-
-solution = solve(problem, solver)
-
-plot(solution)
-png("images/normsolver.png") # hide
-```
-![](images/normsolver.png)
