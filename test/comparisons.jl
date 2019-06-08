@@ -37,7 +37,7 @@
     Random.seed!(2019)
 
     data2D = readgeotable(joinpath(datadir,"500Gaussian.csv"), coordnames=[:x,:y])
-    grid2D = boundgrid(data2D, (100,100))
+    grid2D = RegularGrid(bounds(data2D), dims=(100,100))
     problem2D = EstimationProblem(data2D, grid2D, :value)
 
     if visualtests

@@ -117,8 +117,8 @@ function preprocess(problem::EstimationProblem, solver::Kriging)
         # nearest neighbor search with a distance
         distance = varparams.distance
         path = SimplePath(pdomain)
-        neighsearcher = NearestNeighborSearcher(pdomain, maxneighbors,
-                                                distance, varlocs)
+        neighsearcher = NearestNeighborSearcher(pdomain, varlocs,
+                                                maxneighbors, distance)
       end
     else
       # use all data points as neighbors
