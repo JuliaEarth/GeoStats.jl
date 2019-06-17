@@ -2,7 +2,7 @@
 
 Various tools are made available that can be used to accelerate the process of writing
 new geostatistical solvers. They are implemented in the
-[GeoStatsDevTools.jl](https://github.com/juliohm/GeoStatsDevTools.jl) package.
+[GeoStatsBase.jl](https://github.com/juliohm/GeoStatsBase.jl) package.
 
 ## Solver macros
 

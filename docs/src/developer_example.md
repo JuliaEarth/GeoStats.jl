@@ -9,7 +9,6 @@ An estimation solver that, for each location of the domain, assigns the
 
 ```@example normsolver
 using GeoStatsBase
-using GeoStatsDevTools
 using LinearAlgebra: norm
 
 # implement method for new solver
