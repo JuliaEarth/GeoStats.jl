@@ -50,7 +50,6 @@ The project is split into various packages:
 | [Variography.jl](https://github.com/juliohm/Variography.jl) | Variogram estimation and modeling, and related tools. |
 | [KrigingEstimators.jl](https://github.com/juliohm/KrigingEstimators.jl) | High-performance implementations of Kriging estimators. |
 | [GeoStatsBase.jl](https://github.com/juliohm/GeoStatsBase.jl) | Base package containing problem and solution specifications (for developers). |
-| [GeoStatsDevTools.jl](https://github.com/juliohm/GeoStatsDevTools.jl) | Developer tools for writing new solvers (for developers). |
 
 The main package (i.e. GeoStats.jl) is self-contained, and provides high-performance
 Kriging-based estimation/simulation algorithms over arbitrary domains. Other packages

@@ -10,17 +10,17 @@ following statistics are defined:
 ## Mean
 
 ```@docs
-GeoStatsDevTools.mean(::SimulationSolution)
+GeoStatsBase.mean(::SimulationSolution)
 ```
 
 ## Variance
 
 ```@docs
-GeoStatsDevTools.var(::SimulationSolution)
+GeoStatsBase.var(::SimulationSolution)
 ```
 
 ## Quantile
 
 ```@docs
-GeoStatsDevTools.quantile(::SimulationSolution, ::Real)
+GeoStatsBase.quantile(::SimulationSolution, ::Real)
 ```
