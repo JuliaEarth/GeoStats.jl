@@ -6,8 +6,8 @@ version = "0.9.0"
 [deps]
 Distances = "b4f34e82-e78d-54a5-968a-f98e89d6e8f7"
 Distributed = "8ba89e20-285c-5b6f-9357-94700520ee1b"
+Distributions = "31c24e10-a181-5473-b8eb-7969acd0382f"
 GeoStatsBase = "323cb8eb-fbf6-51c0-afd0-f8fba70507b2"
-GeoStatsDevTools = "19e549d1-356f-5655-9f3d-c1d6136da705"
 KrigingEstimators = "d293930c-a38c-56c5-8ebb-12008647b47a"
 LinearAlgebra = "37e2e46d-f89d-539d-b4ee-838fcccc9c8e"
 Random = "9a3f8284-a2c9-5f02-9a11-845980a1fd5c"
@@ -15,6 +15,12 @@ RecipesBase = "3cdcf5f2-1ef4-517c-9805-6587b60abb01"
 Reexport = "189a3867-3050-52da-a836-e630ba90ab69"
 StaticArrays = "90137ffa-7385-5640-81b9-e52037218182"
 Variography = "04a0146e-e6df-5636-8d7f-62fa9eb0b20c"
+
+[compat]
+GeoStatsBase = "≥ 0.4.3"
+KrigingEstimators = "≥ 0.2.2"
+Variography = "≥ 0.3.6"
+julia = "1"
 
 [extras]
 ImageMagick = "6218d12a-5da1-5696-b52f-db25d2ecc6d1"
@@ -27,14 +33,3 @@ VisualRegressionTests = "34922c18-7c2a-561c-bac1-01e79b2c4c92"
 
 [targets]
 test = ["Pkg", "VisualRegressionTests", "Test", "Plots", "ImageMagick", "QuartzImageIO", "Random"]
-
-[compat]
-Distances = "≥ 0.7.4"
-GeoStatsBase = "≥ 0.4.3"
-GeoStatsDevTools = "≥ 0.4.5"
-KrigingEstimators = "≥ 0.2.2"
-RecipesBase = "≥ 0.2.3"
-Reexport = "≥ 0.1.0"
-StaticArrays = "≥ 0.7.0"
-Variography = "≥ 0.3.6"
-julia = "1"

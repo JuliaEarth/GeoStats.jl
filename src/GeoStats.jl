@@ -11,12 +11,12 @@ using Distributed
 using StaticArrays
 using RecipesBase
 
-# some default arguments for solvers
-using Distances: Euclidean
+# reexport basic packages
+@reexport using Distances
+@reexport using Distributions
 
-# export project modules
+# reexport project modules
 @reexport using GeoStatsBase
-@reexport using GeoStatsDevTools
 @reexport using KrigingEstimators
 
 # extend base module
