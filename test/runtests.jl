@@ -1,6 +1,4 @@
 using GeoStats
-using Plots; gr(size=(600,400))
-using VisualRegressionTests
 using Test, Pkg, Random
 
 # workaround GR warnings
@@ -16,12 +14,8 @@ if !istravis
   using Gtk
 end
 
-include("dummysolver.jl")
-
 # list of tests
 testfiles = [
-  "solvers.jl",
-  "comparisons.jl"
 ]
 
 @testset "GeoStats.jl" begin
