@@ -203,6 +203,15 @@ If you find GeoStats.jl useful in your work, please consider citing it:
 }
 ```
 
+## Used at
+
+<p align="center">
+  <img src="docs/src/images/Stanford.png" height="100">
+  <img src="docs/src/images/IBM.png" height="100"><br><br>
+  <img src="docs/src/images/Deltares.png" height="150" hspace="20">
+  <img src="docs/src/images/ENI.png" height="150" hspace="20">
+</p>
+
 [travis-img]: https://travis-ci.org/juliohm/GeoStats.jl.svg?branch=master
 [travis-url]: https://travis-ci.org/juliohm/GeoStats.jl
 
