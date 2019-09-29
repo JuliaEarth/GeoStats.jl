@@ -37,7 +37,7 @@ function solve(problem::EstimationProblem, solver::NormSolver)
     varμ = Vector{V}(undef, npoints(pdomain))
     varσ = Vector{V}(undef, npoints(pdomain))
 
-    for location in SimplePath(pdomain)
+    for location in LinearPath(pdomain)
       x = coordinates(pdomain, location)
 
       varμ[location] = norm(x, varparams.pmean)

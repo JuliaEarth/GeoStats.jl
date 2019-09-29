@@ -16,22 +16,20 @@ In this project, solvers can be compared without effort. Below is a list of curr
 implemented comparison methods. For examples of usage, please consult the
 [GeoStatsTutorials](https://github.com/juliohm/GeoStatsTutorials) repository.
 
-## Visual comparison
-
-Visual comparison can be useful for qualitivative assessment of solver performance
-and for debugging purposes. In this case, solvers are used to solve a problem and
-their solutions are plotted side by side.
-
-```@docs
-VisualComparison
-```
-
 ## Cross-validation
-
-k-fold cross-validation is a popular statistical method for quantitative comparison
-of estimation solvers. The spatial data is split into `k` folds as the name implies
-and the solvers are used to estimate (or predict) one of the folds given the others.
 
 ```@docs
 CrossValidation
+```
+
+## Block Cross-Validation
+
+```@docs
+BlockCrossValidation
+```
+
+## Leave-Ball-Out Validation
+
+```@docs
+LeaveBallOut
 ```
