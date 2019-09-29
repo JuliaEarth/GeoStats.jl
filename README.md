@@ -44,6 +44,51 @@ Get the latest stable release with Julia's package manager:
 ] add GeoStats
 ```
 
+## Documentation
+
+- [**STABLE**][docs-stable-url] &mdash; **most recently tagged version of the documentation.**
+- [**LATEST**][docs-latest-url] &mdash; *in-development version of the documentation.*
+
+## Tutorials
+
+A set of Jupyter notebooks demonstrating the current functionality of the package is available
+in [GeoStatsTutorials](https://github.com/juliohm/GeoStatsTutorials).
+
+Below is a quick preview of the high-level API. For the full example, please check
+[this notebook](http://nbviewer.jupyter.org/github/juliohm/GeoStatsTutorials/blob/master/notebooks/EstimationProblems.ipynb).
+
+```julia
+using GeoStats
+using Plots
+
+# data.csv:
+#    x,    y,       station, precipitation
+# 25.0, 25.0,     palo alto,           1.0
+# 50.0, 75.0,  redwood city,           0.0
+# 75.0, 50.0, mountain view,           1.0
+
+# read spreadsheet file containing spatial data
+sdata = readgeotable("data.csv", coordnames=[:x,:y])
+
+# define spatial domain (e.g. regular grid, point collection)
+sdomain = RegularGrid{Float64}(100, 100)
+
+# define estimation problem for any data column(s) (e.g. :precipitation)
+problem = EstimationProblem(sdata, sdomain, :precipitation)
+
+# choose a solver from the list of solvers
+solver = Kriging(
+  :precipitation => (variogram=GaussianVariogram(range=35.),)
+)
+
+# solve the problem
+solution = solve(problem, solver)
+
+# plot the solution
+contourf(solution, clabels=true)
+```
+![EstimationSolution](docs/src/images/EstimationSolution.png)
+
 ## Project organization
 
 The project is split into various packages:
@@ -91,51 +136,6 @@ All simulation solvers can generate realizations in parallel unless otherwise no
 If you are a developer and your solver is not listed above, please open a pull request and
 we will be happy to review and add it to the list. Please check the developer guide in the
 documentation below for instructions on how to write your own solvers.
-
-## Documentation
-
-- [**STABLE**][docs-stable-url] &mdash; **most recently tagged version of the documentation.**
-- [**LATEST**][docs-latest-url] &mdash; *in-development version of the documentation.*
-
-## Tutorials
-
-A set of Jupyter notebooks demonstrating the current functionality of the package is available
-in [GeoStatsTutorials](https://github.com/juliohm/GeoStatsTutorials).
-
-Below is a quick preview of the high-level API. For the full example, please check
-[this notebook](http://nbviewer.jupyter.org/github/juliohm/GeoStatsTutorials/blob/master/notebooks/EstimationProblems.ipynb).
-
-```julia
-using GeoStats
-using Plots
-
-# data.csv:
-#    x,    y,       station, precipitation
-# 25.0, 25.0,     palo alto,           1.0
-# 50.0, 75.0,  redwood city,           0.0
-# 75.0, 50.0, mountain view,           1.0
-
-# read spreadsheet file containing spatial data
-sdata = readgeotable("data.csv", coordnames=[:x,:y])
-
-# define spatial domain (e.g. regular grid, point collection)
-sdomain = RegularGrid{Float64}(100, 100)
-
-# define estimation problem for any data column(s) (e.g. :precipitation)
-problem = EstimationProblem(sdata, sdomain, :precipitation)
-
-# choose a solver from the list of solvers
-solver = Kriging(
-  :precipitation => (variogram=GaussianVariogram(range=35.),)
-)
-
-# solve the problem
-solution = solve(problem, solver)
-
-# plot the solution
-contourf(solution, contour_labels=true)
-```
-![EstimationSolution](docs/src/images/EstimationSolution.png)
 
 ## Contributing and supporting
 
