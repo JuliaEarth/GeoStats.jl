@@ -10,9 +10,8 @@ how hard it is to compare algorithms fairly. Often a new algorithm is proposed i
 and yet the task of comparing it with the state of the art is quite demanding. Even when a
 comparison is made by the author after a great amount of effort, it is inevitably biased.
 
-Part of this issue is attributed to the fact that a general definition of the problem is missing.
-What is it that we call an "estimation problem" in geostatistics? What about "stochastic simulation"?
-The answer to these questions is given below in the form of code.
+Part of this issue is attributed to the fact that a formal definition of geostatistical problems is missing.
+The project provides solutions to three problems defined below.
 
 ## Estimation problem
 
@@ -46,6 +45,20 @@ SimulationProblem
 hasdata
 ```
 
+## Learning problem
+
+A geostatistical learning problem consists of a triplet:
+
+1. Source spatial data (e.g. with labels)
+2. Target spatial data (e.g. without labels)
+3. Learning task (e.g. classification)
+
+In this case, a learning model is trained with the source spatial data, and then used to perform the same task with the target spatial data.
+
+```@docs
+LearningProblem
+```
+
 ## List of solvers
 
 Below is the list of solvers distributed with GeoStats.jl. For more solvers, please check
@@ -66,4 +79,10 @@ SeqGaussSim
 
 ```@docs
 CookieCutter
+```
+
+### Learning
+
+```@docs
+PointwiseLearn
 ```

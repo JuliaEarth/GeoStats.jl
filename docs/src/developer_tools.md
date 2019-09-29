@@ -31,18 +31,18 @@ Similarly, simulation solvers can be created with the `@simsolver` macro.
 ## Domain navigation
 
 To navigate through all locations of a (finite) spatial domain, we introduce the concept
-of paths. This package defines various path types such as `SimplePath` and `RandomPath`
+of paths. This package defines various path types such as `LinearPath` and `RandomPath`
 that can be used for iteration over any domain:
 
 ```julia
 # prints 1, 2, ..., npoints(domain)
-for location in SimplePath(domain)
+for location in LinearPath(domain)
   println(location)
 end
 ```
 
 ```@docs
-SimplePath
+LinearPath
 RandomPath
 SourcePath
 ```
@@ -74,12 +74,12 @@ In GeoStats.jl, spatial data and domain types are disconnected from each other f
 - To give developers the power of deciding when and where data is to be copied
 - To enable higher-level comparison schemes such as cross-validation
 
-To map spatial data onto a domain, we introduce the notion of mappers. For example, a `SimpleMapper`
+To map spatial data onto a domain, we introduce the notion of mappers. For example, a `NearestMapper`
 can be used to find the mapping from domain locations to data locations for a given variable:
 
 ```julia
-# construct a problem mapping data onto domain using SimpleMapper (default)
-problem = EstimationProblem(..., mapper=SimpleMapper())
+# construct a problem mapping data onto domain using NearestMapper (default)
+problem = EstimationProblem(..., mapper=NearestMapper())
 
 # get the mapping for the `:precipitation` variable
 mapping = datamap(problem, :precipitation)
@@ -90,7 +90,7 @@ end
 ```
 
 ```@docs
-SimpleMapper
+NearestMapper
 CopyMapper
 ```
 

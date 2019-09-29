@@ -83,7 +83,7 @@ solver = Kriging(
 solution = solve(problem, solver)
 
 # plot the solution
-contourf(solution, contour_labels=true)
+contourf(solution, clabels=true)
 png("images/EstimationSolution.png") # hide
 ```
 ![](images/EstimationSolution.png)
