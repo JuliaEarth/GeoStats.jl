@@ -1,10 +1,8 @@
 # Spatial data
 
-In GeoStats.jl, data and domain are disconnected one from another. This design enables
-levels of parallelism that would be difficult or even impossible to implement otherwise.
-
-The data is accessed by solvers only if strictly necessary. One of our goals is to be
-able to handle massive datasets that may not fit in random-access memory (RAM).
+Below is the list of currently implemented spatial data types. There exists an effort
+in the JuliaGeo organization to add more flexible raster out-of-memory data types
+that are compatible with the GeoStats.jl framework.
 
 ## GeoDataFrame
 
