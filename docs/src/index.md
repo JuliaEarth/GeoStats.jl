@@ -11,24 +11,23 @@
 
 ## Overview
 
-Geostatistics (a.k.a. spatial statistics) is the branch of statistics that deals with
-spatial data. In many fields of science, such as mining engineering, hydrogeology,
-petroleum engineering, and environmental sciences, traditional regression techniques
-fail to capture spatiotemporal correlation, and therefore are not satisfactory tools
-for decision making involving spatial resources.
+In many fields of science, such as mining engineering, hydrogeology, petroleum engineering,
+and environmental sciences, traditional statistical theories fail to provide unbiased estimates
+of resources due to the presence of spatial correlation. Geostatistics (a.k.a. spatial statistics)
+is the branch of statistics developed to overcome this limitation. Particularly, it is the branch
+that takes spatial coordinates of data into account.
 
-GeoStats.jl is an attempt to bring together bleeding-edge research in the geostatistics
-community into a comprehensive framework, and to empower researchers and practioners
-with a toolkit for fast assessment of different modeling approaches.
+GeoStats.jl is an attempt to bring together bleeding-edge research in the geostatistics community
+into a comprehensive framework for spatial statistics, as well as to empower researchers and
+practioners with a toolkit for fast assessment of different modeling approaches. The framework is
+well-integrated with the Julia ecosystem, including the [MLJ.jl](https://github.com/alan-turing-institute/MLJ.jl)
+and [Plots.jl](https://github.com/JuliaPlots/Plots.jl) projects for learning and plotting spatial variables.
 
-The design of this package is the result of many years developing geostatistical software.
-I hope that it can serve to promote more collaboration between geostatisticians around the
-globe and to standardize this incredible science.
-
-If you would like to help support the project, please
-[star the repository on GitHub](https://github.com/juliohm/GeoStats.jl)
-and share it with your colleagues. If you are a developer,
-please check the [Developer guide](developer_basics.md).
+The design of this project is the result of many years developing geostatistical software. I hopehttps://github.com/JuliaPlots/Plots.jl
+that it can serve to promote more collaboration between geostatisticians around the globe and to
+standardize this incredible science. If you would like to help support the project, please
+[star the repository on GitHub](https://github.com/juliohm/GeoStats.jl) and share it with your
+colleagues. If you are a developer, please check the [Developer guide](developer_basics.md).
 
 ## Installation
 
@@ -55,10 +54,16 @@ The main package (i.e. GeoStats.jl) is self-contained, and provides high-perform
 Kriging-based estimation/simulation algorithms over arbitrary domains. Other packages
 can be installed from the list above for additional functionality.
 
+Besides the packages above, the project is extended via solver packages, for which
+the links are listed in the [README](https://github.com/juliohm/GeoStats.jl) on GitHub.
+These solvers are implemented independently of the main package for different
+geostatistical problems.
+
 ## Quick example
 
-Below is a quick preview of the high-level API. For the full example, please see
-the [GeoStatsTutorials](https://github.com/juliohm/GeoStatsTutorials) repository.
+Below is a quick preview of a geostatistical estimation problem solved with a Kriging
+solver. Besides estimation, the framework implements various solvers for
+geostatistical simulation and geostatitistical learning problems.
 
 ```@example overview
 using GeoStats
@@ -88,40 +93,5 @@ png("images/EstimationSolution.png") # hide
 ```
 ![](images/EstimationSolution.png)
 
-### Low-level API
-
-If you are interested in finer control, some estimators
-can also be used directly:
-
-```@example
-using GeoStats
-using Random, Statistics # hide
-Random.seed!(2017) # hide
-
-# create some data
-dim, nobs = 3, 10
-X = rand(dim, nobs)
-z = rand(nobs)
-
-# target location
-xₒ = rand(dim)
-
-# define a variogram model
-γ = GaussianVariogram(sill=1., range=1., nugget=0.)
-
-# define an estimator (i.e. build the Kriging system)
-sk = SimpleKriging(X, z, γ, mean(z))
-ok = OrdinaryKriging(X, z, γ)
-uk = UniversalKriging(X, z, γ, 0)
-
-# estimate at target location
-μ, σ² = predict(sk, xₒ)
-println("Simple Kriging:") # hide
-println("  μ = $μ, σ² = $σ²") # hide
-μ, σ² = predict(ok, xₒ)
-println("Ordinary Kriging:") # hide
-println("  μ = $μ, σ² = $σ²") # hide
-μ, σ² = predict(uk, xₒ)
-println("Universal Kriging:") # hide
-println("  μ = $μ, σ² = $σ²") # hide
-```
+For the full example, please see
+the [GeoStatsTutorials](https://github.com/juliohm/GeoStatsTutorials) repository.

@@ -1,8 +1,3 @@
-# Workaround for JuliaLang/julia/pull/28625
-if Base.HOME_PROJECT[] !== nothing
-  Base.HOME_PROJECT[] = abspath(Base.HOME_PROJECT[])
-end
-
 # Workaround for GR warnings
 ENV["GKSwstype"] = "100"
 
@@ -17,8 +12,14 @@ makedocs(
   pages = [
     "Home" => "index.md",
     "User guide" => [
-      "Problems & solvers" => "problems_and_solvers.md",
-      "Spatial data" => "spatialdata.md",
+      "Manipulating data" => "data_manipulation.md",
+      "Defining problems" => "problem_definition.md",
+      "Plotting solutions" => "solution_plotting.md"
+    ],
+    "Tutorials" => "tutorials.md",
+    "Reference guide" => [
+      "Problems" => "problems_and_solvers.md",
+      "Data" => "data.md",
       "Domains" => "domains.md",
       "Variography" => [
         "empirical_variograms.md",
@@ -30,7 +31,6 @@ makedocs(
       "Spatial statistics" => "statistics.md",
       "Plotting" => "plotting.md"
     ],
-    "Tutorials" => "tutorials.md",
     "Contributing" => "contributing.md",
     "About" => [
       "Community" => "about/community.md",

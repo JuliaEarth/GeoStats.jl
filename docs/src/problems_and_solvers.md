@@ -1,4 +1,4 @@
-# Problems & solvers
+# Problems
 
 One of the greatest features of GeoStats.jl is the ability to define geostatistical problems
 independently of the solution strategy. This design allows researchers and practioners to
@@ -28,7 +28,7 @@ Each of these components is constructed separately, and then grouped (no memory 
 EstimationProblem
 ```
 
-Please check [Spatial data](spatialdata.md) and [Domains](domains.md) for currently implemented
+Please check [Spatial data](data.md) and [Domains](domains.md) for currently implemented
 data and domain types.
 
 ## Simulation problem
@@ -59,19 +59,19 @@ In this case, a learning model is trained with the source spatial data, and then
 LearningProblem
 ```
 
-## List of solvers
+# Built-in solvers
 
 Below is the list of solvers distributed with GeoStats.jl. For more solvers, please check
 the [project page on GitHub](https://github.com/juliohm/GeoStats.jl#problems-and-solvers)
 where a table is provided with links to accompanying repositories.
 
-### Estimation
+### Estimation solvers
 
 ```@docs
 Kriging
 ```
 
-### Simulation
+### Simulation solvers
 
 ```@docs
 SeqGaussSim
@@ -81,7 +81,7 @@ SeqGaussSim
 CookieCutter
 ```
 
-### Learning
+### Learning solvers
 
 ```@docs
 PointwiseLearn
