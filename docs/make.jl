@@ -24,7 +24,7 @@ makedocs(
       ],
       "Kriging estimators" => "estimators.md",
       "Solver comparisons" => "comparisons.md",
-      "Spatial statistics" => "statistics.md",
+      "Spatial operations" => "operations.md",
       "Plotting" => "plotting.md"
     ],
     "Developer guide" => "devguide.md",
