@@ -16,7 +16,7 @@ makedocs(
     "Reference guide" => [
       "Data" => "data.md",
       "Domains" => "domains.md",
-      "Problems" => "problems_and_solvers.md",
+      "Problems" => "problems.md",
       "Variography" => [
         "empirical_variograms.md",
         "theoretical_variograms.md",
@@ -27,11 +27,7 @@ makedocs(
       "Spatial statistics" => "statistics.md",
       "Plotting" => "plotting.md"
     ],
-    "Developer guide" => [
-      "The basics" => "developer_basics.md",
-      "Developer tools" => "developer_tools.md",
-      "Writing solvers" => "developer_example.md"
-    ],
+    "Developer guide" => "devguide.md",
     "Contributing" => "contributing.md",
     "About" => [
       "Community" => "about/community.md",
