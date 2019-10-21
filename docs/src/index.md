@@ -93,5 +93,4 @@ png("images/EstimationSolution.png") # hide
 ```
 ![](images/EstimationSolution.png)
 
-For the full example, please see
-the [GeoStatsTutorials](https://github.com/juliohm/GeoStatsTutorials) repository.
+For the full example, please see the [Tutorials](tutorials.md) section of the documentation.
