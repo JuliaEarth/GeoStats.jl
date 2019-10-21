@@ -22,13 +22,13 @@ implemented comparison methods. For examples of usage, please consult the
 CrossValidation
 ```
 
-## Block Cross-Validation
+## Block cross-validation
 
 ```@docs
 BlockCrossValidation
 ```
 
-## Leave-Ball-Out Validation
+## Leave-ball-out validation
 
 ```@docs
 LeaveBallOut
