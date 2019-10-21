@@ -10,11 +10,12 @@ don't hesitate to ask in our
 
 ## Spatial problems
 
-Currently, there are two types of spatial problems defined in the framework:
+Currently, there are three types of spatial problems defined in the framework:
 
 ```julia
 EstimationProblem
 SimulationProblem
+LearningProblem
 ```
 
 For each problem type, there is a corresponding solution type:
@@ -22,6 +23,7 @@ For each problem type, there is a corresponding solution type:
 ```julia
 EstimationSolution
 SimulationSolution
+LearningSolution
 ```
 
 Any `EstimationSolver` in the framework returns an `EstimationSolution`, which
@@ -40,6 +42,14 @@ realizations:
 
 ```julia
 SimulationSolution(domain, rdict)
+```
+
+Any `LearningSolver` in the framework returns a `LearningSolution`, which consits
+of the target domain of the `LearningProblem` plus a dictionary `dict` mapping
+variable names (a `Symbol`) of the problem to learned values:
+
+```julia
+LearningSolution(domain, dict)
 ```
 
 These definitions are implemented in the
@@ -203,3 +213,9 @@ with preprocessed data:
 ```julia
 preprocess(problem::SimulationProblem, solver::MySimSolver) = nothing
 ```
+
+### Learning solvers
+
+Similar to the other cases, writing a `LearningSolver` compatible with the framework consists
+of writing a simple Julia function that takes the `LearningProblem` as input along with the solver,
+and returns a `LearningSolution`.
