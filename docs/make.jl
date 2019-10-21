@@ -11,16 +11,12 @@ makedocs(
   authors = "Júlio Hoffimann",
   pages = [
     "Home" => "index.md",
-    "User guide" => [
-      "Manipulating data" => "data_manipulation.md",
-      "Defining problems" => "problem_definition.md",
-      "Plotting solutions" => "solution_plotting.md"
-    ],
+    "User guide" => "userguide.md",
     "Tutorials" => "tutorials.md",
     "Reference guide" => [
-      "Problems" => "problems_and_solvers.md",
       "Data" => "data.md",
       "Domains" => "domains.md",
+      "Problems" => "problems_and_solvers.md",
       "Variography" => [
         "empirical_variograms.md",
         "theoretical_variograms.md",
@@ -31,16 +27,16 @@ makedocs(
       "Spatial statistics" => "statistics.md",
       "Plotting" => "plotting.md"
     ],
+    "Developer guide" => [
+      "The basics" => "developer_basics.md",
+      "Developer tools" => "developer_tools.md",
+      "Writing solvers" => "developer_example.md"
+    ],
     "Contributing" => "contributing.md",
     "About" => [
       "Community" => "about/community.md",
       "License" => "about/license.md",
       "Citing" => "about/citing.md"
-    ],
-    "Developer guide" => [
-      "The basics" => "developer_basics.md",
-      "Developer tools" => "developer_tools.md",
-      "Writing solvers" => "developer_example.md"
     ],
     "Index" => "links.md"
   ]
