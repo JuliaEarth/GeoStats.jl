@@ -31,7 +31,7 @@ we can georeference the image as `RegularGridData`:
 ```@example userguide
 using GeoStats
 
-sdata = RegularGridData{Float64}(Dict(:Z=>Z))
+Ω = RegularGridData{Float64}(Dict(:Z=>Z))
 ```
 
 The origin and spacing of samples in the regular grid can be specified in the constructor:
@@ -45,7 +45,7 @@ and different spatial data types have different constructor options (see [Data](
 We plot the spatial data and note a few differences compared to the image plot shown above:
 
 ```@example userguide
-plot(sdata)
+plot(Ω)
 ```
 
 First, we note that the image was rotated to match the first index `i` of the array
@@ -57,7 +57,7 @@ Each sample in the spatial data object has a coordinate, which is calculated on 
 for a given list of locations (i.e. spatial indices):
 
 ```@example userguide
-coordinates(sdata, 1:3)
+coordinates(Ω, 1:3)
 ```
 
 In-place versions exist to avoid unnecessary memory allocations.
@@ -66,7 +66,7 @@ All coordinates are retrieved as a `ndims x npoints` matrix when we do not speci
 the spatial indices:
 
 ```@example userguide
-coordinates(sdata)
+coordinates(Ω)
 ```
 
 ### Tabular access
@@ -76,15 +76,15 @@ interface, which means that they can be accessed as if they were tables with sam
 in the rows and variables in the columns:
 
 ```@example userguide
-sdata[1:3,:Z]
+Ω[1:3,:Z]
 ```
 
 In this case, the coordinates of the samples are lost. To reconstruct a spatial data
 object, we need to save the spatial indices that were used to index the table:
 
 ```@example userguide
-zvals = sdata[1:3,:Z]
-coord = coordinates(sdata, 1:3)
+zvals = Ω[1:3,:Z]
+coord = coordinates(Ω, 1:3)
 
 PointSetData(Dict(:Z=>zvals), coord)
 ```
@@ -94,7 +94,7 @@ data with the variable name. In this case, the size of the array (i.e. `100x200`
 is preserved:
 
 ```@example userguide
-sdata[:Z]
+Ω[:Z]
 ```
 
 ### Spatial views
@@ -107,16 +107,16 @@ By plotting a view of the first 10 lines of our regular grid data, we obtain a
 general `PointSetData` as opposed to a `RegularGridData`:
 
 ```@example userguide
-sview = view(sdata, 1:10*100)
-plot(sview)
+Ωᵥ = view(Ω, 1:10*100)
+plot(Ωᵥ)
 ```
 
 We plot a random view of the grid to emphasize that views do not preserve
 spatial regularity:
 
 ```@example userguide
-inds = rand(1:npoints(sdata), 100)
-plot(view(sdata, inds))
+inds = rand(1:npoints(Ω), 100)
+plot(view(Ω, inds))
 ```
 
 ### Data partitions
@@ -126,15 +126,15 @@ To demonstrate the operation, we partition our spatial data view into
 balls of given radius:
 
 ```@example userguide
-p = partition(sview, BallPartitioner(5.))
-plot(p)
+Π = partition(Ωᵥ, BallPartitioner(5.))
+plot(Π)
 ```
 
 or, alternatively, into two halfspaces:
 
 ```@example userguide
-p = partition(sview, BisectFractionPartitioner((1.,1.), 0.5))
-plot(p)
+Π = partition(Ωᵥ, BisectFractionPartitioner((1.,1.), 0.5))
+plot(Π)
 ```
 
 Spatial partitions are (lazy) iterators of spatial views, which are useful in
@@ -142,13 +142,32 @@ many contexts as it will be shown in the next section of the user guide. To
 access a subset of a partition, we use index notation:
 
 ```@example userguide
-plot(p[1])
+plot(Π[1])
 ```
 
 ```@example userguide
-plot(p[2])
+plot(Π[2])
 ```
 
 ## Defining problems
+
+Having defined the spatial data objects, we proceed and define the geostatistical
+problem to be solved. In this guide, we illustrate *geostatistical learning*. For
+other types of geostatistical problems, please check the [Problems](problems.md)
+section of the documentation.
+
+Let's assume that we have spatial data with some variable that we want to predict
+in a supervised learning setting. We load the data from a CSV file, and specify
+the columns containing the coordinates:
+
+```@example userguide
+# TODO
+```
+
+and plot it:
+
+```@example userguide
+# TODO
+```
 
 ## Plotting solutions
