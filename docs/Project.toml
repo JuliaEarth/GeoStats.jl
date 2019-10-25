@@ -1,9 +1,8 @@
 [deps]
+CSV = "336ed68f-0bac-5ca0-87d4-7b16caf5d00b"
 CategoricalArrays = "324d7699-5711-5eae-9e2f-1d82baa6b597"
 DecisionTree = "7806a523-6efd-50cb-b5f6-3fa6f1930dbb"
 Documenter = "e30172f5-a6a5-5a46-863b-614d45cd2de4"
-GeoStatsBase = "323cb8eb-fbf6-51c0-afd0-f8fba70507b2"
-GeoStatsDevTools = "19e549d1-356f-5655-9f3d-c1d6136da705"
 MLJ = "add582a8-e3ab-11e8-2d5e-e98b27df1bc7"
 MLJModels = "d491faf4-2d78-11e9-2867-c94bc002c0b7"
 Plots = "91a5bcdd-55d7-5caf-9e0b-520d859cae80"
