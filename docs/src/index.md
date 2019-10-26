@@ -23,8 +23,8 @@ practioners with a toolkit for fast assessment of different modeling approaches.
 well-integrated with the Julia ecosystem, including the [MLJ.jl](https://github.com/alan-turing-institute/MLJ.jl)
 and [Plots.jl](https://github.com/JuliaPlots/Plots.jl) projects for learning and plotting spatial variables.
 
-The design of this project is the result of many years developing geostatistical software. I hopehttps://github.com/JuliaPlots/Plots.jl
-that it can serve to promote more collaboration between geostatisticians around the globe and to
+The design of this project is the result of many years developing geostatistical software. I hope that
+it can serve to promote more collaboration between geostatisticians around the globe and to
 standardize this incredible science. If you would like to help support the project, please
 [star the repository on GitHub](https://github.com/juliohm/GeoStats.jl) and share it with your
 colleagues. If you are a developer, please check the [Developer guide](devguide.md).
