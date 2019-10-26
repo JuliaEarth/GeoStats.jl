@@ -133,6 +133,12 @@ All simulation solvers can generate realizations in parallel unless otherwise no
 | [StratSim](https://github.com/juliohm/StratiGraphics.jl) | Stratigraphy simulation | [![](https://travis-ci.org/juliohm/StratiGraphics.jl.svg?branch=master)](https://travis-ci.org/juliohm/StratiGraphics.jl) | [![](https://codecov.io/gh/juliohm/StratiGraphics.jl/branch/master/graph/badge.svg)](https://codecov.io/gh/juliohm/StratiGraphics.jl) | [Hoffimann 2018](https://searchworks.stanford.edu/view/12746435) |
 | [CookieCutter](https://github.com/juliohm/GeoStatsBase.jl) | Cookie-cutter scheme | [![](https://travis-ci.org/juliohm/GeoStatsBase.jl.svg?branch=master)](https://travis-ci.org/juliohm/GeoStatsBase.jl) | [![](https://codecov.io/gh/juliohm/GeoStatsBase.jl/branch/master/graph/badge.svg)](https://codecov.io/gh/juliohm/GeoStatsBase.jl) | [Begg 1992](https://www.onepetro.org/conference-paper/SPE-24698-MS) |
 
+#### Learning problems
+
+| Solver | Description | Build | Coverage | References |
+|:------:|-------------|-------|----------|------------|
+| [PointwiseLearn](https://github.com/juliohm/GeoStatsBase.jl) | Pointwise learning | [![](https://travis-ci.org/juliohm/GeoStatsBase.jl.svg?branch=master)](https://travis-ci.org/juliohm/GeoStatsBase.jl) | [![](https://codecov.io/gh/juliohm/GeoStatsBase.jl/branch/master/graph/badge.svg)](https://codecov.io/gh/juliohm/GeoStatsBase.jl) | [Hoffimann 2018](https://doi.org/10.21105/joss.00692) |
+
 If you are a developer and your solver is not listed above, please open a pull request and
 we will be happy to review and add it to the list. Please check the developer guide in the
 documentation below for instructions on how to write your own solvers.
