@@ -1,7 +1,7 @@
 # User guide
 
 This guide provides an overview of a simple geostatistical workflow, which consists of
-of three basic steps:
+three basic steps:
 
 1. Manipulation of spatial data
 2. Definition of geostatistical problem
