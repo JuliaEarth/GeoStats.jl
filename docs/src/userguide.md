@@ -267,5 +267,5 @@ validation methods such as block cross-validation and leave-ball-out, but
 these methods deserve a separate tutorial.
 
 With this example we conclude the user guide. To get familiar with other
-features of GeoStats.jl, please check the [Tutorials](@ref) and the
-[Reference guide](@ref).
+features of GeoStats.jl, please check the tutorials and the
+reference guide.
