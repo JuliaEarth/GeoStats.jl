@@ -42,6 +42,10 @@ The following statistics have spatial semantics (i.e. make use of spatial coordi
 and as such, approximate better spatial variables when compared to their non-spatial
 counterparts:
 
+```@docs
+EmpiricalHistogram
+```
+
 ### Statistics from random field
 
 A set of geostatistical realizations of a random field represents a probability
