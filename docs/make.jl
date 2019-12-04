@@ -29,6 +29,7 @@ makedocs(
     ],
     "Developer guide" => "devguide.md",
     "Contributing" => "contributing.md",
+    "Related packages" => "related.md",
     "About" => [
       "Community" => "about/community.md",
       "License" => "about/license.md",
