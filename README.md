@@ -95,16 +95,17 @@ The project is split into various packages:
 
 | Package  | Description |
 |:--------:| ----------- |
-| [GeoStats.jl](https://github.com/juliohm/GeoStats.jl) | Main package containing Kriging-based solvers, and other geostatistical tools. |
-| [GeoStatsImages.jl](https://github.com/juliohm/GeoStatsImages.jl) | Training images for multiple-point geostatistical simulation. |
-| [GslibIO.jl](https://github.com/juliohm/GslibIO.jl) | Utilities to read/write *extended* GSLIB files. |
+| [GeoStats.jl](https://github.com/juliohm/GeoStats.jl) | Main package reexporting full stack of packages for geostatistics. |
 | [Variography.jl](https://github.com/juliohm/Variography.jl) | Variogram estimation and modeling, and related tools. |
 | [KrigingEstimators.jl](https://github.com/juliohm/KrigingEstimators.jl) | High-performance implementations of Kriging estimators. |
+| [PointPatterns.jl](https://github.com/juliohm/PointPatterns.jl) | Spatial point pattern analysis and synthesis. |
+| [GeoStatsImages.jl](https://github.com/juliohm/GeoStatsImages.jl) | Training images for multiple-point geostatistical simulation. |
+| [GslibIO.jl](https://github.com/juliohm/GslibIO.jl) | Utilities to read/write *extended* GSLIB files. |
 | [GeoStatsBase.jl](https://github.com/juliohm/GeoStatsBase.jl) | Base package containing problem and solution specifications (for developers). |
 
-The main package (i.e. GeoStats.jl) is self-contained, and provides high-performance
-Kriging-based estimation/simulation algorithms over arbitrary domains. Other packages
-can be installed from the list above for additional functionality.
+The main package (i.e. GeoStats.jl) is self-contained, and provides the full stack of
+packages for high-performance geostatistics over arbitrary domains. Other packages
+like GeoStatsImages.jl can be installed from the list above for additional functionality.
 
 ### Problems and solvers
 
