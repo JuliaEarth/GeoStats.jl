@@ -14,7 +14,7 @@ methods exist, their implementation is not necessarily straighforward.
 
 In this project, solvers can be compared without effort. Below is a list of currenlty
 implemented comparison methods. For examples of usage, please consult the
-[GeoStatsTutorials](https://github.com/juliohm/GeoStatsTutorials) repository.
+[GeoStatsTutorials](https://github.com/JuliaEarth/GeoStatsTutorials) repository.
 
 ## Cross-validation
 
