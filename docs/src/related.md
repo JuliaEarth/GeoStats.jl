@@ -13,7 +13,7 @@ and other important geostatisticians have generalized Gaussian processes
 to more general random fields with locally-varying mean and for situations
 where the mean is unknown. GeoStats.jl includes Gaussian processes as
 a special case as well as other more practical Kriging variants, see the
-[Gaussian processes example](https://github.com/juliohm/GeoStatsTutorials).
+[Gaussian processes example](https://github.com/JuliaEarth/GeoStatsTutorials).
 
 ## MLKernels.jl
 
@@ -25,7 +25,7 @@ there are variogram models with no covariance counterpart. Furthermore,
 empirical variograms can be easily estimated from the data (in various
 directions) with an efficient procedure. GeoStats.jl treats variograms
 as first-class objects, see the
-[Variogram modeling example](https://github.com/juliohm/GeoStatsTutorials).
+[Variogram modeling example](https://github.com/JuliaEarth/GeoStatsTutorials).
 
 ## Interpolations.jl
 
