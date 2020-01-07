@@ -39,4 +39,4 @@ makedocs(
   ]
 )
 
-deploydocs(repo="github.com/juliohm/GeoStats.jl.git")
+deploydocs(repo="github.com/JuliaEarth/GeoStats.jl.git")
