@@ -23,7 +23,7 @@ bibliography: paper.bib
 
 # Summary
 
-[GeoStats.jl](https://github.com/juliohm/GeoStats.jl) is an extensible framework
+[GeoStats.jl](https://github.com/JuliaEarth/GeoStats.jl) is an extensible framework
 for high-performance geostatistics in Julia, as well as a formal specification of
 statistical problems in the spatial setting. It provides highly optimized solvers
 for estimation and (conditional) simulation of variables defined over general spatial
@@ -142,7 +142,7 @@ As of version 0.6, the following comparison methods are available.
 # Usage in academia and industry
 
 The solvers and tools implemented in the project have been used in both academic and industrial endeavours.
-To give an example, the [ImageQuilting.jl](https://github.com/juliohm/ImageQuilting.jl)
+To give an example, the [ImageQuilting.jl](https://github.com/JuliaEarth/ImageQuilting.jl)
 [@Hoffimann2017] solver has been used inside [ENI](https://www.eni.com)
 to condition 3D process-based models to data acquired in Oil \& Gas fields.
 It has also been used by researchers in Denmark interested in modeling groundwater
