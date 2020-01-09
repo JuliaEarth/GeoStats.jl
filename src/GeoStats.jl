@@ -10,5 +10,6 @@ using Reexport
 @reexport using GeoStatsBase
 @reexport using Variography
 @reexport using KrigingEstimators
+@reexport using PointPatterns
 
 end
