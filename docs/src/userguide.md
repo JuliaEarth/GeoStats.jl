@@ -189,7 +189,7 @@ the spatial variables:
 Ω = GeoDataFrame(df, [:x,:y])
 
 gr(format=:png) # hide
-plot(Ω, variables=[:band4,:crop], ms=0.5, mc=:viridis, size=(800,400))
+plot(Ω, variables=[:band4,:crop], ms=0.2, mc=:viridis, size=(800,400))
 ```
 
 Similar to a generic statistical learning workflow, we split the data into "train"
@@ -199,8 +199,8 @@ accepts a separating plane specified by its normal direction `(1,-1)`:
 ```@example userguide
 Ωs, Ωt = split(Ω, 0.2, (1.,-1.))
 
-plot(domain(Ωs), ms=0.5)
-plot!(domain(Ωt), ms=0.5, mc=:green)
+plot(domain(Ωs), ms=0.2)
+plot!(domain(Ωt), ms=0.2, mc=:green)
 ```
 
 We can visualize the domain of the "train" (or source) set Ωs in black, and the
@@ -255,8 +255,8 @@ This also means that we can plot the solution directly, side by side with the
 true label in this synthetic example:
 
 ```@example userguide
-p̂ = plot(Ω̂t, ms=0.5, mc=:viridis, title="crop (prediction)")
-p = plot(Ωt, variables=[:crop], ms=0.5, mc=:viridis)
+p̂ = plot(Ω̂t, ms=0.2, mc=:viridis, title="crop (prediction)")
+p = plot(Ωt, variables=[:crop], ms=0.2, mc=:viridis)
 
 plot(p̂, p, size=(800,400))
 ```
