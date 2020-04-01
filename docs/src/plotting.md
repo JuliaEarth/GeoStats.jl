@@ -33,20 +33,25 @@ savefig("images/pointset.svg") # hide
 ```
 ![](images/pointset.svg)
 
-Besides plotting GeoStats.jl objects directly, a few other plots are provided for exploring spatial data.
+Besides plotting GeoStats.jl objects directly, a few other plots are provided for
+exploring spatial data.
 
-## h-scatter
+## hscatter
 
-A h-scatter plot between two variables `var1` and `var2` (possibly with `var2` = `var1`) is a simple scatter
-plot in which the dots represent all ordered pairs of values of `var1` and `var2` at a given lag `h`.
+A hscatter plot between two variables `var1` and `var2` (possibly with `var2` =
+`var1`) is a simple scatter plot in which the dots represent all ordered pairs of
+values of `var1` and `var2` at a given lag `h`.
 
-```julia
-using GeoStats
-using Plots
+```@example plots
+gr(size=(800,300)) # hide
+Z = [10sin(i/10) + j for i in 1:100, j in 1:200]
 
-hscatter(geodata, :value, lags=[0.,1.,2.,3.])
+Ω = RegularGridData{Float64}(OrderedDict(:Z=>Z))
+
+hscatter(sample(Ω, 500), :Z, lags=[0.,20.,50.])
+savefig("images/hscatter.svg") # hide
 ```
-![](images/HScatter.png)
+![](images/hscatter.svg)
 
 ## varplane
 
@@ -54,10 +59,7 @@ A variogram plane (i.e. `varplane`) plot is a visualization that displays a coll
 variograms for all angles in a given plane for 2D or 3D spatial data.
 
 ```julia
-using GeoStats
-using Plots
-
 # horizontal plane ==> theta=0, phi=90
-varplane(geodata, :value, theta=0, phi=90)
+varplane(Ω, :Z, theta=0, phi=90)
 ```
 ![](images/VarPlane.png)

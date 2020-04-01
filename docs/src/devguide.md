@@ -175,36 +175,39 @@ plot(solution)
 #### Writing simulation solvers
 
 The process of writing a simulation solver is very similar, but there is an alternative
-function to `solve` called `solve_single` that is *preferred*. The function `solve_single`
+function to `solve` called `solvesingle` that is *preferred*. The function `solvesingle`
 takes a simulation problem, one of the variables to be simulated, a solver, and a
 preprocessed input, and returns a *vector* with the simulation results:
 
 ```julia
-function solve_single(problem::SimulationProblem,
-                      var::Symbol, solver::MySimSolver, preproc)
+function solvesingle(problem::SimulationProblem, covars::NamedTuple,
+                     solver::MySimSolver, preproc)
   # retrieve problem info
   pdata = data(problem)
   pdomain = domain(problem)
-  V = valuetype(pdata, var)
 
-  # output is a single realization
-  realization = Vector{V}(undef, npoints(pdomain))
+  real4var = map(covars.names) do var
+    # output is a single realization for each covariable
+    real = Vector{V}(undef, npoints(pdomain))
 
-  # fill realization with hard data
-  for (loc, datloc) in datamap(problem, var)
-    realization[loc] = value(pdata, datloc, var)
+    # fill realization with hard data
+    for (loc, datloc) in datamap(problem, var)
+      real[loc] = pdata[datloc,var]
+    end
+
+    # algorithm goes here
+    # ...
+
+    var => real
   end
 
-  # algorithm goes here
-  # ...
-
-  realization
+  Dict(real4var)
 end
 ```
 
 This function is preferred over `solve` if your algorithm is the same for every single
 realization (the algorithm is only a function of the random seed). In this case, GeoStats.jl
-will provide an implementation of `solve` for you that calls `solve_single` in parallel.
+will provide an implementation of `solve` for you that calls `solvesingle` in parallel.
 
 The argument `preproc` is ignored unless the function `preprocess` is also defined for the
 solver. The function takes a simulation problem and a solver, and returns an arbitrary object
@@ -247,27 +250,28 @@ function solve(problem::EstimationProblem, solver::NormSolver)
   # results for each variable
   μs = []; σs = []
 
-  for (var,V) in variables(problem)
-    # get user parameters
-    if var in keys(solver.params)
-      varparams = solver.params[var]
-    else
-      varparams = NormSolverParam()
+  for covars in covariables(problem, solver)
+    for var in covars.names
+      # get user parameters
+      varparams = covars.params[(var,)]
+
+      # get variable type
+      V = variables(problem)[var]
+
+      # allocate memory for result
+      varμ = Vector{V}(undef, npoints(pdomain))
+      varσ = Vector{V}(undef, npoints(pdomain))
+
+      for location in LinearPath(pdomain)
+        x = coordinates(pdomain, location)
+
+        varμ[location] = norm(x, varparams.pmean)
+        varσ[location] = norm(x, varparams.pvar)
+      end
+
+      push!(μs, var => varμ)
+      push!(σs, var => varσ)
     end
-
-    # allocate memory for result
-    varμ = Vector{V}(undef, npoints(pdomain))
-    varσ = Vector{V}(undef, npoints(pdomain))
-
-    for location in LinearPath(pdomain)
-      x = coordinates(pdomain, location)
-
-      varμ[location] = norm(x, varparams.pmean)
-      varσ[location] = norm(x, varparams.pvar)
-    end
-
-    push!(μs, var => varμ)
-    push!(σs, var => varσ)
   end
 
   EstimationSolution(pdomain, Dict(μs), Dict(σs))
@@ -282,7 +286,7 @@ using Plots
 gr(size=(900,400)) # hide
 
 # dummy spatial data with a single point and no value
-sdata   = PointSetData(Dict(:z => [NaN]), reshape([0.,0.], 2, 1))
+sdata   = PointSetData(OrderedDict(:z => [NaN]), reshape([0.,0.], 2, 1))
 
 # estimate on a regular grid
 sdomain = RegularGrid{Float64}(100, 100)
@@ -308,9 +312,9 @@ solver = NormSolver(:z => (pmean=1,pvar=3))
 solution = solve(problem, solver)
 
 contourf(solution)
-png("images/normsolver2.png") # hide
+savefig("images/normsolver2.svg") # hide
 ```
-![](images/normsolver2.png)
+![](images/normsolver2.svg)
 
 ### Simulation solver example
 
@@ -321,26 +325,30 @@ sample from a Gaussian distribution.
 using GeoStatsBase
 
 # implement method for new solver
-import GeoStatsBase: solve_single
+import GeoStatsBase: solvesingle
 
 @simsolver RandSolver begin
   @param mean = 0
   @param var  = 1
 end
 
-function solve_single(problem::SimulationProblem, var::Symbol,
-                      solver::RandSolver, preproc)
+function solvesingle(problem::SimulationProblem, covars::NamedTuple,
+                     solver::RandSolver, preproc)
   pdomain = domain(problem)
 
-  # retrieve solver parameters
-  varparams = solver.params[var]
-  μ, σ² = varparams.mean, varparams.var
+  real4var = map(covars.names) do var
+    # retrieve solver parameters
+    varparams = covars.params[(var,)]
+    μ, σ² = varparams.mean, varparams.var
 
-  # i.i.d. samples ~ Normal(0,1)
-  z = rand(npoints(pdomain))
+    # i.i.d. samples ~ Normal(0,1)
+    z = rand(npoints(pdomain))
 
-  # rescale and return
-  μ .+ sqrt(σ²) .* z
+    # rescale and return
+    var => μ .+ sqrt(σ²) .* z
+  end
+
+  Dict(real4var)
 end;
 ```
 
@@ -363,9 +371,9 @@ solver = RandSolver(:z => (mean=10.,var=10.))
 solution = solve(problem, solver)
 
 heatmap(solution)
-png("images/randsolver1.png") # hide
+savefig("images/randsolver1.svg") # hide
 ```
-![](images/randsolver1.png)
+![](images/randsolver1.svg)
 
 Note, however, that we did not define the `preprocess` function for the solver.
 This function can be used to avoid recalculations for each realization, and to
@@ -376,19 +384,12 @@ solver constructor:
 import GeoStatsBase: preprocess
 
 function preprocess(problem::SimulationProblem, solver::RandSolver)
-  # result of preprocessing
-  preproc = Dict{Symbol,NamedTuple}()
-
-  for (varname, V) in variables(problem)
-    if varname ∈ keys(solver.params)
-      # get user parameters
-      varparams = solver.params[varname]
-    else
-      # set default parameters
-      varparams = RandSolverParam()
+  preproc = Dict()
+  for covars in covariables(problem, solver)
+    for varname in covars.names
+      varparams = covars.params[(varname,)]
+      preproc[varname] = (mean=varparams.mean, var=varparams.var)
     end
-
-    preproc[varname] = (mean=varparams.mean, var=varparams.var)
   end
 
   preproc
@@ -406,24 +407,85 @@ preprocess(problem, solver)
 ```
 
 This `preproc` output is passed by GeoStats.jl as the last argument to the
-`solve_single` function, which could be reimplemented as follows:
+`solvesingle` function, which could be reimplemented as follows:
 
 ```@example randsolver
-function solve_single(problem::SimulationProblem, var::Symbol,
-                      solver::RandSolver, preproc)
+function solvesingle(problem::SimulationProblem, covars::NamedTuple,
+                     solver::RandSolver, preproc)
   pdomain = domain(problem)
 
-  # retrieve solver parameters
-  μ, σ² = preproc[var]
+  real4var = map(covars.names) do var
+    # retrieve solver parameters
+    μ, σ² = preproc[var]
 
-  # i.i.d. samples ~ Normal(0,1)
-  z = rand(npoints(pdomain))
+    # i.i.d. samples ~ Normal(0,1)
+    z = rand(npoints(pdomain))
 
-  # rescale and return
-  μ .+ sqrt(σ²) .* z
+    # rescale and return
+    var => μ .+ sqrt(σ²) .* z
+  end
+
+  Dict(real4var)
 end;
 ```
 
 ### Learning solver example
 
-TODO
+A learning solver that clusters data into super pixels:
+
+```@example slicsolver
+using GeoStatsBase
+
+# implement method for new solver
+import GeoStatsBase: solvesingle
+
+struct SLICSolver <: AbstractLearningSolver
+  k::Int # approximate number of super pixels
+  m::Float64 # SLIC tradeoff parameter
+end
+
+function solve(problem::LearningProblem, solver::SLICSolver)
+  @assert task(problem) isa ClusteringTask "invalid problem"
+
+  # retrieve problem info
+  ptask  = task(problem)
+  feats  = collect(features(ptask))
+  tdata  = targetdata(problem)
+  output = outputvars(ptask)[1]
+
+  # find super pixels
+  slic = SLICPartitioner(solver.k, solver.m, vars=feats)
+  part = partition(tdata, slic)
+
+  # label for each point in target data
+  labels = Vector{Int}(undef, npoints(tdata))
+  for (i, inds) in enumerate(subsets(part))
+    labels[inds] .= i
+  end
+
+  # return learning solution
+  LearningSolution(domain(tdata), OrderedDict(output => labels))
+end;
+```
+
+We can test the newly defined solver in a learning problem:
+
+```@example slicsolver
+using GeoStats
+using Plots
+gr(size=(900,300)) # hide
+
+Z = [10sin(i/10) + j for i in 1:100, j in 1:100]
+
+Ω = RegularGridData{Float64}(OrderedDict(:Z=>Z))
+
+t = ClusteringTask(:Z, :SUPERPIXEL)
+
+p = LearningProblem(Ω, Ω, t)
+
+s = solve(p, SLICSolver(50, 0.01))
+
+plot(plot(Ω), plot(s, c=:viridis))
+savefig("images/slicsolver.svg") # hide
+```
+![](images/slicsolver.svg)

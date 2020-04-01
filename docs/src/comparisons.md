@@ -33,3 +33,33 @@ BlockCrossValidation
 ```@docs
 LeaveBallOut
 ```
+
+## Weighted cross-validation
+
+```@docs
+WeightedCrossValidation
+```
+
+## Weighted hold-out validation
+
+```@docs
+WeightedHoldOut
+```
+
+## Weighted bootstrap validation
+
+```@docs
+WeightedBootstrap
+```
+
+## Density-ratio validation
+
+```@docs
+DensityRatioValidation
+```
+
+## Ball-sample validation
+
+```@docs
+BallSampleValidation
+```

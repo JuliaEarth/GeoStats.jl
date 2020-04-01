@@ -4,8 +4,6 @@ Below is a list of spatial operations implemented in the GeoStats.jl framework.
 
 ## Partitioning
 
-Various methods are available to partition spatial objects (i.e. data, domain):
-
 ```@docs
 UniformPartitioner
 FractionPartitioner
@@ -16,18 +14,58 @@ BisectFractionPartitioner
 BallPartitioner
 PlanePartitioner
 DirectionPartitioner
-FunctionPartitioner
 VariablePartitioner
+PredicatePartitioner
+SpatialPredicatePartitioner
 ProductPartitioner
 HierarchicalPartitioner
 ```
 
 ## Weighting
 
-Below is the list of currently implemented methods for weighting spatial objects:
-
 ```@docs
 BlockWeighter
+DensityRatioWeighter
+```
+
+## Sampling
+
+```@docs
+UniformSampler
+BallSampler
+WeightedSampler
+```
+
+## Filtering
+
+```@docs
+UniqueCoordsFilter
+```
+
+## Joining
+
+```@docs
+VariableJoiner
+```
+
+## Searching
+
+```@docs
+NeighborhoodSearcher
+NearestNeighborSearcher
+BoundedSearcher
+```
+
+## Covering
+
+```@docs
+RectangleCoverer
+```
+
+## Discretizing
+
+```@docs
+RegularGridDiscretizer
 ```
 
 ## Statistics
