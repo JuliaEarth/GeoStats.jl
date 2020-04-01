@@ -5,29 +5,32 @@
 [![Stable Documentation](https://img.shields.io/badge/docs-stable-blue.svg)](https://JuliaEarth.github.io/GeoStats.jl/stable)
 [![Latest Documentation](https://img.shields.io/badge/docs-latest-blue.svg)](https://JuliaEarth.github.io/GeoStats.jl/latest)
 [![License File](https://img.shields.io/badge/license-ISC-blue.svg)](https://github.com/JuliaEarth/GeoStats.jl/blob/master/LICENSE)
+
 [![Gitter](https://img.shields.io/badge/chat-on%20gitter-bc0067.svg)](https://gitter.im/JuliaEarth/GeoStats.jl)
 [![JOSS](http://joss.theoj.org/papers/10.21105/joss.00692/status.svg)](https://doi.org/10.21105/joss.00692)
 [![DOI](https://zenodo.org/badge/33827844.svg)](https://zenodo.org/badge/latestdoi/33827844)
 
 ## Overview
 
-In many fields of science, such as mining engineering, hydrogeology, petroleum engineering,
-and environmental sciences, traditional statistical theories fail to provide unbiased estimates
-of resources due to the presence of spatial correlation. Geostatistics (a.k.a. spatial statistics)
-is the branch of statistics developed to overcome this limitation. Particularly, it is the branch
-that takes spatial coordinates of data into account.
+In many fields of science, such as mining engineering, hydrogeology, petroleum
+engineering, and environmental sciences, traditional statistical theories fail
+to provide unbiased estimates of resources due to the presence of spatial
+correlation. Geostatistics (a.k.a. spatial statistics) is the branch of
+statistics developed to overcome this limitation. Particularly, it is the
+branch that takes spatial coordinates of data into account.
 
-GeoStats.jl is an attempt to bring together bleeding-edge research in the geostatistics community
-into a comprehensive framework for spatial statistics, as well as to empower researchers and
-practioners with a toolkit for fast assessment of different modeling approaches. The framework is
-well-integrated with the Julia ecosystem, including the [MLJ.jl](https://github.com/alan-turing-institute/MLJ.jl)
-and [Plots.jl](https://github.com/JuliaPlots/Plots.jl) projects for learning and plotting spatial variables.
+GeoStats.jl is an attempt to bring together bleeding-edge research in the
+geostatistics community into a comprehensive framework for spatial statistics,
+as well as to empower researchers and practioners with a toolkit for fast
+assessment of different modeling approaches.
 
-The design of this project is the result of many years developing geostatistical software. I hope that
-it can serve to promote more collaboration between geostatisticians around the globe and to
-standardize this incredible science. If you would like to help support the project, please
-[star the repository on GitHub](https://github.com/JuliaEarth/GeoStats.jl) and share it with your
-colleagues. If you are a developer, please check the [Developer guide](devguide.md).
+The design of this project is the result of many years developing geostatistical
+software. I hope that it can serve to promote more collaboration between
+geostatisticians around the globe and to standardize this incredible science.
+If you would like to help support the project, please
+[star the repository on GitHub](https://github.com/JuliaEarth/GeoStats.jl) and
+share it with your colleagues. If you are a developer, please check the
+[Developer guide](devguide.md).
 
 ## Installation
 
@@ -51,19 +54,20 @@ The project is split into various packages:
 | [GslibIO.jl](https://github.com/JuliaEarth/GslibIO.jl) | Utilities to read/write *extended* GSLIB files. |
 | [GeoStatsBase.jl](https://github.com/JuliaEarth/GeoStatsBase.jl) | Base package containing problem and solution specifications (for developers). |
 
-The main package (i.e. GeoStats.jl) is self-contained, and provides the full stack of
-packages for high-performance geostatistics over arbitrary domains. Other packages
-like GeoStatsImages.jl can be installed from the list above for additional functionality.
+The main package (i.e. GeoStats.jl) is self-contained, and provides the full stack
+of packages for high-performance geostatistics over arbitrary domains. Other packages
+like GeoStatsImages.jl can be installed from the list above for additional
+functionality.
 
 Besides the packages above, the project is extended via solver packages, for which
-the links are listed in the [README](https://github.com/JuliaEarth/GeoStats.jl) on GitHub.
-These solvers are implemented independently of the main package for different
-geostatistical problems.
+the links are listed in the [README](https://github.com/JuliaEarth/GeoStats.jl)
+on GitHub. These solvers are implemented independently of the main package for
+different geostatistical problems.
 
 ## Quick example
 
-Below is a quick preview of a geostatistical estimation problem solved with a Kriging
-solver. Besides estimation, the framework implements various solvers for
+Below is a quick preview of a geostatistical estimation problem solved with a
+Kriging solver. Besides estimation, the framework implements various solvers for
 geostatistical simulation and geostatitistical learning problems.
 
 ```@example overview
@@ -72,7 +76,7 @@ using Plots
 gr(size=(900,400)) # hide
 
 # define spatial data
-sdata = PointSetData(Dict(:precipitation => [1.,0.,1.]), [(25.,25.),(50.,75.),(75.,50.)])
+sdata = PointSetData(OrderedDict(:precipitation => [1.,0.,1.]), [(25.,25.),(50.,75.),(75.,50.)])
 
 # define spatial domain (e.g. regular grid, point set)
 sdomain = RegularGrid{Float64}(100, 100)
@@ -94,4 +98,5 @@ png("images/EstimationSolution.png") # hide
 ```
 ![](images/EstimationSolution.png)
 
-For the full example, please see the [Tutorials](tutorials.md) section of the documentation.
+For the full example, please see the [Tutorials](tutorials.md) section of the
+documentation.

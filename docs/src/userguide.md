@@ -29,13 +29,13 @@ we can georeference the image as [RegularGridData](@ref):
 ```@example userguide
 using GeoStats
 
-Ω = RegularGridData{Float64}(Dict(:Z=>Z))
+Ω = RegularGridData{Float64}(OrderedDict(:Z=>Z))
 ```
 
 The origin and spacing of samples in the regular grid can be specified in the constructor:
 
 ```@example userguide
-RegularGridData(Dict(:Z=>Z), (1.,1.), (10.,10.))
+RegularGridData(OrderedDict(:Z=>Z), (1.,1.), (10.,10.))
 ```
 
 and different spatial data types have different constructor options (see [Data](data.md) for more options).
@@ -84,7 +84,7 @@ object, we need to save the spatial indices that were used to index the table:
 zvals = Ω[1:3,:Z]
 coord = coordinates(Ω, 1:3)
 
-PointSetData(Dict(:Z=>zvals), coord)
+PointSetData(OrderedDict(:Z=>zvals), coord)
 ```
 
 To recover the original Julia array behind a spatial data object, we can index the
