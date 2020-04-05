@@ -19,10 +19,10 @@ correlation. Geostatistics (a.k.a. spatial statistics) is the branch of
 statistics developed to overcome this limitation. Particularly, it is the
 branch that takes spatial coordinates of data into account.
 
-GeoStats.jl is an attempt to bring together bleeding-edge research in the
-geostatistics community into a comprehensive framework for spatial statistics,
-as well as to empower researchers and practioners with a toolkit for fast
-assessment of different modeling approaches.
+[GeoStats.jl](https://github.com/JuliaEarth/GeoStats.jl) is an attempt to bring
+together bleeding-edge research in the geostatistics community into a comprehensive
+framework for spatial statistics, as well as to empower researchers and practioners
+with a toolkit for fast assessment of different modeling approaches.
 
 The design of this project is the result of many years developing geostatistical
 software. I hope that it can serve to promote more collaboration between
@@ -30,7 +30,7 @@ geostatisticians around the globe and to standardize this incredible science.
 If you would like to help support the project, please
 [star the repository on GitHub](https://github.com/JuliaEarth/GeoStats.jl) and
 share it with your colleagues. If you are a developer, please check the
-[Developer guide](devguide.md).
+developer guide.
 
 ## Installation
 
@@ -40,53 +40,31 @@ Get the latest stable release with Julia's package manager:
 ] add GeoStats
 ```
 
-## Project organization
-
-The project is split into various packages:
-
-| Package  | Description |
-|:--------:| ----------- |
-| [GeoStats.jl](https://github.com/JuliaEarth/GeoStats.jl) | Main package reexporting full stack of packages for geostatistics. |
-| [Variography.jl](https://github.com/JuliaEarth/Variography.jl) | Variogram estimation and modeling, and related tools. |
-| [KrigingEstimators.jl](https://github.com/JuliaEarth/KrigingEstimators.jl) | High-performance implementations of Kriging estimators. |
-| [PointPatterns.jl](https://github.com/JuliaEarth/PointPatterns.jl) | Spatial point pattern analysis and synthesis. |
-| [GeoStatsImages.jl](https://github.com/JuliaEarth/GeoStatsImages.jl) | Training images for multiple-point geostatistical simulation. |
-| [GslibIO.jl](https://github.com/JuliaEarth/GslibIO.jl) | Utilities to read/write *extended* GSLIB files. |
-| [GeoStatsBase.jl](https://github.com/JuliaEarth/GeoStatsBase.jl) | Base package containing problem and solution specifications (for developers). |
-
-The main package (i.e. GeoStats.jl) is self-contained, and provides the full stack
-of packages for high-performance geostatistics over arbitrary domains. Other packages
-like GeoStatsImages.jl can be installed from the list above for additional
-functionality.
-
-Besides the packages above, the project is extended via solver packages, for which
-the links are listed in the [README](https://github.com/JuliaEarth/GeoStats.jl)
-on GitHub. These solvers are implemented independently of the main package for
-different geostatistical problems.
-
 ## Quick example
 
-Below is a quick preview of a geostatistical estimation problem solved with a
-Kriging solver. Besides estimation, the framework implements various solvers for
-geostatistical simulation and geostatitistical learning problems.
+Below is a simple example of geostatistical estimation:
 
 ```@example overview
 using GeoStats
 using Plots
 gr(size=(900,400)) # hide
 
+# list of properties with coordinates
+props = OrderedDict(:prop => [1.,0.,1.])
+coord = [(25.,25.),(50.,75.),(75.,50.)]
+
 # define spatial data
-sdata = PointSetData(OrderedDict(:precipitation => [1.,0.,1.]), [(25.,25.),(50.,75.),(75.,50.)])
+sdata = PointSetData(props, coord)
 
 # define spatial domain (e.g. regular grid, point set)
 sdomain = RegularGrid{Float64}(100, 100)
 
 # define estimation problem for any data column(s) (e.g. :precipitation)
-problem = EstimationProblem(sdata, sdomain, :precipitation)
+problem = EstimationProblem(sdata, sdomain, :prop)
 
 # choose a solver from the list of solvers
 solver = Kriging(
-  :precipitation => (variogram=GaussianVariogram(range=35.),)
+  :prop => (variogram=GaussianVariogram(range=35.),)
 )
 
 # solve the problem
@@ -98,5 +76,26 @@ png("images/EstimationSolution.png") # hide
 ```
 ![](images/EstimationSolution.png)
 
-For the full example, please see the [Tutorials](tutorials.md) section of the
+For more examples, please see the [Tutorials](tutorials.md) section of the
 documentation.
+
+## Project organization
+
+The project is split into various packages:
+
+| Package | Description |
+|:-------:|:------------|
+| [GeoStats.jl](https://github.com/JuliaEarth/GeoStats.jl) | Main package reexporting full stack of packages for geostatistics. |
+| [Variography.jl](https://github.com/JuliaEarth/Variography.jl) | Variogram estimation and modeling, and related tools. |
+| [KrigingEstimators.jl](https://github.com/JuliaEarth/KrigingEstimators.jl) | High-performance implementations of Kriging estimators. |
+| [PointPatterns.jl](https://github.com/JuliaEarth/PointPatterns.jl) | Spatial point pattern analysis and synthesis. |
+| [GeoStatsImages.jl](https://github.com/JuliaEarth/GeoStatsImages.jl) | Training images for multiple-point geostatistical simulation. |
+| [GslibIO.jl](https://github.com/JuliaEarth/GslibIO.jl) | Utilities to read/write *extended* GSLIB files. |
+| [GeoStatsBase.jl](https://github.com/JuliaEarth/GeoStatsBase.jl) | Base package containing problem and solution specifications (for developers). |
+
+The main [GeoStats.jl](https://github.com/JuliaEarth/GeoStats.jl) package reexports
+the full stack of packages for high-performance geostatistics in Julia. Other
+packages like [GeoStatsImages.jl](https://github.com/JuliaEarth/GeoStatsImages.jl)
+can be installed for additional functionality. Besides the packages above, the
+project is extended via [solver packages](solvers.md). These solvers are implemented
+independently of the main package for different geostatistical problems.
