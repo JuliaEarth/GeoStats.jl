@@ -2,11 +2,17 @@
 ENV["GKSwstype"] = "100"
 
 using Documenter, GeoStats
+using DocumenterTools: Themes
 
 istravis = "TRAVIS" ∈ keys(ENV)
 
+Themes.compile(joinpath(@__DIR__,"src/assets/geostats-light.scss"), joinpath(@__DIR__,"src/assets/themes/documenter-light.css"))
+Themes.compile(joinpath(@__DIR__,"src/assets/geostats-light.scss"), joinpath(@__DIR__,"src/assets/themes/documenter-dark.css"))
+
 makedocs(
-  format = Documenter.HTML(assets=["assets/style.css"], prettyurls=istravis),
+  format = Documenter.HTML(assets=[
+    asset("https://fonts.googleapis.com/css?family=Montserrat|Source+Code+Pro&display=swap", class=:css)
+  ], prettyurls=istravis),
   sitename = "GeoStats.jl",
   authors = "Júlio Hoffimann",
   pages = [
