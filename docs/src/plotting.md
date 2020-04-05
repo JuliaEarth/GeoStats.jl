@@ -1,10 +1,10 @@
 # Plotting
 
-GeoStats.jl is integrated with the Julia [Plots.jl](https://github.com/JuliaPlots/Plots.jl) project.
-This means that many objects defined in the package can be plotted directly without data format
-conversions.
+GeoStats.jl is integrated with the [Plots.jl](https://github.com/JuliaPlots/Plots.jl)
+project. This means that many objects defined in the package can be plotted directly
+without data format conversions.
 
-For example, below we plot various theoretical variograms with the `plot` command from Plots.jl:
+For example, below we plot various theoretical variograms:
 
 ```@example plots
 using GeoStats

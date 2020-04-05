@@ -4,7 +4,7 @@ Below is the list of currently implemented spatial data types in the project.
 
 ## GeoDataFrame
 
-For point (or hard) data in spreadsheet format (e.g. CSV, TSV), the `GeoDataFrame`
+For point data in spreadsheet format (e.g. CSV, TSV), the `GeoDataFrame`
 object is a lightweight wrapper over Julia's `DataFrame` types.
 
 ```@docs
@@ -18,7 +18,7 @@ readgeotable
 ## PointSetData
 
 The `PointSetData` object is equivalent to `GeoDataFrame` except that it stores
-the data in a simple Julia `OrderedDict` instead of in a `DataFrame`.
+the data in a Julia `OrderedDict` instead of in a `DataFrame`.
 
 ```@docs
 PointSetData

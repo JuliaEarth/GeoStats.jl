@@ -1,32 +1,32 @@
-# User guide
+# Basic workflow
 
-This guide provides an overview of a simple geostatistical workflow, which consists of
-three basic steps:
+A basic geostatistical workflow often consists of three steps:
 
 1. Manipulation of spatial data
 2. Definition of geostatistical problem
 3. Visualization of problem solution
 
-These steps are only shown to guide the reader, which is free to follow his/her own workflow.
+In this section, we walk through these steps to illustrate some of the features
+of the project.
 
 ## Manipulating data
 
-The workflow starts with the creation of spatial data objects, which can be loaded from
-disk or derived from other Julia variables. For example, given a Julia array (or image),
-which is not attached to any particular coordinate system:
+The workflow starts with the creation of spatial data objects, which can be loaded
+from disk or derived from other Julia variables. For example, given a Julia array
+(or image), which is not attached to any particular coordinate system:
 
-```@example userguide
+```@example workflow
 using Plots
 gr(format=:svg) # hide
 
 Z = [10sin(i/10) + j for i in 1:100, j in 1:200]
 
-heatmap(Z, c=:bluesreds)
+heatmap(Z)
 ```
 
 we can georeference the image as [RegularGridData](@ref):
 
-```@example userguide
+```@example workflow
 using GeoStats
 
 Ω = RegularGridData{Float64}(OrderedDict(:Z=>Z))
@@ -34,7 +34,7 @@ using GeoStats
 
 The origin and spacing of samples in the regular grid can be specified in the constructor:
 
-```@example userguide
+```@example workflow
 RegularGridData(OrderedDict(:Z=>Z), (1.,1.), (10.,10.))
 ```
 
@@ -42,7 +42,7 @@ and different spatial data types have different constructor options (see [Data](
 
 We plot the spatial data and note a few differences compared to the image plot shown above:
 
-```@example userguide
+```@example workflow
 plot(Ω)
 ```
 
@@ -54,7 +54,7 @@ size of the regular grid data.
 Each sample in the spatial data object has a coordinate, which is calculated on demand
 for a given list of locations (i.e. spatial indices):
 
-```@example userguide
+```@example workflow
 coordinates(Ω, 1:3)
 ```
 
@@ -63,7 +63,7 @@ In-place versions exist to avoid unnecessary memory allocations.
 All coordinates are retrieved as a `ndims x npoints` matrix when we do not specify
 the spatial indices:
 
-```@example userguide
+```@example workflow
 coordinates(Ω)
 ```
 
@@ -73,14 +73,14 @@ Spatial data types implement the [Tables.jl](https://github.com/JuliaData/Tables
 interface, which means that they can be accessed as if they were tables with samples
 in the rows and variables in the columns:
 
-```@example userguide
+```@example workflow
 Ω[1:3,:Z]
 ```
 
 In this case, the coordinates of the samples are lost. To reconstruct a spatial data
 object, we need to save the spatial indices that were used to index the table:
 
-```@example userguide
+```@example workflow
 zvals = Ω[1:3,:Z]
 coord = coordinates(Ω, 1:3)
 
@@ -91,7 +91,7 @@ To recover the original Julia array behind a spatial data object, we can index t
 data with the variable name. In this case, the size of the array (i.e. `100x200`)
 is preserved:
 
-```@example userguide
+```@example workflow
 Ω[:Z]
 ```
 
@@ -104,7 +104,7 @@ data in general.
 By plotting a view of the first 10 lines of our regular grid data, we obtain a
 general [PointSetData](@ref) as opposed to a [RegularGridData](@ref):
 
-```@example userguide
+```@example workflow
 Ωᵥ = view(Ω, 1:10*100)
 plot(Ωᵥ)
 ```
@@ -112,7 +112,7 @@ plot(Ωᵥ)
 We plot a random view of the grid to emphasize that views do not preserve
 spatial regularity:
 
-```@example userguide
+```@example workflow
 inds = rand(1:npoints(Ω), 100)
 plot(view(Ω, inds))
 ```
@@ -123,14 +123,14 @@ Spatial data objects can be partitioned with various efficient methods.
 To demonstrate the operation, we partition our spatial data view into
 balls of given radius:
 
-```@example userguide
+```@example workflow
 Π = partition(Ωᵥ, BallPartitioner(5.))
 plot(Π)
 ```
 
 or, alternatively, into two halfspaces:
 
-```@example userguide
+```@example workflow
 Π = partition(Ωᵥ, BisectFractionPartitioner((1.,1.), 0.5))
 plot(Π)
 ```
@@ -139,11 +139,11 @@ Spatial partitions are (lazy) iterators of spatial views, which are useful in
 many contexts as it will be shown in the next section of the user guide. To
 access a subset of a partition, we use index notation:
 
-```@example userguide
+```@example workflow
 plot(Π[1])
 ```
 
-```@example userguide
+```@example workflow
 plot(Π[2])
 ```
 
@@ -158,7 +158,7 @@ Let's assume that we have spatial data with some variable that we want to predic
 in a supervised learning setting. We load the data from a CSV file, and inspect
 the available columns:
 
-```@example userguide
+```@example workflow
 using CSV
 
 df = CSV.read("data/agriculture.csv")
@@ -174,7 +174,7 @@ learning model.
 Because the labels are categorical variables, we need to inform the framework
 the correct categorical type:
 
-```@example userguide
+```@example workflow
 using CategoricalArrays
 
 df.crop = categorical(df.crop)
@@ -185,7 +185,7 @@ first(df, 5)
 We can now georeference the data as a [GeoDataFrame](@ref) and plot some of
 the spatial variables:
 
-```@example userguide
+```@example workflow
 Ω = GeoDataFrame(df, [:x,:y])
 
 gr(format=:png) # hide
@@ -196,7 +196,7 @@ Similar to a generic statistical learning workflow, we split the data into "trai
 and "test" sets. The main difference here is that our spatial `split` function
 accepts a separating plane specified by its normal direction `(1,-1)`:
 
-```@example userguide
+```@example workflow
 Ωs, Ωt = split(Ω, 0.2, (1.,-1.))
 
 plot(domain(Ωs), ms=0.2)
@@ -211,11 +211,11 @@ Let's define the learning task and the geostatistical learning problem. We want
 to predict the crop type based on the four satellite bands. We will train the model
 in Ωs where labels are available, and apply it to Ωt, which is our target:
 
-```@example userguide
-features = [:band1,:band2,:band3,:band4]
-label    = :crop
+```@example workflow
+feats = [:band1,:band2,:band3,:band4]
+label = :crop
 
-task = ClassificationTask(features, label)
+task = ClassificationTask(feats, label)
 
 problem = LearningProblem(Ωs, Ωt, task)
 ```
@@ -224,7 +224,7 @@ GeoStats.jl is integrated with the [MLJ.jl](https://github.com/alan-turing-insti
 project, which means that we can solve geostatistical learning problems with any classical
 learning model:
 
-```@example userguide
+```@example workflow
 using MLJ
 
 @load DecisionTreeClassifier
@@ -238,23 +238,18 @@ In this example, we selected a `PointwiseLearn` strategy to solve the geostatist
 learning problem. This strategy consists of applying the learning model pointwise for
 every point in the spatial data:
 
-```@example userguide
+```@example workflow
 Ω̂t = solve(problem, solver)
 ```
 
 ## Plotting solutions
 
-First, we note that the solution to a geostatistical learning problem is a spatial
-data object. We can inspect it with the same methods already described:
-
-```@example userguide
-Ω̂t[1:5,:crop]
-```
-
+We note that the solution to a geostatistical learning problem is a spatial
+data object, and we can inspect it with the same methods already described above.
 This also means that we can plot the solution directly, side by side with the
 true label in this synthetic example:
 
-```@example userguide
+```@example workflow
 p̂ = plot(Ω̂t, ms=0.2, mc=:viridis, title="crop (prediction)")
 p = plot(Ωt, variables=[:crop], ms=0.2, mc=:viridis)
 

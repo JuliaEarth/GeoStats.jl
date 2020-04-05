@@ -1,4 +1,4 @@
-# Related packages
+# Related projects
 
 ## GaussianProcesses.jl
 

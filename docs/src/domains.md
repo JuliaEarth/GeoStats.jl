@@ -11,8 +11,7 @@ as simple point sets, unstructured meshes, and tesselations. These types are imp
 grid, for example, the coordinates of a given location are known, and one can perform
 search without ever constructing a grid.
 
-Below is the list of currently implemented domain types. More options will be available
-in future releases.
+Below is the list of currently implemented domain types.
 
 ## PointSet
 

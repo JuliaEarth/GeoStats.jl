@@ -89,61 +89,6 @@ contourf(solution, clabels=true)
 ```
 ![EstimationSolution](docs/src/images/EstimationSolution.png)
 
-## Project organization
-
-The project is split into various packages:
-
-| Package  | Description |
-|:--------:| ----------- |
-| [GeoStats.jl](https://github.com/JuliaEarth/GeoStats.jl) | Main package reexporting full stack of packages for geostatistics. |
-| [Variography.jl](https://github.com/JuliaEarth/Variography.jl) | Variogram estimation and modeling, and related tools. |
-| [KrigingEstimators.jl](https://github.com/JuliaEarth/KrigingEstimators.jl) | High-performance implementations of Kriging estimators. |
-| [PointPatterns.jl](https://github.com/JuliaEarth/PointPatterns.jl) | Spatial point pattern analysis and synthesis. |
-| [GeoStatsImages.jl](https://github.com/JuliaEarth/GeoStatsImages.jl) | Training images for multiple-point geostatistical simulation. |
-| [GslibIO.jl](https://github.com/JuliaEarth/GslibIO.jl) | Utilities to read/write *extended* GSLIB files. |
-| [GeoStatsBase.jl](https://github.com/JuliaEarth/GeoStatsBase.jl) | Base package containing problem and solution specifications (for developers). |
-
-The main package (i.e. GeoStats.jl) is self-contained, and provides the full stack of
-packages for high-performance geostatistics over arbitrary domains. Other packages
-like GeoStatsImages.jl can be installed from the list above for additional functionality.
-
-### Problems and solvers
-
-Solvers for geostatistical problems can be installed separately depending on the application.
-They are automatically integrated with GeoStats.jl thanks to Julia's multiple dispatch features.
-
-#### Estimation problems
-
-| Solver | Description | Build | Coverage | References |
-|:------:|-------------|-------|----------|------------|
-| [Kriging](https://github.com/JuliaEarth/KrigingEstimators.jl) | Kriging (SK, OK, UK, EDK) | [![](https://travis-ci.org/JuliaEarth/KrigingEstimators.jl.svg?branch=master)](https://travis-ci.org/JuliaEarth/KrigingEstimators.jl) | [![](https://codecov.io/gh/JuliaEarth/KrigingEstimators.jl/branch/master/graph/badge.svg)](https://codecov.io/gh/JuliaEarth/KrigingEstimators.jl) | [Matheron 1971](https://books.google.com/books/about/The_Theory_of_Regionalized_Variables_and.html?id=TGhGAAAAYAAJ) |
-| [InvDistWeight](https://github.com/JuliaEarth/InverseDistanceWeighting.jl) | Inverse distance weighting | [![](https://travis-ci.org/JuliaEarth/InverseDistanceWeighting.jl.svg?branch=master)](https://travis-ci.org/JuliaEarth/InverseDistanceWeighting.jl) | [![](https://codecov.io/gh/JuliaEarth/InverseDistanceWeighting.jl/branch/master/graph/badge.svg)](https://codecov.io/gh/JuliaEarth/InverseDistanceWeighting.jl) | [Shepard 1968](https://dl.acm.org/citation.cfm?id=810616) |
-| [LocalWeightRegress](https://github.com/JuliaEarth/LocallyWeightedRegression.jl) | Locally weighted regression | [![](https://travis-ci.org/JuliaEarth/LocallyWeightedRegression.jl.svg?branch=master)](https://travis-ci.org/JuliaEarth/LocallyWeightedRegression.jl) | [![](https://codecov.io/gh/JuliaEarth/LocallyWeightedRegression.jl/branch/master/graph/badge.svg)](https://codecov.io/gh/JuliaEarth/LocallyWeightedRegression.jl) | [Cleveland 1979](http://www.jstor.org/stable/2286407) |
-
-#### Simulation problems
-
-All simulation solvers can generate realizations in parallel unless otherwise noted.
-
-| Solver | Description | Build | Coverage | References |
-|:------:|-------------|-------|----------|------------|
-| [DirectGaussSim](https://github.com/JuliaEarth/DirectGaussianSimulation.jl) | Direct Gaussian simulation | [![](https://travis-ci.org/JuliaEarth/DirectGaussianSimulation.jl.svg?branch=master)](https://travis-ci.org/JuliaEarth/DirectGaussianSimulation.jl) | [![](https://codecov.io/gh/JuliaEarth/DirectGaussianSimulation.jl/branch/master/graph/badge.svg)](https://codecov.io/gh/JuliaEarth/DirectGaussianSimulation.jl) | [Alabert 1987](https://link.springer.com/article/10.1007/BF00897191) |
-| [SeqGaussSim](https://github.com/JuliaEarth/KrigingEstimators.jl) | Sequential Gaussian simulation | [![](https://travis-ci.org/JuliaEarth/KrigingEstimators.jl.svg?branch=master)](https://travis-ci.org/JuliaEarth/KrigingEstimators.jl) | [![](https://codecov.io/gh/JuliaEarth/KrigingEstimators.jl/branch/master/graph/badge.svg)](https://codecov.io/gh/JuliaEarth/KrigingEstimators.jl) | [Gómez-Hernández 1993](https://link.springer.com/chapter/10.1007/978-94-011-1739-5_8) |
-| [SpecGaussSim](https://github.com/JuliaEarth/SpectralGaussianSimulation.jl) | Spectral Gaussian simulation | [![](https://travis-ci.org/JuliaEarth/SpectralGaussianSimulation.jl.svg?branch=master)](https://travis-ci.org/JuliaEarth/SpectralGaussianSimulation.jl) | [![](https://codecov.io/gh/JuliaEarth/SpectralGaussianSimulation.jl/branch/master/graph/badge.svg)](https://codecov.io/gh/JuliaEarth/SpectralGaussianSimulation.jl) | [Gutjahr 1997](https://link.springer.com/article/10.1007/BF02769641) |
-| [TuringPat](https://github.com/yurivish/TuringPatterns.jl) | Turing patterns | [![](https://travis-ci.org/yurivish/TuringPatterns.jl.svg?branch=master)](https://travis-ci.org/yurivish/TuringPatterns.jl) | [![](https://codecov.io/gh/yurivish/TuringPatterns.jl/branch/master/graph/badge.svg)](https://codecov.io/gh/yurivish/TuringPatterns.jl) | [Turing 1952](https://royalsocietypublishing.org/doi/pdf/10.1098/rstb.1952.0012) |
-| [ImgQuilt](https://github.com/JuliaEarth/ImageQuilting.jl) | Fast image quilting | [![](https://travis-ci.org/JuliaEarth/ImageQuilting.jl.svg?branch=master)](https://travis-ci.org/JuliaEarth/ImageQuilting.jl) | [![](https://codecov.io/gh/JuliaEarth/ImageQuilting.jl/branch/master/graph/badge.svg)](https://codecov.io/gh/JuliaEarth/ImageQuilting.jl) | [Hoffimann 2017](http://www.sciencedirect.com/science/article/pii/S0098300417301139) |
-| [StratSim](https://github.com/JuliaEarth/StratiGraphics.jl) | Stratigraphy simulation | [![](https://travis-ci.org/JuliaEarth/StratiGraphics.jl.svg?branch=master)](https://travis-ci.org/JuliaEarth/StratiGraphics.jl) | [![](https://codecov.io/gh/JuliaEarth/StratiGraphics.jl/branch/master/graph/badge.svg)](https://codecov.io/gh/JuliaEarth/StratiGraphics.jl) | [Hoffimann 2018](https://searchworks.stanford.edu/view/12746435) |
-| [CookieCutter](https://github.com/JuliaEarth/GeoStatsBase.jl) | Cookie-cutter scheme | [![](https://travis-ci.org/JuliaEarth/GeoStatsBase.jl.svg?branch=master)](https://travis-ci.org/JuliaEarth/GeoStatsBase.jl) | [![](https://codecov.io/gh/JuliaEarth/GeoStatsBase.jl/branch/master/graph/badge.svg)](https://codecov.io/gh/JuliaEarth/GeoStatsBase.jl) | [Begg 1992](https://www.onepetro.org/conference-paper/SPE-24698-MS) |
-
-#### Learning problems
-
-| Solver | Description | Build | Coverage | References |
-|:------:|-------------|-------|----------|------------|
-| [PointwiseLearn](https://github.com/JuliaEarth/GeoStatsBase.jl) | Pointwise learning | [![](https://travis-ci.org/JuliaEarth/GeoStatsBase.jl.svg?branch=master)](https://travis-ci.org/JuliaEarth/GeoStatsBase.jl) | [![](https://codecov.io/gh/JuliaEarth/GeoStatsBase.jl/branch/master/graph/badge.svg)](https://codecov.io/gh/JuliaEarth/GeoStatsBase.jl) | [Hoffimann 2018](https://doi.org/10.21105/joss.00692) |
-
-If you are a developer and your solver is not listed above, please open a pull request and
-we will be happy to review and add it to the list. Please check the developer guide in the
-documentation below for instructions on how to write your own solvers.
-
 ## Contributing and supporting
 
 Contributions are very welcome, as are feature requests and suggestions. Please
@@ -159,7 +104,7 @@ GeoStats.jl was developed as part of academic research. It will always be open
 source and free of charge. If you would like to help support the project, please
 star the repository and share it with your colleagues.
 
-## Citation
+## Citing
 
 If you find GeoStats.jl useful in your work, please consider citing it:
 

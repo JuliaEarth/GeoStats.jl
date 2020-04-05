@@ -17,25 +17,30 @@ makedocs(
   authors = "Júlio Hoffimann",
   pages = [
     "Home" => "index.md",
-    "User guide" => "userguide.md",
+    "Basic workflow" => "workflow.md",
     "Tutorials" => "tutorials.md",
     "Reference guide" => [
       "Data" => "data.md",
       "Domains" => "domains.md",
+      "Operations" => "operations.md",
+      "Statistics" => "statistics.md",
       "Problems" => "problems.md",
+      "Solvers" => "solvers.md",
+      "Validation" => "validation.md",
       "Variography" => [
-        "empirical_variograms.md",
-        "theoretical_variograms.md",
-        "fitting_variograms.md"
+        "empvario.md",
+        "theovario.md",
+        "fitvario.md"
       ],
-      "Kriging estimators" => "estimators.md",
-      "Solver comparisons" => "comparisons.md",
-      "Spatial operations" => "operations.md",
+      "Kriging" => "kriging.md",
       "Plotting" => "plotting.md"
     ],
-    "Developer guide" => "devguide.md",
+    "Developer guide" => [
+      "The basics" => "devbasics.md",
+      "Solver examples" => "devexamples.md"
+    ],
     "Contributing" => "contributing.md",
-    "Related packages" => "related.md",
+    "Related projects" => "related.md",
     "About" => [
       "Community" => "about/community.md",
       "License" => "about/license.md",
