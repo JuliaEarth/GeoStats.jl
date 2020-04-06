@@ -1,4 +1,6 @@
-![GeoStatsLogo](images/GeoStats.png)
+# GeoStats.jl
+
+*High-performance geostatistics in Julia.*
 
 [![Build Status](https://travis-ci.org/JuliaEarth/GeoStats.jl.svg?branch=master)](https://travis-ci.org/JuliaEarth/GeoStats.jl)
 [![Coverage Status](https://codecov.io/gh/JuliaEarth/GeoStats.jl/branch/master/graph/badge.svg)](https://codecov.io/gh/JuliaEarth/GeoStats.jl)
