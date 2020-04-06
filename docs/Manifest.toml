@@ -293,9 +293,9 @@ version = "0.11.0"
 
 [[GeoStatsBase]]
 deps = ["AverageShiftedHistograms", "CSV", "CategoricalArrays", "DataFrames", "DensityRatioEstimation", "Distances", "Distributed", "Distributions", "LinearAlgebra", "LossFunctions", "MLJModelInterface", "NearestNeighbors", "Optim", "OrderedCollections", "Parameters", "Random", "RecipesBase", "ScientificTypes", "SpecialFunctions", "StaticArrays", "Statistics", "StatsBase", "Tables"]
-git-tree-sha1 = "dae8bf548e3180bab259080fe61821f72b562695"
+git-tree-sha1 = "ffecd17b69a6e2f9d86b32b4bc4e7c96bb405b61"
 uuid = "323cb8eb-fbf6-51c0-afd0-f8fba70507b2"
-version = "0.8.1"
+version = "0.8.2"
 
 [[GeometryTypes]]
 deps = ["ColorTypes", "FixedPointNumbers", "LinearAlgebra", "StaticArrays"]
@@ -404,10 +404,10 @@ uuid = "add582a8-e3ab-11e8-2d5e-e98b27df1bc7"
 version = "0.10.3"
 
 [[MLJBase]]
-deps = ["CategoricalArrays", "ComputationalResources", "DelimitedFiles", "Distributed", "Distributions", "HTTP", "InteractiveUtils", "InvertedIndices", "JLSO", "JSON", "LinearAlgebra", "LossFunctions", "MLJModelInterface", "MLJScientificTypes", "Missings", "OrderedCollections", "Parameters", "PrettyTables", "ProgressMeter", "Random", "ScientificTypes", "Statistics", "StatsBase", "Tables"]
-git-tree-sha1 = "af4c33b2f76fddf643f4ba9bf96477181527b39d"
+deps = ["CategoricalArrays", "ComputationalResources", "Dates", "DelimitedFiles", "Distributed", "Distributions", "HTTP", "InteractiveUtils", "InvertedIndices", "JLSO", "JSON", "LinearAlgebra", "LossFunctions", "MLJModelInterface", "MLJScientificTypes", "Missings", "OrderedCollections", "Parameters", "PrettyTables", "ProgressMeter", "Random", "ScientificTypes", "Statistics", "StatsBase", "Tables"]
+git-tree-sha1 = "1b7a04b1f58d9eb0fcc193e9f9294eec663e7095"
 uuid = "a7f614a8-145f-11e9-1d2a-a57a1082229d"
-version = "0.12.5"
+version = "0.12.6"
 
 [[MLJModelInterface]]
 deps = ["Random", "ScientificTypes"]
@@ -416,10 +416,10 @@ uuid = "e80e1ace-859a-464e-9ed9-23947d8ae3ea"
 version = "0.2.1"
 
 [[MLJModels]]
-deps = ["CategoricalArrays", "Distances", "Distributions", "InteractiveUtils", "LinearAlgebra", "MLJBase", "MLJModelInterface", "MultivariateStats", "OrderedCollections", "Parameters", "Pkg", "Random", "Requires", "ScientificTypes", "Statistics", "StatsBase", "Tables"]
-git-tree-sha1 = "06779e689aae527892cde93f3d41ec0dd7bb77dd"
+deps = ["CategoricalArrays", "Dates", "Distances", "Distributions", "InteractiveUtils", "LinearAlgebra", "MLJBase", "MLJModelInterface", "MultivariateStats", "OrderedCollections", "Parameters", "Pkg", "Random", "Requires", "ScientificTypes", "Statistics", "StatsBase", "Tables"]
+git-tree-sha1 = "8d9185d1c47b6e42aae995b8333f256cbb615267"
 uuid = "d491faf4-2d78-11e9-2867-c94bc002c0b7"
-version = "0.9.2"
+version = "0.9.3"
 
 [[MLJScientificTypes]]
 deps = ["CategoricalArrays", "ColorTypes", "PrettyTables", "ScientificTypes", "Tables"]
