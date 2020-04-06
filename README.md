@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="docs/src/images/GeoStats.png" height="200"><br>
+  <img src="docs/src/assets/logo-text.svg" height="200"><br>
   <a href="https://travis-ci.org/JuliaEarth/GeoStats.jl">
     <img src="https://travis-ci.org/JuliaEarth/GeoStats.jl.svg?branch=master">
   </a>
