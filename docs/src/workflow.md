@@ -160,6 +160,7 @@ the available columns:
 
 ```@example workflow
 using CSV
+gr(size=(800,400))
 
 df = CSV.read("data/agriculture.csv")
 
@@ -189,7 +190,7 @@ the spatial variables:
 Ω = GeoDataFrame(df, [:x,:y])
 
 gr(format=:png) # hide
-plot(Ω, variables=[:band4,:crop], ms=0.2, mc=:viridis, size=(800,400))
+plot(Ω, variables=[:band4,:crop], ms=0.2, mc=:viridis)
 ```
 
 Similar to a generic statistical learning workflow, we split the data into "train"
@@ -253,7 +254,7 @@ true label in this synthetic example:
 p̂ = plot(Ω̂t, ms=0.2, mc=:viridis, title="crop (prediction)")
 p = plot(Ωt, variables=[:crop], ms=0.2, mc=:viridis)
 
-plot(p̂, p, size=(800,400))
+plot(p̂, p)
 ```
 
 Visually, the learning model has succeeded predicting the crop. We can also
