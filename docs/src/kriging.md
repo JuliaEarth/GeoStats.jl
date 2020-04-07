@@ -3,8 +3,6 @@
 A Kriging estimator has the form:
 
 ```math
-\newcommand{\x}{\boldsymbol{x}}
-\newcommand{\R}{\mathbb{R}}
 \hat{Z}(\x_0) = \lambda_1 Z(\x_1) + \lambda_2 Z(\x_2) + \cdots + \lambda_n Z(\x_n),\quad \x_i \in \R^m, \lambda_i \in \R
 ```
 
@@ -77,11 +75,6 @@ In Simple Kriging, the mean ``\mu`` of the random field is assumed to be constan
 The resulting linear system is:
 
 ```math
-\newcommand{\C}{\boldsymbol{C}}
-\newcommand{\c}{\boldsymbol{c}}
-\newcommand{\l}{\boldsymbol{\lambda}}
-\newcommand{\1}{\boldsymbol{1}}
-\newcommand{\z}{\boldsymbol{z}}
 \begin{bmatrix}
 cov(\x_1,\x_1) & cov(\x_1,\x_2) & \cdots & cov(\x_1,\x_n) \\
 cov(\x_2,\x_1) & cov(\x_2,\x_2) & \cdots & cov(\x_2,\x_n) \\
@@ -122,8 +115,6 @@ In Ordinary Kriging the mean of the random field is assumed to be constant *and 
 system is:
 
 ```math
-\newcommand{\G}{\boldsymbol{\Gamma}}
-\newcommand{\g}{\boldsymbol{\gamma}}
 \begin{bmatrix}
 \G & \1 \\
 \1^\top & 0
@@ -168,8 +159,6 @@ with ``N_d`` monomials ``f_k`` of degree up to ``d``. For example, in 2D there a
 The choice of the degree ``d`` determines the size of the polynomial matrix
 
 ```math
-\newcommand{\F}{\boldsymbol{F}}
-\newcommand{\f}{\boldsymbol{f}}
 \F =
 \begin{bmatrix}
 f_1(\x_1) & f_2(\x_1) & \cdots & f_{N_d}(\x_1) \\

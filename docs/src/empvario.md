@@ -3,7 +3,6 @@
 An empirical variogram has the form:
 
 ```math
-\newcommand{\x}{\boldsymbol{x}}
 \hat{\gamma}(h) = \frac{1}{2|N(h)|} \sum_{(i,j) \in N(h)} (z_i - z_j)^2
 ```
 

@@ -10,9 +10,25 @@ Themes.compile(joinpath(@__DIR__,"src/assets/geostats-light.scss"), joinpath(@__
 Themes.compile(joinpath(@__DIR__,"src/assets/geostats-light.scss"), joinpath(@__DIR__,"src/assets/themes/documenter-dark.css"))
 
 makedocs(
-  format = Documenter.HTML(assets=[
-    asset("https://fonts.googleapis.com/css?family=Montserrat|Source+Code+Pro&display=swap", class=:css)
-  ], prettyurls=istravis),
+  format = Documenter.HTML(
+    assets=[asset("https://fonts.googleapis.com/css?family=Montserrat|Source+Code+Pro&display=swap", class=:css)],
+    prettyurls = istravis,
+    mathengine = KaTeX(Dict(
+      :macros => Dict(
+        "\\x" => "\\boldsymbol{x}",
+        "\\z" => "\\boldsymbol{z}",
+        "\\l" => "\\boldsymbol{l}",
+        "\\c" => "\\boldsymbol{c}",
+        "\\C" => "\\boldsymbol{C}",
+        "\\g" => "\\boldsymbol{g}",
+        "\\G" => "\\boldsymbol{G}",
+        "\\f" => "\\boldsymbol{f}",
+        "\\F" => "\\boldsymbol{F}",
+        "\\R" => "\\mathbb{R}",
+        "\\1" => "\\mathbb{1}"
+      )
+    ))
+  ),
   sitename = "GeoStats.jl",
   authors = "Júlio Hoffimann",
   pages = [

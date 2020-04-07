@@ -1,11 +1,5 @@
 # Theoretical variograms
 
-```math
-\newcommand{\x}{\boldsymbol{x}}
-\newcommand{\R}{\mathbb{R}}
-\newcommand{\1}{\mathbb{1}}
-```
-
 In an intrinsic isotropic model, the variogram is only a function of the
 distance between any two points ``\x_1,\x_2 \in \R^m``:
 
