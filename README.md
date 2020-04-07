@@ -87,7 +87,9 @@ solution = solve(problem, solver)
 # plot the solution
 contourf(solution, clabels=true)
 ```
-![EstimationSolution](docs/src/images/EstimationSolution.png)
+<p align="center">
+  <img src="docs/src/images/EstimationSolution.png">
+</p>
 
 ## Contributing and supporting
 
