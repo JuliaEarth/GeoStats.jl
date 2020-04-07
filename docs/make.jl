@@ -11,7 +11,7 @@ Themes.compile(joinpath(@__DIR__,"src/assets/geostats-light.scss"), joinpath(@__
 
 makedocs(
   format = Documenter.HTML(
-    assets=[asset("https://fonts.googleapis.com/css?family=Montserrat|Source+Code+Pro&display=swap", class=:css)],
+    assets=["assets/favicon.ico", asset("https://fonts.googleapis.com/css?family=Montserrat|Source+Code+Pro&display=swap", class=:css)],
     prettyurls = istravis,
     mathengine = KaTeX(Dict(
       :macros => Dict(
