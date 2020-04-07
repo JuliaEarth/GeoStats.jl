@@ -48,7 +48,15 @@ makedocs(
         "theovario.md",
         "fitvario.md"
       ],
-      "Kriging" => "kriging.md",
+      "Point Patterns" => [
+        "pointprocs.md",
+        "regions.md",
+        "pointops.md"
+      ],
+      "Kriging" => [
+        "krigestim.md",
+        "krigsolver.md"
+      ],
       "Plotting" => "plotting.md"
     ],
     "Developer guide" => [
