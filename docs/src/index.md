@@ -31,8 +31,8 @@ software. I hope that it can serve to promote more collaboration between
 geostatisticians around the globe and to standardize this incredible science.
 If you would like to help support the project, please
 [star the repository on GitHub](https://github.com/JuliaEarth/GeoStats.jl) and
-share it with your colleagues. If you are a developer, please check the
-developer guide.
+share it with your colleagues. If you would like to extend the framework with
+new geostatistical solvers, please check the [Developer guide](devbasics.md).
 
 ## Installation
 
