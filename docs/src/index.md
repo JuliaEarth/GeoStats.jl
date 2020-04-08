@@ -9,7 +9,7 @@
 [![License File](https://img.shields.io/badge/license-ISC-blue.svg)](https://github.com/JuliaEarth/GeoStats.jl/blob/master/LICENSE)
 
 [![Gitter](https://img.shields.io/badge/chat-on%20gitter-bc0067.svg)](https://gitter.im/JuliaEarth/GeoStats.jl)
-[![JOSS](http://joss.theoj.org/papers/10.21105/joss.00692/status.svg)](https://doi.org/10.21105/joss.00692)
+[![JOSS](https://joss.theoj.org/papers/10.21105/joss.00692/status.svg)](https://doi.org/10.21105/joss.00692)
 [![DOI](https://zenodo.org/badge/33827844.svg)](https://zenodo.org/badge/latestdoi/33827844)
 
 ## Overview
