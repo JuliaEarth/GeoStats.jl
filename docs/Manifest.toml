@@ -14,9 +14,9 @@ version = "3.5.0+3"
 
 [[ArrayInterface]]
 deps = ["LinearAlgebra", "Requires", "SparseArrays"]
-git-tree-sha1 = "3ffa20ffa495e9a4c823cb026164d8c0f95f72aa"
+git-tree-sha1 = "b34d74dc877e6083c4c5c553a685e89e10ea4662"
 uuid = "4fba245c-0d91-5ea0-9b3e-6abc04ee57a9"
-version = "2.6.2"
+version = "2.8.3"
 
 [[AverageShiftedHistograms]]
 deps = ["LinearAlgebra", "RecipesBase", "Statistics", "StatsBase", "UnicodePlots"]
@@ -46,9 +46,9 @@ version = "1.0.6+2"
 
 [[CSV]]
 deps = ["CategoricalArrays", "DataFrames", "Dates", "FilePathsBase", "Mmap", "Parsers", "PooledArrays", "Tables", "Unicode", "WeakRefStrings"]
-git-tree-sha1 = "c0f38b559c40d954ca7170ab91248eb59c41932d"
+git-tree-sha1 = "c5ef3e34d21aa4b0e88521f1dc8031515d389148"
 uuid = "336ed68f-0bac-5ca0-87d4-7b16caf5d00b"
-version = "0.6.0"
+version = "0.5.26"
 
 [[CategoricalArrays]]
 deps = ["Compat", "DataAPI", "Future", "JSON", "Missings", "Printf", "Reexport", "Statistics", "Unicode"]
@@ -289,13 +289,13 @@ version = "0.48.0"
 deps = ["GeoStatsBase", "KrigingEstimators", "PointPatterns", "Reexport", "Variography"]
 path = ".."
 uuid = "dcc97b0b-8ce5-5539-9008-bb190f959ef6"
-version = "0.11.0"
+version = "0.11.1"
 
 [[GeoStatsBase]]
 deps = ["AverageShiftedHistograms", "CSV", "CategoricalArrays", "DataFrames", "DensityRatioEstimation", "Distances", "Distributed", "Distributions", "LinearAlgebra", "LossFunctions", "MLJModelInterface", "NearestNeighbors", "Optim", "OrderedCollections", "Parameters", "Random", "RecipesBase", "ScientificTypes", "SpecialFunctions", "StaticArrays", "Statistics", "StatsBase", "Tables"]
-git-tree-sha1 = "ffecd17b69a6e2f9d86b32b4bc4e7c96bb405b61"
+git-tree-sha1 = "d1fe8780034e7edcc93d33c3d53951de56aaa271"
 uuid = "323cb8eb-fbf6-51c0-afd0-f8fba70507b2"
-version = "0.8.2"
+version = "0.8.3"
 
 [[GeometryTypes]]
 deps = ["ColorTypes", "FixedPointNumbers", "LinearAlgebra", "StaticArrays"]
@@ -332,9 +332,9 @@ version = "1.0.0"
 
 [[JLSO]]
 deps = ["BSON", "CodecZlib", "FilePathsBase", "Memento", "Pkg", "Serialization"]
-git-tree-sha1 = "80210b0bce8561723c98517dfa57bb1575e9a3be"
+git-tree-sha1 = "250ffc4f6e9c7c38f5e96fe45218ea77ec50635d"
 uuid = "9da8a3cd-07a3-59c0-a743-3fdc52c30d11"
-version = "2.3.0"
+version = "2.3.1"
 
 [[JSON]]
 deps = ["Dates", "Mmap", "Parsers", "Unicode"]
@@ -417,9 +417,9 @@ version = "0.2.1"
 
 [[MLJModels]]
 deps = ["CategoricalArrays", "Dates", "Distances", "Distributions", "InteractiveUtils", "LinearAlgebra", "MLJBase", "MLJModelInterface", "MultivariateStats", "OrderedCollections", "Parameters", "Pkg", "Random", "Requires", "ScientificTypes", "Statistics", "StatsBase", "Tables"]
-git-tree-sha1 = "8d9185d1c47b6e42aae995b8333f256cbb615267"
+git-tree-sha1 = "64932df6c71608f4c6663dc1734a0e0f4ceb5839"
 uuid = "d491faf4-2d78-11e9-2867-c94bc002c0b7"
-version = "0.9.3"
+version = "0.9.4"
 
 [[MLJScientificTypes]]
 deps = ["CategoricalArrays", "ColorTypes", "PrettyTables", "ScientificTypes", "Tables"]
@@ -456,9 +456,9 @@ version = "0.3.1"
 
 [[Memento]]
 deps = ["Dates", "Distributed", "JSON", "Serialization", "Sockets", "Syslogs", "Test", "TimeZones", "UUIDs"]
-git-tree-sha1 = "090463b13da88689e5eae6468a6f531a21392175"
+git-tree-sha1 = "5b0f65a76a45d1e9a28f56c5c82743e4d0eecbe9"
 uuid = "f28f55f0-a522-5efc-85c2-fe41dfb9b2d9"
-version = "0.12.1"
+version = "1.0.0"
 
 [[Missings]]
 deps = ["DataAPI"]
@@ -505,10 +505,10 @@ uuid = "e7412a2a-1a6e-54c0-be00-318e2571c051"
 version = "1.3.3+0"
 
 [[OpenBLAS_jll]]
-deps = ["Libdl", "Pkg"]
-git-tree-sha1 = "cbab167006bbb875d4b4204cc4da8822bd43df83"
+deps = ["CompilerSupportLibraries_jll", "Libdl", "Pkg"]
+git-tree-sha1 = "2ee3e636e94b9fd95fa8364d5cba2e20dae16609"
 uuid = "4536629a-c528-5b80-bd46-f80d51c5b363"
-version = "0.3.9+1"
+version = "0.3.9+2"
 
 [[OpenSSL_jll]]
 deps = ["Libdl", "Pkg"]
@@ -554,9 +554,9 @@ version = "0.12.0"
 
 [[Parsers]]
 deps = ["Dates", "Test"]
-git-tree-sha1 = "75d07cb840c300084634b4991761886d0d762724"
+git-tree-sha1 = "0c16b3179190d3046c073440d94172cfc3bb0553"
 uuid = "69de0a69-1ddd-5017-9359-2bf0b02dc9f0"
-version = "1.0.1"
+version = "0.3.12"
 
 [[Pkg]]
 deps = ["Dates", "LibGit2", "Libdl", "Logging", "Markdown", "Printf", "REPL", "Random", "SHA", "Test", "UUIDs"]
@@ -564,9 +564,9 @@ uuid = "44cfe95a-1eb2-52ea-b672-e2afdf69b78f"
 
 [[PlotThemes]]
 deps = ["PlotUtils", "Requires", "Statistics"]
-git-tree-sha1 = "493bd54296a33d7575f5f7e488d30ffd9d05dc45"
+git-tree-sha1 = "87a4ea7f8c350d87d3a8ca9052663b633c0b2722"
 uuid = "ccf2f8ad-2431-5c83-bf29-c5338b663b6a"
-version = "1.0.2"
+version = "1.0.3"
 
 [[PlotUtils]]
 deps = ["Colors", "Dates", "Printf", "Random", "Reexport"]
@@ -582,9 +582,9 @@ version = "0.29.9"
 
 [[PointPatterns]]
 deps = ["Distributions", "GeoStatsBase", "RecipesBase"]
-git-tree-sha1 = "3bfb55ef4674d2fae92a37127e8b28fc7e316ee4"
+git-tree-sha1 = "8a5383f56e88a341203d8d5db1cd1095d8b5b2a3"
 uuid = "e61b41b6-3414-4803-863f-2b69057479eb"
-version = "0.1.1"
+version = "0.1.2"
 
 [[Polynomials]]
 deps = ["LinearAlgebra", "RecipesBase"]
@@ -790,9 +790,9 @@ version = "1.2.0"
 
 [[Variography]]
 deps = ["Distances", "GeoStatsBase", "Optim", "Parameters", "Printf", "RecipesBase", "SpecialFunctions", "StaticArrays", "Statistics"]
-git-tree-sha1 = "211ecaa9ba7ef8b61e543ff0239cae453d9503be"
+git-tree-sha1 = "948365d4c4c709b2e221450c9ee91afdee1971e2"
 uuid = "04a0146e-e6df-5636-8d7f-62fa9eb0b20c"
-version = "0.5.1"
+version = "0.5.2"
 
 [[WeakRefStrings]]
 deps = ["DataAPI", "Random", "Test"]
