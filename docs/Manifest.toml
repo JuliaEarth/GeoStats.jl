@@ -293,9 +293,9 @@ version = "0.11.2"
 
 [[GeoStatsBase]]
 deps = ["AverageShiftedHistograms", "CSV", "CategoricalArrays", "DataFrames", "DensityRatioEstimation", "Distances", "Distributed", "Distributions", "LinearAlgebra", "LossFunctions", "MLJModelInterface", "NearestNeighbors", "Optim", "OrderedCollections", "Parameters", "Random", "RecipesBase", "ScientificTypes", "SpecialFunctions", "StaticArrays", "Statistics", "StatsBase", "Tables"]
-git-tree-sha1 = "619f0f10f7ce9438aac9146e097f687151127633"
+git-tree-sha1 = "f54a06cd1e5daa99fa337e3fe87b5378ef42aa5e"
 uuid = "323cb8eb-fbf6-51c0-afd0-f8fba70507b2"
-version = "0.8.4"
+version = "0.8.5"
 
 [[GeometryTypes]]
 deps = ["ColorTypes", "FixedPointNumbers", "LinearAlgebra", "StaticArrays"]
