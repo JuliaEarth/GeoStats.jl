@@ -38,7 +38,16 @@ makedocs(
     "Reference guide" => [
       "Data" => "data.md",
       "Domains" => "domains.md",
-      "Operations" => "operations.md",
+      "Operations" => [
+        "operations/partitioning.md",
+        "operations/weighting.md",
+        "operations/sampling.md",
+        "operations/filtering.md",
+        "operations/joining.md",
+        "operations/searching.md",
+        "operations/covering.md",
+        "operations/discretizing.md"
+      ],
       "Statistics" => "statistics.md",
       "Problems" => "problems.md",
       "Solvers" => "solvers.md",
