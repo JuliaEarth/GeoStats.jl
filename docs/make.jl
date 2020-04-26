@@ -39,8 +39,8 @@ makedocs(
       "Domains" => "domains.md",
       "Operations" => [
         "operations/partitioning.md",
-        "operations/weighting.md",
         "operations/sampling.md",
+        "operations/weighting.md",
         "operations/filtering.md",
         "operations/joining.md",
         "operations/searching.md",
