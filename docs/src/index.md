@@ -1,6 +1,6 @@
 # GeoStats.jl
 
-*High-performance geostatistics in Julia.*
+*An extensible framework for high-performance geostatistics in Julia.*
 
 [![Build Status](https://travis-ci.org/JuliaEarth/GeoStats.jl.svg?branch=master)](https://travis-ci.org/JuliaEarth/GeoStats.jl)
 [![Coverage Status](https://codecov.io/gh/JuliaEarth/GeoStats.jl/branch/master/graph/badge.svg)](https://codecov.io/gh/JuliaEarth/GeoStats.jl)
@@ -32,7 +32,7 @@ geostatisticians around the globe and to standardize this incredible science.
 If you would like to help support the project, please
 [star the repository on GitHub](https://github.com/JuliaEarth/GeoStats.jl) and
 share it with your colleagues. If you would like to extend the framework with
-new geostatistical solvers, please check the [Developer guide](devbasics.md).
+new geostatistical solvers, please check the [Developer guide](devguide/basics.md).
 
 ## Installation
 
