@@ -29,4 +29,4 @@ EmpiricalVariogram
 DirectionalVariogram
 ```
 
-Variogram plane plots are also available, please see [Plotting](plotting.md).
+Variogram plane plots are also available, please see [Plotting](../plotting.md).

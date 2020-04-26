@@ -53,24 +53,24 @@ makedocs(
       "Solvers" => "solvers.md",
       "Validation" => "validation.md",
       "Variography" => [
-        "empvario.md",
-        "theovario.md",
-        "fitvario.md"
-      ],
-      "Point Patterns" => [
-        "pointprocs.md",
-        "regions.md",
-        "pointops.md"
+        "variography/empirical.md",
+        "variography/theoretical.md",
+        "variography/fitting.md"
       ],
       "Kriging" => [
-        "krigestim.md",
-        "krigsolver.md"
+        "kriging/estimators.md",
+        "kriging/solver.md"
+      ],
+      "Point Patterns" => [
+        "pointpatterns/pointprocs.md",
+        "pointpatterns/regions.md",
+        "pointpatterns/pointops.md"
       ],
       "Plotting" => "plotting.md"
     ],
     "Developer guide" => [
-      "The basics" => "devbasics.md",
-      "Solver examples" => "devexamples.md"
+      "The basics" => "devguide/basics.md",
+      "Solver examples" => "devguide/examples.md"
     ],
     "Contributing" => "contributing.md",
     "Related projects" => "related.md",
