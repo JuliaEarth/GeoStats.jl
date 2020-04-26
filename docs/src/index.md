@@ -42,9 +42,21 @@ Get the latest stable release with Julia's package manager:
 ] add GeoStats
 ```
 
+## Tutorials
+
+A set of Jupyter notebooks demonstrating the current functionality of the project
+is available in [GeoStatsTutorials](https://github.com/JuliaEarth/GeoStatsTutorials)
+with an accompanying series of videos:
+
+```@raw html
+<p align="center">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/yDIK9onnZVw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</p>
+```
+
 ## Quick example
 
-Below is a simple example of geostatistical estimation:
+Below is a quick preview of the high-level API:
 
 ```@example overview
 using GeoStats
@@ -77,9 +89,6 @@ contourf(solution, clabels=true)
 png("images/EstimationSolution.png") # hide
 ```
 ![](images/EstimationSolution.png)
-
-For more examples, please see the [Tutorials](tutorials.md) section of the
-documentation.
 
 ## Project organization
 

@@ -34,7 +34,6 @@ makedocs(
   pages = [
     "Home" => "index.md",
     "Basic workflow" => "workflow.md",
-    "Tutorials" => "tutorials.md",
     "Reference guide" => [
       "Data" => "data.md",
       "Domains" => "domains.md",
