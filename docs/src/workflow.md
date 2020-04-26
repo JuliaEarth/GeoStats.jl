@@ -136,8 +136,8 @@ plot(Π)
 ```
 
 Spatial partitions are (lazy) iterators of spatial views, which are useful in
-many contexts as it will be shown in the next section of the user guide. To
-access a subset of a partition, we use index notation:
+many contexts as it will be shown in the next section. To access a subset of
+a partition, we use index notation:
 
 ```@example workflow
 plot(Π[1])
@@ -146,6 +146,10 @@ plot(Π[1])
 ```@example workflow
 plot(Π[2])
 ```
+
+Various other spatial operations are defined in the framework besides partitioning.
+For a complete list, please check the [Operations](operations/partitioning.md)
+section of the reference guide.
 
 ## Defining problems
 
@@ -160,7 +164,7 @@ the available columns:
 
 ```@example workflow
 using CSV
-gr(size=(800,400))
+gr(size=(800,400)) # hide
 
 df = CSV.read("data/agriculture.csv")
 
@@ -173,7 +177,7 @@ for each location that was labeled manually with the purpose of training a
 learning model.
 
 Because the labels are categorical variables, we need to inform the framework
-the correct categorical type:
+the correct type:
 
 ```@example workflow
 using CategoricalArrays
@@ -206,7 +210,9 @@ plot!(domain(Ωt), ms=0.2, mc=:green)
 
 We can visualize the domain of the "train" (or source) set Ωs in black, and the
 domain of the "test" (or target) set Ωt in green. We reserved 20% of the samples
-to Ωs and 80% to Ωt.
+to Ωs and 80% to Ωt. Internally, this spatial `split` function is implemented in
+terms of efficient spatial partitioning operations, which were illustrated in the
+previous section.
 
 Let's define the learning task and the geostatistical learning problem. We want
 to predict the crop type based on the four satellite bands. We will train the model
@@ -262,6 +268,5 @@ estimate the generalization error of the geostatistical solver with spatial
 validation methods such as block cross-validation and leave-ball-out, but
 these methods deserve a separate tutorial.
 
-With this example we conclude the user guide. To get familiar with other
-features of GeoStats.jl, please check the tutorials and the
-reference guide.
+With this example we conclude the basic workflow. To get familiar with other
+features of GeoStats.jl, please check the tutorials and the reference guide.
