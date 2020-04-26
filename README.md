@@ -15,12 +15,11 @@
   <a href="LICENSE">
     <img src="https://img.shields.io/badge/license-ISC-blue.svg">
   </a>
+</p>
+<p align="center">
   <a href="https://gitter.im/JuliaEarth/GeoStats.jl">
     <img src="https://img.shields.io/badge/chat-on%20gitter-bc0067.svg">
   </a>
-</p>
-<p align="center">
-  Cite as &#8599;
   <a href="https://doi.org/10.21105/joss.00692">
     <img src="http://joss.theoj.org/papers/10.21105/joss.00692/status.svg">
   </a>
@@ -51,11 +50,15 @@ Get the latest stable release with Julia's package manager:
 
 ## Tutorials
 
-A set of Jupyter notebooks demonstrating the current functionality of the package is available
-in [GeoStatsTutorials](https://github.com/JuliaEarth/GeoStatsTutorials).
+A set of Jupyter notebooks demonstrating the current functionality of the project is available in
+[GeoStatsTutorials](https://github.com/JuliaEarth/GeoStatsTutorials)
+with an accompanying series of videos:
 
-Below is a quick preview of the high-level API. For the full example, please check
-[this notebook](http://nbviewer.jupyter.org/github/JuliaEarth/GeoStatsTutorials/blob/master/notebooks/EstimationProblems.ipynb).
+<p align="center">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/yDIK9onnZVw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</p>
+
+Below is a quick preview of the high-level API:
 
 ```julia
 using GeoStats
