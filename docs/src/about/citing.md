@@ -1,4 +1,5 @@
-If you find GeoStats.jl useful in your work, please consider citing it:
+If you find [GeoStats.jl](https://github.com/JuliaEarth/GeoStats.jl)
+useful in your work, please consider citing it:
 
 [![JOSS](https://joss.theoj.org/papers/10.21105/joss.00692/status.svg)](https://doi.org/10.21105/joss.00692)
 [![DOI](https://zenodo.org/badge/33827844.svg)](https://zenodo.org/badge/latestdoi/33827844)
