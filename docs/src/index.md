@@ -34,6 +34,25 @@ If you would like to help support the project, please
 share it with your colleagues. If you would like to extend the framework with
 new geostatistical solvers, please check the [Developer guide](devguide/basics.md).
 
+### Citing
+
+```latex
+@ARTICLE{Hoffimann2018,
+  title={GeoStats.jl – High-performance geostatistics in Julia},
+  author={Hoffimann, Júlio},
+  journal={Journal of Open Source Software},
+  publisher={The Open Journal},
+  volume={3},
+  pages={692},
+  number={24},
+  ISSN={2475-9066},
+  DOI={10.21105/joss.00692},
+  url={https://dx.doi.org/10.21105/joss.00692},
+  year={2018},
+  month={Apr}
+}
+```
+
 ## Installation
 
 Get the latest stable release with Julia's package manager:
