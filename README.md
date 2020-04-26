@@ -54,9 +54,7 @@ A set of Jupyter notebooks demonstrating the current functionality of the projec
 [GeoStatsTutorials](https://github.com/JuliaEarth/GeoStatsTutorials)
 with an accompanying series of videos:
 
-<p align="center">
-<iframe width="560" height="315" src="https://www.youtube.com/embed/yDIK9onnZVw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-</p>
+[![Watch the video](https://img.youtube.com/vi/yDIK9onnZVw/maxresdefault.jpg)](https://youtu.be/yDIK9onnZVw)
 
 Below is a quick preview of the high-level API:
 
