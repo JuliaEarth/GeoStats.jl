@@ -34,7 +34,7 @@ savefig("images/pointset.svg") # hide
 ![](images/pointset.svg)
 
 Besides plotting GeoStats.jl objects directly, a few other plots are provided for
-exploring spatial data.
+exploring spatial data:
 
 ## hscatter
 
