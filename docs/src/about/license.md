@@ -1,7 +1,7 @@
-The GeoStats.jl package is licensed under the
-[ISC License](https://opensource.org/licenses/ISC):
+The [GeoStats.jl](https://github.com/JuliaEarth/GeoStats.jl) project is
+licensed under the [ISC License](https://opensource.org/licenses/ISC):
 
-    Copyright (c) 2015, Júlio Hoffimann Mendes <juliohm@stanford.edu>
+    Copyright (c) 2015, Júlio Hoffimann Mendes
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose with or without fee is hereby granted, provided that the above
