@@ -20,7 +20,7 @@ Z = [norm([i,j]) for i in 1:100, j in 1:100]
 Ω = RegularGridData{Float64}(OrderedDict(:Z=>Z))
 S = sample(Ω, 1000, replace=false)
 
-W = weight(S, BlockWeighter(10.))
+W = weight(S, BlockWeighter(10.,10.))
 
 plot(plot(S), plot(W))
 ```
