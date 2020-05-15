@@ -30,7 +30,7 @@ gr(format=:svg) # hide
 Z = [norm([i,j]) for i in 1:100, j in 1:100]
 Ω = RegularGridData{Float64}(OrderedDict(:Z=>Z))
 
-Π = partition(Ω, BlockPartitioner(10.))
+Π = partition(Ω, BlockPartitioner(10.,10.))
 
 plot(plot(Ω), plot(Π))
 ```
