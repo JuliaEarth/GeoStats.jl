@@ -13,8 +13,8 @@ models are easily obtained by defining an ellipsoid distance in place of the Euc
 distance. For a list of available distances, please see
 [Distances.jl](https://github.com/JuliaStats/Distances.jl).
 
-This package implements a few commonly used and other more excentric variogram models.
-They all share the same default parameters:
+This package implements a few commonly used and other more exotic variogram models.
+Most of these models share a set of default parameters:
 
 - `sill=1`
 - `range=1`
@@ -23,20 +23,24 @@ They all share the same default parameters:
 
 Some of them have extra parameters that can be set with keyword arguments:
 
-```julia
-GaussianVariogram(nugget=.1) # set nugget effect
-MaternVariogram(order=1) # set order of Bessel function
+```@example variograms
+using GeoStats # hide
+using Plots # hide
+MaternVariogram(order=1.) # set order of Bessel function
 ```
 
-Additionally, a composite (additive) variogram model ``\gamma(h) = \gamma_1(h) + \gamma_2(h) + \cdots \gamma_n(h)``
-can be constructed from a list of variogram models:
+Additionally, a composite (additive) variogram model
+``\gamma(h) = \gamma_1(h) + \gamma_2(h) + \cdots \gamma_n(h)``
+can be constructed from multiple variogram models. Like the
+other variogram models, a composite variogram ``\gamma`` can be
+evaluated as an isotropic model ``\gamma(h)`` or as a model
+with a custom distance ``\gamma(\x_1,\x_2)``:
 
-```julia
+```@example variograms
 γ = GaussianVariogram() + ExponentialVariogram()
-```
 
-Like the other variogram models, a composite variogram ``\gamma`` can be evaluated as an isotropic model
-``\gamma(h)`` or as a model with a custom distance ``\gamma(\x_1,\x_2)``.
+γ(1.), γ([0.,0.], [1.,0.])
+```
 
 Finally, the 2nd-order stationarity property of a variogram can be checked with the `isstationary` method:
 
@@ -54,6 +58,10 @@ isstationary
 GaussianVariogram
 ```
 
+```@example variograms
+plot(GaussianVariogram(), maxlag=3.)
+```
+
 ## Exponential
 
 ```math
@@ -63,6 +71,10 @@ GaussianVariogram
 
 ```@docs
 ExponentialVariogram
+```
+
+```@example variograms
+plot(ExponentialVariogram(), maxlag=3.)
 ```
 
 ## Matern
@@ -75,6 +87,10 @@ ExponentialVariogram
 MaternVariogram
 ```
 
+```@example variograms
+plot(MaternVariogram(), maxlag=3.)
+```
+
 ## Spherical
 
 ```math
@@ -83,6 +99,10 @@ MaternVariogram
 
 ```@docs
 SphericalVariogram
+```
+
+```@example variograms
+plot(SphericalVariogram(), maxlag=3.)
 ```
 
 ## Cubic
@@ -95,6 +115,10 @@ SphericalVariogram
 CubicVariogram
 ```
 
+```@example variograms
+plot(CubicVariogram(), maxlag=3.)
+```
+
 ## Pentaspherical
 
 ```math
@@ -103,6 +127,10 @@ CubicVariogram
 
 ```@docs
 PentasphericalVariogram
+```
+
+```@example variograms
+plot(PentasphericalVariogram(), maxlag=3.)
 ```
 
 ## Power
@@ -115,6 +143,10 @@ PentasphericalVariogram
 PowerVariogram
 ```
 
+```@example variograms
+plot(PowerVariogram(), maxlag=3.)
+```
+
 ## Sine hole
 
 ```math
@@ -125,8 +157,18 @@ PowerVariogram
 SineHoleVariogram
 ```
 
+```@example variograms
+plot(SineHoleVariogram(), maxlag=3.)
+```
+
 ## Composite
 
 ```@docs
 CompositeVariogram
+```
+
+```@example variograms
+γ = GaussianVariogram() + SphericalVariogram()
+
+plot(γ, maxlag=3.)
 ```
