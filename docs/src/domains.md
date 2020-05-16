@@ -34,7 +34,7 @@ StructuredGrid
 
 ```@example domains
 # create 3D coordinates
-nx, ny, nz = 20, 10, 10
+nx, ny, nz = 20, 10, 5
 X = [x for x in range(0,10,length=nx), j in 1:ny, k in 1:nz]
 Y = sin.(X) .+ [0.5j for i in 1:nx, j in 1:ny, k in 1:nz]
 Z = [1.0(k-1) for i in 1:nx, j in 1:ny, k in 1:nz]
