@@ -12,6 +12,8 @@ counterparts:
 
 ```@docs
 EmpiricalHistogram
+mean(::AbstractData)
+var(::AbstractData)
 ```
 
 ## Ensemble
@@ -23,5 +25,5 @@ or ensemble:
 ```@docs
 mean(::SimulationSolution)
 var(::SimulationSolution)
-quantile(::SimulationSolution, ::Real)
+quantile(::SimulationSolution, ::Number)
 ```
