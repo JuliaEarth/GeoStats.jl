@@ -1,9 +1,7 @@
 # Plotting
 
-GeoStats.jl is integrated with the [Plots.jl](https://github.com/JuliaPlots/Plots.jl)
-project. This means that domains, variograms and many other objects defined in this
-documentation can be plotted directly without major efforts. Besides plotting objects
-directly, a few other plots are provided.
+Most objects defined in the project can be plotted directly without major efforts.
+Other plots are provided below that can be useful for spatial data analysis.
 
 ## hscatter
 
