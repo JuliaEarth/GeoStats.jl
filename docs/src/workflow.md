@@ -264,9 +264,9 @@ plot(p̂, p)
 ```
 
 Visually, the learning model has succeeded predicting the crop. We can also
-estimate the generalization error of the geostatistical solver with spatial
-validation methods such as block cross-validation and leave-ball-out, but
-these methods deserve a separate tutorial.
+estimate the generalization error of the geostatistical solver with [spatial
+validation methods](validation.md) such as block cross-validation and
+leave-ball-out, but these methods deserve a separate tutorial.
 
 With this example we conclude the basic workflow. To get familiar with other
-features of GeoStats.jl, please check the tutorials and the reference guide.
+features of the project, please check the tutorials and the reference guide.

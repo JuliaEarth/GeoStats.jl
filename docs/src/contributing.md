@@ -25,10 +25,24 @@ Suggestions as well as feature requests are very welcome.
 ## Code contribution
 
 If you have code that you would like to contribute to GeoStats.jl,
-that is awesome! Please open an issue before you create the pull
-request on GitHub so that we make sure your idea is aligned with
-our goals for the project.
+that is awesome! Please [open an issue](https://github.com/JuliaEarth/GeoStats.jl/issues)
+before you create the pull request on GitHub so that we make sure
+your idea is aligned with our goals for the project.
+
+After your idea is discussed and revised by maintainers, please get
+the development version of the project by typing the following in
+the package manager:
+
+```julia
+] dev GeoStatsBase Variography KrigingEstimators PointPatterns GeoStats
+```
+
+This will clone all the project components in your `~/.julia` folder so
+that you can modify it and submit a pull request on GitHub later. Don't
+hesitate to ask questions in our [gitter channel](https://gitter.im/JuliaEarth/GeoStats.jl)
+if you are not familiar with the Git workflow.
 
 You can also develop your own solver independently, under your own
-license terms. Please check the developer guide for information on
-how to write solvers that are compatible with the framework.
+license terms, and optionally make it public. Please check the [developer
+guide](devguide/basics.md) for information on how to write solvers that
+are compatible with the framework.
