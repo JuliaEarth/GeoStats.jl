@@ -118,7 +118,7 @@ If you find GeoStats.jl useful in your work, please consider citing it:
 [![JOSS][joss-img]][joss-url]
 [![DOI][zenodo-img]][zenodo-url]
 
-```latex
+```bibtex
 @ARTICLE{GeoStats.jl-2018,
   title={GeoStats.jl – High-performance geostatistics in Julia},
   author={Hoffimann, Júlio},
