@@ -11,7 +11,7 @@ Reexport = "189a3867-3050-52da-a836-e630ba90ab69"
 Variography = "04a0146e-e6df-5636-8d7f-62fa9eb0b20c"
 
 [compat]
-GeoStatsBase = "0.7, 0.8, 0.9"
+GeoStatsBase = "0.7, 0.8, 0.9, 0.10"
 KrigingEstimators = "0.3"
 PointPatterns = "0.1"
 Reexport = "0.2"
