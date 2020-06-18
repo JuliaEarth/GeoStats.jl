@@ -75,8 +75,8 @@ using Plots
 # read spreadsheet file containing spatial data
 sdata = readgeotable("data.csv", coordnames=[:x,:y])
 
-# define spatial domain (e.g. regular grid, point collection)
-sdomain = RegularGrid{Float64}(100, 100)
+# define spatial domain (e.g. regular grid)
+sdomain = RegularGrid(100, 100)
 
 # define estimation problem for any data column(s) (e.g. :precipitation)
 problem = EstimationProblem(sdata, sdomain, :precipitation)

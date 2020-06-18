@@ -20,7 +20,7 @@ boundbox
 ```@example
 using GeoStats # hide
 
-R = boundbox(RegularGrid{Float64}(50, 80))
+R = boundbox(RegularGrid(50, 80))
 
 lowerleft(R), upperright(R)
 ```

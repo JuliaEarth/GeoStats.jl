@@ -13,7 +13,7 @@ join(::AbstractSpatialObject, ::AbstractSpatialObject, ::AbstractJoiner)
 ```@example
 using GeoStats # hide
 
-Ω = RegularGridData{Float64}(OrderedDict(:Z=>rand(100,100)))
+Ω = RegularGridData(OrderedDict(:Z=>rand(100,100)))
 
 join(Ω, Ω, VariableJoiner())
 ```

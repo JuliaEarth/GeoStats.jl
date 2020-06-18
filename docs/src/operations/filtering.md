@@ -6,6 +6,7 @@ Spatial objects can be filtered:
 
 ```@docs
 filter(::AbstractSpatialObject, ::AbstractFilter)
+uniquecoords
 ```
 
 ## Example
@@ -15,7 +16,7 @@ using GeoStats # hide
 
 Ω = PointSetData(OrderedDict(:Z=>[0, 1, 0]), [0. 1. 0.; 0. 0. 0.])
 
-Γ = filter(Ω, UniqueCoordsFilter())
+Γ = uniquecoords(Ω)
 
 coordinates(Γ)
 ```

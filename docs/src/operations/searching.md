@@ -18,18 +18,18 @@ using Plots # hide
 gr(format=:svg) # hide
 
 Z = [norm([i,j]) for i in 1:100, j in 1:100]
-Ω = RegularGridData{Float64}(OrderedDict(:Z=>Z))
+Ω = RegularGridData(OrderedDict(:Z=>Z))
 
 # construct searcher
 b = BallNeighborhood{2}(20.)
 s = NeighborhoodSearcher(Ω, b)
 
 # query neighbors of point
-I = search([50., 50.], s)
-N = view(Ω, I)
+inds = search([50.,50.], s)
+𝒩 = view(Ω, inds)
 
 p₁ = plot(Ω)
-p₂ = plot(N, lims=(0,100))
+p₂ = plot(𝒩, lims=(0,100))
 
 plot(p₁, p₂)
 ```

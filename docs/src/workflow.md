@@ -29,7 +29,7 @@ we can georeference the image as [RegularGridData](@ref):
 ```@example workflow
 using GeoStats
 
-Ω = RegularGridData{Float64}(OrderedDict(:Z=>Z))
+Ω = RegularGridData(OrderedDict(:Z=>Z))
 ```
 
 The origin and spacing of samples in the regular grid can be specified in the constructor:

@@ -37,7 +37,7 @@ function solve(problem::EstimationProblem, solver::NormSolver)
       varμ = Vector{V}(undef, npoints(pdomain))
       varσ = Vector{V}(undef, npoints(pdomain))
 
-      for location in LinearPath(pdomain)
+      for location in traverse(pdomain, LinearPath())
         x = coordinates(pdomain, location)
 
         varμ[location] = norm(x, varparams.pmean)
@@ -64,7 +64,7 @@ gr(size=(900,400)) # hide
 sdata   = PointSetData(OrderedDict(:z => [NaN]), reshape([0.,0.], 2, 1))
 
 # estimate on a regular grid
-sdomain = RegularGrid{Float64}(100, 100)
+sdomain = RegularGrid(100, 100)
 
 # the problem to be solved
 problem = EstimationProblem(sdata, sdomain, :z)
@@ -135,7 +135,7 @@ using Plots
 gr(size=(900,300)) # hide
 
 # simulate on a regular grid
-sdomain = RegularGrid{Float64}(100, 100)
+sdomain = RegularGrid(100, 100)
 
 # the problem to be solved
 problem = SimulationProblem(sdomain, :z => Float64, 3)
@@ -252,7 +252,7 @@ gr(size=(900,300)) # hide
 
 Z = [10sin(i/10) + j for i in 1:100, j in 1:100]
 
-Ω = RegularGridData{Float64}(OrderedDict(:Z=>Z))
+Ω = RegularGridData(OrderedDict(:Z=>Z))
 
 t = ClusteringTask(:Z, :SUPERPIXEL)
 

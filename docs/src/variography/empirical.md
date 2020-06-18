@@ -29,4 +29,8 @@ EmpiricalVariogram
 DirectionalVariogram
 ```
 
-Variogram plane plots are also available, please see [Plotting](../plotting.md).
+## Varioplane
+
+```@docs
+EmpiricalVarioplane
+```

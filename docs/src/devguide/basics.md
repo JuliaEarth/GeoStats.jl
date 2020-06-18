@@ -161,8 +161,8 @@ To test your new solver, load the `GeoStats.jl` package and solve a simple probl
 using GeoStats
 using MySolver
 
-sdata    = readgeotable("somedata.csv", coordnames=[:x,:y])
-sdomain  = RegularGrid{Float64}(100, 100)
+sdata    = readgeotable("samples.csv", coordnames=[:x,:y])
+sdomain  = RegularGrid(100, 100)
 problem  = EstimationProblem(sdata, sdomain, :value)
 
 solution = solve(problem, MyCoolSolver())
