@@ -23,7 +23,7 @@ RegularGrid
 ```
 
 ```@example domains
-plot(RegularGrid{Float64}(10,10,10), camera=(30,60))
+plot(RegularGrid(10,10,10), camera=(30,60))
 ```
 
 ## StructuredGrid

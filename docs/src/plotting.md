@@ -16,18 +16,7 @@ gr(size=(800,300)) # hide
 
 Z = [10sin(i/10) + j for i in 1:100, j in 1:200]
 
-Ω = RegularGridData{Float64}(OrderedDict(:Z=>Z))
+Ω = RegularGridData(OrderedDict(:Z=>Z))
 
 hscatter(sample(Ω, 500), :Z, lags=[0.,20.,50.])
 ```
-
-## varplane
-
-A variogram plane (i.e. `varplane`) plot is a visualization that displays a collection of directional
-variograms for all angles in a given plane for 2D or 3D spatial data.
-
-```julia
-# horizontal plane ==> theta=0, phi=90
-varplane(Ω, :Z, theta=0, phi=90)
-```
-![](images/VarPlane.png)

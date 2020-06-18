@@ -89,10 +89,10 @@ coord = [(25.,25.),(50.,75.),(75.,50.)]
 # define spatial data
 sdata = PointSetData(props, coord)
 
-# define spatial domain (e.g. regular grid, point set)
-sdomain = RegularGrid{Float64}(100, 100)
+# define spatial domain
+sdomain = RegularGrid(100, 100)
 
-# define estimation problem for any data column(s) (e.g. :precipitation)
+# define estimation problem for any data column(s)
 problem = EstimationProblem(sdata, sdomain, :prop)
 
 # choose a solver from the list of solvers
