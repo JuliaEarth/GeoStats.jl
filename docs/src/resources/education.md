@@ -1,4 +1,4 @@
-# Resources
+# Education
 
 Geostatistics is often misunderstood as "classical statistics applied to
 spatial data". To correct this unfortunate misunderstanding, the best we
