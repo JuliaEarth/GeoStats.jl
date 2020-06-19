@@ -72,7 +72,10 @@ makedocs(
       "Solver examples" => "devguide/examples.md"
     ],
     "Contributing" => "contributing.md",
-    "Resources" => "resources.md",
+    "Resources" => [
+      "resources/education.md",
+      "resources/fileformats.md"
+    ],
     "About" => [
       "Community" => "about/community.md",
       "License" => "about/license.md",
