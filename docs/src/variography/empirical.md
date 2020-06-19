@@ -17,19 +17,33 @@ functions. These can be used in order to for example:
 Please see [Distances.jl](https://github.com/JuliaStats/Distances.jl)
 for a complete list of options.
 
-## Omnidirectional
+Additionally, given two empirical variograms ``\hat{\gamma}_\alpha`` and ``\hat{\gamma}_\beta``,
+they can be merged as described in Hoffimann & Zadrozny 2019:
+
+```math
+\hat{\gamma}_{\alpha+\beta}(h) =
+\frac{|N_\alpha(h)| \cdot \hat{\gamma}_\alpha(h) + |N_\beta(h)| \cdot \hat{\gamma}_\beta(h)}{|N_\alpha(h)| + |N_\beta(h)|}
+```
+
+```@docs
+merge(::EmpiricalVariogram, ::EmpiricalVariogram)
+```
+
+## Variograms
+
+### Omnidirectional
 
 ```@docs
 EmpiricalVariogram
 ```
 
-## Directional
+### Directional
 
 ```@docs
 DirectionalVariogram
 ```
 
-## Varioplane
+## Varioplanes
 
 ```@docs
 EmpiricalVarioplane

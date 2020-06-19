@@ -133,7 +133,7 @@ with ``\nu`` the Lagrange multiplier associated with the constraint ``\1^\top \l
 location ``\x_0`` are given by:
 
 ```math
-\mu(\x_0) = \z^\top \lambda
+\mu(\x_0) = \z^\top \l
 ```
 ```math
 \sigma^2(\x_0) =  \begin{bmatrix} \g \\ 1 \end{bmatrix}^\top \begin{bmatrix} \l \\ \nu \end{bmatrix}
