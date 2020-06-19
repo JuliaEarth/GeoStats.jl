@@ -17,7 +17,7 @@ makedocs(
       :macros => Dict(
         "\\x" => "\\boldsymbol{x}",
         "\\z" => "\\boldsymbol{z}",
-        "\\l" => "\\boldsymbol{l}",
+        "\\l" => "\\boldsymbol{\\lambda}",
         "\\c" => "\\boldsymbol{c}",
         "\\C" => "\\boldsymbol{C}",
         "\\g" => "\\boldsymbol{g}",

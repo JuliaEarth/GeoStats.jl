@@ -59,7 +59,7 @@ GaussianVariogram
 ```
 
 ```@example variograms
-plot(GaussianVariogram(), maxlag=3.)
+plot(GaussianVariogram())
 ```
 
 ## Exponential
@@ -74,7 +74,7 @@ ExponentialVariogram
 ```
 
 ```@example variograms
-plot(ExponentialVariogram(), maxlag=3.)
+plot(ExponentialVariogram())
 ```
 
 ## Matern
@@ -88,7 +88,7 @@ MaternVariogram
 ```
 
 ```@example variograms
-plot(MaternVariogram(), maxlag=3.)
+plot(MaternVariogram())
 ```
 
 ## Spherical
@@ -102,7 +102,7 @@ SphericalVariogram
 ```
 
 ```@example variograms
-plot(SphericalVariogram(), maxlag=3.)
+plot(SphericalVariogram())
 ```
 
 ## Cubic
@@ -116,7 +116,7 @@ CubicVariogram
 ```
 
 ```@example variograms
-plot(CubicVariogram(), maxlag=3.)
+plot(CubicVariogram())
 ```
 
 ## Pentaspherical
@@ -130,7 +130,7 @@ PentasphericalVariogram
 ```
 
 ```@example variograms
-plot(PentasphericalVariogram(), maxlag=3.)
+plot(PentasphericalVariogram())
 ```
 
 ## Power
@@ -144,7 +144,7 @@ PowerVariogram
 ```
 
 ```@example variograms
-plot(PowerVariogram(), maxlag=3.)
+plot(PowerVariogram())
 ```
 
 ## Sine hole
@@ -158,7 +158,7 @@ SineHoleVariogram
 ```
 
 ```@example variograms
-plot(SineHoleVariogram(), maxlag=3.)
+plot(SineHoleVariogram())
 ```
 
 ## Composite
@@ -168,7 +168,5 @@ CompositeVariogram
 ```
 
 ```@example variograms
-γ = GaussianVariogram() + SphericalVariogram()
-
-plot(γ, maxlag=3.)
+plot(GaussianVariogram(range=0.5) + SphericalVariogram(range=1.5))
 ```
