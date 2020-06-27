@@ -45,7 +45,8 @@ makedocs(
         "operations/joining.md",
         "operations/searching.md",
         "operations/covering.md",
-        "operations/discretizing.md"
+        "operations/discretizing.md",
+        "operations/detrending.md"
       ],
       "Statistics" => "statistics.md",
       "Problems" => "problems.md",
