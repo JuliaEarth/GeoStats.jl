@@ -31,20 +31,60 @@ merge(::EmpiricalVariogram, ::EmpiricalVariogram)
 
 ## Variograms
 
-### Omnidirectional
+Consider the following image for illustration purposes:
+
+```@example empirical
+using GeoStats #hide
+using GeoStatsImages
+using Plots #hide
+
+𝒟 = geostatsimage("Gaussian30x10")
+
+plot(𝒟)
+```
 
 ```@docs
 EmpiricalVariogram
 ```
 
-### Directional
+```@example empirical
+γ = EmpiricalVariogram(𝒟, :Z, maxlag=50.)
+
+plot(γ)
+```
 
 ```@docs
 DirectionalVariogram
+```
+
+```@example empirical
+γₕ = DirectionalVariogram((1.,0.), 𝒟, :Z, maxlag=50.)
+γᵥ = DirectionalVariogram((0.,1.), 𝒟, :Z, maxlag=50.)
+
+plot(γₕ, label="horizontal")
+plot!(γᵥ, label="vertical")
+```
+
+```@docs
+PlanarVariogram
+```
+
+```@example empirical
+γᵥ = PlanarVariogram((1.,0.), 𝒟, :Z, maxlag=50.)
+γₕ = PlanarVariogram((0.,1.), 𝒟, :Z, maxlag=50.)
+
+plot(γₕ, label="horizontal")
+plot!(γᵥ, label="vertical")
 ```
 
 ## Varioplanes
 
 ```@docs
 EmpiricalVarioplane
+```
+
+```@example empirical
+γ = EmpiricalVarioplane(𝒟, :Z, maxlag=50.)
+
+plot(γ)
 ```

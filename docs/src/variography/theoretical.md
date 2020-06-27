@@ -29,17 +29,21 @@ using Plots # hide
 MaternVariogram(order=1.) # set order of Bessel function
 ```
 
-Additionally, a composite (additive) variogram model
-``\gamma(h) = \gamma_1(h) + \gamma_2(h) + \cdots \gamma_n(h)``
+Additionally, an additive variogram model
+``\gamma(h) = c_1\cdot\gamma_1(h) + c_2\cdot\gamma_2(h) + \cdots + c_n\cdot\gamma_n(h)``
 can be constructed from multiple variogram models. Like the
-other variogram models, a composite variogram ``\gamma`` can be
+other variogram models, an additive model ``\gamma`` can be
 evaluated as an isotropic model ``\gamma(h)`` or as a model
 with a custom distance ``\gamma(\x_1,\x_2)``:
 
 ```@example variograms
-γ = GaussianVariogram() + ExponentialVariogram()
+γ₁ = GaussianVariogram()
+γ₂ = ExponentialVariogram()
 
-γ(1.), γ([0.,0.], [1.,0.])
+# additive model
+γ = γ₁ + 2γ₂
+
+γ(1.) == γ([0.,0.], [1.,0.])
 ```
 
 Finally, the 2nd-order stationarity property of a variogram can be checked with the `isstationary` method:
@@ -159,14 +163,4 @@ SineHoleVariogram
 
 ```@example variograms
 plot(SineHoleVariogram())
-```
-
-## Composite
-
-```@docs
-CompositeVariogram
-```
-
-```@example variograms
-plot(GaussianVariogram(range=0.5) + SphericalVariogram(range=1.5))
 ```
