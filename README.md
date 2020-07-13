@@ -55,7 +55,7 @@ A set of Jupyter notebooks demonstrating the current functionality of the projec
 with an accompanying series of videos:
 
 <p align="center">
-  <a href="https://youtu.be/yDIK9onnZVw">
+  <a href="https://www.youtube.com/playlist?list=PLsH4hc788Z1f1e61DN3EV9AhDlpbhhanw">
     <img src="https://img.youtube.com/vi/yDIK9onnZVw/maxresdefault.jpg">
   </a>
 </p>
