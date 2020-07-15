@@ -55,9 +55,3 @@ WeightedBootstrap
 ```@docs
 DensityRatioValidation
 ```
-
-## Ball-sample validation
-
-```@docs
-BallSampleValidation
-```

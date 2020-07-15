@@ -5,7 +5,7 @@
 Multiple spatial objects can be joined into a single object:
 
 ```@docs
-join(::AbstractSpatialObject, ::AbstractSpatialObject, ::AbstractJoiner)
+GeoStatsBase.join
 ```
 
 ## Example
@@ -13,7 +13,7 @@ join(::AbstractSpatialObject, ::AbstractSpatialObject, ::AbstractJoiner)
 ```@example
 using GeoStats # hide
 
-Ω = RegularGridData(OrderedDict(:Z=>rand(100,100)))
+Ω = georef((z=rand(100,100),))
 
 join(Ω, Ω, VariableJoiner())
 ```

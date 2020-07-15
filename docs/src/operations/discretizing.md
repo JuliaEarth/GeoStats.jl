@@ -5,7 +5,7 @@
 Spatial regions can be discretized:
 
 ```@docs
-discretize(::AbstractRegion, ::AbstractDiscretizer)
+discretize
 ```
 
 ## Example

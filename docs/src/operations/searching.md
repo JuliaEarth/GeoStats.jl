@@ -5,8 +5,7 @@
 Neighbors of a point or sample can be searched efficiently:
 
 ```@docs
-search(::AbstractVector, ::AbstractNeighborSearcher)
-search(::Int, ::AbstractNeighborSearcher)
+search
 ```
 
 ## Example
@@ -17,11 +16,10 @@ using LinearAlgebra # hide
 using Plots # hide
 gr(format=:svg) # hide
 
-Z = [norm([i,j]) for i in 1:100, j in 1:100]
-Ω = RegularGridData(OrderedDict(:Z=>Z))
+Ω = georef((Z=[norm([i,j]) for i in 1:100, j in 1:100],))
 
 # construct searcher
-b = BallNeighborhood{2}(20.)
+b = BallNeighborhood(20.)
 s = NeighborhoodSearcher(Ω, b)
 
 # query neighbors of point

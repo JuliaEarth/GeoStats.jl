@@ -14,9 +14,7 @@ using GeoStats
 using Plots
 gr(size=(800,300)) # hide
 
-Z = [10sin(i/10) + j for i in 1:100, j in 1:200]
+𝒟 = georef((Z=[10sin(i/10) + j for i in 1:100, j in 1:200],))
 
-Ω = RegularGridData(OrderedDict(:Z=>Z))
-
-hscatter(sample(Ω, 500), :Z, lags=[0.,20.,50.])
+hscatter(sample(𝒟, 500), :Z, lags=[0.,20.,50.])
 ```

@@ -12,43 +12,39 @@ fit(::Type{Variogram}, ::EmpiricalVariogram, ::VariogramFitAlgo)
 
 ## Example
 
-In this example we generate data from a known theoretical model and fit
-other models to the data. First, we select a single model and evaluate it
-at different lags to create a synthetic empirical variogram:
-
 ```@example variofit
 using GeoStats # hide
 using Plots # hide
-# create data from a model
-γ = SphericalVariogram()
-x = range(0, stop=3, length=20)
-y = γ.(x)
-n = 20:-1:1
 
-# synthetic empirical variogram
-g = EmpiricalVariogram(x, y, n)
+# sinusoidal data
+𝒟 = georef((Z=[sin(i/2) + sin(j/2) for i in 1:50, j in 1:50],))
+
+# empirical variogram
+g = EmpiricalVariogram(𝒟, :Z, maxlag=25.)
 
 plot(g)
 ```
 
-We can then fit different models to the empirical variogram:
+We can fit specific models to the empirical variogram:
 
 ```@example variofit
-γs = [fit(V, g) for V in [GaussianVariogram, ExponentialVariogram, MaternVariogram]]
+γ = fit(SineHoleVariogram, g)
 
-# plot all models
-p = plot(g)
-for γ in γs
-  plot!(γ, maxlag=3.)
-end
-p
+plot(g)
+plot!(γ)
 ```
 
-Alternatively, we can let GeoStats.jl find the model with minimum error:
+or let GeoStats.jl find the model with minimum error:
 
 ```@example variofit
-γₒ = fit(Variogram, g)
+γ = fit(Variogram, g)
+
+plot(g)
+plot!(γ)
 ```
+
+which should be a [`SineHoleVariogram`](@ref) given that the synthetic data
+of this example is sinusoidal.
 
 ## Methods
 

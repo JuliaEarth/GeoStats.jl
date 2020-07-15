@@ -68,11 +68,12 @@ makedocs(
       ],
       "Plotting" => "plotting.md"
     ],
-    "Developer guide" => [
-      "The basics" => "devguide/basics.md",
-      "Solver examples" => "devguide/examples.md"
+    "Contributing" => [
+      "contributing/guidelines.md",
+      "Developer guide" => [
+        "contributing/solvers.md"
+      ]
     ],
-    "Contributing" => "contributing.md",
     "Resources" => [
       "resources/education.md",
       "resources/fileformats.md"
