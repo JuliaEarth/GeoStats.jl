@@ -163,9 +163,10 @@ the available columns:
 
 ```@example workflow
 using CSV
+using DataFrames
 gr(size=(800,400)) # hide
 
-df = CSV.read("data/agriculture.csv")
+df = DataFrame!(CSV.File("data/agriculture.csv"))
 
 first(df, 5)
 ```
@@ -179,9 +180,7 @@ Because the labels are categorical variables, we need to inform the framework
 the correct type:
 
 ```@example workflow
-using CategoricalArrays
-
-df.crop = categorical(df.crop)
+categorical!(df, :crop)
 
 first(df, 5)
 ```
@@ -220,9 +219,9 @@ in Ωs where labels are available, and apply it to Ωt, which is our target:
 feats = [:band1,:band2,:band3,:band4]
 label = :crop
 
-task = ClassificationTask(feats, label)
+𝒯 = ClassificationTask(feats, label)
 
-problem = LearningProblem(Ωs, Ωt, task)
+𝒫 = LearningProblem(Ωs, Ωt, 𝒯)
 ```
 
 GeoStats.jl is integrated with the [MLJ.jl](https://github.com/alan-turing-institute/MLJ.jl)
@@ -234,9 +233,9 @@ using MLJ
 
 @load DecisionTreeClassifier
 
-model = DecisionTreeClassifier()
+ℳ = DecisionTreeClassifier()
 
-solver = PointwiseLearn(model)
+ℒ = PointwiseLearn(ℳ)
 ```
 
 In this example, we selected a `PointwiseLearn` strategy to solve the geostatistical
@@ -244,7 +243,7 @@ learning problem. This strategy consists of applying the learning model pointwis
 every point in the spatial data:
 
 ```@example workflow
-Ω̂t = solve(problem, solver)
+Ω̂t = solve(𝒫, ℒ)
 ```
 
 ## Plotting solutions
