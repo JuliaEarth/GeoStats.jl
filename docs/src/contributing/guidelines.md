@@ -1,4 +1,4 @@
-# Contributing
+# Guidelines
 
 First off, thank you for considering contributing to GeoStats.jl.
 It’s people like you that make this project so much fun.
@@ -40,9 +40,5 @@ the package manager:
 This will clone all the project components in your `~/.julia` folder so
 that you can modify it and submit a pull request on GitHub later. Don't
 hesitate to ask questions in our [gitter channel](https://gitter.im/JuliaEarth/GeoStats.jl)
-if you are not familiar with the Git workflow.
-
-You can also develop your own solver independently, under your own
-license terms, and optionally make it public. Please check the [developer
-guide](devguide/basics.md) for information on how to write solvers that
-are compatible with the framework.
+if you are not familiar with the Git workflow. We are looking forward
+to your contributions.

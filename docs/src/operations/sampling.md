@@ -5,8 +5,7 @@
 Samples can be drawn from spatial objects:
 
 ```@docs
-sample(::AbstractSpatialObject, ::AbstractSampler)
-sample(::AbstractSpatialObject, ::Int, ::AbstractVector)
+GeoStatsBase.sample
 ```
 
 ## Example
@@ -17,8 +16,8 @@ using LinearAlgebra # hide
 using Plots # hide
 gr(format=:svg) # hide
 
-Z = [norm([i,j]) for i in 1:100, j in 1:100]
-Ω = RegularGridData(OrderedDict(:Z=>Z))
+
+Ω = georef((Z=[norm([i,j]) for i in 1:100, j in 1:100],))
 
 S = sample(Ω, 1000, replace=false)
 

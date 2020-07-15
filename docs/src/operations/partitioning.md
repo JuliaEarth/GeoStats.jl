@@ -5,18 +5,18 @@
 A spatial object can be partitioned into various sub-objects:
 
 ```@docs
-partition(::AbstractSpatialObject, ::AbstractPartitioner)
+partition
 ```
 
 Other utility functions are available, which are implemented with the general
 `partition` function:
 
 ```@docs
-split(::AbstractSpatialObject, ::Real)
+GeoStatsBase.split(::AbstractSpatialObject, ::Real)
 ```
 
 ```@docs
-groupby(::AbstractData, ::Symbol)
+GeoStatsBase.groupby(::AbstractData, ::Symbol)
 ```
 
 ## Example
@@ -27,8 +27,7 @@ using LinearAlgebra # hide
 using Plots # hide
 gr(format=:svg) # hide
 
-Z = [norm([i,j]) for i in 1:100, j in 1:100]
-Ω = RegularGridData(OrderedDict(:Z=>Z))
+Ω = georef((Z=[norm([i,j]) for i in 1:100, j in 1:100],))
 
 Π = partition(Ω, BlockPartitioner(10.,10.))
 

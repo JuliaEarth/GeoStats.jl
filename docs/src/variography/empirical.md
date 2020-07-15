@@ -26,7 +26,7 @@ they can be merged as described in Hoffimann & Zadrozny 2019:
 ```
 
 ```@docs
-merge(::EmpiricalVariogram, ::EmpiricalVariogram)
+merge(::EmpiricalVariogram{D}, ::EmpiricalVariogram{D}) where {D}
 ```
 
 ## Variograms

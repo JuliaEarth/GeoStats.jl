@@ -5,7 +5,7 @@
 Spatial objects can be filtered:
 
 ```@docs
-filter(::AbstractSpatialObject, ::AbstractFilter)
+GeoStatsBase.filter
 uniquecoords
 ```
 
@@ -14,7 +14,7 @@ uniquecoords
 ```@example
 using GeoStats # hide
 
-Ω = PointSetData(OrderedDict(:Z=>[0, 1, 0]), [0. 1. 0.; 0. 0. 0.])
+Ω = georef((z=[0, 1, 0],), [0. 1. 0.; 0. 0. 0.])
 
 Γ = uniquecoords(Ω)
 

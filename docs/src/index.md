@@ -32,7 +32,7 @@ geostatisticians around the globe and to standardize this incredible science.
 If you would like to help support the project, please
 [star the repository on GitHub](https://github.com/JuliaEarth/GeoStats.jl) and
 share it with your colleagues. If you would like to extend the framework with
-new geostatistical solvers, please check the [Developer guide](devguide/basics.md).
+new geostatistical solvers, please check the [Developer guide](contributing/solvers.md).
 
 ### Citing
 
@@ -83,21 +83,22 @@ using Plots
 gr(size=(900,400)) # hide
 
 # list of properties with coordinates
-props = OrderedDict(:prop => [1.,0.,1.])
-coord = [(25.,25.),(50.,75.),(75.,50.)]
+props = (Z=[1.,0.,1.],)
+coord = [25. 50. 75.
+         25. 75. 50.]
 
-# define spatial data
-sdata = PointSetData(props, coord)
+# georeference data
+𝒟 = georef(props, coord)
 
-# define spatial domain
-sdomain = RegularGrid(100, 100)
+# estimation domain
+𝒢 = RegularGrid(100, 100)
 
-# define estimation problem for any data column(s)
-problem = EstimationProblem(sdata, sdomain, :prop)
+# estimation problem
+problem = EstimationProblem(𝒟, 𝒢, :Z)
 
 # choose a solver from the list of solvers
 solver = Kriging(
-  :prop => (variogram=GaussianVariogram(range=35.),)
+  :Z => (variogram=GaussianVariogram(range=35.),)
 )
 
 # solve the problem

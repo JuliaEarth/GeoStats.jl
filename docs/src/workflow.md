@@ -24,21 +24,21 @@ Z = [10sin(i/10) + j for i in 1:100, j in 1:200]
 heatmap(Z)
 ```
 
-we can georeference the image as [RegularGridData](@ref):
+We can georeference the image using the [`georef`](@ref) function:
 
 ```@example workflow
 using GeoStats
 
-Ω = RegularGridData(OrderedDict(:Z=>Z))
+Ω = georef((Z=Z,))
 ```
 
-The origin and spacing of samples in the regular grid can be specified in the constructor:
+The origin and spacing of samples in the image can be specified with:
 
 ```@example workflow
-RegularGridData(OrderedDict(:Z=>Z), (1.,1.), (10.,10.))
+georef((Z=Z,), origin=(1.,1.), spacing=(10.,10.))
 ```
 
-and different spatial data types have different constructor options (see [Data](data.md) for more options).
+and different spatial configurations can be obtained with different methods (see [Data](data.md)).
 
 We plot the spatial data and note a few differences compared to the image plot shown above:
 
@@ -84,12 +84,11 @@ object, we need to save the spatial indices that were used to index the table:
 zvals = Ω[1:3,:Z]
 coord = coordinates(Ω, 1:3)
 
-PointSetData(OrderedDict(:Z=>zvals), coord)
+georef((Z=zvals,), coord)
 ```
 
 To recover the original Julia array behind a spatial data object, we can index the
-data with the variable name. In this case, the size of the array (i.e. `100x200`)
-is preserved:
+data with the variable name:
 
 ```@example workflow
 Ω[:Z]
@@ -101,8 +100,8 @@ Spatial data types can be viewed at a subset of locations without unnecessary
 memory allocations. Spatial views do not preserve the spatial regularity of the
 data in general.
 
-By plotting a view of the first 10 lines of our regular grid data, we obtain a
-general [PointSetData](@ref) as opposed to a [RegularGridData](@ref):
+By plotting a view of the first 10 lines of our image data, we obtain a
+general point set as opposed to a regular grid configuration:
 
 ```@example workflow
 Ωᵥ = view(Ω, 1:10*100)
@@ -187,11 +186,10 @@ df.crop = categorical(df.crop)
 first(df, 5)
 ```
 
-We can now georeference the data as a [GeoDataFrame](@ref) and plot some of
-the spatial variables:
+We can now georeference the table and plot some of the spatial variables:
 
 ```@example workflow
-Ω = GeoDataFrame(df, [:x,:y])
+Ω = georef(df, (:x,:y))
 
 gr(format=:png) # hide
 plot(Ω, variables=[:band4,:crop], ms=0.2, mc=:viridis)

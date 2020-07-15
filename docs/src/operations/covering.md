@@ -5,7 +5,7 @@
 Spatial objects can be covered with spatial regions (e.g. bounding boxes):
 
 ```@docs
-cover(::AbstractSpatialObject, ::AbstractCoverer)
+cover(::Any, ::AbstractCoverer)
 ```
 
 Other utility functions are available, which are implemented with the general

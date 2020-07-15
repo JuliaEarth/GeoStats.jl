@@ -11,9 +11,16 @@ and as such, approximate better spatial variables when compared to their non-spa
 counterparts:
 
 ```@docs
-EmpiricalHistogram
 mean(::AbstractData)
 var(::AbstractData)
+quantile(::AbstractData, ::Any)
+```
+
+A histogram with spatial semantics is also available where the heights of the bins
+are readjusted based on the coordinates of the samples (i.e. declustered histogram):
+
+```@docs
+EmpiricalHistogram
 ```
 
 ## Ensemble
