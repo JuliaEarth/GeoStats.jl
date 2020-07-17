@@ -13,7 +13,7 @@ Variography = "04a0146e-e6df-5636-8d7f-62fa9eb0b20c"
 [compat]
 GeoStatsBase = "0.11"
 KrigingEstimators = "0.4"
-PointPatterns = "0.2"
+PointPatterns = "0.2, 0.1"
 Reexport = "0.2"
 Variography = "0.8"
 julia = "1.4"
