@@ -1,7 +1,6 @@
 # File formats
 
-The Julia ecosystem provides various packages for reading/writing spatial data.
-Below is an incomplete list of famous file formats:
+The Julia ecosystem provides various packages for reading/writing spatial data from disk.
 
 ## NetCDF
 

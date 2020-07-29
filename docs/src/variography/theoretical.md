@@ -14,14 +14,9 @@ distance. For a list of available distances, please see
 [Distances.jl](https://github.com/JuliaStats/Distances.jl).
 
 This package implements a few commonly used and other more exotic variogram models.
-Most of these models share a set of default parameters:
-
-- `sill=1`
-- `range=1`
-- `nugget=0`
-- `distance=Euclidean()`
-
-Some of them have extra parameters that can be set with keyword arguments:
+Most of these models share a set of default parameters (e.g. `sill=1`, `range=1`,
+`distance=Euclidean()`). Some of them have extra parameters that can be set with
+keyword arguments:
 
 ```@example variograms
 using GeoStats # hide
