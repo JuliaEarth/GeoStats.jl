@@ -9,7 +9,7 @@ be interested in benchmarking your new method against other established methods.
 Errors of geostatistical solvers can be estimated on given geostatistical problems:
 
 ```@docs
-error(::AbstractSolver, ::AbstractProblem, ::AbstractErrorEstimator)
+GeoStatsBase.error
 ```
 
 Below is the list of currently implemented error estimation methods.
