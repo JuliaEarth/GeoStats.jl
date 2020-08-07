@@ -85,6 +85,15 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "briochemc",
+      "name": "Benoit Pasquier",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/4486578?v=4",
+      "profile": "https://www.bpasquier.com/",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
