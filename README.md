@@ -188,6 +188,9 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://github.com/tkelman"><img src="https://avatars0.githubusercontent.com/u/5934628?v=4" width="100px;" alt=""/><br /><sub><b>Tony Kelman</b></sub></a><br /><a href="#infra-tkelman" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a></td>
     <td align="center"><a href="https://www.linkedin.com/in/madnansiddique/"><img src="https://avatars0.githubusercontent.com/u/8629089?v=4" width="100px;" alt=""/><br /><sub><b>M. A. Siddique</b></sub></a><br /><a href="#question-masiddique" title="Answering Questions">💬</a></td>
   </tr>
+  <tr>
+    <td align="center"><a href="https://github.com/asinghvi17"><img src="https://avatars1.githubusercontent.com/u/32143268?v=4" width="100px;" alt=""/><br /><sub><b>Anshul Singhvi</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=asinghvi17" title="Documentation">📖</a></td>
+  </tr>
 </table>
 
 <!-- markdownlint-enable -->
