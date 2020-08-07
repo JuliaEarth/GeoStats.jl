@@ -112,6 +112,15 @@
       "contributions": [
         "test"
       ]
+    },
+    {
+      "login": "pkofod",
+      "name": "Patrick Kofod Mogensen",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/8431156?v=4",
+      "profile": "http://pkofod.com/",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
