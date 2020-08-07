@@ -67,6 +67,15 @@
       "contributions": [
         "question"
       ]
+    },
+    {
+      "login": "asinghvi17",
+      "name": "Anshul Singhvi",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/32143268?v=4",
+      "profile": "https://github.com/asinghvi17",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7,
