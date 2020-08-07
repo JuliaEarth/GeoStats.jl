@@ -1,4 +1,7 @@
 <p align="center">
+<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+<!-- ALL-CONTRIBUTORS-BADGE:END -->
   <img src="docs/src/assets/logo-text.svg" height="200"><br>
   <a href="https://travis-ci.org/JuliaEarth/GeoStats.jl">
     <img src="https://travis-ci.org/JuliaEarth/GeoStats.jl.svg?branch=master">
@@ -170,3 +173,22 @@ If you find GeoStats.jl useful in your work, please consider citing it:
 
 [zenodo-img]: https://zenodo.org/badge/33827844.svg
 [zenodo-url]: https://zenodo.org/badge/latestdoi/33827844
+
+## Contributors ✨
+
+Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tr>
+    <td align="center"><a href="https://www.evetion.nl"><img src="https://avatars0.githubusercontent.com/u/8655030?v=4" width="100px;" alt=""/><br /><sub><b>Maarten Pronk</b></sub></a><br /><a href="#infra-evetion" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a></td>
+  </tr>
+</table>
+
+<!-- markdownlint-enable -->
+<!-- prettier-ignore-end -->
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
