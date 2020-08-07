@@ -73,7 +73,7 @@ using Plots
 # 75.0, 50.0, mountain view,           1.0
 
 # read spreadsheet file containing spatial data
-sdata = readgeotable("data.csv", coordnames=[:x,:y])
+sdata = readgeotable("data.csv", coordnames=(:x,:y))
 
 # define spatial domain (e.g. regular grid)
 sdomain = RegularGrid(100, 100)
@@ -171,9 +171,9 @@ If you find GeoStats.jl useful in your work, please consider citing it:
 [zenodo-img]: https://zenodo.org/badge/33827844.svg
 [zenodo-url]: https://zenodo.org/badge/latestdoi/33827844
 
-## Contributors ✨
+## Contributors
 
-Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+This project would not be possible without the contribution of:
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
@@ -202,5 +202,3 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <!-- markdownlint-enable -->
 <!-- prettier-ignore-end -->
 <!-- ALL-CONTRIBUTORS-LIST:END -->
-
-This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
