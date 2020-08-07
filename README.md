@@ -173,7 +173,7 @@ If you find GeoStats.jl useful in your work, please consider citing it:
 
 ## Contributors
 
-This project would not be possible without the contribution of:
+This project would not be possible without the contributions of:
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
