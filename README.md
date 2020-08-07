@@ -191,6 +191,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
   <tr>
     <td align="center"><a href="https://github.com/asinghvi17"><img src="https://avatars1.githubusercontent.com/u/32143268?v=4" width="100px;" alt=""/><br /><sub><b>Anshul Singhvi</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=asinghvi17" title="Documentation">📖</a></td>
     <td align="center"><a href="https://zdroid.github.io"><img src="https://avatars2.githubusercontent.com/u/2725611?v=4" width="100px;" alt=""/><br /><sub><b>Zlatan Vasović</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=zdroid" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://www.bpasquier.com/"><img src="https://avatars2.githubusercontent.com/u/4486578?v=4" width="100px;" alt=""/><br /><sub><b>Benoit Pasquier</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=briochemc" title="Code">💻</a></td>
   </tr>
 </table>
 
