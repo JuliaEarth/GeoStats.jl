@@ -76,6 +76,15 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "zdroid",
+      "name": "Zlatan Vasović",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/2725611?v=4",
+      "profile": "https://zdroid.github.io",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7,
