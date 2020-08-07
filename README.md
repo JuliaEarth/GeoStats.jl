@@ -184,6 +184,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://github.com/visr"><img src="https://avatars1.githubusercontent.com/u/4471859?v=4" width="100px;" alt=""/><br /><sub><b>Martijn Visser</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=visr" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/fredrikekre"><img src="https://avatars2.githubusercontent.com/u/11698744?v=4" width="100px;" alt=""/><br /><sub><b>Fredrik Ekre</b></sub></a><br /><a href="#infra-fredrikekre" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a></td>
     <td align="center"><a href="http://dldx.org"><img src="https://avatars2.githubusercontent.com/u/107700?v=4" width="100px;" alt=""/><br /><sub><b>Durand D'souza</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=dldx" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/mortenpi"><img src="https://avatars1.githubusercontent.com/u/147757?v=4" width="100px;" alt=""/><br /><sub><b>Morten Piibeleht</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=mortenpi" title="Documentation">📖</a></td>
   </tr>
 </table>
 
