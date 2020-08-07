@@ -194,6 +194,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://www.bpasquier.com/"><img src="https://avatars2.githubusercontent.com/u/4486578?v=4" width="100px;" alt=""/><br /><sub><b>Benoit Pasquier</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=briochemc" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/exepulveda"><img src="https://avatars2.githubusercontent.com/u/5109252?v=4" width="100px;" alt=""/><br /><sub><b>exepulveda</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=exepulveda" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/errearanhas"><img src="https://avatars1.githubusercontent.com/u/12888985?v=4" width="100px;" alt=""/><br /><sub><b>Renato Aranha</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=errearanhas" title="Tests">⚠️</a></td>
+    <td align="center"><a href="http://pkofod.com/"><img src="https://avatars0.githubusercontent.com/u/8431156?v=4" width="100px;" alt=""/><br /><sub><b>Patrick Kofod Mogensen</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=pkofod" title="Code">💻</a></td>
   </tr>
 </table>
 
