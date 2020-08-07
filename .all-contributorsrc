@@ -40,6 +40,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "mortenpi",
+      "name": "Morten Piibeleht",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/147757?v=4",
+      "profile": "https://github.com/mortenpi",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7,
