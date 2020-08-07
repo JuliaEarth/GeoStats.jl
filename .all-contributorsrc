@@ -13,6 +13,15 @@
       "contributions": [
         "infra"
       ]
+    },
+    {
+      "login": "visr",
+      "name": "Martijn Visser",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/4471859?v=4",
+      "profile": "https://github.com/visr",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
