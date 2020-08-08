@@ -199,6 +199,7 @@ This project would not be possible without the contributions of:
   </tr>
   <tr>
     <td align="center"><a href="https://github.com/PaulMatlashewski"><img src="https://avatars1.githubusercontent.com/u/13931255?v=4" width="100px;" alt=""/><br /><sub><b>Paul Matlashewski</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=PaulMatlashewski" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/riyadm"><img src="https://avatars1.githubusercontent.com/u/38479955?v=4" width="100px;" alt=""/><br /><sub><b>Riyad Muradov</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=riyadm" title="Code">💻</a></td>
   </tr>
 </table>
 
