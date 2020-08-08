@@ -197,6 +197,9 @@ This project would not be possible without the contributions of:
     <td align="center"><a href="http://pkofod.com/"><img src="https://avatars0.githubusercontent.com/u/8431156?v=4" width="100px;" alt=""/><br /><sub><b>Patrick Kofod Mogensen</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=pkofod" title="Code">💻</a></td>
     <td align="center"><a href="http://xuk.ai"><img src="https://avatars1.githubusercontent.com/u/5985769?v=4" width="100px;" alt=""/><br /><sub><b>Kai Xu</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=xukai92" title="Code">💻</a></td>
   </tr>
+  <tr>
+    <td align="center"><a href="https://github.com/PaulMatlashewski"><img src="https://avatars1.githubusercontent.com/u/13931255?v=4" width="100px;" alt=""/><br /><sub><b>Paul Matlashewski</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=PaulMatlashewski" title="Code">💻</a></td>
+  </tr>
 </table>
 
 <!-- markdownlint-enable -->
