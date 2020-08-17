@@ -4,6 +4,7 @@ os:
   - osx
 julia:
   - 1.4
+  - 1.5
   - nightly
 matrix:
   allow_failures:
