@@ -73,7 +73,7 @@ using Plots
 # 75.0, 50.0, mountain view,           1.0
 
 # read spreadsheet file containing spatial data
-sdata = readgeotable("data.csv", coordnames=[:x,:y])
+sdata = readgeotable("data.csv", coordnames=(:x,:y))
 
 # define spatial domain (e.g. regular grid)
 sdomain = RegularGrid(100, 100)
@@ -170,3 +170,41 @@ If you find GeoStats.jl useful in your work, please consider citing it:
 
 [zenodo-img]: https://zenodo.org/badge/33827844.svg
 [zenodo-url]: https://zenodo.org/badge/latestdoi/33827844
+
+## Contributors
+
+This project would not be possible without the contributions of:
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tr>
+    <td align="center"><a href="https://www.evetion.nl"><img src="https://avatars0.githubusercontent.com/u/8655030?v=4" width="100px;" alt=""/><br /><sub><b>Maarten Pronk</b></sub></a><br /><a href="#infra-evetion" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a></td>
+    <td align="center"><a href="https://github.com/visr"><img src="https://avatars1.githubusercontent.com/u/4471859?v=4" width="100px;" alt=""/><br /><sub><b>Martijn Visser</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=visr" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/fredrikekre"><img src="https://avatars2.githubusercontent.com/u/11698744?v=4" width="100px;" alt=""/><br /><sub><b>Fredrik Ekre</b></sub></a><br /><a href="#infra-fredrikekre" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a></td>
+    <td align="center"><a href="http://dldx.org"><img src="https://avatars2.githubusercontent.com/u/107700?v=4" width="100px;" alt=""/><br /><sub><b>Durand D'souza</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=dldx" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/mortenpi"><img src="https://avatars1.githubusercontent.com/u/147757?v=4" width="100px;" alt=""/><br /><sub><b>Morten Piibeleht</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=mortenpi" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://github.com/tkelman"><img src="https://avatars0.githubusercontent.com/u/5934628?v=4" width="100px;" alt=""/><br /><sub><b>Tony Kelman</b></sub></a><br /><a href="#infra-tkelman" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a></td>
+    <td align="center"><a href="https://www.linkedin.com/in/madnansiddique/"><img src="https://avatars0.githubusercontent.com/u/8629089?v=4" width="100px;" alt=""/><br /><sub><b>M. A. Siddique</b></sub></a><br /><a href="#question-masiddique" title="Answering Questions">💬</a></td>
+  </tr>
+  <tr>
+    <td align="center"><a href="https://github.com/asinghvi17"><img src="https://avatars1.githubusercontent.com/u/32143268?v=4" width="100px;" alt=""/><br /><sub><b>Anshul Singhvi</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=asinghvi17" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://zdroid.github.io"><img src="https://avatars2.githubusercontent.com/u/2725611?v=4" width="100px;" alt=""/><br /><sub><b>Zlatan Vasović</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=zdroid" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://www.bpasquier.com/"><img src="https://avatars2.githubusercontent.com/u/4486578?v=4" width="100px;" alt=""/><br /><sub><b>Benoit Pasquier</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=briochemc" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/exepulveda"><img src="https://avatars2.githubusercontent.com/u/5109252?v=4" width="100px;" alt=""/><br /><sub><b>exepulveda</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=exepulveda" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/errearanhas"><img src="https://avatars1.githubusercontent.com/u/12888985?v=4" width="100px;" alt=""/><br /><sub><b>Renato Aranha</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=errearanhas" title="Tests">⚠️</a></td>
+    <td align="center"><a href="http://pkofod.com/"><img src="https://avatars0.githubusercontent.com/u/8431156?v=4" width="100px;" alt=""/><br /><sub><b>Patrick Kofod Mogensen</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=pkofod" title="Code">💻</a></td>
+    <td align="center"><a href="http://xuk.ai"><img src="https://avatars1.githubusercontent.com/u/5985769?v=4" width="100px;" alt=""/><br /><sub><b>Kai Xu</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=xukai92" title="Code">💻</a></td>
+  </tr>
+  <tr>
+    <td align="center"><a href="https://github.com/PaulMatlashewski"><img src="https://avatars1.githubusercontent.com/u/13931255?v=4" width="100px;" alt=""/><br /><sub><b>Paul Matlashewski</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=PaulMatlashewski" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/riyadm"><img src="https://avatars1.githubusercontent.com/u/38479955?v=4" width="100px;" alt=""/><br /><sub><b>Riyad Muradov</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=riyadm" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/ammilten"><img src="https://avatars0.githubusercontent.com/u/29921747?v=4" width="100px;" alt=""/><br /><sub><b>Alex Miltenberger</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=ammilten" title="Code">💻</a></td>
+    <td align="center"><a href="https://www.linkedin.com/in/LakshyaKhatri"><img src="https://avatars1.githubusercontent.com/u/28972442?v=4" width="100px;" alt=""/><br /><sub><b>Lakshya Khatri</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=LakshyaKhatri" title="Code">💻</a></td>
+  </tr>
+</table>
+
+<!-- markdownlint-enable -->
+<!-- prettier-ignore-end -->
+<!-- ALL-CONTRIBUTORS-LIST:END -->
