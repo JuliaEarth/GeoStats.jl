@@ -109,7 +109,7 @@ willing to help.
 
 GeoStats.jl was developed as part of academic research. It will always be open
 source and free of charge. If you would like to help support the project, please
-star the repository and share it with your colleagues.
+star the repository [![STARS][stars-img]][stars-url] and share it with your colleagues.
 
 ## Citing
 
@@ -144,32 +144,20 @@ If you find GeoStats.jl useful in your work, please consider citing it:
   <img src="docs/src/images/ENI.png" height="150" hspace="20">
 </p>
 
-[travis-img]: https://travis-ci.org/JuliaEarth/GeoStats.jl.svg?branch=master
-[travis-url]: https://travis-ci.org/JuliaEarth/GeoStats.jl
-
-[julia-pkg-img]: http://pkg.julialang.org/badges/GeoStats_0.7.svg
-[julia-pkg-url]: http://pkg.julialang.org/?pkg=GeoStats
-
-[codecov-img]: https://codecov.io/gh/JuliaEarth/GeoStats.jl/branch/master/graph/badge.svg
-[codecov-url]: https://codecov.io/gh/JuliaEarth/GeoStats.jl
-
-[docs-stable-img]: https://img.shields.io/badge/docs-stable-blue.svg
+[docs-stable-img]: https://img.shields.io/badge/docs-stable-blue?style=flat-square
 [docs-stable-url]: https://JuliaEarth.github.io/GeoStats.jl/stable
 
-[docs-latest-img]: https://img.shields.io/badge/docs-latest-blue.svg
+[docs-latest-img]: https://img.shields.io/badge/docs-latest-blue?style=flat-square
 [docs-latest-url]: https://JuliaEarth.github.io/GeoStats.jl/latest
 
-[license-img]: https://img.shields.io/badge/license-ISC-blue.svg
-[license-url]: LICENSE
-
-[gitter-img]: https://img.shields.io/badge/chat-on%20gitter-bc0067.svg
-[gitter-url]: https://gitter.im/JuliaEarth/GeoStats.jl
-
-[joss-img]: http://joss.theoj.org/papers/10.21105/joss.00692/status.svg
+[joss-img]: https://img.shields.io/badge/JOSS-10.21105%2Fjoss.00692-brightgreen?style=flat-square
 [joss-url]: https://doi.org/10.21105/joss.00692
 
-[zenodo-img]: https://zenodo.org/badge/33827844.svg
+[zenodo-img]: https://img.shields.io/badge/DOI-10.5281%2Fzenodo.3875233-blue?style=flat-square
 [zenodo-url]: https://zenodo.org/badge/latestdoi/33827844
+
+[stars-img]: https://img.shields.io/github/stars/JuliaEarth/GeoStats.jl?style=social
+[stars-url]: https://github.com/JuliaEarth/GeoStats.jl
 
 ## Contributors
 
