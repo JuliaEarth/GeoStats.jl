@@ -1,30 +1,30 @@
 <p align="center">
   <img src="docs/src/assets/logo-text.svg" height="200"><br>
   <a href="https://travis-ci.org/JuliaEarth/GeoStats.jl">
-    <img src="https://travis-ci.org/JuliaEarth/GeoStats.jl.svg?branch=master">
+    <img src="https://img.shields.io/travis/JuliaEarth/GeoStats.jl?style=flat-square">
   </a>
   <a href="https://codecov.io/gh/JuliaEarth/GeoStats.jl">
-    <img src="https://codecov.io/gh/JuliaEarth/GeoStats.jl/branch/master/graph/badge.svg">
+    <img src="https://img.shields.io/codecov/c/github/JuliaEarth/GeoStats.jl?style=flat-square">
   </a>
   <a href="https://JuliaEarth.github.io/GeoStats.jl/stable">
-    <img src="https://img.shields.io/badge/docs-stable-blue.svg">
+    <img src="https://img.shields.io/badge/docs-stable-blue?style=flat-square">
   </a>
   <a href="https://JuliaEarth.github.io/GeoStats.jl/latest">
-    <img src="https://img.shields.io/badge/docs-latest-blue.svg">
+    <img src="https://img.shields.io/badge/docs-latest-blue?style=flat-square">
   </a>
   <a href="LICENSE">
-    <img src="https://img.shields.io/badge/license-ISC-blue.svg">
+    <img src="https://img.shields.io/badge/license-ISC-blue?style=flat-square">
   </a>
 </p>
 <p align="center">
   <a href="https://gitter.im/JuliaEarth/GeoStats.jl">
-    <img src="https://img.shields.io/badge/chat-on%20gitter-bc0067.svg">
+    <img src="https://img.shields.io/badge/chat-on%20gitter-bc0067?style=flat-square">
   </a>
   <a href="https://doi.org/10.21105/joss.00692">
-    <img src="http://joss.theoj.org/papers/10.21105/joss.00692/status.svg">
+    <img src="https://img.shields.io/badge/JOSS-10.21105%2Fjoss.00692-brightgreen?style=flat-square">
   </a>
   <a href="https://zenodo.org/badge/latestdoi/33827844">
-    <img src="https://zenodo.org/badge/33827844.svg">
+    <img src="https://img.shields.io/badge/DOI-10.5281%2Fzenodo.3875233-blue?style=flat-square">
   </a>
 </p>
 
