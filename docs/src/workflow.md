@@ -60,8 +60,7 @@ coordinates(Ω, 1:3)
 
 In-place versions exist to avoid unnecessary memory allocations.
 
-All coordinates are retrieved as a `ndims x npoints` matrix when we do not specify
-the spatial indices:
+All coordinates are retrieved as a matrix when we do not specify the spatial indices:
 
 ```@example workflow
 coordinates(Ω)
@@ -112,7 +111,7 @@ We plot a random view of the grid to emphasize that views do not preserve
 spatial regularity:
 
 ```@example workflow
-inds = rand(1:npoints(Ω), 100)
+inds = rand(1:nelms(Ω), 100)
 plot(view(Ω, inds))
 ```
 

@@ -124,8 +124,8 @@ function solve(problem::EstimationProblem, solver::MyCoolSolver)
   variance = Dict{Symbol,Vector}()
 
   for (var,V) in variables(problem)
-    push!(mean, var => rand(npoints(pdomain)))
-    push!(variance, var => rand(npoints(pdomain)))
+    push!(mean, var => rand(nelms(pdomain)))
+    push!(variance, var => rand(nelms(pdomain)))
   end
 
   EstimationSolution(pdomain, mean, variance)
@@ -168,7 +168,7 @@ function solvesingle(problem::SimulationProblem, covars::NamedTuple,
 
   real4var = map(covars.names) do var
     # output is a single realization for each covariable
-    real = Vector{V}(undef, npoints(pdomain))
+    real = Vector{V}(undef, nelms(pdomain))
 
     # fill realization with hard data
     for (loc, datloc) in datamap(problem, var)
@@ -238,8 +238,8 @@ function solve(problem::EstimationProblem, solver::NormSolver)
       V = variables(problem)[var]
 
       # allocate memory for result
-      varμ = Vector{V}(undef, npoints(pdomain))
-      varσ = Vector{V}(undef, npoints(pdomain))
+      varμ = Vector{V}(undef, nelms(pdomain))
+      varσ = Vector{V}(undef, nelms(pdomain))
 
       for location in traverse(pdomain, LinearPath())
         x = coordinates(pdomain, location)
@@ -321,7 +321,7 @@ function solvesingle(problem::SimulationProblem, covars::NamedTuple,
     μ, σ² = varparams.mean, varparams.var
 
     # i.i.d. samples ~ Normal(0,1)
-    z = rand(npoints(pdomain))
+    z = rand(nelms(pdomain))
 
     # rescale and return
     var => μ .+ sqrt(σ²) .* z
@@ -398,7 +398,7 @@ function solvesingle(problem::SimulationProblem, covars::NamedTuple,
     μ, σ² = preproc[var]
 
     # i.i.d. samples ~ Normal(0,1)
-    z = rand(npoints(pdomain))
+    z = rand(nelms(pdomain))
 
     # rescale and return
     var => μ .+ sqrt(σ²) .* z
@@ -437,7 +437,7 @@ function solve(problem::LearningProblem, solver::SLICSolver)
   part = partition(tdata, slic)
 
   # label for each point in target data
-  labels = Vector{Int}(undef, npoints(tdata))
+  labels = Vector{Int}(undef, nelms(tdata))
   for (i, inds) in enumerate(subsets(part))
     labels[inds] .= i
   end
