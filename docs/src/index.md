@@ -106,9 +106,7 @@ solution = solve(problem, solver)
 
 # plot the solution
 contourf(solution, clabels=true)
-png("images/EstimationSolution.png") # hide
 ```
-![](images/EstimationSolution.png)
 
 ## Project organization
 
