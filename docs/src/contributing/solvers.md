@@ -34,7 +34,7 @@ realizations:
 SimulationSolution(domain, rdict)
 ```
 
-Any `LearningSolver` in the framework returns `AbstractData` with variables
+Any `LearningSolver` in the framework returns spatial data with variables
 learned for the specified learning task.
 
 The task of writing a solver for a geostatistical problem consists of writing
