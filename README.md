@@ -67,30 +67,30 @@ using GeoStats
 using Plots
 
 # data.csv:
-#    x,    y,       station, precipitation
+#    x,    y,       station,        precip
 # 25.0, 25.0,     palo alto,           1.0
 # 50.0, 75.0,  redwood city,           0.0
 # 75.0, 50.0, mountain view,           1.0
 
-# read spreadsheet file containing spatial data
-sdata = readgeotable("data.csv", coordnames=(:x,:y))
+# read spatial data (e.g. geotable)
+𝒯 = readgeotable("data.csv", coordnames=(:x,:y))
 
 # define spatial domain (e.g. regular grid)
-sdomain = RegularGrid(100, 100)
+𝒟 = RegularGrid(100, 100)
 
-# define estimation problem for any data column(s) (e.g. :precipitation)
-problem = EstimationProblem(sdata, sdomain, :precipitation)
+# define estimation problem for precipitation
+𝒫 = EstimationProblem(𝒯, 𝒟, :precip)
 
 # choose a solver from the list of solvers
-solver = Kriging(
-  :precipitation => (variogram=GaussianVariogram(range=35.),)
+𝒮 = Kriging(
+  :precip => (variogram=GaussianVariogram(range=35.),)
 )
 
 # solve the problem
-solution = solve(problem, solver)
+sol = solve(𝒫, 𝒮)
 
 # plot the solution
-contourf(solution, clabels=true)
+contourf(sol)
 ```
 <p align="center">
   <img src="docs/src/images/EstimationSolution.png">
