@@ -12,7 +12,7 @@ matrix:
   fast_finish: true
   include:
     - stage: "Documentation"
-      julia: 1.4
+      julia: 1.5
       os: linux
       script:
         - julia --project=docs/ -e 'using Pkg; Pkg.instantiate()'
