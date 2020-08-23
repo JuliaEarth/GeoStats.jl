@@ -2,15 +2,15 @@
 
 *An extensible framework for high-performance geostatistics in Julia.*
 
-[![Build Status](https://travis-ci.org/JuliaEarth/GeoStats.jl.svg?branch=master)](https://travis-ci.org/JuliaEarth/GeoStats.jl)
-[![Coverage Status](https://codecov.io/gh/JuliaEarth/GeoStats.jl/branch/master/graph/badge.svg)](https://codecov.io/gh/JuliaEarth/GeoStats.jl)
-[![Stable Documentation](https://img.shields.io/badge/docs-stable-blue.svg)](https://JuliaEarth.github.io/GeoStats.jl/stable)
-[![Latest Documentation](https://img.shields.io/badge/docs-latest-blue.svg)](https://JuliaEarth.github.io/GeoStats.jl/latest)
-[![License File](https://img.shields.io/badge/license-ISC-blue.svg)](https://github.com/JuliaEarth/GeoStats.jl/blob/master/LICENSE)
+[![Build Status](https://img.shields.io/travis/JuliaEarth/GeoStats.jl?style=flat-square)](https://travis-ci.org/JuliaEarth/GeoStats.jl)
+[![Coverage Status](https://img.shields.io/codecov/c/github/JuliaEarth/GeoStats.jl?style=flat-square)](https://codecov.io/gh/JuliaEarth/GeoStats.jl)
+[![Stable Documentation](https://img.shields.io/badge/docs-stable-blue?style=flat-square)](https://JuliaEarth.github.io/GeoStats.jl/stable)
+[![Latest Documentation](https://img.shields.io/badge/docs-latest-blue?style=flat-square)](https://JuliaEarth.github.io/GeoStats.jl/latest)
+[![License File](https://img.shields.io/badge/license-ISC-blue?style=flat-square)](https://github.com/JuliaEarth/GeoStats.jl/blob/master/LICENSE)
 
-[![Gitter](https://img.shields.io/badge/chat-on%20gitter-bc0067.svg)](https://gitter.im/JuliaEarth/GeoStats.jl)
-[![JOSS](https://joss.theoj.org/papers/10.21105/joss.00692/status.svg)](https://doi.org/10.21105/joss.00692)
-[![DOI](https://zenodo.org/badge/33827844.svg)](https://zenodo.org/badge/latestdoi/33827844)
+[![Gitter](https://img.shields.io/badge/chat-on%20gitter-bc0067?style=flat-square)](https://gitter.im/JuliaEarth/GeoStats.jl)
+[![JOSS](https://img.shields.io/badge/JOSS-10.21105%2Fjoss.00692-brightgreen?style=flat-square)](https://doi.org/10.21105/joss.00692)
+[![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.3875233-blue?style=flat-square)](https://zenodo.org/badge/latestdoi/33827844)
 
 ## Overview
 
@@ -30,7 +30,7 @@ The design of this project is the result of many years developing geostatistical
 software. I hope that it can serve to promote more collaboration between
 geostatisticians around the globe and to standardize this incredible science.
 If you would like to help support the project, please
-[star the repository on GitHub](https://github.com/JuliaEarth/GeoStats.jl) and
+star the repository on GitHub [![STARS](https://img.shields.io/github/stars/JuliaEarth/GeoStats.jl?style=social)](https://github.com/JuliaEarth/GeoStats.jl) and
 share it with your colleagues. If you would like to extend the framework with
 new geostatistical solvers, please check the [Developer guide](contributing/solvers.md).
 
