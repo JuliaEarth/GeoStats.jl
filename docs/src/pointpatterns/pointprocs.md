@@ -1,10 +1,10 @@
 # Processes
 
 Point processes can be simulated with the function `rand` on
-different [spatial regions](regions.md):
+different geometries:
 
 ```@docs
-rand(::PointProcess, ::AbstractRegion, ::Int)
+rand(::PointProcess, ::AbstractGeometry, ::Int)
 ```
 
 For example, a Poisson process with given intensity in a rectangular region:
@@ -15,7 +15,7 @@ using Plots # hide
 gr(format=:svg) # hide
 
 p = PoissonProcess(0.1)
-r = RectangleRegion((0.,0.), (100.,100.))
+r = Rectangle((0.,0.), (100.,100.))
 
 s = rand(p, r, 2)
 

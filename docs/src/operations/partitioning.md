@@ -8,17 +8,6 @@ A spatial object can be partitioned into various sub-objects:
 partition
 ```
 
-Other utility functions are available, which are implemented with the general
-`partition` function:
-
-```@docs
-GeoStatsBase.split(::AbstractSpatialObject, ::Real)
-```
-
-```@docs
-GeoStatsBase.groupby(::AbstractData, ::Symbol)
-```
-
 ## Example
 
 ```@example

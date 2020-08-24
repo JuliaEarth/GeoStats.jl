@@ -41,12 +41,9 @@ makedocs(
         "operations/partitioning.md",
         "operations/sampling.md",
         "operations/weighting.md",
-        "operations/filtering.md",
-        "operations/joining.md",
         "operations/searching.md",
-        "operations/covering.md",
         "operations/discretizing.md",
-        "operations/detrending.md"
+        "operations/miscellaneous.md"
       ],
       "Statistics" => "statistics.md",
       "Problems" => "problems.md",
@@ -63,10 +60,10 @@ makedocs(
       ],
       "Point Patterns" => [
         "pointpatterns/pointprocs.md",
-        "pointpatterns/regions.md",
         "pointpatterns/pointops.md"
       ],
-      "Plotting" => "plotting.md"
+      "Plotting" => "plotting.md",
+      "Geometries" => "geometries.md"
     ],
     "Contributing" => [
       "contributing/guidelines.md",

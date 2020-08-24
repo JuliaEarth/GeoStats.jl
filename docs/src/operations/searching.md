@@ -37,5 +37,6 @@ plot(p₁, p₂)
 ```@docs
 NeighborhoodSearcher
 NearestNeighborSearcher
+KBallSearcher
 BoundedSearcher
 ```
