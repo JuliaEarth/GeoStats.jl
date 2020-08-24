@@ -2,7 +2,7 @@
 
 ## Overview
 
-Spatial regions can be discretized:
+Geometries can be discretized:
 
 ```@docs
 discretize
@@ -15,7 +15,7 @@ using GeoStats # hide
 using Plots # hide
 gr(format=:svg) # hide
 
-R = RectangleRegion((0., 0.), (100., 100.))
+R = Rectangle((0., 0.), (100., 100.))
 
 D = discretize(R, RegularGridDiscretizer((5, 4)))
 

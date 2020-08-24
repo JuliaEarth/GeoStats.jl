@@ -230,9 +230,7 @@ learning model:
 ```@example workflow
 using MLJ
 
-@load DecisionTreeClassifier
-
-ℳ = DecisionTreeClassifier()
+ℳ = @load DecisionTreeClassifier
 
 ℒ = PointwiseLearn(ℳ)
 ```
@@ -254,7 +252,7 @@ true label in this synthetic example:
 
 ```@example workflow
 p̂ = plot(Ω̂t, ms=0.2, mc=:viridis, title="crop (prediction)")
-p = plot(Ωt, variables=[:crop], ms=0.2, mc=:viridis)
+p = plot(Ωt, (:crop,), ms=0.2, mc=:viridis)
 
 plot(p̂, p)
 ```

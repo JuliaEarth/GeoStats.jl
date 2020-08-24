@@ -16,12 +16,11 @@ using LinearAlgebra # hide
 using Plots # hide
 gr(format=:svg) # hide
 
-Ω = georef((Z=[norm([i,j]) for i in 1:100, j in 1:100],))
-S = sample(Ω, 1000, replace=false)
+Ω = PointSet(rand(2,500))
 
-W = weight(S, BlockWeighter(10.,10.))
+W = weight(Ω, BlockWeighter(0.1,0.1))
 
-plot(plot(S), plot(W))
+plot(W)
 ```
 
 ## Methods
