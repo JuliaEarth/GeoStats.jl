@@ -23,6 +23,31 @@ plot(plot(S[1]), plot(S[2]))
 ```
 
 ```@docs
+GeoStatsBase.slice
+```
+
+```@example
+using GeoStats # hide
+using GeoStatsImages # hide
+using Plots # hide
+gr(format=:png) # hide
+
+# slice image
+I = geostatsimage("Strebelle")
+S = slice(I, 50.5:100.2, 41.7:81.3)
+
+p1 = plot(plot(I), plot(S), link=:both)
+
+# slide point set
+P = sample(I, 100)
+S = slice(P, 50.5:150.7, 175.2:250.3)
+
+p2 = plot(plot(P), plot(S), link=:both, ms=3)
+
+plot(p1, p2, layout=(2,1))
+```
+
+```@docs
 uniquecoords
 ```
 
