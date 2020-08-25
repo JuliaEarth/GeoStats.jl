@@ -190,7 +190,7 @@ We can now georeference the table and plot some of the spatial variables:
 Ω = georef(df, (:x,:y))
 
 gr(format=:png) # hide
-plot(Ω, variables=[:band4,:crop], ms=0.2, mc=:viridis)
+plot(Ω, (:band4,:crop), ms=0.2, mc=:viridis)
 ```
 
 Similar to a generic statistical learning workflow, we split the data into "train"

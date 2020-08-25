@@ -5,6 +5,24 @@ Below is a list of additional geospatial operations.
 ## Geometric
 
 ```@docs
+GeoStatsBase.split(::Union{AbstractData,AbstractDomain}, ::Real)
+```
+
+```@example
+using GeoStats # hide
+using GeoStatsImages # hide
+using Plots # hide
+gr(format=:png,ms=0.2) # hide
+
+𝒟 = geostatsimage("Strebelle")
+
+# 50/50 split perpendicular to (1.,1.)
+S = split(𝒟, 0.5, (1.,1.))
+
+plot(plot(S[1]), plot(S[2]))
+```
+
+```@docs
 uniquecoords
 ```
 
@@ -30,14 +48,6 @@ R = boundbox(RegularGrid(50, 80))
 extrema(R)
 ```
 
-```@docs
-GeoStatsBase.split(::Union{AbstractData,AbstractDomain}, ::Real)
-```
-
-```@example
-# TODO
-```
-
 ## Tabular
 
 ```@docs
@@ -48,7 +58,6 @@ trend
 ```@example
 using GeoStats # hide
 using Plots # hide
-gr(format=:svg) # hide
 
 # quadratic + noise
 r = range(-1,stop=1,length=100)
@@ -66,7 +75,16 @@ GeoStatsBase.groupby(::AbstractData, ::Symbol)
 ```
 
 ```@example
-# TODO
+using GeoStats # hide
+using GeoStatsImages # hide
+using Plots # hide
+gr(format=:png,ms=0.2) # hide
+
+𝒟 = geostatsimage("Strebelle")
+
+ℱ = groupby(𝒟, :facies)
+
+plot(plot(ℱ[1]), plot(ℱ[2]))
 ```
 
 ```@docs
