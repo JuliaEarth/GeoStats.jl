@@ -12,14 +12,14 @@ GeoStatsBase.split(::Union{AbstractData,AbstractDomain}, ::Real)
 using GeoStats # hide
 using GeoStatsImages # hide
 using Plots # hide
-gr(format=:png,ms=0.2) # hide
+gr(format=:png) # hide
 
 𝒟 = geostatsimage("Strebelle")
 
 # 50/50 split perpendicular to (1.,1.)
 S = split(𝒟, 0.5, (1.,1.))
 
-plot(plot(S[1]), plot(S[2]))
+plot(plot(S[1],ms=0.2), plot(S[2],ms=0.2))
 ```
 
 ```@docs
@@ -103,23 +103,37 @@ GeoStatsBase.groupby(::AbstractData, ::Symbol)
 using GeoStats # hide
 using GeoStatsImages # hide
 using Plots # hide
-gr(format=:png,ms=0.2) # hide
+gr(format=:png) # hide
 
 𝒟 = geostatsimage("Strebelle")
 
 ℱ = groupby(𝒟, :facies)
 
-plot(plot(ℱ[1]), plot(ℱ[2]))
+plot(plot(ℱ[1],ms=0.2), plot(ℱ[2],ms=0.2))
 ```
 
 ```@docs
-GeoStatsBase.join
+GeoStatsBase.hcat(::AbstractData, ::AbstractData)
 ```
 
 ```@example
 using GeoStats # hide
 
-Ω = georef((z=rand(100,100),))
+𝒟 = georef((z=rand(100,100),))
 
-join(Ω, Ω)
+hcat(𝒟, 𝒟)
+```
+
+```@docs
+GeoStatsBase.vcat(::AbstractDomain, ::AbstractDomain)
+GeoStatsBase.vcat(::AbstractData, ::AbstractData)
+```
+
+```@example
+using GeoStats # hide
+
+𝒟1 = georef((z=rand(100,100),))
+𝒟2 = georef((w=rand(10,10),))
+
+vcat(𝒟1, 𝒟2)
 ```
