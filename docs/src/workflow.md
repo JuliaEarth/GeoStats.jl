@@ -165,7 +165,7 @@ using CSV
 using DataFrames
 gr(size=(800,400)) # hide
 
-df = DataFrame!(CSV.File("data/agriculture.csv"))
+df = DataFrame(CSV.File("data/agriculture.csv"))
 
 first(df, 5)
 ```
@@ -179,7 +179,7 @@ Because the labels are categorical variables, we need to inform the framework
 the correct type:
 
 ```@example workflow
-categorical!(df, :crop)
+transform!(df, :crop => categorical => :crop)
 
 first(df, 5)
 ```
