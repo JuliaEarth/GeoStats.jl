@@ -166,6 +166,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "nalimilan",
+      "name": "Milan Bouchet-Valat",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/1120448?v=4",
+      "profile": "http://bouchet-valat.site.ined.fr",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7,
