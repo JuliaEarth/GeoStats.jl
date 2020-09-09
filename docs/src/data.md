@@ -63,26 +63,18 @@ plot(𝒟)
 ### Arrays
 
 Consider arrays (e.g. images) with data for various spatial variables. We can
-georeference these arrays using a named tuple:
+georeference these arrays using a named tuple, and GeoStats.jl will understand
+that the shape of the arrays should be preserved in a regular grid:
 
 ```@example georef
 T, P = rand(5,5), rand(5,5)
 
-𝒟 = georef((T=T, P=P), rand(2,25))
-
-plot(𝒟)
-```
-
-Alternatively, we can omit the coordinates and GeoStats.jl will understand
-that the shape of the arrays should be preserved in a regular grid:
-
-```@example georef
 𝒟 = georef((T=T, P=P))
 
 plot(𝒟)
 ```
 
-Optionally, we can specify the origin and spacing of the grid using keyword arguments:
+We can also specify the origin and spacing of the grid using keyword arguments:
 
 ```@example georef
 𝒟₁ = georef((T=T, P=P), origin=(0.,0.), spacing=(1.,1.))
@@ -90,4 +82,12 @@ Optionally, we can specify the origin and spacing of the grid using keyword argu
 
 plot(𝒟₁)
 plot!(𝒟₂)
+```
+
+Alternatively, we can interpret the entries of the named tuple as columns in a table:
+
+```@example georef
+𝒟 = georef((T=T, P=T), rand(2,25))
+
+plot(𝒟)
 ```

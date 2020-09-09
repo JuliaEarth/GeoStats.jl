@@ -20,9 +20,9 @@ All simulation solvers can generate realizations in parallel unless otherwise no
 
 | Solver | Coverage | Description | References |
 |:------:|:--------:|:------------|:-----------|
-| [DirectGaussSim](https://github.com/JuliaEarth/DirectGaussianSimulation.jl) | [![](https://img.shields.io/codecov/c/github/JuliaEarth/DirectGaussianSimulation.jl?style=flat-square)](https://codecov.io/gh/JuliaEarth/DirectGaussianSimulation.jl) | Direct Gaussian simulation | [Alabert 1987](https://link.springer.com/article/10.1007/BF00897191) |
-| [SeqGaussSim](https://github.com/JuliaEarth/KrigingEstimators.jl) | [![](https://img.shields.io/codecov/c/github/JuliaEarth/KrigingEstimators.jl?style=flat-square)](https://codecov.io/gh/JuliaEarth/KrigingEstimators.jl) | Sequential Gaussian simulation | [Gómez-Hernández 1993](https://link.springer.com/chapter/10.1007/978-94-011-1739-5_8) |
-| [SpecGaussSim](https://github.com/JuliaEarth/SpectralGaussianSimulation.jl) | [![](https://img.shields.io/codecov/c/github/JuliaEarth/SpectralGaussianSimulation.jl?style=flat-square)](https://codecov.io/gh/JuliaEarth/SpectralGaussianSimulation.jl) | Spectral Gaussian simulation | [Gutjahr 1997](https://link.springer.com/article/10.1007/BF02769641) |
+| [LUGaussSim](https://github.com/JuliaEarth/GaussianSimulation.jl) | [![](https://img.shields.io/codecov/c/github/JuliaEarth/GaussianSimulation.jl?style=flat-square)](https://codecov.io/gh/JuliaEarth/GaussianSimulation.jl) | LU Gaussian simulation | [Alabert 1987](https://link.springer.com/article/10.1007/BF00897191) |
+| [SeqGaussSim](https://github.com/JuliaEarth/GaussianSimulation.jl) | [![](https://img.shields.io/codecov/c/github/JuliaEarth/GaussianSimulation.jl?style=flat-square)](https://codecov.io/gh/JuliaEarth/GaussianSimulation.jl) | Sequential Gaussian simulation | [Gómez-Hernández 1993](https://link.springer.com/chapter/10.1007/978-94-011-1739-5_8) |
+| [FFTGaussSim](https://github.com/JuliaEarth/GaussianSimulation.jl) | [![](https://img.shields.io/codecov/c/github/JuliaEarth/GaussianSimulation.jl?style=flat-square)](https://codecov.io/gh/JuliaEarth/GaussianSimulation.jl) | FFT Gaussian simulation | [Gutjahr 1997](https://link.springer.com/article/10.1007/BF02769641) |
 
 ### Multiple-point
 
