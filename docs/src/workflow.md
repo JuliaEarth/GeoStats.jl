@@ -70,24 +70,10 @@ coordinates(Ω)
 
 Spatial data types implement the [Tables.jl](https://github.com/JuliaData/Tables.jl)
 interface, which means that they can be accessed as if they were tables with samples
-in the rows and variables in the columns:
+in the rows and variables in the columns. This interface is convenient to pass spatial
+data to non-spatial workflows directly.
 
-```@example workflow
-Ω[1:3,:Z]
-```
-
-In this case, the coordinates of the samples are lost. To reconstruct a spatial data
-object, we need to save the spatial indices that were used to index the table:
-
-```@example workflow
-zvals = Ω[1:3,:Z]
-coord = coordinates(Ω, 1:3)
-
-georef((Z=zvals,), coord)
-```
-
-To recover the original Julia array behind a spatial data object, we can index the
-data with the variable name:
+Additionaly, we can access the values of a variable as a vector using the variable name:
 
 ```@example workflow
 Ω[:Z]
@@ -179,7 +165,7 @@ Because the labels are categorical variables, we need to inform the framework
 the correct type:
 
 ```@example workflow
-transform!(df, :crop => categorical => :crop)
+DataFrames.transform!(df, :crop => categorical => :crop)
 
 first(df, 5)
 ```

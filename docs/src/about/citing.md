@@ -1,8 +1,8 @@
 If you find [GeoStats.jl](https://github.com/JuliaEarth/GeoStats.jl)
 useful in your work, please consider citing it:
 
-[![JOSS](https://joss.theoj.org/papers/10.21105/joss.00692/status.svg)](https://doi.org/10.21105/joss.00692)
-[![DOI](https://zenodo.org/badge/33827844.svg)](https://zenodo.org/badge/latestdoi/33827844)
+[![JOSS](https://img.shields.io/badge/JOSS-10.21105%2Fjoss.00692-brightgreen?style=flat-square)](https://doi.org/10.21105/joss.00692)
+[![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.3875233-blue?style=flat-square)](https://zenodo.org/badge/latestdoi/33827844)
 
 ```bibtex
 @ARTICLE{Hoffimann2018,

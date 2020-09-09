@@ -85,8 +85,7 @@ gr(size=(900,400)) # hide
 
 # list of properties with coordinates
 props = (Z=[1.,0.,1.],)
-coord = [25. 50. 75.
-         25. 75. 50.]
+coord = [(25.,25.), (50.,75.), (75.,50.)]
 
 # georeference data
 𝒟 = georef(props, coord)
@@ -121,10 +120,11 @@ The project is split into various packages:
 | [GeoStats.jl](https://github.com/JuliaEarth/GeoStats.jl) | Main package reexporting full stack of packages for geostatistics. |
 | [Variography.jl](https://github.com/JuliaEarth/Variography.jl) | Variogram estimation and modeling, and related tools. |
 | [KrigingEstimators.jl](https://github.com/JuliaEarth/KrigingEstimators.jl) | High-performance implementations of Kriging estimators. |
+| [GaussianSimulation.jl](https://github.com/JuliaEarth/GaussianSimulation.jl) | Efficient solvers for Gaussian process simulation. |
 | [PointPatterns.jl](https://github.com/JuliaEarth/PointPatterns.jl) | Spatial point pattern analysis and synthesis. |
-| [GeoStatsImages.jl](https://github.com/JuliaEarth/GeoStatsImages.jl) | Training images for multiple-point geostatistical simulation. |
+| [GeoStatsImages.jl](https://github.com/JuliaEarth/GeoStatsImages.jl) | Training images for multiple-point simulation. |
 | [GslibIO.jl](https://github.com/JuliaEarth/GslibIO.jl) | Utilities to read/write *extended* GSLIB files. |
-| [GeoStatsBase.jl](https://github.com/JuliaEarth/GeoStatsBase.jl) | Base package containing interfaces and developer tools. |
+| [GeoStatsBase.jl](https://github.com/JuliaEarth/GeoStatsBase.jl) | Base package containing core functionality. |
 
 The main [GeoStats.jl](https://github.com/JuliaEarth/GeoStats.jl) package reexports
 the full stack of packages for high-performance geostatistics in Julia. Other

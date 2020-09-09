@@ -76,7 +76,6 @@ extrema(R)
 ## Tabular
 
 ```@docs
-detrend!
 trend
 ```
 

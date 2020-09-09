@@ -34,7 +34,7 @@ the development version of the project by typing the following in
 the package manager:
 
 ```julia
-] dev GeoStatsBase Variography KrigingEstimators PointPatterns GeoStats
+] dev GeoStatsBase Variography KrigingEstimators GaussianSimulation PointPatterns GeoStats
 ```
 
 This will clone all the project components in your `~/.julia` folder so
