@@ -5,7 +5,7 @@
 A spatial object can be partitioned into various sub-objects:
 
 ```@docs
-partition
+GeoStatsBase.partition
 ```
 
 ## Example

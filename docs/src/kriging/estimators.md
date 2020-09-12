@@ -29,7 +29,7 @@ KrigingEstimators.fit
 The `predict` function performs the estimation at a given location:
 
 ```@docs
-predict
+KrigingEstimators.predict
 ```
 
 Alternative constructors are provided for convenience that will immediately fit the Kriging
