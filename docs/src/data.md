@@ -1,5 +1,7 @@
 # Spatial data
 
+## Overview
+
 Given a table or array containing data, we can gereference these objects
 onto a spatial domain with the [`georef`](@ref) function. For a list of
 available spatial domains, please see [Domains](domains.md).
@@ -91,3 +93,24 @@ Alternatively, we can interpret the entries of the named tuple as columns in a t
 
 plot(𝒟)
 ```
+
+## Custom data
+
+GeoStats.jl introduces a set of traits that developers can implement to integrate
+their own spatial data and domain types into the framework. These "geotraits" as
+we call them live in GeoStatsBase.jl.
+
+To implement a spatial data type compatible with the project, the developer can
+inherit basic behavior from [`GeoStatsBase.AbstractData`](@ref), and implement
+two functions:
+
+```@docs
+GeoStatsBase.domain
+GeoStatsBase.values
+```
+
+The [`domain`](@ref) function should return the underlying spatial domain where the
+data lives. This spatial domain should implement a set of traits for a general finite
+element mesh.
+
+The [`values`](@ref) function should return a table according to the Tables.jl interface.
