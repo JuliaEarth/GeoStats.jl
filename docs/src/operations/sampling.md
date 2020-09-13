@@ -16,7 +16,6 @@ using LinearAlgebra # hide
 using Plots # hide
 gr(format=:svg) # hide
 
-
 Ω = georef((Z=[norm([i,j]) for i in 1:100, j in 1:100],))
 
 S = sample(Ω, 1000, replace=false)

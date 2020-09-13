@@ -279,9 +279,7 @@ solver = NormSolver()
 solution = solve(problem, solver)
 
 contourf(solution)
-png("../images/normsolver1.png") # hide
 ```
-![](../images/normsolver1.png)
 
 And assess the behavior of different parameters:
 
@@ -291,9 +289,7 @@ solver = NormSolver(:z => (pmean=1,pvar=3))
 solution = solve(problem, solver)
 
 contourf(solution)
-savefig("../images/normsolver2.svg") # hide
 ```
-![](../images/normsolver2.svg)
 
 ### Simulation
 
@@ -350,9 +346,7 @@ solver = RandSolver(:z => (mean=10.,var=10.))
 solution = solve(problem, solver)
 
 heatmap(solution)
-savefig("../images/randsolver1.svg") # hide
 ```
-![](../images/randsolver1.svg)
 
 Note, however, that we did not define the `preprocess` function for the solver.
 This function can be used to avoid recalculations for each realization, and to
@@ -463,6 +457,4 @@ p = LearningProblem(Ω, Ω, t)
 s = solve(p, SLICSolver(50, 0.01))
 
 plot(plot(Ω), plot(s, c=:viridis))
-savefig("../images/slicsolver.svg") # hide
 ```
-![](../images/slicsolver.svg)
