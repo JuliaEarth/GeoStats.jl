@@ -10,7 +10,8 @@ using Reexport
 @reexport using GeoStatsBase
 @reexport using Variography
 @reexport using KrigingEstimators
-@reexport using GaussianSimulation
 @reexport using PointPatterns
+@reexport using GeoEstimation
+@reexport using GaussianSimulation
 
 end
