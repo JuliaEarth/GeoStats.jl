@@ -58,10 +58,6 @@ makedocs(
         "kriging/estimators.md",
         "kriging/solver.md"
       ],
-      "Gaussian" => [
-        "gausssim/processes.md",
-        "gausssim/solvers.md"
-      ],
       "Point Patterns" => [
         "pointpatterns/pointprocs.md",
         "pointpatterns/pointops.md"

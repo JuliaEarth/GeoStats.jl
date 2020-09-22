@@ -101,16 +101,13 @@ their own spatial data and domain types into the framework. These "geotraits" as
 we call them live in GeoStatsBase.jl.
 
 To implement a spatial data type compatible with the project, the developer can
-inherit basic behavior from [`GeoStatsBase.AbstractData`](@ref), and implement
-two functions:
+inherit basic behavior from `GeoStatsBase.AbstractData`, and implement two functions:
 
 ```@docs
 GeoStatsBase.domain
 GeoStatsBase.values
 ```
 
-The [`domain`](@ref) function should return the underlying spatial domain where the
-data lives. This spatial domain should implement a set of traits for a general finite
-element mesh.
-
+The [`domain`](@ref) function should return the underlying spatial domain of the data.
+This spatial domain should implement a set of traits for a general finite element mesh.
 The [`values`](@ref) function should return a table according to the Tables.jl interface.
