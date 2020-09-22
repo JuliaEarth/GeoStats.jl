@@ -1,43 +1,123 @@
 # Problems
 
-The project provides solutions to three three types of problems defined below.
+The project provides solutions to three types of problems defined below.
 
 ## Estimation
-
-An estimation problem in geostatitsics is a triplet:
-
-1. Spatial data (i.e. data with coordinates)
-2. Spatial domain (e.g. regular grid, point collection)
-3. Target variables (or variables to be estimated)
-
-Each of these components is constructed separately, and then grouped
-(no memory is copied) in an `EstimationProblem`.
 
 ```@docs
 EstimationProblem
 ```
 
-## Simulation
+### Example
 
-Likewise, a stochastic simulation problem in geostatistics is represented with
-the same triplet. However, the spatial data in this case is optional in order
-to accomodate the concept of conditional versus unconditional simulation.
+Define a 2D estimation problem:
+
+```@example estimation
+using GeoStats # hide
+using Plots # hide
+using Distances # hide
+gr(size=(900,400),clabels=true) # hide
+
+# list of properties with coordinates
+props = (Z=[1.,0.,1.],)
+coord = [(25.,25.), (50.,75.), (75.,50.)]
+
+# estimation problem
+𝒟 = georef(props, coord)
+𝒢 = RegularGrid(100, 100)
+𝒫 = EstimationProblem(𝒟, 𝒢, :Z)
+```
+
+Solve the problem with a few built-in solvers:
+
+```@example estimation
+# few built-in solvers
+S1 = InvDistWeight(:Z => (distance=Euclidean(),))
+S2 = InvDistWeight(:Z => (distance=Chebyshev(),))
+S3 = Kriging(:Z => (variogram=GaussianVariogram(range=35.),))
+
+# solve the problem
+sol = [solve(𝒫, S) for S in (S1, S2, S3)]
+
+# plot the solution
+contourf(sol[1])
+```
+
+```@example estimation
+contourf(sol[2])
+```
+
+```@example estimation
+contourf(sol[3])
+```
+
+## Simulation
 
 ```@docs
 SimulationProblem
 ```
 
+### Example
+
+Define a 2D unconditional simulation problem:
+
+```@example simulation
+using GeoStats # hide
+using Plots # hide
+gr(size=(900,300)) # hide
+
+# unconditional simulation problem
+𝒢 = RegularGrid(100, 100)
+𝒫 = SimulationProblem(𝒢, :Z => Float64, 3)
+```
+
+Solve the problem with a few built-in solvers:
+
+```@example simulation
+# few built-in solvers
+S1 = LUGaussSim(:Z => (variogram=GaussianVariogram(range=25.),))
+S2 = FFTGaussSim(:Z => (variogram=GaussianVariogram(range=25.),))
+
+# solve the problem
+sol = [solve(𝒫, S) for S in (S1, S2)]
+
+# plot the solution
+heatmap(sol[1])
+```
+
+```@example simulation
+heatmap(sol[2])
+```
+
+Alternatively, define a 2D conditional simulation problem:
+
+```@example simulation
+# unconditional realization
+Z1 = sol[1][1]
+
+# sample observations
+𝒟 = sample(Z1, 10, replace=false)
+
+# conditional simulation problem
+𝒫 = SimulationProblem(𝒟, 𝒢, :Z, 3)
+```
+
+And solve it as before:
+
+```@example simulation
+# solve the problem
+sol = solve(𝒫, S1)
+
+# plot the solution
+heatmap(sol)
+```
+
 ## Learning
-
-A geostatistical learning problem consists of a triplet:
-
-1. Source spatial data (e.g. with labels)
-2. Target spatial data (e.g. without labels)
-3. Learning task (e.g. classification)
-
-In this case, a learning model is trained with the source spatial data, and then
-used to perform the same task with the target spatial data.
 
 ```@docs
 LearningProblem
 ```
+
+### Example
+
+Please consult the [Basic workflow](workflow.md) for an example.
