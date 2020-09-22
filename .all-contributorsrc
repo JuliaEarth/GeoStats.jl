@@ -175,6 +175,15 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "rmcaixeta",
+      "name": "Rafael Caixeta",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/8386288?v=4",
+      "profile": "http://www.linkedin.com/in/rmcaixeta",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
