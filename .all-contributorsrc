@@ -184,6 +184,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "ElOceanografo",
+      "name": "Sam",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/1072448?v=4",
+      "profile": "https://github.com/ElOceanografo",
+      "contributions": [
+        "infra"
+      ]
     }
   ],
   "contributorsPerLine": 7,
