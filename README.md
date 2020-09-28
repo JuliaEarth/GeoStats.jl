@@ -192,6 +192,7 @@ This project would not be possible without the contributions of:
     <td align="center"><a href="https://www.linkedin.com/in/LakshyaKhatri"><img src="https://avatars1.githubusercontent.com/u/28972442?v=4" width="100px;" alt=""/><br /><sub><b>Lakshya Khatri</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=LakshyaKhatri" title="Code">💻</a></td>
     <td align="center"><a href="http://bouchet-valat.site.ined.fr"><img src="https://avatars3.githubusercontent.com/u/1120448?v=4" width="100px;" alt=""/><br /><sub><b>Milan Bouchet-Valat</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=nalimilan" title="Documentation">📖</a></td>
     <td align="center"><a href="http://www.linkedin.com/in/rmcaixeta"><img src="https://avatars3.githubusercontent.com/u/8386288?v=4" width="100px;" alt=""/><br /><sub><b>Rafael Caixeta</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=rmcaixeta" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/ElOceanografo"><img src="https://avatars3.githubusercontent.com/u/1072448?v=4" width="100px;" alt=""/><br /><sub><b>Sam</b></sub></a><br /><a href="#infra-ElOceanografo" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a></td>
   </tr>
 </table>
 
