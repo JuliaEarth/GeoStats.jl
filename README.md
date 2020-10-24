@@ -1,6 +1,6 @@
 <p align="center">
   <img src="docs/src/assets/logo-text.svg" height="200"><br>
-  <a href="https://travis-ci.org/JuliaEarth/GeoStats.jl">
+  <a href="https://travis-ci.com/JuliaEarth/GeoStats.jl">
     <img src="https://img.shields.io/travis/JuliaEarth/GeoStats.jl?style=flat-square">
   </a>
   <a href="https://codecov.io/gh/JuliaEarth/GeoStats.jl">

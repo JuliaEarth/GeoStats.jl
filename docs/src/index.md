@@ -2,7 +2,7 @@
 
 *An extensible framework for high-performance geostatistics in Julia.*
 
-[![Build Status](https://img.shields.io/travis/JuliaEarth/GeoStats.jl?style=flat-square)](https://travis-ci.org/JuliaEarth/GeoStats.jl)
+[![Build Status](https://img.shields.io/travis/JuliaEarth/GeoStats.jl?style=flat-square)](https://travis-ci.com/JuliaEarth/GeoStats.jl)
 [![Coverage Status](https://img.shields.io/codecov/c/github/JuliaEarth/GeoStats.jl?style=flat-square)](https://codecov.io/gh/JuliaEarth/GeoStats.jl)
 [![Stable Documentation](https://img.shields.io/badge/docs-stable-blue?style=flat-square)](https://JuliaEarth.github.io/GeoStats.jl/stable)
 [![Latest Documentation](https://img.shields.io/badge/docs-latest-blue?style=flat-square)](https://JuliaEarth.github.io/GeoStats.jl/latest)
