@@ -24,27 +24,37 @@ using Plots # hide
 MaternVariogram(order=1.) # set order of Bessel function
 ```
 
-Additionally, an additive variogram model
+Additionally, a nested variogram model
 ``\gamma(h) = c_1\cdot\gamma_1(h) + c_2\cdot\gamma_2(h) + \cdots + c_n\cdot\gamma_n(h)``
-can be constructed from multiple variogram models. Like the
-other variogram models, an additive model ``\gamma`` can be
-evaluated as an isotropic model ``\gamma(h)`` or as a model
-with a custom distance ``\gamma(\x_1,\x_2)``:
+can be constructed from multiple variogram models, including matrix coefficients:
 
 ```@example variograms
 γ₁ = GaussianVariogram()
 γ₂ = ExponentialVariogram()
 
-# additive model
-γ = γ₁ + 2γ₂
-
-γ(1.) == γ([0.,0.], [1.,0.])
+# nested model
+γ = [1.0 0.0; 0.0 1.0] * γ₁ + [2.0 0.5; 0.5 3.0] * γ₂
 ```
 
-Finally, the 2nd-order stationarity property of a variogram can be checked with the `isstationary` method:
+The individual structures can be recovered in canonical form with the
+[`structures`](@ref) function:
+
+```@docs
+structures
+```
+
+and the 2nd-order stationarity property can be checked with the
+[`isstationary`](@ref) function:
 
 ```@docs
 isstationary
+```
+
+Geometric anisotropy can be specified as a distance using the
+[`aniso2distance`](@ref) function:
+
+```@docs
+aniso2distance
 ```
 
 ## Gaussian
