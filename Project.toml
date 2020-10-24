@@ -15,7 +15,7 @@ Variography = "04a0146e-e6df-5636-8d7f-62fa9eb0b20c"
 [compat]
 GaussianSimulation = "0.1"
 GeoEstimation = "0.1"
-GeoStatsBase = "0.14"
+GeoStatsBase = "0.14, 0.13"
 KrigingEstimators = "0.4"
 PointPatterns = "0.2"
 Reexport = "0.2"
