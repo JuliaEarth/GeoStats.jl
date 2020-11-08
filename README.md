@@ -194,6 +194,9 @@ This project would not be possible without the contributions of:
     <td align="center"><a href="http://www.linkedin.com/in/rmcaixeta"><img src="https://avatars3.githubusercontent.com/u/8386288?v=4" width="100px;" alt=""/><br /><sub><b>Rafael Caixeta</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=rmcaixeta" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/ElOceanografo"><img src="https://avatars3.githubusercontent.com/u/1072448?v=4" width="100px;" alt=""/><br /><sub><b>Sam</b></sub></a><br /><a href="#infra-ElOceanografo" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a></td>
   </tr>
+  <tr>
+    <td align="center"><a href="http://nitishgadangi.github.io"><img src="https://avatars0.githubusercontent.com/u/29014716?v=4" width="100px;" alt=""/><br /><sub><b>Nitish Gadangi</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=NitishGadangi" title="Documentation">📖</a> <a href="#infra-NitishGadangi" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a></td>
+  </tr>
 </table>
 
 <!-- markdownlint-enable -->
