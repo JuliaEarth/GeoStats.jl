@@ -193,6 +193,16 @@
       "contributions": [
         "infra"
       ]
+    },
+    {
+      "login": "NitishGadangi",
+      "name": "Nitish Gadangi",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/29014716?v=4",
+      "profile": "http://nitishgadangi.github.io",
+      "contributions": [
+        "doc",
+        "infra"
+      ]
     }
   ],
   "contributorsPerLine": 7,
