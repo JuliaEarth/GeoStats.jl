@@ -140,8 +140,10 @@ If you find GeoStats.jl useful in your work, please consider citing it:
 <p align="center">
   <img src="docs/src/images/Stanford.png" height="100">
   <img src="docs/src/images/IBM.png" height="100"><br><br>
-  <img src="docs/src/images/Deltares.png" height="150" hspace="20">
   <img src="docs/src/images/ENI.png" height="150" hspace="20">
+  <img src="docs/src/images/Petrobras.gif" height="150" hspace="20">
+  <img src="docs/src/images/Deltares.png" height="150" hspace="20">
+  <img src="docs/src/images/Nexa.jpg" height="150" hspace="20">
 </p>
 
 [docs-stable-img]: https://img.shields.io/badge/docs-stable-blue?style=flat-square
