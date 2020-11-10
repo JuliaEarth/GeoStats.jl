@@ -63,7 +63,7 @@ using MySolver
 
 Choose a license for your solver. If you don't have major restrictions, I suggest
 using the `ISC` license. This license is equivalent to the `MIT` and `BSD 2-Clause`
-licenses, plus it eliminates [unncessary language](https://en.wikipedia.org/wiki/ISC_license).
+licenses, plus it eliminates [obsolete legal language](https://en.wikipedia.org/wiki/ISC_license).
 Try to choose a [permissive license](https://opensource.org/licenses) so that your
 solver can be used, and improved by private companies.
 
@@ -142,7 +142,7 @@ To test your new solver, load the `GeoStats.jl` package and solve a simple probl
 using GeoStats
 using MySolver
 
-sdata    = readgeotable("samples.csv", coordnames=[:x,:y])
+sdata    = readgeotable("samples.csv", coordnames=(:x,:y))
 sdomain  = RegularGrid(100, 100)
 problem  = EstimationProblem(sdata, sdomain, :value)
 
@@ -168,12 +168,7 @@ function solvesingle(problem::SimulationProblem, covars::NamedTuple,
 
   real4var = map(covars.names) do var
     # output is a single realization for each covariable
-    real = Vector{V}(undef, nelms(pdomain))
-
-    # fill realization with hard data
-    for (loc, datloc) in datamap(problem, var)
-      real[loc] = pdata[datloc,var]
-    end
+    real = Vector{Float64}(undef, nelms(pdomain))
 
     # algorithm goes here
     # ...

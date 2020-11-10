@@ -9,8 +9,8 @@ developer guide for instructions on how to write your own solvers.
 | Solver | Coverage | Description | References |
 |:------:|:--------:|:------------|:-----------|
 | [Kriging](https://github.com/JuliaEarth/KrigingEstimators.jl) | [![](https://img.shields.io/codecov/c/github/JuliaEarth/KrigingEstimators.jl?style=flat-square)](https://codecov.io/gh/JuliaEarth/KrigingEstimators.jl) | Kriging (SK, OK, UK, EDK) | [Matheron 1971](https://books.google.com/books/about/The_Theory_of_Regionalized_Variables_and.html?id=TGhGAAAAYAAJ) |
-| [InvDistWeight](https://github.com/JuliaEarth/InverseDistanceWeighting.jl) | [![](https://img.shields.io/codecov/c/github/JuliaEarth/InverseDistanceWeighting.jl?style=flat-square)](https://codecov.io/gh/JuliaEarth/InverseDistanceWeighting.jl) | Inverse distance weighting | [Shepard 1968](https://dl.acm.org/citation.cfm?id=810616) |
-| [LocalWeightRegress](https://github.com/JuliaEarth/LocallyWeightedRegression.jl) | [![](https://img.shields.io/codecov/c/github/JuliaEarth/LocallyWeightedRegression.jl?style=flat-square)](https://codecov.io/gh/JuliaEarth/LocallyWeightedRegression.jl) | Locally weighted regression | [Cleveland 1979](https://www.jstor.org/stable/2286407) |
+| [IDW](https://github.com/JuliaEarth/GeoEstimation.jl) | [![](https://img.shields.io/codecov/c/github/JuliaEarth/GeoEstimation.jl?style=flat-square)](https://codecov.io/gh/JuliaEarth/GeoEstimation.jl) | Inverse distance weighting | [Shepard 1968](https://dl.acm.org/citation.cfm?id=810616) |
+| [LWR](https://github.com/JuliaEarth/GeoEstimation.jl) | [![](https://img.shields.io/codecov/c/github/JuliaEarth/GeoEstimation.jl?style=flat-square)](https://codecov.io/gh/JuliaEarth/GeoEstimation.jl) | Locally weighted regression | [Cleveland 1979](https://www.jstor.org/stable/2286407) |
 
 ## Simulation
 
@@ -20,9 +20,9 @@ All simulation solvers can generate realizations in parallel unless otherwise no
 
 | Solver | Coverage | Description | References |
 |:------:|:--------:|:------------|:-----------|
-| [LUGaussSim](https://github.com/JuliaEarth/GaussianSimulation.jl) | [![](https://img.shields.io/codecov/c/github/JuliaEarth/GaussianSimulation.jl?style=flat-square)](https://codecov.io/gh/JuliaEarth/GaussianSimulation.jl) | LU Gaussian simulation | [Alabert 1987](https://link.springer.com/article/10.1007/BF00897191) |
-| [SeqGaussSim](https://github.com/JuliaEarth/GaussianSimulation.jl) | [![](https://img.shields.io/codecov/c/github/JuliaEarth/GaussianSimulation.jl?style=flat-square)](https://codecov.io/gh/JuliaEarth/GaussianSimulation.jl) | Sequential Gaussian simulation | [Gómez-Hernández 1993](https://link.springer.com/chapter/10.1007/978-94-011-1739-5_8) |
-| [FFTGaussSim](https://github.com/JuliaEarth/GaussianSimulation.jl) | [![](https://img.shields.io/codecov/c/github/JuliaEarth/GaussianSimulation.jl?style=flat-square)](https://codecov.io/gh/JuliaEarth/GaussianSimulation.jl) | FFT Gaussian simulation | [Gutjahr 1997](https://link.springer.com/article/10.1007/BF02769641) |
+| [LUGS](https://github.com/JuliaEarth/GaussianSimulation.jl) | [![](https://img.shields.io/codecov/c/github/JuliaEarth/GaussianSimulation.jl?style=flat-square)](https://codecov.io/gh/JuliaEarth/GaussianSimulation.jl) | LU Gaussian simulation | [Alabert 1987](https://link.springer.com/article/10.1007/BF00897191) |
+| [SGS](https://github.com/JuliaEarth/GaussianSimulation.jl) | [![](https://img.shields.io/codecov/c/github/JuliaEarth/GaussianSimulation.jl?style=flat-square)](https://codecov.io/gh/JuliaEarth/GaussianSimulation.jl) | Sequential Gaussian simulation | [Gómez-Hernández 1993](https://link.springer.com/chapter/10.1007/978-94-011-1739-5_8) |
+| [FFTGS](https://github.com/JuliaEarth/GaussianSimulation.jl) | [![](https://img.shields.io/codecov/c/github/JuliaEarth/GaussianSimulation.jl?style=flat-square)](https://codecov.io/gh/JuliaEarth/GaussianSimulation.jl) | FFT Gaussian simulation | [Gutjahr 1997](https://link.springer.com/article/10.1007/BF02769641) |
 
 ### Multiple-point
 

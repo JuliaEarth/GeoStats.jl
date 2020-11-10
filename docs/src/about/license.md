@@ -1,5 +1,8 @@
 The [GeoStats.jl](https://github.com/JuliaEarth/GeoStats.jl) project is
-licensed under the [ISC License](https://opensource.org/licenses/ISC):
+licensed under the [ISC](https://opensource.org/licenses/ISC) license.
+The license is equivalent to the [MIT](https://opensource.org/licenses/MIT)
+and [BSD 2-Clause](https://opensource.org/licenses/BSD-2-Clause) licenses,
+plus it eliminates [obsolete legal language](https://en.wikipedia.org/wiki/ISC_license).
 
     Copyright (c) 2015, Júlio Hoffimann Mendes
 

@@ -32,8 +32,8 @@ Solve the problem with a few built-in solvers:
 
 ```@example estimation
 # few built-in solvers
-S1 = InvDistWeight(:Z => (distance=Euclidean(),))
-S2 = InvDistWeight(:Z => (distance=Chebyshev(),))
+S1 = IDW(:Z => (distance=Euclidean(),))
+S2 = IDW(:Z => (distance=Chebyshev(),))
 S3 = Kriging(:Z => (variogram=GaussianVariogram(range=35.),))
 
 # solve the problem
@@ -75,8 +75,8 @@ Solve the problem with a few built-in solvers:
 
 ```@example simulation
 # few built-in solvers
-S1 = LUGaussSim(:Z => (variogram=GaussianVariogram(range=25.),))
-S2 = FFTGaussSim(:Z => (variogram=GaussianVariogram(range=25.),))
+S1 = LUGS(:Z => (variogram=GaussianVariogram(range=25.),))
+S2 = FFTGS(:Z => (variogram=GaussianVariogram(range=25.),))
 
 # solve the problem
 sol = [solve(𝒫, S) for S in (S1, S2)]
