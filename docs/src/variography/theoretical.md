@@ -169,3 +169,17 @@ SineHoleVariogram
 ```@example variograms
 plot(SineHoleVariogram())
 ```
+
+## Nugget
+
+```math
+\gamma(h) = n \cdot \1_{(0,\infty)}(h)
+```
+
+```@docs
+NuggetEffect
+```
+
+```@example variograms
+plot(NuggetEffect(1.0))
+```
