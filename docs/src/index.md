@@ -6,7 +6,7 @@
 [![Coverage Status](https://img.shields.io/codecov/c/github/JuliaEarth/GeoStats.jl?style=flat-square)](https://codecov.io/gh/JuliaEarth/GeoStats.jl)
 [![Stable Documentation](https://img.shields.io/badge/docs-stable-blue?style=flat-square)](https://JuliaEarth.github.io/GeoStats.jl/stable)
 [![Latest Documentation](https://img.shields.io/badge/docs-latest-blue?style=flat-square)](https://JuliaEarth.github.io/GeoStats.jl/latest)
-[![License File](https://img.shields.io/badge/license-ISC-blue?style=flat-square)](https://github.com/JuliaEarth/GeoStats.jl/blob/master/LICENSE)
+[![License File](https://img.shields.io/badge/license-MIT-blue?style=flat-square)](https://github.com/JuliaEarth/GeoStats.jl/blob/master/LICENSE)
 
 [![Gitter](https://img.shields.io/badge/chat-on%20gitter-bc0067?style=flat-square)](https://gitter.im/JuliaEarth/GeoStats.jl)
 [![JOSS](https://img.shields.io/badge/JOSS-10.21105%2Fjoss.00692-brightgreen?style=flat-square)](https://doi.org/10.21105/joss.00692)
