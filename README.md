@@ -13,7 +13,7 @@
     <img src="https://img.shields.io/badge/docs-latest-blue?style=flat-square">
   </a>
   <a href="LICENSE">
-    <img src="https://img.shields.io/badge/license-ISC-blue?style=flat-square">
+    <img src="https://img.shields.io/badge/license-MIT-blue?style=flat-square">
   </a>
 </p>
 <p align="center">

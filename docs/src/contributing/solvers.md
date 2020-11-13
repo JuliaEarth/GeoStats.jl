@@ -62,10 +62,8 @@ using MySolver
 ```
 
 Choose a license for your solver. If you don't have major restrictions, I suggest
-using the `ISC` license. This license is equivalent to the `MIT` and `BSD 2-Clause`
-licenses, plus it eliminates [obsolete legal language](https://en.wikipedia.org/wiki/ISC_license).
-Try to choose a [permissive license](https://opensource.org/licenses) so that your
-solver can be used, and improved by private companies.
+using the `MIT` license. Try to choose a [permissive license](https://opensource.org/licenses)
+so that your solver can be used, and improved by private corporations.
 
 #### Import GeoStatsBase
 
