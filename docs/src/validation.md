@@ -14,6 +14,18 @@ GeoStatsBase.error
 
 Below is the list of currently implemented error estimation methods.
 
+## Leave-one-out validation
+
+```@docs
+LeaveOneOut
+```
+
+## Leave-ball-out validation
+
+```@docs
+LeaveBallOut
+```
+
 ## Cross-validation
 
 ```@docs
@@ -24,12 +36,6 @@ CrossValidation
 
 ```@docs
 BlockCrossValidation
-```
-
-## Leave-ball-out validation
-
-```@docs
-LeaveBallOut
 ```
 
 ## Weighted cross-validation
