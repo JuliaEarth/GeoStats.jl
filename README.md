@@ -112,7 +112,7 @@ source and free of charge. If you would like to help support the project, please
 star the repository [![STARS][stars-img]][stars-url] and share it with your colleagues.
 To fund this work I have chosen to rely on the direct support of the community:
 
-[![liberapay](https://liberapay.com/assets/widgets/donate.svg)](https://liberapay.com/juliohm/donate)
+[![liberapay](https://liberapay.com/assets/widgets/donate.svg)](https://liberapay.com/juliohm)
 
 ## Citing
 
