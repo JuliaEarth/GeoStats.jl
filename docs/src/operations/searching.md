@@ -20,7 +20,7 @@ gr(format=:svg) # hide
 
 # construct searcher
 b = BallNeighborhood(20.)
-s = NeighborhoodSearcher(Ω, b)
+s = NeighborhoodSearch(Ω, b)
 
 # query neighbors of point
 inds = search([50.,50.], s)
@@ -35,8 +35,8 @@ plot(p₁, p₂)
 ## Methods
 
 ```@docs
-NeighborhoodSearcher
-KNearestSearcher
-KBallSearcher
-BoundedSearcher
+NeighborhoodSearch
+KNearestSearch
+KBallSearch
+BoundedSearch
 ```

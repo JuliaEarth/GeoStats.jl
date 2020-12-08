@@ -17,7 +17,7 @@ gr(format=:svg) # hide
 
 R = Rectangle((0., 0.), (100., 100.))
 
-D = discretize(R, RegularGridDiscretizer((5, 4)))
+D = discretize(R, BlockDiscretization((5, 4)))
 
 plot(D)
 ```
@@ -25,5 +25,5 @@ plot(D)
 ## Methods
 
 ```@docs
-RegularGridDiscretizer
+BlockDiscretization
 ```

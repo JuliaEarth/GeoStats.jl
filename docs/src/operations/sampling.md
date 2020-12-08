@@ -26,7 +26,7 @@ plot(plot(Ω), plot(S))
 ## Methods
 
 ```@docs
-UniformSampler
-BallSampler
-WeightedSampler
+UniformSampling
+BallSampling
+WeightedSampling
 ```

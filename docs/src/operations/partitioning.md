@@ -18,7 +18,7 @@ gr(format=:png) # hide
 
 Ω = georef((Z=[norm([i,j]) for i in 1:100, j in 1:100],))
 
-Π = partition(Ω, BlockPartitioner(10.,10.))
+Π = partition(Ω, BlockPartition(10.,10.))
 
 plot(plot(Ω), plot(Π))
 ```
@@ -26,18 +26,18 @@ plot(plot(Ω), plot(Π))
 ## Methods
 
 ```@docs
-UniformPartitioner
-FractionPartitioner
-SLICPartitioner
-BlockPartitioner
-BisectPointPartitioner
-BisectFractionPartitioner
-BallPartitioner
-PlanePartitioner
-DirectionPartitioner
-VariablePartitioner
-PredicatePartitioner
-SpatialPredicatePartitioner
-ProductPartitioner
-HierarchicalPartitioner
+RandomPartition
+FractionPartition
+SLICPartition
+BlockPartition
+BisectPointPartition
+BisectFractionPartition
+BallPartition
+PlanePartition
+DirectionPartition
+VariablePartition
+PredicatePartition
+SPredicatePartition
+ProductPartition
+HierarchicalPartition
 ```

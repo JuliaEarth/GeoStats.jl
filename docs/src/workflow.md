@@ -108,14 +108,14 @@ To demonstrate the operation, we partition our spatial data view into
 balls of given radius:
 
 ```@example workflow
-Π = partition(Ωᵥ, BallPartitioner(5.))
+Π = partition(Ωᵥ, BallPartition(5.))
 plot(Π)
 ```
 
 or, alternatively, into two halfspaces:
 
 ```@example workflow
-Π = partition(Ωᵥ, BisectFractionPartitioner((1.,1.), 0.5))
+Π = partition(Ωᵥ, BisectFractionPartition((1.,1.), 0.5))
 plot(Π)
 ```
 
