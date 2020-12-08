@@ -420,7 +420,7 @@ function solve(problem::LearningProblem, solver::SLICSolver)
   output = outputvars(ptask)[1]
 
   # find super pixels
-  slic = SLICPartitioner(solver.k, solver.m, vars=feats)
+  slic = SLICPartition(solver.k, solver.m, vars=feats)
   part = partition(tdata, slic)
 
   # label for each point in target data

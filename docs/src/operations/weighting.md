@@ -18,7 +18,7 @@ gr(format=:svg) # hide
 
 Ω = PointSet(rand(2,500))
 
-W = weight(Ω, BlockWeighter(0.1,0.1))
+W = weight(Ω, BlockWeighting(0.1,0.1))
 
 plot(W)
 ```
@@ -26,6 +26,6 @@ plot(W)
 ## Methods
 
 ```@docs
-BlockWeighter
-DensityRatioWeighter
+BlockWeighting
+DensityRatioWeighting
 ```

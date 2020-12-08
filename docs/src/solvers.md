@@ -28,8 +28,8 @@ All simulation solvers can generate realizations in parallel unless otherwise no
 
 | Solver | Coverage | Description | References |
 |:------:|:--------:|:------------|:-----------|
-| [ImgQuilt](https://github.com/JuliaEarth/ImageQuilting.jl) | [![](https://img.shields.io/codecov/c/github/JuliaEarth/ImageQuilting.jl?style=flat-square)](https://codecov.io/gh/JuliaEarth/ImageQuilting.jl) | Image quilting | [Hoffimann 2017](https://www.sciencedirect.com/science/article/pii/S0098300417301139) |
-| [TuringPat](https://github.com/yurivish/TuringPatterns.jl) | [![](https://img.shields.io/codecov/c/github/yurivish/TuringPatterns.jl?style=flat-square)](https://codecov.io/gh/yurivish/TuringPatterns.jl) | Turing patterns | [Turing 1952](https://royalsocietypublishing.org/doi/pdf/10.1098/rstb.1952.0012) |
+| [IQ](https://github.com/JuliaEarth/ImageQuilting.jl) | [![](https://img.shields.io/codecov/c/github/JuliaEarth/ImageQuilting.jl?style=flat-square)](https://codecov.io/gh/JuliaEarth/ImageQuilting.jl) | Image quilting | [Hoffimann 2017](https://www.sciencedirect.com/science/article/pii/S0098300417301139) |
+| [TPS](https://github.com/yurivish/TuringPatterns.jl) | [![](https://img.shields.io/codecov/c/github/yurivish/TuringPatterns.jl?style=flat-square)](https://codecov.io/gh/yurivish/TuringPatterns.jl) | Turing patterns | [Turing 1952](https://royalsocietypublishing.org/doi/pdf/10.1098/rstb.1952.0012) |
 
 ### Meta
 
