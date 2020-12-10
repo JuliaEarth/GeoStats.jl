@@ -1,7 +1,7 @@
 name = "GeoStats"
 uuid = "dcc97b0b-8ce5-5539-9008-bb190f959ef6"
 author = "Júlio Hoffimann <julio.hoffimann@gmail.com>"
-version = "0.20.0"
+version = "0.20.1"
 
 [deps]
 GaussianSimulation = "e40f437e-72ad-4a71-a29e-78c1c8d897bb"
