@@ -203,6 +203,15 @@
         "doc",
         "infra"
       ]
+    },
+    {
+      "login": "Mattriks",
+      "name": "Mattriks",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/18226881?v=4",
+      "profile": "https://github.com/Mattriks",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
