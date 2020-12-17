@@ -212,6 +212,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "cormullion",
+      "name": "cormullion",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/52289?v=4",
+      "profile": "https://cormullion.github.io",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7,
