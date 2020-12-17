@@ -199,6 +199,7 @@ This project would not be possible without the contributions of:
   <tr>
     <td align="center"><a href="http://nitishgadangi.github.io"><img src="https://avatars0.githubusercontent.com/u/29014716?v=4" width="100px;" alt=""/><br /><sub><b>Nitish Gadangi</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=NitishGadangi" title="Documentation">📖</a> <a href="#infra-NitishGadangi" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a></td>
     <td align="center"><a href="https://github.com/Mattriks"><img src="https://avatars0.githubusercontent.com/u/18226881?v=4" width="100px;" alt=""/><br /><sub><b>Mattriks</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=Mattriks" title="Code">💻</a></td>
+    <td align="center"><a href="https://cormullion.github.io"><img src="https://avatars1.githubusercontent.com/u/52289?v=4" width="100px;" alt=""/><br /><sub><b>cormullion</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=cormullion" title="Documentation">📖</a></td>
   </tr>
 </table>
 
