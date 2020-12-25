@@ -18,7 +18,7 @@ GeoEstimation = "0.3"
 GeoStatsBase = "0.16"
 KrigingEstimators = "0.4"
 PointPatterns = "0.2"
-Reexport = "0.2"
+Reexport = "0.2, 1.0"
 Variography = "0.10"
 julia = "1.4"
 
