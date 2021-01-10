@@ -1,7 +1,7 @@
 name = "GeoStats"
 uuid = "dcc97b0b-8ce5-5539-9008-bb190f959ef6"
 author = "Júlio Hoffimann <julio.hoffimann@gmail.com>"
-version = "0.20.1"
+version = "0.21.0"
 
 [deps]
 GaussianSimulation = "e40f437e-72ad-4a71-a29e-78c1c8d897bb"
@@ -13,10 +13,10 @@ Reexport = "189a3867-3050-52da-a836-e630ba90ab69"
 Variography = "04a0146e-e6df-5636-8d7f-62fa9eb0b20c"
 
 [compat]
-GaussianSimulation = "0.3"
-GeoEstimation = "0.3"
-GeoStatsBase = "0.16"
-KrigingEstimators = "0.4"
+GaussianSimulation = "0.4"
+GeoEstimation = "0.4"
+GeoStatsBase = "0.17"
+KrigingEstimators = "0.5"
 PointPatterns = "0.2"
 Reexport = "0.2, 1.0"
 Variography = "0.10"
