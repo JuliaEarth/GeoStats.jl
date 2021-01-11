@@ -34,7 +34,15 @@ the development version of the project by typing the following in
 the package manager:
 
 ```julia
-] dev GeoStatsBase Variography KrigingEstimators GaussianSimulation PointPatterns GeoStats
+] activate @geo
+```
+
+This will create a fresh environment called `@geo` where you can
+play with the project components without compromising your normal
+user environment.
+
+```julia
+] dev GeoStatsBase Variography KrigingEstimators GeoEstimation GaussianSimulation PointPatterns GeoStats
 ```
 
 This will clone all the project components in your `~/.julia` folder so
