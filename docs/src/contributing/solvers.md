@@ -8,34 +8,13 @@ you have any questions, please don't hesitate to ask in our
 
 ## Basics
 
-Currently, there are three types of spatial problems defined in the framework:
+Currently, there are three types of geostatistical problems defined in the framework:
 
 ```julia
 EstimationProblem
 SimulationProblem
 LearningProblem
 ```
-
-Any `EstimationSolver` in the framework returns an `EstimationSolution`, which
-consists of the domain of the `EstimationProblem` plus two dictionaries: `mdict`
-mapping the variable names (a `Symbol`) of the problem to mean values, and `vdict`
-mapping the same variable names to variance values:
-
-```julia
-EstimationSolution(domain, mdict, vdict)
-```
-
-Any `SimulationSolver` in the framework returns a `SimulationSolution`, which
-consists of the domain of the `SimulationProblem` plus a dictionary `rdict`
-mapping the variable names (a `Symbol`) of the problem to a vector of (flattened)
-realizations:
-
-```julia
-SimulationSolution(domain, rdict)
-```
-
-Any `LearningSolver` in the framework returns spatial data with variables
-learned for the specified learning task.
 
 The task of writing a solver for a geostatistical problem consists of writing
 a simple function in Julia that takes the problem as input and returns the
@@ -118,15 +97,13 @@ solution:
 function solve(problem::EstimationProblem, solver::MyCoolSolver)
   pdomain = domain(problem)
 
-  mean = Dict{Symbol,Vector}()
-  variance = Dict{Symbol,Vector}()
-
-  for (var,V) in variables(problem)
-    push!(mean, var => rand(nelms(pdomain)))
-    push!(variance, var => rand(nelms(pdomain)))
+  μs = []; σs = []
+  for var in name.(variables(problem))
+    push!(μs, var => rand(nelms(pdomain)))
+    push!(σs, Symbol(var,:Var) => rand(nelms(pdomain)))
   end
 
-  EstimationSolution(pdomain, mean, variance)
+  georef((; μs..., σs...), pdomain)
 end
 ```
 
@@ -219,6 +196,9 @@ end
 function solve(problem::EstimationProblem, solver::NormSolver)
   pdomain = domain(problem)
 
+  # dictionary mapping variable names to types
+  mactypeof = Dict(name(v) => mactype(v) for v in variables(problem))
+
   # results for each variable
   μs = []; σs = []
 
@@ -228,7 +208,7 @@ function solve(problem::EstimationProblem, solver::NormSolver)
       varparams = covars.params[(var,)]
 
       # get variable type
-      V = variables(problem)[var]
+      V = mactypeof[var]
 
       # allocate memory for result
       varμ = Vector{V}(undef, nelms(pdomain))
@@ -242,11 +222,11 @@ function solve(problem::EstimationProblem, solver::NormSolver)
       end
 
       push!(μs, var => varμ)
-      push!(σs, var => varσ)
+      push!(σs, Symbol(var,:Var) => varσ)
     end
   end
 
-  EstimationSolution(pdomain, Dict(μs), Dict(σs))
+  georef((; μs..., σs...), pdomain)
 end;
 ```
 

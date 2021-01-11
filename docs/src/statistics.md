@@ -30,7 +30,7 @@ distribution. It is often useful to compute summary statistics with this set
 or ensemble:
 
 ```@docs
-mean(::SimulationSolution)
-var(::SimulationSolution)
-quantile(::SimulationSolution, ::Number)
+mean(::Ensemble)
+var(::Ensemble)
+quantile(::Ensemble, ::Number)
 ```
