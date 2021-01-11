@@ -2,7 +2,12 @@
 
 First off, thank you for considering contributing to GeoStats.jl.
 It’s people like you that make this project so much fun.
-Below are a few suggestions to speed up the collaboration process.
+Below are a few suggestions to speed up the collaboration process:
+
+- Please be polite, we are here to help and learn from each other.
+- Try to explain your contribution with simple language.
+- References to textbooks and papers are always welcome.
+- Follow the coding standards in the source.
 
 ## Reporting issues
 
@@ -13,7 +18,7 @@ These can be found with two commands:
 
 ```julia
 julia> versioninfo()
-pkg> status
+julia> using Pkg; Pkg.status()
 ```
 
 ## Feature requests
