@@ -144,6 +144,7 @@ If you find GeoStats.jl useful in your work, please consider citing it:
   <img src="docs/src/images/Petrobras.gif" height="150" hspace="20">
   <img src="docs/src/images/Deltares.png" height="150" hspace="20">
   <img src="docs/src/images/Nexa.jpg" height="150" hspace="20">
+  <img src="docs/src/images/Gazprom.png" height="150" hspace="20">
 </p>
 
 [docs-stable-img]: https://img.shields.io/badge/docs-stable-blue?style=flat-square
