@@ -1,4 +1,4 @@
 *.jl.mem
-*Manifest.toml
+Manifest.toml
 docs/build/
 docs/src/assets/themes/

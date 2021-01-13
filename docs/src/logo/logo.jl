@@ -12,8 +12,8 @@ function geostats(s)
   img = imresize(i, ratio=1.75)
   H, W = size(img)
   imgg = imfilter(img, Kernel.gaussian(15))
-  x = -W/2.0:W/2.0  # W elements
-  y = -H/2.0:H/2.0  # H elements
+  x = -W/2.0:W/2.0 - 1  # W elements
+  y = -H/2.0:H/2.0 - 1  # H elements
   z = Float64.(Gray.(imgg))
   # just two contours required
   clevels = Contour.contourlevels(z, 2)
