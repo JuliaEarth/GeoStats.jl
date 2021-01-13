@@ -67,16 +67,17 @@ function logotext(w, h, fname)
   origin()
   table = Table([h], [h, w - h])
   @layer begin
-    translate(table[1])
-    geostats(h)
-  end
-  @layer begin
     translate(table[2])
+    background("white") # comment for transparent background
     sethue("black")
     # find all fonts available on Linux with `fc-list | -f 2 -d ":"`
     fontface("Julius Sans One")
     fontsize(h/2.5)
     text("GeoStats.jl", halign=:center, valign=:middle)
+  end
+  @layer begin
+    translate(table[1])
+    geostats(h)
   end
   finish()
   preview()
