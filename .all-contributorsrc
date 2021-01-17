@@ -221,6 +221,15 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "mauro3",
+      "name": "Mauro",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/4098145?v=4",
+      "profile": "http://maurow.bitbucket.io/",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
