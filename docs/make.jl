@@ -72,7 +72,8 @@ makedocs(
     ],
     "Resources" => [
       "resources/education.md",
-      "resources/fileformats.md"
+      "resources/publications.md",
+      "resources/ecosystem.md"
     ],
     "About" => [
       "Community" => "about/community.md",
