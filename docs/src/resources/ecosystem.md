@@ -1,4 +1,4 @@
-# File formats
+# Ecosystem
 
 The Julia ecosystem provides various packages for reading/writing spatial data:
 
@@ -11,4 +11,3 @@ The Julia ecosystem provides various packages for reading/writing spatial data:
 | Shapefile   | [Shapefile.jl](https://github.com/JuliaGeo/Shapefile.jl) |
 | GeoPackage  | [ArchGDAL.jl](https://github.com/yeesian/ArchGDAL.jl) |
 | GeoJSON     | [GeoJSON.jl](https://github.com/JuliaGeo/GeoJSON.jl) |
-

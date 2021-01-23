@@ -3,10 +3,32 @@
 Geostatistics is often misunderstood as "classical statistics applied to
 spatial data". To correct this unfortunate misunderstanding, the best we
 can do as a community is to list additional learning resources for newcomers.
-Below is one such a list including related projects with clarifying comments,
-links to papers, books and video lectures.
 
-## Related projects
+## Learning resources
+
+### Books
+
+- *Isaaks, E. and Srivastava, R. 1990.* [An Introduction to Applied Geostatistics]
+  (https://www.amazon.com.br/Introduction-Applied-Geostatistics-Edward-Isaaks/dp/0195050134) -
+  An introductory book on geostatistics that covers important concepts with very
+  simple language.
+
+- *Chilès, JP and Delfiner, P. 2012.* [Geostatistics: Modeling Spatial Uncertainty]
+  (https://onlinelibrary.wiley.com/doi/book/10.1002/9781118136188) - An incredible
+  book for those with good mathematical background.
+
+### Lectures
+
+- [Júlio Hoffimann](https://www.youtube.com/playlist?list=PLsH4hc788Z1f1e61DN3EV9AhDlpbhhanw) -
+  Tutorials on geostatistics with the GeoStats.jl project.
+
+- [Edward Isaaks](https://www.youtube.com/user/sadeddy/videos) -
+  Video lectures on variography, Kriging and related concepts.
+
+- [Jef Caers](https://www.youtube.com/playlist?list=PLh35GyCXlQaQ1LNGWr4vCD9AGOGni8yxq) -
+  Video lectures on two-point and multiple-point methods.
+
+## Related efforts
 
 ### GaussianProcesses.jl
 
@@ -56,43 +78,3 @@ Statistical learning theory relies on a set of assumptions that do
 stationarity, to name a few). Geostatistical learning theory generalizes
 traditional machine learning for applications where statistical models
 need to be learned from spatial data.
-
-## Learning resources
-
-### Books
-
-- *Isaaks, E. and Srivastava, R. 1990.* [An Introduction to Applied Geostatistics]
-  (https://www.amazon.com.br/Introduction-Applied-Geostatistics-Edward-Isaaks/dp/0195050134) -
-  An introductory book on geostatistics that covers important concepts with very
-  simple language.
-
-- *Chilès, JP and Delfiner, P. 2012.* [Geostatistics: Modeling Spatial Uncertainty]
-  (https://onlinelibrary.wiley.com/doi/book/10.1002/9781118136188) - An incredible
-  book for those with good mathematical background.
-
-### Lectures
-
-- [Júlio Hoffimann](https://www.youtube.com/playlist?list=PLsH4hc788Z1f1e61DN3EV9AhDlpbhhanw) -
-  Tutorials on geostatistics with the GeoStats.jl project.
-
-- [Edward Isaaks](https://www.youtube.com/user/sadeddy/videos) -
-  Video lectures on variography, Kriging and related concepts.
-
-- [Jef Caers](https://www.youtube.com/playlist?list=PLh35GyCXlQaQ1LNGWr4vCD9AGOGni8yxq) -
-  Video lectures on two-point and multiple-point methods.
-
-## Related publications
-
-Below is a list of publications made possible with this project:
-
-- *Hoffimann, J. & Zadrozny, B. 2019.* [Efficient Variography with Partition Variograms]
-  (https://www.sciencedirect.com/science/article/pii/S0098300419302936)
-
-- *Hoffimann et al. 2019.* [Morphodynamic Analysis and Statistical Synthesis of Geomorphic Data:
-  Application to a Flume Experiment](https://agupubs.onlinelibrary.wiley.com/doi/abs/10.1029/2019JF005245)
-
-- *Barfod et al. 2017.* [Hydrostratigraphic Modeling using Multiple-point Statistics and Airbone Transient
-  Electromagnetic Methods](https://hess.copernicus.org/articles/22/3351/2018)
-
-- *Hoffimann et al. 2017.* [Stochastic Simulation by Image Quilting of Process-based Geological Models]
-  (https://www.sciencedirect.com/science/article/pii/S0098300417301139)
