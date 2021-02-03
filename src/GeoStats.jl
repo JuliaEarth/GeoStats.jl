@@ -12,6 +12,6 @@ using Reexport
 @reexport using KrigingEstimators
 @reexport using PointPatterns
 @reexport using GeoEstimation
-@reexport using GaussianSimulation
+@reexport using GeoSimulation
 
 end

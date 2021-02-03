@@ -4,8 +4,8 @@ author = "Júlio Hoffimann <julio.hoffimann@gmail.com>"
 version = "0.21.0"
 
 [deps]
-GaussianSimulation = "e40f437e-72ad-4a71-a29e-78c1c8d897bb"
 GeoEstimation = "a4aa24f8-9f24-4d1a-b848-66d123bfa54d"
+GeoSimulation = "220efe8a-9139-4e14-a4fa-f683d572f4c5"
 GeoStatsBase = "323cb8eb-fbf6-51c0-afd0-f8fba70507b2"
 KrigingEstimators = "d293930c-a38c-56c5-8ebb-12008647b47a"
 PointPatterns = "e61b41b6-3414-4803-863f-2b69057479eb"
@@ -13,8 +13,8 @@ Reexport = "189a3867-3050-52da-a836-e630ba90ab69"
 Variography = "04a0146e-e6df-5636-8d7f-62fa9eb0b20c"
 
 [compat]
-GaussianSimulation = "0.4"
 GeoEstimation = "0.4"
+GeoSimulation = "0.1"
 GeoStatsBase = "0.17"
 KrigingEstimators = "0.5"
 PointPatterns = "0.2"

@@ -20,9 +20,9 @@ All simulation solvers can generate realizations in parallel unless otherwise no
 
 | Solver | Coverage | Description | References |
 |:------:|:--------:|:------------|:-----------|
-| [LUGS](https://github.com/JuliaEarth/GaussianSimulation.jl) | [![](https://img.shields.io/codecov/c/github/JuliaEarth/GaussianSimulation.jl?style=flat-square)](https://codecov.io/gh/JuliaEarth/GaussianSimulation.jl) | LU Gaussian simulation | [Alabert 1987](https://link.springer.com/article/10.1007/BF00897191) |
-| [SGS](https://github.com/JuliaEarth/GaussianSimulation.jl) | [![](https://img.shields.io/codecov/c/github/JuliaEarth/GaussianSimulation.jl?style=flat-square)](https://codecov.io/gh/JuliaEarth/GaussianSimulation.jl) | Sequential Gaussian simulation | [Gómez-Hernández 1993](https://link.springer.com/chapter/10.1007/978-94-011-1739-5_8) |
-| [FFTGS](https://github.com/JuliaEarth/GaussianSimulation.jl) | [![](https://img.shields.io/codecov/c/github/JuliaEarth/GaussianSimulation.jl?style=flat-square)](https://codecov.io/gh/JuliaEarth/GaussianSimulation.jl) | FFT Gaussian simulation | [Gutjahr 1997](https://link.springer.com/article/10.1007/BF02769641) |
+| [LUGS](https://github.com/JuliaEarth/GeoSimulation.jl) | [![](https://img.shields.io/codecov/c/github/JuliaEarth/GeoSimulation.jl?style=flat-square)](https://codecov.io/gh/JuliaEarth/GeoSimulation.jl) | LU Gaussian simulation | [Alabert 1987](https://link.springer.com/article/10.1007/BF00897191) |
+| [SGS](https://github.com/JuliaEarth/GeoSimulation.jl) | [![](https://img.shields.io/codecov/c/github/JuliaEarth/GeoSimulation.jl?style=flat-square)](https://codecov.io/gh/JuliaEarth/GeoSimulation.jl) | Sequential Gaussian simulation | [Gómez-Hernández 1993](https://link.springer.com/chapter/10.1007/978-94-011-1739-5_8) |
+| [FFTGS](https://github.com/JuliaEarth/GeoSimulation.jl) | [![](https://img.shields.io/codecov/c/github/JuliaEarth/GeoSimulation.jl?style=flat-square)](https://codecov.io/gh/JuliaEarth/GeoSimulation.jl) | FFT Gaussian simulation | [Gutjahr 1997](https://link.springer.com/article/10.1007/BF02769641) |
 
 ### Multiple-point
 
