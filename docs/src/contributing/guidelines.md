@@ -47,7 +47,7 @@ play with the project components without compromising your normal
 user environment.
 
 ```julia
-] dev GeoStatsBase Variography KrigingEstimators GeoEstimation GaussianSimulation PointPatterns GeoStats
+] dev GeoStatsBase Variography KrigingEstimators GeoEstimation GeoSimulation PointPatterns GeoStats
 ```
 
 This will clone all the project components in your `~/.julia` folder so
