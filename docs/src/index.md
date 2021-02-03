@@ -120,8 +120,8 @@ The project is split into various packages:
 | [GeoStats.jl](https://github.com/JuliaEarth/GeoStats.jl) | Main package reexporting full stack of packages for geostatistics. |
 | [Variography.jl](https://github.com/JuliaEarth/Variography.jl) | Variogram estimation and modeling, and related tools. |
 | [KrigingEstimators.jl](https://github.com/JuliaEarth/KrigingEstimators.jl) | High-performance implementations of Kriging estimators. |
-| [GeoEstimation.jl](https://github.com/JuliaEarth/GeoEstimation.jl) | Efficient solvers for geospatial estimation. |
-| [GeoSimulation.jl](https://github.com/JuliaEarth/GeoSimulation.jl) | Efficient solvers for geospatial simulation. |
+| [GeoEstimation.jl](https://github.com/JuliaEarth/GeoEstimation.jl) | Built-in solvers for geospatial estimation. |
+| [GeoSimulation.jl](https://github.com/JuliaEarth/GeoSimulation.jl) | Built-in solvers for geospatial simulation. |
 | [PointPatterns.jl](https://github.com/JuliaEarth/PointPatterns.jl) | Spatial point pattern analysis and synthesis. |
 | [GeoStatsImages.jl](https://github.com/JuliaEarth/GeoStatsImages.jl) | Training images for multiple-point simulation. |
 | [GslibIO.jl](https://github.com/JuliaEarth/GslibIO.jl) | Utilities to read/write *extended* GSLIB files. |
