@@ -1,7 +1,7 @@
 name = "GeoStats"
 uuid = "dcc97b0b-8ce5-5539-9008-bb190f959ef6"
 author = "Júlio Hoffimann <julio.hoffimann@gmail.com>"
-version = "0.21.0"
+version = "0.21.1"
 
 [deps]
 GeoEstimation = "a4aa24f8-9f24-4d1a-b848-66d123bfa54d"
