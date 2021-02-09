@@ -21,11 +21,3 @@ PointPatterns = "0.2"
 Reexport = "0.2, 1.0"
 Variography = "0.10"
 julia = "1.4"
-
-[extras]
-Pkg = "44cfe95a-1eb2-52ea-b672-e2afdf69b78f"
-Random = "9a3f8284-a2c9-5f02-9a11-845980a1fd5c"
-Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
-
-[targets]
-test = ["Pkg", "Random", "Test"]
