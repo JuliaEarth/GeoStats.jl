@@ -2,6 +2,9 @@
 
 Below is a list of publications made possible with this project:
 
+- *Asner, G. P. et al. 2021.* [Abiotic and Human Drivers of Reef Habitat Complexity
+  Throughout the Main Hawaiian Islands](https://www.frontiersin.org/articles/10.3389/fmars.2021.631842/full)
+
 - *Asner, G. P. et al. 2020.* [Large-scale mapping of live corals to guide reef conservation]
   (https://www.pnas.org/content/117/52/33711)
 
