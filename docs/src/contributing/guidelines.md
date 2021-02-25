@@ -65,4 +65,6 @@ technical barriers that come associated with it:
 
 https://invenia.github.io/blog/2021/01/29/contribute-open-source
 
-The article will also take you through the steps required to make your first contribution in detail.
+The article will also take you through the steps required to make your first contribution in detail:
+
+https://github.com/firstcontributions/first-contributions
