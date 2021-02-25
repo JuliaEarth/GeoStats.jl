@@ -55,3 +55,11 @@ that you can modify it and submit a pull request on GitHub later. Don't
 hesitate to ask questions in our [gitter channel](https://gitter.im/JuliaEarth/GeoStats.jl)
 if you are not familiar with the Git workflow. We are looking forward
 to your contributions.
+
+## I'm new to open-source. How do I start contributing?
+
+Contributing to an open-source project for the very first time can be a very daunting task. Don't worry, we were all there at some point as well! To make the process easier and more github-beginner-friendly, our friends over at Invenia have written an article about how to start contributing to open-source and overcome the Mental and Technical barriers that come associated with it : https://invenia.github.io/blog/2021/01/29/contribute-open-source
+
+The article will also take you through the steps required to make your first contribution in detail.
+
+
