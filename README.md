@@ -203,6 +203,7 @@ This project would not be possible without the contributions of:
     <td align="center"><a href="https://cormullion.github.io"><img src="https://avatars1.githubusercontent.com/u/52289?v=4?s=100" width="100px;" alt=""/><br /><sub><b>cormullion</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=cormullion" title="Documentation">📖</a></td>
     <td align="center"><a href="http://maurow.bitbucket.io/"><img src="https://avatars1.githubusercontent.com/u/4098145?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Mauro</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=mauro3" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/cyborg1995"><img src="https://avatars.githubusercontent.com/u/55525317?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Gaurav Wasnik</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=cyborg1995" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/atreyamaj"><img src="https://avatars.githubusercontent.com/u/14348863?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Atreya Majumdar</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=atreyamaj" title="Documentation">📖</a></td>
   </tr>
 </table>
 
