@@ -61,7 +61,7 @@ to your contributions.
 Contributing to an open-source project for the very first time can be a very daunting task.
 To make the process easier and more GitHub-beginner-friendly, the community has written
 an article about how to start contributing to open-source and overcome the mental and
-technical barriers that come associated with it : 
+technical barriers that come associated with it: 
 
 https://invenia.github.io/blog/2021/01/29/contribute-open-source
 
