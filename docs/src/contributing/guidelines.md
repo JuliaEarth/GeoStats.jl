@@ -59,11 +59,10 @@ to your contributions.
 ## I'm new to open-source. How do I start contributing?
 
 Contributing to an open-source project for the very first time can be a very daunting task.
-To make the process easier and more github-beginner-friendly, the community has written
+To make the process easier and more GitHub-beginner-friendly, the community has written
 an article about how to start contributing to open-source and overcome the mental and
 technical barriers that come associated with it : 
 
 https://invenia.github.io/blog/2021/01/29/contribute-open-source
 
 The article will also take you through the steps required to make your first contribution in detail.
-
