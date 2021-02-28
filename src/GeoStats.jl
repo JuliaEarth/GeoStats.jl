@@ -7,6 +7,7 @@ module GeoStats
 using Reexport
 
 # reexport project modules
+@reexport using Meshes
 @reexport using GeoStatsBase
 @reexport using Variography
 @reexport using KrigingEstimators
