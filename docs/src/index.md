@@ -91,7 +91,7 @@ coord = [(25.,25.), (50.,75.), (75.,50.)]
 𝒟 = georef(props, coord)
 
 # estimation domain
-𝒢 = RegularGrid(100, 100)
+𝒢 = CartesianGrid(100, 100)
 
 # estimation problem
 problem = EstimationProblem(𝒟, 𝒢, :Z)
@@ -124,7 +124,6 @@ The project is split into various packages:
 | [GeoSimulation.jl](https://github.com/JuliaEarth/GeoSimulation.jl) | Built-in solvers for geospatial simulation. |
 | [PointPatterns.jl](https://github.com/JuliaEarth/PointPatterns.jl) | Spatial point pattern analysis and synthesis. |
 | [GeoStatsImages.jl](https://github.com/JuliaEarth/GeoStatsImages.jl) | Training images for multiple-point simulation. |
-| [GslibIO.jl](https://github.com/JuliaEarth/GslibIO.jl) | Utilities to read/write *extended* GSLIB files. |
 | [GeoStatsBase.jl](https://github.com/JuliaEarth/GeoStatsBase.jl) | Base package containing core functionality. |
 
 The main [GeoStats.jl](https://github.com/JuliaEarth/GeoStats.jl) package reexports

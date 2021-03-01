@@ -47,19 +47,20 @@ so that your solver can be used, and improved by private corporations.
 #### Import GeoStatsBase
 
 After the package is created, open the main source file `MySolver.jl` and add the
-following line:
+following lines:
 
 ```julia
+using Meshes
 using GeoStatsBase
 import GeoStatsBase: solve
 ```
 
-These lines bring all the symbols defined in `GeoStatsBase` into scope, and tell
-Julia that the method `solve` will be specialized for the new solver. Next, give
-your solver a name:
+These lines bring all the symbols defined in `Meshes` and `GeoStatsBase` into scope,
+and tell Julia that the method `solve` will be specialized for the new solver. Next,
+give your solver a name:
 
 ```julia
-struct MyCoolSolver <: AbstractEstimationSolver
+struct MyCoolSolver <: EstimationSolver
   # optional parameters go here
 end
 ```
@@ -75,12 +76,13 @@ At this point, the `MySolver.jl` file should have the following content:
 ```julia
 module MySolver
 
+using Meshes
 using GeoStatsBase
 import GeoStatsBase: solve
 
 export MyCoolSolver
 
-struct MyCoolSolver <: AbstractEstimationSolver
+struct MyCoolSolver <: EstimationSolver
   # optional parameters go here
 end
 
@@ -99,8 +101,8 @@ function solve(problem::EstimationProblem, solver::MyCoolSolver)
 
   μs = []; σs = []
   for var in name.(variables(problem))
-    push!(μs, var => rand(nelms(pdomain)))
-    push!(σs, Symbol(var,:Var) => rand(nelms(pdomain)))
+    push!(μs, var => rand(nelements(pdomain)))
+    push!(σs, Symbol(var,"-variance") => rand(nelements(pdomain)))
   end
 
   georef((; μs..., σs...), pdomain)
@@ -118,7 +120,7 @@ using GeoStats
 using MySolver
 
 sdata    = readgeotable("samples.csv", coordnames=(:x,:y))
-sdomain  = RegularGrid(100, 100)
+sdomain  = CartesianGrid(100, 100)
 problem  = EstimationProblem(sdata, sdomain, :value)
 
 solution = solve(problem, MyCoolSolver())
@@ -143,7 +145,7 @@ function solvesingle(problem::SimulationProblem, covars::NamedTuple,
 
   real4var = map(covars.names) do var
     # output is a single realization for each covariable
-    real = Vector{Float64}(undef, nelms(pdomain))
+    real = Vector{Float64}(undef, nelements(pdomain))
 
     # algorithm goes here
     # ...
@@ -182,6 +184,7 @@ An estimation solver that, for each location of the domain, assigns the
 2-norm of the coordinates as the mean and the ∞-norm as the variance.
 
 ```@example normsolver
+using Meshes
 using GeoStatsBase
 using LinearAlgebra: norm
 
@@ -211,8 +214,8 @@ function solve(problem::EstimationProblem, solver::NormSolver)
       V = mactypeof[var]
 
       # allocate memory for result
-      varμ = Vector{V}(undef, nelms(pdomain))
-      varσ = Vector{V}(undef, nelms(pdomain))
+      varμ = Vector{V}(undef, nelements(pdomain))
+      varσ = Vector{V}(undef, nelements(pdomain))
 
       for location in traverse(pdomain, LinearPath())
         x = coordinates(pdomain, location)
@@ -222,7 +225,7 @@ function solve(problem::EstimationProblem, solver::NormSolver)
       end
 
       push!(μs, var => varμ)
-      push!(σs, Symbol(var,:Var) => varσ)
+      push!(σs, Symbol(var,"-variance") => varσ)
     end
   end
 
@@ -241,7 +244,7 @@ gr(size=(900,400)) # hide
 sdata   = georef((z=[NaN],), reshape([0.,0.], 2, 1))
 
 # estimate on a regular grid
-sdomain = RegularGrid(100, 100)
+sdomain = CartesianGrid(100, 100)
 
 # the problem to be solved
 problem = EstimationProblem(sdata, sdomain, :z)
@@ -270,6 +273,7 @@ A simulation solver that, for each location of the domain, assigns a random
 sample from a Gaussian distribution.
 
 ```@example randsolver
+using Meshes
 using GeoStatsBase
 
 # implement method for new solver
@@ -290,7 +294,7 @@ function solvesingle(problem::SimulationProblem, covars::NamedTuple,
     μ, σ² = varparams.mean, varparams.var
 
     # i.i.d. samples ~ Normal(0,1)
-    z = rand(nelms(pdomain))
+    z = rand(nelements(pdomain))
 
     # rescale and return
     var => μ .+ sqrt(σ²) .* z
@@ -308,7 +312,7 @@ using Plots
 gr(size=(900,300)) # hide
 
 # simulate on a regular grid
-sdomain = RegularGrid(100, 100)
+sdomain = CartesianGrid(100, 100)
 
 # the problem to be solved
 problem = SimulationProblem(sdomain, :z => Float64, 3)
@@ -365,7 +369,7 @@ function solvesingle(problem::SimulationProblem, covars::NamedTuple,
     μ, σ² = preproc[var]
 
     # i.i.d. samples ~ Normal(0,1)
-    z = rand(nelms(pdomain))
+    z = rand(nelements(pdomain))
 
     # rescale and return
     var => μ .+ sqrt(σ²) .* z
@@ -380,12 +384,13 @@ end;
 A learning solver that clusters data into super pixels:
 
 ```@example slicsolver
+using Meshes
 using GeoStatsBase
 
 # implement method for new solver
 import GeoStatsBase: solvesingle
 
-struct SLICSolver <: AbstractLearningSolver
+struct SLICSolver <: LearningSolver
   k::Int # approximate number of super pixels
   m::Float64 # SLIC tradeoff parameter
 end
@@ -400,11 +405,11 @@ function solve(problem::LearningProblem, solver::SLICSolver)
   output = outputvars(ptask)[1]
 
   # find super pixels
-  slic = SLICPartition(solver.k, solver.m, vars=feats)
+  slic = SLIC(solver.k, solver.m, vars=feats)
   part = partition(tdata, slic)
 
   # label for each point in target data
-  labels = Vector{Int}(undef, nelms(tdata))
+  labels = Vector{Int}(undef, nelements(tdata))
   for (i, inds) in enumerate(subsets(part))
     labels[inds] .= i
   end

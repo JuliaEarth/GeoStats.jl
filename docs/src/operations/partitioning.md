@@ -2,10 +2,10 @@
 
 ## Overview
 
-A spatial object can be partitioned into various sub-objects:
+A spatial object can be partitioned into various subsets:
 
-```@docs
-GeoStatsBase.partition
+```
+Meshes.partition
 ```
 
 ## Example
@@ -26,18 +26,17 @@ plot(plot(Ω), plot(Π))
 ## Methods
 
 ```@docs
+SLIC
 RandomPartition
 FractionPartition
-SLICPartition
 BlockPartition
 BisectPointPartition
 BisectFractionPartition
 BallPartition
 PlanePartition
 DirectionPartition
-VariablePartition
 PredicatePartition
-SPredicatePartition
+SpatialPredicatePartition
 ProductPartition
 HierarchicalPartition
 ```

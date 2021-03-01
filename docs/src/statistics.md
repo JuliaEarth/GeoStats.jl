@@ -11,9 +11,9 @@ and as such, approximate better spatial variables when compared to their non-spa
 counterparts:
 
 ```@docs
-mean(::AbstractData)
-var(::AbstractData)
-quantile(::AbstractData, ::Any)
+mean(::Data)
+var(::Data)
+quantile(::Data, ::Any)
 ```
 
 A histogram with spatial semantics is also available where the heights of the bins

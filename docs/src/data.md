@@ -36,7 +36,7 @@ plot(𝒟)
 or alternatively, georeference it on a 5x5 regular grid (5x5 = 25 samples):
 
 ```@example georef
-𝒟 = georef(table, RegularGrid(5,5))
+𝒟 = georef(table, CartesianGrid(5,5))
 
 plot(𝒟)
 ```
@@ -96,18 +96,7 @@ plot(𝒟)
 
 ## Custom data
 
-GeoStats.jl introduces a set of traits that developers can implement to integrate
-their own spatial data and domain types into the framework. These "geotraits" as
-we call them live in GeoStatsBase.jl.
-
-To implement a spatial data type compatible with the project, the developer can
-inherit basic behavior from `GeoStatsBase.AbstractData`, and implement two functions:
-
-```@docs
-GeoStatsBase.domain
-GeoStatsBase.values
-```
-
-The [`domain`](@ref) function should return the underlying spatial domain of the data.
-This spatial domain should implement a set of traits for a general finite element mesh.
-The [`values`](@ref) function should return a table according to the Tables.jl interface.
+GeoStats.jl is integrated with the [Meshes.jl](https://github.com/JuliaGeometry/Meshes.jl)
+project. This means that one can use any `Meshes.Data` in geostatistical workflows.
+Please read their documentation to find out how geospatial data can be made compatible
+with the framework.
