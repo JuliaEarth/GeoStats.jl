@@ -4,9 +4,7 @@ Below is a list of additional geospatial operations.
 
 ## Geometric
 
-```@docs
-GeoStatsBase.split(::Union{AbstractData,AbstractDomain}, ::Real)
-```
+### Split
 
 ```@example
 using GeoStats # hide
@@ -22,9 +20,7 @@ S = split(𝒟, 0.5, (1.,1.))
 plot(plot(S[1],ms=0.2), plot(S[2],ms=0.2))
 ```
 
-```@docs
-GeoStatsBase.slice
-```
+### Slice
 
 ```@example
 using GeoStats # hide
@@ -47,9 +43,7 @@ p2 = plot(plot(P), plot(S), link=:both, ms=3)
 plot(p1, p2, layout=(2,1))
 ```
 
-```@docs
-uniquecoords
-```
+### Unique
 
 ```@example
 using GeoStats # hide
@@ -58,19 +52,7 @@ using GeoStats # hide
 
 Γ = uniquecoords(Ω)
 
-coordinates(Γ)
-```
-
-```@docs
-boundbox
-```
-
-```@example
-using GeoStats # hide
-
-R = boundbox(RegularGrid(50, 80))
-
-extrema(R)
+coordinates(Γ, 1:nelements(Γ))
 ```
 
 ## Tabular
@@ -95,7 +77,7 @@ plot(plot(𝒟), plot(ℳ))
 ```
 
 ```@docs
-GeoStatsBase.groupby(::AbstractData, ::Symbol)
+groupby(::Data, ::Symbol)
 ```
 
 ```@example
@@ -109,30 +91,4 @@ gr(format=:png) # hide
 ℱ = groupby(𝒟, :facies)
 
 plot(plot(ℱ[1],ms=0.2), plot(ℱ[2],ms=0.2))
-```
-
-```@docs
-GeoStatsBase.hcat(::AbstractData, ::AbstractData)
-```
-
-```@example
-using GeoStats # hide
-
-𝒟 = georef((z=rand(100,100),))
-
-hcat(𝒟, 𝒟)
-```
-
-```@docs
-GeoStatsBase.vcat(::AbstractDomain, ::AbstractDomain)
-GeoStatsBase.vcat(::AbstractData, ::AbstractData)
-```
-
-```@example
-using GeoStats # hide
-
-𝒟1 = georef((z=rand(100,100),))
-𝒟2 = georef((w=rand(10,10),))
-
-vcat(𝒟1, 𝒟2)
 ```

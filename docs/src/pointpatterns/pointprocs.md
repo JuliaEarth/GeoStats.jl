@@ -4,7 +4,7 @@ Point processes can be simulated with the function `rand` on
 different geometries:
 
 ```@docs
-rand(::PointProcess, ::AbstractGeometry, ::Int)
+rand(::PointProcess, ::Geometry, ::Int)
 ```
 
 For example, a Poisson process with given intensity in a rectangular region:
@@ -15,9 +15,9 @@ using Plots # hide
 gr(format=:svg) # hide
 
 p = PoissonProcess(0.1)
-r = Rectangle((0.,0.), (100.,100.))
+b = Box((0.,0.), (100.,100.))
 
-s = rand(p, r, 2)
+s = rand(p, b, 2)
 
 plot(plot(s[1]), plot(s[2]))
 ```
@@ -29,7 +29,7 @@ p₁ = BinomialProcess(50)
 p₂ = BinomialProcess(50)
 p  = p₁ ∪ p₂ # 100 points
 
-s = rand(p, r, 2)
+s = rand(p, b, 2)
 
 plot(plot(s[1]), plot(s[2]))
 ```

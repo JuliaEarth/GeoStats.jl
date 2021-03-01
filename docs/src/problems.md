@@ -24,7 +24,7 @@ coord = [(25.,25.), (50.,75.), (75.,50.)]
 
 # estimation problem
 𝒟 = georef(props, coord)
-𝒢 = RegularGrid(100, 100)
+𝒢 = CartesianGrid(100, 100)
 𝒫 = EstimationProblem(𝒟, 𝒢, :Z)
 ```
 
@@ -67,7 +67,7 @@ using Plots # hide
 gr(size=(900,300)) # hide
 
 # unconditional simulation problem
-𝒢 = RegularGrid(100, 100)
+𝒢 = CartesianGrid(100, 100)
 𝒫 = SimulationProblem(𝒢, :Z => Float64, 3)
 ```
 

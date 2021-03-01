@@ -60,23 +60,29 @@ coordinates(Ω, 1:3)
 
 In-place versions exist to avoid unnecessary memory allocations.
 
-All coordinates are retrieved as a matrix when we do not specify the spatial indices:
-
-```@example workflow
-coordinates(Ω)
-```
-
 ### Tabular access
 
 Spatial data types implement the [Tables.jl](https://github.com/JuliaData/Tables.jl)
 interface, which means that they can be accessed as if they were tables with samples
 in the rows and variables in the columns. This interface is convenient to pass spatial
-data to non-spatial workflows directly.
+data to non-spatial workflows directly:
+
+```@example workflow
+using Tables
+
+first(Tables.rows(Ω), 3)
+```
 
 Additionaly, we can access the values of a variable as a vector using the variable name:
 
 ```@example workflow
 Ω[:Z]
+```
+
+or as an array with the correct shape using the `asarray` function:
+
+```@example workflow
+asarray(Ω, :Z)
 ```
 
 ### Spatial views
@@ -97,7 +103,7 @@ We plot a random view of the grid to emphasize that views do not preserve
 spatial regularity:
 
 ```@example workflow
-inds = rand(1:nelms(Ω), 100)
+inds = rand(1:nelements(Ω), 100)
 plot(view(Ω, inds))
 ```
 
@@ -176,7 +182,7 @@ We can now georeference the table and plot some of the spatial variables:
 Ω = georef(df, (:x,:y))
 
 gr(format=:png) # hide
-plot(Ω, (:band4,:crop), ms=0.2, mc=:viridis)
+#plot(Ω, (:band4,:crop), ms=0.2, mc=:viridis)
 ```
 
 Similar to a generic statistical learning workflow, we split the data into "train"
@@ -218,7 +224,7 @@ using MLJ
 
 ℳ = @load DecisionTreeClassifier
 
-ℒ = PointwiseLearn(ℳ)
+ℒ = PointwiseLearn(ℳ())
 ```
 
 In this example, we selected a `PointwiseLearn` strategy to solve the geostatistical
@@ -237,10 +243,10 @@ This also means that we can plot the solution directly, side by side with the
 true label in this synthetic example:
 
 ```@example workflow
-p̂ = plot(Ω̂t, ms=0.2, mc=:viridis, title="crop (prediction)")
-p = plot(Ωt, (:crop,), ms=0.2, mc=:viridis)
+#p̂ = plot(Ω̂t, ms=0.2, mc=:viridis, title="crop (prediction)")
+#p = plot(Ωt, (:crop,), ms=0.2, mc=:viridis)
 
-plot(p̂, p)
+#plot(p̂, p)
 ```
 
 Visually, the learning model has succeeded predicting the crop. We can also

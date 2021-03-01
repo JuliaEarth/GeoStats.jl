@@ -42,7 +42,6 @@ makedocs(
         "operations/sampling.md",
         "operations/weighting.md",
         "operations/searching.md",
-        "operations/discretizing.md",
         "operations/miscellaneous.md"
       ],
       "Statistics" => "statistics.md",

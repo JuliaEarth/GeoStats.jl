@@ -75,8 +75,8 @@ using Plots
 # read spatial data (e.g. geotable)
 𝒯 = readgeotable("data.csv", coordnames=(:x,:y))
 
-# define spatial domain (e.g. regular grid)
-𝒟 = RegularGrid(100, 100)
+# define spatial domain (e.g. Cartesian grid)
+𝒟 = CartesianGrid(100, 100)
 
 # define estimation problem for precipitation
 𝒫 = EstimationProblem(𝒯, 𝒟, :precip)
