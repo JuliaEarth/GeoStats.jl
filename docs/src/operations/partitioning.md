@@ -4,7 +4,7 @@
 
 A spatial object can be partitioned into various subsets:
 
-```
+```@docs
 Meshes.partition
 ```
 
