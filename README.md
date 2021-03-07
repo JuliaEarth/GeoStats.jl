@@ -17,14 +17,19 @@
   </a>
 </p>
 <p align="center">
-  <a href="https://gitter.im/JuliaEarth/GeoStats.jl">
-    <img src="https://img.shields.io/badge/chat-on%20gitter-bc0067?style=flat-square">
-  </a>
   <a href="https://doi.org/10.21105/joss.00692">
     <img src="https://img.shields.io/badge/JOSS-10.21105%2Fjoss.00692-brightgreen?style=flat-square">
   </a>
   <a href="https://zenodo.org/badge/latestdoi/33827844">
     <img src="https://img.shields.io/badge/DOI-10.5281%2Fzenodo.3875233-blue?style=flat-square">
+  </a>
+</p>
+<p align="center">
+  <a href="https://gitter.im/JuliaEarth/GeoStats.jl">
+    <img src="https://img.shields.io/badge/chat-on%20gitter-bc0067?style=flat-square">
+  </a>
+  <a href="https://julialang.zulipchat.com/#narrow/stream/276201-geostats.2Ejl">
+    <img src="https://img.shields.io/badge/chat-on%20zulip-9cf?style=flat-square">
   </a>
 </p>
 
@@ -96,16 +101,17 @@ contourf(sol)
   <img src="docs/src/images/EstimationSolution.png">
 </p>
 
+If you have questions, don't hesitate to ask in our community channels:
+
+[![GITTER][gitter-img]][gitter-url]
+[![ZULIP][zulip-img]][zulip-url]
+
 ## Contributing and supporting
 
 Contributions are very welcome, as are feature requests and suggestions. Please
 [open an issue](https://github.com/JuliaEarth/GeoStats.jl/issues) if you encounter
 any problems. We have [written instructions](CONTRIBUTING.md) to help you with
 the process.
-
-If you have questions, don't hesitate to ask. Join our community in our
-[gitter channel](https://gitter.im/JuliaEarth/GeoStats.jl). We are always
-willing to help.
 
 GeoStats.jl was developed as part of academic research. It will always be open
 source and free of charge. If you would like to help support the project, please
@@ -158,6 +164,12 @@ If you find GeoStats.jl useful in your work, please consider citing it:
 
 [zenodo-img]: https://img.shields.io/badge/DOI-10.5281%2Fzenodo.3875233-blue?style=flat-square
 [zenodo-url]: https://zenodo.org/badge/latestdoi/33827844
+
+[gitter-img]: https://img.shields.io/badge/chat-on%20gitter-bc0067?style=flat-square
+[gitter-url]: https://gitter.im/JuliaEarth/GeoStats.jl
+
+[zulip-img]: https://img.shields.io/badge/chat-on%20zulip-9cf?style=flat-square
+[zulip-url]: https://julialang.zulipchat.com/#narrow/stream/276201-geostats.2Ejl
 
 [stars-img]: https://img.shields.io/github/stars/JuliaEarth/GeoStats.jl?style=social
 [stars-url]: https://github.com/JuliaEarth/GeoStats.jl
