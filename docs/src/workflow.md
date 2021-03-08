@@ -51,15 +51,6 @@ with the horizontal "x" axis, and the second index `j` of the array with the ver
 "y" axis. Second, we note that the image was stretched to reflect the real `100x200`
 size of the regular grid data.
 
-Each sample in the spatial data object has a coordinate, which is calculated on demand
-for a given list of locations (i.e. spatial indices):
-
-```@example workflow
-coordinates(Ω, 1:3)
-```
-
-In-place versions exist to avoid unnecessary memory allocations.
-
 ### Tabular access
 
 Spatial data types implement the [Tables.jl](https://github.com/JuliaData/Tables.jl)
@@ -222,7 +213,7 @@ learning model:
 ```@example workflow
 using MLJ
 
-ℳ = @load DecisionTreeClassifier
+ℳ = @load DecisionTreeClassifier pkg=DecisionTree
 
 ℒ = PointwiseLearn(ℳ())
 ```

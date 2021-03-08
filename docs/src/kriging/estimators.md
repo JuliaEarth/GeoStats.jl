@@ -36,20 +36,20 @@ Alternative constructors are provided for convenience that will immediately fit 
 parameters to the data. In this case, the data is passed as the first argument. For example:
 
 ```julia
-OrdinaryKriging(X, z, γ)
+OrdinaryKriging(data, var, γ)
 ```
 
-creates a `OrdinaryKriging(γ)` estimator and fits it to `(X,z)`.
+creates a `OrdinaryKriging(γ)` estimator and fits it to `(data, var)`.
 
 A typical use of the interface is as follows:
 
 ```julia
 # build and factorize the system
-sk = SimpleKriging(X, z, γ, mean(z))
+sk = OrdinaryKriging(data, var, γ)
 
-# estimate at various locations
-for xₒ in [x₁, x₂, x₃]
-  μ, σ² = predict(sk, xₒ)
+# estimate at various points
+for pₒ in [p₁, p₂, p₃]
+  μ, σ² = predict(sk, pₒ)
 end
 ```
 
@@ -59,14 +59,6 @@ the weights and a field `ν` for the Lagrange multipliers:
 
 ```@docs
 weights
-```
-
-For example with Ordinary Kriging:
-
-```julia
-ok = OrdinaryKriging(X, z, γ)
-w = weights(ok, xₒ)
-w.λ, w.ν
 ```
 
 ## Simple Kriging

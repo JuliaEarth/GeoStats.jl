@@ -8,7 +8,7 @@ developer guide for instructions on how to write your own solvers.
 
 | Solver | Coverage | Description | References |
 |:------:|:--------:|:------------|:-----------|
-| [Kriging](https://github.com/JuliaEarth/KrigingEstimators.jl) | [![](https://img.shields.io/codecov/c/github/JuliaEarth/KrigingEstimators.jl?style=flat-square)](https://codecov.io/gh/JuliaEarth/KrigingEstimators.jl) | Kriging (SK, OK, UK, EDK) | [Matheron 1971](https://books.google.com/books/about/The_Theory_of_Regionalized_Variables_and.html?id=TGhGAAAAYAAJ) |
+| [Kriging](https://github.com/JuliaEarth/GeoEstimation.jl) | [![](https://img.shields.io/codecov/c/github/JuliaEarth/GeoEstimation.jl?style=flat-square)](https://codecov.io/gh/JuliaEarth/GeoEstimation.jl) | Kriging (SK, OK, UK, EDK) | [Matheron 1971](https://books.google.com/books/about/The_Theory_of_Regionalized_Variables_and.html?id=TGhGAAAAYAAJ) |
 | [IDW](https://github.com/JuliaEarth/GeoEstimation.jl) | [![](https://img.shields.io/codecov/c/github/JuliaEarth/GeoEstimation.jl?style=flat-square)](https://codecov.io/gh/JuliaEarth/GeoEstimation.jl) | Inverse distance weighting | [Shepard 1968](https://dl.acm.org/citation.cfm?id=810616) |
 | [LWR](https://github.com/JuliaEarth/GeoEstimation.jl) | [![](https://img.shields.io/codecov/c/github/JuliaEarth/GeoEstimation.jl?style=flat-square)](https://codecov.io/gh/JuliaEarth/GeoEstimation.jl) | Locally weighted regression | [Cleveland 1979](https://www.jstor.org/stable/2286407) |
 
@@ -36,7 +36,7 @@ All simulation solvers can generate realizations in parallel unless otherwise no
 | Solver | Coverage | Description | References |
 |:------:|:--------:|:------------|:-----------|
 | [StratSim](https://github.com/JuliaEarth/StratiGraphics.jl) | [![](https://img.shields.io/codecov/c/github/JuliaEarth/StratiGraphics.jl?style=flat-square)](https://codecov.io/gh/JuliaEarth/StratiGraphics.jl) | Stratigraphy simulation | [Hoffimann 2018](https://searchworks.stanford.edu/view/12746435) |
-| [CookieCutter](https://github.com/JuliaEarth/GeoStatsBase.jl) | [![](https://img.shields.io/codecov/c/github/JuliaEarth/GeoStatsBase.jl?style=flat-square)](https://codecov.io/gh/JuliaEarth/GeoStatsBase.jl) | Cookie-cutter simulation | [Begg 1992](https://www.onepetro.org/conference-paper/SPE-24698-MS) |
+| [CookieCutter](https://github.com/JuliaEarth/GeoSimulation.jl) | [![](https://img.shields.io/codecov/c/github/JuliaEarth/GeoSimulation.jl?style=flat-square)](https://codecov.io/gh/JuliaEarth/GeoSimulation.jl) | Cookie-cutter simulation | [Begg 1992](https://www.onepetro.org/conference-paper/SPE-24698-MS) |
 
 ## Learning
 

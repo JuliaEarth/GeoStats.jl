@@ -9,6 +9,15 @@ Below are a few suggestions to speed up the collaboration process:
 - References to textbooks and papers are always welcome.
 - Follow the coding standards in the source.
 
+## How do I start contributing?
+
+Contributing to an open-source project for the very first time can be a very daunting task.
+To make the process easier and more GitHub-beginner-friendly, the community has written
+an [article](https://invenia.github.io/blog/2021/01/29/contribute-open-source) about how
+to start contributing to open-source and overcome the mental and technical barriers that
+come associated with it. The article will also take you through the steps required to make
+your [first contribution](https://github.com/firstcontributions/first-contributions) in detail.
+
 ## Reporting issues
 
 If you are experiencing issues or have discovered a bug, please
@@ -51,16 +60,4 @@ user environment.
 ```
 
 This will clone all the project components in your `~/.julia` folder so
-that you can modify it and submit a pull request on GitHub later. Don't
-hesitate to ask questions in our [gitter channel](https://gitter.im/JuliaEarth/GeoStats.jl)
-if you are not familiar with the Git workflow. We are looking forward
-to your contributions.
-
-## I'm new to open-source. How do I start contributing?
-
-Contributing to an open-source project for the very first time can be a very daunting task.
-To make the process easier and more GitHub-beginner-friendly, the community has written
-an [article](https://invenia.github.io/blog/2021/01/29/contribute-open-source) about how
-to start contributing to open-source and overcome the mental and technical barriers that
-come associated with it. The article will also take you through the steps required to make
-your [first contribution](https://github.com/firstcontributions/first-contributions) in detail.
+that you can modify it and submit a pull request on GitHub later.

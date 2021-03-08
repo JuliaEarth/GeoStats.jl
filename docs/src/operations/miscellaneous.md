@@ -47,12 +47,13 @@ plot(p1, p2, layout=(2,1))
 
 ```@example
 using GeoStats # hide
+using Tables # hide
 
-Ω = georef((z=[0, 1, 0],), [0. 1. 0.; 0. 0. 0.])
+D = georef((z=[0, 1, 0],), [(0.,0.), (1.,0.), (0.,0.)])
 
-Γ = uniquecoords(Ω)
+U = uniquecoords(D)
 
-coordinates(Γ, 1:nelements(Γ))
+Tables.rows(U)
 ```
 
 ## Tabular

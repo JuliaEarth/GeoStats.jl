@@ -218,7 +218,7 @@ function solve(problem::EstimationProblem, solver::NormSolver)
       varσ = Vector{V}(undef, nelements(pdomain))
 
       for location in traverse(pdomain, LinearPath())
-        x = coordinates(pdomain, location)
+        x = coordinates(centroid(pdomain, location))
 
         varμ[location] = norm(x, varparams.pmean)
         varσ[location] = norm(x, varparams.pvar)
