@@ -1,15 +1,9 @@
 Everyone is welcome to join our community channels.
 
-[![GITTER][gitter-img]][gitter-url]
+[![Gitter](https://img.shields.io/badge/chat-on%20gitter-bc0067?style=flat-square)](https://gitter.im/JuliaEarth/GeoStats.jl)
 
-[![gitter](../images/gitter.png)][gitter-url]
+[![Gitter](../images/gitter.png)](https://gitter.im/JuliaEarth/GeoStats.jl)
 
-[![ZULIP][zulip-img]][zulip-url]
+[![Zulip](https://img.shields.io/badge/chat-on%20zulip-9cf?style=flat-square)](https://julialang.zulipchat.com/#narrow/stream/276201-geostats.2Ejl)
 
-[![zulip](../images/zulip.png)][zulip-url]
-
-[gitter-img]: https://img.shields.io/badge/chat-on%20gitter-bc0067?style=flat-square
-[gitter-url]: https://gitter.im/JuliaEarth/GeoStats.jl
-
-[zulip-img]: https://img.shields.io/badge/chat-on%20zulip-9cf?style=flat-square
-[zulip-url]: https://julialang.zulipchat.com/#narrow/stream/276201-geostats.2Ejl
+[![Zulip](../images/zulip.png)](https://julialang.zulipchat.com/#narrow/stream/276201-geostats.2Ejl)
