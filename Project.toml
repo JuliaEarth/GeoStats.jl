@@ -4,6 +4,7 @@ author = "Júlio Hoffimann <julio.hoffimann@gmail.com>"
 version = "0.23.0"
 
 [deps]
+GeoClustering = "7472b188-6dde-460e-bd07-96c4bc049f7e"
 GeoEstimation = "a4aa24f8-9f24-4d1a-b848-66d123bfa54d"
 GeoSimulation = "220efe8a-9139-4e14-a4fa-f683d572f4c5"
 GeoStatsBase = "323cb8eb-fbf6-51c0-afd0-f8fba70507b2"
@@ -14,6 +15,7 @@ Reexport = "189a3867-3050-52da-a836-e630ba90ab69"
 Variography = "04a0146e-e6df-5636-8d7f-62fa9eb0b20c"
 
 [compat]
+GeoClustering = "0.1"
 GeoEstimation = "0.6"
 GeoSimulation = "0.3"
 GeoStatsBase = "0.20"
