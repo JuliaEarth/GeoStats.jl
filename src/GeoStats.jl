@@ -12,6 +12,7 @@ using Reexport
 @reexport using Variography
 @reexport using KrigingEstimators
 @reexport using PointPatterns
+@reexport using GeoClustering
 @reexport using GeoEstimation
 @reexport using GeoSimulation
 
