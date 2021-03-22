@@ -15,5 +15,6 @@ using Reexport
 @reexport using GeoClustering
 @reexport using GeoEstimation
 @reexport using GeoSimulation
+@reexport using GeoLearning
 
 end
