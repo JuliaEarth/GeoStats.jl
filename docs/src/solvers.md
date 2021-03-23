@@ -42,4 +42,4 @@ All simulation solvers can generate realizations in parallel unless otherwise no
 
 | Solver | Coverage | Description | References |
 |:------:|:--------:|:------------|:-----------|
-| [PointwiseLearn](https://github.com/JuliaEarth/GeoStatsBase.jl) | [![](https://img.shields.io/codecov/c/github/JuliaEarth/GeoStatsBase.jl?style=flat-square)](https://codecov.io/gh/JuliaEarth/GeoStatsBase.jl) | Pointwise learning | [Hoffimann 2018](https://doi.org/10.21105/joss.00692) |
+| [PointwiseLearn](https://github.com/JuliaEarth/GeoLearning.jl) | [![](https://img.shields.io/codecov/c/github/JuliaEarth/GeoLearning.jl?style=flat-square)](https://codecov.io/gh/JuliaEarth/GeoLearning.jl) | Pointwise learning | [Hoffimann 2018](https://doi.org/10.21105/joss.00692) |

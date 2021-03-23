@@ -122,9 +122,11 @@ The project is split into various packages:
 | [GeoStats.jl](https://github.com/JuliaEarth/GeoStats.jl) | Main package reexporting full stack of packages for geostatistics. |
 | [Variography.jl](https://github.com/JuliaEarth/Variography.jl) | Variogram estimation and modeling, and related tools. |
 | [KrigingEstimators.jl](https://github.com/JuliaEarth/KrigingEstimators.jl) | High-performance implementations of Kriging estimators. |
-| [GeoEstimation.jl](https://github.com/JuliaEarth/GeoEstimation.jl) | Built-in solvers for geospatial estimation. |
-| [GeoSimulation.jl](https://github.com/JuliaEarth/GeoSimulation.jl) | Built-in solvers for geospatial simulation. |
 | [PointPatterns.jl](https://github.com/JuliaEarth/PointPatterns.jl) | Spatial point pattern analysis and synthesis. |
+| [GeoClustering.jl](https://github.com/JuliaEarth/GeoClustering.jl) | Geostatistical clustering (a.k.a. domaining). |
+| [GeoEstimation.jl](https://github.com/JuliaEarth/GeoEstimation.jl) | Built-in solvers for geostatistical estimation. |
+| [GeoSimulation.jl](https://github.com/JuliaEarth/GeoSimulation.jl) | Built-in solvers for geostatistical simulation. |
+| [GeoLearning.jl](https://github.com/JuliaEarth/GeoLearning.jl) | Built-in solvers for geostatistical learning. |
 | [GeoStatsImages.jl](https://github.com/JuliaEarth/GeoStatsImages.jl) | Training images for multiple-point simulation. |
 | [GeoStatsBase.jl](https://github.com/JuliaEarth/GeoStatsBase.jl) | Base package containing core functionality. |
 
