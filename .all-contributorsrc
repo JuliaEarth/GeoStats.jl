@@ -248,6 +248,15 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "hameye",
+      "name": "Hadrien Meyer",
+      "avatar_url": "https://avatars.githubusercontent.com/u/57682091?v=4",
+      "profile": "https://github.com/hameye",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
