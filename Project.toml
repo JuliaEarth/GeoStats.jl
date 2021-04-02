@@ -1,7 +1,7 @@
 name = "GeoStats"
 uuid = "dcc97b0b-8ce5-5539-9008-bb190f959ef6"
 author = "Júlio Hoffimann <julio.hoffimann@gmail.com>"
-version = "0.24.0"
+version = "0.24.1"
 
 [deps]
 GeoClustering = "7472b188-6dde-460e-bd07-96c4bc049f7e"
@@ -22,7 +22,7 @@ GeoLearning = "0.1"
 GeoSimulation = "0.3"
 GeoStatsBase = "0.21"
 KrigingEstimators = "0.7"
-Meshes = "0.11"
+Meshes = "0.12"
 PointPatterns = "0.3"
 Reexport = "0.2, 1.0"
 Variography = "0.12"
