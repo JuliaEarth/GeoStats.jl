@@ -55,7 +55,7 @@ Get the latest stable release with Julia's package manager:
 
 ## Tutorials
 
-A set of Jupyter notebooks demonstrating the current functionality of the project is available in
+A set of Pluto notebooks demonstrating the current functionality of the project is available in
 [GeoStatsTutorials](https://github.com/JuliaEarth/GeoStatsTutorials)
 with an accompanying series of videos:
 
