@@ -1,6 +1,6 @@
 # Miscellaneous
 
-Below is a list of additional geospatial operations.
+Below is a list of miscellaneous geospatial operations.
 
 ## Geometric
 

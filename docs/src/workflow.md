@@ -150,7 +150,7 @@ plot(Π[2])
 ```
 
 Various other geospatial operations are defined in the framework besides
-partitioning. For a complete list, please check the [Operations](operations/partitioning.md) section of the reference guide.
+partitioning. For a complete list, please check the reference guide.
 
 ## Defining problems
 

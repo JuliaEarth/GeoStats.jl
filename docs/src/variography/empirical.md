@@ -37,6 +37,7 @@ Consider the following image for illustration purposes:
 using GeoStats #hide
 using GeoStatsImages
 using Plots #hide
+gr(size=(800,400)) #hide
 
 𝒟 = geostatsimage("Gaussian30x10")
 
