@@ -1,5 +1,8 @@
 # Estimators
 
+*This section describes the estimators used in the Kriging [solver](solver.md). Most users
+don't need to use estimators directly.*
+
 A Kriging estimator has the form:
 
 ```math
@@ -15,9 +18,9 @@ This package implements the following Kriging variants:
 - Universal Kriging
 - External Drift Kriging
 
-All these variants follow the same interface: an `estimator` object is first created with a
-given set of parameters (e.g. `estimator = OrdinaryKriging(γ)`), it is then combined with the
-data `krig = fit(estimator, X, z)` to obtain predictions at new locations `predict(krig, xₒ)`.
+All these variants follow the same interface: an estimator object is first created with a
+given set of parameters, it is then combined with the data to obtain predictions at new
+locations.
 
 The `fit` function takes care of building the Kriging system and factorizing the LHS with
 an appropriate decomposition (e.g. Cholesky, LU):
@@ -26,7 +29,7 @@ an appropriate decomposition (e.g. Cholesky, LU):
 KrigingEstimators.fit
 ```
 
-The `predict` function performs the estimation at a given location:
+and the `predict` function performs the estimation at a given location:
 
 ```@docs
 KrigingEstimators.predict

@@ -119,7 +119,7 @@ To test your new solver, load the `GeoStats.jl` package and solve a simple probl
 using GeoStats
 using MySolver
 
-sdata    = readgeotable("samples.csv", coordnames=(:x,:y))
+sdata    = georef(CSV.File("samples.csv"), (:x,:y))
 sdomain  = CartesianGrid(100, 100)
 problem  = EstimationProblem(sdata, sdomain, :value)
 

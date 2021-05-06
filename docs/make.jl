@@ -37,17 +37,13 @@ makedocs(
     "Reference guide" => [
       "Data" => "data.md",
       "Domains" => "domains.md",
-      "Operations" => [
-        "operations/partitioning.md",
-        "operations/sampling.md",
-        "operations/weighting.md",
-        "operations/searching.md",
-        "operations/miscellaneous.md"
-      ],
-      "Statistics" => "statistics.md",
       "Problems" => "problems.md",
       "Solvers" => "solvers.md",
       "Validation" => "validation.md",
+      "Statistics" => "statistics.md",
+      "Clustering" => "clustering.md",
+      "Weighting" => "weighting.md",
+      "Miscellaneous" => "miscellaneous.md",
       "Variography" => [
         "variography/empirical.md",
         "variography/theoretical.md",
