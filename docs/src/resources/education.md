@@ -17,6 +17,10 @@ can do as a community is to list additional learning resources for newcomers.
   (https://onlinelibrary.wiley.com/doi/book/10.1002/9781118136188) - An incredible
   book for those with good mathematical background.
 
+- *Journel, A. and Huijbregts, Ch. 2003.* [Mining Geostatistics]
+  (https://www.amazon.com/Mining-Geostatistics-G-Journel/dp/1930665911) - A great
+  book with both theoretical and practical developments.
+
 ### Lectures
 
 - [Júlio Hoffimann](https://www.youtube.com/playlist?list=PLsH4hc788Z1f1e61DN3EV9AhDlpbhhanw) -
@@ -33,7 +37,7 @@ can do as a community is to list additional learning resources for newcomers.
 ### GaussianProcesses.jl
 
 [GaussianProcesses.jl](https://github.com/STOR-i/GaussianProcesses.jl) -
-Gaussian processes (the method) and Simple Kriging are essentially
+Gaussian process regression and Simple Kriging are essentially
 [two names for the same concept](https://en.wikipedia.org/wiki/Kriging).
 The derivation of Kriging estimators, however; does **not** require
 distributional assumptions. It is a beautiful coincidence that for
@@ -42,8 +46,7 @@ expectation. [Matheron](https://en.wikipedia.org/wiki/Georges_Matheron)
 and other important geostatisticians have generalized Gaussian processes
 to more general random fields with locally-varying mean and for situations
 where the mean is unknown. GeoStats.jl includes Gaussian processes as
-a special case as well as other more practical Kriging variants, see the
-[Gaussian processes example](https://github.com/JuliaEarth/GeoStatsTutorials).
+a special case as well as other more practical Kriging variants.
 
 ### MLKernels.jl
 
