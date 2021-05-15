@@ -2,13 +2,11 @@
 
 Below is a list of miscellaneous geospatial operations.
 
-## Geometric
-
-### Split
+## Split
 
 ```@example
-using GeoStats # hide
-using GeoStatsImages # hide
+using GeoStats
+using GeoStatsImages
 using Plots # hide
 gr(format=:png) # hide
 
@@ -20,7 +18,11 @@ S = split(𝒟, 0.5, (1.,1.))
 plot(plot(S[1],ms=0.2), plot(S[2],ms=0.2))
 ```
 
-### Slice
+## Slice
+
+```@docs
+Meshes.slice
+```
 
 ```@example
 using GeoStats # hide
@@ -43,7 +45,11 @@ p2 = plot(plot(P), plot(S), link=:both, ms=3)
 plot(p1, p2, layout=(2,1))
 ```
 
-### Unique
+## Unique
+
+```@docs
+uniquecoords
+```
 
 ```@example
 using GeoStats # hide
@@ -56,7 +62,7 @@ U = uniquecoords(D)
 Tables.rows(U)
 ```
 
-## Tabular
+## Trend
 
 ```@docs
 trend
@@ -76,6 +82,8 @@ r = range(-1,stop=1,length=100)
 
 plot(plot(𝒟), plot(ℳ))
 ```
+
+## Groupby
 
 ```@docs
 groupby(::Data, ::Symbol)
