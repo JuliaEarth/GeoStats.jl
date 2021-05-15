@@ -195,7 +195,7 @@ We can now georeference the table and plot some of the variables:
 Ω = georef(df, (:x,:y))
 
 gr(format=:png) # hide
-#plot(Ω, (:band4,:crop), ms=0.2, mc=:viridis)
+plot(Ω, (:band4,:crop), ms=0.2, mc=:viridis)
 ```
 
 Similar to a generic statistical learning workflow, we split the data
@@ -263,7 +263,7 @@ directly, side by side with the true label in this synthetic example:
 p̂ = plot(Ω̂t, ms=0.2, mc=:viridis, title="crop (prediction)")
 p = plot(Ωt, (:crop,), ms=0.2, mc=:viridis)
 
-#plot(p̂, p)
+plot(p̂, p)
 ```
 
 Visually, the learning model has succeeded predicting the crop. We can

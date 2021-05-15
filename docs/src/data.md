@@ -18,9 +18,9 @@ Consider a table (e.g. DataFrame) with 25 samples of temperature and
 precipitation:
 
 ```@example georef
-using GeoStats #hide
+using GeoStats # hide
 using DataFrames
-using Plots #hide
+using Plots # hide
 
 table = DataFrame(T=rand(25), P=rand(25))
 ```
@@ -128,6 +128,7 @@ We can visualize these geometries as the domain of the geospatial data
 as usual:
 
 ```@example shapefile
+gr(size=(600,400)) # hide
 plot(domain(zone), fill=true, color=:gray)
 plot!(domain(path), fill=true, color=:gray90)
 ```
