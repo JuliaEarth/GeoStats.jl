@@ -70,6 +70,7 @@ Below is a quick preview of the high-level API:
 ```julia
 using GeoStats
 using Plots
+using CSV
 
 # data.csv:
 #    x,    y,       station,        precip
@@ -78,7 +79,7 @@ using Plots
 # 75.0, 50.0, mountain view,           1.0
 
 # read spatial data (e.g. geotable)
-𝒯 = readgeotable("data.csv", coordnames=(:x,:y))
+𝒯 = georef(CSV.File("data.csv"), (:x,:y))
 
 # define spatial domain (e.g. Cartesian grid)
 𝒟 = CartesianGrid(100, 100)
