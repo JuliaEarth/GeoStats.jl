@@ -3,9 +3,6 @@
   <a href="https://github.com/JuliaEarth/GeoStats.jl/actions">
     <img src="https://img.shields.io/github/workflow/status/JuliaEarth/GeoStats.jl/CI?style=flat-square">
   </a>
-  <a href="https://codecov.io/gh/JuliaEarth/GeoStats.jl">
-    <img src="https://img.shields.io/codecov/c/github/JuliaEarth/GeoStats.jl?style=flat-square">
-  </a>
   <a href="https://JuliaEarth.github.io/GeoStats.jl/stable">
     <img src="https://img.shields.io/badge/docs-stable-blue?style=flat-square">
   </a>
