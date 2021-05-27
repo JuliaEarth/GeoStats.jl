@@ -13,6 +13,7 @@ SLIC
 ```@example clustering
 using GeoStats # hide
 using Plots # hide
+gr(format=:png) # hide
 
 Ω = georef((Z=[10sin(i/10) + j for i in 1:100, j in 1:100],))
 
