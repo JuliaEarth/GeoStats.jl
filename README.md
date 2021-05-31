@@ -37,6 +37,45 @@
 - Exploit modern hardware aggressively, including GPUs and computer clusters.
 - Educate people outside of the field about the existence of geostatistics.
 
+## Contributing and supporting
+
+Contributions are very welcome, as are feature requests and suggestions. Please
+[open an issue](https://github.com/JuliaEarth/GeoStats.jl/issues) if you encounter
+any problems. We have [written instructions](CONTRIBUTING.md) to help you with
+the process.
+
+GeoStats.jl was developed as part of academic research. It will always be open
+source and free of charge. If you would like to help support the project, please
+star the repository [![STARS][stars-img]][stars-url] and share it with your colleagues.
+If you have questions, don't hesitate to ask in our community channels:
+
+[![GITTER][gitter-img]][gitter-url]
+[![ZULIP][zulip-img]][zulip-url]
+
+## Citing
+
+If you find GeoStats.jl useful in your work, please consider citing it:
+
+[![JOSS][joss-img]][joss-url]
+[![DOI][zenodo-img]][zenodo-url]
+
+```bibtex
+@ARTICLE{GeoStats.jl-2018,
+  title={GeoStats.jl – High-performance geostatistics in Julia},
+  author={Hoffimann, Júlio},
+  journal={Journal of Open Source Software},
+  publisher={The Open Journal},
+  volume={3},
+  pages={692},
+  number={24},
+  ISSN={2475-9066},
+  DOI={10.21105/joss.00692},
+  url={http://dx.doi.org/10.21105/joss.00692},
+  year={2018},
+  month={Apr}
+}
+```
+
 ## Installation
 
 Get the latest stable release with Julia's package manager:
@@ -98,46 +137,6 @@ contourf(sol)
 <p align="center">
   <img src="docs/src/images/EstimationSolution.png">
 </p>
-
-If you have questions, don't hesitate to ask in our community channels:
-
-[![GITTER][gitter-img]][gitter-url]
-[![ZULIP][zulip-img]][zulip-url]
-
-## Contributing and supporting
-
-Contributions are very welcome, as are feature requests and suggestions. Please
-[open an issue](https://github.com/JuliaEarth/GeoStats.jl/issues) if you encounter
-any problems. We have [written instructions](CONTRIBUTING.md) to help you with
-the process.
-
-GeoStats.jl was developed as part of academic research. It will always be open
-source and free of charge. If you would like to help support the project, please
-star the repository [![STARS][stars-img]][stars-url] and share it with your colleagues.
-
-## Citing
-
-If you find GeoStats.jl useful in your work, please consider citing it:
-
-[![JOSS][joss-img]][joss-url]
-[![DOI][zenodo-img]][zenodo-url]
-
-```bibtex
-@ARTICLE{GeoStats.jl-2018,
-  title={GeoStats.jl – High-performance geostatistics in Julia},
-  author={Hoffimann, Júlio},
-  journal={Journal of Open Source Software},
-  publisher={The Open Journal},
-  volume={3},
-  pages={692},
-  number={24},
-  ISSN={2475-9066},
-  DOI={10.21105/joss.00692},
-  url={http://dx.doi.org/10.21105/joss.00692},
-  year={2018},
-  month={Apr}
-}
-```
 
 ## Used at
 
