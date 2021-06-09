@@ -15,7 +15,6 @@ Define a 2D estimation problem:
 ```@example estimation
 using GeoStats # hide
 using Plots # hide
-using Distances # hide
 gr(size=(900,400),clabels=true) # hide
 
 # list of properties with coordinates
