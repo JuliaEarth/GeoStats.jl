@@ -6,8 +6,13 @@ module GeoStats
 
 using Reexport
 
-# reexport project modules
+# reexport related stack
 @reexport using Meshes
+@reexport using Distances
+@reexport using LossFunctions
+@reexport using DensityRatioEstimation
+
+# reexport project modules
 @reexport using GeoStatsBase
 @reexport using Variography
 @reexport using KrigingEstimators
