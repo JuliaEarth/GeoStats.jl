@@ -37,6 +37,14 @@
 - Exploit modern hardware aggressively, including GPUs and computer clusters.
 - Educate people outside of the field about the existence of geostatistics.
 
+For a feature preview, watch our latest JuliaCon2021 talk:
+
+<p align="center">
+  <a href="https://youtu.be/75A6zyn5pIE">
+    <img src="https://img.youtube.com/vi/75A6zyn5pIE/maxresdefault.jpg">
+  </a>
+</p>
+
 ## Contributing and supporting
 
 Contributions are very welcome, as are feature requests and suggestions. Please
