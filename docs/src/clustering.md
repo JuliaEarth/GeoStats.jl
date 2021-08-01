@@ -17,7 +17,7 @@ gr(format=:png) # hide
 
 Ω = georef((Z=[10sin(i/10) + j for i in 1:100, j in 1:100],))
 
-Π = partition(Ω, SLIC(50, 0.01))
+C = cluster(Ω, SLIC(50, 0.01))
 
-plot(plot(Ω), plot(Π))
+plot(plot(Ω), plot(C))
 ```
