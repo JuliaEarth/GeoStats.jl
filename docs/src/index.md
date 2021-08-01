@@ -117,7 +117,7 @@ solution = solve(problem, solver)
 contourf(solution, clabels=true)
 ```
 
-For more detailed examples, please consult the
+For a more detailed example, please consult the
 [Basic workflow](workflow.md) section of the
 documentation.
 

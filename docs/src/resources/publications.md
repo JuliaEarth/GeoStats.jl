@@ -3,7 +3,7 @@
 Below is a list of publications made possible with this project:
 
 - *Hoffimann et al. 2021.* [Geostatistical Learning: Challenges and Opportunities]
-  (https://arxiv.org/abs/2102.08791)
+  (https://www.frontiersin.org/articles/10.3389/fams.2021.689393/full)
 
 - *Asner, G. P. et al. 2021.* [Abiotic and Human Drivers of Reef Habitat Complexity
   Throughout the Main Hawaiian Islands](https://www.frontiersin.org/articles/10.3389/fmars.2021.631842/full)
