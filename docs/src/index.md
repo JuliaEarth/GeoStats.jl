@@ -36,6 +36,14 @@ star the repository [![STARS](https://img.shields.io/github/stars/JuliaEarth/Geo
 If you would like to extend the framework with new geostatistical solvers,
 please check the [Developer guide](contributing/solvers.md).
 
+For a guided tour, please watch our JuliaCon2021 talk:
+
+```@raw html
+<p align="center">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/75A6zyn5pIE" title="Geostatistical Learning" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</p>
+```
+
 ### Citing
 
 ```latex
@@ -109,16 +117,9 @@ solution = solve(problem, solver)
 contourf(solution, clabels=true)
 ```
 
-For a more detailed example, please consult the
+For more detailed examples, please consult the
 [Basic workflow](workflow.md) section of the
-documentation or watch our latest JuliaCon2021
-talk:
-
-```@raw html
-<p align="center">
-<iframe width="560" height="315" src="https://www.youtube.com/embed/75A6zyn5pIE" title="Geostatistical Learning" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-</p>
-```
+documentation.
 
 ## Project organization
 
