@@ -2,7 +2,7 @@
 
 ## Overview
 
-Given a table or array containing data, we can gereference these objects
+Given a table or array containing data, we can georeference these objects
 onto a geospatial domain with the [`georef`](@ref) function. For a list of
 available domains, please see [Domains](domains.md).
 
