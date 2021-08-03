@@ -257,6 +257,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "felixcremer",
+      "name": "Felix Cremer",
+      "avatar_url": "https://avatars.githubusercontent.com/u/17124431?v=4",
+      "profile": "https://github.com/felixcremer",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7,
