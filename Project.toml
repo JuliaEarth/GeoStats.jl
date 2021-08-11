@@ -1,7 +1,7 @@
 name = "GeoStats"
 uuid = "dcc97b0b-8ce5-5539-9008-bb190f959ef6"
 author = "Júlio Hoffimann <julio.hoffimann@gmail.com>"
-version = "0.25.3"
+version = "0.25.4"
 
 [deps]
 DensityRatioEstimation = "ab46fb84-d57c-11e9-2f65-6f72e4a7229f"
@@ -28,7 +28,7 @@ GeoSimulation = "0.3"
 GeoStatsBase = "0.21"
 KrigingEstimators = "0.7"
 LossFunctions = "0.7"
-Meshes = "0.16"
+Meshes = "0.17"
 PointPatterns = "0.3"
 Reexport = "1.0"
 Variography = "0.12"
