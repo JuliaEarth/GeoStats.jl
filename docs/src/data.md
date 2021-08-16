@@ -121,7 +121,7 @@ with simple geometries (e.g. `Point` or `Quadrangle`), here we have
 more complicated geometries to consider:
 
 ```@example shapefile
-collect(domain(zone))
+zone.geometry
 ```
 
 We can visualize these geometries as the domain of the geospatial data

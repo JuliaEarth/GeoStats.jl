@@ -88,7 +88,7 @@ t |> GeoData
 For convenience, we can retrieve individual columns as vectors:
 
 ```@example workflow
-Ω[:Z]
+Ω.Z
 ```
 
 or as an array with the correct shape using the `asarray` function:
