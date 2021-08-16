@@ -410,7 +410,7 @@ function solve(problem::LearningProblem, solver::SLICSolver)
 
   # label for each point in target data
   labels = Vector{Int}(undef, nelements(tdata))
-  for (i, inds) in enumerate(subsets(part))
+  for (i, inds) in enumerate(indices(part))
     labels[inds] .= i
   end
 
