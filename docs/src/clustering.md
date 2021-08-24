@@ -8,6 +8,7 @@ is the current list of clustering methods available:
 
 ```@docs
 SLIC
+GHC
 ```
 
 ```@example clustering
