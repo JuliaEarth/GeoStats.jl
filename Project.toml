@@ -1,7 +1,7 @@
 name = "GeoStats"
 uuid = "dcc97b0b-8ce5-5539-9008-bb190f959ef6"
 author = "Júlio Hoffimann <julio.hoffimann@gmail.com>"
-version = "0.26.1"
+version = "0.26.2"
 
 [deps]
 DensityRatioEstimation = "ab46fb84-d57c-11e9-2f65-6f72e4a7229f"
@@ -21,7 +21,7 @@ Variography = "04a0146e-e6df-5636-8d7f-62fa9eb0b20c"
 [compat]
 DensityRatioEstimation = "0.4"
 Distances = "0.10"
-GeoClustering = "0.1"
+GeoClustering = "0.2"
 GeoEstimation = "0.8"
 GeoLearning = "0.1"
 GeoSimulation = "0.4"
