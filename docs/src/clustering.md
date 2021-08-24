@@ -8,7 +8,6 @@ is the current list of clustering methods available:
 
 ```@docs
 SLIC
-GHC
 ```
 
 ```@example clustering
@@ -19,6 +18,18 @@ gr(format=:png) # hide
 Ω = georef((Z=[10sin(i/10) + j for i in 1:100, j in 1:100],))
 
 C = cluster(Ω, SLIC(50, 0.01))
+
+plot(plot(Ω), plot(C))
+```
+
+## GHC
+
+```@docs
+GHC
+```
+
+```@example clustering
+C = cluster(Ω, GHC(20, 1.0))
 
 plot(plot(Ω), plot(C))
 ```
