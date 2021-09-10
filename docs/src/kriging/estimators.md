@@ -26,35 +26,17 @@ The `fit` function takes care of building the Kriging system and factorizing the
 an appropriate decomposition (e.g. Cholesky, LU):
 
 ```@docs
-KrigingEstimators.fit
+fit(::KrigingEstimator, ::Any)
 ```
 
-and the `predict` function performs the estimation at a given location:
+and the `predict` function performs the estimation for a given variable and location:
 
 ```@docs
-KrigingEstimators.predict
+predict(::KrigingEstimators.FittedKriging, ::Any, ::Any)
 ```
 
 Alternative constructors are provided for convenience that will immediately fit the Kriging
-parameters to the data. In this case, the data is passed as the first argument. For example:
-
-```julia
-OrdinaryKriging(data, var, γ)
-```
-
-creates a `OrdinaryKriging(γ)` estimator and fits it to `(data, var)`.
-
-A typical use of the interface is as follows:
-
-```julia
-# build and factorize the system
-sk = OrdinaryKriging(data, var, γ)
-
-# estimate at various points
-for pₒ in [p₁, p₂, p₃]
-  μ, σ² = predict(sk, pₒ)
-end
-```
+parameters to the data. In this case, the data is passed as the first argument.
 
 For advanced users, the Kriging weights and Lagrange multipliers at a given location can be accessed
 with the `weights` method. This method returns a `KrigingWeights` object containing a field `λ` for
@@ -63,6 +45,15 @@ the weights and a field `ν` for the Lagrange multipliers:
 ```@docs
 weights
 ```
+
+These weights can be combined with a vector of observations using the `combine` function:
+
+```@docs
+KrigingEstimators.combine
+```
+
+This functionality can be useful in real-time applications when the locations of the observations are
+fixed and an online stream of data is available.
 
 ## Simple Kriging
 
