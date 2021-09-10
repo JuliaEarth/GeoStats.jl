@@ -142,5 +142,5 @@ The main [GeoStats.jl](https://github.com/JuliaEarth/GeoStats.jl) package reexpo
 the full stack of packages for high-performance geostatistics in Julia. Other
 packages like [GeoStatsImages.jl](https://github.com/JuliaEarth/GeoStatsImages.jl)
 can be installed for additional functionality. Besides the packages above, the
-project is extended via [solver packages](solvers.md). These solvers are implemented
-independently of the main package for different geostatistical problems.
+project is extended via [solver packages](solvers/summary.md). These solvers are
+implemented independently of the main package for different geostatistical problems.
