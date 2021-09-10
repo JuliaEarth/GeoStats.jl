@@ -4,6 +4,11 @@ ENV["GKSwstype"] = "100"
 using Documenter, GeoStats
 using DocumenterTools: Themes
 
+# external solvers
+using ImageQuilting
+using TuringPatterns
+using StratiGraphics
+
 istravis = "TRAVIS" ∈ keys(ENV)
 
 Themes.compile(joinpath(@__DIR__,"src/assets/geostats-light.scss"), joinpath(@__DIR__,"src/assets/themes/documenter-light.css"))
@@ -38,7 +43,11 @@ makedocs(
       "Data" => "data.md",
       "Domains" => "domains.md",
       "Problems" => "problems.md",
-      "Solvers" => "solvers.md",
+      "Solvers" => [
+        "solvers/builtin.md",
+        "solvers/external.md",
+        "solvers/summary.md"
+      ],
       "Validation" => "validation.md",
       "Statistics" => "statistics.md",
       "Clustering" => "clustering.md",
