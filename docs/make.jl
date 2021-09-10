@@ -49,7 +49,7 @@ makedocs(
         "variography/theoretical.md",
         "variography/fitting.md"
       ],
-      "Kriging" => [
+      "Kriging estimation" => [
         "kriging/estimators.md",
         "kriging/solver.md"
       ],
@@ -58,7 +58,7 @@ makedocs(
         "gausssim/fft.md",
         "gausssim/sgs.md"
       ],
-      "Point Patterns" => [
+      "Point patterns" => [
         "pointpatterns/pointprocs.md",
         "pointpatterns/pointops.md"
       ],
