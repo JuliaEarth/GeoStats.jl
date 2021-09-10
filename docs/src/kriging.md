@@ -1,8 +1,8 @@
-# Estimators
+# Kriging
 
 !!! note
 
-    This section describes the estimators used in the Kriging [solver](solver.md). Most users don't need to use estimators directly.
+    This section describes the estimators used in the Kriging [solver](solvers.md). Most users don't need to use estimators directly.
 
 A Kriging estimator has the form:
 

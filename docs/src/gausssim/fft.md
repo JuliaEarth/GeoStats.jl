@@ -1,5 +1,0 @@
-# FFT
-
-```@docs
-FFTGS
-```
