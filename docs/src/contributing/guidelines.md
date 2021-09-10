@@ -9,7 +9,7 @@ Below are a few suggestions to speed up the collaboration process:
 - References to textbooks and papers are always welcome.
 - Follow the coding standards in the source.
 
-## How do I start contributing?
+## How to start contributing?
 
 Contributing to an open-source project for the very first time can be a very daunting task.
 To make the process easier and more GitHub-beginner-friendly, the community has written
@@ -53,11 +53,19 @@ the package manager:
 
 This will create a fresh environment called `@geo` where you can
 play with the project components without compromising your normal
-user environment.
+user environment. Next, go ahead and type:
 
 ```julia
-] dev GeoStatsBase Variography KrigingEstimators GeoEstimation GeoSimulation PointPatterns GeoStats
+] dev GeoStatsBase
+] dev Variography
+] dev KrigingEstimators
+] dev GeoEstimation
+] dev GeoSimulation
+] dev GeoClustering
+] dev PointPatterns
+] dev GeoStats
 ```
 
-This will clone all the project components in your `~/.julia` folder so
-that you can modify it and submit a pull request on GitHub later.
+to clone all the project components in your `~/.julia` folder.
+You can modify the source code and submit a pull request on
+GitHub later.
