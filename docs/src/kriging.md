@@ -2,7 +2,10 @@
 
 !!! note
 
-    This section describes the estimators used in the [Kriging](solvers/builtin.md) solver. Most users don't need to use estimators directly.
+    This section describes the estimators used in the [Kriging](solvers/builtin.md) solver.
+    Most users don't want to use estimators directly because they lack features such as
+    neighborhood search and change of support. If that is your case, please refer to the
+    solver documentation.
 
 A Kriging estimator has the form:
 
