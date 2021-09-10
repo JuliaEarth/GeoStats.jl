@@ -207,8 +207,8 @@ its normal direction `(1,-1)`:
 Ωs, Ωt = split(Ω, 0.2, (1.,-1.))
 
 gr(format=:png,aspect_ratio=:equal) # hide
-plot(domain(Ωs), ms=0.2)
-plot!(domain(Ωt), ms=0.2, mc=:green)
+plot(domain(Ωs), ms=0.2, mc=:royalblue)
+plot!(domain(Ωt), ms=0.2, mc=:gray)
 ```
 
 We can visualize the domain of the "train" (or source) set Ωs in black,
