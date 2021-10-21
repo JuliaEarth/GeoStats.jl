@@ -225,6 +225,7 @@ This project would not be possible without the contributions of:
   </tr>
   <tr>
     <td align="center"><a href="https://github.com/felixcremer"><img src="https://avatars.githubusercontent.com/u/17124431?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Felix Cremer</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=felixcremer" title="Documentation">📖</a></td>
+    <td align="center"><a href="http://storopoli.io"><img src="https://avatars.githubusercontent.com/u/43353831?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Jose Storopoli</b></sub></a><br /><a href="#infra-storopoli" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a></td>
   </tr>
 </table>
 
