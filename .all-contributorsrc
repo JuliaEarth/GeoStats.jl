@@ -266,6 +266,15 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "storopoli",
+      "name": "Jose Storopoli",
+      "avatar_url": "https://avatars.githubusercontent.com/u/43353831?v=4",
+      "profile": "http://storopoli.io",
+      "contributions": [
+        "infra"
+      ]
     }
   ],
   "contributorsPerLine": 7,
