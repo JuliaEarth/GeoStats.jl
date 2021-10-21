@@ -1,0 +1,7 @@
+# LaTeX Stuff
+*.bib text
+*.tex text
+paper/* text
+
+# Documentations
+docs/* text
