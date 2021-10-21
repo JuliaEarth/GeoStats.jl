@@ -1,7 +1,7 @@
 # LaTeX Stuff
-*.bib text
-*.tex text
-paper/* text
+*.bib linguist-generated
+*.tex linguist-generated
+paper/* linguist-generated
 
 # Documentations
-docs/* text
+docs/* linguist-generated
