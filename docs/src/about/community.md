@@ -1,12 +1,12 @@
 ## Gitter
 
-*We plan to deprecate this channel in the future.*
+*(This channel is deprecated)*
 
 The **Gitter** channel is the **oldest** channel. It does **not** support 
 ``\LaTeX`` nor syntax highlighting for Julia. We keep it around
 because of its direct integration with GitHub accounts.
 
-Click on the image to join the channel:
+Click on the image to access past conversations:
 
 [![Gitter](../images/gitter.png)](https://gitter.im/JuliaEarth/GeoStats.jl)
 
