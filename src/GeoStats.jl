@@ -11,6 +11,7 @@ using Reexport
 @reexport using LossFunctions: L2DistLoss, L1DistLoss
 @reexport using LossFunctions: HingeLoss, MisclassLoss
 @reexport using DensityRatioEstimation
+@reexport using ScientificTypes
 @reexport using TableTransforms
 @reexport using Meshes
 
