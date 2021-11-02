@@ -63,7 +63,7 @@ makedocs(
         "pointpatterns/pointprocs.md",
         "pointpatterns/pointops.md"
       ],
-      "Plot recipes" => "plotting.md"
+      "Plotting" => "plotting.md"
     ],
     "Contributing" => [
       "contributing/guidelines.md",

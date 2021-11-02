@@ -381,58 +381,65 @@ end;
 
 ### Learning
 
-A learning solver that clusters data into super pixels:
+A learning solver that copies the mean of a response
+variable defined in source data over to target data:
 
-```@example slicsolver
+```@example meansolver
 using Meshes
 using GeoStatsBase
 
 # implement method for new solver
-import GeoStatsBase: solvesingle
+import GeoStatsBase: solve
 
-struct SLICSolver <: LearningSolver
-  k::Int # approximate number of super pixels
-  m::Float64 # SLIC tradeoff parameter
-end
+# new solver that copies the mean
+struct MeanSolver <: LearningSolver end
 
-function solve(problem::LearningProblem, solver::SLICSolver)
-  @assert task(problem) isa ClusteringTask "invalid problem"
-
+function solve(problem::LearningProblem, solver::MeanSolver)
   # retrieve problem info
   ptask  = task(problem)
   feats  = collect(features(ptask))
+  sdata  = sourcedata(problem)
   tdata  = targetdata(problem)
-  output = outputvars(ptask)[1]
+  resp   = first(outputvars(ptask))
 
-  # find super pixels
-  slic = SLIC(solver.k, solver.m, vars=feats)
-  part = partition(tdata, slic)
+  # mean of response over source data
+  μ = mean(sdata[resp])
 
-  # label for each point in target data
-  labels = Vector{Int}(undef, nelements(tdata))
-  for (i, inds) in enumerate(indices(part))
-    labels[inds] .= i
-  end
+  # copy the mean over target domain
+  μs = fill(μ, nelements(tdata))
 
-  # return learning solution
-  georef((; output => labels), domain(tdata))
+  # new table of attributes
+  table = (; zip([resp], [μs])...)
+
+  # georeference new table
+  georef(table, domain(tdata))
 end;
 ```
 
 We can test the newly defined solver in a learning problem:
 
-```@example slicsolver
+```@example meansolver
 using GeoStats
 using Plots
 gr(size=(900,300)) # hide
 
-Ω = georef((Z=[10sin(i/10) + j for i in 1:100, j in 1:100],))
+# create some values
+v = [10sin(i/10) + j for i in 1:100, j in 1:100]
 
-t = ClusteringTask(:Z, :SUPERPIXEL)
+# source data has X and Y
+Ωs = georef((X=v, Y=v))
 
-p = LearningProblem(Ω, Ω, t)
+# target data only has X
+Ωt = georef((X=v,))
 
-s = solve(p, SLICSolver(50, 0.01))
+# regression from X to Y
+t = RegressionTask(:X, :Y)
 
-plot(plot(Ω), plot(s, c=:viridis))
+# learning problem
+p = LearningProblem(Ωs, Ωt, t)
+
+# solve problem
+μ = solve(p, MeanSolver())
+
+plot(plot(Ωs), plot(μ))
 ```

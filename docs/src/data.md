@@ -10,6 +10,15 @@ available domains, please see [Domains](domains.md).
 georef
 ```
 
+In the opposite direction, the functions [`values`](@ref) and
+[`domain`](@ref) can be used to retrieve the table of attributes
+and the underlying geospatial domain.
+
+```@docs
+values
+domain
+```
+
 ## Examples
 
 ### Tables
@@ -102,7 +111,7 @@ provides utility functions to automatically download maps given the
 name of any region in the world.
 
 We can load a shapefile as a geospatial table that is compatible with
-the GeoStats.jl framework:
+the framework:
 
 ```@example shapefile
 using GeoTables
@@ -140,11 +149,10 @@ table can be used with any geostatistical workflow.
 
 GeoStats.jl is integrated with the
 [Meshes.jl](https://github.com/JuliaGeometry/Meshes.jl)
-project. This means that one can use any `Meshes.Data`
-in geostatistical workflows. In summary, any type that
-is a subtype of `Meshes.Data` and that implements
-`Meshes.domain` and `Meshes.values` is compatible with
-the framework.
+project. In summary, any type that is a subtype of
+`Meshes.Data` and that implements `Meshes.domain` and
+`Meshes.values` is compatible with the framework and
+can be used in geostatistical workflows.
 
-Please ask in our community channels if you have questions
-about custom geospatial data types.
+Please ask in our community channels if you need help
+implementing custom geospatial data types.

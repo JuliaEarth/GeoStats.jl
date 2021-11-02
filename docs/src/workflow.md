@@ -7,7 +7,10 @@ A basic geostatistical workflow often consists of three steps:
 3. Visualization of problem solution
 
 In this section, we walk through these steps to illustrate some of the
-features of the project.
+features of the project. Although we use [Plots.jl](https://github.com/JuliaPlots/Plots.jl)
+for visualization, we could have used [Makie.jl](https://github.com/JuliaPlots/Makie.jl)
+instead. Please check [MeshViz.jl](https://github.com/JuliaGeometry/MeshViz.jl) for
+3D visualization examples.
 
 ## Manipulating data
 
@@ -50,9 +53,9 @@ plot(Ω)
 ```
 
 First, we note that the image was rotated to match the first index `i`
-of the array with the horizontal "x" axis, and the second index `j` of
-the array with the vertical "y" axis. Second, we note that the image
-was stretched to reflect the real `100x200` size of the Cartesian grid.
+of the array with the horizontal `x` axis, and the second index `j` of
+the array with the vertical `y` axis. Second, we note that the image
+was stretched to reflect the real `100x200` size of the [`CartesianGrid`](@ref).
 
 ### Tabular access
 
@@ -69,7 +72,7 @@ using Tables
 first(Tables.rows(Ω), 3)
 ```
 
-We can design advanced **geospatial** queries
+We can design advanced geospatial queries
 using the [Query.jl](https://github.com/queryverse/Query.jl) language:
 
 ```@example workflow
@@ -97,6 +100,28 @@ or as an array with the correct shape using the `asarray` function:
 asarray(Ω, :Z)
 ```
 
+### Transforms
+
+The [TableTransforms.jl](https://github.com/JuliaML/TableTransforms.jl)
+package can be used to design advanced pipelines with the attribute table:
+
+```@example workflow
+t = values(Ω) |> ZScore()
+
+histogram(t.Z)
+```
+
+The transformed table can be georeferenced for further geostatistical
+modeling:
+
+```
+georef(t, domain(Ω))
+```
+
+These pipelines are revertible meaning that one can transform the data,
+perform geostatistical modeling, and revert the pipelines to obtain
+estimates in the original sample space.
+
 ### Geospatial views
 
 Geospatial data can be viewed at a subset of locations without
@@ -120,8 +145,8 @@ plot(view(Ω, inds))
 ### Geospatial partitions
 
 Geospatial data can be partitioned with various efficient methods.
-To demonstrate the operation, we partition our spatial data view into
-balls of given radius:
+To demonstrate the operation, we partition our geospatial data view
+into balls of given radius:
 
 ```@example workflow
 Π = partition(Ωᵥ, BallPartition(5.))
@@ -150,7 +175,8 @@ plot(Π[2])
 ```
 
 Various other geospatial operations are defined in the framework besides
-partitioning. For a complete list, please check the reference guide.
+partitioning. For a complete list, please check the reference guide and
+the [Meshes.jl](https://github.com/JuliaGeometry/Meshes.jl) documentation.
 
 ## Defining problems
 
@@ -168,22 +194,19 @@ using CSV
 using DataFrames
 gr(size=(800,400)) # hide
 
-df = DataFrame(CSV.File("data/agriculture.csv"))
+df = CSV.File("data/agriculture.csv") |> DataFrame
 
 first(df, 5)
 ```
 
-Columns `band1`, ..., `band4` represent four satellite bands for different
-locations `(x,y)` in this region. The column `crop` has the crop type
-for each location that was labeled manually with the purpose of training
-a learning model.
-
-Because the labels are categorical variables, we need to inform the
-framework the correct type:
+Columns `band1`, `band2`, ..., `band4` represent four satellite bands
+for different locations `(x,y)` in this region. The column `crop` has
+the crop type for each location that was labeled manually with the
+purpose of training a learning model. Because the labels are categorical
+variables, we need to inform the framework the correct scientific type from
+[ScientificTypes.jl](https://github.com/JuliaAI/ScientificTypes.jl):
 
 ```@example workflow
-using MLJ
-
 df = coerce(df, :crop => Multiclass)
 
 first(df, 5)
@@ -211,8 +234,8 @@ plot(domain(Ωs), ms=0.2, mc=:royalblue)
 plot!(domain(Ωt), ms=0.2, mc=:gray)
 ```
 
-We can visualize the domain of the "train" (or source) set Ωs in black,
-and the domain of the "test" (or target) set Ωt in green. We reserved
+We can visualize the domain of the "train" (or source) set Ωs in blue,
+and the domain of the "test" (or target) set Ωt in gray. We reserved
 20% of the samples to Ωs and 80% to Ωt. Internally, this geospatial
 `split` function is implemented in terms of efficient geospatial
 partitions, which were illustrated in the previous section.
@@ -239,7 +262,7 @@ with more than 150 classical learning models:
 ```@example workflow
 using MLJ
 
-ℳ = @load DecisionTreeClassifier pkg=DecisionTree
+ℳ = MLJ.@load DecisionTreeClassifier pkg=DecisionTree
 
 ℒ = PointwiseLearn(ℳ())
 ```
@@ -266,9 +289,9 @@ p = plot(Ωt, (:crop,), ms=0.2, mc=:viridis)
 plot(p̂, p)
 ```
 
-Visually, the learning model has succeeded predicting the crop. We can
-also estimate the generalization error of the geostatistical solver with
-[geospatial validation methods](validation.md) such as block
+Visually, it seems that the learning model is predicting the crop type.
+We can also estimate the generalization error of the geostatistical solver
+with [geostatistical validation methods](validation.md) such as block
 cross-validation and leave-ball-out, but these methods deserve
 a separate tutorial.
 
