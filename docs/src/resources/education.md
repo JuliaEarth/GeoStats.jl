@@ -1,8 +1,8 @@
 # Education
 
-Geostatistics is often misunderstood as "classical statistics applied to
-spatial data". To correct this unfortunate misunderstanding, the best we
-can do as a community is to list additional learning resources for newcomers.
+Geostatistics is often misunderstood as *"classical statistics applied to
+geospatial data"*. To correct this unfortunate misunderstanding, the best we
+can do as a community is to list educational resources.
 
 ## Learning resources
 
@@ -32,7 +32,7 @@ can do as a community is to list additional learning resources for newcomers.
 - [Jef Caers](https://www.youtube.com/playlist?list=PLh35GyCXlQaQ1LNGWr4vCD9AGOGni8yxq) -
   Video lectures on two-point and multiple-point methods.
 
-## Related efforts
+## Related concepts
 
 ### GaussianProcesses.jl
 
@@ -57,27 +57,24 @@ kernels according to the intrinsic stationary property. This means that
 there are variogram models with no covariance counterpart. Furthermore,
 empirical variograms can be easily estimated from the data (in various
 directions) with an efficient procedure. GeoStats.jl treats variograms
-as first-class objects, see the
-[Variogram modeling example](https://github.com/JuliaEarth/GeoStatsTutorials).
+as first-class objects.
 
 ### Interpolations.jl
 
 [Interpolations.jl](https://github.com/JuliaMath/Interpolations.jl) -
-Kriging and Spline interpolation have different purposes, yet these two
+Kriging and spline interpolation have different purposes, yet these two
 methods are sometimes listed as competing alternatives. Kriging estimation
-is about minimizing variance (or estimation error), whereas Spline
-interpolation is about forcedly smooth estimators derived for
-*computer visualization*.
-[Kriging is a generalization of Splines](https://www.sciencedirect.com/science/article/pii/009830048490030X)
+is about minimizing variance (or estimation error), whereas spline
+interpolation is about deriving smooth estimators for *computer visualization*.
+[Kriging is a generalization of splines](https://www.sciencedirect.com/science/article/pii/009830048490030X)
 in which one has the freedom to customize spatial structure based
 on data. Besides the estimate itself, Kriging also provides the
-variance map as a function of knots configuration.
+variance map as a function of point patterns.
 
 ### MLJ.jl
 
 [MLJ.jl](https://github.com/alan-turing-institute/MLJ.jl) -
-Statistical learning theory relies on a set of assumptions that do
-**not** hold with spatial data (e.g i.i.d. samples on fixed-size support,
-stationarity, to name a few). Geostatistical learning theory generalizes
-traditional machine learning for applications where statistical models
-need to be learned from spatial data.
+Classical statistical learning theory relies on a set of assumptions that do
+**not** hold in geospatial settings. Geostatistical learning theory has been
+developed for applications where statistical models need to be learned from
+geospatial data.
