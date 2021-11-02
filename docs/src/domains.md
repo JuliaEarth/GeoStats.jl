@@ -1,7 +1,7 @@
 # Domains
 
 A geospatial domain is a region in physical space where data
-can be measured. For example, a collection of rain gauge stations
+can be observed. For example, a collection of rain gauge stations
 can be represented as a point set in the map. Similarly, a collection
 of states in a given country can be represented as a set of 2D shapes.
 

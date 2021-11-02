@@ -2,41 +2,9 @@
 
 *An extensible framework for high-performance geostatistics in Julia.*
 
-[![Build Status](https://img.shields.io/github/workflow/status/JuliaEarth/GeoStats.jl/CI?style=flat-square)](https://github.com/JuliaEarth/GeoStats.jl/actions)
-[![Stable Documentation](https://img.shields.io/badge/docs-stable-blue?style=flat-square)](https://JuliaEarth.github.io/GeoStats.jl/stable)
-[![Latest Documentation](https://img.shields.io/badge/docs-latest-blue?style=flat-square)](https://JuliaEarth.github.io/GeoStats.jl/latest)
-[![License File](https://img.shields.io/badge/license-MIT-blue?style=flat-square)](https://github.com/JuliaEarth/GeoStats.jl/blob/master/LICENSE)
-
-[![JOSS](https://img.shields.io/badge/JOSS-10.21105%2Fjoss.00692-brightgreen?style=flat-square)](https://doi.org/10.21105/joss.00692)
-[![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.3875233-blue?style=flat-square)](https://zenodo.org/badge/latestdoi/33827844)
-
 [![Gitter](https://img.shields.io/badge/chat-on%20gitter-bc0067?style=flat-square)](https://gitter.im/JuliaEarth/GeoStats.jl)
 [![Zulip](https://img.shields.io/badge/chat-on%20zulip-9cf?style=flat-square)](https://julialang.zulipchat.com/#narrow/stream/276201-geostats.2Ejl)
-
-## Overview
-
-In many fields of science, such as mining engineering, hydrogeology, petroleum
-engineering, and environmental sciences, traditional statistical theories fail
-to provide unbiased estimates of resources due to the presence of spatial
-correlation. Geostatistics (a.k.a. spatial statistics) is the branch of
-statistics developed to overcome this limitation. Particularly, it is the
-branch that takes spatial coordinates of data into account.
-
-[GeoStats.jl](https://github.com/JuliaEarth/GeoStats.jl) is an attempt to bring
-together bleeding-edge research in the geostatistics community into a comprehensive
-framework for spatial statistics, as well as to empower researchers and practioners
-with a toolkit for fast assessment of different modeling approaches.
-
-The design of this project is the result of many years developing geostatistical
-software. I hope that it can serve to promote more collaboration between
-geostatisticians around the globe and to standardize this incredible science.
-If you would like to help support the project, please
-star the repository [![STARS](https://img.shields.io/github/stars/JuliaEarth/GeoStats.jl?style=social)]
-(https://github.com/JuliaEarth/GeoStats.jl) and share it with your colleagues.
-If you would like to extend the framework with new geostatistical solvers,
-please check the [Developer guide](contributing/solvers.md).
-
-For a guided tour, please watch our JuliaCon2021 talk:
+[![License File](https://img.shields.io/badge/license-MIT-blue?style=flat-square)](https://github.com/JuliaEarth/GeoStats.jl/blob/master/LICENSE)
 
 ```@raw html
 <p align="center">
@@ -44,7 +12,35 @@ For a guided tour, please watch our JuliaCon2021 talk:
 </p>
 ```
 
+## Overview
+
+In many fields of science, such as mining engineering, hydrogeology, petroleum
+engineering, and environmental sciences, traditional statistical methods fail
+to provide unbiased estimates of resources due to the presence of geospatial
+correlation. Geostatistics (a.k.a. geospatial statistics) is the branch of
+statistics developed to overcome this limitation. Particularly, it is the
+branch that takes geospatial coordinates of data into account.
+
+[GeoStats.jl](https://github.com/JuliaEarth/GeoStats.jl) is an attempt to bring
+together bleeding-edge research in the geostatistics community into a comprehensive
+framework for geospatial modeling, as well as to empower researchers and practioners
+with a toolkit for fast assessment of different modeling approaches.
+
+The design of this project is the result of many years developing geostatistical
+software. I hope that it can serve to promote more collaboration between
+geostatisticians around the globe and to standardize this incredible field of
+research. If you would like to help support the project, please star the repository
+[![STARS](https://img.shields.io/github/stars/JuliaEarth/GeoStats.jl?style=social)]
+(https://github.com/JuliaEarth/GeoStats.jl) and share it with your colleagues.
+If you would like to extend the framework with new geostatistical solvers,
+please check the [Developer guide](contributing/solvers.md).
+
 ### Citing
+
+If you find this project useful in your work, please consider citing it: 
+
+[![JOSS](https://img.shields.io/badge/JOSS-10.21105%2Fjoss.00692-brightgreen?style=flat-square)](https://doi.org/10.21105/joss.00692)
+[![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.3875233-blue?style=flat-square)](https://zenodo.org/badge/latestdoi/33827844)
 
 ```latex
 @ARTICLE{Hoffimann2018,
@@ -92,12 +88,14 @@ using GeoStats
 using Plots
 gr(size=(900,400)) # hide
 
-# list of properties with coordinates
-props = (Z=[1.,0.,1.],)
+# attribute table
+table = (Z=[1.,0.,1.],)
+
+# coordinates for each row
 coord = [(25.,25.), (50.,75.), (75.,50.)]
 
 # georeference data
-𝒟 = georef(props, coord)
+𝒟 = georef(table, coord)
 
 # estimation domain
 𝒢 = CartesianGrid(100, 100)
@@ -130,17 +128,25 @@ The project is split into various packages:
 | [GeoStats.jl](https://github.com/JuliaEarth/GeoStats.jl) | Main package reexporting full stack of packages for geostatistics. |
 | [Variography.jl](https://github.com/JuliaEarth/Variography.jl) | Variogram estimation and modeling, and related tools. |
 | [KrigingEstimators.jl](https://github.com/JuliaEarth/KrigingEstimators.jl) | High-performance implementations of Kriging estimators. |
-| [PointPatterns.jl](https://github.com/JuliaEarth/PointPatterns.jl) | Spatial point pattern analysis and synthesis. |
+| [PointPatterns.jl](https://github.com/JuliaEarth/PointPatterns.jl) | Geospatial point pattern analysis and synthesis. |
 | [GeoClustering.jl](https://github.com/JuliaEarth/GeoClustering.jl) | Geostatistical clustering (a.k.a. domaining). |
 | [GeoEstimation.jl](https://github.com/JuliaEarth/GeoEstimation.jl) | Built-in solvers for geostatistical estimation. |
 | [GeoSimulation.jl](https://github.com/JuliaEarth/GeoSimulation.jl) | Built-in solvers for geostatistical simulation. |
 | [GeoLearning.jl](https://github.com/JuliaEarth/GeoLearning.jl) | Built-in solvers for geostatistical learning. |
-| [GeoStatsImages.jl](https://github.com/JuliaEarth/GeoStatsImages.jl) | Training images for multiple-point simulation. |
-| [GeoStatsBase.jl](https://github.com/JuliaEarth/GeoStatsBase.jl) | Base package containing core functionality. |
+| [GeoStatsBase.jl](https://github.com/JuliaEarth/GeoStatsBase.jl) | Base package containing core definitions. |
 
-The main [GeoStats.jl](https://github.com/JuliaEarth/GeoStats.jl) package reexports
-the full stack of packages for high-performance geostatistics in Julia. Other
-packages like [GeoStatsImages.jl](https://github.com/JuliaEarth/GeoStatsImages.jl)
-can be installed for additional functionality. Besides the packages above, the
-project is extended via [solver packages](solvers/summary.md). These solvers are
-implemented independently of the main package for different geostatistical problems.
+The main [GeoStats.jl](https://github.com/JuliaEarth/GeoStats.jl) package
+reexports the full stack of packages for high-performance geostatistics
+in Julia. Other packages can be installed separately for additional
+functionality:
+
+| Package | Description |
+|:-------:|:------------|
+| [GeoStatsImages.jl](https://github.com/JuliaEarth/GeoStatsImages.jl) | Training images for multiple-point simulation. |
+| [DrillHoles.jl](https://github.com/JuliaEarth/DrillHoles.jl) | Desurvey/composite drillhole data. |
+| [GeoTables.jl](https://github.com/JuliaEarth/GeoTables.jl) | (Down)load geospatial tables in various formats. |
+| [GslibIO.jl](https://github.com/JuliaEarth/GslibIO.jl) | Load/save (extended) GSLIB files. |
+
+Besides the packages above, the project is extended via
+[solver packages](solvers/summary.md). These solvers are implemented
+independently of the main package for different geostatistical problems.
