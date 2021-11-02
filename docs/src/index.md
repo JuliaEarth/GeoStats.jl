@@ -42,7 +42,7 @@ If you find this project useful in your work, please consider citing it:
 [![JOSS](https://img.shields.io/badge/JOSS-10.21105%2Fjoss.00692-brightgreen?style=flat-square)](https://doi.org/10.21105/joss.00692)
 [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.3875233-blue?style=flat-square)](https://zenodo.org/badge/latestdoi/33827844)
 
-```latex
+```bibtex
 @ARTICLE{Hoffimann2018,
   title={GeoStats.jl – High-performance geostatistics in Julia},
   author={Hoffimann, Júlio},
@@ -58,6 +58,8 @@ If you find this project useful in your work, please consider citing it:
   month={Apr}
 }
 ```
+
+We ❤ to see our [list of publications](resources/publications.md) growing.
 
 ## Installation
 
@@ -150,3 +152,9 @@ functionality:
 Besides the packages above, the project is extended via
 [solver packages](solvers/summary.md). These solvers are implemented
 independently of the main package for different geostatistical problems.
+
+## Community channels
+
+We invite you to join our [community channels](about/community.md).
+There you will meet other fellow geostatisticians who like to code.
+We are very friendly, come say hi! 😄🌎
