@@ -100,22 +100,22 @@ or as an array with the correct shape using the `asarray` function:
 asarray(Ω, :Z)
 ```
 
-### Transforms
+### Tabular transforms
 
 The [TableTransforms.jl](https://github.com/JuliaML/TableTransforms.jl)
 package can be used to design advanced pipelines with the attribute table:
 
 ```@example workflow
-t = values(Ω) |> ZScore()
+quant = values(Ω) |> Quantile()
 
-histogram(t.Z)
+histogram(quant.Z, color=:gray80, label="quantile")
 ```
 
 The transformed table can be georeferenced for further geostatistical
 modeling:
 
-```
-georef(t, domain(Ω))
+```@example workflow
+georef(quant, domain(Ω))
 ```
 
 These pipelines are revertible meaning that one can transform the data,
@@ -191,12 +191,9 @@ file, and inspect the available columns:
 
 ```@example workflow
 using CSV
-using DataFrames
 gr(size=(800,400)) # hide
 
-df = CSV.File("data/agriculture.csv") |> DataFrame
-
-first(df, 5)
+csv = CSV.File("data/agriculture.csv")
 ```
 
 Columns `band1`, `band2`, ..., `band4` represent four satellite bands
@@ -207,15 +204,15 @@ variables, we need to inform the framework the correct scientific type from
 [ScientificTypes.jl](https://github.com/JuliaAI/ScientificTypes.jl):
 
 ```@example workflow
-df = coerce(df, :crop => Multiclass)
+table = coerce(csv, :crop => Multiclass)
 
-first(df, 5)
+first(table.crop, 5)
 ```
 
 We can now georeference the table and plot some of the variables:
 
 ```@example workflow
-Ω = georef(df, (:x,:y))
+Ω = georef(table, (:x,:y))
 
 gr(format=:png) # hide
 plot(Ω, (:band4,:crop), ms=0.2, mc=:viridis)
