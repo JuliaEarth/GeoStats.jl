@@ -24,13 +24,22 @@ can do as a community is to list educational resources.
 ### Lectures
 
 - [Júlio Hoffimann](https://www.youtube.com/playlist?list=PLsH4hc788Z1f1e61DN3EV9AhDlpbhhanw) -
-  Tutorials on geostatistics with the GeoStats.jl project.
+  Video lectures with the GeoStats.jl project.
 
 - [Edward Isaaks](https://www.youtube.com/user/sadeddy/videos) -
   Video lectures on variography, Kriging and related concepts.
 
 - [Jef Caers](https://www.youtube.com/playlist?list=PLh35GyCXlQaQ1LNGWr4vCD9AGOGni8yxq) -
   Video lectures on two-point and multiple-point methods.
+
+### Workshops
+
+- [CBMina 2021](https://github.com/juliohm/CBMina2021)
+  [Portuguese] - GeoStats.jl at the Brazilian mining congress.
+
+- [UFMG 2021](https://github.com/fnaghetini/intro-to-geostats)
+  [Portuguese] - GeoStats.jl at the Federal University of
+  Minas Gerais.
 
 ## Related concepts
 
@@ -74,7 +83,8 @@ variance map as a function of point patterns.
 ### MLJ.jl
 
 [MLJ.jl](https://github.com/alan-turing-institute/MLJ.jl) -
-Classical statistical learning theory relies on a set of assumptions that do
-**not** hold in geospatial settings. Geostatistical learning theory has been
-developed for applications where statistical models need to be learned from
-geospatial data.
+Traditional statistical learning relies on core assumptions that do
+**not** hold in geospatial settings (fixed support, i.i.d. samples, ...).
+[Geostatistical learning](https://www.frontiersin.org/articles/10.3389/fams.2021.689393/full)
+has been introduced recently as an attempt to push the frontiers of
+statistical learning with geospatial data.

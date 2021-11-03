@@ -1,10 +1,13 @@
 # Plotting
 
-Most objects defined in the project can be plotted directly without
-major efforts. Other plots are provided below that can be useful for
-geospatial data analysis.
+Most objects defined in GeoStats.jl can be plotted directly using the
+`plot` command from [Plots.jl](https://github.com/JuliaPlots/Plots.jl).
+For visualization of 3D objects, however, we recommend the experimental
+[MeshViz.jl](https://github.com/JuliaGeometry/MeshViz.jl) package.
+Additional plots are listed below that can be useful for geostatistical
+analysis.
 
-## hscatter
+## Built-in
 
 A `hscatter` plot between two variables `var1` and `var2` (possibly
 with `var2` = `var1`) is a simple scatter plot in which the dots
@@ -28,8 +31,14 @@ p4 = hscatter(𝒮, :Z, lag=60)
 plot(p1, p2, p3, p4)
 ```
 
-## corner
+## PairPlots.jl
 
 The [PairPlots.jl](https://github.com/sefffal/PairPlots.jl) package
 provides the `corner` plot that can be used with any table, including
 tables of attributes obtained with the [`values`](@ref) function.
+
+## StatsPlots.jl
+
+The [StatsPlots.jl](https://github.com/JuliaPlots/StatsPlots.jl) package
+provides various statistical plots such as `boxplot`, `dotplot`, `violin`
+and other plots commonly used in statistical workflows.
