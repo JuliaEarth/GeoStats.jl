@@ -284,6 +284,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "nshea3",
+      "name": "Nicholas Shea",
+      "avatar_url": "https://avatars.githubusercontent.com/u/25097799?v=4",
+      "profile": "https://www.nicholasshea.com/",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
