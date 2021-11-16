@@ -2,8 +2,8 @@
 
 *An extensible framework for high-performance geostatistics in Julia.*
 
-[![Gitter](https://img.shields.io/badge/chat-on%20gitter-bc0067?style=flat-square)](https://gitter.im/JuliaEarth/GeoStats.jl)
 [![Zulip](https://img.shields.io/badge/chat-on%20zulip-9cf?style=flat-square)](https://julialang.zulipchat.com/#narrow/stream/276201-geostats.2Ejl)
+[![Gitter](https://img.shields.io/badge/chat-on%20gitter-bc0067?style=flat-square)](https://gitter.im/JuliaEarth/GeoStats.jl)
 [![License File](https://img.shields.io/badge/license-MIT-blue?style=flat-square)](https://github.com/JuliaEarth/GeoStats.jl/blob/master/LICENSE)
 
 ```@raw html
