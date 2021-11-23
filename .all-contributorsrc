@@ -293,6 +293,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "stevengj",
+      "name": "Steven G. Johnson",
+      "avatar_url": "https://avatars.githubusercontent.com/u/2913679?v=4",
+      "profile": "http://math.mit.edu/~stevenj",
+      "contributions": [
+        "infra"
+      ]
     }
   ],
   "contributorsPerLine": 7,
