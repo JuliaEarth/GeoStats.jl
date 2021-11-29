@@ -22,8 +22,7 @@ Originally created to host the GeoStats.jl stack of packages, this
 initiative is primarily concerned with **statistical modeling** of
 geospatial processes. Due to the various  applications of geostatistics
 in the subsurface of the Earth, most of our packages were developed to
-work well with both 2D and 3D geometries, i.e. high-performance has
-always been our priority from the start.
+work efficiently with both 2D and 3D geometries.
 
 Unlike other initiatives, JuliaEarth is **100% Julia by design**.
 This means that we do not rely on external libraries such as GDAL
