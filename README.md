@@ -115,33 +115,32 @@ Below is a quick preview of the high-level API:
 ```julia
 using GeoStats
 using Plots
-using CSV
 
-# data.csv:
-#    x,    y,       station,        precip
-# 25.0, 25.0,     palo alto,           1.0
-# 50.0, 75.0,  redwood city,           0.0
-# 75.0, 50.0, mountain view,           1.0
+# attribute table with single variable "precip"
+table = (precip=[1.,0.,1.],)
 
-# read spatial data (e.g. geotable)
-𝒯 = georef(CSV.File("data.csv"), (:x,:y))
+# coordinates for each row of the attribute table
+coord = [(25.,25.), (50.,75.), (75.,50.)]
 
-# define spatial domain (e.g. Cartesian grid)
-𝒟 = CartesianGrid(100, 100)
+# georeference data
+𝒟 = georef(table, coord)
 
-# define estimation problem for precipitation
-𝒫 = EstimationProblem(𝒯, 𝒟, :precip)
+# estimation domain
+𝒢 = CartesianGrid(100, 100)
+
+# estimation problem
+problem = EstimationProblem(𝒟, 𝒢, :precip)
 
 # choose a solver from the list of solvers
-𝒮 = Kriging(
+solver = Kriging(
   :precip => (variogram=GaussianVariogram(range=35.),)
 )
 
 # solve the problem
-sol = solve(𝒫, 𝒮)
+solution = solve(problem, solver)
 
 # plot the solution
-contourf(sol)
+contourf(solution, clabels=true)
 ```
 <p align="center">
   <img src="docs/src/images/EstimationSolution.png">
