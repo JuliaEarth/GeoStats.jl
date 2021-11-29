@@ -193,6 +193,7 @@ This project would not be possible without the contributions of:
     <td align="center"><a href="https://github.com/fnaghetini"><img src="https://avatars.githubusercontent.com/u/63740520?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Franco Naghetini</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=fnaghetini" title="Code">💻</a></td>
     <td align="center"><a href="https://www.nicholasshea.com/"><img src="https://avatars.githubusercontent.com/u/25097799?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Nicholas Shea</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=nshea3" title="Code">💻</a></td>
     <td align="center"><a href="http://math.mit.edu/~stevenj"><img src="https://avatars.githubusercontent.com/u/2913679?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Steven G. Johnson</b></sub></a><br /><a href="#infra-stevengj" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a></td>
+    <td align="center"><a href="https://github.com/mrr00b00t"><img src="https://avatars.githubusercontent.com/u/32930332?v=4?s=100" width="100px;" alt=""/><br /><sub><b>José A. S. Silva</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=mrr00b00t" title="Code">💻</a></td>
   </tr>
 </table>
 
