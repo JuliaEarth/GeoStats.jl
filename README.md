@@ -69,7 +69,7 @@ If you find GeoStats.jl useful in your work, please consider citing it:
 [![DOI][zenodo-img]][zenodo-url]
 
 ```bibtex
-@ARTICLE{GeoStats.jl-2018,
+@ARTICLE{Hoffimann2018,
   title={GeoStats.jl – High-performance geostatistics in Julia},
   author={Hoffimann, Júlio},
   journal={Journal of Open Source Software},
@@ -108,42 +108,6 @@ with an accompanying series of videos:
   <a href="https://www.youtube.com/playlist?list=PLsH4hc788Z1f1e61DN3EV9AhDlpbhhanw">
     <img src="https://img.youtube.com/vi/yDIK9onnZVw/maxresdefault.jpg">
   </a>
-</p>
-
-Below is a quick preview of the high-level API:
-
-```julia
-using GeoStats
-using Plots
-
-# attribute table with single variable "precip"
-table = (precip=[1.,0.,1.],)
-
-# coordinates for each row of the attribute table
-coord = [(25.,25.), (50.,75.), (75.,50.)]
-
-# georeference data
-𝒟 = georef(table, coord)
-
-# estimation domain
-𝒢 = CartesianGrid(100, 100)
-
-# estimation problem
-problem = EstimationProblem(𝒟, 𝒢, :precip)
-
-# choose a solver from the list of solvers
-solver = Kriging(
-  :precip => (variogram=GaussianVariogram(range=35.),)
-)
-
-# solve the problem
-solution = solve(problem, solver)
-
-# plot the solution
-contourf(solution, clabels=true)
-```
-<p align="center">
-  <img src="docs/src/images/EstimationSolution.png">
 </p>
 
 ## Used at
