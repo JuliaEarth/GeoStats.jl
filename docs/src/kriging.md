@@ -59,6 +59,9 @@ KrigingEstimators.combine
 This functionality can be useful in real-time applications when the locations of the observations are
 fixed and an online stream of data is available.
 
+Finally, all estimators work with general Hilbert spaces, meaning that one can interpolate any
+data type that implements scalar multiplication, vector addition and inner product.
+
 ## Simple Kriging
 
 In Simple Kriging, the mean ``\mu`` of the random field is assumed to be constant *and known*.
