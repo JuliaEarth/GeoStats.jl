@@ -59,10 +59,11 @@ user environment. Next, go ahead and type:
 ] dev GeoStatsBase
 ] dev Variography
 ] dev KrigingEstimators
+] dev PointPatterns
+] dev GeoClustering
 ] dev GeoEstimation
 ] dev GeoSimulation
-] dev GeoClustering
-] dev PointPatterns
+] dev GeoLearning
 ] dev GeoStats
 ```
 
