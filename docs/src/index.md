@@ -137,10 +137,7 @@ The project is split into various packages:
 | [GeoLearning.jl](https://github.com/JuliaEarth/GeoLearning.jl) | Built-in solvers for geostatistical learning. |
 | [GeoStatsBase.jl](https://github.com/JuliaEarth/GeoStatsBase.jl) | Base package containing core definitions. |
 
-The main [GeoStats.jl](https://github.com/JuliaEarth/GeoStats.jl) package
-reexports the full stack of packages for high-performance geostatistics
-in Julia. Other packages can be installed separately for additional
-functionality:
+Other packages can be installed separately for additional functionality:
 
 | Package | Description |
 |:-------:|:------------|
@@ -149,9 +146,7 @@ functionality:
 | [DrillHoles.jl](https://github.com/JuliaEarth/DrillHoles.jl) | Desurvey/composite drillhole data. |
 | [GslibIO.jl](https://github.com/JuliaEarth/GslibIO.jl) | Load/save (extended) GSLIB files. |
 
-Besides the packages above, the project is extended via
-[solver packages](solvers/summary.md). These solvers are implemented
-independently of the main package for different geostatistical problems.
+Besides the packages above, the project can be extended with [solver packages](solvers/summary.md).
 
 ## Community channels
 
