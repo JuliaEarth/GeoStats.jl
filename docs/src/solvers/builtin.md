@@ -16,6 +16,7 @@ Kriging
 LUGS
 FFTGS
 SGS
+SPDEGS
 CookieCutter
 ```
 
