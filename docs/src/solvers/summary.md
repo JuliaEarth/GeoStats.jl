@@ -23,6 +23,7 @@ All simulation solvers can generate realizations in parallel unless otherwise no
 | [LUGS](https://github.com/JuliaEarth/GeoSimulation.jl) | [![](https://img.shields.io/codecov/c/github/JuliaEarth/GeoSimulation.jl?style=flat-square)](https://codecov.io/gh/JuliaEarth/GeoSimulation.jl) | LU Gaussian simulation | [Alabert 1987](https://link.springer.com/article/10.1007/BF00897191) |
 | [SGS](https://github.com/JuliaEarth/GeoSimulation.jl) | [![](https://img.shields.io/codecov/c/github/JuliaEarth/GeoSimulation.jl?style=flat-square)](https://codecov.io/gh/JuliaEarth/GeoSimulation.jl) | Sequential Gaussian simulation | [Gómez-Hernández 1993](https://link.springer.com/chapter/10.1007/978-94-011-1739-5_8) |
 | [FFTGS](https://github.com/JuliaEarth/GeoSimulation.jl) | [![](https://img.shields.io/codecov/c/github/JuliaEarth/GeoSimulation.jl?style=flat-square)](https://codecov.io/gh/JuliaEarth/GeoSimulation.jl) | FFT Gaussian simulation | [Gutjahr 1997](https://link.springer.com/article/10.1007/BF02769641) |
+| [SPDEGS](https://github.com/JuliaEarth/GeoSimulation.jl) | [![](https://img.shields.io/codecov/c/github/JuliaEarth/GeoSimulation.jl?style=flat-square)](https://codecov.io/gh/JuliaEarth/GeoSimulation.jl) | SPDE Gaussian simulation | [Lindgren 2011](https://rss.onlinelibrary.wiley.com/doi/10.1111/j.1467-9868.2011.00777.x) |
 
 ### Multiple-point
 
