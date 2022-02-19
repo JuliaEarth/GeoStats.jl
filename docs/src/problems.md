@@ -1,6 +1,8 @@
 # Problems
 
-The project provides solutions to three types of problems defined below.
+The project provides solutions to three types of geostatistical problems.
+These problems can be defined unambiguously and independently of solvers,
+which is quite convenient for fair comparison of alternative workflows.
 
 ## Estimation
 
