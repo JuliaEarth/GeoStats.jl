@@ -49,11 +49,12 @@ makedocs(
         "solvers/external.md",
         "solvers/summary.md"
       ],
+      "Ensembles" => "ensembles.md",
       "Validation" => "validation.md",
-      "Statistics" => "statistics.md",
       "Clustering" => "clustering.md",
       "Weighting" => "weighting.md",
       "Miscellaneous" => "miscellaneous.md",
+      "Declustering" => "declustering.md",
       "Variography" => [
         "variography/empirical.md",
         "variography/theoretical.md",

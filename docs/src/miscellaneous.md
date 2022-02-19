@@ -101,3 +101,9 @@ gr(format=:png) # hide
 
 plot(plot(ℱ[1],ms=0.2), plot(ℱ[2],ms=0.2))
 ```
+
+## Integrate
+
+```@docs
+integrate(::Data, ::Symbol)
+```

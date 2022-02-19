@@ -50,9 +50,9 @@ or alternatively, georeference it on a 5x5 regular grid (5x5 = 25 samples):
 plot(𝒟)
 ```
 
-In the first case, the [`PointSet`](@ref) domain type can be omitted, and
-GeoStats.jl will understand that the matrix passed as the second argument
-contains the coordinates of a point set:
+In the first case, the `PointSet` domain type can be omitted, and GeoStats.jl
+will understand that the matrix passed as the second argument contains the
+coordinates of a point set:
 
 
 ```@example georef

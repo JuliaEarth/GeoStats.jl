@@ -3,6 +3,9 @@
   <a href="https://github.com/JuliaEarth/GeoStats.jl/actions">
     <img src="https://img.shields.io/github/workflow/status/JuliaEarth/GeoStats.jl/CI?style=flat-square">
   </a>
+  <a href="https://julialang.zulipchat.com/#narrow/stream/276201-geostats.2Ejl">
+    <img src="https://img.shields.io/badge/chat-on%20zulip-9cf?style=flat-square">
+  </a>
   <a href="https://JuliaEarth.github.io/GeoStats.jl/stable">
     <img src="https://img.shields.io/badge/docs-stable-blue?style=flat-square">
   </a>
@@ -19,14 +22,6 @@
   </a>
   <a href="https://zenodo.org/badge/latestdoi/33827844">
     <img src="https://img.shields.io/badge/DOI-10.5281%2Fzenodo.3875233-blue?style=flat-square">
-  </a>
-</p>
-<p align="center">
-  <a href="https://julialang.zulipchat.com/#narrow/stream/276201-geostats.2Ejl">
-    <img src="https://img.shields.io/badge/chat-on%20zulip-9cf?style=flat-square">
-  </a>
-  <a href="https://gitter.im/JuliaEarth/GeoStats.jl">
-    <img src="https://img.shields.io/badge/chat-on%20gitter-bc0067?style=flat-square">
   </a>
 </p>
 
@@ -56,10 +51,9 @@ the process.
 GeoStats.jl was developed as part of academic research. It will always be open
 source and free of charge. If you would like to help support the project, please
 star the repository [![STARS][stars-img]][stars-url] and share it with your colleagues.
-If you have questions, don't hesitate to ask in our community channels:
+If you have questions, don't hesitate to ask in our community channel:
 
 [![ZULIP][zulip-img]][zulip-url]
-[![GITTER][gitter-img]][gitter-url]
 
 ## Citing
 
@@ -136,9 +130,6 @@ with an accompanying series of videos:
 
 [zulip-img]: https://img.shields.io/badge/chat-on%20zulip-9cf?style=flat-square
 [zulip-url]: https://julialang.zulipchat.com/#narrow/stream/276201-geostats.2Ejl
-
-[gitter-img]: https://img.shields.io/badge/chat-on%20gitter-bc0067?style=flat-square
-[gitter-url]: https://gitter.im/JuliaEarth/GeoStats.jl
 
 [stars-img]: https://img.shields.io/github/stars/JuliaEarth/GeoStats.jl?style=social
 [stars-url]: https://github.com/JuliaEarth/GeoStats.jl

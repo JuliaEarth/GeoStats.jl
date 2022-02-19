@@ -2,10 +2,6 @@
 
 *An extensible framework for high-performance geostatistics in Julia.*
 
-[![Zulip](https://img.shields.io/badge/chat-on%20zulip-9cf?style=flat-square)](https://julialang.zulipchat.com/#narrow/stream/276201-geostats.2Ejl)
-[![Gitter](https://img.shields.io/badge/chat-on%20gitter-bc0067?style=flat-square)](https://gitter.im/JuliaEarth/GeoStats.jl)
-[![License File](https://img.shields.io/badge/license-MIT-blue?style=flat-square)](https://github.com/JuliaEarth/GeoStats.jl/blob/master/LICENSE)
-
 ```@raw html
 <p align="center">
 <iframe width="560" height="315" src="https://www.youtube.com/embed/75A6zyn5pIE" title="Geostatistical Learning" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>

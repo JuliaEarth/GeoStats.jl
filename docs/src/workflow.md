@@ -55,7 +55,7 @@ plot(Ω)
 First, we note that the image was rotated to match the first index `i`
 of the array with the horizontal `x` axis, and the second index `j` of
 the array with the vertical `y` axis. Second, we note that the image
-was stretched to reflect the real `100x200` size of the [`CartesianGrid`](@ref).
+was stretched to reflect the real `100x200` size of the `CartesianGrid`.
 
 ### Tabular access
 

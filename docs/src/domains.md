@@ -1,32 +1,33 @@
 # Domains
 
+## Overview
+
 A geospatial domain is a region in physical space where data
-can be observed. For example, a collection of rain gauge stations
+can be measured. For example, a collection of rain gauge stations
 can be represented as a point set in the map. Similarly, a collection
 of states in a given country can be represented as a set of 2D shapes.
 
 We provide flexible domain types for advanced geospatial workflows via
 the [Meshes.jl](https://github.com/JuliaGeometry/Meshes.jl) project.
+Please check their documentation for more details.
 
-## PointSet
+## Examples
 
-```@docs
-PointSet
-```
+### PointSet
 
 ```@example domains
 using GeoStats # hide
 using Plots # hide
 gr(size=(600,600)) # hide
 
-plot(PointSet(rand(3,100)), camera=(30,60))
+pset = PointSet(rand(3,100))
 ```
 
-## GeometrySet
-
-```@docs
-GeometrySet
+```@example domains
+plot(pset, camera=(30,60))
 ```
+
+### GeometrySet
 
 ```@example domains
 t = Triangle((0.0,0.0), (1.0,1.0), (0.0,1.0))
@@ -39,21 +40,17 @@ gset = GeometrySet([t, q])
 plot(gset, fillcolor=:gray90, linecolor=:black)
 ```
 
-## CartesianGrid
+### CartesianGrid
 
-```@docs
-CartesianGrid
+```@example domains
+grid = CartesianGrid(10,10,10)
 ```
 
 ```@example domains
-plot(CartesianGrid(10,10,10), camera=(30,60))
+plot(grid, camera=(30,60))
 ```
 
-## SimpleMesh
-
-```@docs
-SimpleMesh
-```
+### SimpleMesh
 
 ```@example domains
 points = Point2[(0,0), (1,0), (0,1), (1,1), (0.25,0.5), (0.75,0.5)]
