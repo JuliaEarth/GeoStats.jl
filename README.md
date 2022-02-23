@@ -114,6 +114,7 @@ with an accompanying series of videos:
   <img src="docs/src/images/Deltares.png" height="150" hspace="20">
   <img src="docs/src/images/Nexa.jpg" height="150" hspace="20">
   <img src="docs/src/images/Gazprom.png" height="150" hspace="20">
+  <img src="docs/src/images/Vale.png" height="150" hspace="20">
 </p>
 
 [docs-stable-img]: https://img.shields.io/badge/docs-stable-blue?style=flat-square
