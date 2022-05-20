@@ -9,12 +9,12 @@ The union or (superposition) of two point processes creates a
 union process:
 
 ```@docs
-union(::PointProcess, ::PointProcess)
+Base.union(::PointProcess, ::PointProcess)
 ```
 
 ## Thinning
 
-The `thin` function implements the thinning operation for
+The [`thin`](@ref) function implements the thinning operation for
 point processes and patterns. Below are the available thinning
 methods.
 
