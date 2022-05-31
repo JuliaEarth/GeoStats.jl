@@ -4,7 +4,7 @@ Point processes can be simulated with the function `rand` on
 different geometries:
 
 ```@docs
-Base.rand(::Any, ::PointProcess, ::Geometry, ::Int)
+Base.rand(::AbstractRNG, ::PointProcess, ::Geometry, ::Int)
 ```
 
 For example, a Poisson process with given intensity in a rectangular region:

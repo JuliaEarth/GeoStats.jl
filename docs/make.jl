@@ -4,6 +4,8 @@ ENV["GKSwstype"] = "100"
 using Documenter, GeoStats
 using DocumenterTools: Themes
 
+using Random: AbstractRNG
+
 # external solvers
 using ImageQuilting
 using TuringPatterns
