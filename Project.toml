@@ -21,7 +21,7 @@ TableTransforms = "0d432bfd-3ee1-4ac1-886a-39f05cc69a3e"
 Variography = "04a0146e-e6df-5636-8d7f-62fa9eb0b20c"
 
 [compat]
-DensityRatioEstimation = "0.5"
+DensityRatioEstimation = "0.5, 0.6"
 Distances = "0.10"
 GeoClustering = "0.2"
 GeoEstimation = "0.9"
