@@ -1,7 +1,7 @@
 name = "GeoStats"
 uuid = "dcc97b0b-8ce5-5539-9008-bb190f959ef6"
 author = "Júlio Hoffimann <julio.hoffimann@gmail.com>"
-version = "0.31.7"
+version = "0.31.8"
 
 [deps]
 DensityRatioEstimation = "ab46fb84-d57c-11e9-2f65-6f72e4a7229f"
@@ -21,7 +21,7 @@ TableTransforms = "0d432bfd-3ee1-4ac1-886a-39f05cc69a3e"
 Variography = "04a0146e-e6df-5636-8d7f-62fa9eb0b20c"
 
 [compat]
-DensityRatioEstimation = "0.5"
+DensityRatioEstimation = "0.6"
 Distances = "0.10"
 GeoClustering = "0.2"
 GeoEstimation = "0.9"
@@ -33,7 +33,7 @@ LossFunctions = "0.8"
 Meshes = "0.22"
 PointPatterns = "0.4"
 Reexport = "1.0"
-ScientificTypes = "2.3, 3.0"
+ScientificTypes = "3.0"
 TableTransforms = "1.0"
 Variography = "0.14"
 julia = "1.6"
