@@ -188,6 +188,9 @@ This project would not be possible without the contributions of:
     <td align="center"><a href="https://github.com/mrr00b00t"><img src="https://avatars.githubusercontent.com/u/32930332?v=4?s=100" width="100px;" alt=""/><br /><sub><b>José A. S. Silva</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=mrr00b00t" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/marlonsmathias"><img src="https://avatars.githubusercontent.com/u/81258808?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Marlon Sproesser Mathias</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=marlonsmathias" title="Code">💻</a></td>
   </tr>
+  <tr>
+    <td align="center"><a href="https://github.com/eliascarv"><img src="https://avatars.githubusercontent.com/u/73039601?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Elias Carvalho</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=eliascarv" title="Code">💻</a></td>
+  </tr>
 </table>
 
 <!-- markdownlint-restore -->
