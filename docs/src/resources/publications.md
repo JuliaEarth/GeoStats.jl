@@ -2,6 +2,9 @@
 
 Below is a list of publications made possible with this project:
 
+- *Hoffimann et al. 2022.* [Modeling Geospatial Uncertainty of Geometallurgical Variables
+  with Bayesian Models and Hilbert-Kriging](https://link.springer.com/article/10.1007/s11004-022-10013-1)
+
 - *Hoffimann et al. 2021.* [Geostatistical Learning: Challenges and Opportunities]
   (https://www.frontiersin.org/articles/10.3389/fams.2021.689393/full)
 
