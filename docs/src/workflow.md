@@ -8,9 +8,10 @@ A basic geostatistical workflow often consists of three steps:
 
 In this section, we walk through these steps to illustrate some of the
 features of the project. Although we use [Plots.jl](https://github.com/JuliaPlots/Plots.jl)
-for visualization, we could have used [Makie.jl](https://github.com/JuliaPlots/Makie.jl)
-instead. Please check [MeshViz.jl](https://github.com/JuliaGeometry/MeshViz.jl) for
-3D visualization examples.
+and the [GeoStatsPlots.jl](https://github.com/JuliaEarth/GeoStatsPlots.jl) recipes for
+visualization, we could have used [Makie.jl](https://github.com/JuliaPlots/Makie.jl)
+and [GeoStatsViz.jl](https://github.com/JuliaEarth/GeoStatsViz.jl) recipes for more
+advanced 3D visualization examples.
 
 ## Manipulating data
 
