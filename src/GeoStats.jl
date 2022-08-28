@@ -21,8 +21,6 @@ using Reexport
 @reexport using KrigingEstimators
 @reexport using PointPatterns
 @reexport using GeoClustering
-@reexport using GeoEstimation
-@reexport using GeoSimulation
-@reexport using GeoLearning
+@reexport using GeoStatsSolvers
 
 end

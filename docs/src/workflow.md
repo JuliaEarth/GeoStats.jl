@@ -49,6 +49,8 @@ We plot the geospatial data and note a few differences compared to the
 plot shown above:
 
 ```@example workflow
+using GeoStatsPlots
+
 plot(Ω)
 ```
 

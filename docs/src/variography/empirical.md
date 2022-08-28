@@ -34,10 +34,11 @@ merge(::EmpiricalVariogram{D}, ::EmpiricalVariogram{D}) where {D}
 Consider the following image for illustration purposes:
 
 ```@example empirical
-using GeoStats #hide
+using GeoStats # hide
 using GeoStatsImages
-using Plots #hide
-gr(size=(800,400)) #hide
+using Plots # hide
+using GeoStatsPlots # hide
+gr(size=(800,400)) # hide
 
 𝒟 = geostatsimage("Gaussian30x10")
 

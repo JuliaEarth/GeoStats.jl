@@ -16,7 +16,7 @@ given lag `h`.
 
 ```@example plots
 using GeoStats
-using Plots
+using Plots, GeoStatsPlots
 gr(size=(800,300)) # hide
 
 𝒟 = georef((Z=[10sin(i/10) + j for i in 1:100, j in 1:200],))

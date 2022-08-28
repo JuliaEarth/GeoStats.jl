@@ -37,6 +37,7 @@ and the `predict` function performs the estimation for a given variable and loca
 
 ```@docs
 predict(::KrigingEstimators.FittedKriging, ::Any, ::Any)
+predictprob(::KrigingEstimators.FittedKriging, ::Any, ::Any)
 ```
 
 Alternative constructors are provided for convenience that will immediately fit the Kriging

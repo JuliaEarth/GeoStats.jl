@@ -18,13 +18,14 @@ Please check their documentation for more details.
 ```@example domains
 using GeoStats # hide
 using Plots # hide
+using GeoStatsPlots # hide
 gr(size=(600,600)) # hide
 
 pset = PointSet(rand(3,100))
 ```
 
 ```@example domains
-plot(pset, camera=(30,60))
+plot(pset)
 ```
 
 ### GeometrySet
@@ -47,7 +48,7 @@ grid = CartesianGrid(10,10,10)
 ```
 
 ```@example domains
-plot(grid, camera=(30,60))
+plot(grid)
 ```
 
 ### SimpleMesh

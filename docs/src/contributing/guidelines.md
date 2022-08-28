@@ -47,7 +47,7 @@ After your idea is discussed and revised by maintainers, please get
 the development version of the project by typing the following in
 the package manager:
 
-```julia
+```
 ] activate @geo
 ```
 
@@ -55,15 +55,13 @@ This will create a fresh environment called `@geo` where you can
 play with the project components without compromising your normal
 user environment. Next, go ahead and type:
 
-```julia
+```
 ] dev GeoStatsBase
 ] dev Variography
 ] dev KrigingEstimators
 ] dev PointPatterns
 ] dev GeoClustering
-] dev GeoEstimation
-] dev GeoSimulation
-] dev GeoLearning
+] dev GeoStatsSolvers
 ] dev GeoStats
 ```
 

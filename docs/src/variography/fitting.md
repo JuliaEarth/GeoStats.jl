@@ -15,6 +15,7 @@ fit(::Type{Variogram}, ::EmpiricalVariogram, ::VariogramFitAlgo)
 ```@example variofit
 using GeoStats # hide
 using Plots # hide
+using GeoStatsPlots # hide
 gr(size=(800,400)) # hide
 
 # sinusoidal data

@@ -8,6 +8,7 @@ Below is a list of miscellaneous geospatial operations.
 using GeoStats
 using GeoStatsImages
 using Plots # hide
+using GeoStatsPlots # hide
 gr(format=:png) # hide
 
 𝒟 = geostatsimage("Strebelle")
@@ -28,6 +29,7 @@ Meshes.slice
 using GeoStats # hide
 using GeoStatsImages # hide
 using Plots # hide
+using GeoStatsPlots # hide
 gr(format=:png) # hide
 
 # slice image
@@ -71,6 +73,7 @@ trend
 ```@example
 using GeoStats # hide
 using Plots # hide
+using GeoStatsPlots # hide
 
 # quadratic + noise
 r = range(-1,stop=1,length=100)
@@ -93,6 +96,7 @@ groupby(::Data, ::Symbol)
 using GeoStats # hide
 using GeoStatsImages # hide
 using Plots # hide
+using GeoStatsPlots # hide
 gr(format=:png) # hide
 
 𝒟 = geostatsimage("Strebelle")

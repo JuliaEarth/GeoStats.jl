@@ -3,6 +3,7 @@
 ```@example variograms
 using GeoStats # hide
 using Plots # hide
+using GeoStatsPlots # hide
 ```
 
 ## Models

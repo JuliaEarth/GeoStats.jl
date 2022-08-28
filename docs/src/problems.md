@@ -17,6 +17,7 @@ Define a 2D estimation problem:
 ```@example estimation
 using GeoStats # hide
 using Plots # hide
+using GeoStatsPlots # hide
 gr(size=(900,400),clabels=true) # hide
 
 # list of properties with coordinates
@@ -65,6 +66,7 @@ Define a 2D unconditional simulation problem:
 ```@example simulation
 using GeoStats # hide
 using Plots # hide
+using GeoStatsPlots # hide
 gr(size=(900,300)) # hide
 
 # unconditional simulation problem

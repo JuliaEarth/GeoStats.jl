@@ -8,7 +8,7 @@ Consider the following solution to a conditional simulation problem:
 
 ```@example ensemble
 using GeoStats
-using Plots
+using Plots, GeoStatsPlots
 gr(size=(900,400)) # hide
 
 # geospatial samples

@@ -61,7 +61,7 @@ We ❤ to see our [list of publications](resources/publications.md) growing.
 
 Get the latest stable release with Julia's package manager:
 
-```julia
+```
 ] add GeoStats
 ```
 
@@ -83,7 +83,7 @@ Below is a quick preview of the high-level API:
 
 ```@example overview
 using GeoStats
-using Plots
+using Plots, GeoStatsPlots
 gr(size=(900,400)) # hide
 
 # attribute table
@@ -128,10 +128,8 @@ The project is split into various packages:
 | [KrigingEstimators.jl](https://github.com/JuliaEarth/KrigingEstimators.jl) | High-performance implementations of Kriging estimators. |
 | [PointPatterns.jl](https://github.com/JuliaEarth/PointPatterns.jl) | Geospatial point pattern analysis and synthesis. |
 | [GeoClustering.jl](https://github.com/JuliaEarth/GeoClustering.jl) | Geostatistical clustering (a.k.a. domaining). |
-| [GeoEstimation.jl](https://github.com/JuliaEarth/GeoEstimation.jl) | Built-in solvers for geostatistical estimation. |
-| [GeoSimulation.jl](https://github.com/JuliaEarth/GeoSimulation.jl) | Built-in solvers for geostatistical simulation. |
-| [GeoLearning.jl](https://github.com/JuliaEarth/GeoLearning.jl) | Built-in solvers for geostatistical learning. |
-| [GeoStatsBase.jl](https://github.com/JuliaEarth/GeoStatsBase.jl) | Base package containing core definitions. |
+| [GeoStatsSolvers.jl](https://github.com/JuliaEarth/GeoStatsSolvers.jl) | Built-in geostatistical solvers. |
+| [GeoStatsBase.jl](https://github.com/JuliaEarth/GeoStatsBase.jl) | Base package with core definitions. |
 
 Other packages can be installed separately for additional functionality:
 

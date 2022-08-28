@@ -27,9 +27,10 @@ Consider a table (e.g. DataFrame) with 25 samples of temperature and
 precipitation:
 
 ```@example georef
-using GeoStats # hide
 using DataFrames
+using GeoStats # hide
 using Plots # hide
+using GeoStatsPlots # hide
 
 table = DataFrame(T=rand(25), P=rand(25))
 ```

@@ -12,6 +12,7 @@ For example, a Poisson process with given intensity in a rectangular region:
 ```@example pointpatterns
 using GeoStats # hide
 using Plots # hide
+using GeoStatsPlots # hide
 gr(format=:svg) # hide
 
 p = PoissonProcess(0.1)
