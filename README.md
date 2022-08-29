@@ -83,7 +83,7 @@ If you find GeoStats.jl useful in your work, please consider citing it:
 
 Get the latest stable release with Julia's package manager:
 
-```julia
+```
 ] add GeoStats
 ```
 
