@@ -13,6 +13,12 @@ visualization, we could have used [Makie.jl](https://github.com/JuliaPlots/Makie
 and [GeoStatsViz.jl](https://github.com/JuliaEarth/GeoStatsViz.jl) recipes for more
 advanced 3D visualization examples.
 
+```@example workflow
+using GeoStats
+using Plots, GeoStatsPlots
+gr(format=:png,size=(800,400),aspectratio=:equal) # hide
+```
+
 ## Manipulating data
 
 The workflow starts with the creation of geospatial data, which can
@@ -21,9 +27,6 @@ given a Julia array (or image), which is not attached to any particular
 coordinate system:
 
 ```@example workflow
-using Plots
-gr(format=:svg) # hide
-
 Z = [10sin(i/10) + j for i in 1:100, j in 1:200]
 
 heatmap(Z)
@@ -32,8 +35,6 @@ heatmap(Z)
 We can georeference the array using the [`georef`](@ref) function:
 
 ```@example workflow
-using GeoStats
-
 Ω = georef((Z=Z,))
 ```
 
@@ -50,8 +51,6 @@ We plot the geospatial data and note a few differences compared to the
 plot shown above:
 
 ```@example workflow
-using GeoStatsPlots
-
 plot(Ω)
 ```
 
@@ -194,7 +193,6 @@ file, and inspect the available columns:
 
 ```@example workflow
 using CSV
-gr(size=(800,400)) # hide
 
 csv = CSV.File("data/agriculture.csv")
 ```
@@ -217,7 +215,6 @@ We can now georeference the table and plot some of the variables:
 ```@example workflow
 Ω = georef(table, (:x,:y))
 
-gr(format=:png) # hide
 plot(Ω, (:band4,:crop), ms=0.2, mc=:viridis)
 ```
 
@@ -229,7 +226,6 @@ its normal direction `(1,-1)`:
 ```@example workflow
 Ωs, Ωt = split(Ω, 0.2, (1.,-1.))
 
-gr(format=:png,aspect_ratio=:equal) # hide
 plot(domain(Ωs), ms=0.2, mc=:royalblue)
 plot!(domain(Ωt), ms=0.2, mc=:gray)
 ```

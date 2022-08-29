@@ -47,9 +47,9 @@ makedocs(
       "Domains" => "domains.md",
       "Problems" => "problems.md",
       "Solvers" => [
+        "solvers/overview.md",
         "solvers/builtin.md",
-        "solvers/external.md",
-        "solvers/summary.md"
+        "solvers/external.md"
       ],
       "Ensembles" => "ensembles.md",
       "Validation" => "validation.md",

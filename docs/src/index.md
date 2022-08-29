@@ -140,7 +140,7 @@ Other packages can be installed separately for additional functionality:
 | [DrillHoles.jl](https://github.com/JuliaEarth/DrillHoles.jl) | Desurvey/composite drillhole data. |
 | [GslibIO.jl](https://github.com/JuliaEarth/GslibIO.jl) | Load/save (extended) GSLIB files. |
 
-Besides the packages above, the project can be extended with [solver packages](solvers/summary.md).
+Besides the packages above, the project can be extended with [solver packages](solvers/overview.md).
 
 ## Community channels
 
