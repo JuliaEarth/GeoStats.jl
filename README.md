@@ -107,14 +107,12 @@ with an accompanying series of videos:
 ## Used at
 
 <p align="center">
-  <img src="docs/src/images/Stanford.png" height="100">
-  <img src="docs/src/images/IBM.png" height="100"><br><br>
-  <img src="docs/src/images/ENI.png" height="150" hspace="20">
-  <img src="docs/src/images/Petrobras.gif" height="150" hspace="20">
-  <img src="docs/src/images/Deltares.png" height="150" hspace="20">
-  <img src="docs/src/images/Nexa.jpg" height="150" hspace="20">
-  <img src="docs/src/images/Gazprom.png" height="150" hspace="20">
-  <img src="docs/src/images/Vale.png" height="150" hspace="20">
+  <img src="docs/src/images/Petrobras.gif" width="160px" hspace="20">
+  <img src="docs/src/images/Vale.png" width="160px" hspace="20">
+  <img src="docs/src/images/Gazprom.png" width="160px" hspace="20">
+  <img src="docs/src/images/Nexa.jpg" width="160px" hspace="20">
+  <img src="docs/src/images/ENI.png" width="100px" hspace="20">
+  <img src="docs/src/images/Stanford.png" height="80px" hspace="20">
 </p>
 
 [docs-stable-img]: https://img.shields.io/badge/docs-stable-blue?style=flat-square
