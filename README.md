@@ -112,7 +112,10 @@ with an accompanying series of videos:
   <img src="docs/src/images/Gazprom.png" width="160px" hspace="20">
   <img src="docs/src/images/Nexa.jpg" width="160px" hspace="20">
   <img src="docs/src/images/ENI.png" width="100px" hspace="20">
-  <img src="docs/src/images/Stanford.png" height="80px" hspace="20">
+  <img src="docs/src/images/IBM.png" width="100px" hspace="20">
+  <img src="docs/src/images/Stanford.png" width="300px" hspace="20">
+  <img src="docs/src/images/UFMG.jpg" width="160px" hspace="20">
+  <img src="docs/src/images/Deltares.png" width="100px" hspace="20">
 </p>
 
 [docs-stable-img]: https://img.shields.io/badge/docs-stable-blue?style=flat-square
