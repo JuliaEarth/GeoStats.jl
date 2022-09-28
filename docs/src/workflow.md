@@ -74,22 +74,6 @@ using Tables
 first(Tables.rows(Ω), 3)
 ```
 
-We can design advanced geospatial queries
-using the [Query.jl](https://github.com/queryverse/Query.jl) language:
-
-```@example workflow
-using Query
-
-t = Ω |> @mutate(geometry = centroid(_.geometry))
-```
-
-and convert the resulting table to geospatial data if a `geometry`
-column is present:
-
-```@example workflow
-t |> GeoData
-```
-
 For convenience, we can retrieve individual columns as vectors:
 
 ```@example workflow
@@ -102,22 +86,20 @@ or as an array with the correct shape using the `asarray` function:
 asarray(Ω, :Z)
 ```
 
-### Tabular transforms
+### Table transforms
 
-The [TableTransforms.jl](https://github.com/JuliaML/TableTransforms.jl)
-package can be used to design advanced pipelines with the attribute table:
-
-```@example workflow
-quant = values(Ω) |> Quantile()
-
-histogram(quant.Z, color=:gray80, label="quantile")
-```
-
-The transformed table can be georeferenced for further geostatistical
-modeling:
+We can design advanced geospatial pipelines that operate on the attribute
+table or on the underlying geospatial domain (see [Transforms](transforms.md)):
 
 ```@example workflow
-georef(quant, domain(Ω))
+# pipeline with table transforms
+pipe = Quantile()
+
+# apply pipeline to geospatial data
+Ω̄ = pipe(Ω)
+
+# plot transfomed geospatial data
+plot(Ω̄)
 ```
 
 These pipelines are revertible meaning that one can transform the data,

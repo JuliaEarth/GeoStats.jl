@@ -2,16 +2,19 @@
 
 Below is a list of publications made possible with this project:
 
+- *Sepúlveda et al. 2022.* [Evaluation of multivariate Gaussian transforms for geostatistical
+  applications](https://www.researchsquare.com/article/rs-2087808/v1)
+
 - *Hoffimann et al. 2022.* [Modeling Geospatial Uncertainty of Geometallurgical Variables
   with Bayesian Models and Hilbert-Kriging](https://link.springer.com/article/10.1007/s11004-022-10013-1)
 
 - *Hoffimann et al. 2021.* [Geostatistical Learning: Challenges and Opportunities]
   (https://www.frontiersin.org/articles/10.3389/fams.2021.689393/full)
 
-- *Asner, G. P. et al. 2021.* [Abiotic and Human Drivers of Reef Habitat Complexity
+- *Asner et al. 2021.* [Abiotic and Human Drivers of Reef Habitat Complexity
   Throughout the Main Hawaiian Islands](https://www.frontiersin.org/articles/10.3389/fmars.2021.631842/full)
 
-- *Asner, G. P. et al. 2020.* [Large-scale mapping of live corals to guide reef conservation]
+- *Asner et al. 2020.* [Large-scale mapping of live corals to guide reef conservation]
   (https://www.pnas.org/content/117/52/33711)
 
 - *Hoffimann, J. & Zadrozny, B. 2019.* [Efficient Variography with Partition Variograms]

@@ -6,8 +6,6 @@ Most objects defined in GeoStats.jl can be plotted directly with
 first install [GeoStatsPlots.jl](https://github.com/JuliaEarth/GeoStatsPlots.jl)
 (for Plots.jl) or [GeoStatsViz.jl](https://github.com/JuliaEarth/GeoStatsViz.jl) 
 (for Makie.jl), which define recipes for each plotting library.
-For visualization of 3D objects, however, we recommend the experimental
-[MeshViz.jl](https://github.com/JuliaGeometry/MeshViz.jl) package.
 Additional plots are listed below that can be useful for geostatistical
 analysis.
 

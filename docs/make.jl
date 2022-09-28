@@ -51,12 +51,10 @@ makedocs(
         "solvers/builtin.md",
         "solvers/external.md"
       ],
-      "Ensembles" => "ensembles.md",
       "Validation" => "validation.md",
       "Clustering" => "clustering.md",
-      "Weighting" => "weighting.md",
-      "Miscellaneous" => "miscellaneous.md",
       "Declustering" => "declustering.md",
+      "Transforms" => "transforms.md",
       "Variography" => [
         "variography/empirical.md",
         "variography/theoretical.md",
@@ -67,6 +65,9 @@ makedocs(
         "pointpatterns/pointprocs.md",
         "pointpatterns/pointops.md"
       ],
+      "Ensembles" => "ensembles.md",
+      "Weighting" => "weighting.md",
+      "Miscellaneous" => "miscellaneous.md",
       "Plotting" => "plotting.md"
     ],
     "Contributing" => [
