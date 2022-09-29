@@ -37,28 +37,19 @@ Select
 ```
 
 Transforms of type [`GeometricTransform`](@ref) operate on the underlying
-geospatial domain, whereas transforms of type [`TableTransforms.TableTransform`](@ref)
+geospatial domain, whereas transforms of type [`FeatureTransform`](@ref)
 operate on the attribute table:
 
 ```@docs
 Meshes.GeometricTransform
-TableTransforms.TableTransform
+TableTransforms.FeatureTransform
 ```
 
-Other transforms such as [`Detrend`](@ref) are truly geospatial as they are
-defined in terms of both the geospatial domain and the attribute table:
+Other transforms such as [`Detrend`](@ref) are are defined in terms of both
+the geospatial domain and the attribute table:
 
 ```@docs
 Detrend
-```
-
-Finally, transforms such as [`Sequential`](@ref) and [`Parallel`](@ref)
-exist to represent pipelines constructed with the operators `→` (\to) and
-`⊔` (\sqcup) respectively.
-
-```@docs
-Sequential
-Parallel
 ```
 
 All transforms and pipelines implement the following functions:
