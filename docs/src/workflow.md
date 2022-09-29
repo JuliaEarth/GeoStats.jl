@@ -59,7 +59,7 @@ of the array with the horizontal `x` axis, and the second index `j` of
 the array with the vertical `y` axis. Second, we note that the image
 was stretched to reflect the real `100x200` size of the `CartesianGrid`.
 
-### Tabular access
+### Table interface
 
 Our geospatial data implements the
 [Tables.jl](https://github.com/JuliaData/Tables.jl) interface, which
@@ -89,22 +89,24 @@ asarray(Ω, :Z)
 ### Table transforms
 
 We can design advanced geospatial pipelines that operate on the attribute
-table or on the underlying geospatial domain (see [Transforms](transforms.md)):
+table or on the underlying geospatial domain:
 
 ```@example workflow
 # pipeline with table transforms
 pipe = Quantile()
 
-# apply pipeline to geospatial data
-Ω̄ = pipe(Ω)
+# feed geospatial data to pipeline
+Ω̄ = Ω |> pipe
 
-# plot transfomed geospatial data
-plot(Ω̄)
+# plot distribution before and after pipeline
+p1 = histogram(Ω.Z, color=:gray80, label="original")
+p2 = histogram(Ω̄.Z, color=:gray80, label="quantile")
+plot(p1, p2, layout=(2,1))
 ```
 
 These pipelines are revertible meaning that one can transform the data,
 perform geostatistical modeling, and revert the pipelines to obtain
-estimates in the original sample space.
+estimates in the original sample space (see [Transforms](transforms.md)).
 
 ### Geospatial views
 

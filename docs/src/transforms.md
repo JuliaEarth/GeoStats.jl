@@ -1,8 +1,8 @@
 # Transforms
 
 [TableTranfrorms.jl](https://github.com/JuliaML/TableTransforms.jl)
-provides a very powerful list of transforms that work seamlessly
-with our geospatial data types. Other packages such as
+provides a very powerful list of transforms that were designed to
+work seamlessly with geospatial data. Other packages such as
 [CoDa.jl](https://github.com/JuliaEarth/CoDa.jl) provide additional
 transforms for custom variable types.
 
@@ -29,11 +29,45 @@ AbstractTrees.print_tree(TransformsAPI.Transform)
 ```
 
 Transforms at the leaves of the tree above should have a docstring with
-more information on the available options. For example, the docstring
-of the `Select` transform is shown below:
+more information on the available options. For example, the documentation
+of the [`Select`](@ref) transform is shown below:
 
 ```@docs
 Select
+```
+
+Transforms of type [`GeometricTransform`](@ref) operate on the underlying
+geospatial domain, whereas transforms of type [`TableTransforms.TableTransform`](@ref)
+operate on the attribute table:
+
+```@docs
+Meshes.GeometricTransform
+TableTransforms.TableTransform
+```
+
+Other transforms such as [`Detrend`](@ref) are truly geospatial as they are
+defined in terms of both the geospatial domain and the attribute table:
+
+```@docs
+Detrend
+```
+
+Finally, transforms such as [`Sequential`](@ref) and [`Parallel`](@ref)
+exist to represent pipelines constructed with the operators `→` (\to) and
+`⊔` (\sqcup) respectively.
+
+```@docs
+Sequential
+Parallel
+```
+
+All transforms and pipelines implement the following functions:
+
+```@docs
+TableTransforms.isrevertible
+TableTransforms.apply
+TableTransforms.revert
+TableTransforms.reapply
 ```
 
 ## Examples
