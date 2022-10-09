@@ -15,7 +15,7 @@ code can be used to print an updated list in any project environment:
 # packages to print type tree
 using InteractiveUtils
 using AbstractTrees
-using TransformsAPI
+using TransformsBase
 
 # packages with transforms
 using GeoStats
@@ -25,7 +25,7 @@ using CoDa
 AbstractTrees.children(T::Type) = subtypes(T)
 
 # print all currently available transforms
-AbstractTrees.print_tree(TransformsAPI.Transform)
+AbstractTrees.print_tree(TransformsBase.Transform)
 ```
 
 Transforms at the leaves of the tree above should have a docstring with
