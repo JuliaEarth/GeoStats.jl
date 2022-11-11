@@ -4,6 +4,7 @@ author = "Júlio Hoffimann <julio.hoffimann@gmail.com>"
 version = "0.35.1"
 
 [deps]
+Chain = "8be319e6-bccf-4806-a6f7-6fae938471bc"
 DensityRatioEstimation = "ab46fb84-d57c-11e9-2f65-6f72e4a7229f"
 Distances = "b4f34e82-e78d-54a5-968a-f98e89d6e8f7"
 GeoClustering = "7472b188-6dde-460e-bd07-96c4bc049f7e"
@@ -19,6 +20,7 @@ TableTransforms = "0d432bfd-3ee1-4ac1-886a-39f05cc69a3e"
 Variography = "04a0146e-e6df-5636-8d7f-62fa9eb0b20c"
 
 [compat]
+Chain = "0.5"
 DensityRatioEstimation = "1.0"
 Distances = "0.10"
 GeoClustering = "0.2"
