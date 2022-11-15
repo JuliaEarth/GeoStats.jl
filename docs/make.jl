@@ -41,7 +41,7 @@ makedocs(
   authors = "Júlio Hoffimann",
   pages = [
     "Home" => "index.md",
-    "Basic workflow" => "workflow.md",
+    "Quickstart" => "workflow.md",
     "Reference guide" => [
       "Data" => "data.md",
       "Domains" => "domains.md",

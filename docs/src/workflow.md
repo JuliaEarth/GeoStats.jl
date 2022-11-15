@@ -1,4 +1,4 @@
-# Basic workflow
+# Quickstart
 
 A basic geostatistical workflow often consists of three steps:
 
