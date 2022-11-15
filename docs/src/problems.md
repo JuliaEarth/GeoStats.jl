@@ -123,7 +123,7 @@ LearningProblem
 
 ### Example
 
-Please consult the [Basic workflow](workflow.md) for an example or
+Please consult the [Quickstart](quickstart.md) for an example or
 watch our JuliaCon2021 talk:
 
 ```@raw html
