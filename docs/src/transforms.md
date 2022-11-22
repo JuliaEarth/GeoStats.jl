@@ -1,4 +1,4 @@
-# Transforms
+# Table transforms
 
 [TableTranfrorms.jl](https://github.com/JuliaML/TableTransforms.jl)
 provides a very powerful list of transforms that were designed to

@@ -1,6 +1,6 @@
 # Quickstart
 
-A basic geostatistical workflow often consists of three steps:
+A geostatistical workflow often consists of three steps:
 
 1. Manipulation of geospatial data
 2. Definition of geostatistical problem
@@ -11,9 +11,9 @@ features of the project. Although we use [Plots.jl](https://github.com/JuliaPlot
 and the [GeoStatsPlots.jl](https://github.com/JuliaEarth/GeoStatsPlots.jl) recipes for
 visualization, we could have used [Makie.jl](https://github.com/JuliaPlots/Makie.jl)
 and [GeoStatsViz.jl](https://github.com/JuliaEarth/GeoStatsViz.jl) recipes for more
-advanced 3D visualization examples.
+advanced [3D visualization examples](https://github.com/JuliaGeometry/MeshViz.jl).
 
-```@example workflow
+```@example quickstart
 using GeoStats
 using Plots, GeoStatsPlots
 gr(format=:png,size=(800,400),aspectratio=:equal) # hide
@@ -26,7 +26,7 @@ be loaded from disk or derived from other Julia variables. For example,
 given a Julia array (or image), which is not attached to any particular
 coordinate system:
 
-```@example workflow
+```@example quickstart
 Z = [10sin(i/10) + j for i in 1:100, j in 1:200]
 
 heatmap(Z)
@@ -34,13 +34,13 @@ heatmap(Z)
 
 We can georeference the array using the [`georef`](@ref) function:
 
-```@example workflow
+```@example quickstart
 Ω = georef((Z=Z,))
 ```
 
 The origin and spacing of samples can be specified with:
 
-```@example workflow
+```@example quickstart
 georef((Z=Z,), origin=(1.,1.), spacing=(10.,10.))
 ```
 
@@ -50,7 +50,7 @@ methods (see [Data](data.md)).
 We plot the geospatial data and note a few differences compared to the
 plot shown above:
 
-```@example workflow
+```@example quickstart
 plot(Ω)
 ```
 
@@ -66,32 +66,53 @@ Our geospatial data implements the
 means that they can be accessed as if they were tables with samples
 in the rows and variables in the columns. In this case, a special
 column named `geometry` is created on the fly, row by row, containing
-[Meshes.jl](https://github.com/JuliaGeometry/Meshes.jl) geometries:
+[Meshes.jl](https://github.com/JuliaGeometry/Meshes.jl) geometries.
 
-```@example workflow
-using Tables
+For those familiar with the productive
+[DataFrames.jl](https://github.com/JuliaData/DataFrames.jl) interface,
+there is nothing new:
 
-first(Tables.rows(Ω), 3)
+```@example quickstart
+Ω[1,:]
 ```
 
-For convenience, we can retrieve individual columns as vectors:
+```@example quickstart
+Ω[1,:geometry]
+```
 
-```@example workflow
+```@example quickstart
 Ω.Z
 ```
 
-or as an array with the correct shape using the `asarray` function:
+However, notice that our implementation performs some clever
+optimizations behind the scenes to avoid expensive creation
+of geometries:
 
-```@example workflow
-asarray(Ω, :Z)
+```@example quickstart
+Ω.geometry
 ```
+
+We can always retrieve the table of attributes (or features)
+with the function [`values`](@ref) and the underlying geospatial
+domain with [`domain`](@ref):
+
+```@example quickstart
+values(Ω)
+```
+
+```@example quickstart
+domain(Ω)
+```
+
+and this can be useful for writing algorithms that depend purely on
+the geometry or purely on the feature values.
 
 ### Table transforms
 
-We can design advanced geospatial pipelines that operate on the attribute
-table or on the underlying geospatial domain:
+It is easy to design advanced geospatial pipelines that operate on
+both the table of attributes and the underlying geospatial domain:
 
-```@example workflow
+```@example quickstart
 # pipeline with table transforms
 pipe = Quantile()
 
@@ -108,12 +129,26 @@ These pipelines are revertible meaning that one can transform the data,
 perform geostatistical modeling, and revert the pipelines to obtain
 estimates in the original sample space (see [Transforms](transforms.md)).
 
+### Split-apply-combine
+
+We provide three macros [`@groupby`](@ref), [`@transform`](@ref) and
+[`@combine`](@ref) for powerful geospatial split-apply-combine patterns:
+
+```@example quickstart
+@transform(Ω, :W = 2 * :Z * area(:geometry))
+```
+
+These macros are very useful for geodata science as they hide the
+complexity of the `geometry` column. For more information, check
+the [Split-apply-combine](splitapplycombine.md) section of the
+documentation.
+
 ### Geospatial views
 
 Geospatial data can be viewed at a subset of locations without
 unnecessary memory allocations:
 
-```@example workflow
+```@example quickstart
 Ωᵥ = view(Ω, 1:10*100)
 
 plot(Ωᵥ)
@@ -122,8 +157,8 @@ plot(Ωᵥ)
 We plot a random view of the grid to emphasize that views do not
 preserve geospatial regularity:
 
-```@example workflow
-inds = rand(1:nelements(Ω), 100)
+```@example quickstart
+inds = rand(1:100*200, 100)
 
 plot(view(Ω, inds))
 ```
@@ -134,7 +169,7 @@ Geospatial data can be partitioned with various efficient methods.
 To demonstrate the operation, we partition our geospatial data view
 into balls of given radius:
 
-```@example workflow
+```@example quickstart
 Π = partition(Ωᵥ, BallPartition(5.))
 
 plot(Π)
@@ -142,7 +177,7 @@ plot(Π)
 
 or, alternatively, into two halfspaces:
 
-```@example workflow
+```@example quickstart
 Π = partition(Ωᵥ, BisectFractionPartition((1.,1.), 0.5))
 
 plot(Π)
@@ -152,11 +187,11 @@ Geospatial partitions are (lazy) iterators of geospatial views, which
 are useful in many contexts as it will be shown in the next section.
 To access a subset of a partition, we use index notation:
 
-```@example workflow
+```@example quickstart
 plot(Π[1])
 ```
 
-```@example workflow
+```@example quickstart
 plot(Π[2])
 ```
 
@@ -175,7 +210,7 @@ Let's assume that we have geopatial data with some variable that we want
 to predict in a supervised learning setting. We load the data from a CSV
 file, and inspect the available columns:
 
-```@example workflow
+```@example quickstart
 using CSV
 
 csv = CSV.File("data/agriculture.csv")
@@ -188,15 +223,15 @@ purpose of training a learning model. Because the labels are categorical
 variables, we need to inform the framework the correct scientific type from
 [ScientificTypes.jl](https://github.com/JuliaAI/ScientificTypes.jl):
 
-```@example workflow
-table = coerce(csv, :crop => Multiclass)
+```@example quickstart
+table = csv |> Coerce(:crop => Multiclass)
 
 first(table.crop, 5)
 ```
 
 We can now georeference the table and plot some of the variables:
 
-```@example workflow
+```@example quickstart
 Ω = georef(table, (:x,:y))
 
 plot(Ω, (:band4,:crop), ms=0.2, mc=:viridis)
@@ -207,7 +242,7 @@ into "train" and "test" sets. The main difference here is that our
 geospatial `split` function accepts a separating plane specified by
 its normal direction `(1,-1)`:
 
-```@example workflow
+```@example quickstart
 Ωs, Ωt = split(Ω, 0.2, (1.,-1.))
 
 plot(domain(Ωs), ms=0.2, mc=:royalblue)
@@ -225,7 +260,7 @@ We want to predict the crop type based on the four satellite bands.
 We will train the model in Ωs where labels are available, and apply it
 to Ωt, which is our target:
 
-```@example workflow
+```@example quickstart
 feats = [:band1,:band2,:band3,:band4]
 label = :crop
 
@@ -239,7 +274,7 @@ GeoStats.jl is integrated with the
 project, which means that we can solve geostatistical learning problems
 with more than 150 classical learning models:
 
-```@example workflow
+```@example quickstart
 using MLJ
 
 ℳ = MLJ.@load DecisionTreeClassifier pkg=DecisionTree
@@ -251,7 +286,7 @@ In this example, we selected a `PointwiseLearn` strategy to solve the
 geostatistical learning problem. This strategy consists of applying the
 learning model pointwise for every location in the geospatial data:
 
-```@example workflow
+```@example quickstart
 Ω̂t = solve(𝒫, ℒ)
 ```
 
@@ -262,7 +297,7 @@ geospatial data object, and we can inspect it with the same methods
 already described above. This also means that we can plot the solution
 directly, side by side with the true label in this synthetic example:
 
-```@example workflow
+```@example quickstart
 p̂ = plot(Ω̂t, ms=0.2, mc=:viridis, title="crop (prediction)")
 p = plot(Ωt, (:crop,), ms=0.2, mc=:viridis)
 

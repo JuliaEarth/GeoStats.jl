@@ -14,37 +14,37 @@ error(::Any, ::Any, ::ErrorEstimationMethod)
 
 Below is the list of currently implemented error estimation methods.
 
-## Leave-one-out validation
+## Leave-one-out
 
 ```@docs
 LeaveOneOut
 ```
 
-## Leave-ball-out validation
+## Leave-ball-out
 
 ```@docs
 LeaveBallOut
 ```
 
-## Cross-validation
+## K-fold
 
 ```@docs
-CrossValidation
+KFoldValidation
 ```
 
-## Block cross-validation
+## Block
 
 ```@docs
-BlockCrossValidation
+BlockValidation
 ```
 
-## Weighted cross-validation
+## Weighted
 
 ```@docs
-WeightedCrossValidation
+WeightedValidation
 ```
 
-## Density-ratio validation
+## Density-ratio
 
 ```@docs
 DensityRatioValidation

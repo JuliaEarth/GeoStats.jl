@@ -86,26 +86,6 @@ r = range(-1,stop=1,length=100)
 plot(plot(𝒟), plot(ℳ))
 ```
 
-## Groupby
-
-```@docs
-groupby(::Data, ::Symbol)
-```
-
-```@example
-using GeoStats # hide
-using GeoStatsImages # hide
-using Plots # hide
-using GeoStatsPlots # hide
-gr(format=:png) # hide
-
-𝒟 = geostatsimage("Strebelle")
-
-ℱ = groupby(𝒟, :facies)
-
-plot(plot(ℱ[1],ms=0.2), plot(ℱ[2],ms=0.2))
-```
-
 ## Integrate
 
 ```@docs

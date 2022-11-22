@@ -34,3 +34,15 @@ C = cluster(Ω, GHC(20, 1.0))
 
 plot(plot(Ω), plot(C))
 ```
+
+## GSC
+
+```@docs
+GSC
+```
+
+```@example clustering
+C = cluster(Ω, GSC(50, 2.0))
+
+plot(plot(Ω), plot(C))
+```

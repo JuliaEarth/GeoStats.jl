@@ -403,10 +403,10 @@ function solve(problem::LearningProblem, solver::MeanSolver)
   resp   = first(outputvars(ptask))
 
   # mean of response over source data
-  μ = mean(sdata[resp])
+  μ = mean(sdata[:,resp])
 
   # copy the mean over target domain
-  μs = fill(μ, nelements(tdata))
+  μs = fill(μ, nitems(tdata))
 
   # new table of attributes
   table = (; zip([resp], [μs])...)
