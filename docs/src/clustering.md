@@ -1,14 +1,10 @@
 # Clustering
 
-Geostatistical clustering (a.k.a. domaining) is the process of partitioning
-geospatial data in terms of both features and geospatial coordinates. Below
-is the current list of clustering methods available:
+Unlike traditional clustering algorithms in machine learning,
+geostatistical clustering (a.k.a. domaining) algorithms consider
+both the features and the geospatial coordinates of the data.
 
-## SLIC
-
-```@docs
-SLIC
-```
+Consider the following data as an example:
 
 ```@example clustering
 using GeoStats # hide
@@ -16,12 +12,26 @@ using Plots # hide
 using GeoStatsPlots # hide
 gr(format=:png) # hide
 
-Ω = georef((Z=[10sin(i/10) + j for i in 1:100, j in 1:100],))
+Ω = georef((Z=[10sin(i/10) + j for i in 1:2:100, j in 1:2:100],))
 
-C = cluster(Ω, SLIC(50, 0.01))
-
-plot(plot(Ω), plot(C))
+plot(Ω)
 ```
+
+We can cluster the data with traditional clustering models from MLJ.jl:
+
+```@example clustering
+using MLJ
+
+kmeans = MLJ.@load KMeans pkg=Clustering
+
+C = cluster(Ω, kmeans(k=50))
+
+plot(C)
+```
+
+but there is no guarantee that the clusters will consist of contiguous
+volumes in space. Alternatively, we can use the following geostatistical
+models:
 
 ## GHC
 
@@ -32,7 +42,7 @@ GHC
 ```@example clustering
 C = cluster(Ω, GHC(20, 1.0))
 
-plot(plot(Ω), plot(C))
+plot(C)
 ```
 
 ## GSC
@@ -44,5 +54,17 @@ GSC
 ```@example clustering
 C = cluster(Ω, GSC(50, 2.0))
 
-plot(plot(Ω), plot(C))
+plot(C)
+```
+
+## SLIC
+
+```@docs
+SLIC
+```
+
+```@example clustering
+C = cluster(Ω, SLIC(50, 0.01))
+
+plot(C)
 ```
