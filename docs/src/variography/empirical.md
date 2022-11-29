@@ -38,7 +38,7 @@ using GeoStats # hide
 using GeoStatsImages
 using Plots # hide
 using GeoStatsPlots # hide
-gr(size=(800,400)) # hide
+gr(size=(800,400),aspectratio=:equal) # hide
 
 𝒟 = geostatsimage("Gaussian30x10")
 
@@ -52,6 +52,7 @@ EmpiricalVariogram
 ```@example empirical
 γ = EmpiricalVariogram(𝒟, :Z, maxlag=50.)
 
+gr(size=(800,400),aspectratio=:none) # hide
 plot(γ)
 ```
 

@@ -120,6 +120,7 @@ pipe = Quantile()
 Ω̄ = Ω |> pipe
 
 # plot distribution before and after pipeline
+gr(format=:png,size=(800,400),aspectratio=:none) # hide
 p1 = histogram(Ω.Z, color=:gray80, label="original")
 p2 = histogram(Ω̄.Z, color=:gray80, label="quantile")
 plot(p1, p2, layout=(2,1))
@@ -151,6 +152,7 @@ unnecessary memory allocations:
 ```@example quickstart
 Ωᵥ = view(Ω, 1:10*100)
 
+gr(format=:png,size=(800,400),aspectratio=:equal) # hide
 plot(Ωᵥ)
 ```
 
