@@ -1,7 +1,7 @@
 <p align="center">
   <img src="docs/src/assets/logo-text.svg" height="200"><br>
   <a href="https://github.com/JuliaEarth/GeoStats.jl/actions">
-    <img src="https://img.shields.io/github/workflow/status/JuliaEarth/GeoStats.jl/CI?style=flat-square">
+    <img src="https://img.shields.io/github/actions/workflow/status/JuliaEarth/GeoStats.jl/CI.yml?branch=master&style=flat-square">
   </a>
   <a href="https://julialang.zulipchat.com/#narrow/stream/276201-geostats.2Ejl">
     <img src="https://img.shields.io/badge/chat-on%20zulip-9cf?style=flat-square">
