@@ -194,6 +194,7 @@ This project would not be possible without the contributions of:
       <td align="center"><a href="https://github.com/decarvalhojunior-fh"><img src="https://avatars.githubusercontent.com/u/102302676?v=4?s=100" width="100px;" alt="decarvalhojunior-fh"/><br /><sub><b>decarvalhojunior-fh</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=decarvalhojunior-fh" title="Code">💻</a></td>
       <td align="center"><a href="https://github.com/DianaPat"><img src="https://avatars.githubusercontent.com/u/105749646?v=4?s=100" width="100px;" alt="DianaPat"/><br /><sub><b>DianaPat</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=DianaPat" title="Code">💻</a></td>
       <td align="center"><a href="https://github.com/jwscook"><img src="https://avatars.githubusercontent.com/u/15519866?v=4?s=100" width="100px;" alt="James Cook"/><br /><sub><b>James Cook</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=jwscook" title="Code">💻</a></td>
+      <td align="center"><a href="https://github.com/vickydeka"><img src="https://avatars.githubusercontent.com/u/48693415?v=4?s=100" width="100px;" alt="vickydeka"/><br /><sub><b>vickydeka</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=vickydeka" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>
