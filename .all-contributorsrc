@@ -374,6 +374,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "lihua-cat",
+      "name": "刘昊",
+      "avatar_url": "https://avatars.githubusercontent.com/u/42488653?v=4",
+      "profile": "https://github.com/lihua-cat",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
