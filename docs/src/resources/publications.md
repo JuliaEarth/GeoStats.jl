@@ -2,6 +2,10 @@
 
 Below is a list of publications made possible with this project:
 
+- *Karsanina, M. & Gerke, K. 2022.* [Stochastic (re)constructions of non-stationary material structures:
+  Using ensemble averaged correlation functions and non-uniform phase distributions]
+  (https://www.sciencedirect.com/science/article/abs/pii/S037843712200975X)
+
 - *Sepúlveda et al. 2022.* [Evaluation of multivariate Gaussian transforms for geostatistical
   applications](https://www.researchsquare.com/article/rs-2087808/v1)
 
