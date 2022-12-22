@@ -383,6 +383,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "stla",
+      "name": "stla",
+      "avatar_url": "https://avatars.githubusercontent.com/u/4466543?v=4",
+      "profile": "https://github.com/stla",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
