@@ -392,6 +392,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "dorn-gerhard",
+      "name": "Gerhard Dorn",
+      "avatar_url": "https://avatars.githubusercontent.com/u/67096719?v=4",
+      "profile": "https://github.com/dorn-gerhard",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
