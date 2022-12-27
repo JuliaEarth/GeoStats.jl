@@ -73,9 +73,7 @@ makedocs(
     ],
     "Contributing" => [
       "contributing/guidelines.md",
-      "Developer guide" => [
-        "contributing/solvers.md"
-      ]
+      "contributing/solvers.md"
     ],
     "Resources" => [
       "resources/education.md",

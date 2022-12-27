@@ -125,7 +125,8 @@ The project is split into various packages:
 | [Meshes.jl](https://github.com/JuliaGeometry/Meshes.jl) | Computational geometry and advanced meshing algorithms. |
 | [TableTransforms.jl](https://github.com/JuliaML/TableTransforms.jl) | Transforms and pipelines with tabular data. |
 | [Variography.jl](https://github.com/JuliaEarth/Variography.jl) | Variogram estimation and modeling, and related tools. |
-| [KrigingEstimators.jl](https://github.com/JuliaEarth/KrigingEstimators.jl) | High-performance implementations of Kriging estimators. |
+| [KrigingEstimators.jl](https://github.com/JuliaEarth/KrigingEstimators.jl) | Kriging estimation over general geospatial domains. |
+| [DensityRatioEstimation.jl](https://github.com/JuliaML/DensityRatioEstimation.jl) | High-performance density ratio estimation. |
 | [PointPatterns.jl](https://github.com/JuliaEarth/PointPatterns.jl) | Geospatial point pattern analysis and synthesis. |
 | [GeoClustering.jl](https://github.com/JuliaEarth/GeoClustering.jl) | Geostatistical clustering (a.k.a. domaining). |
 | [GeoStatsSolvers.jl](https://github.com/JuliaEarth/GeoStatsSolvers.jl) | Built-in geostatistical solvers. |
@@ -135,6 +136,8 @@ Other packages can be installed separately for additional functionality:
 
 | Package | Description |
 |:-------:|:------------|
+| [GeoStatsViz.jl](https://github.com/JuliaEarth/GeoStatsViz.jl) | Recipes for visualization of geospatial data with [Makie.jl](https://docs.makie.org/stable). |
+| [GeoStatsPlots.jl](https://github.com/JuliaEarth/GeoStatsPlots.jl) | Recipes for visualization of geospatial data with [Plots.jl](https://docs.juliaplots.org/stable). |
 | [GeoStatsImages.jl](https://github.com/JuliaEarth/GeoStatsImages.jl) | Training images for multiple-point simulation. |
 | [GeoTables.jl](https://github.com/JuliaEarth/GeoTables.jl) | (Down)load geospatial tables in various formats. |
 | [DrillHoles.jl](https://github.com/JuliaEarth/DrillHoles.jl) | Desurvey/composite drillhole data. |

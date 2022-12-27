@@ -4,7 +4,7 @@ After reading this guide, you should be able to write your own geostatistical
 solver, and enjoy a large set of features *for free*, including distributed
 parallel execution, a suite of meta algorithms, and various plot recipes. If
 you have any questions, please don't hesitate to ask in our
-[gitter channel](https://gitter.im/JuliaEarth/GeoStats.jl).
+[community channel](../about/community.md).
 
 ## Basics
 
