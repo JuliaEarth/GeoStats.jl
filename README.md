@@ -200,6 +200,7 @@ This project would not be possible without the contributions of:
     <tr>
       <td align="center"><a href="https://github.com/stla"><img src="https://avatars.githubusercontent.com/u/4466543?v=4?s=100" width="100px;" alt="stla"/><br /><sub><b>stla</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=stla" title="Code">💻</a></td>
       <td align="center"><a href="https://github.com/dorn-gerhard"><img src="https://avatars.githubusercontent.com/u/67096719?v=4?s=100" width="100px;" alt="Gerhard Dorn"/><br /><sub><b>Gerhard Dorn</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=dorn-gerhard" title="Code">💻</a></td>
+      <td align="center"><a href="https://github.com/jackbeagley"><img src="https://avatars.githubusercontent.com/u/15933842?v=4?s=100" width="100px;" alt="Jack Beagley"/><br /><sub><b>Jack Beagley</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=jackbeagley" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>
