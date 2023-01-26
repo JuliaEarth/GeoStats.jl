@@ -34,7 +34,10 @@ can do as a community is to list educational resources.
 
 ### Workshops
 
-- [CBMina 2021](https://github.com/juliohm/CBMina2021)
+- [JuliaEO 2023](https://github.com/Arpeggeo/JuliaEO2023)
+  [English] - Global Workshop on Earth Observation with GeoStats.jl
+
+- [CBMina 2021](https://github.com/Arpeggeo/CBMina2021)
   [Portuguese] - GeoStats.jl at the Brazilian mining congress.
 
 - [UFMG 2021](https://github.com/fnaghetini/intro-to-geostats)
