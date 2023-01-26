@@ -45,7 +45,7 @@ Meshes.GeometricTransform
 TableTransforms.FeatureTransform
 ```
 
-Other transforms such as [`Detrend`](@ref) are are defined in terms of both
+Other transforms such as [`Detrend`](@ref) are defined in terms of both
 the geospatial domain and the attribute table:
 
 ```@docs
