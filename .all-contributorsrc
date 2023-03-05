@@ -419,6 +419,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "kylebeggs",
+      "name": "Kyle Beggs",
+      "avatar_url": "https://avatars.githubusercontent.com/u/24981811?v=4",
+      "profile": "http://kylebeggs.com",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
