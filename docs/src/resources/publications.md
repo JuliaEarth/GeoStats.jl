@@ -2,6 +2,9 @@
 
 Below is a list of publications made possible with this project:
 
+- *Gruchalla et al. 2023.* [Reevaluating Contour Visualizations for Power Systems Data]
+  (https://www.researchgate.net/publication/368997941_Reevaluating_Contour_Visualizations_for_Power_Systems_Data)
+
 - *Karsanina, M. & Gerke, K. 2022.* [Stochastic (re)constructions of non-stationary material structures:
   Using ensemble averaged correlation functions and non-uniform phase distributions]
   (https://www.sciencedirect.com/science/article/abs/pii/S037843712200975X)
