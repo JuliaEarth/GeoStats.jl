@@ -428,6 +428,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "ErickChacon",
+      "name": "Dr. Erick A. Chacón Montalván",
+      "avatar_url": "https://avatars.githubusercontent.com/u/7862458?v=4",
+      "profile": "https://erickchacon.gitlab.io/",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
