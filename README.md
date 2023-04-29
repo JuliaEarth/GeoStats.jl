@@ -203,6 +203,7 @@ This project would not be possible without the contributions of:
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/jackbeagley"><img src="https://avatars.githubusercontent.com/u/15933842?v=4?s=100" width="100px;" alt="Jack Beagley"/><br /><sub><b>Jack Beagley</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=jackbeagley" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/cserteGT3"><img src="https://avatars.githubusercontent.com/u/26418354?v=4?s=100" width="100px;" alt="cserteGT3"/><br /><sub><b>cserteGT3</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=cserteGT3" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="http://kylebeggs.com"><img src="https://avatars.githubusercontent.com/u/24981811?v=4?s=100" width="100px;" alt="Kyle Beggs"/><br /><sub><b>Kyle Beggs</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=kylebeggs" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://erickchacon.gitlab.io/"><img src="https://avatars.githubusercontent.com/u/7862458?v=4?s=100" width="100px;" alt="Dr. Erick A. Chacón Montalván"/><br /><sub><b>Dr. Erick A. Chacón Montalván</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=ErickChacon" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>
