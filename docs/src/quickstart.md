@@ -8,15 +8,23 @@ A geostatistical workflow often consists of three steps:
 
 In this section, we walk through these steps to illustrate some of the
 features of the project. Although we use [Plots.jl](https://github.com/JuliaPlots/Plots.jl)
-and the [GeoStatsPlots.jl](https://github.com/JuliaEarth/GeoStatsPlots.jl) recipes for
+and [GeoStatsPlots.jl](https://github.com/JuliaEarth/GeoStatsPlots.jl) recipes for
 visualization, we could have used [Makie.jl](https://github.com/JuliaPlots/Makie.jl)
 and [GeoStatsViz.jl](https://github.com/JuliaEarth/GeoStatsViz.jl) recipes for more
-advanced [3D visualization examples](https://github.com/JuliaGeometry/MeshViz.jl).
+advanced 3D examples.
 
 ```@example quickstart
 using GeoStats
 using Plots, GeoStatsPlots
 gr(format=:png,size=(800,400),aspectratio=:equal) # hide
+```
+
+If you prefer learning from video, check the recording of our JuliaEO2023 workshop:
+
+```@raw html
+<p align="center">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/1FfgjW5XQ9g?start=1682" title="GeoStats.jl workshop at JuliaEO2023" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+</p>
 ```
 
 ## Manipulating data
