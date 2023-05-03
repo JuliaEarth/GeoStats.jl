@@ -7,19 +7,8 @@ A geostatistical workflow often consists of three steps:
 3. Visualization of problem solution
 
 In this section, we walk through these steps to illustrate some of the
-features of the project. Although we use [Plots.jl](https://github.com/JuliaPlots/Plots.jl)
-and [GeoStatsPlots.jl](https://github.com/JuliaEarth/GeoStatsPlots.jl) recipes for
-visualization, we could have used [Makie.jl](https://github.com/JuliaPlots/Makie.jl)
-and [GeoStatsViz.jl](https://github.com/JuliaEarth/GeoStatsViz.jl) recipes for more
-advanced 3D examples.
-
-```@example quickstart
-using GeoStats
-using Plots, GeoStatsPlots
-gr(format=:png,size=(800,400),aspectratio=:equal) # hide
-```
-
-If you prefer learning from video, check the recording of our JuliaEO2023 workshop:
+features of the project. If you prefer learning from video, check the
+recording of our JuliaEO2023 workshop:
 
 ```@raw html
 <p align="center">
@@ -28,6 +17,19 @@ If you prefer learning from video, check the recording of our JuliaEO2023 worksh
 ```
 
 ## Manipulating data
+
+Although we use [Plots.jl](https://github.com/JuliaPlots/Plots.jl) and
+[GeoStatsPlots.jl](https://github.com/JuliaEarth/GeoStatsPlots.jl) recipes for
+visualization, we could have used [Makie.jl](https://github.com/JuliaPlots/Makie.jl)
+and [GeoStatsViz.jl](https://github.com/JuliaEarth/GeoStatsViz.jl) recipes for more
+advanced 3D examples:
+
+```@example quickstart
+using GeoStats
+using Plots, GeoStatsPlots
+gr(format=:png,size=(800,400),aspectratio=:equal) # hide
+nothing # hide
+```
 
 The workflow starts with the creation of geospatial data, which can
 be loaded from disk or derived from other Julia variables. For example,
