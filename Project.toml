@@ -1,7 +1,7 @@
 name = "GeoStats"
 uuid = "dcc97b0b-8ce5-5539-9008-bb190f959ef6"
 author = "Júlio Hoffimann <julio.hoffimann@gmail.com>"
-version = "0.37.2"
+version = "0.37.3"
 
 [deps]
 Chain = "8be319e6-bccf-4806-a6f7-6fae938471bc"
@@ -27,7 +27,7 @@ GeoClustering = "0.3"
 GeoStatsBase = "0.30"
 GeoStatsSolvers = "0.2"
 KrigingEstimators = "0.10"
-LossFunctions = "0.9"
+LossFunctions = "0.10"
 Meshes = "0.28"
 PointPatterns = "0.4"
 Reexport = "1.0"
