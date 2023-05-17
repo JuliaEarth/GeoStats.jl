@@ -212,6 +212,9 @@ This project would not be possible without the contributions of:
       <td align="center" valign="top" width="14.28%"><a href="https://erickchacon.gitlab.io/"><img src="https://avatars.githubusercontent.com/u/7862458?v=4?s=100" width="100px;" alt="Dr. Erick A. Chacón Montalván"/><br /><sub><b>Dr. Erick A. Chacón Montalván</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=ErickChacon" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/mfsch"><img src="https://avatars.githubusercontent.com/u/3769324?v=4?s=100" width="100px;" alt="Manuel Schmid"/><br /><sub><b>Manuel Schmid</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=mfsch" title="Code">💻</a></td>
     </tr>
+    <tr>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/longemen3000"><img src="https://avatars.githubusercontent.com/u/38795484?v=4?s=100" width="100px;" alt="Andrés Riedemann"/><br /><sub><b>Andrés Riedemann</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=longemen3000" title="Code">💻</a></td>
+    </tr>
   </tbody>
 </table>
 
