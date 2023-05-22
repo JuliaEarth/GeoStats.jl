@@ -28,8 +28,7 @@
 # Project goals
 
 - Design a comprehensive framework for geostatistics in a modern programming language.
-- Address the lack of a platform for scientific comparison of different geostatistical
-  algorithms in the literature.
+- Address the lack of a platform for scientific comparison of different geostatistical algorithms.
 - Exploit modern hardware aggressively, including GPUs and computer clusters.
 - Educate people outside of the field about the existence of geostatistics.
 
