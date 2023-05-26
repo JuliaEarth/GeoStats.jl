@@ -455,6 +455,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "hyrodium",
+      "name": "Yuto Horikawa",
+      "avatar_url": "https://avatars.githubusercontent.com/u/7488140?v=4",
+      "profile": "https://hyrodium.github.io",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
@@ -463,5 +472,6 @@
   "repoType": "github",
   "repoHost": "https://github.com",
   "skipCi": true,
-  "commitConvention": "angular"
+  "commitConvention": "angular",
+  "commitType": "docs"
 }

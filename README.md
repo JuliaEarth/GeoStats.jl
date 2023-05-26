@@ -213,6 +213,7 @@ This project would not be possible without the contributions of:
     </tr>
     <tr>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/longemen3000"><img src="https://avatars.githubusercontent.com/u/38795484?v=4?s=100" width="100px;" alt="Andrés Riedemann"/><br /><sub><b>Andrés Riedemann</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=longemen3000" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://hyrodium.github.io"><img src="https://avatars.githubusercontent.com/u/7488140?v=4?s=100" width="100px;" alt="Yuto Horikawa"/><br /><sub><b>Yuto Horikawa</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=hyrodium" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>
