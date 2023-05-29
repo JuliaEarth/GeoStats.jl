@@ -157,10 +157,7 @@ plot(NuggetEffect(1.0))
 ### Circular
 
 ```math
-\gamma(h) = \begin{cases}
-  (s - n) \left[ 1 - \frac{2}{\pi} \cos^{-1}\left(\frac{h}{r}\right) + \frac{2h}{\pi r} \sqrt{1 - \frac{h^2}{r^2}}\right] + n \cdot \1_{(0,\infty)}(h), & h \le r \\
-  (s - n) + n \cdot \1_{(0,\infty)}(h), & h > r
-\end{cases}
+\gamma(h) = (s - n) \left[\left(1 - \frac{2}{\pi} \cos^{-1}\left(\frac{h}{r}\right) + \frac{2h}{\pi r} \sqrt{1 - \frac{h^2}{r^2}} \right) \cdot \1_{(0,r)}(h) + \1_{[r,\infty)}(h)\right] + n \cdot \1_{(0,\infty)}(h)
 ```
 
 ```@docs
