@@ -46,7 +46,6 @@ plot(GaussianVariogram())
 
 ```math
 \gamma(h) = (s - n) \left[1 - \exp\left(-3\left(\frac{h}{r}\right)\right)\right] + n \cdot \1_{(0,\infty)}(h)
-
 ```
 
 ```@docs
@@ -154,6 +153,21 @@ NuggetEffect
 ```@example variograms
 plot(NuggetEffect(1.0))
 ```
+
+### Circular
+
+```math
+\gamma(h) = (s - n) \left[\left(1 - \frac{2}{\pi} \cos^{-1}\left(\frac{h}{r}\right) + \frac{2h}{\pi r} \sqrt{1 - \frac{h^2}{r^2}} \right) \cdot \1_{(0,r)}(h) + \1_{[r,\infty)}(h)\right] + n \cdot \1_{(0,\infty)}(h)
+```
+
+```@docs
+CircularVariogram
+```
+
+```@example variograms
+plot(CircularVariogram())
+```
+
 ## Anisotropy
 
 Anisotropic models are easily obtained by defining an ellipsoid metric in
