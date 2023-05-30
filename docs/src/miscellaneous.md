@@ -47,23 +47,6 @@ p2 = plot(plot(P), plot(S), link=:both, ms=3)
 plot(p1, p2, layout=(2,1))
 ```
 
-## Unique
-
-```@docs
-uniquecoords
-```
-
-```@example
-using GeoStats # hide
-using Tables # hide
-
-D = georef((z=[0, 1, 0],), [(0.,0.), (1.,0.), (0.,0.)])
-
-U = uniquecoords(D)
-
-Tables.rows(U)
-```
-
 ## Trend
 
 ```@docs

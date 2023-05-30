@@ -176,7 +176,7 @@ First, we create a custom metric ball, which specifies the ranges and
 angles of rotation of the ellipsoid:
 
 ```@example variograms
-ellipsoid = MetricBall((3.0, 2.0, 1.0), EulerAngles(0.0, 0.0, 0.0))
+ellipsoid = MetricBall((3.0, 2.0, 1.0), RotZXZ(0.0, 0.0, 0.0))
 ```
 
 We then pass this ball as the first argument to the variogram model
@@ -212,7 +212,7 @@ rotation from ``0`` to ``2\pi`` clockwise:
 ```@example variograms
 anim = @animate for θ in range(0, stop=2π, length=10)
   # ellipsoid rotated clockwise by angle θ
-  e = MetricBall((20.,5.), ClockwiseAngle(θ))
+  e = MetricBall((20.,5.), Angle2d(θ))
 
   # anisotropic variogram model
   γ = GaussianVariogram(e)
