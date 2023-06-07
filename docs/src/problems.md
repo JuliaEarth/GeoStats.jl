@@ -115,6 +115,42 @@ sol = solve(𝒫, S1)
 heatmap(sol)
 ```
 
+### Generating realizations in parallel with multiple processes
+
+Solvers for simulation problems can generate realizations in parallel using multiple processes.
+Doing so requires using the `Distributed` package, like in the following example.
+
+```@example simulation
+using Plots, # hide
+using Distributed
+
+# request processes
+addprocs(3)
+
+# load code on every process
+@everywhere using GeoStats
+
+# main script on main process
+table = (Z=[1.,0.,1.],)
+coord = [(25.,25.), (50.,75.), (75.,50.)]
+
+𝒟 = georef(table, coord)
+𝒢 = CartesianGrid(100, 100)
+
+problem = SimulationProblem(𝒟, 𝒢, :Z, 3)
+solver = LUGS(:Z => (variogram=GaussianVariogram(range=35),))
+
+# solve on all processes
+print("starting solve")
+sol = solve(problem, solver, procs=procs())
+
+# plot the realizations
+heatmap(sol)
+```
+
+For more information on distributed computing in Julia, see
+[The ultimate guide to distributed computing in Julia](https://github.com/Arpeggeo/julia-distributed-computing/tree/master).
+
 ## Learning
 
 ```@docs
