@@ -464,6 +464,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "conordoherty",
+      "name": "Conor Doherty",
+      "avatar_url": "https://avatars.githubusercontent.com/u/5650772?v=4",
+      "profile": "https://github.com/conordoherty",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7,
