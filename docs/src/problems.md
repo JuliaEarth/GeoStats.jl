@@ -121,7 +121,7 @@ Solvers for simulation problems can generate realizations in parallel using mult
 Doing so requires using the `Distributed` package, like in the following example.
 
 ```@example simulation
-using Plots, # hide
+using GeoStatsPlots, Plots # hide
 using Distributed
 
 # request processes
