@@ -115,22 +115,22 @@ sol = solve(𝒫, S1)
 heatmap(sol)
 ```
 
-### Generating realizations in parallel with multiple processes
-
 Solvers for simulation problems can generate realizations in parallel using multiple processes.
 Doing so requires using the `Distributed` package, like in the following example.
 
 ```@example simulation
-using GeoStatsPlots, Plots # hide
 using Distributed
 
-# request processes
+# request additional processes
 addprocs(3)
 
-# load code on every process
+# load code on every single process
 @everywhere using GeoStats
 
-# main script on main process
+# ------------
+# main script
+# ------------
+
 table = (Z=[1.,0.,1.],)
 coord = [(25.,25.), (50.,75.), (75.,50.)]
 
@@ -140,11 +140,10 @@ coord = [(25.,25.), (50.,75.), (75.,50.)]
 problem = SimulationProblem(𝒟, 𝒢, :Z, 3)
 solver = LUGS(:Z => (variogram=GaussianVariogram(range=35),))
 
-# solve on all processes
-print("starting solve")
+# solve on all available processes
 sol = solve(problem, solver, procs=procs())
 
-# plot the realizations
+# plot realizations
 heatmap(sol)
 ```
 
