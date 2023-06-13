@@ -1,5 +1,15 @@
 # Domains
 
+```@example domains
+using JSServe: Page # hide
+Page(exportable=true, offline=true) # hide
+```
+
+```@example domains
+using GeoStats, GeoStatsViz # hide
+import WGLMakie as Mke # hide
+```
+
 ## Overview
 
 A geospatial domain is a region in physical space where data
@@ -16,49 +26,35 @@ Please check their documentation for more details.
 ### PointSet
 
 ```@example domains
-using GeoStats # hide
-using Plots # hide
-using GeoStatsPlots # hide
-gr(size=(600,600)) # hide
-
 pset = PointSet(rand(3,100))
-```
 
-```@example domains
-plot(pset)
+viz(pset)
 ```
 
 ### GeometrySet
 
 ```@example domains
-t = Triangle((0.0,0.0), (1.0,1.0), (0.0,1.0))
-q = Quadrangle((1.0,1.0), (2.0,1.0), (2.0,2.0), (1.0,2.0))
+tria = Triangle((0.0, 0.0), (1.0, 1.0), (0.0, 1.0))
+quad = Quadrangle((1.0, 1.0), (2.0, 1.0), (2.0, 2.0), (1.0, 2.0))
+gset = GeometrySet([tria, quad])
 
-gset = GeometrySet([t, q])
-```
-
-```@example domains
-plot(gset, fillcolor=:gray90, linecolor=:black)
+viz(gset, showfacets = true)
 ```
 
 ### CartesianGrid
 
 ```@example domains
-grid = CartesianGrid(10,10,10)
-```
+grid = CartesianGrid(10, 10, 10)
 
-```@example domains
-plot(grid)
+viz(grid, showfacets = true)
 ```
 
 ### SimpleMesh
 
 ```@example domains
-points = Point2[(0,0), (1,0), (0,1), (1,1), (0.25,0.5), (0.75,0.5)]
-connec = connect.([(1,5,3),(4,6,2),(1,2,6,5),(4,3,5,6)], Ngon)
+points = [(0.0, 0.0), (1.0, 0.0), (0.0, 1.0), (1.0, 1.0), (0.25, 0.5), (0.75, 0.5)]
+connec = connect.([(1,5,3),(4,6,2),(1,2,6,5),(4,3,5,6)])
 mesh   = SimpleMesh(points, connec)
-```
 
-```@example domains
-plot(mesh, fillcolor=:gray90, linecolor=:black)
+viz(mesh, showfacets = true)
 ```
