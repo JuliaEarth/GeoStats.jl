@@ -118,7 +118,7 @@ heatmap(sol)
 Solvers for simulation problems can generate realizations in parallel using multiple processes.
 Doing so requires using the `Distributed` package, like in the following example.
 
-```@example simulation
+```julia
 using Distributed
 
 # request additional processes
@@ -142,9 +142,6 @@ solver = LUGS(:Z => (variogram=GaussianVariogram(range=35),))
 
 # solve on all available processes
 sol = solve(problem, solver, procs=procs())
-
-# plot realizations
-heatmap(sol)
 ```
 
 For more information on distributed computing in Julia, see

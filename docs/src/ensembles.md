@@ -13,8 +13,8 @@ gr(size=(900,400)) # hide
 
 # geospatial samples
 S = let
-  coord = [(25.,25.), (50.,75.), (75.,50.)]
   table = (z=[1.,0.,1.],)
+  coord = [(25.,25.), (50.,75.), (75.,50.)]
   georef(table, coord)
 end
 
