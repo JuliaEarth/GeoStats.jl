@@ -5,11 +5,6 @@ using JSServe: Page # hide
 Page(exportable=true, offline=true) # hide
 ```
 
-```@example domains
-using GeoStats, GeoStatsViz # hide
-import WGLMakie as Mke # hide
-```
-
 ## Overview
 
 A geospatial domain is a region in physical space where data
@@ -22,6 +17,11 @@ the [Meshes.jl](https://github.com/JuliaGeometry/Meshes.jl) project.
 Please check their documentation for more details.
 
 ## Examples
+
+```@example domains
+using GeoStats, GeoStatsViz
+import WGLMakie as Mke
+```
 
 ### PointSet
 
