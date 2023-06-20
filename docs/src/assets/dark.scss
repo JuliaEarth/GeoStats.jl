@@ -7,7 +7,7 @@
 
 ////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////
-// Thse define the template:
+// These define the template:
 $maincolor: rgb(78, 134, 151);   // main color of the org theme
 $secondcolor: rgb(197, 96, 255); // secondary color that serves as accents
                        // it is used as-is for links in light theme
@@ -136,7 +136,7 @@ html.theme--#{$themename} {
       background-color: darken-color($documenter-sidebar-background, 1);
       border-color: darken-color($documenter-sidebar-background, 2);
       margin-top: 1.0rem;
-      margin-bottom: 1.0rem; // adjust the margings between search and other elements
+      margin-bottom: 1.0rem; // adjust the margins between search and other elements
       &::placeholder {
         color: $mainwhite; // placeholder text color ("Search here...")
       }

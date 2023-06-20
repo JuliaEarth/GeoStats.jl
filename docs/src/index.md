@@ -19,7 +19,7 @@ branch that takes geospatial coordinates of data into account.
 
 [GeoStats.jl](https://github.com/JuliaEarth/GeoStats.jl) is an attempt to bring
 together bleeding-edge research in the geostatistics community into a comprehensive
-framework for geospatial modeling, as well as to empower researchers and practioners
+framework for geospatial modeling, as well as to empower researchers and practitioners
 with a toolkit for fast assessment of different modeling approaches.
 
 The design of this project is the result of many years developing geostatistical

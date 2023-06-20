@@ -30,7 +30,7 @@ Below is a list of publications made possible with this project:
 - *Hoffimann et al. 2019.* [Morphodynamic Analysis and Statistical Synthesis of Geomorphic Data:
   Application to a Flume Experiment](https://agupubs.onlinelibrary.wiley.com/doi/abs/10.1029/2019JF005245)
 
-- *Barfod et al. 2017.* [Hydrostratigraphic Modeling using Multiple-point Statistics and Airbone Transient
+- *Barfod et al. 2017.* [Hydrostratigraphic Modeling using Multiple-point Statistics and Airborne Transient
   Electromagnetic Methods](https://hess.copernicus.org/articles/22/3351/2018)
 
 - *Hoffimann et al. 2017.* [Stochastic Simulation by Image Quilting of Process-based Geological Models]
