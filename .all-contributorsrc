@@ -473,6 +473,15 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "spaette",
+      "name": "spaette",
+      "avatar_url": "https://avatars.githubusercontent.com/u/111918424?v=4",
+      "profile": "https://github.com/spaette",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7,
