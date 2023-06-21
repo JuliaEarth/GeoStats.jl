@@ -105,7 +105,7 @@ $input-focus-border-color: $mainwhite;
     background-color: darken-color($documenter-sidebar-background, 1);
     border-color: darken-color($documenter-sidebar-background, 2);
     margin-top: 1.0rem;
-    margin-bottom: 1.0rem; // adjust the margings between search and other elements
+    margin-bottom: 1.0rem; // adjust the margins between search and other elements
     &::placeholder {
       color: $mainwhite; // placeholder text color ("Search here...")
     }

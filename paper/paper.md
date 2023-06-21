@@ -39,7 +39,7 @@ precisely once, and switch between different solvers effortlessly. The same
 abstraction layer enables the development of higher-order routines that operate
 on solvers as first-class objects (e.g. cross-validation), a feature that gives
 researchers the ability to experiment with various geomodeling assumptions
-programatically.
+programmatically.
 
 Besides its technical contributions, the project aims to educate people outside
 of the field about state-of-the-art methods in geostatistics, their assumptions,
