@@ -56,9 +56,10 @@ plot!(path.geometry, fill = true, color = :gray90)
 
 !!! note
 
-    We highly recommend using Meshes.jl geometries in geospatial workflows as they
-    were carefully designed to accomodate the advanced features of the framework.
-    Any other geometry type will likely fail with our geostatistical algorithms.
+    We **highly recommend** using Meshes.jl geometries in geospatial workflows as
+    they were carefully designed to accomodate advanced features of the GeoStats.jl
+    framework. Any other geometry type will likely fail with our geostatistical
+    algorithms and pipelines.
 
 ### Creating data
 
