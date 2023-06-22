@@ -16,8 +16,29 @@ different geometries and domains documented in
 Base.rand(::AbstractRNG, ::PointProcess, ::Any, ::Int)
 ```
 
+For example, we can simulate a homogeneous Poisson process
+with given intensity over the sphere:
+
+```@example pointprocs
+# geometry of interest
+sphere = Sphere((0, 0, 0), 1)
+
+# homogeneous Poisson process
+proc = PoissonProcess(2.0)
+
+# sample two point patterns
+pset = rand(proc, sphere, 2)
+
+fig = Mke.Figure(resolution = (800, 400))
+viz(fig[1,1], sphere)
+viz!(fig[1,1], pset[1], color = :black)
+viz(fig[1,2], sphere)
+viz!(fig[1,2], pset[2], color = :black)
+fig
+```
+
 The homogeneity property of a point process can be checked
-with the `ishomogeneous` function:
+with the [`ishomogeneous`](@ref) function:
 
 ```@docs
 ishomogeneous
@@ -35,11 +56,10 @@ BinomialProcess
 # geometry of interest
 box = Box((0, 0), (100, 100))
 
-# superposition of two Binomial processes
-proc₁ = BinomialProcess(500)
-proc₂ = BinomialProcess(500)
-proc  = proc₁ ∪ proc₂ # 1000 points
+# Binomial process
+proc = BinomialProcess(1000)
 
+# sample point patterns
 pset = rand(proc, box, 2)
 
 fig = Mke.Figure(resolution = (800, 400))
@@ -69,6 +89,7 @@ proc₁ = PoissonProcess(0.5)
 # inhomogeneous process
 proc₂ = PoissonProcess(λ)
 
+# sample point patterns
 pset₁ = rand(proc₁, box)
 pset₂ = rand(proc₂, box)
 
