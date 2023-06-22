@@ -1,5 +1,13 @@
 # Processes
 
+```@example pointpatterns
+using JSServe: Page # hide
+Page(exportable=true, offline=true) # hide
+
+using GeoStats, GeoStatsViz # hide
+import WGLMakie as Mke # hide
+```
+
 Point processes can be simulated with the function `rand` on
 different geometries and domains:
 
@@ -7,32 +15,48 @@ different geometries and domains:
 Base.rand(::AbstractRNG, ::PointProcess, ::Any, ::Int)
 ```
 
-For example, a Poisson process with given intensity in a rectangular region:
+For example, we can simulate a Poisson process with
+given intensity in a box:
 
 ```@example pointpatterns
-using GeoStats # hide
-using Plots # hide
-using GeoStatsPlots # hide
-gr(format=:svg) # hide
+# geometry of interest
+box = Box((0, 0), (100, 100))
 
-p = PoissonProcess(0.1)
-b = Box((0.,0.), (100.,100.))
+# intensity function
+λ(p) = sum(coordinates(p))^2 / 10000
 
-s = rand(p, b, 2)
+# homogeneous process
+proc₁ = PoissonProcess(0.5)
 
-plot(plot(s[1]), plot(s[2]))
+# inhomogeneous process
+proc₂ = PoissonProcess(λ)
+
+pset₁ = rand(proc₁, box)
+pset₂ = rand(proc₂, box)
+
+fig = Mke.Figure(resolution = (800, 400))
+viz(fig[1,1], box)
+viz!(fig[1,1], pset₁, color = :black, pointsize = 3)
+viz(fig[1,2], box)
+viz!(fig[1,2], pset₂, color = :black, pointsize = 3)
+fig
 ```
 
 or the superposition of two Binomial processes:
 
 ```@example pointpatterns
-p₁ = BinomialProcess(50)
-p₂ = BinomialProcess(50)
-p  = p₁ ∪ p₂ # 100 points
+proc₁ = BinomialProcess(500)
+proc₂ = BinomialProcess(500)
+proc  = proc₁ ∪ proc₂ # 1000 points
 
-s = rand(p, b, 2)
+pset = rand(proc, box, 2)
 
-plot(plot(s[1]), plot(s[2]))
+fig = Mke.Figure(resolution = (800, 400))
+viz(fig[1,1], box)
+viz!(fig[1,1], pset[1], color = :black, pointsize = 3)
+viz(fig[1,2], box)
+viz!(fig[1,2], pset[2], color = :black, pointsize = 3)
+fig
 ```
 
 The homogeneity property of a point process can be checked
@@ -54,10 +78,4 @@ BinomialProcess
 
 ```@docs
 PoissonProcess
-```
-
-## UnionProcess
-
-```@docs
-UnionProcess
 ```
