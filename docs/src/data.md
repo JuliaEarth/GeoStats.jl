@@ -104,47 +104,25 @@ Alternatively, we can interpret the entries of the named tuple as columns in a t
 plot(𝒟)
 ```
 
-### Shapefiles
+### Files
 
 The [GeoTables.jl](https://github.com/JuliaEarth/GeoTables.jl) package
 can be used to load geospatial data from various file formats. It also
 provides utility functions to automatically download maps given the
 name of any region in the world.
 
-We can load a shapefile as a geospatial table that is compatible with
-the framework:
-
 ```@example shapefile
 using GeoTables
 using GeoStats # hide
 using Plots # hide
+gr(size=(600,400)) # hide
 
 zone = GeoTables.load("data/zone.shp")
-```
-
-```@example shapefile
 path = GeoTables.load("data/path.shp")
+
+plot(zone.geometry, fill = true, color = :gray)
+plot!(path.geometry, fill = true, color = :gray90)
 ```
-
-Unlike in previous examples where each row of the table was associated
-with simple geometries (e.g. `Point` or `Quadrangle`), here we have
-more complicated geometries to consider:
-
-```@example shapefile
-zone.geometry
-```
-
-We can visualize these geometries as the domain of the geospatial data
-as usual:
-
-```@example shapefile
-gr(size=(600,400)) # hide
-plot(domain(zone), fill=true, color=:gray)
-plot!(domain(path), fill=true, color=:gray90)
-```
-
-and most importantly, *nothing special needs to be done*. This geospatial
-table can be used with any geostatistical workflow.
 
 ## Custom data
 

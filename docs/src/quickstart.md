@@ -1,10 +1,11 @@
 # Quickstart
 
-A geostatistical workflow often consists of three steps:
+A geostatistical workflow often consists of four steps:
 
-1. Manipulation of geospatial data
-2. Definition of geostatistical problem
-3. Visualization of problem solution
+1. Creation of geospatial data
+2. Manipulation of geospatial data
+3. Definition of geostatistical problem
+4. Visualization of problem solution
 
 In this section, we walk through these steps to illustrate some of the
 features of the project. If you prefer learning from video, check the
@@ -15,8 +16,6 @@ recording of our JuliaEO2023 workshop:
 <iframe width="560" height="315" src="https://www.youtube.com/embed/1FfgjW5XQ9g?start=1682" title="GeoStats.jl workshop at JuliaEO2023" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 </p>
 ```
-
-## Manipulating data
 
 Although we use [Plots.jl](https://github.com/JuliaPlots/Plots.jl) and
 [GeoStatsPlots.jl](https://github.com/JuliaEarth/GeoStatsPlots.jl) recipes for
@@ -31,8 +30,39 @@ gr(format=:png,size=(800,400),aspectratio=:equal) # hide
 nothing # hide
 ```
 
-The workflow starts with the creation of geospatial data, which can
-be loaded from disk or derived from other Julia variables. For example,
+## Loading/creating data
+
+### Loading data
+
+The Julia ecosystem for loading geospatial data is comprised of several
+low-level packages such as [Shapefile.jl](https://github.com/JuliaGeo/Shapefile.jl)
+and [GeoJSON.jl](https://github.com/JuliaGeo/GeoJSON.jl), which define
+their own very basic geometry types. Instead of requesting users to learn
+the so called [GeoInterface.jl](https://github.com/JuliaGeo/GeoInterface.jl)
+to handle these types, we provide the high-level
+[GeoTables.jl](https://github.com/JuliaEarth/GeoTables.jl) package to load
+any file with geospatial data into well-tested geometries that are implemented
+in the [Meshes.jl](https://github.com/JuliaGeometry/Meshes.jl) submodule:
+
+```@example quickstart
+using GeoTables
+
+zone = GeoTables.load("data/zone.shp")
+path = GeoTables.load("data/path.shp")
+
+plot(zone.geometry, fill = true, color = :gray)
+plot!(path.geometry, fill = true, color = :gray90)
+```
+
+!!! note
+
+    We highly recommend using Meshes.jl geometries in geospatial workflows as they
+    were carefully designed to accomodate the advanced features of the framework.
+    Any other geometry type will likely fail with our geostatistical algorithms.
+
+### Creating data
+
+Geospatial data can also be derived from other Julia variables. For example,
 given a Julia array (or image), which is not attached to any particular
 coordinate system:
 
@@ -68,6 +98,8 @@ First, we note that the image was rotated to match the first index `i`
 of the array with the horizontal `x` axis, and the second index `j` of
 the array with the vertical `y` axis. Second, we note that the image
 was stretched to reflect the real `100x200` size of the `CartesianGrid`.
+
+## Manipulating data
 
 ### Table interface
 
