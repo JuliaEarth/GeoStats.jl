@@ -19,6 +19,17 @@ values
 domain
 ```
 
+The [GeoTables.jl](https://github.com/JuliaEarth/GeoTables.jl) package
+can be used to load geospatial data from various file formats. It also
+provides utility functions to automatically download maps given the
+name of any region in the world.
+
+```@docs
+GeoTables.load
+GeoTables.save
+GeoTables.gadm
+```
+
 ## Examples
 
 ### Tables
@@ -106,12 +117,10 @@ plot(𝒟)
 
 ### Files
 
-The [GeoTables.jl](https://github.com/JuliaEarth/GeoTables.jl) package
-can be used to load geospatial data from various file formats. It also
-provides utility functions to automatically download maps given the
-name of any region in the world.
+Consider the following files with geospatial data. We can easily load the data
+without any specific knowledge of the file format:
 
-```@example shapefile
+```@example files
 using GeoTables
 using GeoStats # hide
 using Plots # hide

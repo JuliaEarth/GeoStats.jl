@@ -11,6 +11,9 @@ using ImageQuilting
 using TuringPatterns
 using StratiGraphics
 
+# IO packages
+using GeoTables
+
 istravis = "TRAVIS" ∈ keys(ENV)
 
 Themes.compile(joinpath(@__DIR__,"src/assets/light.scss"), joinpath(@__DIR__,"src/assets/themes/documenter-light.css"))
