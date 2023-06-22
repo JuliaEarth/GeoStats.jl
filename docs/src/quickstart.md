@@ -65,17 +65,12 @@ plot!(path.geometry, fill = true, color = :gray90)
 
 Geospatial data can also be derived from other Julia variables. For example,
 given a Julia array (or image), which is not attached to any particular
-coordinate system:
+coordinate system, we can georeference the array using the [`georef`](@ref)
+function:
 
 ```@example quickstart
 Z = [10sin(i/10) + j for i in 1:100, j in 1:200]
 
-heatmap(Z)
-```
-
-We can georeference the array using the [`georef`](@ref) function:
-
-```@example quickstart
 Ω = georef((Z=Z,))
 ```
 
@@ -88,17 +83,11 @@ georef((Z=Z,), origin=(1.,1.), spacing=(10.,10.))
 and different geospatial configurations can be obtained with different
 methods (see [Data](data.md)).
 
-We plot the geospatial data and note a few differences compared to the
-plot shown above:
+Geospatial data can be visualized with a simple call to `plot`:
 
 ```@example quickstart
 plot(Ω)
 ```
-
-First, we note that the image was rotated to match the first index `i`
-of the array with the horizontal `x` axis, and the second index `j` of
-the array with the vertical `y` axis. Second, we note that the image
-was stretched to reflect the real `100x200` size of the `CartesianGrid`.
 
 ## Manipulating data
 
