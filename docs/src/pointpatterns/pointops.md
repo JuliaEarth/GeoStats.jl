@@ -1,5 +1,13 @@
 # Operations
 
+```@example pointops
+using JSServe: Page # hide
+Page(exportable=true, offline=true) # hide
+
+using GeoStats, GeoStatsViz # hide
+import WGLMakie as Mke # hide
+```
+
 Below is the list of currently implemented operations for point
 processes and patterns.
 
