@@ -54,6 +54,19 @@ plot(zone.geometry, fill = true, color = :gray)
 plot!(path.geometry, fill = true, color = :gray90)
 ```
 
+Various functions are defined over these geometries, for instance:
+
+```@example quickstart
+sum(area, zone.geometry)
+```
+
+```@example quickstart
+sum(perimeter, zone.geometry)
+```
+
+Please check the [Meshes.jl](https://github.com/JuliaGeometry/Meshes.jl)
+documentation for more details.
+
 !!! note
 
     We **highly recommend** using Meshes.jl geometries in geospatial workflows as
