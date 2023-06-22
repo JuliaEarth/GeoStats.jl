@@ -172,14 +172,24 @@ plot(CircularVariogram())
 
 Anisotropic models are easily obtained by defining an ellipsoid metric in
 place of the default Euclidean metric as shown in the following example.
-First, we create a custom metric ball, which specifies the ranges and
-angles of rotation of the ellipsoid:
+First, we create an ellipsoid that specifies the ranges and angles of
+rotation:
 
 ```@example variograms
 ellipsoid = MetricBall((3.0, 2.0, 1.0), RotZXZ(0.0, 0.0, 0.0))
 ```
 
-We then pass this ball as the first argument to the variogram model
+All rotations from [Rotations.jl](https://github.com/JuliaGeometry/Rotations.jl)
+are supported as well as the following additional rotations from commercial or
+old geostatistical software:
+
+```@docs
+DatamineAngles
+VulcanAngles
+GslibAngles
+```
+
+We pass the ellipsoid as the first argument to the variogram model
 instead of specifying a single `range` with a keyword argument:
 
 ```@example variograms
