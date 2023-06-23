@@ -180,8 +180,8 @@ ellipsoid = MetricBall((3.0, 2.0, 1.0), RotZXZ(0.0, 0.0, 0.0))
 ```
 
 All rotations from [Rotations.jl](https://github.com/JuliaGeometry/Rotations.jl)
-are supported as well as the following additional rotations from commercial or
-old geostatistical software:
+are supported as well as the following additional rotations from commercial
+geostatistical software:
 
 ```@docs
 DatamineAngles
@@ -201,19 +201,16 @@ To illustrate the concept, consider the following 2D data set:
 ```@example variograms
 using Random # hide
 Random.seed!(2000) # hide
-dim, nobs = 2, 50
-table = (Z=rand(nobs),)
-coord = 100rand(dim, nobs)
 
-𝒮 = georef(table, coord)
+𝒟 = georef((Z=rand(50),), 100rand(2, 50))
 
-plot(𝒮)
+plot(𝒟)
 ```
 
 and the corresponding estimation problem on a Cartesian grid:
 
 ```@example variograms
-problem = EstimationProblem(𝒮, CartesianGrid(100,100), :Z)
+problem = EstimationProblem(𝒟, CartesianGrid(100, 100), :Z)
 ```
 
 We solve the problem with different ellipsoids by varying the angle of
@@ -242,19 +239,31 @@ gif(anim, "anisotropy.gif", fps=1)
 
 A nested variogram model
 ``\gamma(h) = c_1\cdot\gamma_1(h) + c_2\cdot\gamma_2(h) + \cdots + c_n\cdot\gamma_n(h)``
-can be constructed from multiple variogram models, including matrix coefficients:
-
-```@example variograms
-γ₁ = GaussianVariogram()
-γ₂ = ExponentialVariogram()
-
-# nested model
-γ = [1.0 0.0; 0.0 1.0] * γ₁ + [2.0 0.5; 0.5 3.0] * γ₂
-```
-
-The individual structures can be recovered in canonical form with the
-[`structures`](@ref) function:
+can be constructed from multiple variogram models, including matrix coefficients. The
+individual structures can be recovered in canonical form with the [`structures`](@ref)
+function:
 
 ```@docs
 structures
+```
+
+```@example variograms
+γ₁ = GaussianVariogram(nugget=1, sill=2)
+γ₂ = ExponentialVariogram(nugget=2, sill=3)
+
+# nested model with matrix coefficients
+γ = [1.0 0.0; 0.0 1.0] * γ₁ + [2.0 0.5; 0.5 3.0] * γ₂
+
+# structures in canonical form
+cₒ, c, g = structures(γ)
+
+cₒ # matrix nugget
+```
+
+```@example variograms
+c # matrix coefficients
+```
+
+```@example variograms
+g # normalized structures
 ```

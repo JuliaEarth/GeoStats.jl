@@ -24,7 +24,7 @@ with given intensity over the sphere:
 sphere = Sphere((0, 0, 0), 1)
 
 # homogeneous Poisson process
-proc = PoissonProcess(2.0)
+proc = PoissonProcess(5.0)
 
 # sample two point patterns
 pset = rand(proc, sphere, 2)

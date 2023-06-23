@@ -4,6 +4,10 @@ Below is a list of miscellaneous geospatial operations.
 
 ## Split
 
+```@docs
+Base.split(::Any, ::Real, ::Any)
+```
+
 ```@example
 using GeoStats
 using GeoStatsImages
@@ -14,9 +18,9 @@ gr(format=:png) # hide
 𝒟 = geostatsimage("Strebelle")
 
 # 50/50 split perpendicular to (1.,1.)
-S = split(𝒟, 0.5, (1.,1.))
+Π = split(𝒟, 0.5, (1.,1.))
 
-plot(plot(S[1],ms=0.2), plot(S[2],ms=0.2))
+plot(plot(Π[1],ms=0.2), plot(Π[2],ms=0.2))
 ```
 
 ## Slice
