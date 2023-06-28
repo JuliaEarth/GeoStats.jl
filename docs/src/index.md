@@ -28,8 +28,9 @@ geostatisticians around the globe and to standardize this incredible field of
 research. If you would like to help support the project, please star the repository
 [![STARS](https://img.shields.io/github/stars/JuliaEarth/GeoStats.jl?style=social)]
 (https://github.com/JuliaEarth/GeoStats.jl) and share it with your colleagues.
-If you would like to extend the framework with new geostatistical solvers,
-please check the [Developer guide](contributing/solvers.md).
+
+If you have questions or would like to brainstorm ideas in general, don't hesitate to
+start a thread in our [community channel](about/community.md).
 
 ### Citing
 
@@ -144,9 +145,3 @@ Other packages can be installed separately for additional functionality:
 | [GslibIO.jl](https://github.com/JuliaEarth/GslibIO.jl) | Load/save (extended) GSLIB files. |
 
 Besides the packages above, the project can be extended with [solver packages](solvers/overview.md).
-
-## Community channels
-
-We invite you to join our [community channels](about/community.md).
-There you will meet other fellow geostatisticians who like to code.
-We are very friendly, come say hi! 😄🌎
