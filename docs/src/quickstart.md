@@ -40,9 +40,9 @@ and [GeoJSON.jl](https://github.com/JuliaGeo/GeoJSON.jl), which define
 their own very basic geometry types. Instead of requesting users to learn
 the so called [GeoInterface.jl](https://github.com/JuliaGeo/GeoInterface.jl)
 to handle these types, we provide the high-level
-[GeoTables.jl](https://github.com/JuliaEarth/GeoTables.jl) package to load
-any file with geospatial data into well-tested geometries that are implemented
-in the [Meshes.jl](https://github.com/JuliaGeometry/Meshes.jl) submodule:
+[GeoTables.jl](https://github.com/JuliaEarth/GeoTables.jl) package to
+load any file with geospatial data into well-tested geometries from the
+[Meshes.jl](https://github.com/JuliaGeometry/Meshes.jl) submodule:
 
 ```@example quickstart
 using GeoTables
@@ -139,7 +139,9 @@ of geometries:
 
 We can always retrieve the table of attributes (or features)
 with the function [`values`](@ref) and the underlying geospatial
-domain with [`domain`](@ref):
+domain with the function [`domain`](@ref). This can be useful for
+writing algorithms that are *type-stable* and depend purely on the
+geometry or on the feature values:
 
 ```@example quickstart
 values(Ω)
@@ -149,9 +151,6 @@ values(Ω)
 domain(Ω)
 ```
 
-and this can be useful for writing algorithms that depend purely on
-the geometry or purely on the feature values.
-
 ### Table transforms
 
 It is easy to design advanced geospatial pipelines that operate on
@@ -159,16 +158,21 @@ both the table of attributes and the underlying geospatial domain:
 
 ```@example quickstart
 # pipeline with table transforms
-pipe = Quantile()
+pipe = Quantile() → StdCoords()
 
 # feed geospatial data to pipeline
-Ω̄ = Ω |> pipe
+Ω̄ = pipe(Ω)
 
 # plot distribution before and after pipeline
 gr(format=:png,size=(800,400),aspectratio=:none) # hide
 p1 = histogram(Ω.Z, color=:gray80, label="original")
 p2 = histogram(Ω̄.Z, color=:gray80, label="quantile")
 plot(p1, p2, layout=(2,1))
+```
+
+```@example quickstart
+# coordinates before and after pipeline
+boundingbox(Ω.geometry), boundingbox(Ω̄.geometry)
 ```
 
 These pipelines are revertible meaning that one can transform the data,
