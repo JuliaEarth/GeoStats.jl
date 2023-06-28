@@ -149,3 +149,7 @@ html.theme--#{$themename} {
     color: #f8f8f2;
   }
 }
+
+#documenter .admonition-header { // Color of notes
+  background-color: $maincolor;
+}

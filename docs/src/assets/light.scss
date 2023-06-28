@@ -115,3 +115,7 @@ $input-focus-border-color: $mainwhite;
 #documenter .content p { // Justify text in paragraphs
   text-align: justify;
 }
+
+#documenter .admonition-header { // Color of notes
+  background-color: $maincolor;
+}
