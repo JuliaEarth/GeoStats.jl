@@ -34,8 +34,8 @@ GeoTables.gadm
 
 ### Tables
 
-Consider a table (e.g. DataFrame) with 25 samples of temperature and
-precipitation:
+Consider a table (e.g. DataFrame) with 25 samples of temperature (T) and
+pressure (P):
 
 ```@example georef
 using DataFrames
@@ -49,17 +49,13 @@ table = DataFrame(T=rand(25), P=rand(25))
 We can georeference this table based on a given set of coordinates:
 
 ```@example georef
-𝒟 = georef(table, PointSet(rand(2,25)))
-
-plot(𝒟)
+georef(table, PointSet(rand(2,25))) |> plot
 ```
 
 or alternatively, georeference it on a 5x5 regular grid (5x5 = 25 samples):
 
 ```@example georef
-𝒟 = georef(table, CartesianGrid(5,5))
-
-plot(𝒟)
+georef(table, CartesianGrid(5,5)) |> plot
 ```
 
 In the first case, the `PointSet` domain type can be omitted, and GeoStats.jl
@@ -68,7 +64,7 @@ coordinates of a point set:
 
 
 ```@example georef
-𝒟 = georef(table, rand(2,25))
+georef(table, rand(2,25))
 ```
 
 Another common pattern in spatial data sets is when the coordinates of the samples
@@ -78,9 +74,7 @@ names as symbols:
 ```@example georef
 table = DataFrame(T=rand(25), P=rand(25), X=rand(25), Y=rand(25), Z=rand(25))
 
-𝒟 = georef(table, (:X,:Y,:Z))
-
-plot(𝒟)
+georef(table, (:X, :Y, :Z)) |> plot
 ```
 
 ### Arrays
@@ -92,9 +86,7 @@ that the shape of the arrays should be preserved in a Cartesian grid:
 ```@example georef
 T, P = rand(5,5), rand(5,5)
 
-𝒟 = georef((T=T, P=P))
-
-plot(𝒟)
+georef((T=T, P=P)) |> plot
 ```
 
 We can also specify the origin and spacing of the grid using keyword arguments:
@@ -110,9 +102,7 @@ plot!(𝒟₂)
 Alternatively, we can interpret the entries of the named tuple as columns in a table:
 
 ```@example georef
-𝒟 = georef((T=T, P=T), rand(2,25))
-
-plot(𝒟)
+georef((T=T, P=T), rand(2,25)) |> plot
 ```
 
 ### Files
@@ -135,12 +125,9 @@ plot!(path.geometry, fill = true, color = :gray90)
 
 ## Custom data
 
-GeoStats.jl is integrated with the
-[Meshes.jl](https://github.com/JuliaGeometry/Meshes.jl)
-project. In summary, any type that is a subtype of
-`Meshes.Data` and that implements `Meshes.domain` and
-`Meshes.values` is compatible with the framework and
-can be used in geostatistical workflows.
+GeoStats.jl is integrated with the [Meshes.jl](https://github.com/JuliaGeometry/Meshes.jl)
+project. In summary, any type that is a subtype of `Meshes.Data` and that implements
+`Meshes.domain` and `Meshes.values` is compatible with the framework and can be used
+in geostatistical workflows.
 
-Please ask in our community channels if you need help
-implementing custom geospatial data types.
+Please ask in our community channel if you need help implementing custom geospatial data types.
