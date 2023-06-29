@@ -85,7 +85,7 @@ coordinate system, we can georeference the array using the [`georef`](@ref)
 function:
 
 ```@example quickstart
-Z = [10sin(i/10) + 2j + k for i in 1:100, j in 1:100, k in 1:100]
+Z = [10sin(i/10) + 2j + k for i in 1:50, j in 1:50, k in 1:50]
 
 Ω = georef((Z=Z,))
 ```
@@ -165,18 +165,18 @@ both the table of attributes and the underlying geospatial domain:
 pipe = Quantile() → StdCoords()
 
 # feed geospatial data to pipeline
-Ω̄ = pipe(Ω)
+Ω̂ = pipe(Ω)
 
 # plot distribution before and after pipeline
 fig = Mke.Figure(resolution = (800, 400))
-Mke.hist(fig[1,1], Ω.Z)
-Mke.hist(fig[2,1], Ω̄.Z)
+Mke.hist(fig[1,1], Ω.Z, color = :gray)
+Mke.hist(fig[2,1], Ω̂.Z, color = :gray)
 fig
 ```
 
 ```@example quickstart
 # coordinates before and after pipeline
-boundingbox(Ω.geometry), boundingbox(Ω̄.geometry)
+boundingbox(Ω.geometry), boundingbox(Ω̂.geometry)
 ```
 
 These pipelines are revertible meaning that one can transform the data,
@@ -203,7 +203,7 @@ Geospatial data can be viewed at a subset of locations without
 unnecessary memory allocations:
 
 ```@example quickstart
-Ωᵥ = view(Ω, 1:100*100*10)
+Ωᵥ = view(Ω, 1:50*50*10)
 
 viz(Ωᵥ.geometry, color = Ωᵥ.Z)
 ```
@@ -212,7 +212,7 @@ We plot a random view of the grid to emphasize that views do not
 preserve geospatial regularity:
 
 ```@example quickstart
-Ωᵣ = view(Ω, rand(1:100*100*100, 1000))
+Ωᵣ = view(Ω, rand(1:50*50*50, 1000))
 
 viz(Ωᵣ.geometry, color = Ωᵣ.Z)
 ```
@@ -340,9 +340,9 @@ using MLJ
 ℒ = PointwiseLearn(ℳ())
 ```
 
-In this example, we selected a `PointwiseLearn` strategy to solve the
-geostatistical learning problem. This strategy consists of applying the
-learning model pointwise for every location in the geospatial data:
+In this example, we selected a [`PointwiseLearn`](@ref) strategy to solve
+the geostatistical learning problem. This strategy consists of applying
+the learning model pointwise for every location in the geospatial data:
 
 ```@example quickstart
 Ω̂t = solve(𝒫, ℒ)
