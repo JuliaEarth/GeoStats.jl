@@ -3,7 +3,7 @@
 ## Overview
 
 Given a table or array containing data, we can georeference these objects
-onto a geospatial domain with the [`georef`](@ref) function. For a list of
+ono a geospatial domain with the [`georef`](@ref) function. For a list of
 available domains, please see [Domains](domains.md).
 
 ```@docs
@@ -62,12 +62,11 @@ In the first case, the `PointSet` domain type can be omitted, and GeoStats.jl
 will understand that the matrix passed as the second argument contains the
 coordinates of a point set:
 
-
 ```@example georef
 georef(table, rand(2,25))
 ```
 
-Another common pattern in spatial data sets is when the coordinates of the samples
+Another common pattern in geospatial data is when the coordinates of the samples
 are already part of the table as columns. In this case, we can specify the column
 names as symbols:
 
@@ -79,7 +78,7 @@ georef(table, (:X, :Y, :Z)) |> plot
 
 ### Arrays
 
-Consider arrays (e.g. images) with data for various spatial variables. We can
+Consider arrays (e.g. images) with data for various geospatial variables. We can
 georeference these arrays using a named tuple, and GeoStats.jl will understand
 that the shape of the arrays should be preserved in a Cartesian grid:
 
@@ -107,8 +106,7 @@ georef((T=T, P=T), rand(2,25)) |> plot
 
 ### Files
 
-Consider the following files with geospatial data. We can easily load the data
-without any specific knowledge of the file format:
+We can easily load geospatial data from disk without any specific knowledge of file formats:
 
 ```@example files
 using GeoTables
@@ -130,4 +128,4 @@ project. In summary, any type that is a subtype of `Meshes.Data` and that implem
 `Meshes.domain` and `Meshes.values` is compatible with the framework and can be used
 in geostatistical workflows.
 
-Please ask in our community channel if you need help implementing custom geospatial data types.
+Please ask in our community channel if you need help implementing custom geospatial data.
