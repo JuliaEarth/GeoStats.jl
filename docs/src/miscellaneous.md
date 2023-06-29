@@ -1,5 +1,13 @@
 # Miscellaneous
 
+```@example misc
+using JSServe: Page # hide
+Page(exportable=true, offline=true) # hide
+
+using GeoStats, GeoStatsViz # hide
+import WGLMakie as Mke # hide
+```
+
 Below is a list of miscellaneous geospatial operations.
 
 ## Split
@@ -8,19 +16,13 @@ Below is a list of miscellaneous geospatial operations.
 Base.split(::Any, ::Real, ::Any)
 ```
 
-```@example
-using GeoStats
+```@example misc
 using GeoStatsImages
-using Plots # hide
-using GeoStatsPlots # hide
-gr(format=:png) # hide
 
 𝒟 = geostatsimage("Strebelle")
 
 # 50/50 split perpendicular to (1.,1.)
-Π = split(𝒟, 0.5, (1.,1.))
-
-plot(plot(Π[1],ms=0.2), plot(Π[2],ms=0.2))
+Π = split(𝒟, 0.5, (1.0, 1.0))
 ```
 
 ## Slice
@@ -29,26 +31,28 @@ plot(plot(Π[1],ms=0.2), plot(Π[2],ms=0.2))
 Meshes.slice
 ```
 
-```@example
-using GeoStats # hide
-using GeoStatsImages # hide
-using Plots # hide
-using GeoStatsPlots # hide
-gr(format=:png) # hide
+```@example misc
+using GeoStatsImages
 
 # slice image
 I = geostatsimage("Strebelle")
 S = slice(I, 50.5:100.2, 41.7:81.3)
 
-p1 = plot(plot(I), plot(S), link=:both)
+fig = Mke.Figure(resolution = (800, 400))
+viz(fig[1,1], I.geometry, color = I.facies)
+viz(fig[1,2], S.geometry, color = S.facies)
+fig
+```
 
-# slide point set
+```@example misc
+# slice point set
 P = sample(I, 100)
 S = slice(P, 50.5:150.7, 175.2:250.3)
 
-p2 = plot(plot(P), plot(S), link=:both, ms=3)
-
-plot(p1, p2, layout=(2,1))
+fig = Mke.Figure(resolution = (800, 400))
+viz(fig[1,1], P.geometry, color = P.facies)
+viz(fig[1,2], S.geometry, color = S.facies)
+fig
 ```
 
 ## Trend
@@ -57,20 +61,19 @@ plot(p1, p2, layout=(2,1))
 trend
 ```
 
-```@example
-using GeoStats # hide
-using Plots # hide
-using GeoStatsPlots # hide
-
+```@example misc
 # quadratic + noise
 r = range(-1,stop=1,length=100)
 μ = [x^2 + y^2 for x in r, y in r]
 ϵ = 0.1rand(100,100)
-𝒟 = georef((z=μ+ϵ,))
+𝒟 = georef((Z=μ+ϵ,))
 
-ℳ = trend(𝒟, :z, degree=2)
+ℳ = trend(𝒟, :Z, degree=2)
 
-plot(plot(𝒟), plot(ℳ))
+fig = Mke.Figure(resolution = (800, 400))
+viz(fig[1,1], 𝒟.geometry, color = 𝒟.Z)
+viz(fig[1,2], ℳ.geometry, color = ℳ.Z)
+fig
 ```
 
 ## Integrate
