@@ -203,55 +203,10 @@ Geospatial data can be viewed at a subset of locations without
 unnecessary memory allocations:
 
 ```@example quickstart
-Ωᵥ = view(Ω, 1:50*50*10)
-
-viz(Ωᵥ.geometry, color = Ωᵥ.Z)
-```
-
-We plot a random view of the grid to emphasize that views do not
-preserve geospatial regularity:
-
-```@example quickstart
 Ωᵣ = view(Ω, rand(1:50*50*50, 1000))
 
 viz(Ωᵣ.geometry, color = Ωᵣ.Z)
 ```
-
-### Geospatial partitions
-
-Geospatial data can be partitioned with various efficient methods.
-To demonstrate the operation, we partition our geospatial data view
-into balls of given radius:
-
-```@example quickstart
-Π = partition(Ω.geometry, BallPartition(5.))
-
-viz(Π)
-```
-
-or, alternatively, into two halfspaces:
-
-```@example quickstart
-Π = partition(Ω.geometry, BisectFractionPartition((1.0, 1.0, 1.0), 0.5))
-
-viz(Π)
-```
-
-Geospatial partitions are (lazy) iterators of geospatial views, which
-are useful in many contexts as it will be shown in the next section.
-To access a subset of a partition, we use index notation:
-
-```@example quickstart
-viz(Π[1])
-```
-
-```@example quickstart
-viz(Π[2])
-```
-
-Various other geospatial operations are defined in the framework besides
-partitioning. For a complete list, please check the reference guide and
-the [Meshes.jl](https://github.com/JuliaGeometry/Meshes.jl) documentation.
 
 ## Defining problems
 
@@ -311,7 +266,7 @@ We can visualize the domain of the "train" (or source) set Ωs in blue,
 and the domain of the "test" (or target) set Ωt in gray. We reserved
 20% of the samples to Ωs and 80% to Ωt. Internally, this geospatial
 `split` function is implemented in terms of efficient geospatial
-partitions, which were illustrated in the previous section.
+partitions.
 
 Let's define the learning task and the geostatistical learning problem.
 We want to predict the crop type based on the four satellite bands.
