@@ -1,5 +1,13 @@
 # Clustering
 
+```@example clustering
+using JSServe: Page # hide
+Page(exportable=true, offline=true) # hide
+
+using GeoStats, GeoStatsViz # hide
+import WGLMakie as Mke # hide
+```
+
 Unlike traditional clustering algorithms in machine learning,
 geostatistical clustering (a.k.a. domaining) algorithms consider
 both the features and the geospatial coordinates of the data.
@@ -7,26 +15,22 @@ both the features and the geospatial coordinates of the data.
 Consider the following data as an example:
 
 ```@example clustering
-using GeoStats # hide
-using Plots # hide
-using GeoStatsPlots # hide
-gr(format=:png) # hide
-
 Ω = georef((Z=[10sin(i/10) + j for i in 1:2:100, j in 1:2:100],))
 
-plot(Ω)
+viz(Ω.geometry, color = Ω.Z)
 ```
 
-We can cluster the data with traditional clustering models from MLJ.jl:
+We can cluster the data with traditional clustering models from
+[MLJ.jl](https://github.com/alan-turing-institute/MLJ.jl):
 
 ```@example clustering
 using MLJ
 
 kmeans = MLJ.@load KMeans pkg=Clustering
 
-C = cluster(Ω, kmeans(k=50))
+𝒞 = cluster(Ω, kmeans(k=50))
 
-plot(C)
+viz(𝒞.geometry, color = 𝒞.cluster)
 ```
 
 but there is no guarantee that the clusters will consist of contiguous
@@ -40,9 +44,9 @@ GHC
 ```
 
 ```@example clustering
-C = cluster(Ω, GHC(20, 1.0))
+𝒞 = cluster(Ω, GHC(20, 1.0))
 
-plot(C)
+viz(𝒞.geometry, color = 𝒞.cluster)
 ```
 
 ## GSC
@@ -52,9 +56,9 @@ GSC
 ```
 
 ```@example clustering
-C = cluster(Ω, GSC(50, 2.0))
+𝒞 = cluster(Ω, GSC(50, 2.0))
 
-plot(C)
+viz(𝒞.geometry, color = 𝒞.cluster)
 ```
 
 ## SLIC
@@ -64,7 +68,7 @@ SLIC
 ```
 
 ```@example clustering
-C = cluster(Ω, SLIC(50, 0.01))
+𝒞 = cluster(Ω, SLIC(50, 0.01))
 
-plot(C)
+viz(𝒞.geometry, color = 𝒞.cluster)
 ```

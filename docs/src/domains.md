@@ -14,7 +14,7 @@ of states in a given country can be represented as a set of 2D shapes.
 
 We provide flexible domain types for advanced geospatial workflows via
 the [Meshes.jl](https://github.com/JuliaGeometry/Meshes.jl) project.
-Please check their documentation for more details.
+Please check their documentation for more details and domain types.
 
 ## Examples
 
