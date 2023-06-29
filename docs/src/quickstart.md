@@ -1,5 +1,10 @@
 # Quickstart
 
+```@example quickstart
+using JSServe: Page # hide
+Page(exportable=true, offline=true) # hide
+```
+
 A geostatistical workflow often consists of four steps:
 
 1. Creation of geospatial data
@@ -17,17 +22,14 @@ recording of our JuliaEO2023 workshop:
 </p>
 ```
 
-Although we use [Plots.jl](https://github.com/JuliaPlots/Plots.jl) and
-[GeoStatsPlots.jl](https://github.com/JuliaEarth/GeoStatsPlots.jl) recipes for
-visualization, we could have used [Makie.jl](https://github.com/JuliaPlots/Makie.jl)
-and [GeoStatsViz.jl](https://github.com/JuliaEarth/GeoStatsViz.jl) recipes for more
-advanced 3D examples:
+Here we use [Makie.jl](https://github.com/JuliaPlots/Makie.jl) and
+[GeoStatsViz.jl](https://github.com/JuliaEarth/GeoStatsViz.jl) recipes
+for 3D visualization. Please check the [Plotting](plotting.md) section
+to learn about alternatives.
 
 ```@example quickstart
-using GeoStats
-using Plots, GeoStatsPlots
-gr(format=:png,size=(800,400),aspectratio=:equal) # hide
-nothing # hide
+using GeoStats, GeoStatsViz
+import WGLMakie as Mke
 ```
 
 ## Loading/creating data
@@ -50,8 +52,9 @@ using GeoTables
 zone = GeoTables.load("data/zone.shp")
 path = GeoTables.load("data/path.shp")
 
-plot(zone.geometry, fill = true, color = :gray)
-plot!(path.geometry, fill = true, color = :gray90)
+viz(zone.geometry)
+viz!(path.geometry, color = :gray90)
+Mke.current_figure()
 ```
 
 Various functions are defined over these geometries, for instance:
@@ -82,7 +85,7 @@ coordinate system, we can georeference the array using the [`georef`](@ref)
 function:
 
 ```@example quickstart
-Z = [10sin(i/10) + j for i in 1:100, j in 1:200]
+Z = [10sin(i/10) + 2j + k for i in 1:100, j in 1:100, k in 1:100]
 
 Ω = georef((Z=Z,))
 ```
@@ -90,16 +93,16 @@ Z = [10sin(i/10) + j for i in 1:100, j in 1:200]
 The origin and spacing of samples can be specified with:
 
 ```@example quickstart
-georef((Z=Z,), origin=(1.,1.), spacing=(10.,10.))
+georef((Z=Z,), origin = (1.0, 1.0, 1.0), spacing = (10.0, 10.0, 10.0))
 ```
 
 and different geospatial configurations can be obtained with different
 methods (see [Data](data.md)).
 
-Geospatial data can be visualized with a simple call to `plot`:
+Geospatial data can be visualized with a simple call to `viz`:
 
 ```@example quickstart
-plot(Ω)
+viz(Ω.geometry, color = Ω.Z)
 ```
 
 ## Manipulating data
@@ -164,10 +167,10 @@ pipe = Quantile() → StdCoords()
 Ω̄ = pipe(Ω)
 
 # plot distribution before and after pipeline
-gr(format=:png,size=(800,400),aspectratio=:none) # hide
-p1 = histogram(Ω.Z, color=:gray80, label="original")
-p2 = histogram(Ω̄.Z, color=:gray80, label="quantile")
-plot(p1, p2, layout=(2,1))
+fig = Mke.Figure(resolution = (800, 400))
+Mke.hist(fig[1,1], Ω.Z)
+Mke.hist(fig[2,1], Ω̄.Z)
+fig
 ```
 
 ```@example quickstart
@@ -185,7 +188,7 @@ We provide three macros [`@groupby`](@ref), [`@transform`](@ref) and
 [`@combine`](@ref) for powerful geospatial split-apply-combine patterns:
 
 ```@example quickstart
-@transform(Ω, :W = 2 * :Z * area(:geometry))
+@transform(Ω, :W = 2 * :Z * volume(:geometry))
 ```
 
 These macros are very useful for geodata science as they hide the
@@ -199,19 +202,18 @@ Geospatial data can be viewed at a subset of locations without
 unnecessary memory allocations:
 
 ```@example quickstart
-Ωᵥ = view(Ω, 1:10*100)
+Ωᵥ = view(Ω, 1:100*100*10)
 
-gr(format=:png,size=(800,400),aspectratio=:equal) # hide
-plot(Ωᵥ)
+viz(Ωᵥ.geometry, color = Ωᵥ.Z)
 ```
 
 We plot a random view of the grid to emphasize that views do not
 preserve geospatial regularity:
 
 ```@example quickstart
-inds = rand(1:100*200, 100)
+Ωᵣ = view(Ω, rand(1:100*100*100, 1000))
 
-plot(view(Ω, inds))
+viz(Ωᵣ.geometry, color = Ωᵣ.Z)
 ```
 
 ### Geospatial partitions
@@ -221,17 +223,17 @@ To demonstrate the operation, we partition our geospatial data view
 into balls of given radius:
 
 ```@example quickstart
-Π = partition(Ωᵥ, BallPartition(5.))
+Π = partition(Ω.geometry, BallPartition(5.))
 
-plot(Π)
+viz(Π)
 ```
 
 or, alternatively, into two halfspaces:
 
 ```@example quickstart
-Π = partition(Ωᵥ, BisectFractionPartition((1.,1.), 0.5))
+Π = partition(Ω.geometry, BisectFractionPartition((1.0, 1.0, 1.0), 0.5))
 
-plot(Π)
+viz(Π)
 ```
 
 Geospatial partitions are (lazy) iterators of geospatial views, which
@@ -239,11 +241,11 @@ are useful in many contexts as it will be shown in the next section.
 To access a subset of a partition, we use index notation:
 
 ```@example quickstart
-plot(Π[1])
+viz(Π[1])
 ```
 
 ```@example quickstart
-plot(Π[2])
+viz(Π[2])
 ```
 
 Various other geospatial operations are defined in the framework besides
@@ -283,9 +285,12 @@ first(table.crop, 5)
 We can now georeference the table and plot some of the variables:
 
 ```@example quickstart
-Ω = georef(table, (:x,:y))
+Ω = georef(table, (:x, :y))
 
-plot(Ω, (:band4,:crop), ms=0.2, mc=:viridis)
+fig = Mke.Figure(resolution = (800, 400))
+viz(fig[1,1], Ω.geometry, color = Ω.band4, pointsize = 2)
+viz(fig[1,2], Ω.geometry, color = Ω.crop, pointsize = 2)
+fig
 ```
 
 Similar to a generic statistical learning workflow, we split the data
@@ -294,10 +299,11 @@ geospatial `split` function accepts a separating plane specified by
 its normal direction `(1,-1)`:
 
 ```@example quickstart
-Ωs, Ωt = split(Ω, 0.2, (1.,-1.))
+Ωs, Ωt = split(Ω, 0.2, (1.0, -1.0))
 
-plot(domain(Ωs), ms=0.2, mc=:royalblue)
-plot!(domain(Ωt), ms=0.2, mc=:gray)
+viz(Ωs.geometry, pointsize = 2)
+viz!(Ωt.geometry, color = :gray90, pointsize = 2)
+Mke.current_figure()
 ```
 
 We can visualize the domain of the "train" (or source) set Ωs in blue,
@@ -349,10 +355,10 @@ already described above. This also means that we can plot the solution
 directly, side by side with the true label in this synthetic example:
 
 ```@example quickstart
-p̂ = plot(Ω̂t, ms=0.2, mc=:viridis, title="crop (prediction)")
-p = plot(Ωt, (:crop,), ms=0.2, mc=:viridis)
-
-plot(p̂, p)
+fig = Mke.Figure(resolution = (800, 400))
+viz(fig[1,1], Ω̂t.geometry, color = Ω̂t.crop, pointsize = 2)
+viz(fig[1,2], Ωt.geometry, color = Ωt.crop, pointsize = 2)
+fig
 ```
 
 Visually, it seems that the learning model is predicting the crop type.
