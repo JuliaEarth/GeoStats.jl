@@ -1,5 +1,13 @@
 # Ensembles
 
+```@example ensemble
+using JSServe: Page # hide
+Page(exportable=true, offline=true) # hide
+
+using GeoStats, GeoStatsViz # hide
+import WGLMakie as Mke # hide
+```
+
 ```@docs
 Ensemble
 ```
@@ -7,65 +15,53 @@ Ensemble
 Consider the following solution to a conditional simulation problem:
 
 ```@example ensemble
-using GeoStats
-using Plots, GeoStatsPlots
-gr(size=(900,400)) # hide
-
-# geospatial samples
-S = let
-  table = (z=[1.,0.,1.],)
-  coord = [(25.,25.), (50.,75.), (75.,50.)]
-  georef(table, coord)
-end
-
-# simulation domain
-D = CartesianGrid(100, 100)
+# list of properties with coordinates
+props = (Z=[1.,0.,1.],)
+coord = [(25.,25.), (50.,75.), (75.,50.)]
 
 # request 100 realizations
-problem = SimulationProblem(S, D, :z, 100)
+𝒟 = georef(props, coord)
+𝒢 = CartesianGrid(100, 100)
+𝒫 = SimulationProblem(𝒟, 𝒢, :Z, 100)
 
-# LU Gaussian simulation
-solver = LUGS(:z => (variogram=GaussianVariogram(range=30.),))
+# FFT-based Gaussian simulation
+𝒮 = FFTGS(:Z => (variogram=GaussianVariogram(range=30.),))
 
-# realizations form an ensemble
-ensemble = solve(problem, solver)
+# generate ensemble
+Ω = solve(𝒫, 𝒮)
 ```
 
 We can visualize a few realizations in the ensemble:
 
 ```@example ensemble
-z1 = ensemble[1]
-z2 = ensemble[2]
-z3 = ensemble[3]
-z4 = ensemble[4]
-
-plot(plot(z1), plot(z2),
-     plot(z3), plot(z4),
-     size=(900,800))
+fig = Mke.Figure(resolution = (800, 250))
+viz(fig[1,1], Ω[1].geometry, color = Ω[1].Z)
+viz(fig[1,2], Ω[2].geometry, color = Ω[2].Z)
+viz(fig[1,3], Ω[3].geometry, color = Ω[3].Z)
+fig
 ```
 
 or alternatively, the mean and variance:
 
 ```@example ensemble
-m = mean(ensemble)
-v = var(ensemble)
+m, v = mean(Ω), var(Ω)
 
-p1 = plot(m, title="mean")
-p2 = plot(v, title="variance")
-
-plot(p1, p2)
+fig = Mke.Figure(resolution = (800, 400))
+viz(fig[1,1], m.geometry, color = m.Z)
+viz(fig[1,2], v.geometry, color = v.Z)
+fig
 ```
 
 or the 25th and 75th percentiles:
 
 ```@example ensemble
-a = quantile(ensemble, 0.25)
-b = quantile(ensemble, 0.75)
+q25 = quantile(Ω, 0.25)
+q75 = quantile(Ω, 0.75)
 
-p1 = plot(a, title="25th percentile")
-p2 = plot(b, title="75th percentile")
-
-plot(p1, p2)
+fig = Mke.Figure(resolution = (800, 400))
+viz(fig[1,1], q25.geometry, color = q25.Z)
+viz(fig[1,2], q75.geometry, color = q75.Z)
+fig
 ```
 
 All these objects are examples of geospatial data as described in
