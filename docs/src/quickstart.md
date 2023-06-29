@@ -99,7 +99,8 @@ georef((Z=Z,), origin = (1.0, 1.0, 1.0), spacing = (10.0, 10.0, 10.0))
 and different geospatial configurations can be obtained with different
 methods (see [Data](data.md)).
 
-Geospatial data can be visualized with a simple call to `viz`:
+Geospatial data can be visualized with the `viz` function, which shows
+different behavior depending on the type of geospatial domain:
 
 ```@example quickstart
 viz(Ω.geometry, color = Ω.Z)
