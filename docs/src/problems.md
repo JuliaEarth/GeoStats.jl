@@ -1,5 +1,13 @@
 # Problems
 
+```@example problems
+using JSServe: Page # hide
+Page(exportable=true, offline=true) # hide
+
+using GeoStats, GeoStatsViz # hide
+import WGLMakie as Mke # hide
+```
+
 The project provides solutions to three types of geostatistical problems.
 These problems can be defined unambiguously and independently of solvers,
 which is quite convenient for fair comparison of alternative workflows.
@@ -14,12 +22,7 @@ EstimationProblem
 
 Define a 2D estimation problem:
 
-```@example estimation
-using GeoStats # hide
-using Plots # hide
-using GeoStatsPlots # hide
-gr(size=(900,400),clabels=true) # hide
-
+```@example problems
 # list of properties with coordinates
 props = (Z=[1.,0.,1.],)
 coord = [(25.,25.), (50.,75.), (75.,50.)]
@@ -30,27 +33,20 @@ coord = [(25.,25.), (50.,75.), (75.,50.)]
 𝒫 = EstimationProblem(𝒟, 𝒢, :Z)
 ```
 
-Solve the problem with a few built-in solvers:
+Solve the problem with [`Kriging`](@ref) solver:
 
-```@example estimation
-# few built-in solvers
-S1 = IDW(:Z => (distance=Euclidean(),))
-S2 = IDW(:Z => (distance=Chebyshev(),))
-S3 = Kriging(:Z => (variogram=GaussianVariogram(range=35.),))
+```@example problems
+# ordinary Kriging
+𝒮 = Kriging(:Z => (variogram=GaussianVariogram(range=35.),))
 
-# solve the problem
-sol = [solve(𝒫, S) for S in (S1, S2, S3)]
+# perform estimation
+Ω = solve(𝒫, 𝒮)
 
-# plot the solution
-contourf(sol[1])
-```
-
-```@example estimation
-contourf(sol[2])
-```
-
-```@example estimation
-contourf(sol[3])
+# plot estimate and conditional variance
+fig = Mke.Figure(resolution = (800, 400))
+viz(fig[1,1], Ω.geometry, color = Ω.Z)
+viz(fig[1,2], Ω.geometry, color = Ω.Z_variance)
+fig
 ```
 
 ## Simulation
@@ -63,43 +59,34 @@ SimulationProblem
 
 Define a 2D unconditional simulation problem:
 
-```@example simulation
-using GeoStats # hide
-using Plots # hide
-using GeoStatsPlots # hide
-gr(size=(900,300)) # hide
-
+```@example problems
 # unconditional simulation problem
 𝒢 = CartesianGrid(100, 100)
 𝒫 = SimulationProblem(𝒢, :Z => Float64, 3)
 ```
 
-Solve the problem with a few built-in solvers:
+Solve the problem with [`FFTGS`](@ref) solver:
 
-```@example simulation
-# few built-in solvers
-S1 = LUGS(:Z => (variogram=GaussianVariogram(range=25.),))
-S2 = FFTGS(:Z => (variogram=GaussianVariogram(range=25.),))
+```@example problems
+# FFT-based Gaussian simulation
+𝒮 = FFTGS(:Z => (variogram=GaussianVariogram(range=25.),))
 
-# solve the problem
-sol = [solve(𝒫, S) for S in (S1, S2)]
+# ensemble of realizations
+Ω = solve(𝒫, 𝒮)
 
-# plot the solution
-heatmap(sol[1])
-```
-
-```@example simulation
-heatmap(sol[2])
+# plot realizations
+fig = Mke.Figure(resolution = (800, 250))
+viz(fig[1,1], Ω[1].geometry, color = Ω[1].Z)
+viz(fig[1,2], Ω[2].geometry, color = Ω[2].Z)
+viz(fig[1,3], Ω[3].geometry, color = Ω[3].Z)
+fig
 ```
 
 Alternatively, define a 2D conditional simulation problem:
 
-```@example simulation
-# unconditional realization
-Z1 = sol[1][1]
-
-# sample observations
-𝒟 = sample(Z1, 10, replace=false)
+```@example problems
+# sample first realization
+𝒟 = sample(Ω[1], 10, replace=false)
 
 # conditional simulation problem
 𝒫 = SimulationProblem(𝒟, 𝒢, :Z, 3)
@@ -107,12 +94,16 @@ Z1 = sol[1][1]
 
 And solve it as before:
 
-```@example simulation
-# solve the problem
-sol = solve(𝒫, S1)
+```@example problems
+# ensemble of realizations
+Ω = solve(𝒫, 𝒮)
 
-# plot the solution
-heatmap(sol)
+# plot realizations
+fig = Mke.Figure(resolution = (800, 250))
+viz(fig[1,1], Ω[1].geometry, color = Ω[1].Z)
+viz(fig[1,2], Ω[2].geometry, color = Ω[2].Z)
+viz(fig[1,3], Ω[3].geometry, color = Ω[3].Z)
+fig
 ```
 
 Solvers for simulation problems can generate realizations in parallel using multiple processes.
@@ -137,11 +128,11 @@ coord = [(25.,25.), (50.,75.), (75.,50.)]
 𝒟 = georef(table, coord)
 𝒢 = CartesianGrid(100, 100)
 
-problem = SimulationProblem(𝒟, 𝒢, :Z, 3)
-solver = LUGS(:Z => (variogram=GaussianVariogram(range=35),))
+𝒫 = SimulationProblem(𝒟, 𝒢, :Z, 3)
+𝒮 = LUGS(:Z => (variogram=GaussianVariogram(range=35),))
 
 # solve on all available processes
-sol = solve(problem, solver, procs=procs())
+Ω = solve(𝒫, 𝒮, procs=procs())
 ```
 
 For more information on distributed computing in Julia, see
