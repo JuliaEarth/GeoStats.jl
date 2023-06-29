@@ -1,5 +1,13 @@
 # Plotting
 
+```@example plots
+using JSServe: Page # hide
+Page(exportable=true, offline=true) # hide
+
+using GeoStats, GeoStatsViz # hide
+import WGLMakie as Mke # hide
+```
+
 Most objects defined in GeoStats.jl can be plotted directly with
 [Plots.jl](https://github.com/JuliaPlots/Plots.jl) or 
 [Makie.jl](https://github.com/MakieOrg/Makie.jl). In order to do this, 
@@ -17,20 +25,16 @@ represent all ordered pairs of values of `var1` and `var2` at a
 given lag `h`.
 
 ```@example plots
-using GeoStats
-using Plots, GeoStatsPlots
-gr(size=(800,300)) # hide
-
 𝒟 = georef((Z=[10sin(i/10) + j for i in 1:100, j in 1:200],))
 
 𝒮 = sample(𝒟, 500)
 
-p1 = hscatter(𝒮, :Z, lag=0)
-p2 = hscatter(𝒮, :Z, lag=20)
-p3 = hscatter(𝒮, :Z, lag=40)
-p4 = hscatter(𝒮, :Z, lag=60)
-
-plot(p1, p2, p3, p4)
+fig = Mke.Figure(resolution = (800, 400))
+hscatter(fig[1,1], 𝒮, :Z, :Z, lag=0)
+hscatter(fig[1,2], 𝒮, :Z, :Z, lag=20)
+hscatter(fig[2,1], 𝒮, :Z, :Z, lag=40)
+hscatter(fig[2,2], 𝒮, :Z, :Z, lag=60)
+fig
 ```
 
 ## PairPlots.jl
@@ -39,8 +43,9 @@ The [PairPlots.jl](https://github.com/sefffal/PairPlots.jl) package
 provides the `corner` plot that can be used with any table, including
 tables of attributes obtained with the [`values`](@ref) function.
 
-## StatsPlots.jl
+## AlgebraOfGraphics.jl
 
-The [StatsPlots.jl](https://github.com/JuliaPlots/StatsPlots.jl) package
-provides various statistical plots such as `boxplot`, `dotplot`, `violin`
-and other plots commonly used in statistical workflows.
+The [AlgebraOfGraphics.jl](https://github.com/MakieOrg/AlgebraOfGraphics.jl)
+package provides various statistical plots with a syntax that is similar to
+R's [ggplot](https://ggplot2.tidyverse.org) package. Check their official
+[gallery](https://aog.makie.org/stable/gallery) for examples.
