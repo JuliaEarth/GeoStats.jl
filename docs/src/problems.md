@@ -65,11 +65,11 @@ Define a 2D unconditional simulation problem:
 𝒫 = SimulationProblem(𝒢, :Z => Float64, 3)
 ```
 
-Solve the problem with [`FFTGS`](@ref) solver:
+Solve the problem with [`LUGS`](@ref) solver:
 
 ```@example problems
-# FFT-based Gaussian simulation
-𝒮 = FFTGS(:Z => (variogram=GaussianVariogram(range=25.),))
+# LU-based Gaussian simulation
+𝒮 = LUGS(:Z => (variogram=GaussianVariogram(range=25.),))
 
 # ensemble of realizations
 Ω = solve(𝒫, 𝒮)
@@ -86,7 +86,7 @@ Alternatively, define a 2D conditional simulation problem:
 
 ```@example problems
 # sample first realization
-𝒟 = sample(Ω[1], 10, replace=false)
+𝒟 = sample(Ω[1], 100, replace=false)
 
 # conditional simulation problem
 𝒫 = SimulationProblem(𝒟, 𝒢, :Z, 3)
