@@ -25,43 +25,15 @@ branch that takes geospatial coordinates of data into account.
 [GeoStats.jl](https://github.com/JuliaEarth/GeoStats.jl) is an attempt to bring
 together bleeding-edge research in the geostatistics community into a comprehensive
 framework for geospatial modeling, as well as to empower researchers and practitioners
-with a toolkit for fast assessment of different modeling approaches.
-
-The design of this project is the result of many years developing geostatistical
-software. I hope that it can serve to promote more collaboration between
-geostatisticians around the globe and to standardize this incredible field of
-research. If you would like to help support the project, please star the repository
-[![STARS](https://img.shields.io/github/stars/JuliaEarth/GeoStats.jl?style=social)]
-(https://github.com/JuliaEarth/GeoStats.jl) and share it with your colleagues.
-
-If you have questions or would like to brainstorm ideas in general, don't hesitate to
+with a toolkit for fast assessment of different modeling approaches. If you have
+questions, feature requests, or would like to brainstorm ideas, don't hesitate to
 start a thread in our [community channel](about/community.md).
 
-### Citing
+!!! note "Star us on GitHub!"
 
-If you find this project useful in your work, please consider citing it: 
-
-[![JOSS](https://img.shields.io/badge/JOSS-10.21105%2Fjoss.00692-brightgreen?style=flat-square)](https://doi.org/10.21105/joss.00692)
-[![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.3875233-blue?style=flat-square)](https://zenodo.org/badge/latestdoi/33827844)
-
-```bibtex
-@ARTICLE{Hoffimann2018,
-  title={GeoStats.jl – High-performance geostatistics in Julia},
-  author={Hoffimann, Júlio},
-  journal={Journal of Open Source Software},
-  publisher={The Open Journal},
-  volume={3},
-  pages={692},
-  number={24},
-  ISSN={2475-9066},
-  DOI={10.21105/joss.00692},
-  url={https://dx.doi.org/10.21105/joss.00692},
-  year={2018},
-  month={Apr}
-}
-```
-
-We ❤ to see our [list of publications](resources/publications.md) growing.
+    If you have found this software useful, please consider starring it on
+    [GitHub](https://github.com/JuliaEarth/GeoStats.jl). This gives us an
+    accurate lower bound of the (satisfied) user count.
 
 ## Installation
 
@@ -73,7 +45,7 @@ Get the latest stable release with Julia's package manager:
 
 ## Tutorials
 
-A set of Pluto notebooks demonstrating the current functionality of the project
+A set of Pluto notebooks demonstrating the current functionality of the framework
 is available in [GeoStatsTutorials](https://github.com/JuliaEarth/GeoStatsTutorials)
 with an accompanying series of videos:
 
@@ -85,7 +57,7 @@ with an accompanying series of videos:
 
 ## Quick example
 
-Below is a quick preview of the high-level API:
+Below is a quick preview of the high-level interface:
 
 ```@example overview
 using GeoStats
@@ -152,3 +124,29 @@ Other packages can be installed separately for additional functionality:
 | [GslibIO.jl](https://github.com/JuliaEarth/GslibIO.jl) | Load/save (extended) GSLIB files. |
 
 Besides the packages above, the project can be extended with [solver packages](solvers/overview.md).
+
+## Citing the software
+
+If you find this software useful in your work, please consider citing it: 
+
+[![JOSS](https://img.shields.io/badge/JOSS-10.21105%2Fjoss.00692-brightgreen?style=flat-square)](https://doi.org/10.21105/joss.00692)
+[![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.3875233-blue?style=flat-square)](https://zenodo.org/badge/latestdoi/33827844)
+
+```bibtex
+@ARTICLE{Hoffimann2018,
+  title={GeoStats.jl – High-performance geostatistics in Julia},
+  author={Hoffimann, Júlio},
+  journal={Journal of Open Source Software},
+  publisher={The Open Journal},
+  volume={3},
+  pages={692},
+  number={24},
+  ISSN={2475-9066},
+  DOI={10.21105/joss.00692},
+  url={https://dx.doi.org/10.21105/joss.00692},
+  year={2018},
+  month={Apr}
+}
+```
+
+We ❤ to see our [list of publications](resources/publications.md) growing.
