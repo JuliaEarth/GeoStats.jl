@@ -134,14 +134,64 @@ geometries and features of geospatial data. They are implemented in the
 UniqueCoords
 ```
 
+```@example transforms
+# point set with repeated points
+X = rand(2, 50)
+Ω = georef((Z=rand(100),), [X X])
+```
+
+```@example transforms
+# discard repeated points
+𝒰 = Ω |> UniqueCoords()
+```
+
 ### Detrend
 
 ```@docs
 Detrend
 ```
 
+```@example transforms
+# quadratic trend + random noise
+r = range(-1, stop=1, length=100)
+μ = [x^2 + y^2 for x in r, y in r]
+ϵ = 0.1rand(100, 100)
+Ω = georef((Z=μ+ϵ,))
+
+# detrend and obtain noise component
+𝒩 = Ω |> Detrend(:Z, degree=2)
+
+fig = Mke.Figure(resolution = (800, 400))
+viz(fig[1,1], Ω.geometry, color = Ω.Z)
+viz(fig[1,2], 𝒩.geometry, color = 𝒩.Z)
+fig
+```
+
 ### Potrace
 
 ```@docs
 Potrace
+```
+
+```@example transforms
+# continuous feature
+Z = [sin(i/10) + sin(j/10) for i in 1:100, j in 1:100]
+
+# binary mask
+M = Z .> 0
+
+# georeference data
+Ω = georef((Z=Z, M=M))
+
+# trace polygons using mask
+𝒯 = Ω |> Potrace(:M)
+
+fig = Mke.Figure(resolution = (800, 400))
+viz(fig[1,1], Ω.geometry, color = Ω.Z)
+viz(fig[1,2], 𝒯.geometry, color = 𝒯.Z)
+fig
+```
+
+```@example transforms
+𝒯.geometry
 ```
