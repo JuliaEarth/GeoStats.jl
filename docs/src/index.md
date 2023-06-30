@@ -1,5 +1,10 @@
 # GeoStats.jl
 
+```@example data
+using JSServe: Page # hide
+Page(exportable=true, offline=true) # hide
+```
+
 *An extensible framework for high-performance geostatistics in Julia.*
 
 ```@raw html
@@ -84,8 +89,9 @@ Below is a quick preview of the high-level API:
 
 ```@example overview
 using GeoStats
-using Plots, GeoStatsPlots
-gr(size=(900,400)) # hide
+using GeoStatsViz
+
+import WGLMakie as Mke
 
 # attribute table
 table = (Z=[1.,0.,1.],)
@@ -100,18 +106,19 @@ coord = [(25.,25.), (50.,75.), (75.,50.)]
 𝒢 = CartesianGrid(100, 100)
 
 # estimation problem
-problem = EstimationProblem(𝒟, 𝒢, :Z)
+𝒫 = EstimationProblem(𝒟, 𝒢, :Z)
 
 # choose a solver from the list of solvers
-solver = Kriging(
-  :Z => (variogram=GaussianVariogram(range=35.),)
-)
+𝒮 = Kriging(:Z => (variogram=GaussianVariogram(range=35.),))
 
 # solve the problem
-solution = solve(problem, solver)
+Ω = solve(𝒫, 𝒮)
 
-# plot the solution
-contourf(solution, clabels=true)
+# visualize the solution
+fig = Mke.Figure(resolution = (800, 400))
+viz(fig[1,1], Ω.geometry, color = Ω.Z)
+viz(fig[1,2], Ω.geometry, color = Ω.Z_variance)
+fig
 ```
 
 For a more detailed example, please consult the [Quickstart](quickstart.md).
