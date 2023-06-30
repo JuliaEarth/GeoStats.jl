@@ -1,9 +1,9 @@
-# Writing solvers
+# Solvers
 
 After reading this guide, you should be able to write your own geostatistical
 solver, and enjoy a large set of features *for free*, including distributed
-parallel execution, a suite of meta algorithms, and various plot recipes. If
-you have any questions, please don't hesitate to ask in our
+parallel execution, a suite of meta algorithms, and various visualization
+recipes. If you have any questions, please don't hesitate to ask in our
 [community channel](../about/community.md).
 
 ## Basics
@@ -102,7 +102,7 @@ function solve(problem::EstimationProblem, solver::MyCoolSolver)
   μs = []; σs = []
   for var in name.(variables(problem))
     push!(μs, var => rand(nelements(pdomain)))
-    push!(σs, Symbol(var,"-variance") => rand(nelements(pdomain)))
+    push!(σs, Symbol(var,"_variance") => rand(nelements(pdomain)))
   end
 
   georef((; μs..., σs...), pdomain)
@@ -124,8 +124,6 @@ sdomain  = CartesianGrid(100, 100)
 problem  = EstimationProblem(sdata, sdomain, :value)
 
 solution = solve(problem, MyCoolSolver())
-
-plot(solution)
 ```
 
 ### Writing simulation solvers
@@ -174,7 +172,7 @@ preprocess(problem::SimulationProblem, solver::MySimSolver) = nothing
 
 Similar to the other cases, writing a `LearningSolver` compatible with the framework
 consists of writing a simple Julia function that takes the `LearningProblem` as input
-along with the solver, and returns spatial data with learned variables.
+along with the solver, and returns geospatial data with learned variables.
 
 ## Examples
 
@@ -237,10 +235,8 @@ We can test the newly defined solver on an estimation problem:
 
 ```@example normsolver
 using GeoStats
-using Plots
-gr(size=(900,400)) # hide
 
-# dummy spatial data with a single point and no value
+# dummy geospatial data with a single point and no value
 sdata   = georef((z=[NaN],), reshape([0.,0.], 2, 1))
 
 # estimate on a regular grid
@@ -253,8 +249,6 @@ problem = EstimationProblem(sdata, sdomain, :z)
 solver = NormSolver()
 
 solution = solve(problem, solver)
-
-contourf(solution)
 ```
 
 And assess the behavior of different parameters:
@@ -263,8 +257,6 @@ And assess the behavior of different parameters:
 solver = NormSolver(:z => (pmean=1,pvar=3))
 
 solution = solve(problem, solver)
-
-contourf(solution)
 ```
 
 ### Simulation
@@ -308,8 +300,6 @@ We can test the newly defined solver in a simulation problem:
 
 ```@example randsolver
 using GeoStats
-using Plots
-gr(size=(900,300)) # hide
 
 # simulate on a regular grid
 sdomain = CartesianGrid(100, 100)
@@ -321,8 +311,6 @@ problem = SimulationProblem(sdomain, :z => Float64, 3)
 solver = RandSolver(:z => (mean=10.,var=10.))
 
 solution = solve(problem, solver)
-
-heatmap(solution)
 ```
 
 Note, however, that we did not define the `preprocess` function for the solver.
@@ -420,8 +408,6 @@ We can test the newly defined solver in a learning problem:
 
 ```@example meansolver
 using GeoStats
-using Plots
-gr(size=(900,300)) # hide
 
 # create some values
 v = [10sin(i/10) + j for i in 1:100, j in 1:100]
@@ -440,6 +426,4 @@ p = LearningProblem(Ωs, Ωt, t)
 
 # solve problem
 μ = solve(p, MeanSolver())
-
-plot(plot(Ωs), plot(μ))
 ```
