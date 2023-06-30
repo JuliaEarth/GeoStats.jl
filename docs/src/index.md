@@ -1,6 +1,6 @@
 # GeoStats.jl
 
-```@example data
+```@example overview
 using JSServe: Page # hide
 Page(exportable=true, offline=true) # hide
 ```
