@@ -25,14 +25,11 @@
   </a>
 </p>
 
-# Project goals
+**GeoStats.jl** is an extensible framework for *geospatial data science* and *geostatistical modeling* in Julia.
+It is composed of several modules for advanced geometric processing, state-of-the-art geostatistical algorithms and
+sophisticated visualization of geospatial data.
 
-- Design a comprehensive framework for geostatistics in a modern programming language.
-- Address the lack of a platform for scientific comparison of different geostatistical algorithms.
-- Exploit modern hardware aggressively, including GPUs and computer clusters.
-- Educate people outside of the field about the existence of geostatistics.
-
-For a guided tour, please watch our JuliaCon2021 talk and our JuliaEO2023 workshop:
+For a guided tour, please watch our JuliaCon2021 talk:
 
 <p align="center">
   <a href="https://youtu.be/75A6zyn5pIE">
@@ -40,74 +37,15 @@ For a guided tour, please watch our JuliaCon2021 talk and our JuliaEO2023 worksh
   </a>
 </p>
 
-<p align="center">
-  <a href="https://youtu.be/1FfgjW5XQ9g">
-    <img src="https://img.youtube.com/vi/1FfgjW5XQ9g/maxresdefault.jpg">
-  </a>
-</p>
+To install it, please run:
 
-## Contributing and supporting
-
-Contributions are very welcome, as are feature requests and suggestions. Please
-[open an issue](https://github.com/JuliaEarth/GeoStats.jl/issues) if you encounter
-any problems. We have [written instructions](CONTRIBUTING.md) to help you with
-the process.
-
-GeoStats.jl was developed as part of academic research. It will always be open
-source and free of charge. If you would like to help support the project, please
-star the repository [![STARS][stars-img]][stars-url] and share it with your colleagues.
-If you have questions, don't hesitate to ask in our community channel:
-
-[![ZULIP][zulip-img]][zulip-url]
-
-## Citing
-
-If you find GeoStats.jl useful in your work, please consider citing it:
-
-[![JOSS][joss-img]][joss-url]
-[![DOI][zenodo-img]][zenodo-url]
-
-```bibtex
-@ARTICLE{Hoffimann2018,
-  title={GeoStats.jl – High-performance geostatistics in Julia},
-  author={Hoffimann, Júlio},
-  journal={Journal of Open Source Software},
-  publisher={The Open Journal},
-  volume={3},
-  pages={692},
-  number={24},
-  ISSN={2475-9066},
-  DOI={10.21105/joss.00692},
-  url={http://dx.doi.org/10.21105/joss.00692},
-  year={2018},
-  month={Apr}
-}
+```julia
+julia> import Pkg
+julia> Pkg.add("GeoStats")
 ```
 
-## Installation
 
-Get the latest stable release with Julia's package manager:
-
-```
-] add GeoStats
-```
-
-## Documentation
-
-- [**STABLE**][docs-stable-url] &mdash; **most recently tagged version of the documentation.**
-- [**LATEST**][docs-latest-url] &mdash; *in-development version of the documentation.*
-
-## Tutorials
-
-A set of Pluto notebooks demonstrating the current functionality of the project is available in
-[GeoStatsTutorials](https://github.com/JuliaEarth/GeoStatsTutorials)
-with an accompanying series of videos:
-
-<p align="center">
-  <a href="https://www.youtube.com/playlist?list=PLsH4hc788Z1f1e61DN3EV9AhDlpbhhanw">
-    <img src="https://img.youtube.com/vi/yDIK9onnZVw/maxresdefault.jpg">
-  </a>
-</p>
+All further information is provided in the [online documentation](https://JuliaEarth.github.io/GeoStats.jl/stable).
 
 ## Used at
 
