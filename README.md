@@ -25,9 +25,10 @@
   </a>
 </p>
 
-**GeoStats.jl** is an extensible framework for *geospatial data science* and *geostatistical modeling* in Julia.
-It is composed of several modules for advanced geometric processing, state-of-the-art geostatistical algorithms and
-sophisticated visualization of geospatial data.
+**GeoStats.jl** is an extensible framework for *geospatial data science*
+and *geostatistical modeling* in Julia. It is comprised of several modules
+for advanced geometric processing, state-of-the-art geostatistical
+algorithms and sophisticated visualization of geospatial data.
 
 For a guided tour, please watch our JuliaCon2021 talk:
 
@@ -58,24 +59,6 @@ All further information is provided in the [online documentation](https://JuliaE
   <img src="docs/src/images/Stanford.png" width="300px" hspace="20">
   <img src="docs/src/images/UFMG.jpg" width="160px" hspace="20">
 </p>
-
-[docs-stable-img]: https://img.shields.io/badge/docs-stable-blue?style=flat-square
-[docs-stable-url]: https://JuliaEarth.github.io/GeoStats.jl/stable
-
-[docs-latest-img]: https://img.shields.io/badge/docs-latest-blue?style=flat-square
-[docs-latest-url]: https://JuliaEarth.github.io/GeoStats.jl/latest
-
-[joss-img]: https://img.shields.io/badge/JOSS-10.21105%2Fjoss.00692-brightgreen?style=flat-square
-[joss-url]: https://doi.org/10.21105/joss.00692
-
-[zenodo-img]: https://img.shields.io/badge/DOI-10.5281%2Fzenodo.3875233-blue?style=flat-square
-[zenodo-url]: https://zenodo.org/badge/latestdoi/33827844
-
-[zulip-img]: https://img.shields.io/badge/chat-on%20zulip-9cf?style=flat-square
-[zulip-url]: https://julialang.zulipchat.com/#narrow/stream/276201-geostats.2Ejl
-
-[stars-img]: https://img.shields.io/github/stars/JuliaEarth/GeoStats.jl?style=social
-[stars-url]: https://github.com/JuliaEarth/GeoStats.jl
 
 ## Contributors
 
