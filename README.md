@@ -38,14 +38,6 @@ For a guided tour, please watch our JuliaCon2021 talk:
   </a>
 </p>
 
-To install it, please run:
-
-```julia
-julia> import Pkg
-julia> Pkg.add("GeoStats")
-```
-
-
 All further information is provided in the [online documentation](https://JuliaEarth.github.io/GeoStats.jl/stable).
 
 ## Used at
