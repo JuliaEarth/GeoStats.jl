@@ -1,11 +1,14 @@
-# GeoStats.jl
-
-```@example overview
-using JSServe: Page # hide
-Page(exportable=true, offline=true) # hide
+```@docs
+GeoStats
 ```
 
-*An extensible framework for high-performance geostatistics in Julia.*
+!!! note "Star us on GitHub!"
+
+    If you have found this software useful, please consider starring it on
+    [GitHub](https://github.com/JuliaEarth/GeoStats.jl). This gives us an
+    accurate lower bound of the (satisfied) user count.
+
+For a guided tour, please watch our JuliaCon2021 talk:
 
 ```@raw html
 <p align="center">
@@ -15,6 +18,11 @@ Page(exportable=true, offline=true) # hide
 
 ## Overview
 
+```@example overview
+using JSServe: Page # hide
+Page(exportable=true, offline=true) # hide
+```
+
 In many fields of science, such as mining engineering, hydrogeology, petroleum
 engineering, and environmental sciences, traditional statistical methods fail
 to provide unbiased estimates of resources due to the presence of geospatial
@@ -22,18 +30,13 @@ correlation. Geostatistics (a.k.a. geospatial statistics) is the branch of
 statistics developed to overcome this limitation. Particularly, it is the
 branch that takes geospatial coordinates of data into account.
 
-[GeoStats.jl](https://github.com/JuliaEarth/GeoStats.jl) is an attempt to bring
-together bleeding-edge research in the geostatistics community into a comprehensive
-framework for geospatial modeling, as well as to empower researchers and practitioners
-with a toolkit for fast assessment of different modeling approaches. If you have
-questions, feature requests, or would like to brainstorm ideas, don't hesitate to
-start a thread in our [community channel](about/community.md).
+**GeoStats.jl** is an attempt to bring together bleeding-edge research in the
+geostatistics community into a comprehensive framework for *geospatial data
+science* and *geostatistical modeling*, as well as to empower researchers and
+practitioners with a toolkit for fast assessment of different modeling approaches.
 
-!!! note "Star us on GitHub!"
-
-    If you have found this software useful, please consider starring it on
-    [GitHub](https://github.com/JuliaEarth/GeoStats.jl). This gives us an
-    accurate lower bound of the (satisfied) user count.
+If you have questions, feature requests, or would like to brainstorm ideas, don't
+hesitate to start a thread in our [community channel](about/community.md).
 
 ## Installation
 
@@ -41,18 +44,6 @@ Get the latest stable release with Julia's package manager:
 
 ```
 ] add GeoStats
-```
-
-## Tutorials
-
-A set of Pluto notebooks demonstrating the current functionality of the framework
-is available in [GeoStatsTutorials](https://github.com/JuliaEarth/GeoStatsTutorials)
-with an accompanying series of videos:
-
-```@raw html
-<p align="center">
-<iframe width="560" height="315" src="https://www.youtube.com/embed/yDIK9onnZVw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-</p>
 ```
 
 ## Quick example
@@ -94,6 +85,18 @@ fig
 ```
 
 For a more detailed example, please consult the [Quickstart](quickstart.md).
+
+## Video tutorials
+
+A set of Pluto notebooks demonstrating the functionality of the framework
+is available in [GeoStatsTutorials](https://github.com/JuliaEarth/GeoStatsTutorials)
+with an accompanying series of videos:
+
+```@raw html
+<p align="center">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/yDIK9onnZVw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</p>
+```
 
 ## Project organization
 

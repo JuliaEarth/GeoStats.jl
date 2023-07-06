@@ -1,44 +1,21 @@
-<p align="center">
-  <img src="docs/src/assets/logo-text.svg" height="200"><br>
-  <a href="https://github.com/JuliaEarth/GeoStats.jl/actions">
-    <img src="https://img.shields.io/github/actions/workflow/status/JuliaEarth/GeoStats.jl/CI.yml?branch=master&style=flat-square">
-  </a>
-  <a href="https://julialang.zulipchat.com/#narrow/stream/276201-geostats.2Ejl">
-    <img src="https://img.shields.io/badge/chat-on%20zulip-9cf?style=flat-square">
-  </a>
-  <a href="https://JuliaEarth.github.io/GeoStats.jl/stable">
-    <img src="https://img.shields.io/badge/docs-stable-blue?style=flat-square">
-  </a>
-  <a href="https://JuliaEarth.github.io/GeoStats.jl/latest">
-    <img src="https://img.shields.io/badge/docs-latest-blue?style=flat-square">
-  </a>
-  <a href="LICENSE">
-    <img src="https://img.shields.io/badge/license-MIT-blue?style=flat-square">
-  </a>
-</p>
-<p align="center">
-  <a href="https://doi.org/10.21105/joss.00692">
-    <img src="https://img.shields.io/badge/JOSS-10.21105%2Fjoss.00692-brightgreen?style=flat-square">
-  </a>
-  <a href="https://zenodo.org/badge/latestdoi/33827844">
-    <img src="https://img.shields.io/badge/DOI-10.5281%2Fzenodo.3875233-blue?style=flat-square">
-  </a>
-</p>
+![GeoStats.jl](https://raw.githubusercontent.com/JuliaEarth/GeoStats.jl/master/docs/src/assets/logo-text.svg)
 
-**GeoStats.jl** is an extensible framework for *geospatial data science*
-and *geostatistical modeling* in Julia. It is comprised of several modules
-for advanced geometric processing, state-of-the-art geostatistical
+[![](https://img.shields.io/github/actions/workflow/status/JuliaEarth/GeoStats.jl/CI.yml?branch=master&style=flat-square)](https://github.com/JuliaEarth/GeoStats.jl/actions)
+[![](https://img.shields.io/badge/chat-on%20zulip-9cf?style=flat-square)](https://julialang.zulipchat.com/#narrow/stream/276201-geostats.2Ejl)
+[![](https://img.shields.io/badge/docs-stable-blue?style=flat-square)](https://JuliaEarth.github.io/GeoStats.jl/stable)
+[![](https://img.shields.io/badge/docs-latest-blue?style=flat-square)](https://JuliaEarth.github.io/GeoStats.jl/latest)
+[![](https://img.shields.io/badge/license-MIT-blue?style=flat-square)](https://github.com/JuliaEarth/GeoStats.jl/blob/master/LICENSE)
+
+[![](https://img.shields.io/badge/JOSS-10.21105%2Fjoss.00692-brightgreen?style=flat-square)](https://doi.org/10.21105/joss.00692)
+[![](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.3875233-blue?style=flat-square)](https://zenodo.org/badge/latestdoi/33827844)
+
+**GeoStats.jl** is an extensible framework for *geospatial data science* and
+*geostatistical modeling* fully written in Julia. It is comprised of several
+modules for advanced geometric processing, state-of-the-art geostatistical
 algorithms and sophisticated visualization of geospatial data.
 
-For a guided tour, please watch our JuliaCon2021 talk:
-
-<p align="center">
-  <a href="https://youtu.be/75A6zyn5pIE">
-    <img src="https://img.youtube.com/vi/75A6zyn5pIE/maxresdefault.jpg">
-  </a>
-</p>
-
-All further information is provided in the [online documentation](https://JuliaEarth.github.io/GeoStats.jl/stable).
+All further information is provided in the
+[online documentation](https://JuliaEarth.github.io/GeoStats.jl/stable).
 
 ## Used at
 
