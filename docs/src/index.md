@@ -32,8 +32,7 @@ Organizations using the framework:
 </p>
 ```
 
-Would like to become a sponsor? Check the options by
-pressing the sponsor button in our
+Would like to become a sponsor? Press the sponsor button in our
 [GitHub repository](https://github.com/JuliaEarth/GeoStats.jl).
 
 ## Overview
