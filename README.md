@@ -17,18 +17,6 @@ algorithms and sophisticated visualization of geospatial data.
 All further information is provided in the
 [online documentation](https://JuliaEarth.github.io/GeoStats.jl/stable).
 
-## Used at
-
-<p align="center">
-  <img src="docs/src/images/Petrobras.gif" width="160px" hspace="20">
-  <img src="docs/src/images/Vale.png" width="160px" hspace="20">
-  <img src="docs/src/images/Gazprom.png" width="160px" hspace="20">
-  <img src="docs/src/images/Nexa.jpg" width="160px" hspace="20">
-  <img src="docs/src/images/ENI.png" width="100px" hspace="20">
-  <img src="docs/src/images/Stanford.png" width="300px" hspace="20">
-  <img src="docs/src/images/UFMG.jpg" width="160px" hspace="20">
-</p>
-
 ## Contributors
 
 This project would not be possible without the contributions of:

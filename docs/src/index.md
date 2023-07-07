@@ -8,11 +8,32 @@ GeoStats
     [GitHub](https://github.com/JuliaEarth/GeoStats.jl). This gives us an
     accurate lower bound of the (satisfied) user count.
 
-For a guided tour, please watch our JuliaCon2021 talk:
+Organizations using the framework:
 
 ```@raw html
-<iframe width="560" height="315" src="https://www.youtube.com/embed/75A6zyn5pIE" title="Geostatistical Learning" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<p align="center">
+  <img src="images/Petrobras.gif" width="160px" hspace="20">
+  <img src="images/Vale.png" width="160px" hspace="20">
+  <img src="images/Gazprom.png" width="160px" hspace="20">
+  <img src="images/Nexa.jpg" width="160px" hspace="20">
+  <img src="images/ENI.png" width="100px" hspace="20">
+  <img src="images/Stanford.png" width="300px" hspace="20">
+  <img src="images/UFMG.jpg" width="160px" hspace="20">
+</p>
 ```
+
+### Sponsors
+
+```@raw html
+<p align="center">
+  <a href="https://arpeggeo.tech">
+    <img src="images/Arpeggeo.png" width="200px" hspace="20">
+  </a>
+</p>
+```
+
+Would like to become a sponsor? Send an e-mail to
+[juliohm@arpeggeo.tech](mailto:juliohm@arpeggeo.tech).
 
 ## Overview
 
@@ -32,6 +53,13 @@ branch that takes geospatial coordinates of data into account.
 geostatistics community into a comprehensive framework for *geospatial data
 science* and *geostatistical modeling*, as well as to empower researchers and
 practitioners with a toolkit for fast assessment of different modeling approaches.
+For a guided tour, please watch our JuliaCon2021 talk:
+
+```@raw html
+<p align="center">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/75A6zyn5pIE" title="Geostatistical Learning" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</p>
+```
 
 If you have questions, feature requests, or would like to brainstorm ideas, don't
 hesitate to start a thread in our [community channel](about/community.md).
@@ -91,7 +119,9 @@ is available in [GeoStatsTutorials](https://github.com/JuliaEarth/GeoStatsTutori
 with an accompanying series of videos:
 
 ```@raw html
+<p align="center">
 <iframe width="560" height="315" src="https://www.youtube.com/embed/yDIK9onnZVw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</p>
 ```
 
 ## Project organization
