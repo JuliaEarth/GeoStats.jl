@@ -32,8 +32,9 @@ Organizations using the framework:
 </p>
 ```
 
-Would like to become a sponsor? Send an e-mail to
-[juliohm@arpeggeo.tech](mailto:juliohm@arpeggeo.tech).
+Would like to become a sponsor? Check the options by
+pressing the sponsor button in our
+[GitHub repository](https://github.com/JuliaEarth/GeoStats.jl).
 
 ## Overview
 
