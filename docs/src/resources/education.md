@@ -1,8 +1,8 @@
 # Education
 
 Geostatistics is often misunderstood as *"classical statistics applied to
-geospatial data"*. To correct this unfortunate misunderstanding, the best we
-can do as a community is to list educational resources.
+geospatial data"*. To correct this misunderstanding, we recommend the
+following educational resources.
 
 ## Learning resources
 
@@ -24,7 +24,7 @@ can do as a community is to list educational resources.
 ### Lectures
 
 - [Júlio Hoffimann](https://www.youtube.com/playlist?list=PLsH4hc788Z1f1e61DN3EV9AhDlpbhhanw) -
-  Video lectures with the GeoStats.jl project.
+  Video lectures with the GeoStats.jl framework.
 
 - [Edward Isaaks](https://www.youtube.com/user/sadeddy/videos) -
   Video lectures on variography, Kriging and related concepts.
@@ -54,11 +54,7 @@ Gaussian process regression and Simple Kriging are essentially
 The derivation of Kriging estimators, however; does **not** require
 distributional assumptions. It is a beautiful coincidence that for
 multivariate Gaussian distributions, Simple Kriging gives the conditional
-expectation. [Matheron](https://en.wikipedia.org/wiki/Georges_Matheron)
-and other important geostatisticians have generalized Gaussian processes
-to more general random fields with locally-varying mean and for situations
-where the mean is unknown. GeoStats.jl includes Gaussian processes as
-a special case as well as other more practical Kriging variants.
+expectation.
 
 ### MLKernels.jl
 
