@@ -18,7 +18,7 @@ recording of our JuliaEO2023 workshop:
 
 ```@raw html
 <p align="center">
-<iframe width="560" height="315" src="https://www.youtube.com/embed/1FfgjW5XQ9g?start=1682" title="GeoStats.jl workshop at JuliaEO2023" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+<iframe style="width:560px;height:315px" src="https://www.youtube.com/embed/1FfgjW5XQ9g?start=1682" title="GeoStats.jl workshop at JuliaEO2023" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 </p>
 ```
 
