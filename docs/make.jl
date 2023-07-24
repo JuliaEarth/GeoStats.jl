@@ -57,7 +57,7 @@ makedocs(
       "Validation" => "validation.md",
       "Clustering" => "clustering.md",
       "Declustering" => "declustering.md",
-      "Table transforms" => "transforms.md",
+      "Geospatial transforms" => "transforms.md",
       "Split-apply-combine" => "splitapplycombine.md",
       "Variography" => [
         "variography/empirical.md",

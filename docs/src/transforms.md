@@ -1,4 +1,4 @@
-# Table transforms
+# Geospatial transforms
 
 ```@example transforms
 using JSServe: Page # hide

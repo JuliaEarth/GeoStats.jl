@@ -17,6 +17,10 @@ following educational resources.
   (https://onlinelibrary.wiley.com/doi/book/10.1002/9781118136188) - An incredible
   book for those with good mathematical background.
 
+- *Webster, R and Oliver, MA. 2007.* [Geostatistics for Environmental Scientists]
+  (https://onlinelibrary.wiley.com/doi/book/10.1002/9780470517277) - A great book
+  with good balance between theory and practice.
+
 - *Journel, A. and Huijbregts, Ch. 2003.* [Mining Geostatistics]
   (https://www.amazon.com/Mining-Geostatistics-G-Journel/dp/1930665911) - A great
   book with both theoretical and practical developments.
