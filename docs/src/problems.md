@@ -154,3 +154,19 @@ watch our JuliaCon2021 talk:
 <iframe style="width:560px;height:315px" src="https://www.youtube.com/embed/75A6zyn5pIE" title="Geostatistical Learning" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </p>
 ```
+
+Besides the unsupervised [Clustering](clustering.md) algorithms, the framework defines
+algorithms for two supervised learning tasks:
+
+```@docs
+RegressionTask
+ClassificationTask
+```
+
+These tasks can be learned and performed with geospatial data using any learning model
+from the [MLJ.jl](https://github.com/alan-turing-institute/MLJ.jl) project:
+
+```@docs
+learn(::LearningTask, ::Data, ::Any)
+perform(::LearningTask, ::Data, ::Any)
+```
