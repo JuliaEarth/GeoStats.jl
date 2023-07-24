@@ -491,6 +491,15 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "MilesCranmer",
+      "name": "Miles Cranmer",
+      "avatar_url": "https://avatars.githubusercontent.com/u/7593028?v=4",
+      "profile": "http://astroautomata.com",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
