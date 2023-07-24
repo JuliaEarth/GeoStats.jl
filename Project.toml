@@ -1,7 +1,7 @@
 name = "GeoStats"
 uuid = "dcc97b0b-8ce5-5539-9008-bb190f959ef6"
 author = "Júlio Hoffimann <julio.hoffimann@gmail.com>"
-version = "0.40.10"
+version = "0.41.0"
 
 [deps]
 Chain = "8be319e6-bccf-4806-a6f7-6fae938471bc"
@@ -35,5 +35,5 @@ Reexport = "1.0"
 Rotations = "1.5"
 ScientificTypes = "3.0"
 TableTransforms = "1.9"
-Variography = "0.15"
+Variography = "0.16"
 julia = "1.6"
