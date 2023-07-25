@@ -85,7 +85,7 @@ coordinate system, we can georeference the array using the [`georef`](@ref)
 function:
 
 ```@example quickstart
-Z = [10sin(i/10) + 2j + k for i in 1:50, j in 1:50, k in 1:50]
+Z = [10sin(i/10) + 2j for i in 1:50, j in 1:50]
 
 Ω = georef((Z=Z,))
 ```
@@ -93,7 +93,7 @@ Z = [10sin(i/10) + 2j + k for i in 1:50, j in 1:50, k in 1:50]
 The origin and spacing of samples can be specified with:
 
 ```@example quickstart
-georef((Z=Z,), origin = (1.0, 1.0, 1.0), spacing = (10.0, 10.0, 10.0))
+georef((Z=Z,), origin = (1.0, 1.0), spacing = (10.0, 10.0))
 ```
 
 and different geospatial configurations can be obtained with different
@@ -155,7 +155,7 @@ values(Ω)
 domain(Ω)
 ```
 
-### Table transforms
+### Geospatial transforms
 
 It is easy to design advanced geospatial pipelines that operate on
 both the table of attributes and the underlying geospatial domain:
@@ -189,24 +189,12 @@ We provide three macros [`@groupby`](@ref), [`@transform`](@ref) and
 [`@combine`](@ref) for powerful geospatial split-apply-combine patterns:
 
 ```@example quickstart
-@transform(Ω, :W = 2 * :Z * volume(:geometry))
+@transform(Ω, :W = 2 * :Z * area(:geometry))
 ```
 
-These macros are very useful for geodata science as they hide the
-complexity of the `geometry` column. For more information, check
-the [Split-apply-combine](splitapplycombine.md) section of the
-documentation.
-
-### Geospatial views
-
-Geospatial data can be viewed at a subset of locations without
-unnecessary memory allocations:
-
-```@example quickstart
-Ωᵣ = view(Ω, rand(1:50*50*50, 1000))
-
-viz(Ωᵣ.geometry, color = Ωᵣ.Z)
-```
+These macros are very useful for geospatial data science as they hide
+the complexity of the `geometry` column. For more information, check the
+[Split-apply-combine](splitapplycombine.md) section of the documentation.
 
 ## Defining problems
 
