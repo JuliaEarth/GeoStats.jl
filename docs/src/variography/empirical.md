@@ -23,17 +23,19 @@ in order to for example:
 Please see [Distances.jl](https://github.com/JuliaStats/Distances.jl)
 for a complete list of distance functions.
 
-## Variograms
+## (Omini)directional
 
 ```@docs
 EmpiricalVariogram
+DirectionalVariogram
+PlanarVariogram
 values(::EmpiricalVariogram)
 distance(::EmpiricalVariogram)
 estimator(::EmpiricalVariogram)
 merge(::EmpiricalVariogram{V,D,E}, ::EmpiricalVariogram{V,D,E}) where {V,D,E}
 ```
 
-Consider the following image for illustration purposes:
+Consider the following example image:
 
 ```@example empirical
 using GeoStats # hide
@@ -47,6 +49,9 @@ gr(size=(800,400),aspectratio=:equal) # hide
 plot(𝒟)
 ```
 
+We can compute ominidirectional variograms, which
+consider pairs of points along all directions:
+
 ```@example empirical
 γ = EmpiricalVariogram(𝒟, :Z, maxlag=50.)
 
@@ -54,9 +59,7 @@ gr(size=(800,400),aspectratio=:none) # hide
 plot(γ)
 ```
 
-```@docs
-DirectionalVariogram
-```
+directional variograms along a specific direction:
 
 ```@example empirical
 γₕ = DirectionalVariogram((1.,0.), 𝒟, :Z, maxlag=50.)
@@ -66,9 +69,7 @@ plot(γₕ, label="horizontal")
 plot!(γᵥ, label="vertical")
 ```
 
-```@docs
-PlanarVariogram
-```
+or planar variograms along a specific plane:
 
 ```@example empirical
 γᵥ = PlanarVariogram((1.,0.), 𝒟, :Z, maxlag=50.)
@@ -83,6 +84,9 @@ plot!(γᵥ, label="vertical")
 ```@docs
 EmpiricalVarioplane
 ```
+
+The varioplane is plotted on a polar axis
+for all lags and angles:
 
 ```@example empirical
 γ = EmpiricalVarioplane(𝒟, :Z, maxlag=50.)
