@@ -199,7 +199,7 @@ We pass the ellipsoid as the first argument to the variogram model
 instead of specifying a single `range` with a keyword argument:
 
 ```@example variograms
-GaussianVariogram(ellipsoid, sill=2.0)
+GaussianVariogram(ellipsoid, sill = 2.0)
 ```
 
 To illustrate the concept, consider the following 2D data set:
@@ -223,7 +223,16 @@ We solve the problem with different ellipsoids by varying the angle of
 rotation from ``0`` to ``2\pi`` clockwise:
 
 ```@example variograms
-anim = @animate for θ in range(0, stop=2π, length=10)
+θs = range(0.0, step = π/4, stop = 2π)
+
+# initialize figure
+fig = Mke.Figure(resolution = (800, 1600))
+
+# helper function to position subfigures
+pos = i -> CartesianIndices((4, 2))[i].I
+
+# Kriging with different angles
+for (i, θ) in enumerate(θs)
   # ellipsoid rotated clockwise by angle θ
   e = MetricBall((20.,5.), Angle2d(θ))
 
@@ -233,9 +242,10 @@ anim = @animate for θ in range(0, stop=2π, length=10)
   # solve the problem with Kriging
   sol = solve(problem, Kriging(:Z => (variogram=γ,)))
 
-  # plot current frame
-  plot(sol)
+  viz(fig[pos(i)...], sol.geometry, color = sol.Z)
 end
+
+fig
 ```
 
 ## Nesting
