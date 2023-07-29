@@ -25,7 +25,7 @@ fit(::Type{Variogram}, ::EmpiricalVariogram, ::VariogramFitAlgo)
 𝒟 = georef((Z=[sin(i/2) + sin(j/2) for i in 1:50, j in 1:50],))
 
 # empirical variogram
-g = EmpiricalVariogram(𝒟, :Z, maxlag=25.)
+g = EmpiricalVariogram(𝒟, :Z, maxlag = 25.)
 
 Mke.plot(g)
 ```
@@ -36,7 +36,7 @@ We can fit specific models to the empirical variogram:
 γ = fit(SineHoleVariogram, g)
 
 Mke.plot(g)
-Mke.plot!(γ)
+Mke.plot!(γ, maxlag = 25.)
 Mke.current_figure()
 ```
 
@@ -46,7 +46,7 @@ or let GeoStats.jl find the model with minimum error:
 γ = fit(Variogram, g)
 
 Mke.plot(g)
-Mke.plot!(γ)
+Mke.plot!(γ, maxlag = 25.)
 Mke.current_figure()
 ```
 
@@ -59,7 +59,7 @@ Optionally, we can specify a weighting function to give different weights to the
 γ = fit(SineHoleVariogram, g, h -> exp(-h))
 
 Mke.plot(g)
-Mke.plot!(γ)
+Mke.plot!(γ, maxlag = 25.)
 Mke.current_figure()
 ```
 
