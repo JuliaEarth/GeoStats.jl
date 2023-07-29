@@ -20,8 +20,8 @@ include("plots.jl")
 # reexport project modules
 @reexport using Meshes
 @reexport using Chain: @chain
+@reexport using Rotations
 @reexport using Distances: Euclidean, Haversine
-@reexport using Rotations: Angle2d, AngleAxis, RotXYZ
 @reexport using LossFunctions: L2DistLoss, L1DistLoss
 @reexport using LossFunctions: HingeLoss, MisclassLoss
 @reexport using DensityRatioEstimation
