@@ -13,8 +13,8 @@ A geostatistical workflow often consists of four steps:
 4. Visualization of problem solution
 
 In this section, we walk through these steps to illustrate some of the
-features of the project. If you prefer learning from video, check the
-recording of our JuliaEO2023 workshop:
+features of the project. If you prefer learning from video, check out
+the recording of our JuliaEO2023 workshop:
 
 ```@raw html
 <p align="center">
@@ -28,6 +28,30 @@ We assume that the following packages are loaded throughout the examples:
 using GeoStats
 import WGLMakie as Mke
 ```
+
+The **GeoStats.jl** package exports the full stack for geospatial data science
+and geostatistical modeling. The **WGLMakie.jl** package is one of the possible
+visualization backends from the [Makie.jl](https://docs.makie.org/stable)
+project.
+
+If you are new to Julia and have never heard of **Makie.jl** before, here are a
+few tips to help you choose between the different backends:
+
+- **WGLMakie.jl** is the preferred backend for visualization on the *web browser*.
+  You can interact with 3D scenes and rotate objects as you will see in the
+  examples of this documentation).
+
+- **GLMakie.jl** is the preferred backend for interactive *high-performance*
+  visualization on desktop machines. It leverages native graphical resources
+  and doesn't require a web browser.
+
+- **CairoMakie.jl** is the preferred backend for *publication-quality* static
+  visualization. It requires less computing power and is therefore recommended
+  for those users with modest laptops.
+
+We import the chosen backend as `Mke` to avoid polluting the Julia session with
+names from the visualization stack. This trick is also useful to switch between
+the backends without changing the example code.
 
 ## Loading/creating data
 
