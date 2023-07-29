@@ -48,7 +48,7 @@ function hscatter! end
 
 Plot the variogram or varioplane `γ` with given `options`.
 
-## Variogram options:
+## Empirical variogram options:
 
 * `vcolor` - color of variogram
 * `pshow`  - show points of variogram
@@ -56,17 +56,21 @@ Plot the variogram or varioplane `γ` with given `options`.
 * `tsize`  - text size of variogram labels
 * `ssize`  - size of segments of variogram
 
-## Varioplane options:
+## Empirical varioplane options:
 
 * `vscheme` - color scheme of varioplane
 * `rshow`   - show range of theoretical model
 * `rmodel`  - theoretical model (e.g. `SphericalVariogram`)
 * `rcolor`  - color of range curve
 
-## Histogram options:
+## Empirical histogram options:
 
 * `hshow`  - show histogram
 * `hcolor` - color of histogram
+
+## Theoretical variogram options:
+
+* `maxlag` - maximum lag for theoretical model
 
 ### Notes
 

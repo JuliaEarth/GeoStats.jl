@@ -4,22 +4,25 @@
 
 Makie.@recipe(VarioPlot, γ) do scene
   Makie.Attributes(
-    # variogram options
+    # empirical variogram options
     vcolor=:slategray,
     pshow=true,
     psize=12,
     tsize=12,
     ssize=1.5,
 
-    # varioplane options
+    # empirical varioplane options
     vscheme=:viridis,
     rshow=true,
     rmodel=SphericalVariogram,
     rcolor=:slategray,
 
-    # histogram options
+    # empirical histogram options
     hshow=true,
-    hcolor=:slategray
+    hcolor=:slategray,
+
+    # theoretical variogram options
+    maxlag=nothing
   )
 end
 
@@ -138,9 +141,18 @@ function Makie.plot!(plot::VarioPlot{<:Tuple{Variogram}})
   # retrieve variogram object
   γ = plot[:γ]
 
+  # retrieve maximum lag
+  maxlag = plot[:maxlag]
+
+  L = if isnothing(maxlag[])
+    Makie.@lift _maxlag($γ)
+  else
+    maxlag
+  end
+
   # start at 1e-6 instead of 0 to avoid
   # nugget artifact in visualization
-  x = Makie.@lift range(1e-6, stop=_maxlag($γ), length=100)
+  x = Makie.@lift range(1e-6, stop=$L, length=100)
   y = Makie.@lift $γ.($x)
 
   # visualize variogram
