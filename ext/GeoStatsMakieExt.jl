@@ -6,9 +6,18 @@ module GeoStatsMakieExt
 
 using GeoStats
 
+using Makie.Colors: Colorant
+using Makie.Colors: protanopic, coloralpha
+using Makie.Colors: distinguishable_colors
+using Makie.ColorSchemes: colorschemes
+
+import Makie
+import Meshes: ascolors, defaultscheme
 import GeoStats: hscatter, hscatter!
 import GeoStats: varioplot, varioplot!
-import Makie
+
+# color handling
+include("colors.jl")
 
 # geostats recipes
 include("histogram.jl")

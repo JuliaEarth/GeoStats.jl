@@ -14,16 +14,14 @@ end GeoStats
 
 using Reexport
 
-# plots via Makie extension
-include("plots.jl")
-
 # reexport project modules
+@reexport using Dates
+@reexport using Unitful
 @reexport using Meshes
-@reexport using Chain: @chain
+@reexport using Distances
 @reexport using Rotations
-@reexport using Distances: Euclidean, Haversine
-@reexport using LossFunctions: L2DistLoss, L1DistLoss
-@reexport using LossFunctions: HingeLoss, MisclassLoss
+@reexport using LossFunctions
+@reexport using CategoricalArrays
 @reexport using DensityRatioEstimation
 @reexport using ScientificTypes
 @reexport using TableTransforms
@@ -33,5 +31,9 @@ include("plots.jl")
 @reexport using PointPatterns
 @reexport using GeoClustering
 @reexport using GeoStatsSolvers
+@reexport using Chain: @chain
+
+# plots via Makie extension
+include("plots.jl")
 
 end
