@@ -8,15 +8,9 @@ using GeoStats # hide
 import WGLMakie as Mke # hide
 ```
 
-Variograms are widely used in geostatistics due to their intimate connection
-with (cross-)variance and visual interpretability. The following video explains
-the concept in detail:
-
-```@raw html
-<p align="center">
-<iframe style="width:560px;height:315px" src="https://www.youtube.com/embed/z8tZ6qIt9Fc" title="Variography Game" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-</p>
-```
+We provide various theoretical variogram models from the literature, which can
+can be combined with ellipsoid distances to model geometric anisotropy and nested
+with scalars or matrix coefficients to express multivariate relations.
 
 ## Models
 

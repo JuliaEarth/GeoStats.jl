@@ -8,7 +8,17 @@ using GeoStats # hide
 import WGLMakie as Mke # hide
 ```
 
-The Matheron's estimator of an empirical variogram is given by
+Variograms are widely used in geostatistics due to their intimate connection
+with (cross-)variance and visual interpretability. The following video explains
+the concept in detail:
+
+```@raw html
+<p align="center">
+<iframe style="width:560px;height:315px" src="https://www.youtube.com/embed/z8tZ6qIt9Fc" title="Variography Game" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</p>
+```
+
+The Matheron's estimator of the empirical variogram is given by
 
 ```math
 \widehat{\gamma_M}(h) = \frac{1}{2|N(h)|} \sum_{(i,j) \in N(h)} (z_i - z_j)^2
@@ -30,6 +40,18 @@ in order to for example:
 
 Please see [Distances.jl](https://github.com/JuliaStats/Distances.jl)
 for a complete list of distance functions.
+
+The high-performance estimation procedure implemented in the framework can
+consider all pairs of locations regardless of direction (ominidirectional)
+or a specified partition of the geospatial data (e.g. directional, planar).
+
+Variograms estimated along all directions in a given plane of reference are
+called varioplanes. Both variograms and varioplanes can be plotted directly
+with the following options:
+
+```@docs
+varioplot
+```
 
 ## (Omini)directional
 
@@ -57,7 +79,7 @@ We can compute ominidirectional variograms, which
 consider pairs of points along all directions:
 
 ```@example empirical
-γ = EmpiricalVariogram(𝒟, :Z, maxlag=50.)
+γ = EmpiricalVariogram(𝒟, :Z, maxlag = 50.)
 
 Mke.plot(γ)
 ```
@@ -65,22 +87,22 @@ Mke.plot(γ)
 directional variograms along a specific direction:
 
 ```@example empirical
-γₕ = DirectionalVariogram((1.,0.), 𝒟, :Z, maxlag=50.)
-γᵥ = DirectionalVariogram((0.,1.), 𝒟, :Z, maxlag=50.)
+γₕ = DirectionalVariogram((1.,0.), 𝒟, :Z, maxlag = 50.)
+γᵥ = DirectionalVariogram((0.,1.), 𝒟, :Z, maxlag = 50.)
 
-Mke.plot(γₕ, label="horizontal")
-Mke.plot!(γᵥ, label="vertical")
+Mke.plot(γₕ, vcolor = :maroon, hcolor = :maroon)
+Mke.plot!(γᵥ)
 Mke.current_figure()
 ```
 
 or planar variograms along a specific plane:
 
 ```@example empirical
-γᵥ = PlanarVariogram((1.,0.), 𝒟, :Z, maxlag=50.)
-γₕ = PlanarVariogram((0.,1.), 𝒟, :Z, maxlag=50.)
+γᵥ = PlanarVariogram((1.,0.), 𝒟, :Z, maxlag = 50.)
+γₕ = PlanarVariogram((0.,1.), 𝒟, :Z, maxlag = 50.)
 
-Mke.plot(γₕ, label="horizontal")
-Mke.plot!(γᵥ, label="vertical")
+Mke.plot(γₕ, vcolor = :maroon, hcolor = :maroon)
+Mke.plot!(γᵥ)
 Mke.current_figure()
 ```
 
