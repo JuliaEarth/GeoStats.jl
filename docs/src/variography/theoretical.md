@@ -242,7 +242,10 @@ for (i, θ) in enumerate(θs)
   # solve the problem with Kriging
   sol = solve(problem, Kriging(:Z => (variogram=γ,)))
 
-  viz(fig[pos(i)...], sol.geometry, color = sol.Z)
+  # visualize solution at subplot i
+  viz(fig[pos(i)...], sol.geometry, color = sol.Z,
+    axis = (title = "θ = $(rad2deg(θ))ᵒ",)
+  )
 end
 
 fig

@@ -95,7 +95,7 @@ Mke.plot!(γᵥ)
 Mke.current_figure()
 ```
 
-or planar variograms along a specific plane:
+or planar variograms over a specific plane:
 
 ```@example empirical
 γᵥ = PlanarVariogram((1.,0.), 𝒟, :Z, maxlag = 50.)
@@ -105,6 +105,13 @@ Mke.plot(γₕ, vcolor = :maroon, hcolor = :maroon)
 Mke.plot!(γᵥ)
 Mke.current_figure()
 ```
+
+!!! note
+
+    The directional and planar variograms coincide in the example
+    because planes are equal to lines in 2-dimensional space. The
+    latter is most useful in 3-dimensional space where one may be
+    interested in comparing horizontal to vertical ranges.
 
 ## Varioplanes
 
