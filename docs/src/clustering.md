@@ -15,7 +15,7 @@ both the features and the geospatial coordinates of the data.
 Consider the following data as an example:
 
 ```@example clustering
-Ω = georef((Z=[10sin(i/10) + j for i in 1:2:100, j in 1:2:100],))
+Ω = georef((Z=[10sin(i/10) + j for i in 1:4:100, j in 1:4:100],))
 
 viz(Ω.geometry, color = Ω.Z)
 ```
