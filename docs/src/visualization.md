@@ -1,4 +1,4 @@
-# Plotting
+# Visualization
 
 ```@example plots
 using JSServe: Page # hide
@@ -11,7 +11,7 @@ import WGLMakie as Mke # hide
 The GeoStats.jl framework provides powerful visualization recipes for
 geospatial data science via the [Makie.jl](https://github.com/MakieOrg/Makie.jl)
 project. These recipes were carefully designed to maximize productivity
-and to protect users from "GIS" jargon. The main entry point is the
+and to protect users from GIS jargon. The main entry point is the
 [`viz`](@ref) function:
 
 ```@docs

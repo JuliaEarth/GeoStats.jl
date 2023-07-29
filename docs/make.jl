@@ -72,7 +72,7 @@ makedocs(
       "Ensembles" => "ensembles.md",
       "Weighting" => "weighting.md",
       "Miscellaneous" => "miscellaneous.md",
-      "Plotting" => "plotting.md"
+      "Visualization" => "visualization.md"
     ],
     "Contributing" => [
       "contributing/guidelines.md",
