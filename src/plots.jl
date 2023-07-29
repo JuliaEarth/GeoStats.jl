@@ -59,6 +59,9 @@ Plot the variogram or varioplane `γ` with given `options`.
 ## Varioplane options:
 
 * `vscheme` - color scheme of varioplane
+* `rshow`   - show range of theoretical model
+* `rmodel`  - theoretical model (e.g. `SphericalVariogram`)
+* `rcolor`  - color of range curve
 
 ## Histogram options:
 

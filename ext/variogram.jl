@@ -13,6 +13,9 @@ Makie.@recipe(VarioPlot, γ) do scene
 
     # varioplane options
     vscheme=:viridis,
+    rshow=true,
+    rmodel=SphericalVariogram,
+    rcolor=:slategray,
 
     # histogram options
     hshow=true,
@@ -75,6 +78,10 @@ function Makie.plot!(plot::VarioPlot{<:Tuple{EmpiricalVarioplane}})
   # retrieve varioplane object
   v = plot[:γ]
 
+  # retrieve range model
+  rshow = plot[:rshow]
+  rmodel = plot[:rmodel]
+
   # underyling variograms
   γs = Makie.@lift $v.γs
 
@@ -85,7 +92,7 @@ function Makie.plot!(plot::VarioPlot{<:Tuple{EmpiricalVarioplane}})
   rs = Makie.@lift values($γs[1])[1]
 
   # variogram values for all variograms
-  Z = Makie.@lift begin
+  Z = Makie.@lift let
     zs = map($γs) do γ
       _, zs, __ = values(γ)
 
@@ -112,6 +119,13 @@ function Makie.plot!(plot::VarioPlot{<:Tuple{EmpiricalVarioplane}})
     colormap = plot[:vscheme],
     shading = false
   )
+
+  # show model range
+  if rshow[]
+    ls = Makie.@lift [range(fit($rmodel, γ)) for γ in $γs]
+    ls = Makie.@lift [$ls; $ls]
+    Makie.lines!(plot, ls, θs, color = plot[:rcolor])
+  end
 end
 
 # ------------
