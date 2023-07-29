@@ -6,6 +6,9 @@ using DocumenterTools: Themes
 
 using Random: AbstractRNG
 
+# transforms api
+using TransformsBase
+
 # external solvers
 using ImageQuilting
 using TuringPatterns

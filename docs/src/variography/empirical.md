@@ -1,5 +1,13 @@
 # Empirical variograms
 
+```@example empirical
+using JSServe: Page # hide
+Page(exportable=true, offline=true) # hide
+
+using GeoStats # hide
+import WGLMakie as Mke # hide
+```
+
 The Matheron's estimator of an empirical variogram is given by
 
 ```math
@@ -38,15 +46,11 @@ merge(::EmpiricalVariogram{V,D,E}, ::EmpiricalVariogram{V,D,E}) where {V,D,E}
 Consider the following example image:
 
 ```@example empirical
-using GeoStats # hide
 using GeoStatsImages
-using Plots # hide
-using GeoStatsPlots # hide
-gr(size=(800,400),aspectratio=:equal) # hide
 
 𝒟 = geostatsimage("Gaussian30x10")
 
-plot(𝒟)
+viz(𝒟.geometry, color = 𝒟.Z)
 ```
 
 We can compute ominidirectional variograms, which
@@ -55,8 +59,7 @@ consider pairs of points along all directions:
 ```@example empirical
 γ = EmpiricalVariogram(𝒟, :Z, maxlag=50.)
 
-gr(size=(800,400),aspectratio=:none) # hide
-plot(γ)
+Mke.plot(γ)
 ```
 
 directional variograms along a specific direction:
@@ -65,8 +68,9 @@ directional variograms along a specific direction:
 γₕ = DirectionalVariogram((1.,0.), 𝒟, :Z, maxlag=50.)
 γᵥ = DirectionalVariogram((0.,1.), 𝒟, :Z, maxlag=50.)
 
-plot(γₕ, label="horizontal")
-plot!(γᵥ, label="vertical")
+Mke.plot(γₕ, label="horizontal")
+Mke.plot!(γᵥ, label="vertical")
+Mke.current_figure()
 ```
 
 or planar variograms along a specific plane:
@@ -75,8 +79,9 @@ or planar variograms along a specific plane:
 γᵥ = PlanarVariogram((1.,0.), 𝒟, :Z, maxlag=50.)
 γₕ = PlanarVariogram((0.,1.), 𝒟, :Z, maxlag=50.)
 
-plot(γₕ, label="horizontal")
-plot!(γᵥ, label="vertical")
+Mke.plot(γₕ, label="horizontal")
+Mke.plot!(γᵥ, label="vertical")
+Mke.current_figure()
 ```
 
 ## Varioplanes
@@ -91,5 +96,8 @@ for all lags and angles:
 ```@example empirical
 γ = EmpiricalVarioplane(𝒟, :Z, maxlag=50.)
 
-plot(γ)
+fig = Mke.Figure()
+ax = Mke.PolarAxis(fig[1,1], title = "Varioplane")
+Mke.plot!(ax, γ)
+fig
 ```

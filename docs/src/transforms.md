@@ -4,7 +4,7 @@
 using JSServe: Page # hide
 Page(exportable=true, offline=true) # hide
 
-using GeoStats, GeoStatsViz # hide
+using GeoStats # hide
 import WGLMakie as Mke # hide
 ```
 
@@ -54,10 +54,11 @@ the geospatial domain and the attribute table. All transforms and pipelines
 implement the following functions:
 
 ```@docs
-TableTransforms.isrevertible
-TableTransforms.apply
-TableTransforms.revert
-TableTransforms.reapply
+TransformsBase.isrevertible
+TransformsBase.isinvertible
+TransformsBase.apply
+TransformsBase.revert
+TransformsBase.reapply
 ```
 
 ## Geometric transforms

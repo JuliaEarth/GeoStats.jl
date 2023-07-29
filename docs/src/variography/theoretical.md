@@ -1,9 +1,11 @@
 # Theoretical variograms
 
 ```@example variograms
+using JSServe: Page # hide
+Page(exportable=true, offline=true) # hide
+
 using GeoStats # hide
-using Plots # hide
-using GeoStatsPlots # hide
+import WGLMakie as Mke # hide
 ```
 
 Variograms are widely used in geostatistics due to their intimate connection
@@ -49,7 +51,7 @@ GaussianVariogram
 ```
 
 ```@example variograms
-plot(GaussianVariogram())
+Mke.plot(GaussianVariogram())
 ```
 
 ### Exponential
@@ -63,7 +65,7 @@ ExponentialVariogram
 ```
 
 ```@example variograms
-plot(ExponentialVariogram())
+Mke.plot(ExponentialVariogram())
 ```
 
 ### Matern
@@ -77,7 +79,7 @@ MaternVariogram
 ```
 
 ```@example variograms
-plot(MaternVariogram())
+Mke.plot(MaternVariogram())
 ```
 
 ### Spherical
@@ -91,7 +93,7 @@ SphericalVariogram
 ```
 
 ```@example variograms
-plot(SphericalVariogram())
+Mke.plot(SphericalVariogram())
 ```
 
 ### Cubic
@@ -105,7 +107,7 @@ CubicVariogram
 ```
 
 ```@example variograms
-plot(CubicVariogram())
+Mke.plot(CubicVariogram())
 ```
 
 ### Pentaspherical
@@ -119,7 +121,7 @@ PentasphericalVariogram
 ```
 
 ```@example variograms
-plot(PentasphericalVariogram())
+Mke.plot(PentasphericalVariogram())
 ```
 
 ### Power
@@ -133,7 +135,7 @@ PowerVariogram
 ```
 
 ```@example variograms
-plot(PowerVariogram())
+Mke.plot(PowerVariogram())
 ```
 
 ### Sine hole
@@ -147,7 +149,7 @@ SineHoleVariogram
 ```
 
 ```@example variograms
-plot(SineHoleVariogram())
+Mke.plot(SineHoleVariogram())
 ```
 
 ### Nugget
@@ -161,7 +163,7 @@ NuggetEffect
 ```
 
 ```@example variograms
-plot(NuggetEffect(1.0))
+Mke.plot(NuggetEffect(1.0))
 ```
 
 ### Circular
@@ -175,7 +177,7 @@ CircularVariogram
 ```
 
 ```@example variograms
-plot(CircularVariogram())
+Mke.plot(CircularVariogram())
 ```
 
 ## Anisotropy
@@ -214,7 +216,7 @@ Random.seed!(2000) # hide
 
 𝒟 = georef((Z=rand(50),), 100rand(2, 50))
 
-plot(𝒟)
+viz(𝒟.geometry, color = 𝒟.Z)
 ```
 
 and the corresponding estimation problem on a Cartesian grid:
@@ -240,9 +242,6 @@ anim = @animate for θ in range(0, stop=2π, length=10)
   # plot current frame
   plot(sol)
 end
-
-# generate gif from list of frames
-gif(anim, "anisotropy.gif", fps=1)
 ```
 
 ## Nesting

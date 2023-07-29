@@ -3,6 +3,9 @@
 ```@example domains
 using JSServe: Page # hide
 Page(exportable=true, offline=true) # hide
+
+using GeoStats # hide
+import WGLMakie as Mke # hide
 ```
 
 ## Overview
@@ -17,11 +20,6 @@ the [Meshes.jl](https://github.com/JuliaGeometry/Meshes.jl) project.
 Please check their documentation for more details and domain types.
 
 ## Examples
-
-```@example domains
-using GeoStats, GeoStatsViz
-import WGLMakie as Mke
-```
 
 ### PointSet
 

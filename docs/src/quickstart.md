@@ -22,13 +22,10 @@ recording of our JuliaEO2023 workshop:
 </p>
 ```
 
-Here we use [Makie.jl](https://github.com/JuliaPlots/Makie.jl) and
-[GeoStatsViz.jl](https://github.com/JuliaEarth/GeoStatsViz.jl) recipes
-for 3D visualization. Please check the [Plotting](plotting.md) section
-to learn about alternatives.
+We assume that the following packages are loaded throughout the examples:
 
 ```@example quickstart
-using GeoStats, GeoStatsViz
+using GeoStats
 import WGLMakie as Mke
 ```
 

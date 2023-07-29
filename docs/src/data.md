@@ -38,7 +38,7 @@ GeoTables.gadm
 ## Examples
 
 ```@example data
-using GeoStats, GeoStatsViz
+using GeoStats
 import WGLMakie as Mke
 
 function plot(data)

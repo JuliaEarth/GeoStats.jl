@@ -1,7 +1,7 @@
 name = "GeoStats"
 uuid = "dcc97b0b-8ce5-5539-9008-bb190f959ef6"
 author = "Júlio Hoffimann <julio.hoffimann@gmail.com>"
-version = "0.41.2"
+version = "0.42.0"
 
 [deps]
 Chain = "8be319e6-bccf-4806-a6f7-6fae938471bc"
@@ -20,20 +20,27 @@ ScientificTypes = "321657f4-b219-11e9-178b-2701a2544e81"
 TableTransforms = "0d432bfd-3ee1-4ac1-886a-39f05cc69a3e"
 Variography = "04a0146e-e6df-5636-8d7f-62fa9eb0b20c"
 
+[weakdeps]
+Makie = "ee78f7c6-11fb-53f2-987a-cfe4a2b5a57a"
+
+[extensions]
+GeoStatsMakieExt = "Makie"
+
 [compat]
 Chain = "0.5"
 DensityRatioEstimation = "1.0"
 Distances = "0.10"
-GeoClustering = "0.3"
-GeoStatsBase = "0.31"
-GeoStatsSolvers = "0.2"
-KrigingEstimators = "0.10"
+GeoClustering = "0.4"
+GeoStatsBase = "0.32"
+GeoStatsSolvers = "0.3"
+KrigingEstimators = "0.11"
 LossFunctions = "0.10"
-Meshes = "0.31, 0.32"
-PointPatterns = "0.5"
+Makie = "0.19"
+Meshes = "0.33"
+PointPatterns = "0.6"
 Reexport = "1.0"
 Rotations = "1.5"
 ScientificTypes = "3.0"
 TableTransforms = "1.9"
-Variography = "0.16"
-julia = "1.6"
+Variography = "0.17"
+julia = "1.9"

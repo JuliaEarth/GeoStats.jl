@@ -4,7 +4,7 @@
 using JSServe: Page # hide
 Page(exportable=true, offline=true) # hide
 
-using GeoStats, GeoStatsViz # hide
+using GeoStats # hide
 import WGLMakie as Mke # hide
 ```
 

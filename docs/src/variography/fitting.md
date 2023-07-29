@@ -1,5 +1,13 @@
 # Fitting variograms
 
+```@example variofit
+using JSServe: Page # hide
+Page(exportable=true, offline=true) # hide
+
+using GeoStats # hide
+import WGLMakie as Mke # hide
+```
+
 ## Overview
 
 Fitting theoretical variograms to empirical observations is an important
@@ -13,18 +21,13 @@ fit(::Type{Variogram}, ::EmpiricalVariogram, ::VariogramFitAlgo)
 ## Example
 
 ```@example variofit
-using GeoStats # hide
-using Plots # hide
-using GeoStatsPlots # hide
-gr(size=(800,400)) # hide
-
 # sinusoidal data
 𝒟 = georef((Z=[sin(i/2) + sin(j/2) for i in 1:50, j in 1:50],))
 
 # empirical variogram
 g = EmpiricalVariogram(𝒟, :Z, maxlag=25.)
 
-plot(g)
+Mke.plot(g)
 ```
 
 We can fit specific models to the empirical variogram:
@@ -32,7 +35,9 @@ We can fit specific models to the empirical variogram:
 ```@example variofit
 γ = fit(SineHoleVariogram, g)
 
-plot(g); plot!(γ)
+Mke.plot(g)
+Mke.plot!(γ)
+Mke.current_figure()
 ```
 
 or let GeoStats.jl find the model with minimum error:
@@ -40,7 +45,9 @@ or let GeoStats.jl find the model with minimum error:
 ```@example variofit
 γ = fit(Variogram, g)
 
-plot(g); plot!(γ)
+Mke.plot(g)
+Mke.plot!(γ)
+Mke.current_figure()
 ```
 
 which should be a [`SineHoleVariogram`](@ref) given that the synthetic data
@@ -51,7 +58,9 @@ Optionally, we can specify a weighting function to give different weights to the
 ```@example variofit
 γ = fit(SineHoleVariogram, g, h -> exp(-h))
 
-plot(g); plot!(γ)
+Mke.plot(g)
+Mke.plot!(γ)
+Mke.current_figure()
 ```
 
 ## Methods

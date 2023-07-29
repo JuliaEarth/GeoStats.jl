@@ -4,18 +4,13 @@
 using JSServe: Page # hide
 Page(exportable=true, offline=true) # hide
 
-using GeoStats, GeoStatsViz # hide
+using GeoStats # hide
 import WGLMakie as Mke # hide
 ```
 
 Most objects defined in GeoStats.jl can be plotted directly with
-[Plots.jl](https://github.com/JuliaPlots/Plots.jl) or 
-[Makie.jl](https://github.com/MakieOrg/Makie.jl). In order to do this, 
-first install [GeoStatsPlots.jl](https://github.com/JuliaEarth/GeoStatsPlots.jl)
-(for Plots.jl) or [GeoStatsViz.jl](https://github.com/JuliaEarth/GeoStatsViz.jl) 
-(for Makie.jl), which define recipes for each plotting library.
-Additional plots are listed below that can be useful for geostatistical
-analysis.
+[Makie.jl](https://github.com/MakieOrg/Makie.jl).  Additional plots
+are listed below that can be useful for geostatistical analysis.
 
 ## Built-in
 
