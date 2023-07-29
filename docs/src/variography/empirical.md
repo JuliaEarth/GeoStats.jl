@@ -108,10 +108,11 @@ Mke.current_figure()
 
 !!! note
 
-    The directional and planar variograms coincide in the example
-    because planes are equal to lines in 2-dimensional space. The
-    latter is most useful in 3-dimensional space where one may be
-    interested in comparing horizontal to vertical ranges.
+    The directional and planar variograms coincide in this example
+    because planes are equal to lines in 2-dimensional space. These
+    concepts are most useful in 3-dimensional space where we may be
+    interested in comparing the horizontal planar range to the
+    vertical directional range.
 
 ## Varioplanes
 
