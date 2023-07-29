@@ -10,14 +10,23 @@ import WGLMakie as Mke # hide
 
 ## Overview
 
-A geospatial domain is a region in physical space where data
-can be measured. For example, a collection of rain gauge stations
-can be represented as a point set in the map. Similarly, a collection
-of states in a given country can be represented as a set of 2D shapes.
+A geospatial domain is a (discretized) region in physical space with
+data measurements. For example, a collection of rain gauge stations
+can be represented as a `PointSet` in the map. Similarly, a collection
+of states in a given country can be represented as a `GeometrySet` of
+polygons.
 
 We provide flexible domain types for advanced geospatial workflows via
 the [Meshes.jl](https://github.com/JuliaGeometry/Meshes.jl) project.
-Please check their documentation for more details and domain types.
+Please check out their documentation for more details.
+
+Below is an example of documentation for the [`CartesianGrid`](@ref),
+a widely used type of [`Mesh`](@ref):
+
+```@docs
+CartesianGrid
+Mesh
+```
 
 ## Examples
 

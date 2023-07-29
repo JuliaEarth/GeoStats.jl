@@ -1,6 +1,3 @@
-# Workaround for GR warnings
-ENV["GKSwstype"] = "100"
-
 using Documenter, GeoStats
 using DocumenterTools: Themes
 

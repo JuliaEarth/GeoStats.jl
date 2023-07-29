@@ -8,9 +8,38 @@ using GeoStats # hide
 import WGLMakie as Mke # hide
 ```
 
-Most objects defined in GeoStats.jl can be plotted directly with
-[Makie.jl](https://github.com/MakieOrg/Makie.jl).  Additional plots
-are listed below that can be useful for geostatistical analysis.
+The GeoStats.jl framework provides powerful visualization recipes for
+geospatial data science via the [Makie.jl](https://github.com/MakieOrg/Makie.jl)
+project. These recipes were carefully designed to maximize productivity
+and to protect users from "GIS" jargon. The main entry point is the
+[`viz`](@ref) function:
+
+```@docs
+viz
+viz!
+```
+
+This function takes a geospatial domain as input and provides a set of
+aesthetic options to style the elements (i.e. geometries) of the domain.
+
+!!! note
+
+    Notice that the geometry column of our geospatial data type is a domain
+    (i.e. `data.geometry isa Domain`), and that this design enables several
+    optimizations in the visualization itself.
+
+Users can also call Makie's `plot` function in the geometry column as in
+
+```julia
+Mke.plot(data.geometry)
+```
+
+and this is equivalent to calling the [`viz`](@ref) recipe above. The `plot`
+function also works with various other objects such as [`EmpiricalHistogram`](@ref)
+and [`EmpiricalVariogram`](@ref). That is convenient if you don't remember
+the name of the recipe.
+
+Additional plots are listed below that can be useful for geostatistical analysis.
 
 ## Built-in
 

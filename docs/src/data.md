@@ -125,9 +125,7 @@ Mke.current_figure()
 
 ## Custom data
 
-GeoStats.jl is integrated with the [Meshes.jl](https://github.com/JuliaGeometry/Meshes.jl)
-project. In summary, any type that is a subtype of `Meshes.Data` and that implements
-`Meshes.domain` and `Meshes.values` is compatible with the framework and can be used
-in geostatistical workflows.
-
-Please ask in our community channel if you need help implementing custom geospatial data.
+Any type that is a subtype of our geospatial `Data` type and that implements
+the traits [`domain`](@ref) and [`values`](@ref) is compatible with the framework.
+Please ask in our [community channel](about/community.md) if you need assistance
+implementing custom geospatial data.
