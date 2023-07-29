@@ -223,7 +223,7 @@ We solve the problem with different ellipsoids by varying the angle of
 rotation from ``0`` to ``2\pi`` clockwise:
 
 ```@example variograms
-θs = range(0.0, step = π/4, stop = 2π)
+θs = range(0.0, step = π/4, stop = 2π - π/4)
 
 # initialize figure
 fig = Mke.Figure(resolution = (800, 1600))
