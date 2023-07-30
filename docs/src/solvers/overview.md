@@ -9,16 +9,48 @@ be happy to review and add it to the list.
 
 Solvers are organized into three categories: `estimation`, `simulation`
 and `learning`. These categories correspond to the [Problems](../problems.md)
-defined in the framework.
-
-All `simulation` solvers below can generate realizations in parallel
-on a cluster of computers unless otherwise noted. Please check the
-documentation of [`solve`](@ref) for more details:
+defined in the framework. All solvers implement the [`solve`](@ref) function:
 
 ```@docs
-solve(::SimulationProblem, ::SimulationSolver)
+solve
 solvesingle
 ```
+
+### Distributed computing
+
+All `simulation` solvers can generate realizations in parallel
+using multiple Julia processes. Doing so requires using the
+[Distributed](https://docs.julialang.org/en/v1/stdlib/Distributed/)
+standard library, like in the following example:
+
+```julia
+using Distributed
+
+# request additional processes
+addprocs(3)
+
+# load code on every single process
+@everywhere using GeoStats
+
+# ------------
+# main script
+# ------------
+
+table = (Z=[1.,0.,1.],)
+coord = [(25.,25.), (50.,75.), (75.,50.)]
+
+𝒟 = georef(table, coord)
+𝒢 = CartesianGrid(100, 100)
+
+𝒫 = SimulationProblem(𝒟, 𝒢, :Z, 3)
+𝒮 = LUGS(:Z => (variogram=GaussianVariogram(range=35),))
+
+# solve on all available processes
+Ω = solve(𝒫, 𝒮, procs=procs())
+```
+
+Please consult
+[The ultimate guide to distributed computing in Julia](https://github.com/Arpeggeo/julia-distributed-computing/tree/master).
 
 ## Estimation
 
@@ -57,4 +89,4 @@ solvesingle
 
 | Solver | Description | References |
 |:------:|:------------|:-----------|
-| [PointwiseLearn](https://github.com/JuliaEarth/GeoStatsSolvers.jl) | Pointwise learning | [Hoffimann 2018](https://doi.org/10.21105/joss.00692) |
+| [PointwiseLearn](https://github.com/JuliaEarth/GeoStatsSolvers.jl) | Pointwise learning | [Hoffimann 2021](https://www.frontiersin.org/articles/10.3389/fams.2021.689393/full) |

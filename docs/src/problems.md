@@ -106,38 +106,6 @@ viz(fig[1,3], Ω[3].geometry, color = Ω[3].Z)
 fig
 ```
 
-Solvers for simulation problems can generate realizations in parallel using multiple processes.
-Doing so requires using the `Distributed` package, like in the following example.
-
-```julia
-using Distributed
-
-# request additional processes
-addprocs(3)
-
-# load code on every single process
-@everywhere using GeoStats
-
-# ------------
-# main script
-# ------------
-
-table = (Z=[1.,0.,1.],)
-coord = [(25.,25.), (50.,75.), (75.,50.)]
-
-𝒟 = georef(table, coord)
-𝒢 = CartesianGrid(100, 100)
-
-𝒫 = SimulationProblem(𝒟, 𝒢, :Z, 3)
-𝒮 = LUGS(:Z => (variogram=GaussianVariogram(range=35),))
-
-# solve on all available processes
-Ω = solve(𝒫, 𝒮, procs=procs())
-```
-
-For more information on distributed computing in Julia, see
-[The ultimate guide to distributed computing in Julia](https://github.com/Arpeggeo/julia-distributed-computing/tree/master).
-
 ## Learning
 
 ```@docs

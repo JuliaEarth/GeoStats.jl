@@ -62,7 +62,7 @@ For a guided tour, please watch our JuliaCon2021 talk:
 ```
 
 If you have questions, feature requests, or would like to brainstorm ideas, don't
-hesitate to start a thread in our [community channel](about/community.md).
+hesitate to start a topic in our [community channel](about/community.md).
 
 ## Installation
 
@@ -113,7 +113,7 @@ For a more detailed example, please consult the [Quickstart](quickstart.md).
 
 ## Video tutorials
 
-A set of Pluto notebooks demonstrating the functionality of the framework
+A set of Pluto notebooks demonstrating important geostatistical concepts
 is available in [GeoStatsTutorials](https://github.com/JuliaEarth/GeoStatsTutorials)
 with an accompanying series of videos:
 
@@ -135,6 +135,7 @@ The project is split into various packages:
 | [Variography.jl](https://github.com/JuliaEarth/Variography.jl) | Variogram estimation and modeling, and related tools. |
 | [KrigingEstimators.jl](https://github.com/JuliaEarth/KrigingEstimators.jl) | Kriging estimation over general geospatial domains. |
 | [DensityRatioEstimation.jl](https://github.com/JuliaML/DensityRatioEstimation.jl) | High-performance density ratio estimation. |
+| [LossFunctions.jl](https://github.com/JuliaML/LossFunctions.jl) | Loss functions for (geo)statistical learning. |
 | [PointPatterns.jl](https://github.com/JuliaEarth/PointPatterns.jl) | Geospatial point pattern analysis and synthesis. |
 | [GeoClustering.jl](https://github.com/JuliaEarth/GeoClustering.jl) | Geostatistical clustering (a.k.a. domaining). |
 | [GeoStatsSolvers.jl](https://github.com/JuliaEarth/GeoStatsSolvers.jl) | Built-in geostatistical solvers. |

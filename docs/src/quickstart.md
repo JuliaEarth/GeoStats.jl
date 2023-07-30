@@ -22,7 +22,7 @@ the recording of our JuliaEO2023 workshop:
 </p>
 ```
 
-We assume that the following packages are loaded throughout the examples:
+We assume that the following packages are loaded throughout the code examples:
 
 ```@example quickstart
 using GeoStats
@@ -37,21 +37,22 @@ project.
 If you are new to Julia and have never heard of **Makie.jl** before, here are a
 few tips to help you choose between the different backends:
 
-- **WGLMakie.jl** is the preferred backend for visualization on the *web browser*.
-  You can interact with 3D scenes and rotate objects as you will see in the
-  examples of this documentation).
+- **WGLMakie.jl** is the preferred backend for interactive visualization on the
+  *web browser*. It integrates well with [Pluto.jl](https://plutojl.org) notebooks
+  and other web-based applications.
 
 - **GLMakie.jl** is the preferred backend for interactive *high-performance*
-  visualization on desktop machines. It leverages native graphical resources
-  and doesn't require a web browser.
+  visualization. It leverages native graphical resources and doesn't require
+  a web browser to function.
 
 - **CairoMakie.jl** is the preferred backend for *publication-quality* static
   visualization. It requires less computing power and is therefore recommended
   for those users with modest laptops.
 
-We import the chosen backend as `Mke` to avoid polluting the Julia session with
-names from the visualization stack. This trick is also useful to switch between
-the backends without changing the example code.
+!!! note
+
+    We recommend importing the Makie.jl backend as `Mke` to avoid polluting the
+    Julia session with names from the visualization stack.
 
 ## Loading/creating data
 
@@ -120,12 +121,20 @@ georef((Z=Z,), origin = (1.0, 1.0), spacing = (10.0, 10.0))
 and different geospatial configurations can be obtained with different
 methods (see [Data](data.md)).
 
-Geospatial data can be visualized with the `viz` function, which shows
-different behavior depending on the type of geospatial domain:
+Geospatial data can be visualized with the [`viz`](@ref) function, which
+shows different behavior depending on the type of geospatial domain:
 
 ```@example quickstart
 viz(Ω.geometry, color = Ω.Z)
 ```
+
+!!! note
+
+    Julia supports unicode symbols with $\LaTeX$ syntax. We can type `\Omega`
+    and press `TAB` to get the symbol `Ω` in the example above.
+    This autocompletion works in various text editors, including the
+    [VSCode](https://code.visualstudio.com/docs/languages/julia) editor with
+    the Julia extension.
 
 ## Manipulating data
 
@@ -166,11 +175,13 @@ We can always retrieve the table of attributes (or features)
 with the function [`values`](@ref) and the underlying geospatial
 domain with the function [`domain`](@ref). This can be useful for
 writing algorithms that are *type-stable* and depend purely on the
-geometry or on the feature values:
+feature values:
 
 ```@example quickstart
 values(Ω)
 ```
+
+or on the geometries:
 
 ```@example quickstart
 domain(Ω)
@@ -179,7 +190,7 @@ domain(Ω)
 ### Geospatial transforms
 
 It is easy to design advanced geospatial pipelines that operate on
-both the table of attributes and the underlying geospatial domain:
+both the table of features and the underlying geospatial domain:
 
 ```@example quickstart
 # pipeline with table transforms
@@ -195,12 +206,19 @@ Mke.hist(fig[2,1], Ω̂.Z, color = :gray)
 fig
 ```
 
+Coordinates before pipeline:
+
 ```@example quickstart
-# coordinates before and after pipeline
-boundingbox(Ω.geometry), boundingbox(Ω̂.geometry)
+boundingbox(Ω.geometry)
 ```
 
-These pipelines are revertible meaning that one can transform the data,
+and after pipeline:
+
+```@example quickstart
+boundingbox(Ω̂.geometry)
+```
+
+These pipelines are revertible meaning that we can transform the data,
 perform geostatistical modeling, and revert the pipelines to obtain
 estimates in the original sample space (see [Transforms](transforms.md)).
 
@@ -294,7 +312,8 @@ label = :crop
 GeoStats.jl is integrated with the
 [MLJ.jl](https://github.com/alan-turing-institute/MLJ.jl)
 project, which means that we can solve geostatistical learning problems
-with more than 150 classical learning models:
+with more than 200 classical learning models, including all models
+from [ScitkitLearn.jl](https://github.com/cstjean/ScikitLearn.jl):
 
 ```@example quickstart
 using MLJ
@@ -312,12 +331,13 @@ the learning model pointwise for every location in the geospatial data:
 Ω̂t = solve(𝒫, ℒ)
 ```
 
-## Plotting solutions
+## Visualizing solutions
 
 We note that the solution to a geostatistical learning problem is a
 geospatial data object, and we can inspect it with the same methods
-already described above. This also means that we can plot the solution
-directly, side by side with the true label in this synthetic example:
+already described above. This also means that we can visualize the
+solution directly, side by side with the true label in this synthetic
+example:
 
 ```@example quickstart
 fig = Mke.Figure(resolution = (800, 400))
@@ -333,5 +353,4 @@ cross-validation and leave-ball-out, but these methods deserve
 a separate tutorial.
 
 With this example we conclude the basic workflow. To get familiar with
-other features of the project, please check the tutorials and the
-reference guide.
+other features of the project, please check the the reference guide.

@@ -33,18 +33,30 @@ julia> using Pkg; Pkg.status()
 ## Feature requests
 
 If you have suggestions of improvement or algorithms that you would like
-to see implemented in GeoStats.jl, please open an issue on GitHub.
-Suggestions as well as feature requests are very welcome.
+to see implemented, please open an issue on GitHub. Suggestions as well
+as feature requests are very welcome.
 
 ## Code contribution
 
-If you have code that you would like to contribute to GeoStats.jl,
-that is awesome! Please [open an issue](https://github.com/JuliaEarth/GeoStats.jl/issues)
-before you create the pull request on GitHub so that we make sure
-your idea is aligned with our goals for the project.
+If you have code that you would like to contribute that is awesome!
+Please [open an issue](https://github.com/JuliaEarth/GeoStats.jl/issues)
+or reach out in our community channel before you create the pull request
+on GitHub so that we make sure your idea is aligned with the project goals.
 
-After your idea is discussed and revised by maintainers, please get
-the development version of the project by typing the following in
+After your idea is revised by project maintainers, you implement it online
+on Github or offline on your machine.
+
+### Online changes
+
+If the changes to the code are minimal, we recommend pressing `.` on the
+keyboard on any file in the GitHub repository of interest. This will open
+the VSCode editor on the web browser where you can implement the changes,
+commit them and submit a pull request.
+
+### Offline changes
+
+If the changes require additional investigation and tests, please
+get the development version of the project by typing the following in
 the package manager:
 
 ```
@@ -52,19 +64,13 @@ the package manager:
 ```
 
 This will create a fresh environment called `@geo` where you can
-play with the project components without compromising your normal
-user environment. Next, go ahead and type:
+edit the project modules without effects on your global user
+environment. Next, go ahead and ask the package manager to
+develop the package of interest (e.g. Variography.jl):
 
 ```
-] dev GeoStatsBase
 ] dev Variography
-] dev KrigingEstimators
-] dev PointPatterns
-] dev GeoClustering
-] dev GeoStatsSolvers
-] dev GeoStats
 ```
 
-to clone all the project components in your `~/.julia` folder.
-You can modify the source code and submit a pull request on
-GitHub later.
+You can modify the source code that was cloned in the `.julia/dev`
+folder and submit a pull request on GitHub later.

@@ -40,7 +40,7 @@ Mke.plot!(γ, maxlag = 25.)
 Mke.current_figure()
 ```
 
-or let GeoStats.jl find the model with minimum error:
+or let the framework find the model with minimum error:
 
 ```@example variofit
 γ = fit(Variogram, g)

@@ -1,12 +1,10 @@
 # Education
 
-Geostatistics is often misunderstood as *"classical statistics applied to
-geospatial data"*. To correct this misunderstanding, we recommend the
-following educational resources.
+We recommend the following educational resources.
 
 ## Learning resources
 
-### Books
+### Textbooks
 
 - *Isaaks, E. and Srivastava, R. 1990.* [An Introduction to Applied Geostatistics]
   (https://www.amazon.com.br/Introduction-Applied-Geostatistics-Edward-Isaaks/dp/0195050134) -
@@ -25,7 +23,7 @@ following educational resources.
   (https://www.amazon.com/Mining-Geostatistics-G-Journel/dp/1930665911) - A great
   book with both theoretical and practical developments.
 
-### Lectures
+### Video lectures
 
 - [Júlio Hoffimann](https://www.youtube.com/playlist?list=PLsH4hc788Z1f1e61DN3EV9AhDlpbhhanw) -
   Video lectures with the GeoStats.jl framework.
@@ -36,7 +34,7 @@ following educational resources.
 - [Jef Caers](https://www.youtube.com/playlist?list=PLh35GyCXlQaQ1LNGWr4vCD9AGOGni8yxq) -
   Video lectures on two-point and multiple-point methods.
 
-### Workshops
+### Workshop material
 
 - [JuliaEO 2023](https://github.com/Arpeggeo/JuliaEO2023)
   [English] - Global Workshop on Earth Observation with GeoStats.jl
@@ -60,9 +58,9 @@ distributional assumptions. It is a beautiful coincidence that for
 multivariate Gaussian distributions, Simple Kriging gives the conditional
 expectation.
 
-### MLKernels.jl
+### KernelFunctions.jl
 
-[MLKernels.jl](https://github.com/trthatcher/MLKernels.jl) -
+[KernelFunctions.jl](https://github.com/JuliaGaussianProcesses/KernelFunctions.jl) -
 Spatial structure can be represented in many different forms: covariance,
 variogram, correlogram, etc. Variograms are more general than covariance
 kernels according to the intrinsic stationary property. This means that

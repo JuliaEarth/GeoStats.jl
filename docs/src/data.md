@@ -41,6 +41,8 @@ GeoTables.gadm
 using GeoStats
 import WGLMakie as Mke
 
+# helper function for plotting two
+# variables named T and P side by side
 function plot(data)
   fig = Mke.Figure(resolution = (800, 400))
   viz(fig[1,1], data.geometry, color = data.T)
@@ -51,8 +53,8 @@ end
 
 ### Tables
 
-Consider a table (e.g. DataFrame) with 25 samples of temperature (T) and
-pressure (P):
+Consider a table (e.g. DataFrame) with 25 samples of temperature `T` and
+pressure `P`:
 
 ```@example data
 using DataFrames
@@ -72,9 +74,9 @@ or alternatively, georeference it on a 5x5 regular grid (5x5 = 25 samples):
 georef(table, CartesianGrid(5, 5)) |> plot
 ```
 
-In the first case, the `PointSet` domain type can be omitted, and GeoStats.jl
-will understand that the matrix passed as the second argument contains the
-coordinates of a point set:
+In the first case, the [`PointSet`](@ref) domain type can be omitted, and the
+framework will understand that the matrix passed as the second argument contains
+the coordinates of a point set:
 
 ```@example data
 georef(table, rand(2,25))
@@ -93,8 +95,8 @@ georef(table, (:X, :Y, :Z)) |> plot
 ### Arrays
 
 Consider arrays (e.g. images) with data for various geospatial variables. We can
-georeference these arrays using a named tuple, and GeoStats.jl will understand
-that the shape of the arrays should be preserved in a Cartesian grid:
+georeference these arrays using a named tuple, and the framework will understand
+that the shape of the arrays should be preserved in a [`CartesianGrid`](@ref):
 
 ```@example data
 T, P = rand(5,5), rand(5,5)
