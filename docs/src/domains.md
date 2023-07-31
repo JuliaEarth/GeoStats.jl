@@ -20,6 +20,11 @@ We provide flexible domain types for advanced geospatial workflows via the
 can consist of sets (or "soups") of geometries as it is most common in GIS or
 be actual meshes with topological information.
 
+```@docs
+Domain
+Mesh
+```
+
 ## Examples
 
 ### PointSet
