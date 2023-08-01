@@ -500,6 +500,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "DanielVandH",
+      "name": "Daniel VandenHeuvel",
+      "avatar_url": "https://avatars.githubusercontent.com/u/95613936?v=4",
+      "profile": "https://github.com/DanielVandH",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7,
