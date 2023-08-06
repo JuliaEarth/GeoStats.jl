@@ -25,36 +25,6 @@ using GeoStatsImages
 Π = split(𝒟, 0.5, (1.0, 1.0))
 ```
 
-## Slice
-
-```@docs
-Meshes.slice
-```
-
-```@example misc
-using GeoStatsImages
-
-# slice image
-I = geostatsimage("Strebelle")
-S = slice(I, 50.5:100.2, 41.7:81.3)
-
-fig = Mke.Figure(resolution = (800, 400))
-viz(fig[1,1], I.geometry, color = I.facies)
-viz(fig[1,2], S.geometry, color = S.facies)
-fig
-```
-
-```@example misc
-# slice point set
-P = sample(I, 100)
-S = slice(P, 50.5:150.7, 175.2:250.3)
-
-fig = Mke.Figure(resolution = (800, 400))
-viz(fig[1,1], P.geometry, color = P.facies)
-viz(fig[1,2], S.geometry, color = S.facies)
-fig
-```
-
 ## Trend
 
 ```@docs
