@@ -42,7 +42,7 @@ function viewer(data::Data; kwargs...)
   lims[] = extrema(vals[])
 
   # initialize visualization
-  viz(fig[2,:], dom; color = vals, kwargs...)
+  Makie.plot(fig[2,:], dom; color = vals, kwargs...)
   Makie.Colorbar(fig[2,3], colormap = cmap, limits = lims)
 
   # update visualization if necessary
