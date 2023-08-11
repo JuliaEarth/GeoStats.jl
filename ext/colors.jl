@@ -11,11 +11,11 @@ ascolors(values::V{DateTime}, scheme) = ascolors(datetime2unix.(values), scheme)
 ascolors(values::V{Date}, scheme) = ascolors(convert.(Ref(DateTime), values), scheme)
 
 defaultscheme(values::V) = defaultscheme(elscitype(values))
-defaultscheme(::Type{Unknown}) = colorschemes[:viridis]
-defaultscheme(::Type{Continuous}) = colorschemes[:viridis]
-defaultscheme(::Type{Count}) = colorschemes[:viridis]
+defaultscheme(::Type{Unknown}) = cgrad(:viridis)
+defaultscheme(::Type{Continuous}) = cgrad(:viridis)
+defaultscheme(::Type{Count}) = cgrad(:viridis)
 defaultscheme(::Type{Multiclass{N}}) where {N} =
-  distinguishable_colors(N, transform=protanopic)
+  cgrad(:Spectral, N, categorical=true)
 defaultscheme(::Type{OrderedFactor{N}}) where {N} =
-  distinguishable_colors(N, transform=protanopic)
-defaultscheme(::Type{ScientificDateTime}) = colorschemes[:viridis]
+  cgrad(:Spectral, N, categorical=true)
+defaultscheme(::Type{ScientificDateTime}) = cgrad(:viridis)
