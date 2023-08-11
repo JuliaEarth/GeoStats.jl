@@ -12,25 +12,23 @@ function viewer(data::Data; kwargs...)
 
   # list of viewable variables
   viewable = filter(vars) do var
-    v = Tables.getcolumn(cols, var)
-    isviewable(elscitype(v))
+    vals = Tables.getcolumn(cols, var)
+    isviewable(elscitype(vals))
   end
 
   # throw error if there are no viewable variables
   if isempty(viewable)
     throw(AssertionError("""
-      Could not find viewable variables.
-      Please make sure that the scientific type of columns is correct.
-      A common mistake is to try to plot a textual column `col` directly.
-      The textual column must be coerced to `Multiclass` or `OrderedFactor`.
-      For example, `table |> Coerce(:col => Multiclass)`.
+      Could not find viewable variables, i.e., variables that can be
+      converted to colors with the `ascolors` trait. Please make sure
+      that the scientific type of variables is correct.
       """))
   end
 
   # initialize figure and menu
-  fig    = Makie.Figure()
-  label  = Makie.Label(fig[1,1], "Variable")
-  menu   = Makie.Menu(fig[1,2], options = collect(viewable))
+  fig   = Makie.Figure()
+  label = Makie.Label(fig[1,1], "Variable")
+  menu  = Makie.Menu(fig[1,2], options = collect(viewable))
 
   # select viewable variable
   var  = menu.selection
