@@ -6,10 +6,10 @@ module GeoStats
 
 # use README.md as the module docs
 @doc let
-    path = joinpath(dirname(@__DIR__), "README.md")
-    include_dependency(path)
-    text = read(path, String)
-    first(split(text, "##"))
+  path = joinpath(dirname(@__DIR__), "README.md")
+  include_dependency(path)
+  text = read(path, String)
+  first(split(text, "##"))
 end GeoStats
 
 using Reexport
