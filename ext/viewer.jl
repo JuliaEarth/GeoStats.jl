@@ -36,10 +36,11 @@ function viewer(data::Data; kwargs...)
   var  = menu.selection
   vals = Makie.@lift Tables.getcolumn(cols, $var)
   cmap = Makie.@lift defaultscheme($vals)
+  lims = Makie.@lift extrema($vals)
 
   # initialize visualization
   viz(fig[2,:], dom; color = vals, kwargs...)
-  Makie.Colorbar(fig[2,3], colormap = cmap)
+  Makie.Colorbar(fig[2,3], colormap = cmap, limits = lims)
 
   # update visualization if necessary
   Makie.on(menu.selection) do var
