@@ -14,8 +14,6 @@ defaultscheme(values::V) = defaultscheme(elscitype(values))
 defaultscheme(::Type{Unknown}) = cgrad(:viridis)
 defaultscheme(::Type{Continuous}) = cgrad(:viridis)
 defaultscheme(::Type{Count}) = cgrad(:viridis)
-defaultscheme(::Type{Multiclass{N}}) where {N} =
-  cgrad(:Spectral, N, categorical=true)
-defaultscheme(::Type{OrderedFactor{N}}) where {N} =
-  cgrad(:Spectral, N, categorical=true)
+defaultscheme(::Type{Multiclass{N}}) where {N} = cgrad(:Spectral, N, categorical=true)
+defaultscheme(::Type{OrderedFactor{N}}) where {N} = cgrad(:Spectral, N, categorical=true)
 defaultscheme(::Type{ScientificDateTime}) = cgrad(:viridis)
