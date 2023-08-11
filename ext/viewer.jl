@@ -45,7 +45,6 @@ function viewer(data::Data; kwargs...)
   # update visualization if necessary
   Makie.on(menu.selection) do var
     vals[] = Tables.getcolumn(cols, var)
-    cmap[] = defaultscheme(vals[])
   end
 
   fig
