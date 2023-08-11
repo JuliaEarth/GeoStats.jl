@@ -30,11 +30,16 @@ function viewer(data::Data; kwargs...)
   label = Makie.Label(fig[1,1], "Variable")
   menu  = Makie.Menu(fig[1,2], options = collect(viewable))
 
-  # select viewable variable
-  var  = menu.selection
-  vals = Makie.@lift Tables.getcolumn(cols, $var)
-  cmap = Makie.@lift defaultscheme($vals)
-  lims = Makie.@lift extrema($vals)
+  # select first viewable variable
+  var = first(viewable)
+
+  # initialize observables
+  vals = Makie.Observable{Any}()
+  cmap = Makie.Observable{Any}()
+  lims = Makie.Observable{Any}()
+  vals[] = Tables.getcolumn(cols, var)
+  cmap[] = defaultscheme(vals[])
+  lims[] = extrema(vals[])
 
   # initialize visualization
   viz(fig[2,:], dom; color = vals, kwargs...)
@@ -43,6 +48,8 @@ function viewer(data::Data; kwargs...)
   # update visualization if necessary
   Makie.on(menu.selection) do var
     vals[] = Tables.getcolumn(cols, var)
+    cmap[] = defaultscheme(vals[])
+    lims[] = extrema(vals[])
   end
 
   fig
