@@ -46,7 +46,7 @@ coord = [(25.,25.), (50.,75.), (75.,50.)]
 𝒮 = LUGS(:Z => (variogram=GaussianVariogram(range=35),))
 
 # solve on all available processes
-Ω = solve(𝒫, 𝒮, procs=procs())
+Ω = solve(𝒫, 𝒮, procs=workers())
 ```
 
 Please consult
