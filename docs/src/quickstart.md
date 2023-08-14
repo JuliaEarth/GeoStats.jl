@@ -101,10 +101,9 @@ documentation for more details.
 
 ### Creating data
 
-Geospatial data can also be derived from other Julia variables. For example,
-given a Julia array (or image), which is not attached to any particular
-coordinate system, we can georeference the array using the [`georef`](@ref)
-function:
+Geospatial data can be derived from other Julia variables. For example,
+given a Julia array, which is not attached to any coordinate system, we
+can georeference the array using the [`georef`](@ref) function:
 
 ```@example quickstart
 Z = [10sin(i/10) + 2j for i in 1:50, j in 1:50]
@@ -112,20 +111,21 @@ Z = [10sin(i/10) + 2j for i in 1:50, j in 1:50]
 Ω = georef((Z=Z,))
 ```
 
-The origin and spacing of samples can be specified with:
+Default coordinates are assigned based on the size of the array, and different
+configurations can be obtained with different methods (see [Data](data.md)).
 
-```@example quickstart
-georef((Z=Z,), origin = (1.0, 1.0), spacing = (10.0, 10.0))
-```
-
-and different geospatial configurations can be obtained with different
-methods (see [Data](data.md)).
-
-Geospatial data can be visualized with the [`viz`](@ref) function, which
-shows different behavior depending on the type of geospatial domain:
+Geospatial data can be visualized with the [`viz`](@ref) recipe function:
 
 ```@example quickstart
 viz(Ω.geometry, color = Ω.Z)
+```
+
+Alternatively, we provide a basic scientific [`viewer`](@ref) to visualize
+all viewable variables in the data with a colorbar and other interactive
+elements (see [Visualization](visualization.md)):
+
+```@example quickstart
+viewer(Ω)
 ```
 
 !!! note

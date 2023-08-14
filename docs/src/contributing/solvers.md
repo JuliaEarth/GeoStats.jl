@@ -197,19 +197,16 @@ end
 function solve(problem::EstimationProblem, solver::NormSolver)
   pdomain = domain(problem)
 
-  # dictionary mapping variable names to types
-  mactypeof = Dict(name(v) => mactype(v) for v in variables(problem))
-
   # results for each variable
   μs = []; σs = []
 
   for covars in covariables(problem, solver)
     for var in covars.names
       # get user parameters
-      varparams = covars.params[(var,)]
+      varparams = covars.params[Set([var])]
 
       # get variable type
-      V = mactypeof[var]
+      V = variables(problem)[var]
 
       # allocate memory for result
       varμ = Vector{V}(undef, nelements(pdomain))
@@ -239,7 +236,7 @@ using GeoStats
 # dummy geospatial data with a single point and no value
 sdata   = georef((z=[NaN],), reshape([0.,0.], 2, 1))
 
-# estimate on a regular grid
+# estimate on a Cartesian grid
 sdomain = CartesianGrid(100, 100)
 
 # the problem to be solved
@@ -280,9 +277,9 @@ function solvesingle(problem::SimulationProblem, covars::NamedTuple,
                      solver::RandSolver, preproc)
   pdomain = domain(problem)
 
-  real4var = map(covars.names) do var
+  real4var = map(collect(covars.names)) do var
     # retrieve solver parameters
-    varparams = covars.params[(var,)]
+    varparams = covars.params[Set([var])]
     μ, σ² = varparams.mean, varparams.var
 
     # i.i.d. samples ~ Normal(0,1)
@@ -301,7 +298,7 @@ We can test the newly defined solver in a simulation problem:
 ```@example randsolver
 using GeoStats
 
-# simulate on a regular grid
+# simulate on a Cartesian grid
 sdomain = CartesianGrid(100, 100)
 
 # the problem to be solved
@@ -325,7 +322,7 @@ function preprocess(problem::SimulationProblem, solver::RandSolver)
   preproc = Dict()
   for covars in covariables(problem, solver)
     for varname in covars.names
-      varparams = covars.params[(varname,)]
+      varparams = covars.params[Set([varname])]
       preproc[varname] = (mean=varparams.mean, var=varparams.var)
     end
   end
@@ -352,7 +349,7 @@ function solvesingle(problem::SimulationProblem, covars::NamedTuple,
                      solver::RandSolver, preproc)
   pdomain = domain(problem)
 
-  real4var = map(covars.names) do var
+  real4var = map(collect(covars.names)) do var
     # retrieve solver parameters
     μ, σ² = preproc[var]
 

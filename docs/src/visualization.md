@@ -39,7 +39,14 @@ function also works with various other objects such as [`EmpiricalHistogram`](@r
 and [`EmpiricalVariogram`](@ref). That is convenient if you don't remember
 the name of the recipe.
 
-Additional plots are listed below that can be useful for geostatistical analysis.
+Additionaly, we provide a basic scientific [`viewer`](@ref) to visualize
+all viewable variables in the data:
+
+```@docs
+viewer
+```
+
+Other plots are listed below that can be useful for geostatistical analysis.
 
 ## Built-in
 
