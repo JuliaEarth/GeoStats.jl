@@ -6,20 +6,18 @@ Makie.@recipe(VarioPlot, γ) do scene
   Makie.Attributes(
     # empirical variogram options
     vcolor=:slategray,
-    pshow=true,
     psize=12,
-    tsize=12,
     ssize=1.5,
+    tshow=true,
+    tsize=12,
+    hshow=true,
+    hcolor=:slategray,
 
     # empirical varioplane options
     vscheme=:viridis,
     rshow=true,
     rmodel=SphericalVariogram,
     rcolor=:slategray,
-
-    # empirical histogram options
-    hshow=true,
-    hcolor=:slategray,
 
     # theoretical variogram options
     maxlag=nothing
@@ -64,8 +62,8 @@ function Makie.plot!(plot::VarioPlot{<:Tuple{EmpiricalVariogram}})
     linewidth  = plot[:ssize]
   )
 
-  # visualize bin counts
-  if plot[:pshow][]
+  # visualize text counts
+  if plot[:tshow][]
     bincounts = Makie.@lift string.($n)
     positions = Makie.@lift collect(zip($x, $y))
     Makie.text!(plot, bincounts,

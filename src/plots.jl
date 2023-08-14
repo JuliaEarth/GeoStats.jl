@@ -51,10 +51,12 @@ Plot the variogram or varioplane `γ` with given `options`.
 ## Empirical variogram options:
 
 * `vcolor` - color of variogram
-* `pshow`  - show points of variogram
 * `psize`  - size of points of variogram
-* `tsize`  - text size of variogram labels
 * `ssize`  - size of segments of variogram
+* `tshow`  - show text counts
+* `tsize`  - size of text counts
+* `hshow`  - show histogram
+* `hcolor` - color of histogram
 
 ## Empirical varioplane options:
 
@@ -62,11 +64,6 @@ Plot the variogram or varioplane `γ` with given `options`.
 * `rshow`   - show range of theoretical model
 * `rmodel`  - theoretical model (e.g. `SphericalVariogram`)
 * `rcolor`  - color of range curve
-
-## Empirical histogram options:
-
-* `hshow`  - show histogram
-* `hcolor` - color of histogram
 
 ## Theoretical variogram options:
 
