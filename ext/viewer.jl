@@ -39,7 +39,7 @@ function viewer(data::Data; kwargs...)
   lims = Makie.Observable{Any}()
   vals[] = Tables.getcolumn(cols, var)
   cmap[] = defaultscheme(vals[])
-  lims[] = extrema(vals[])
+  lims[] = defaultlimits(vals[])
 
   # initialize visualization
   Makie.plot(fig[2,:], dom; color = vals, kwargs...)
@@ -49,11 +49,13 @@ function viewer(data::Data; kwargs...)
   Makie.on(menu.selection) do var
     vals[] = Tables.getcolumn(cols, var)
     cmap[] = defaultscheme(vals[])
-    lims[] = extrema(vals[])
+    lims[] = defaultlimits(vals[])
   end
 
   fig
 end
+
+defaultlimits(vals) = ustrip.(extrema(vals))
 
 isviewable(::Type) = false
 isviewable(::Type{<:Finite}) = true

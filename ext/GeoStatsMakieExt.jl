@@ -7,6 +7,7 @@ module GeoStatsMakieExt
 using GeoStats
 
 using Tables
+using Unitful: ustrip
 using Makie: cgrad
 using Makie.Colors: Colorant
 
