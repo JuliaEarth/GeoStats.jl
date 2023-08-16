@@ -13,7 +13,7 @@ function viewer(data::Data; kwargs...)
   # list of viewable variables
   viewable = filter(vars) do var
     vals = Tables.getcolumn(cols, var)
-    isviewable(elscitype(vals))
+    isviewable(nonmissingtype(elscitype(vals)))
   end
 
   # throw error if there are no viewable variables
@@ -55,7 +55,7 @@ function viewer(data::Data; kwargs...)
   fig
 end
 
-defaultlimits(vals) = ustrip.(extrema(vals))
+defaultlimits(vals) = ustrip.(extrema(skipmissing(vals)))
 
 isviewable(::Type) = false
 isviewable(::Type{<:Finite}) = true
