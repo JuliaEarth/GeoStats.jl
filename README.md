@@ -98,6 +98,9 @@ This project would not be possible without the contributions of:
       <td align="center" valign="top" width="14.28%"><a href="http://astroautomata.com"><img src="https://avatars.githubusercontent.com/u/7593028?v=4?s=100" width="100px;" alt="Miles Cranmer"/><br /><sub><b>Miles Cranmer</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=MilesCranmer" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/DanielVandH"><img src="https://avatars.githubusercontent.com/u/95613936?v=4?s=100" width="100px;" alt="Daniel VandenHeuvel"/><br /><sub><b>Daniel VandenHeuvel</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=DanielVandH" title="Documentation">📖</a></td>
     </tr>
+    <tr>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/chrstphrbrns"><img src="https://avatars.githubusercontent.com/u/19110911?v=4?s=100" width="100px;" alt="Christopher Burns"/><br /><sub><b>Christopher Burns</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=chrstphrbrns" title="Code">💻</a></td>
+    </tr>
   </tbody>
 </table>
 
