@@ -509,6 +509,15 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "chrstphrbrns",
+      "name": "Christopher Burns",
+      "avatar_url": "https://avatars.githubusercontent.com/u/19110911?v=4",
+      "profile": "https://github.com/chrstphrbrns",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
