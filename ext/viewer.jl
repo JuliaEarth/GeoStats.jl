@@ -77,9 +77,7 @@ function defaultformat(vals)
   end
 end
 
-function defaultformat(vals::CategoricalArray)
-  ticks -> map(t -> asstring(t, levels(vals)), ticks)
-end
+defaultformat(vals::CategoricalArray) = ticks -> map(t -> asstring(t, levels(vals)), ticks)
 
 asvalue(x) = x
 asvalue(x::Quantity) = ustrip(x)
