@@ -62,8 +62,8 @@ function viewer(data::Data; kwargs...)
 end
 
 defaultlimits(vals) = defaultlimits(vals, elscitype(vals))
-defaultlimits(vals, ::Type) = asvalue.(extrema(skipmissing(vals)))
-defaultlimits(vals, ::Type{<:Finite}) = (0, length(levels(vals)))
+defaultlimits(vals, ::Type) = asfloat.(extrema(skipmissing(vals)))
+defaultlimits(vals, ::Type{<:Finite}) = asfloat.((0, length(levels(vals))))
 
 defaultticks(vals) = defaultticks(vals, elscitype(vals))
 defaultticks(vals, ::Type) = range(defaultlimits(vals)..., 5)
@@ -81,8 +81,8 @@ function defaultformat(vals, ::Type)
   end
 end
 
-asvalue(x) = x
-asvalue(x::Quantity) = ustrip(x)
+asfloat(x) = float(x)
+asfloat(x::Quantity) = float(ustrip(x))
 
 function asstring(tick, levels)
   i = trunc(Int, tick)
