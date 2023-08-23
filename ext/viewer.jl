@@ -61,18 +61,18 @@ function viewer(data::Data; kwargs...)
   fig
 end
 
-defaultlimits(vals) = defaultlimits(vals, elscitype(vals))
+defaultlimits(vals) = defaultlimits(vals, nonmissingtype(elscitype(vals)))
 defaultlimits(vals, ::Type) = asfloat.(extrema(skipmissing(vals)))
 defaultlimits(vals, ::Type{<:Finite}) = asfloat.((0, length(levels(vals))))
 
-defaultticks(vals) = defaultticks(vals, elscitype(vals))
+defaultticks(vals) = defaultticks(vals, nonmissingtype(elscitype(vals)))
 defaultticks(vals, ::Type) = range(defaultlimits(vals)..., 5)
 defaultticks(vals, ::Type{<:Finite}) = 0:length(levels(vals))
 
-defaultformat(vals) = defaultformat(vals, elscitype(vals))
+defaultformat(vals) = defaultformat(vals, nonmissingtype(elscitype(vals)))
 defaultformat(vals, ::Type{<:Finite}) = ticks -> map(t -> asstring(t, levels(vals)), ticks)
 function defaultformat(vals, ::Type)
-  T = eltype(vals)
+  T = nonmissingtype(eltype(vals))
   if T <: Quantity
     u = unit(T)
     ticks -> map(t -> string(round(t, digits=2), " ", u), ticks)
