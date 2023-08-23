@@ -71,9 +71,9 @@ function defaultformat(vals)
   T = eltype(vals)
   if T <: Quantity
     u = unit(T)
-    ticks -> map(t -> string(round(tick, digits=2), " ", u), ticks)
+    ticks -> map(t -> string(round(t, digits=2), " ", u), ticks)
   else
-    ticks -> map(t -> string(round(tick, digits=2)), ticks)
+    ticks -> map(t -> string(round(t, digits=2)), ticks)
   end
 end
 
