@@ -37,25 +37,57 @@ function viewer(data::Data; kwargs...)
   vals = Makie.Observable{Any}()
   cmap = Makie.Observable{Any}()
   lims = Makie.Observable{Any}()
+  ticks = Makie.Observable{Any}()
+  format = Makie.Observable{Any}()
   vals[] = Tables.getcolumn(cols, var)
   cmap[] = defaultscheme(vals[])
   lims[] = defaultlimits(vals[])
+  ticks[] = defaultticks(vals[])
+  format[] = defaultformat(vals[])
 
   # initialize visualization
-  Makie.plot(fig[2,:], dom; color = vals, kwargs...)
-  Makie.Colorbar(fig[2,3], colormap = cmap, limits = lims)
+  Makie.plot(fig[2,:], dom; color=vals, kwargs...)
+  Makie.Colorbar(fig[2,3], colormap=cmap, limits=lims, ticks=ticks, tickformat=format)
 
   # update visualization if necessary
   Makie.on(menu.selection) do var
     vals[] = Tables.getcolumn(cols, var)
     cmap[] = defaultscheme(vals[])
     lims[] = defaultlimits(vals[])
+    ticks[] = defaultticks(vals[])
+    format[] = defaultformat(vals[])
   end
 
   fig
 end
 
-defaultlimits(vals) = ustrip.(extrema(skipmissing(vals)))
+defaultlimits(vals) = defaultlimits(vals, nonmissingtype(elscitype(vals)))
+defaultlimits(vals, ::Type) = asfloat.(extrema(skipmissing(vals)))
+defaultlimits(vals, ::Type{<:Finite}) = asfloat.((0, length(levels(vals))))
+
+defaultticks(vals) = defaultticks(vals, nonmissingtype(elscitype(vals)))
+defaultticks(vals, ::Type) = range(defaultlimits(vals)..., 5)
+defaultticks(vals, ::Type{<:Finite}) = 0:length(levels(vals))
+
+defaultformat(vals) = defaultformat(vals, nonmissingtype(elscitype(vals)))
+defaultformat(vals, ::Type{<:Finite}) = ticks -> map(t -> asstring(t, levels(vals)), ticks)
+function defaultformat(vals, ::Type)
+  T = nonmissingtype(eltype(vals))
+  if T <: Quantity
+    u = unit(T)
+    ticks -> map(t -> string(round(t, digits=2), " ", u), ticks)
+  else
+    ticks -> map(t -> string(round(t, digits=2)), ticks)
+  end
+end
+
+asfloat(x) = float(x)
+asfloat(x::Quantity) = float(ustrip(x))
+
+function asstring(tick, levels)
+  i = trunc(Int, tick)
+  isassigned(levels, i) ? string(levels[i]) : ""
+end
 
 isviewable(::Type) = false
 isviewable(::Type{<:Finite}) = true
