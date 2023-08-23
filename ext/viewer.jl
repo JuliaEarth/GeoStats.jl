@@ -78,8 +78,7 @@ function defaultformat(vals)
 end
 
 function defaultformat(vals::CategoricalArray)
-  ls = levels(vals)
-  ticks -> map(t -> asstring(t, ls), ticks)
+  ticks -> map(t -> asstring(t, levels(vals)), ticks)
 end
 
 asvalue(x) = x
