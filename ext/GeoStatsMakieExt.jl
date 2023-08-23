@@ -7,7 +7,9 @@ module GeoStatsMakieExt
 using GeoStats
 
 using Tables
-using Unitful: ustrip
+using CategoricalArrays
+using ScientificTypes
+using Unitful: Quantity, unit, ustrip
 using Makie: cgrad
 using Makie.Colors: Colorant
 
