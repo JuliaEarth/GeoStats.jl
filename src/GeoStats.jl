@@ -20,6 +20,7 @@ using Reexport
 @reexport using Meshes
 @reexport using Distances
 @reexport using Rotations
+@reexport using Statistics
 @reexport using LossFunctions
 @reexport using CategoricalArrays
 @reexport using DensityRatioEstimation
