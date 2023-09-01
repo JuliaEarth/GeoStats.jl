@@ -36,15 +36,17 @@ We recommend the following educational resources.
 
 ### Workshop material
 
+- [UFMG 2023](https://github.com/Arpeggeo/UFMG2023)
+  [Portuguese] - Geociência de Dados na Mineração, UFMG 2023
+
 - [JuliaEO 2023](https://github.com/Arpeggeo/JuliaEO2023)
-  [English] - Global Workshop on Earth Observation with GeoStats.jl
+  [English] - Global Workshop on Earth Observation, AIRCentre 2023
 
 - [CBMina 2021](https://github.com/Arpeggeo/CBMina2021)
-  [Portuguese] - GeoStats.jl at the Brazilian mining congress.
+  [Portuguese] - Introução à Geoestatística, CBMina 2021
 
 - [UFMG 2021](https://github.com/fnaghetini/intro-to-geostats)
-  [Portuguese] - GeoStats.jl at the Federal University of
-  Minas Gerais.
+  [Portuguese] - Introdução à Geoestatística, UFMG 2021
 
 ## Related concepts
 

@@ -12,7 +12,7 @@ using TuringPatterns
 using StratiGraphics
 
 # IO packages
-using GeoTables
+using GeoIO
 
 istravis = "TRAVIS" ∈ keys(ENV)
 

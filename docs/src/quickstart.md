@@ -64,15 +64,15 @@ and [GeoJSON.jl](https://github.com/JuliaGeo/GeoJSON.jl), which define
 their own very basic geometry types. Instead of requesting users to learn
 the so called [GeoInterface.jl](https://github.com/JuliaGeo/GeoInterface.jl)
 to handle these types, we provide the high-level
-[GeoTables.jl](https://github.com/JuliaEarth/GeoTables.jl) package to
+[GeoIO.jl](https://github.com/JuliaEarth/GeoIO.jl) package to
 load any file with geospatial data into well-tested geometries from the
 [Meshes.jl](https://github.com/JuliaGeometry/Meshes.jl) submodule:
 
 ```@example quickstart
-using GeoTables
+using GeoIO
 
-zone = GeoTables.load("data/zone.shp")
-path = GeoTables.load("data/path.shp")
+zone = GeoIO.load("data/zone.shp")
+path = GeoIO.load("data/path.shp")
 
 viz(zone.geometry)
 viz!(path.geometry, color = :gray90)

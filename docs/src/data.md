@@ -24,15 +24,15 @@ values
 domain
 ```
 
-The [GeoTables.jl](https://github.com/JuliaEarth/GeoTables.jl) package
+The [GeoIO.jl](https://github.com/JuliaEarth/GeoIO.jl) package
 can be used to load geospatial data from various file formats. It also
 provides utility functions to automatically download maps given the
 name of any region in the world.
 
 ```@docs
-GeoTables.load
-GeoTables.save
-GeoTables.gadm
+GeoIO.load
+GeoIO.save
+GeoIO.gadm
 ```
 
 ## Examples
@@ -115,10 +115,10 @@ georef((T=T, P=T), rand(2,25)) |> plot
 We can easily load geospatial data from disk without any specific knowledge of file formats:
 
 ```@example data
-using GeoTables
+using GeoIO
 
-zone = GeoTables.load("data/zone.shp")
-path = GeoTables.load("data/path.shp")
+zone = GeoIO.load("data/zone.shp")
+path = GeoIO.load("data/path.shp")
 
 viz(zone.geometry)
 viz!(path.geometry, color = :gray90)
