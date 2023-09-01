@@ -101,6 +101,7 @@ This project would not be possible without the contributions of:
     <tr>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/chrstphrbrns"><img src="https://avatars.githubusercontent.com/u/19110911?v=4?s=100" width="100px;" alt="Christopher Burns"/><br /><sub><b>Christopher Burns</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=chrstphrbrns" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://www.linkedin.com/in/essamwisam/"><img src="https://avatars.githubusercontent.com/u/49572294?v=4?s=100" width="100px;" alt="Essam"/><br /><sub><b>Essam</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=EssamWisam" title="Code">💻</a> <a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=EssamWisam" title="Documentation">📖</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/luschiro"><img src="https://avatars.githubusercontent.com/u/56177321?v=4?s=100" width="100px;" alt="Lucas R. Schiavetti"/><br /><sub><b>Lucas R. Schiavetti</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/issues?q=author%3Aluschiro" title="Bug reports">🐛</a></td>
     </tr>
   </tbody>
 </table>
