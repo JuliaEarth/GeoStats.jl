@@ -381,17 +381,16 @@ struct MeanSolver <: LearningSolver end
 
 function solve(problem::LearningProblem, solver::MeanSolver)
   # retrieve problem info
-  ptask  = task(problem)
-  feats  = collect(features(ptask))
-  sdata  = sourcedata(problem)
-  tdata  = targetdata(problem)
-  resp   = first(outputvars(ptask))
+  ptask = task(problem)
+  sdata = sourcedata(problem)
+  tdata = targetdata(problem)
+  resp  = first(outputvars(ptask))
 
   # mean of response over source data
   μ = mean(sdata[:,resp])
 
   # copy the mean over target domain
-  μs = fill(μ, nitems(tdata))
+  μs = fill(μ, nrow(tdata))
 
   # new table of attributes
   table = (; zip([resp], [μs])...)

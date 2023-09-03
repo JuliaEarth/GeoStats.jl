@@ -27,7 +27,7 @@ data = georef(CSV.File("data/agriculture.csv"), (:x, :y))
 Ω = data |> Coerce(:crop => Multiclass)
 
 # 20%/80% split along the (1, -1) direction
-Ωₛ, Ωₜ = split(Ω, 0.2, (1.0, -1.0))
+Ωₛ, Ωₜ = geosplit(Ω, 0.2, (1.0, -1.0))
 
 # features and label for supervised learning
 feats = [:band1,:band2,:band3,:band4]

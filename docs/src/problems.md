@@ -86,7 +86,7 @@ Alternatively, define a 2D conditional simulation problem:
 
 ```@example problems
 # sample first realization
-𝒟 = sample(Ω[1], 100, replace=false)
+𝒟 = sample(Ω[1], UniformSampling(100))
 
 # conditional simulation problem
 𝒫 = SimulationProblem(𝒟, 𝒢, :Z, 3)
@@ -135,6 +135,6 @@ These tasks can be learned and performed with geospatial data using any learning
 from the [MLJ.jl](https://github.com/alan-turing-institute/MLJ.jl) project:
 
 ```@docs
-learn(::LearningTask, ::Data, ::Any)
-perform(::LearningTask, ::Data, ::Any)
+learn(::LearningTask, ::AbstractGeoTable, ::Any)
+perform(::LearningTask, ::AbstractGeoTable, ::Any)
 ```

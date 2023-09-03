@@ -2,7 +2,7 @@
 # Licensed under the MIT License. See LICENCE in the project root.
 # ------------------------------------------------------------------
 
-function viewer(data::Data; kwargs...)
+function viewer(data::AbstractGeoTable; kwargs...)
   # retrieve domain and element table
   dom, tab = domain(data), values(data)
 

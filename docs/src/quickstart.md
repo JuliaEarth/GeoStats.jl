@@ -278,11 +278,11 @@ fig
 
 Similar to a generic statistical learning workflow, we split the data
 into "train" and "test" sets. The main difference here is that our
-geospatial `split` function accepts a separating plane specified by
+geospatial `geosplit` function accepts a separating plane specified by
 its normal direction `(1,-1)`:
 
 ```@example quickstart
-Ωs, Ωt = split(Ω, 0.2, (1.0, -1.0))
+Ωs, Ωt = geosplit(Ω, 0.2, (1.0, -1.0))
 
 viz(Ωs.geometry, pointsize = 2)
 viz!(Ωt.geometry, color = :gray90, pointsize = 2)
@@ -292,7 +292,7 @@ Mke.current_figure()
 We can visualize the domain of the "train" (or source) set Ωs in blue,
 and the domain of the "test" (or target) set Ωt in gray. We reserved
 20% of the samples to Ωs and 80% to Ωt. Internally, this geospatial
-`split` function is implemented in terms of efficient geospatial
+`geosplit` function is implemented in terms of efficient geospatial
 partitions.
 
 Let's define the learning task and the geostatistical learning problem.

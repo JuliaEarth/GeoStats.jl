@@ -13,7 +13,7 @@ Below is a list of miscellaneous geospatial operations.
 ## Split
 
 ```@docs
-Base.split(::Any, ::Real, ::Any)
+geosplit
 ```
 
 ```@example misc
@@ -22,7 +22,7 @@ using GeoStatsImages
 𝒟 = geostatsimage("Strebelle")
 
 # 50/50 split perpendicular to (1.,1.)
-Π = split(𝒟, 0.5, (1.0, 1.0))
+Π = geosplit(𝒟, 0.5, (1.0, 1.0))
 ```
 
 ## Trend
@@ -49,5 +49,5 @@ fig
 ## Integrate
 
 ```@docs
-integrate(::Data, ::Symbol)
+integrate(::AbstractGeoTable, ::Symbol)
 ```

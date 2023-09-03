@@ -18,6 +18,7 @@ using Reexport
 @reexport using Dates
 @reexport using Unitful
 @reexport using Meshes
+@reexport using GeoTables
 @reexport using Distances
 @reexport using Rotations
 @reexport using Statistics

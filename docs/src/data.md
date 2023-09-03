@@ -124,10 +124,3 @@ viz(zone.geometry)
 viz!(path.geometry, color = :gray90)
 Mke.current_figure()
 ```
-
-## Custom data
-
-Any type that is a subtype of our geospatial `Data` type and that implements
-the traits [`domain`](@ref) and [`values`](@ref) is compatible with the framework.
-Please ask in our [community channel](about/community.md) if you need assistance
-implementing custom geospatial data.

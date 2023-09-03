@@ -58,7 +58,7 @@ given lag `h`.
 ```@example plots
 𝒟 = georef((Z=[10sin(i/10) + j for i in 1:100, j in 1:200],))
 
-𝒮 = sample(𝒟, 500)
+𝒮 = sample(𝒟, UniformSampling(500))
 
 fig = Mke.Figure(resolution = (800, 400))
 hscatter(fig[1,1], 𝒮, :Z, :Z, lag=0)
@@ -71,7 +71,7 @@ fig
 ## PairPlots.jl
 
 The [PairPlots.jl](https://github.com/sefffal/PairPlots.jl) package
-provides the `corner` plot that can be used with any table, including
+provides the `pairplot` function that can be used with any table, including
 tables of attributes obtained with the [`values`](@ref) function.
 
 ## AlgebraOfGraphics.jl
