@@ -81,8 +81,7 @@ makedocs(
     "Resources" => [
       "resources/education.md",
       "resources/publications.md",
-      "resources/ecosystem.md",
-      "resources/glossary.md"
+      "resources/ecosystem.md"
     ],
     "About" => [
       "Community" => "about/community.md",
