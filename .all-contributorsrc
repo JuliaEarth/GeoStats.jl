@@ -537,6 +537,15 @@
       "contributions": [
         "bug"
       ]
+    },
+    {
+      "login": "ehgus",
+      "name": "Lee, Dohyeon",
+      "avatar_url": "https://avatars.githubusercontent.com/u/18534737?v=4",
+      "profile": "https://ehgus.github.io/",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
