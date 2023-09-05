@@ -22,7 +22,6 @@ using Reexport
 @reexport using Distances
 @reexport using Rotations
 @reexport using Statistics
-@reexport using Distributions
 @reexport using LossFunctions
 @reexport using CategoricalArrays
 @reexport using DensityRatioEstimation

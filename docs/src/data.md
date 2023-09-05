@@ -107,7 +107,7 @@ georef((T=T, P=P)) |> plot
 Alternatively, we can interpret the entries of the named tuple as columns in a table:
 
 ```@example data
-georef((T=T, P=T), rand(2,25)) |> plot
+georef((T=vec(T), P=vec(P)), rand(2,25)) |> plot
 ```
 
 ### Files
