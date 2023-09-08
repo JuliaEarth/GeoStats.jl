@@ -8,7 +8,7 @@ using GeoStats
 
 using Tables
 using Makie: cgrad
-using Makie.Colors: Colorant
+using Makie.Colors: Colorant, Gray
 
 import Makie
 import Meshes: ascolors, defaultscheme
