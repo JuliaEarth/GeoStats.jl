@@ -39,7 +39,7 @@ function viewer(data::AbstractGeoTable; kwargs...)
   lims = Makie.Observable{Any}()
   ticks = Makie.Observable{Any}()
   format = Makie.Observable{Any}()
-  vals[] = Tables.getcolumn(cols, var)
+  vals[] = Tables.getcolumn(cols, var) |> asvalues
   cmap[] = defaultscheme(vals[])
   lims[] = defaultlimits(vals[])
   ticks[] = defaultticks(vals[])
@@ -51,7 +51,7 @@ function viewer(data::AbstractGeoTable; kwargs...)
 
   # update visualization if necessary
   Makie.on(menu.selection) do var
-    vals[] = Tables.getcolumn(cols, var)
+    vals[] = Tables.getcolumn(cols, var) |> asvalues
     cmap[] = defaultscheme(vals[])
     lims[] = defaultlimits(vals[])
     ticks[] = defaultticks(vals[])
@@ -80,6 +80,10 @@ function defaultformat(vals, ::Type)
     ticks -> map(t -> string(round(t, digits=2)), ticks)
   end
 end
+
+asvalues(x) = asvalues(x, nonmissingtype(eltype(x)))
+asvalues(x, ::Type) = x
+asvalues(x, ::Type{<:Colorant}) = map(c -> Float64(Gray(c)), x)
 
 asfloat(x) = float(x)
 asfloat(x::Quantity) = float(ustrip(x))
