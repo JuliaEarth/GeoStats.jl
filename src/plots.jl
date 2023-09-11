@@ -19,7 +19,6 @@ H-scatter plot of geospatial `data` for pair of variables
 * `size`          - size of points in point set
 * `color`         - color of geometries or points
 * `alpha`         - transparency channel in [0,1]
-* `colorscheme`   - color scheme from ColorSchemes.jl
 * `rcolor`        - color of regression line
 * `icolor`        - color of identity line
 * `ccolor`        - color of center lines

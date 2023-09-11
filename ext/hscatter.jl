@@ -11,9 +11,8 @@ Makie.@recipe(HScatter, data, var₁, var₂) do scene
 
     # aesthetics options
     size        = 2,
-    color       = :slategray,
+    color       = :black,
     alpha       = 1.0,
-    colorscheme = :viridis,
     rcolor      = :maroon,
     icolor      = :black,
     ccolor      = :teal,
@@ -39,7 +38,6 @@ function Makie.plot!(plot::HScatter)
   # visualizat h-scatter
   Makie.scatter!(plot, x, y,
     color      = plot[:color],
-    colormap   = plot[:colorscheme],
     alpha      = plot[:alpha],
     markersize = plot[:size],
   )
