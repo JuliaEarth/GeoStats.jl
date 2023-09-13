@@ -17,7 +17,7 @@ Makie.@recipe(VarioPlot, γ) do scene
     vscheme=:viridis,
     rshow=true,
     rmodel=SphericalVariogram,
-    rcolor=:slategray,
+    rcolor=:white,
 
     # theoretical variogram options
     maxlag=nothing
@@ -125,7 +125,8 @@ function Makie.plot!(plot::VarioPlot{<:Tuple{EmpiricalVarioplane}})
   if rshow[]
     ls = Makie.@lift [range(fit($rmodel, γ)) for γ in $γs]
     ls = Makie.@lift [$ls; $ls]
-    Makie.lines!(plot, ls, θs, color = plot[:rcolor])
+    zs = Makie.@lift fill(maximum($Z) + 1, length($ls))
+    Makie.lines!(plot, ls, θs, zs, color = plot[:rcolor])
   end
 end
 
