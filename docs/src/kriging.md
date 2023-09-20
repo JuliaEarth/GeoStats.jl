@@ -2,12 +2,11 @@
 
 !!! note
 
-    This section describes the models used in the [KrigingSolver](solvers/builtin.md).
+    This section describes the Kriging models used in the [`Interpolate`](@ref) transform.
     Most users don't want to use models directly because they lack features such as
-    neighborhood search and change of support. If that is your case, please refer to the
-    solver documentation.
+    neighborhood search and change of support.
 
-A Kriging estimator has the form:
+A Kriging model has the form:
 
 ```math
 \hat{Z}(\x_0) = \lambda_1 Z(\x_1) + \lambda_2 Z(\x_2) + \cdots + \lambda_n Z(\x_n),\quad \x_i \in \R^m, \lambda_i \in \R

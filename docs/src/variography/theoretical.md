@@ -208,18 +208,12 @@ To illustrate the concept, consider the following 2D data set:
 using Random # hide
 Random.seed!(2000) # hide
 
-𝒟 = georef((Z=rand(50),), 100rand(2, 50))
+geotable = georef((Z=rand(50),), 100rand(2, 50))
 
-viz(𝒟.geometry, color = 𝒟.Z)
+viz(geotable.geometry, color = geotable.Z)
 ```
 
-and the corresponding estimation problem on a Cartesian grid:
-
-```@example variograms
-problem = EstimationProblem(𝒟, CartesianGrid(100, 100), :Z)
-```
-
-We solve the problem with different ellipsoids by varying the angle of
+We interpolate the data with different ellipsoids by varying the angle of
 rotation from ``0`` to ``2\pi`` clockwise:
 
 ```@example variograms
@@ -239,8 +233,11 @@ for (i, θ) in enumerate(θs)
   # anisotropic variogram model
   γ = GaussianVariogram(e)
 
-  # solve the problem with Kriging
-  sol = solve(problem, KrigingSolver(:Z => (variogram=γ,)))
+  # domain of interpolation
+  grid = CartesianGrid(100, 100)
+
+  # perform interpolation
+  sol = geotable |> Interpolate(grid, "Z" => Kriging(γ), maxneighbors=nrow(geotable))
 
   # visualize solution at subplot i
   viz(fig[pos(i)...], sol.geometry, color = sol.Z,
