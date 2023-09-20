@@ -29,9 +29,9 @@ using Reexport
 @reexport using TableTransforms
 @reexport using GeoStatsBase
 @reexport using Variography
-@reexport using KrigingEstimators
 @reexport using PointPatterns
-@reexport using GeoClustering
+@reexport using GeoStatsModels
+@reexport using GeoStatsTransforms
 @reexport using GeoStatsSolvers
 @reexport using Chain: @chain
 

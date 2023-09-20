@@ -240,7 +240,7 @@ for (i, θ) in enumerate(θs)
   γ = GaussianVariogram(e)
 
   # solve the problem with Kriging
-  sol = solve(problem, Kriging(:Z => (variogram=γ,)))
+  sol = solve(problem, KrigingSolver(:Z => (variogram=γ,)))
 
   # visualize solution at subplot i
   viz(fig[pos(i)...], sol.geometry, color = sol.Z,

@@ -97,7 +97,7 @@ coord = [(25.,25.), (50.,75.), (75.,50.)]
 𝒫 = EstimationProblem(𝒟, 𝒢, :Z)
 
 # choose a solver from the list of solvers
-𝒮 = Kriging(:Z => (variogram=GaussianVariogram(range=35.),))
+𝒮 = KrigingSolver(:Z => (variogram=GaussianVariogram(range=35.),))
 
 # solve the problem
 Ω = solve(𝒫, 𝒮)
@@ -131,13 +131,14 @@ The project is split into various packages:
 |:-------:|:------------|
 | [GeoStats.jl](https://github.com/JuliaEarth/GeoStats.jl) | Main package reexporting full stack of packages for geostatistics. |
 | [Meshes.jl](https://github.com/JuliaGeometry/Meshes.jl) | Computational geometry and advanced meshing algorithms. |
+| [GeoTables.jl](https://github.com/JuliaEarth/GeoTables.jl) | Geospatial tables compatible with the framework. |
 | [TableTransforms.jl](https://github.com/JuliaML/TableTransforms.jl) | Transforms and pipelines with tabular data. |
 | [Variography.jl](https://github.com/JuliaEarth/Variography.jl) | Variogram estimation and modeling, and related tools. |
-| [KrigingEstimators.jl](https://github.com/JuliaEarth/KrigingEstimators.jl) | Kriging estimation over general geospatial domains. |
+| [PointPatterns.jl](https://github.com/JuliaEarth/PointPatterns.jl) | Geospatial point pattern analysis and synthesis. |
 | [DensityRatioEstimation.jl](https://github.com/JuliaML/DensityRatioEstimation.jl) | High-performance density ratio estimation. |
 | [LossFunctions.jl](https://github.com/JuliaML/LossFunctions.jl) | Loss functions for (geo)statistical learning. |
-| [PointPatterns.jl](https://github.com/JuliaEarth/PointPatterns.jl) | Geospatial point pattern analysis and synthesis. |
-| [GeoClustering.jl](https://github.com/JuliaEarth/GeoClustering.jl) | Geostatistical clustering (a.k.a. domaining). |
+| [GeoStatsModels.jl](https://github.com/JuliaEarth/GeoStatsModels.jl) | Geostatistical models for geospatial interpolation. |
+| [GeoStatsTransforms.jl](https://github.com/JuliaEarth/GeoStatsTransforms.jl) | Geostatistical transforms for geospatial data. |
 | [GeoStatsSolvers.jl](https://github.com/JuliaEarth/GeoStatsSolvers.jl) | Built-in geostatistical solvers. |
 | [GeoStatsBase.jl](https://github.com/JuliaEarth/GeoStatsBase.jl) | Base package with core definitions. |
 

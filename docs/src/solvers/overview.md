@@ -56,9 +56,9 @@ Please consult
 
 | Solver | Description | References |
 |:------:|:------------|:-----------|
-| [`Kriging`](@ref) | Kriging (SK, OK, UK, EDK) | [Matheron 1971](https://books.google.com/books/about/The_Theory_of_Regionalized_Variables_and.html?id=TGhGAAAAYAAJ) |
-| [`IDW`](@ref) | Inverse distance weighting | [Shepard 1968](https://dl.acm.org/citation.cfm?id=810616) |
-| [`LWR`](@ref) | Locally weighted regression | [Cleveland 1979](https://www.jstor.org/stable/2286407) |
+| [`KrigingSolver`](@ref) | Kriging (SK, OK, UK, EDK) | [Matheron 1971](https://books.google.com/books/about/The_Theory_of_Regionalized_Variables_and.html?id=TGhGAAAAYAAJ) |
+| [`IDWSolver`](@ref) | Inverse distance weighting | [Shepard 1968](https://dl.acm.org/citation.cfm?id=810616) |
+| [`LWRSolver`](@ref) | Locally weighted regression | [Cleveland 1979](https://www.jstor.org/stable/2286407) |
 
 ## Simulation
 

@@ -33,11 +33,11 @@ coord = [(25.,25.), (50.,75.), (75.,50.)]
 𝒫 = EstimationProblem(𝒟, 𝒢, :Z)
 ```
 
-Solve the problem with [`Kriging`](@ref) solver:
+Solve the problem with the [`KrigingSolver`](@ref):
 
 ```@example problems
 # ordinary Kriging
-𝒮 = Kriging(:Z => (variogram=GaussianVariogram(range=35.),))
+𝒮 = KrigingSolver(:Z => (variogram=GaussianVariogram(range=35.),))
 
 # perform estimation
 Ω = solve(𝒫, 𝒮)

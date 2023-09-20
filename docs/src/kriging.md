@@ -2,8 +2,8 @@
 
 !!! note
 
-    This section describes the estimators used in the [Kriging](solvers/builtin.md) solver.
-    Most users don't want to use estimators directly because they lack features such as
+    This section describes the models used in the [KrigingSolver](solvers/builtin.md).
+    Most users don't want to use models directly because they lack features such as
     neighborhood search and change of support. If that is your case, please refer to the
     solver documentation.
 
@@ -22,45 +22,14 @@ This package implements the following Kriging variants:
 - Universal Kriging
 - External Drift Kriging
 
-All these variants follow the same interface: an estimator object is first created with a
-given set of parameters, it is then combined with the data to obtain predictions at new
-locations.
+All these variants follow the same interface: an object is first created with a given set
+of parameters, it is then combined with the data to obtain predictions at new geometries.
 
 The `fit` function takes care of building the Kriging system and factorizing the LHS with
-an appropriate decomposition (e.g. Cholesky, LU):
+an appropriate decomposition (e.g. Cholesky, LU), and the `predict` (or `predictprob`)
+function performs the estimation for a given variable and geometry.
 
-```@docs
-fit(::KrigingEstimator, ::Any)
-```
-
-and the `predict` function performs the estimation for a given variable and location:
-
-```@docs
-predict(::KrigingEstimators.FittedKriging, ::Any, ::Any)
-predictprob(::KrigingEstimators.FittedKriging, ::Any, ::Any)
-```
-
-Alternative constructors are provided for convenience that will immediately fit the Kriging
-parameters to the data. In this case, the data is passed as the first argument.
-
-For advanced users, the Kriging weights and Lagrange multipliers at a given location can be accessed
-with the `weights` method. This method returns a `KrigingWeights` object containing a field `λ` for
-the weights and a field `ν` for the Lagrange multipliers:
-
-```@docs
-weights
-```
-
-These weights can be combined with a vector of observations using the `combine` function:
-
-```@docs
-KrigingEstimators.combine
-```
-
-This functionality can be useful in real-time applications when the locations of the observations are
-fixed and an online stream of data is available.
-
-Finally, all estimators work with general Hilbert spaces, meaning that one can interpolate any
+All variants work with general Hilbert spaces, meaning that one can interpolate any
 data type that implements scalar multiplication, vector addition and inner product.
 
 ## Simple Kriging
@@ -100,7 +69,7 @@ or in matricial form ``\C\l = \c``. We subtract the given mean from the observat
 ```
 
 ```@docs
-SimpleKriging
+GeoStatsModels.SimpleKriging
 ```
 
 ## Ordinary Kriging
@@ -134,7 +103,7 @@ location ``\x_0`` are given by:
 ```
 
 ```@docs
-OrdinaryKriging
+GeoStatsModels.OrdinaryKriging
 ```
 
 ## Universal Kriging
@@ -206,7 +175,7 @@ variance at location ``\x_0`` are given by:
 ```
 
 ```@docs
-UniversalKriging
+GeoStatsModels.UniversalKriging
 ```
 
 ## External Drift Kriging
@@ -224,5 +193,5 @@ estimated.
 External drifts are known to cause numerical instability. Give preference to other Kriging variants if possible.
 
 ```@docs
-ExternalDriftKriging
+GeoStatsModels.ExternalDriftKriging
 ```
