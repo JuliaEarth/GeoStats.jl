@@ -8,46 +8,9 @@ using GeoStats # hide
 import WGLMakie as Mke # hide
 ```
 
-The project provides solutions to three types of geostatistical problems.
+The project provides solutions to different types of geostatistical problems.
 These problems can be defined unambiguously and independently of solvers,
 which is quite convenient for fair comparison of alternative workflows.
-
-## Estimation
-
-```@docs
-EstimationProblem
-```
-
-### Example
-
-Define a 2D estimation problem:
-
-```@example problems
-# list of properties with coordinates
-props = (Z=[1.,0.,1.],)
-coord = [(25.,25.), (50.,75.), (75.,50.)]
-
-# estimation problem
-𝒟 = georef(props, coord)
-𝒢 = CartesianGrid(100, 100)
-𝒫 = EstimationProblem(𝒟, 𝒢, :Z)
-```
-
-Solve the problem with the [`KrigingSolver`](@ref):
-
-```@example problems
-# ordinary Kriging
-𝒮 = KrigingSolver(:Z => (variogram=GaussianVariogram(range=35.),))
-
-# perform estimation
-Ω = solve(𝒫, 𝒮)
-
-# plot estimate and conditional variance
-fig = Mke.Figure(resolution = (800, 400))
-viz(fig[1,1], Ω.geometry, color = Ω.Z)
-viz(fig[1,2], Ω.geometry, color = Ω.Z_variance)
-fig
-```
 
 ## Simulation
 

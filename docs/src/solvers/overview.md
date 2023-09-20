@@ -7,8 +7,8 @@ separate packages, a.k.a. "external" solvers. If your solver
 is not listed below, please submit a pull request and we will
 be happy to review and add it to the list.
 
-Solvers are organized into three categories: `estimation`, `simulation`
-and `learning`. These categories correspond to the [Problems](../problems.md)
+Solvers are organized into categories: `simulation` and `learning`.
+These categories correspond to the [Problems](../problems.md)
 defined in the framework. All solvers implement the [`solve`](@ref) function:
 
 ```@docs
@@ -51,14 +51,6 @@ coord = [(25.,25.), (50.,75.), (75.,50.)]
 
 Please consult
 [The ultimate guide to distributed computing in Julia](https://github.com/Arpeggeo/julia-distributed-computing/tree/master).
-
-## Estimation
-
-| Solver | Description | References |
-|:------:|:------------|:-----------|
-| [`KrigingSolver`](@ref) | Kriging (SK, OK, UK, EDK) | [Matheron 1971](https://books.google.com/books/about/The_Theory_of_Regionalized_Variables_and.html?id=TGhGAAAAYAAJ) |
-| [`IDWSolver`](@ref) | Inverse distance weighting | [Shepard 1968](https://dl.acm.org/citation.cfm?id=810616) |
-| [`LWRSolver`](@ref) | Locally weighted regression | [Cleveland 1979](https://www.jstor.org/stable/2286407) |
 
 ## Simulation
 

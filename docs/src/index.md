@@ -82,31 +82,25 @@ using GeoStats
 import WGLMakie as Mke
 
 # attribute table
-table = (Z=[1.,0.,1.],)
+table = (; Z=[1.,0.,1.])
 
 # coordinates for each row
 coord = [(25.,25.), (50.,75.), (75.,50.)]
 
 # georeference data
-𝒟 = georef(table, coord)
+geotable = georef(table, coord)
 
-# estimation domain
-𝒢 = CartesianGrid(100, 100)
+# interpolation domain
+grid = CartesianGrid(100, 100)
 
-# estimation problem
-𝒫 = EstimationProblem(𝒟, 𝒢, :Z)
+# choose an interpolation model
+model = Kriging(GaussianVariogram(range=35.))
 
-# choose a solver from the list of solvers
-𝒮 = KrigingSolver(:Z => (variogram=GaussianVariogram(range=35.),))
-
-# solve the problem
-Ω = solve(𝒫, 𝒮)
+# perform interpolation over grid
+interp = geotable |> Interpolate(grid, "Z" => model)
 
 # visualize the solution
-fig = Mke.Figure(resolution = (800, 400))
-viz(fig[1,1], Ω.geometry, color = Ω.Z)
-viz(fig[1,2], Ω.geometry, color = Ω.Z_variance)
-fig
+viz(interp.geometry, color = interp.Z)
 ```
 
 For a more detailed example, please consult the [Quickstart](quickstart.md).

@@ -2,14 +2,6 @@
 
 Below is the list of solvers that are readily available after loading the project.
 
-## Estimation
-
-```@docs
-KrigingSolver
-IDWSolver
-LWRSolver
-```
-
 ## Simulation
 
 ```@docs

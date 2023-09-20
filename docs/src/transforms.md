@@ -40,13 +40,13 @@ of the [`Select`](@ref) transform is shown below:
 Select
 ```
 
-Transforms of type [`GeometricTransform`](@ref) operate on the underlying
-geospatial domain, whereas transforms of type [`FeatureTransform`](@ref)
-operate on the attribute table:
+Transforms of type [`FeatureTransform`](@ref) operate on the attribute table,
+whereas transforms of type [`GeometricTransform`](@ref) operate on the underlying
+geospatial domain:
 
 ```@docs
-Meshes.GeometricTransform
 TableTransforms.FeatureTransform
+Meshes.GeometricTransform
 ```
 
 Other transforms such as [`Detrend`](@ref) are defined in terms of both
@@ -59,25 +59,6 @@ TransformsBase.isinvertible
 TransformsBase.apply
 TransformsBase.revert
 TransformsBase.reapply
-```
-
-## Geometric transforms
-
-Please check the [Meshes.jl](https://github.com/JuliaGeometry/Meshes.jl)
-documentation for an updated list of geometric transforms. As an example
-consider the rotation of geospatial data over a Cartesian grid:
-
-```@example transforms
-# geospatial domain
-Ω = georef((Z=rand(10, 10),))
-
-# apply geometric transform
-Ωr = Ω |> Rotate(Angle2d(π/4))
-
-fig = Mke.Figure(resolution = (800, 400))
-viz(fig[1,1], Ω.geometry, color = Ω.Z)
-viz(fig[1,2], Ωr.geometry, color = Ωr.Z)
-fig
 ```
 
 ## Feature transforms
@@ -121,6 +102,25 @@ transformed sample space:
 Ωₒ = revert(pipe, Ω̄, cache)
 
 describe(values(Ωₒ))
+```
+
+## Geometric transforms
+
+Please check the [Meshes.jl](https://github.com/JuliaGeometry/Meshes.jl)
+documentation for an updated list of geometric transforms. As an example
+consider the rotation of geospatial data over a Cartesian grid:
+
+```@example transforms
+# geospatial domain
+Ω = georef((Z=rand(10, 10),))
+
+# apply geometric transform
+Ωr = Ω |> Rotate(Angle2d(π/4))
+
+fig = Mke.Figure(resolution = (800, 400))
+viz(fig[1,1], Ω.geometry, color = Ω.Z)
+viz(fig[1,2], Ωr.geometry, color = Ωr.Z)
+fig
 ```
 
 ## Geostatistical transforms
@@ -195,4 +195,45 @@ fig
 
 ```@example transforms
 𝒯.geometry
+```
+
+### Rasterize
+
+```@docs
+Rasterize
+```
+
+```@example transforms
+A = [1, 2, 3, 4, 5]
+B = [1.1, 2.2, 3.3, 4.4, 5.5]
+p1 = PolyArea((2, 0), (6, 2), (2, 2))
+p2 = PolyArea((0, 6), (3, 8), (0, 10))
+p3 = PolyArea((3, 6), (9, 6), (9, 9), (6, 9))
+p4 = PolyArea((7, 0), (10, 0), (10, 4), (7, 4))
+p5 = PolyArea((1, 3), (5, 3), (6, 6), (3, 8), (0, 6))
+gt = georef((; A, B), [p1, p2, p3, p4, p5])
+
+nt = gt |> Rasterize(20, 20)
+
+viz(nt.geometry, color = nt.A)
+```
+
+### Interpolate
+
+```@docs
+Interpolate
+```
+
+```@example transforms
+table = (; Z=[1.,0.,1.])
+coord = [(25.,25.), (50.,75.), (75.,50.)]
+geotable = georef(table, coord)
+
+grid = CartesianGrid(100, 100)
+
+model = Kriging(GaussianVariogram(range=35.))
+
+interp = geotable |> Interpolate(grid, "Z" => model)
+
+viz(interp.geometry, color = interp.Z)
 ```
