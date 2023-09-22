@@ -58,7 +58,7 @@ makedocs(
       "Clustering" => "clustering.md",
       "Declustering" => "declustering.md",
       "Geospatial transforms" => "transforms.md",
-      "Split-apply-combine" => "splitapplycombine.md",
+      "Geospatial queries" => "queries.md",
       "Variography" => [
         "variography/empirical.md",
         "variography/theoretical.md",

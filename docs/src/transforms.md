@@ -222,6 +222,7 @@ viz(nt.geometry, color = nt.A)
 
 ```@docs
 Interpolate
+InterpolateNeighbors
 ```
 
 ```@example transforms

@@ -222,18 +222,19 @@ These pipelines are revertible meaning that we can transform the data,
 perform geostatistical modeling, and revert the pipelines to obtain
 estimates in the original sample space (see [Transforms](transforms.md)).
 
-### Split-apply-combine
+### Geospatial queries
 
 We provide three macros [`@groupby`](@ref), [`@transform`](@ref) and
-[`@combine`](@ref) for powerful geospatial split-apply-combine patterns:
+[`@combine`](@ref) for powerful geospatial split-apply-combine patterns,
+as well as the function [`geojoin`](@ref) for advanced geospatial joins.
 
 ```@example quickstart
 @transform(Ω, :W = 2 * :Z * area(:geometry))
 ```
 
-These macros are very useful for geospatial data science as they hide
-the complexity of the `geometry` column. For more information, check the
-[Split-apply-combine](splitapplycombine.md) section of the documentation.
+These are very useful for geospatial data science as they hide the complexity
+of the `geometry` column. For more information, check the [Queries](queries.md)
+section of the documentation.
 
 ## Defining problems
 

@@ -1,4 +1,6 @@
-# Split-apply-combine
+# Geospatial queries
+
+## Split-apply-combine
 
 We provide a geospatial version of the split-apply-combine pattern:
 
@@ -12,4 +14,10 @@ We provide a geospatial version of the split-apply-combine pattern:
 @groupby
 @transform
 @combine
+```
+
+## Geospatial join
+
+```@docs
+geojoin
 ```
