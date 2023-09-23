@@ -116,7 +116,10 @@ function Makie.plot!(plot::VarioPlot{<:Tuple{EmpiricalVarioplane}})
   rs = Makie.@lift [0; $rs]
   Z  = Makie.@lift [$Z[1:1,:]; $Z]
 
-  Makie.surface!(plot, rs, θs, Z,
+  # transpose for plotting
+  Z  = Makie.@lift $Z'
+
+  Makie.surface!(plot, θs, rs, Z,
     colormap = plot[:vscheme],
     shading = false
   )
@@ -126,7 +129,7 @@ function Makie.plot!(plot::VarioPlot{<:Tuple{EmpiricalVarioplane}})
     ls = Makie.@lift [range(fit($rmodel, γ)) for γ in $γs]
     ls = Makie.@lift [$ls; $ls]
     zs = Makie.@lift fill(maximum($Z) + 1, length($ls))
-    Makie.lines!(plot, ls, θs, zs, color = plot[:rcolor])
+    Makie.lines!(plot, θs, ls, zs, color = plot[:rcolor])
   end
 end
 
