@@ -117,7 +117,7 @@ function Makie.plot!(plot::VarioPlot{<:Tuple{EmpiricalVarioplane}})
   Z  = Makie.@lift [$Z[1:1,:]; $Z]
 
   # transpose for plotting
-  Z  = Makie.@lift $Z'
+  Z  = Makie.@lift transpose($Z)
 
   Makie.surface!(plot, θs, rs, Z,
     colormap = plot[:vscheme],
