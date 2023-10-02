@@ -15,7 +15,7 @@ modules for advanced geometric processing, state-of-the-art geostatistical
 algorithms and sophisticated visualization of geospatial data.
 
 All further information is provided in the
-[online documentation](https://JuliaEarth.github.io/GeoStats.jl/stable).
+[online documentation](https://JuliaEarth.github.io/GeoStatsDocs/stable).
 
 ## Contributors
 
