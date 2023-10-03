@@ -95,5 +95,5 @@ makedocs(
 repo = "github.com/JuliaEarth/GeoStatsDocs.git"
 
 withenv("GITHUB_REPOSITORY" => repo) do
-  deploydocs(repo=repo)
+  deploydocs(; repo, versions=["stable" => "v^", "dev" => "dev"])
 end
