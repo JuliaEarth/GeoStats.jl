@@ -234,7 +234,7 @@ grid = CartesianGrid(100, 100)
 
 model = Kriging(GaussianVariogram(range=35.))
 
-interp = geotable |> Interpolate(grid, "Z" => model)
+interp = geotable |> Interpolate(grid, model)
 
 viz(interp.geometry, color = interp.Z)
 ```

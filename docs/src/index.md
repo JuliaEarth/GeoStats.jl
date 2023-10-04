@@ -97,7 +97,7 @@ grid = CartesianGrid(100, 100)
 model = Kriging(GaussianVariogram(range=35.))
 
 # perform interpolation over grid
-interp = geotable |> Interpolate(grid, "Z" => model)
+interp = geotable |> Interpolate(grid, model)
 
 # visualize the solution
 viz(interp.geometry, color = interp.Z)
@@ -131,6 +131,7 @@ The project is split into various packages:
 | [PointPatterns.jl](https://github.com/JuliaEarth/PointPatterns.jl) | Geospatial point pattern analysis and synthesis. |
 | [DensityRatioEstimation.jl](https://github.com/JuliaML/DensityRatioEstimation.jl) | High-performance density ratio estimation. |
 | [LossFunctions.jl](https://github.com/JuliaML/LossFunctions.jl) | Loss functions for (geo)statistical learning. |
+| [StatsLearnModels.jl](https://github.com/JuliaML/StatsLearnModels.jl) | Statistical learning models for geospatial prediction. |
 | [GeoStatsModels.jl](https://github.com/JuliaEarth/GeoStatsModels.jl) | Geostatistical models for geospatial interpolation. |
 | [GeoStatsTransforms.jl](https://github.com/JuliaEarth/GeoStatsTransforms.jl) | Geostatistical transforms for geospatial data. |
 | [GeoStatsSolvers.jl](https://github.com/JuliaEarth/GeoStatsSolvers.jl) | Built-in geostatistical solvers. |

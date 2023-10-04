@@ -30,6 +30,7 @@ using Reexport
 @reexport using GeoStatsBase
 @reexport using Variography
 @reexport using PointPatterns
+@reexport using StatsLearnModels
 @reexport using GeoStatsModels
 @reexport using GeoStatsTransforms
 @reexport using GeoStatsSolvers

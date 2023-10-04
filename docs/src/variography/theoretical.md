@@ -237,7 +237,7 @@ for (i, θ) in enumerate(θs)
   grid = CartesianGrid(100, 100)
 
   # perform interpolation
-  sol = geotable |> Interpolate(grid, "Z" => Kriging(γ), maxneighbors=nrow(geotable))
+  sol = geotable |> Interpolate(grid, Kriging(γ))
 
   # visualize solution at subplot i
   viz(fig[pos(i)...], sol.geometry, color = sol.Z,
