@@ -104,6 +104,7 @@ This project would not be possible without the contributions of:
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/luschiro"><img src="https://avatars.githubusercontent.com/u/56177321?v=4?s=100" width="100px;" alt="Lucas R. Schiavetti"/><br /><sub><b>Lucas R. Schiavetti</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/issues?q=author%3Aluschiro" title="Bug reports">🐛</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://ehgus.github.io/"><img src="https://avatars.githubusercontent.com/u/18534737?v=4?s=100" width="100px;" alt="Lee, Dohyeon"/><br /><sub><b>Lee, Dohyeon</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=ehgus" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/Jay-sanjay"><img src="https://avatars.githubusercontent.com/u/134289328?v=4?s=100" width="100px;" alt="Jay-sanjay"/><br /><sub><b>Jay-sanjay</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=Jay-sanjay" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/remann2"><img src="https://avatars.githubusercontent.com/u/139355838?v=4?s=100" width="100px;" alt="Steve"/><br /><sub><b>Steve</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=remann2" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>
