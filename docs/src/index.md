@@ -35,6 +35,19 @@ Organizations using the framework:
 Would like to become a sponsor? Press the sponsor button in our
 [GitHub repository](https://github.com/JuliaEarth/GeoStats.jl).
 
+### Textbooks
+
+The following textbooks can be useful to learn the framework.
+Click on the cover to learn more.
+
+```@raw html
+<p align="center">
+  <a href="https://juliaearth.github.io/geospatial-data-science-with-julia">
+    <img src="https://juliaearth.github.io/geospatial-data-science-with-julia/images/cover.svg" width="200px" hspace="20">
+  </a>
+</p>
+```
+
 ## Overview
 
 ```@example overview

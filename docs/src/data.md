@@ -32,7 +32,6 @@ name of any region in the world.
 ```@docs
 GeoIO.load
 GeoIO.save
-GeoIO.gadm
 ```
 
 ## Examples
