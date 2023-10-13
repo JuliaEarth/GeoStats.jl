@@ -9,6 +9,7 @@ using GeoStats
 using Tables
 using Makie: cgrad
 using Makie.Colors: Colorant, Gray
+using Unitful: AbstractQuantity
 
 import Makie
 import Meshes: ascolors, defaultscheme

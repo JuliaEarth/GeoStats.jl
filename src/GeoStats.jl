@@ -16,8 +16,9 @@ using Reexport
 
 # reexport project modules
 @reexport using Dates
-@reexport using Unitful
 @reexport using Meshes
+@reexport using Unitful
+@reexport using SciTypes
 @reexport using GeoTables
 @reexport using Distances
 @reexport using Rotations
@@ -25,7 +26,6 @@ using Reexport
 @reexport using LossFunctions
 @reexport using CategoricalArrays
 @reexport using DensityRatioEstimation
-@reexport using ScientificTypes
 @reexport using TableTransforms
 @reexport using GeoStatsBase
 @reexport using Variography

@@ -13,7 +13,7 @@ function viewer(data::AbstractGeoTable; kwargs...)
   # list of viewable variables
   viewable = filter(vars) do var
     vals = Tables.getcolumn(cols, var)
-    isviewable(nonmissingtype(elscitype(vals)))
+    isviewable(elscitype(vals))
   end
 
   # throw error if there are no viewable variables
@@ -61,19 +61,16 @@ function viewer(data::AbstractGeoTable; kwargs...)
   fig
 end
 
-defaultlimits(vals) = defaultlimits(vals, nonmissingtype(elscitype(vals)))
-defaultlimits(vals, ::Type) = asfloat.(extrema(skipmissing(vals)))
-defaultlimits(vals, ::Type{<:Finite}) = asfloat.((0, length(levels(vals))))
+defaultlimits(vals) = asfloat.(extrema(skipmissing(vals)))
+defaultlimits(vals::CategoricalArray) = asfloat.((0, length(levels(vals))))
 
-defaultticks(vals) = defaultticks(vals, nonmissingtype(elscitype(vals)))
-defaultticks(vals, ::Type) = range(defaultlimits(vals)..., 5)
-defaultticks(vals, ::Type{<:Finite}) = 0:length(levels(vals))
+defaultticks(vals) = range(defaultlimits(vals)..., 5)
+defaultticks(vals::CategoricalArray) = 0:length(levels(vals))
 
-defaultformat(vals) = defaultformat(vals, nonmissingtype(elscitype(vals)))
-defaultformat(vals, ::Type{<:Finite}) = ticks -> map(t -> asstring(t, levels(vals)), ticks)
-function defaultformat(vals, ::Type)
+defaultformat(vals::CategoricalArray) = ticks -> map(t -> asstring(t, levels(vals)), ticks)
+function defaultformat(vals)
   T = nonmissingtype(eltype(vals))
-  if T <: Quantity
+  if T <: AbstractQuantity
     u = unit(T)
     ticks -> map(t -> string(round(t, digits=2), " ", u), ticks)
   else
@@ -81,12 +78,12 @@ function defaultformat(vals, ::Type)
   end
 end
 
-asvalues(x) = asvalues(x, nonmissingtype(eltype(x)))
-asvalues(x, ::Type) = x
-asvalues(x, ::Type{<:Colorant}) = map(c -> Float64(Gray(c)), x)
+asvalues(x) = asvalues(nonmissingtype(eltype(x)), x)
+asvalues(::Type, x) = x
+asvalues(::Type{<:Colorant}, x) = map(c -> Float64(Gray(c)), x)
 
 asfloat(x) = float(x)
-asfloat(x::Quantity) = float(ustrip(x))
+asfloat(x::AbstractQuantity) = float(ustrip(x))
 
 function asstring(tick, levels)
   i = trunc(Int, tick)
@@ -94,6 +91,6 @@ function asstring(tick, levels)
 end
 
 isviewable(::Type) = false
-isviewable(::Type{<:Finite}) = true
-isviewable(::Type{<:Infinite}) = true
-isviewable(::Type{<:Unknown}) = true
+isviewable(::Type{SciTypes.Unknown}) = true
+isviewable(::Type{SciTypes.Continuous}) = true
+isviewable(::Type{SciTypes.Categorical}) = true
