@@ -6,6 +6,11 @@ We recommend the following educational resources.
 
 ### Textbooks
 
+- *Hoffimann, J. 2023.* [Geospatial Data Science with Julia]
+  (https://juliaearth.github.io/geospatial-data-science-with-julia) -
+  A fresh approach to data science with geospatial data and the Julia
+  programming language.
+
 - *Isaaks, E. and Srivastava, R. 1990.* [An Introduction to Applied Geostatistics]
   (https://www.amazon.com.br/Introduction-Applied-Geostatistics-Edward-Isaaks/dp/0195050134) -
   An introductory book on geostatistics that covers important concepts with very
