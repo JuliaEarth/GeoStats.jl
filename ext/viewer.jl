@@ -26,9 +26,9 @@ function viewer(data::AbstractGeoTable; kwargs...)
   end
 
   # initialize figure and menu
-  fig   = Makie.Figure()
-  label = Makie.Label(fig[1,1], "Variable")
-  menu  = Makie.Menu(fig[1,2], options = collect(viewable))
+  fig = Makie.Figure()
+  label = Makie.Label(fig[1, 1], "Variable")
+  menu = Makie.Menu(fig[1, 2], options=collect(viewable))
 
   # select first viewable variable
   var = first(viewable)
@@ -46,8 +46,8 @@ function viewer(data::AbstractGeoTable; kwargs...)
   format[] = defaultformat(vals[])
 
   # initialize visualization
-  Makie.plot(fig[2,:], dom; color=vals, kwargs...)
-  Makie.Colorbar(fig[2,3], colormap=cmap, limits=lims, ticks=ticks, tickformat=format)
+  Makie.plot(fig[2, :], dom; color=vals, kwargs...)
+  Makie.Colorbar(fig[2, 3], colormap=cmap, limits=lims, ticks=ticks, tickformat=format)
 
   # update visualization if necessary
   Makie.on(menu.selection) do var
