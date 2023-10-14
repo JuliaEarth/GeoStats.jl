@@ -4,5 +4,4 @@
 
 Makie.plottype(::EmpiricalHistogram) = Makie.Hist
 
-Makie.convert_arguments(P::Type{<:Makie.Hist}, h::EmpiricalHistogram)  =
-  Makie.convert_arguments(P, h.hist)
+Makie.convert_arguments(P::Type{<:Makie.Hist}, h::EmpiricalHistogram) = Makie.convert_arguments(P, h.hist)

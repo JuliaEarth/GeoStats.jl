@@ -47,29 +47,18 @@ function Makie.plot!(plot::VarioPlot{<:Tuple{EmpiricalVariogram}})
 
   # visualize frequencies as bars
   if plot[:hshow][]
-    f = Makie.@lift $n*(maximum($y) / maximum($n)) / 10
-    Makie.barplot!(plot, x, f,
-      color = plot[:hcolor],
-      alpha = 0.3,
-      gap   = 0.0,
-    )
+    f = Makie.@lift $n * (maximum($y) / maximum($n)) / 10
+    Makie.barplot!(plot, x, f, color=plot[:hcolor], alpha=0.3, gap=0.0)
   end
 
   # visualize variogram
-  Makie.scatterlines!(plot, x, y,
-    color = plot[:vcolor],
-    markersize = plot[:psize],
-    linewidth  = plot[:ssize]
-  )
+  Makie.scatterlines!(plot, x, y, color=plot[:vcolor], markersize=plot[:psize], linewidth=plot[:ssize])
 
   # visualize text counts
   if plot[:tshow][]
     bincounts = Makie.@lift string.($n)
     positions = Makie.@lift collect(zip($x, $y))
-    Makie.text!(plot, bincounts,
-      position = positions,
-      fontsize = plot[:tsize],
-    )
+    Makie.text!(plot, bincounts, position=positions, fontsize=plot[:tsize])
   end
 end
 
@@ -100,7 +89,7 @@ function Makie.plot!(plot::VarioPlot{<:Tuple{EmpiricalVarioplane}})
       # handle NaN values (i.e. empty bins)
       isnan(zs[1]) && (zs[1] = 0)
       for i in 2:length(zs)
-        isnan(zs[i]) && (zs[i] = zs[i-1])
+        isnan(zs[i]) && (zs[i] = zs[i - 1])
       end
 
       zs
@@ -109,27 +98,24 @@ function Makie.plot!(plot::VarioPlot{<:Tuple{EmpiricalVarioplane}})
   end
 
   # exploit symmetry
-  θs = Makie.@lift range(0, 2π, length=2*length($θs))
-  Z  = Makie.@lift [$Z $Z]
+  θs = Makie.@lift range(0, 2π, length=2 * length($θs))
+  Z = Makie.@lift [$Z $Z]
 
   # hide hole at center
   rs = Makie.@lift [0; $rs]
-  Z  = Makie.@lift [$Z[1:1,:]; $Z]
+  Z = Makie.@lift [$Z[1:1, :]; $Z]
 
   # transpose for plotting
-  Z  = Makie.@lift transpose($Z)
+  Z = Makie.@lift transpose($Z)
 
-  Makie.surface!(plot, θs, rs, Z,
-    colormap = plot[:vscheme],
-    shading = false
-  )
+  Makie.surface!(plot, θs, rs, Z, colormap=plot[:vscheme], shading=false)
 
   # show model range
   if rshow[]
     ls = Makie.@lift [range(fit($rmodel, γ)) for γ in $γs]
     ls = Makie.@lift [$ls; $ls]
     zs = Makie.@lift fill(maximum($Z) + 1, length($ls))
-    Makie.lines!(plot, θs, ls, zs, color = plot[:rcolor])
+    Makie.lines!(plot, θs, ls, zs, color=plot[:rcolor])
   end
 end
 
@@ -158,11 +144,9 @@ function Makie.plot!(plot::VarioPlot{<:Tuple{Variogram}})
   y = Makie.@lift $γ.($x)
 
   # visualize variogram
-  Makie.lines!(plot, x, y,
-    color = plot[:vcolor],
-  )
+  Makie.lines!(plot, x, y, color=plot[:vcolor])
 end
 
-_maxlag(γ::Variogram)      = 3range(γ)
+_maxlag(γ::Variogram) = 3range(γ)
 _maxlag(γ::PowerVariogram) = 3.0
-_maxlag(γ::NuggetEffect)   = 3.0
+_maxlag(γ::NuggetEffect) = 3.0

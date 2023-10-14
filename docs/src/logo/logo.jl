@@ -1,7 +1,7 @@
 using Luxor, Contour, Images
 
 function geostats(s)
-  Δ = s/500 # scale factor, original design was 500units
+  Δ = s / 500 # scale factor, original design was 500units
   circle(O, 245Δ, :clip)
   sethue("white")
   circle(O, 245Δ, :fill)
@@ -12,8 +12,8 @@ function geostats(s)
   img = imresize(i, ratio=1.75)
   H, W = size(img)
   imgg = imfilter(img, Kernel.gaussian(15))
-  x = -W/2.0:W/2.0 - 1  # W elements
-  y = -H/2.0:H/2.0 - 1  # H elements
+  x = (-W / 2.0):(W / 2.0 - 1)  # W elements
+  y = (-H / 2.0):(H / 2.0 - 1)  # H elements
   z = Float64.(Gray.(imgg))
   # just two contours required
   clevels = Contour.contourlevels(z, 2)
@@ -31,7 +31,7 @@ function geostats(s)
         poly(pgon, :stroke)
 
         # optional coloring?
-        setgray([.6, .8][n])
+        setgray([0.6, 0.8][n])
         poly(pgon, :fill, close=true)
       end
     end
@@ -72,7 +72,7 @@ function logotext(w, h, fname)
     sethue("black")
     # find all fonts available on Linux with `fc-list | -f 2 -d ":"`
     fontface("Julius Sans One")
-    fontsize(h/2.5)
+    fontsize(h / 2.5)
     text("GeoStats.jl", halign=:center, valign=:middle)
   end
   @layer begin
@@ -84,6 +84,6 @@ function logotext(w, h, fname)
 end
 
 for ext in [".svg", ".png"]
-  logo(120, "../assets/logo"*ext)
-  logotext(350, 100, "../assets/logo-text"*ext)
+  logo(120, "../assets/logo" * ext)
+  logotext(350, 100, "../assets/logo-text" * ext)
 end
