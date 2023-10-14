@@ -1,0 +1,10 @@
+indent = 2
+margin = 120
+always_for_in = true
+always_use_return = false
+whitespace_typedefs = false
+whitespace_in_kwargs = false
+whitespace_ops_in_indices = true
+remove_extra_newlines = true
+trailing_comma = false
+normalize_line_endings = "unix"
