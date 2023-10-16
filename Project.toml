@@ -27,12 +27,6 @@ Tables = "bd369af6-aec1-5ad0-b16a-f7cc5008161c"
 Unitful = "1986cc42-f94f-5a68-af5c-568840ba703d"
 Variography = "04a0146e-e6df-5636-8d7f-62fa9eb0b20c"
 
-[weakdeps]
-Makie = "ee78f7c6-11fb-53f2-987a-cfe4a2b5a57a"
-
-[extensions]
-GeoStatsMakieExt = "Makie"
-
 [compat]
 CategoricalArrays = "0.10"
 Chain = "0.5"
@@ -41,7 +35,7 @@ Distances = "0.10"
 GeoStatsBase = "0.38"
 GeoStatsModels = "0.1"
 GeoStatsSolvers = "0.7"
-GeoStatsTransforms = "0.1"
+GeoStatsTransforms = "0.1, 0.2"
 GeoTables = "1.8"
 LossFunctions = "0.11"
 Makie = "0.19.10"
@@ -56,3 +50,9 @@ Tables = "1.10"
 Unitful = "1.15"
 Variography = "0.19"
 julia = "1.9"
+
+[extensions]
+GeoStatsMakieExt = "Makie"
+
+[weakdeps]
+Makie = "ee78f7c6-11fb-53f2-987a-cfe4a2b5a57a"
