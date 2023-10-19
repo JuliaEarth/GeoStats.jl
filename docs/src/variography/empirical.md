@@ -68,9 +68,9 @@ merge(::EmpiricalVariogram{V,D,E}, ::EmpiricalVariogram{V,D,E}) where {V,D,E}
 Consider the following example image:
 
 ```@example empirical
-using GeoStatsImages
+using GeoArtifacts
 
-𝒟 = geostatsimage("Gaussian30x10")
+𝒟 = GeoArtifacts.geostatsimage("Gaussian30x10")
 
 viz(𝒟.geometry, color = 𝒟.Z)
 ```
