@@ -13,7 +13,7 @@ A geostatistical workflow often consists of four steps:
 
 In this section, we walk through these steps to illustrate some of the 
 features of the project. In the case of geostatistical modeling, 
-we will specifically explore the geostatistical learning models. 
+we will specifically explore geostatistical learning models. 
 If you prefer learning from video, check out
 the recording of our JuliaEO2023 workshop:
 
@@ -251,7 +251,7 @@ file, and inspect the available columns:
 using CSV
 using DataFrames
 
-table = CSV.read("data/agriculture.csv", DataFrame)
+table = CSV.File("data/agriculture.csv") |> DataFrame
 
 first(table, 5)
 ```
