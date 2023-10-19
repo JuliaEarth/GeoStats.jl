@@ -79,7 +79,7 @@ function defaultformat(vals)
 end
 
 asvalues(x) = asvalues(nonmissingtype(eltype(x)), x)
-asvalues(::Type, x) = elscitype(x) <: DST.Categorical ? ascateg(x) : x
+asvalues(::Type, x) = elscitype(x) <: Categorical ? ascateg(x) : x
 asvalues(::Type{<:Colorant}, x) = map(c -> ismissing(c) ? missing : Float64(Gray(c)), x)
 
 ascateg(x) = categorical(x)
@@ -96,6 +96,6 @@ end
 asstring(x) = sprint(print, x; context=:compact => true)
 
 isviewable(::Type) = false
-isviewable(::Type{DST.Categorical}) = true
-isviewable(::Type{DST.Continuous}) = true
-isviewable(::Type{DST.Unknown}) = true
+isviewable(::Type{Categorical}) = true
+isviewable(::Type{Continuous}) = true
+isviewable(::Type{Unknown}) = true
