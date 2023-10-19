@@ -248,14 +248,15 @@ file, and inspect the available columns:
 
 ```@example quickstart
 using CSV
+using DataFrames
 
-csv = CSV.File("data/agriculture.csv")
+table = CSV.read("data/agriculture.csv", DataFrame)
 ```
 
 Columns `band1`, `band2`, ..., `band4` represent four satellite bands
-for different locations `(x,y)` in this region. The column `crop` has
+for different locations `(x, y)` in this region. The column `crop` has
 the crop type for each location that was labeled manually with the
-purpose of training a learning model.
+purpose of fitting a learning model.
 
 We can now georeference the table and plot some of the variables:
 
@@ -287,9 +288,9 @@ and the domain of the "test" (or target) set Ωt in gray. We reserved
 `geosplit` function is implemented in terms of efficient geospatial
 partitions.
 
-Let's define and train the geostatistical learning model.
+Let's define and fit the geostatistical learning model.
 We want to predict the crop type based on the four satellite bands.
-We will train the model in Ωs where the features and labels are available.
+We will fit the model in Ωs where the features and labels are available.
 And we will use the `DecisionTreeClassifier` model, which is suitable for the task we want to perform.
 
 ```@example quickstart
@@ -301,7 +302,7 @@ model = DecisionTreeClassifier()
 lmodel = Learn(Ωs, model, feats => label)
 ```
 
-When we define our geostatistical learning model using the `Learn` transform, it is automatically trained.
+When we define our geostatistical learning model using the `Learn` transform, it is automatically fitted.
 
 GeoStats.jl uses the [StatsLeanModels.jl](https://github.com/JuliaML/StatsLearnModels.jl) package 
 to fit models created by the Julia Language Community, including all models wrapped by the 
@@ -313,7 +314,7 @@ Now, let's use the learned model to predict the labels using our test set:
 Ω̂t = lmodel(Ωt)
 ```
 
-## Visualizing the model prediction
+## Visualizing predictions
 
 We note that the prediction of a geostatistical learning model is a
 geospatial data object, and we can inspect it with the same methods
