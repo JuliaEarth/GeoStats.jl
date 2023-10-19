@@ -9,11 +9,12 @@ A geostatistical workflow often consists of four steps:
 
 1. Creation of geospatial data
 2. Manipulation of geospatial data
-3. Definition of geostatistical problem
-4. Visualization of problem solution
+3. Geostatistical modeling
 
-In this section, we walk through these steps to illustrate some of the
-features of the project. If you prefer learning from video, check out
+In this section, we walk through these steps to illustrate some of the 
+features of the project. In the case of geostatistical modeling, 
+we will specifically explore the geostatistical learning models. 
+If you prefer learning from video, check out
 the recording of our JuliaEO2023 workshop:
 
 ```@raw html
@@ -251,6 +252,8 @@ using CSV
 using DataFrames
 
 table = CSV.read("data/agriculture.csv", DataFrame)
+
+first(table, 5)
 ```
 
 Columns `band1`, `band2`, ..., `band4` represent four satellite bands
