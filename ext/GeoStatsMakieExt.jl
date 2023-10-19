@@ -9,6 +9,10 @@ using GeoStats
 using Tables
 using Makie: cgrad
 using Makie.Colors: Colorant, Gray
+using Unitful: AbstractQuantity
+using DataScienceTraits: Continuous
+using DataScienceTraits: Categorical
+using DataScienceTraits: Unknown
 
 import Makie
 import Meshes: ascolors, defaultscheme

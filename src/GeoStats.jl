@@ -25,7 +25,7 @@ using Reexport
 @reexport using LossFunctions
 @reexport using CategoricalArrays
 @reexport using DensityRatioEstimation
-@reexport using ScientificTypes
+@reexport using DataScienceTraits
 @reexport using TableTransforms
 @reexport using GeoStatsBase
 @reexport using Variography
