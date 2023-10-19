@@ -236,11 +236,10 @@ These are very useful for geospatial data science as they hide the complexity
 of the `geometry` column. For more information, check the [Queries](queries.md)
 section of the documentation.
 
-## Defining problems
+## Geostatistical learning
 
 Having defined the geospatial data objects, we proceed and define the
-geostatistical problem to be solved. In this guide, we illustrate
-*geostatistical learning*. For other types of geostatistical problems,
+geostatistical learning model to be fitted. For other types of geostatistical problems,
 please check the [Problems](problems.md) section of the documentation.
 
 Let's assume that we have geopatial data with some variable that we want
@@ -256,15 +255,7 @@ csv = CSV.File("data/agriculture.csv")
 Columns `band1`, `band2`, ..., `band4` represent four satellite bands
 for different locations `(x,y)` in this region. The column `crop` has
 the crop type for each location that was labeled manually with the
-purpose of training a learning model. Because the labels are categorical
-variables, we need to inform the framework the correct scientific type from
-[ScientificTypes.jl](https://github.com/JuliaAI/ScientificTypes.jl):
-
-```@example quickstart
-table = csv |> Coerce(:crop => Multiclass)
-
-first(table.crop, 5)
-```
+purpose of training a learning model.
 
 We can now georeference the table and plot some of the variables:
 
@@ -296,48 +287,38 @@ and the domain of the "test" (or target) set Ωt in gray. We reserved
 `geosplit` function is implemented in terms of efficient geospatial
 partitions.
 
-Let's define the learning task and the geostatistical learning problem.
+Let's define and train the geostatistical learning model.
 We want to predict the crop type based on the four satellite bands.
-We will train the model in Ωs where labels are available, and apply it
-to Ωt, which is our target:
+We will train the model in Ωs where the features and labels are available.
+And we will use the `DecisionTreeClassifier` model, which is suitable for the task we want to perform.
 
 ```@example quickstart
-feats = [:band1,:band2,:band3,:band4]
+feats = [:band1, :band2, :band3, :band4]
 label = :crop
 
-𝒯 = ClassificationTask(feats, label)
+model = DecisionTreeClassifier()
 
-𝒫 = LearningProblem(Ωs, Ωt, 𝒯)
+lmodel = Learn(Ωs, model, feats => label)
 ```
 
-GeoStats.jl is integrated with the
-[MLJ.jl](https://github.com/alan-turing-institute/MLJ.jl)
-project, which means that we can solve geostatistical learning problems
-with more than 200 classical learning models, including all models
-from [ScitkitLearn.jl](https://github.com/cstjean/ScikitLearn.jl):
+When we define our geostatistical learning model using the `Learn` transform, it is automatically trained.
+
+GeoStats.jl uses the [StatsLeanModels.jl](https://github.com/JuliaML/StatsLearnModels.jl) package 
+to fit models created by the Julia Language Community, including all models wrapped by the 
+[MLJ.jl](https://github.com/alan-turing-institute/MLJ.jl) project.
+
+Now, let's use the learned model to predict the labels using our test set:
 
 ```@example quickstart
-using MLJ
-
-ℳ = MLJ.@load DecisionTreeClassifier pkg=DecisionTree
-
-ℒ = PointwiseLearn(ℳ())
+Ω̂t = lmodel(Ωt)
 ```
 
-In this example, we selected a [`PointwiseLearn`](@ref) strategy to solve
-the geostatistical learning problem. This strategy consists of applying
-the learning model pointwise for every location in the geospatial data:
+## Visualizing the model prediction
 
-```@example quickstart
-Ω̂t = solve(𝒫, ℒ)
-```
-
-## Visualizing solutions
-
-We note that the solution to a geostatistical learning problem is a
+We note that the prediction of a geostatistical learning model is a
 geospatial data object, and we can inspect it with the same methods
 already described above. This also means that we can visualize the
-solution directly, side by side with the true label in this synthetic
+prediction directly, side by side with the true label in this synthetic
 example:
 
 ```@example quickstart
