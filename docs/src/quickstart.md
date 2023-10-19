@@ -305,11 +305,10 @@ model = DecisionTreeClassifier()
 lmodel = Learn(Ωs, model, feats => label)
 ```
 
-When we define our geostatistical learning model using the `Learn` transform, it is automatically fitted.
+The `Learn` transform automatically fits the model to the data that is passed to it.
 
-GeoStats.jl uses the [StatsLeanModels.jl](https://github.com/JuliaML/StatsLearnModels.jl) package 
-to fit models created by the Julia Language Community, including all models wrapped by the 
-[MLJ.jl](https://github.com/alan-turing-institute/MLJ.jl) project.
+Any model from the [StatsLeanModels.jl](https://github.com/JuliaML/StatsLearnModels.jl) 
+model is supported, including all models from [MLJ.jl](https://github.com/alan-turing-institute/MLJ.jl).
 
 Now, let's use the learned model to predict the labels using our test set:
 
