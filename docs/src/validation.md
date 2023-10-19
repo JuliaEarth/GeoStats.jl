@@ -21,7 +21,7 @@ using GeoStats
 using CSV
 
 # load geospatial data
-data = georef(CSV.File("data/agriculture.csv"), (:x, :y))
+Ω = georef(CSV.File("data/agriculture.csv"), (:x, :y))
 
 # 20%/80% split along the (1, -1) direction
 Ωₛ, Ωₜ = geosplit(Ω, 0.2, (1.0, -1.0))
