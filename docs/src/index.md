@@ -156,7 +156,7 @@ Other packages can be installed separately for additional functionality:
 |:-------:|:------------|
 | [GeoIO.jl](https://github.com/JuliaEarth/GeoIO.jl) | Load/save geospatial tables in various formats. |
 | [DrillHoles.jl](https://github.com/JuliaEarth/DrillHoles.jl) | Desurvey/composite drillhole data. |
-| [GeoArtifacts.jl.jl](https://github.com/JuliaEarth/GeoArtifacts.jl.jl) | Artifacts for Geospatial Data Science. |
+| [GeoArtifacts.jl](https://github.com/JuliaEarth/GeoArtifacts.jl) | Artifacts for Geospatial Data Science. |
 
 Besides the packages above, the project can be extended with [solver packages](solvers/overview.md).
 
