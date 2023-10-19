@@ -93,7 +93,7 @@ function asstring(tick, levels)
   isassigned(levels, i) ? asstring(levels[i]) : ""
 end
 
-asstring(tick) = sprint(print, tick; context=:compact => true)
+asstring(x) = sprint(print, x; context=:compact => true)
 
 isviewable(::Type) = false
 isviewable(::Type{DST.Categorical}) = true
