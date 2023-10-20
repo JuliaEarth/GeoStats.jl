@@ -149,6 +149,10 @@ The project is split into various packages:
 | [GeoStatsTransforms.jl](https://github.com/JuliaEarth/GeoStatsTransforms.jl) | Geostatistical transforms for geospatial data. |
 | [GeoStatsSolvers.jl](https://github.com/JuliaEarth/GeoStatsSolvers.jl) | Built-in geostatistical solvers. |
 | [GeoStatsBase.jl](https://github.com/JuliaEarth/GeoStatsBase.jl) | Base package with core definitions. |
+| [DataScienceTraits.jl](https://github.com/JuliaML/DataScienceTraits.jl) | Traits for data science. |
+| [Unitful.jl](https://github.com/PainterQubits/Unitful.jl) | Physical quantities with arbitrary units. |
+| [CategoricalArrays.jl](https://github.com/JuliaData/CategoricalArrays.jl) | Categorical data types. |
+| [CoDa.jl](https://github.com/JuliaEarth/CoDa.jl) | Compositional data types. |
 
 Other packages can be installed separately for additional functionality:
 
