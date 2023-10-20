@@ -23,7 +23,6 @@ using TransformsBase
 
 # packages with transforms
 using GeoStats
-using CoDa
 
 # define the tree of types
 AbstractTrees.children(T::Type) = subtypes(T)
@@ -65,10 +64,8 @@ TransformsBase.reapply
 
 Please check the [TableTransforms.jl](https://github.com/JuliaML/TableTransforms.jl)
 documentation for an updated list of feature transforms.
-The [CoDa.jl](https://github.com/JuliaEarth/CoDa.jl) package
-also provides transforms for compositional features. As an
-example consider the following features over a Cartesian grid
-and their statistics:
+As an example consider the following features over a 
+Cartesian grid and their statistics:
 
 ```@example transforms
 using DataFrames

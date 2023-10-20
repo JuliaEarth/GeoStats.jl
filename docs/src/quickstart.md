@@ -240,12 +240,9 @@ section of the documentation.
 ## Geostatistical modeling
 
 Having defined the geospatial data objects, we proceed and define the
-geostatistical learning model. For other types of geostatistical problems,
-please check the [Problems](problems.md) section of the documentation.
-
-Let's assume that we have geopatial data with some variable that we want
-to predict in a supervised learning setting. We load the data from a CSV
-file, and inspect the available columns:
+geostatistical learning model. Let's assume that we have geopatial data 
+with some variable that we want to predict in a supervised learning setting. 
+We load the data from a CSV file, and inspect the available columns:
 
 ```@example quickstart
 using CSV
@@ -291,30 +288,31 @@ and the domain of the "test" (or target) set Ωt in gray. We reserved
 `geosplit` function is implemented in terms of efficient geospatial
 partitions.
 
-Let's define and fit the geostatistical learning model.
-We want to predict the crop type based on the four satellite bands.
-We will fit the model in Ωs where the features and labels are available.
-And we will use the `DecisionTreeClassifier` model, which is suitable for
-the task we want to perform.
+Let's define our geostatistical learning model to predict the crop type
+based on the four satellite bands. We will use the `DecisionTreeClassifier` 
+model, which is suitable for the task we want to perform.
+Any model from the [StatsLeanModels.jl](https://github.com/JuliaML/StatsLearnModels.jl) 
+model is supported, including all models from [MLJ.jl](https://github.com/alan-turing-institute/MLJ.jl):
 
 ```@example quickstart
 feats = [:band1, :band2, :band3, :band4]
 label = :crop
 
 model = DecisionTreeClassifier()
-
-lmodel = Learn(Ωs, model, feats => label)
 ```
 
-The `Learn` transform automatically fits the model to the data.
-
-Any model from the [StatsLeanModels.jl](https://github.com/JuliaML/StatsLearnModels.jl) 
-model is supported, including all models from [MLJ.jl](https://github.com/alan-turing-institute/MLJ.jl).
-
-Now, let's use the learned model to predict the labels using our test set:
+We will fit the model in Ωs where the features and labels are available 
+and predict in Ωt where the features are available. The `Learn` transform
+automatically fits the model to the data:
 
 ```@example quickstart
-Ω̂t = lmodel(Ωt)
+learn = Learn(Ωs, model, feats => label)
+```
+
+The transform can be called with new data to generate predictions:
+
+```@example quickstart
+Ω̂t = learn(Ωt)
 ```
 
 ## Visualizing predictions
@@ -331,12 +329,6 @@ viz(fig[1,1], Ω̂t.geometry, color = Ω̂t.crop, pointsize = 2)
 viz(fig[1,2], Ωt.geometry, color = Ωt.crop, pointsize = 2)
 fig
 ```
-
-Visually, it seems that the learning model is predicting the crop type.
-We can also estimate the generalization error of the geostatistical solver
-with [geostatistical validation methods](validation.md) such as block
-cross-validation and leave-ball-out, but these methods deserve
-a separate tutorial.
 
 With this example we conclude the basic workflow. To get familiar with
 other features of the project, please check the the reference guide.
