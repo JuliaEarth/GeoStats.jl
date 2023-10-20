@@ -237,10 +237,10 @@ These are very useful for geospatial data science as they hide the complexity
 of the `geometry` column. For more information, check the [Queries](queries.md)
 section of the documentation.
 
-## Geostatistical learning
+## Geostatistical modeling
 
 Having defined the geospatial data objects, we proceed and define the
-geostatistical learning model to be fitted. For other types of geostatistical problems,
+geostatistical learning model. For other types of geostatistical problems,
 please check the [Problems](problems.md) section of the documentation.
 
 Let's assume that we have geopatial data with some variable that we want
@@ -294,7 +294,8 @@ partitions.
 Let's define and fit the geostatistical learning model.
 We want to predict the crop type based on the four satellite bands.
 We will fit the model in Ωs where the features and labels are available.
-And we will use the `DecisionTreeClassifier` model, which is suitable for the task we want to perform.
+And we will use the `DecisionTreeClassifier` model, which is suitable for
+the task we want to perform.
 
 ```@example quickstart
 feats = [:band1, :band2, :band3, :band4]
@@ -305,7 +306,7 @@ model = DecisionTreeClassifier()
 lmodel = Learn(Ωs, model, feats => label)
 ```
 
-The `Learn` transform automatically fits the model to the data that is passed to it.
+The `Learn` transform automatically fits the model to the data.
 
 Any model from the [StatsLeanModels.jl](https://github.com/JuliaML/StatsLearnModels.jl) 
 model is supported, including all models from [MLJ.jl](https://github.com/alan-turing-institute/MLJ.jl).
