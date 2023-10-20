@@ -21,10 +21,7 @@ using GeoStats
 using CSV
 
 # load geospatial data
-data = georef(CSV.File("data/agriculture.csv"), (:x, :y))
-
-# adjust scientific type of "crop" column
-Ω = data |> Coerce(:crop => Multiclass)
+Ω = georef(CSV.File("data/agriculture.csv"), (:x, :y))
 
 # 20%/80% split along the (1, -1) direction
 Ωₛ, Ωₜ = geosplit(Ω, 0.2, (1.0, -1.0))
@@ -43,13 +40,11 @@ label = :crop
 Second, we define the learning solver:
 
 ```@example error
-using MLJ
-
-# load learning model
-ℳ = MLJ.@load DecisionTreeClassifier pkg=DecisionTree
+# learning model
+model = DecisionTreeClassifier()
 	
 # learning strategy
-𝒮 = PointwiseLearn(ℳ())
+𝒮 = PointwiseLearn(model)
 ```
 
 Finally, we define the validation method and estimate the error:

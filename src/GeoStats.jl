@@ -15,6 +15,7 @@ end GeoStats
 using Reexport
 
 # reexport project modules
+@reexport using CoDa
 @reexport using Dates
 @reexport using Unitful
 @reexport using Meshes

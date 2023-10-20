@@ -93,11 +93,3 @@ algorithms for two supervised learning tasks:
 RegressionTask
 ClassificationTask
 ```
-
-These tasks can be learned and performed with geospatial data using any learning model
-from the [MLJ.jl](https://github.com/alan-turing-institute/MLJ.jl) project:
-
-```@docs
-learn(::LearningTask, ::AbstractGeoTable, ::Any)
-perform(::LearningTask, ::AbstractGeoTable, ::Any)
-```

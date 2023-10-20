@@ -9,11 +9,12 @@ A geostatistical workflow often consists of four steps:
 
 1. Creation of geospatial data
 2. Manipulation of geospatial data
-3. Definition of geostatistical problem
-4. Visualization of problem solution
+3. Geostatistical modeling
 
-In this section, we walk through these steps to illustrate some of the
-features of the project. If you prefer learning from video, check out
+In this section, we walk through these steps to illustrate some of the 
+features of the project. In the case of geostatistical modeling, 
+we will specifically explore geostatistical learning models. 
+If you prefer learning from video, check out
 the recording of our JuliaEO2023 workshop:
 
 ```@raw html
@@ -236,35 +237,26 @@ These are very useful for geospatial data science as they hide the complexity
 of the `geometry` column. For more information, check the [Queries](queries.md)
 section of the documentation.
 
-## Defining problems
+## Geostatistical modeling
 
 Having defined the geospatial data objects, we proceed and define the
-geostatistical problem to be solved. In this guide, we illustrate
-*geostatistical learning*. For other types of geostatistical problems,
-please check the [Problems](problems.md) section of the documentation.
-
-Let's assume that we have geopatial data with some variable that we want
-to predict in a supervised learning setting. We load the data from a CSV
-file, and inspect the available columns:
+geostatistical learning model. Let's assume that we have geopatial data 
+with some variable that we want to predict in a supervised learning setting. 
+We load the data from a CSV file, and inspect the available columns:
 
 ```@example quickstart
 using CSV
+using DataFrames
 
-csv = CSV.File("data/agriculture.csv")
+table = CSV.File("data/agriculture.csv") |> DataFrame
+
+first(table, 5)
 ```
 
 Columns `band1`, `band2`, ..., `band4` represent four satellite bands
-for different locations `(x,y)` in this region. The column `crop` has
+for different locations `(x, y)` in this region. The column `crop` has
 the crop type for each location that was labeled manually with the
-purpose of training a learning model. Because the labels are categorical
-variables, we need to inform the framework the correct scientific type from
-[ScientificTypes.jl](https://github.com/JuliaAI/ScientificTypes.jl):
-
-```@example quickstart
-table = csv |> Coerce(:crop => Multiclass)
-
-first(table.crop, 5)
-```
+purpose of fitting a learning model.
 
 We can now georeference the table and plot some of the variables:
 
@@ -296,48 +288,39 @@ and the domain of the "test" (or target) set Ωt in gray. We reserved
 `geosplit` function is implemented in terms of efficient geospatial
 partitions.
 
-Let's define the learning task and the geostatistical learning problem.
-We want to predict the crop type based on the four satellite bands.
-We will train the model in Ωs where labels are available, and apply it
-to Ωt, which is our target:
+Let's define our geostatistical learning model to predict the crop type
+based on the four satellite bands. We will use the `DecisionTreeClassifier` 
+model, which is suitable for the task we want to perform.
+Any model from the [StatsLeanModels.jl](https://github.com/JuliaML/StatsLearnModels.jl) 
+model is supported, including all models from [MLJ.jl](https://github.com/alan-turing-institute/MLJ.jl):
 
 ```@example quickstart
-feats = [:band1,:band2,:band3,:band4]
+feats = [:band1, :band2, :band3, :band4]
 label = :crop
 
-𝒯 = ClassificationTask(feats, label)
-
-𝒫 = LearningProblem(Ωs, Ωt, 𝒯)
+model = DecisionTreeClassifier()
 ```
 
-GeoStats.jl is integrated with the
-[MLJ.jl](https://github.com/alan-turing-institute/MLJ.jl)
-project, which means that we can solve geostatistical learning problems
-with more than 200 classical learning models, including all models
-from [ScitkitLearn.jl](https://github.com/cstjean/ScikitLearn.jl):
+We will fit the model in Ωs where the features and labels are available 
+and predict in Ωt where the features are available. The `Learn` transform
+automatically fits the model to the data:
 
 ```@example quickstart
-using MLJ
-
-ℳ = MLJ.@load DecisionTreeClassifier pkg=DecisionTree
-
-ℒ = PointwiseLearn(ℳ())
+learn = Learn(Ωs, model, feats => label)
 ```
 
-In this example, we selected a [`PointwiseLearn`](@ref) strategy to solve
-the geostatistical learning problem. This strategy consists of applying
-the learning model pointwise for every location in the geospatial data:
+The transform can be called with new data to generate predictions:
 
 ```@example quickstart
-Ω̂t = solve(𝒫, ℒ)
+Ω̂t = learn(Ωt)
 ```
 
-## Visualizing solutions
+## Visualizing predictions
 
-We note that the solution to a geostatistical learning problem is a
+We note that the prediction of a geostatistical learning model is a
 geospatial data object, and we can inspect it with the same methods
 already described above. This also means that we can visualize the
-solution directly, side by side with the true label in this synthetic
+prediction directly, side by side with the true label in this synthetic
 example:
 
 ```@example quickstart
@@ -346,12 +329,6 @@ viz(fig[1,1], Ω̂t.geometry, color = Ω̂t.crop, pointsize = 2)
 viz(fig[1,2], Ωt.geometry, color = Ωt.crop, pointsize = 2)
 fig
 ```
-
-Visually, it seems that the learning model is predicting the crop type.
-We can also estimate the generalization error of the geostatistical solver
-with [geostatistical validation methods](validation.md) such as block
-cross-validation and leave-ball-out, but these methods deserve
-a separate tutorial.
 
 With this example we conclude the basic workflow. To get familiar with
 other features of the project, please check the the reference guide.

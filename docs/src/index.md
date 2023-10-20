@@ -139,16 +139,18 @@ The project is split into various packages:
 | [GeoStats.jl](https://github.com/JuliaEarth/GeoStats.jl) | Main package reexporting full stack of packages for geostatistics. |
 | [Meshes.jl](https://github.com/JuliaGeometry/Meshes.jl) | Computational geometry and advanced meshing algorithms. |
 | [GeoTables.jl](https://github.com/JuliaEarth/GeoTables.jl) | Geospatial tables compatible with the framework. |
+| [DataScienceTraits.jl](https://github.com/JuliaML/DataScienceTraits.jl) | Traits for geospatial data science. |
 | [TableTransforms.jl](https://github.com/JuliaML/TableTransforms.jl) | Transforms and pipelines with tabular data. |
+| [StatsLearnModels.jl](https://github.com/JuliaML/StatsLearnModels.jl) | Statistical learning models for geospatial prediction. |
 | [Variography.jl](https://github.com/JuliaEarth/Variography.jl) | Variogram estimation and modeling, and related tools. |
 | [PointPatterns.jl](https://github.com/JuliaEarth/PointPatterns.jl) | Geospatial point pattern analysis and synthesis. |
-| [DensityRatioEstimation.jl](https://github.com/JuliaML/DensityRatioEstimation.jl) | High-performance density ratio estimation. |
-| [LossFunctions.jl](https://github.com/JuliaML/LossFunctions.jl) | Loss functions for (geo)statistical learning. |
-| [StatsLearnModels.jl](https://github.com/JuliaML/StatsLearnModels.jl) | Statistical learning models for geospatial prediction. |
 | [GeoStatsModels.jl](https://github.com/JuliaEarth/GeoStatsModels.jl) | Geostatistical models for geospatial interpolation. |
 | [GeoStatsTransforms.jl](https://github.com/JuliaEarth/GeoStatsTransforms.jl) | Geostatistical transforms for geospatial data. |
 | [GeoStatsSolvers.jl](https://github.com/JuliaEarth/GeoStatsSolvers.jl) | Built-in geostatistical solvers. |
 | [GeoStatsBase.jl](https://github.com/JuliaEarth/GeoStatsBase.jl) | Base package with core definitions. |
+| [Unitful.jl](https://github.com/PainterQubits/Unitful.jl) | Physical quantities with arbitrary units. |
+| [CategoricalArrays.jl](https://github.com/JuliaData/CategoricalArrays.jl) | Categorical data types. |
+| [CoDa.jl](https://github.com/JuliaEarth/CoDa.jl) | Compositional data types. |
 
 Other packages can be installed separately for additional functionality:
 
@@ -156,7 +158,7 @@ Other packages can be installed separately for additional functionality:
 |:-------:|:------------|
 | [GeoIO.jl](https://github.com/JuliaEarth/GeoIO.jl) | Load/save geospatial tables in various formats. |
 | [DrillHoles.jl](https://github.com/JuliaEarth/DrillHoles.jl) | Desurvey/composite drillhole data. |
-| [GeoStatsImages.jl](https://github.com/JuliaEarth/GeoStatsImages.jl) | Training images for multiple-point simulation. |
+| [GeoArtifacts.jl](https://github.com/JuliaEarth/GeoArtifacts.jl) | Artifacts for Geospatial Data Science. |
 
 Besides the packages above, the project can be extended with [solver packages](solvers/overview.md).
 
