@@ -88,9 +88,9 @@ in which one has the freedom to customize spatial structure based
 on data. Besides the estimate itself, Kriging also provides the
 variance map as a function of point patterns.
 
-### MLJ.jl
+### ScikitLearn.jl
 
-[MLJ.jl](https://github.com/alan-turing-institute/MLJ.jl) -
+[ScikitLearn.jl](https://github.com/cstjean/ScikitLearn.jl) -
 Traditional statistical learning relies on core assumptions that do
 **not** hold in geospatial settings (fixed support, i.i.d. samples, ...).
 [Geostatistical learning](https://www.frontiersin.org/articles/10.3389/fams.2021.689393/full)

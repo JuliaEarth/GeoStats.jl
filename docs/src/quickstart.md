@@ -292,7 +292,7 @@ Let's define our geostatistical learning model to predict the crop type
 based on the four satellite bands. We will use the `DecisionTreeClassifier` 
 model, which is suitable for the task we want to perform.
 Any model from the [StatsLeanModels.jl](https://github.com/JuliaML/StatsLearnModels.jl) 
-model is supported, including all models from [MLJ.jl](https://github.com/alan-turing-institute/MLJ.jl):
+model is supported, including all models from [ScikitLearn.jl](https://github.com/cstjean/ScikitLearn.jl):
 
 ```@example quickstart
 feats = [:band1, :band2, :band3, :band4]
