@@ -17,7 +17,7 @@ The union or (superposition) of two point processes creates a
 union process:
 
 ```@docs
-Base.union(::PointProcess, ::PointProcess)
+Base.union(::GeoStatsProcesses.PointProcess, ::GeoStatsProcesses.PointProcess)
 ```
 
 ```@example pointops

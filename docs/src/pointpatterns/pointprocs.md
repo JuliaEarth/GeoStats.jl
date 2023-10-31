@@ -13,7 +13,7 @@ different geometries and domains documented in
 [Meshes.jl](https://github.com/JuliaGeometry/Meshes.jl).
 
 ```@docs
-Base.rand(::AbstractRNG, ::PointProcess, ::Any, ::Int)
+Base.rand(::AbstractRNG, ::GeoStatsProcesses.PointProcess, ::Any, ::Int)
 ```
 
 For example, we can simulate a homogeneous Poisson process
