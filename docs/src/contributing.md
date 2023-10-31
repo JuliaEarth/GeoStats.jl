@@ -1,4 +1,4 @@
-# Guidelines
+# Contributing
 
 First off, thank you for considering contributing to GeoStats.jl.
 It’s people like you that make this project so much fun.

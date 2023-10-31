@@ -71,7 +71,7 @@ makedocs(
       "Miscellaneous" => "miscellaneous.md",
       "Visualization" => "visualization.md"
     ],
-    "Contributing" => ["contributing/guidelines.md", "contributing/solvers.md"],
+    "Contributing" => "contributing.md",
     "Resources" => ["resources/education.md", "resources/publications.md", "resources/ecosystem.md"],
     "About" => ["Community" => "about/community.md", "License" => "about/license.md", "Citing" => "about/citing.md"],
     "Index" => "links.md"

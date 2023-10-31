@@ -142,15 +142,12 @@ The project is split into various packages:
 | [DataScienceTraits.jl](https://github.com/JuliaML/DataScienceTraits.jl) | Traits for geospatial data science. |
 | [TableTransforms.jl](https://github.com/JuliaML/TableTransforms.jl) | Transforms and pipelines with tabular data. |
 | [StatsLearnModels.jl](https://github.com/JuliaML/StatsLearnModels.jl) | Statistical learning models for geospatial prediction. |
+| [GeoStatsBase.jl](https://github.com/JuliaEarth/GeoStatsBase.jl) | Base package with core geostatistical definitions. |
 | [Variography.jl](https://github.com/JuliaEarth/Variography.jl) | Variogram estimation and modeling, and related tools. |
-| [PointPatterns.jl](https://github.com/JuliaEarth/PointPatterns.jl) | Geospatial point pattern analysis and synthesis. |
 | [GeoStatsModels.jl](https://github.com/JuliaEarth/GeoStatsModels.jl) | Geostatistical models for geospatial interpolation. |
+| [GeoStatsProcesses.jl](https://github.com/JuliaEarth/GeoStatsProcesses.jl) | Geostatistical processes for geospatial simulation. |
 | [GeoStatsTransforms.jl](https://github.com/JuliaEarth/GeoStatsTransforms.jl) | Geostatistical transforms for geospatial data. |
 | [GeoStatsSolvers.jl](https://github.com/JuliaEarth/GeoStatsSolvers.jl) | Built-in geostatistical solvers. |
-| [GeoStatsBase.jl](https://github.com/JuliaEarth/GeoStatsBase.jl) | Base package with core definitions. |
-| [Unitful.jl](https://github.com/PainterQubits/Unitful.jl) | Physical quantities with arbitrary units. |
-| [CategoricalArrays.jl](https://github.com/JuliaData/CategoricalArrays.jl) | Categorical data types. |
-| [CoDa.jl](https://github.com/JuliaEarth/CoDa.jl) | Compositional data types. |
 
 Other packages can be installed separately for additional functionality:
 

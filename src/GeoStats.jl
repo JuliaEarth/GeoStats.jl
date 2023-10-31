@@ -28,11 +28,11 @@ using Reexport
 @reexport using DensityRatioEstimation
 @reexport using DataScienceTraits
 @reexport using TableTransforms
+@reexport using StatsLearnModels
 @reexport using GeoStatsBase
 @reexport using Variography
-@reexport using PointPatterns
-@reexport using StatsLearnModels
 @reexport using GeoStatsModels
+@reexport using GeoStatsProcesses
 @reexport using GeoStatsTransforms
 @reexport using GeoStatsSolvers
 @reexport using Chain: @chain
