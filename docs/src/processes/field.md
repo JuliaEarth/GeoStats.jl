@@ -12,6 +12,56 @@ import WGLMakie as Mke # hide
 Base.rand(::GeoStatsProcesses.FieldProcess, ::Domain, ::Any, ::Any)
 ```
 
+Realizations are stored in an [`Ensemble`](@ref) as illustrated in
+the following example:
+
+```@docs
+Ensemble
+```
+
+```@example fieldprocs
+# domain of interest
+grid = CartesianGrid(100, 100)
+
+# Gaussian process
+proc = GaussianProcess(GaussianVariogram(range=30.0))
+
+# unconditional simulation
+real = rand(proc, grid, [:Z => Float64], 100)
+```
+
+We can visualize the first two realizations:
+
+```@example fieldprocs
+fig = Mke.Figure(resolution = (800, 400))
+viz(fig[1,1], real[1].geometry, color = real[1].Z)
+viz(fig[1,2], real[2].geometry, color = real[2].Z)
+fig
+```
+
+the mean and variance:
+
+```@example fieldprocs
+m, v = mean(real), var(real)
+
+fig = Mke.Figure(resolution = (800, 400))
+viz(fig[1,1], m.geometry, color = m.Z)
+viz(fig[1,2], v.geometry, color = v.Z)
+fig
+```
+
+or the 25th and 75th percentiles:
+
+```@example fieldprocs
+q25 = quantile(real, 0.25)
+q75 = quantile(real, 0.75)
+
+fig = Mke.Figure(resolution = (800, 400))
+viz(fig[1,1], q25.geometry, color = q25.Z)
+viz(fig[1,2], q75.geometry, color = q75.Z)
+fig
+```
+
 All field processes can generate realizations in parallel
 using multiple Julia processes. Doing so requires using the
 [Distributed](https://docs.julialang.org/en/v1/stdlib/Distributed/)
@@ -61,7 +111,7 @@ grid = CartesianGrid(100, 100)
 # Gaussian process
 proc = GaussianProcess(GaussianVariogram(range=30.0))
 
-# unconditionatl simulation
+# unconditional simulation
 real = rand(proc, grid, [:Z => Float64], 2)
 
 fig = Mke.Figure(resolution = (800, 400))
