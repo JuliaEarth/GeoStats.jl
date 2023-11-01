@@ -152,7 +152,7 @@ for i in 1:nx, j in 1:ny
   end
 end
 
-process = QuiltingProcess(trainimg, (30, 30))
+process = QuiltingProcess(trainimg, (30, 30), inactive = circle)
 
 real = rand(process, grid, [:facies => Float64], 2)
 
