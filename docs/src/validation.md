@@ -13,8 +13,8 @@ error(::Any, ::Any, ::ErrorEstimationMethod)
 ```
 
 For example, we can perform block cross-validation in a geostatistical learning problem
-to estimate the generalization error of the [`PointwiseLearn`](@ref) solver. First, we
-define the problem:
+to estimate the generalization error of the `PointwiseLearn` solver. First, we define
+the problem:
 
 ```@example error
 using GeoStats

@@ -235,3 +235,29 @@ interp = geotable |> Interpolate(grid, model)
 
 viz(interp.geometry, color = interp.Z)
 ```
+
+### Simulate
+
+```@docs
+Simulate
+```
+
+### Learn
+
+```@docs
+Learn
+```
+
+For more details, consider watching our JuliaCon2021 talk:
+
+```@raw html
+<p align="center">
+<iframe style="width:560px;height:315px" src="https://www.youtube.com/embed/75A6zyn5pIE" title="Geostatistical Learning" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</p>
+```
+
+### CookieCutter
+
+```@docs
+CookieCutter
+```
