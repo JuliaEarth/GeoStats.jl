@@ -64,8 +64,6 @@ makedocs(
       "Kriging" => "kriging.md",
       "Processes" => ["processes/point.md", "processes/field.md"],
       "Validation" => "validation.md",
-      "Weighting" => "weighting.md",
-      "Miscellaneous" => "miscellaneous.md",
       "Visualization" => "visualization.md"
     ],
     "Contributing" => "contributing.md",
