@@ -141,7 +141,6 @@ with the mask. This is particularly useful with complex 3D models that
 have large inactive portions.
 
 ```@example fieldprocs
-trainimg = GeoArtifacts.geostatsimage("Strebelle")
 grid = domain(trainimg)
 
 # skip circle at the center
