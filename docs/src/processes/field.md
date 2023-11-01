@@ -94,7 +94,7 @@ using ImageQuilting
 using GeoArtifacts
 
 grid = CartesianGrid(200, 200)
-trainimg = GeoArtifacts.geostatsimage("Strebelle")
+trainimg = GeoArtifacts.image("Strebelle")
 process = QuiltingProcess(trainimg, (62, 62))
 
 real = rand(process, grid, [:facies => Int], 2)
@@ -107,7 +107,7 @@ fig
 
 ```@example fieldprocs
 grid = CartesianGrid(200, 200)
-trainimg = GeoArtifacts.geostatsimage("StoneWall")
+trainimg = GeoArtifacts.image("StoneWall")
 process = QuiltingProcess(trainimg, (13, 13))
 
 real = rand(process, grid, [:Z => Int], 2)
@@ -119,7 +119,7 @@ fig
 ```
 
 ```@example fieldprocs
-trainimg = GeoArtifacts.geostatsimage("Strebelle")
+trainimg = GeoArtifacts.image("Strebelle")
 observed = trainimg |> Sample(20, replace=false)
 
 process = QuiltingProcess(trainimg, (30, 30))
@@ -171,10 +171,10 @@ selection of patterns from the training image.
 using ImageFiltering
 
 # image assumed as ground truth (unknown)
-truthimg = GeoArtifacts.geostatsimage("WalkerLakeTruth")
+truthimg = GeoArtifacts.image("WalkerLakeTruth")
 
 # training image with similar patterns
-trainimg = GeoArtifacts.geostatsimage("WalkerLake")
+trainimg = GeoArtifacts.image("WalkerLake")
 
 # forward model (blur filter)
 function forward(data)

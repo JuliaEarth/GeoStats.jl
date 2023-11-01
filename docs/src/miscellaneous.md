@@ -19,7 +19,7 @@ geosplit
 ```@example misc
 using GeoArtifacts
 
-𝒟 = GeoArtifacts.geostatsimage("Strebelle")
+𝒟 = GeoArtifacts.image("Strebelle")
 
 # 50/50 split perpendicular to (1.,1.)
 Π = geosplit(𝒟, 0.5, (1.0, 1.0))
