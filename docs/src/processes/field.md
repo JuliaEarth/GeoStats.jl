@@ -234,7 +234,7 @@ proc = SmoothingProcess()
 ΔT = ExponentialDuration(1.0)
 env = Environment([proc, proc], [0.5 0.5; 0.5 0.5], ΔT)
 grid = CartesianGrid(50, 50, 20)
-real = rand(StrataProcess(env), grid, [:z => Float64], 3)
+real = rand(StrataProcess(env), grid, [:z => Float64], 2)
 
 fig = Mke.Figure(resolution = (800, 400))
 viz(fig[1,1], real[1].geometry, color = real[1].z)
