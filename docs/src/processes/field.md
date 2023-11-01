@@ -210,6 +210,7 @@ TuringProcess
 using TuringPatterns
 
 grid = CartesianGrid(200, 200)
+
 real = rand(TuringProcess(), grid, [:z => Float64], 2)
 
 fig = Mke.Figure(resolution = (800, 400))
