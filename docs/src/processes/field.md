@@ -90,6 +90,7 @@ QuiltingProcess
 ##### Basic Examples
 
 ```@example fieldprocs
+using ImageQuilting
 using GeoArtifacts
 
 grid = CartesianGrid(200, 200)
@@ -207,6 +208,8 @@ TuringProcess
 ##### Example
 
 ```@example fieldprocs
+using TuringPatterns
+
 grid = CartesianGrid(200, 200)
 real = rand(TuringProcess(), grid, [:z => Float64], 2)
 
