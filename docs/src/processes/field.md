@@ -19,7 +19,7 @@ Base.rand(::GeoStatsProcesses.FieldProcess, ::Domain, ::Any, ::Any)
 grid = CartesianGrid(100, 100)
 
 # Gaussian process
-proc = GaussianProcess(variogram=GaussianVariogram(range=30.0))
+proc = GaussianProcess(GaussianVariogram(range=30.0))
 
 # request two realizations of variable z
 real = rand(proc, grid, [:z => Float64], 2)
@@ -92,12 +92,11 @@ QuiltingProcess
 ```@example fieldprocs
 using GeoArtifacts
 
-sdomain = CartesianGrid(200, 200)
+grid = CartesianGrid(200, 200)
 trainimg = GeoArtifacts.geostatsimage("Strebelle")
-tilesize = (62, 62)
-process = QuiltingProcess(trainimg, tilesize)
+process = QuiltingProcess(trainimg, (62, 62))
 
-real = rand(process, sdomain, [:facies => Int], 2)
+real = rand(process, grid, [:facies => Int], 2)
 
 fig = Mke.Figure(resolution = (800, 400))
 viz(fig[1,1], real[1].geometry, color = real[1].facies)
@@ -106,16 +105,15 @@ fig
 ```
 
 ```@example fieldprocs
-sdomain = CartesianGrid(200, 200)
+grid = CartesianGrid(200, 200)
 trainimg = GeoArtifacts.geostatsimage("StoneWall")
-tilesize = (13, 13)
-process = QuiltingProcess(trainimg, tilesize)
+process = QuiltingProcess(trainimg, (13, 13))
 
-real = rand(process, sdomain, [:z => Int], 2)
+real = rand(process, grid, [:Z => Int], 2)
 
 fig = Mke.Figure(resolution = (800, 400))
-viz(fig[1,1], real[1].geometry, color = real[1].z)
-viz(fig[1,2], real[2].geometry, color = real[2].z)
+viz(fig[1,1], real[1].geometry, color = real[1].Z)
+viz(fig[1,2], real[2].geometry, color = real[2].Z)
 fig
 ```
 
@@ -123,11 +121,9 @@ fig
 trainimg = GeoArtifacts.geostatsimage("Strebelle")
 observed = trainimg |> Sample(20, replace=false)
 
-sdomain = domain(trainimg)
-tilesize = (30, 30)
-process = QuiltingProcess(trainimg, tilesize)
+process = QuiltingProcess(trainimg, (30, 30))
 
-real = rand(process, sdomain, observed, 2)
+real = rand(process, domain(trainimg), observed, 2)
 
 fig = Mke.Figure(resolution = (800, 400))
 viz(fig[1,1], real[1].geometry, color = real[1].facies)
@@ -145,9 +141,10 @@ have large inactive portions.
 
 ```@example fieldprocs
 trainimg = GeoArtifacts.geostatsimage("Strebelle")
+grid = domain(trainimg)
 
 # skip circle at the center
-nx, ny = size(domain(trainimg))
+nx, ny = size(grid)
 r = 100; circle = []
 for i in 1:nx, j in 1:ny
   if (i-nx÷2)^2 + (j-ny÷2)^2 < r^2
@@ -155,11 +152,9 @@ for i in 1:nx, j in 1:ny
   end
 end
 
-sdomain = domain(trainimg)
-tilesize = (30, 30)
-process = QuiltingProcess(trainimg, tilesize)
+process = QuiltingProcess(trainimg, (30, 30))
 
-real = rand(process, sdomain, [:facies => Float64], 2)
+real = rand(process, grid, [:facies => Float64], 2)
 
 fig = Mke.Figure(resolution = (800, 400))
 viz(fig[1,1], real[1].geometry, color = real[1].facies)
@@ -186,23 +181,20 @@ function forward(data)
   img = asarray(data, :Z)
   krn = KernelFactors.IIRGaussian([10,10])
   fwd = imfilter(img, krn)
-  georef((; fwd), domain(data))
+  georef((; fwd=vec(fwd)), domain(data))
 end
 
 # apply forward model to both images
 data   = forward(truthimg)
 dataTI = forward(trainimg)
 
-sdomain = domain(truthimg)
-tilesize = (27, 27)
-soft = (data, dataTI)
-process = QuiltingProcess(trainimg, tilesize; soft)
+process = QuiltingProcess(trainimg, (27, 27), soft=(data, dataTI))
 
-real = rand(process, sdomain, [:z => Float64], 2)
+real = rand(process, domain(truthimg), [:Z => Float64], 2)
 
 fig = Mke.Figure(resolution = (800, 400))
-viz(fig[1,1], real[1].geometry, color = real[1].z)
-viz(fig[1,2], real[2].geometry, color = real[2].z)
+viz(fig[1,1], real[1].geometry, color = real[1].Z)
+viz(fig[1,2], real[2].geometry, color = real[2].Z)
 fig
 ```
 
@@ -215,8 +207,8 @@ TuringProcess
 ##### Example
 
 ```@example fieldprocs
-sdomain = CartesianGrid(200, 200)
-real = rand(TuringProcess(), sdomain, [:z => Float64], 2)
+grid = CartesianGrid(200, 200)
+real = rand(TuringProcess(), grid, [:z => Float64], 2)
 
 fig = Mke.Figure(resolution = (800, 400))
 viz(fig[1,1], real[1].geometry, color = real[1].z)
@@ -233,11 +225,13 @@ StrataProcess
 ##### Example
 
 ```@example fieldprocs
+using StratiGraphics
+
 proc = SmoothingProcess()
 ΔT = ExponentialDuration(1.0)
 env = Environment([proc, proc], [0.5 0.5; 0.5 0.5], ΔT)
-sdomain = CartesianGrid(50, 50, 20)
-real = rand(StrataProcess(env), sdomain, [:z => Float64], 3)
+grid = CartesianGrid(50, 50, 20)
+real = rand(StrataProcess(env), grid, [:z => Float64], 3)
 
 fig = Mke.Figure(resolution = (800, 400))
 viz(fig[1,1], real[1].geometry, color = real[1].z)
