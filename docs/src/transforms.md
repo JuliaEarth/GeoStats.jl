@@ -101,6 +101,21 @@ transformed sample space:
 describe(values(Ωₒ))
 ```
 
+The `Learn` transform is another important transform from
+[StatsLearnModels.jl](https://github.com/JuliaML/StatsLearnModels.jl):
+
+```@docs
+Learn
+```
+
+For more details, consider watching our JuliaCon2021 talk:
+
+```@raw html
+<p align="center">
+<iframe style="width:560px;height:315px" src="https://www.youtube.com/embed/75A6zyn5pIE" title="Geostatistical Learning" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</p>
+```
+
 ## Geometric transforms
 
 Please check the [Meshes.jl](https://github.com/JuliaGeometry/Meshes.jl)
@@ -240,20 +255,6 @@ viz(interp.geometry, color = interp.Z)
 
 ```@docs
 Simulate
-```
-
-### Learn
-
-```@docs
-Learn
-```
-
-For more details, consider watching our JuliaCon2021 talk:
-
-```@raw html
-<p align="center">
-<iframe style="width:560px;height:315px" src="https://www.youtube.com/embed/75A6zyn5pIE" title="Geostatistical Learning" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-</p>
 ```
 
 ### CookieCutter
