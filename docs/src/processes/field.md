@@ -8,29 +8,9 @@ using GeoStats # hide
 import WGLMakie as Mke # hide
 ```
 
-## Overview
-
 ```@docs
 Base.rand(::GeoStatsProcesses.FieldProcess, ::Domain, ::Any, ::Any)
 ```
-
-```@example fieldprocs
-# domain of interest
-grid = CartesianGrid(100, 100)
-
-# Gaussian process
-proc = GaussianProcess(GaussianVariogram(range=30.0))
-
-# request two realizations of variable z
-real = rand(proc, grid, [:z => Float64], 2)
-
-fig = Mke.Figure(resolution = (800, 400))
-viz(fig[1,1], real[1].geometry, color = real[1].z)
-viz(fig[1,2], real[2].geometry, color = real[2].z)
-fig
-```
-
-### Distributed computing
 
 All field processes can generate realizations in parallel
 using multiple Julia processes. Doing so requires using the
@@ -57,47 +37,66 @@ grid = CartesianGrid(100, 100)
 proc = GaussianProcess(GaussianVariogram(range=30.0))
 
 # generate three realizations with three processes
-real = rand(proc, grid, [:z => Float64], 3, pool = workers())
+real = rand(proc, grid, [:Z => Float64], 3, pool = workers())
 ```
 
 Please consult
 [The ultimate guide to distributed computing in Julia](https://github.com/Arpeggeo/julia-distributed-computing/tree/master).
 
-## Types
-
-### Builtin
+## Builtin
 
 The following processes are shipped with the framework.
 
 ```@docs
 GaussianProcess
+LUMethod
+FFTMethod
+SEQMethod
+```
+
+```@example fieldprocs
+# domain of interest
+grid = CartesianGrid(100, 100)
+
+# Gaussian process
+proc = GaussianProcess(GaussianVariogram(range=30.0))
+
+# unconditionatl simulation
+real = rand(proc, grid, [:Z => Float64], 2)
+
+fig = Mke.Figure(resolution = (800, 400))
+viz(fig[1,1], real[1].geometry, color = real[1].Z)
+viz(fig[1,2], real[2].geometry, color = real[2].Z)
+fig
 ```
 
 ```@docs
 LindgrenProcess
 ```
 
-### External
+## External
 
 The following processes are available in external packages.
 
-#### ImageQuilting.jl
+### ImageQuilting.jl
 
 ```@docs
 QuiltingProcess
 ```
 
-##### Basic Examples
-
 ```@example fieldprocs
 using ImageQuilting
 using GeoArtifacts
 
+# domain of interest
 grid = CartesianGrid(200, 200)
-trainimg = GeoArtifacts.image("Strebelle")
-process = QuiltingProcess(trainimg, (62, 62))
 
-real = rand(process, grid, [:facies => Int], 2)
+# quilting process
+img  = GeoArtifacts.image("Strebelle")
+proc = QuiltingProcess(img, (62, 62))
+
+# unconditional simulation
+real = rand(proc, grid, [:facies => Int], 2)
 
 fig = Mke.Figure(resolution = (800, 400))
 viz(fig[1,1], real[1].geometry, color = real[1].facies)
@@ -106,11 +105,15 @@ fig
 ```
 
 ```@example fieldprocs
+# domain of interest
 grid = CartesianGrid(200, 200)
-trainimg = GeoArtifacts.image("StoneWall")
-process = QuiltingProcess(trainimg, (13, 13))
 
-real = rand(process, grid, [:Z => Int], 2)
+# quilting process
+img  = GeoArtifacts.image("StoneWall")
+proc = QuiltingProcess(img, (13, 13))
+
+# unconditional simulation
+real = rand(proc, grid, [:Z => Int], 2)
 
 fig = Mke.Figure(resolution = (800, 400))
 viz(fig[1,1], real[1].geometry, color = real[1].Z)
@@ -119,20 +122,24 @@ fig
 ```
 
 ```@example fieldprocs
-trainimg = GeoArtifacts.image("Strebelle")
-observed = trainimg |> Sample(20, replace=false)
+# domain of interest
+grid = domain(img)
 
-process = QuiltingProcess(trainimg, (30, 30))
+# pre-existing observations
+img  = GeoArtifacts.image("Strebelle")
+data = img |> Sample(20, replace=false)
 
-real = rand(process, domain(trainimg), observed, 2)
+# quilting process
+proc = QuiltingProcess(img, (30, 30))
+
+# conditional simulation
+real = rand(proc, grid, data, 2)
 
 fig = Mke.Figure(resolution = (800, 400))
 viz(fig[1,1], real[1].geometry, color = real[1].facies)
 viz(fig[1,2], real[2].geometry, color = real[2].facies)
 fig
 ```
-
-##### Masked grids
 
 Voxels marked with the special symbol `NaN` are treated as inactive.
 The algorithm will skip tiles that only contain inactive voxels to 
@@ -141,7 +148,8 @@ with the mask. This is particularly useful with complex 3D models that
 have large inactive portions.
 
 ```@example fieldprocs
-grid = domain(trainimg)
+# domain of interest
+grid = domain(img)
 
 # skip circle at the center
 nx, ny = size(grid)
@@ -152,17 +160,17 @@ for i in 1:nx, j in 1:ny
   end
 end
 
-process = QuiltingProcess(trainimg, (62, 62), inactive = circle)
+# quilting process
+proc = QuiltingProcess(img, (62, 62), inactive = circle)
 
-real = rand(process, grid, [:facies => Float64], 2)
+# unconditional simulation
+real = rand(proc, grid, [:facies => Float64], 2)
 
 fig = Mke.Figure(resolution = (800, 400))
 viz(fig[1,1], real[1].geometry, color = real[1].facies)
 viz(fig[1,2], real[2].geometry, color = real[2].facies)
 fig
 ```
-
-##### Soft data
 
 It is possible to incorporate auxiliary variables to guide the 
 selection of patterns from the training image.
@@ -171,10 +179,10 @@ selection of patterns from the training image.
 using ImageFiltering
 
 # image assumed as ground truth (unknown)
-truthimg = GeoArtifacts.image("WalkerLakeTruth")
+truth = GeoArtifacts.image("WalkerLakeTruth")
 
 # training image with similar patterns
-trainimg = GeoArtifacts.image("WalkerLake")
+img = GeoArtifacts.image("WalkerLake")
 
 # forward model (blur filter)
 function forward(data)
@@ -185,12 +193,12 @@ function forward(data)
 end
 
 # apply forward model to both images
-data   = forward(truthimg)
-dataTI = forward(trainimg)
+data   = forward(truth)
+dataTI = forward(img)
 
-process = QuiltingProcess(trainimg, (27, 27), soft=(data, dataTI))
+proc = QuiltingProcess(img, (27, 27), soft=(data, dataTI))
 
-real = rand(process, domain(truthimg), [:Z => Float64], 2)
+real = rand(proc, domain(truth), [:Z => Float64], 2)
 
 fig = Mke.Figure(resolution = (800, 400))
 viz(fig[1,1], real[1].geometry, color = real[1].Z)
@@ -198,19 +206,19 @@ viz(fig[1,2], real[2].geometry, color = real[2].Z)
 fig
 ```
 
-#### TuringPatterns.jl
+### TuringPatterns.jl
 
 ```@docs
 TuringProcess
 ```
 
-##### Example
-
 ```@example fieldprocs
 using TuringPatterns
 
+# domain of interest
 grid = CartesianGrid(200, 200)
 
+# unconditional simulation
 real = rand(TuringProcess(), grid, [:z => Float64], 2)
 
 fig = Mke.Figure(resolution = (800, 400))
@@ -219,13 +227,11 @@ viz(fig[1,2], real[2].geometry, color = real[2].z)
 fig
 ```
 
-#### StratiGraphics.jl
+### StratiGraphics.jl
 
 ```@docs
 StrataProcess
 ```
-
-##### Example
 
 ```@example fieldprocs
 using StratiGraphics
@@ -240,12 +246,4 @@ fig = Mke.Figure(resolution = (800, 400))
 viz(fig[1,1], real[1].geometry, color = real[1].z)
 viz(fig[1,2], real[2].geometry, color = real[2].z)
 fig
-```
-
-## Methods
-
-```@docs
-LUMethod
-FFTMethod
-SEQMethod
 ```
