@@ -65,7 +65,7 @@ makedocs(
       "Queries" => "queries.md",
       "Variography" => ["variography/empirical.md", "variography/theoretical.md", "variography/fitting.md"],
       "Kriging" => "kriging.md",
-      "Processes" => ["processes/point.md"],
+      "Processes" => ["processes/point.md", "processes/field.md"],
       "Ensembles" => "ensembles.md",
       "Weighting" => "weighting.md",
       "Miscellaneous" => "miscellaneous.md",

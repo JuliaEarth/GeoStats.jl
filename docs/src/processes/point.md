@@ -10,15 +10,9 @@ import WGLMakie as Mke # hide
 
 ## Overview
 
-Point processes can be simulated with the function `rand` on
-different geometries and domains.
-
 ```@docs
-Base.rand(::AbstractRNG, ::GeoStatsProcesses.PointProcess, ::Any, ::Int)
+Base.rand(::GeoStatsProcesses.PointProcess, ::Any)
 ```
-
-For example, we can simulate a homogeneous Poisson process
-with given intensity over the sphere:
 
 ```@example pointprocs
 # geometry of interest
@@ -38,14 +32,11 @@ viz!(fig[1,2], pset[2], color = :black)
 fig
 ```
 
-The homogeneity property of a point process can be checked
-with the [`ishomogeneous`](@ref) function:
-
 ```@docs
 ishomogeneous
 ```
 
-Below is the list of currently implemented point processes.
+## Types
 
 ```@docs
 BinomialProcess
@@ -155,9 +146,6 @@ fig
 
 ## Operations
 
-The union or (superposition) of two point processes creates a
-union process:
-
 ```@docs
 Base.union(::GeoStatsProcesses.PointProcess, ::GeoStatsProcesses.PointProcess)
 ```
@@ -180,10 +168,6 @@ viz(fig[1,2], box)
 viz!(fig[1,2], pset[2], color = :black, pointsize = 3)
 fig
 ```
-
-The [`thin`](@ref) function implements the thinning operation for
-point processes and patterns. Below are the available thinning
-methods.
 
 ```@docs
 thin
