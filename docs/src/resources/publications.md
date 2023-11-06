@@ -2,6 +2,9 @@
 
 Below is a list of publications made possible with this project:
 
+- *Hoffimann, J. 2023.* [Geospatial Data Science with Julia]
+  (https://juliaearth.github.io/geospatial-data-science-with-julia)
+
 - *Gruchalla et al. 2023.* [Reevaluating Contour Visualizations for Power Systems Data]
   (https://www.researchgate.net/publication/368997941_Reevaluating_Contour_Visualizations_for_Power_Systems_Data)
 
