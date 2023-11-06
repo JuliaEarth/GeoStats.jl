@@ -1,10 +1,5 @@
 # Geospatial data
 
-```@example data
-using JSServe: Page # hide
-Page(exportable=true, offline=true) # hide
-```
-
 ## Overview
 
 Given a table or array containing data, we can georeference these objects
@@ -38,7 +33,7 @@ GeoIO.save
 
 ```@example data
 using GeoStats
-import WGLMakie as Mke
+import CairoMakie as Mke
 
 # helper function for plotting two
 # variables named T and P side by side

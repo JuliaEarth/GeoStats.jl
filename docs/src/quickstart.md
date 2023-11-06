@@ -1,10 +1,5 @@
 # Quickstart
 
-```@example quickstart
-using JSServe: Page # hide
-Page(exportable=true, offline=true) # hide
-```
-
 A geostatistical workflow often consists of four steps:
 
 1. Creation of geospatial data
@@ -27,11 +22,11 @@ We assume that the following packages are loaded throughout the code examples:
 
 ```@example quickstart
 using GeoStats
-import WGLMakie as Mke
+import CairoMakie as Mke
 ```
 
 The **GeoStats.jl** package exports the full stack for geospatial data science
-and geostatistical modeling. The **WGLMakie.jl** package is one of the possible
+and geostatistical modeling. The **CairoMakie.jl** package is one of the possible
 visualization backends from the [Makie.jl](https://docs.makie.org/stable)
 project.
 

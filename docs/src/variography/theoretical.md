@@ -1,11 +1,8 @@
 # Theoretical variograms
 
 ```@example variograms
-using JSServe: Page # hide
-Page(exportable=true, offline=true) # hide
-
 using GeoStats # hide
-import WGLMakie as Mke # hide
+import CairoMakie as Mke # hide
 ```
 
 We provide various theoretical variogram models from the literature, which can

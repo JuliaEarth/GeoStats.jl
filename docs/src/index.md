@@ -50,11 +50,6 @@ Click on the cover to learn more.
 
 ## Overview
 
-```@example overview
-using JSServe: Page # hide
-Page(exportable=true, offline=true) # hide
-```
-
 In many fields of science, such as mining engineering, hydrogeology, petroleum
 engineering, and environmental sciences, traditional statistical methods fail
 to provide unbiased estimates of resources due to the presence of geospatial
@@ -92,7 +87,7 @@ Below is a quick preview of the high-level interface:
 ```@example overview
 using GeoStats
 
-import WGLMakie as Mke
+import CairoMakie as Mke
 
 # attribute table
 table = (; Z=[1.,0.,1.])

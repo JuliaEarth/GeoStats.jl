@@ -1,11 +1,8 @@
 # Visualization
 
 ```@example plots
-using JSServe: Page # hide
-Page(exportable=true, offline=true) # hide
-
 using GeoStats # hide
-import WGLMakie as Mke # hide
+import CairoMakie as Mke # hide
 ```
 
 The framework provides powerful visualization recipes for

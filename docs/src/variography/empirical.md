@@ -1,11 +1,8 @@
 # Empirical variograms
 
 ```@example empirical
-using JSServe: Page # hide
-Page(exportable=true, offline=true) # hide
-
 using GeoStats # hide
-import WGLMakie as Mke # hide
+import CairoMakie as Mke # hide
 ```
 
 Variograms are widely used in geostatistics due to their intimate connection

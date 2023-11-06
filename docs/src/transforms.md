@@ -1,11 +1,8 @@
 # Geospatial transforms
 
 ```@example transforms
-using JSServe: Page # hide
-Page(exportable=true, offline=true) # hide
-
 using GeoStats # hide
-import WGLMakie as Mke # hide
+import CairoMakie as Mke # hide
 ```
 
 We provide a very powerful list of transforms that were designed to
