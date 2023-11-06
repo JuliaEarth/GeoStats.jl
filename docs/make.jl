@@ -58,7 +58,6 @@ makedocs(
       "Domains" => "domains.md",
       "Transforms" => "transforms.md",
       "Queries" => "queries.md",
-      "Clustering" => "clustering.md",
       "Declustering" => "declustering.md",
       "Variography" => ["variography/empirical.md", "variography/theoretical.md", "variography/fitting.md"],
       "Kriging" => "kriging.md",

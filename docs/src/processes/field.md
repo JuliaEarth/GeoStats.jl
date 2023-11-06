@@ -286,11 +286,17 @@ StrataProcess
 ```@example fieldprocs
 using StratiGraphics
 
-proc = SmoothingProcess()
-ΔT = ExponentialDuration(1.0)
-env = Environment([proc, proc], [0.5 0.5; 0.5 0.5], ΔT)
+# domain of interest
 grid = CartesianGrid(50, 50, 20)
-real = rand(StrataProcess(env), grid, [:z => Float64], 2)
+
+# stratigraphic environment
+p = SmoothingProcess()
+T = [0.5 0.5; 0.5 0.5]
+Δ = ExponentialDuration(1.0)
+ℰ = Environment([p, p], T, Δ)
+
+# strata simulation
+real = rand(StrataProcess(ℰ), grid, [:z => Float64], 2)
 
 fig = Mke.Figure(resolution = (800, 400))
 viz(fig[1,1], real[1].geometry, color = real[1].z)
