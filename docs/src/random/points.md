@@ -1,11 +1,9 @@
-# Point processes
+# Points
 
 ```@example pointprocs
 using GeoStats # hide
 import CairoMakie as Mke # hide
 ```
-
-## Overview
 
 ```@docs
 Base.rand(::GeoStatsProcesses.PointProcess, ::Any)
@@ -33,7 +31,7 @@ fig
 ishomogeneous
 ```
 
-## Types
+## Processes
 
 ```@docs
 BinomialProcess

@@ -52,6 +52,7 @@ implement the following functions:
 ```@docs
 TransformsBase.isrevertible
 TransformsBase.isinvertible
+TransformsBase.inverse
 TransformsBase.apply
 TransformsBase.revert
 TransformsBase.reapply

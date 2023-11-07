@@ -61,7 +61,7 @@ makedocs(
       "Declustering" => "declustering.md",
       "Variography" => ["variography/empirical.md", "variography/theoretical.md", "variography/fitting.md"],
       "Kriging" => "kriging.md",
-      "Processes" => ["processes/point.md", "processes/field.md"],
+      "Random" => ["random/points.md", "random/fields.md"],
       "Validation" => "validation.md",
       "Visualization" => "visualization.md"
     ],
