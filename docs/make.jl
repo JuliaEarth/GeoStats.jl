@@ -1,8 +1,6 @@
 using Documenter, GeoStats
 using DocumenterTools: Themes
 
-using Random: AbstractRNG
-
 # transforms api
 using TransformsBase
 
