@@ -95,6 +95,7 @@ function viewer(data::AbstractGeoTable; kwargs...)
     else
       if !isnothing(cbar)
         Makie.delete!(cbar)
+        Makie.trim!(fig.layout)
         cbar = nothing
       end
     end
