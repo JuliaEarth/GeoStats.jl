@@ -26,32 +26,22 @@ function viewer(data::AbstractGeoTable; kwargs...)
   end
 
   # constant variables
-  isconst = map(viewable) do var
-    vals = Tables.getcolumn(cols, var)
-    var => allequal(vals)
-  end |> Dict
+  isconst = Dict(var => allequal(Tables.getcolumn(cols, var)) for var in viewable)
 
   # list of menu options
   options = map(viewable) do var
     if isconst[var]
-      vals = Tables.getcolumn(cols, var)
-      v = asstring(first(vals))
-      "$var = $v (constant)"
+      val = Tables.getcolumn(cols, var) |> first |> asstring
+      "$var = $val (constant)"
     else
-      string(var)
+      "$var"
     end
   end |> collect
 
-  # map menu option to corresponding variable
-  optmap = Dict(zip(options, viewable))
-
   # initialize figure and menu
   fig = Makie.Figure()
-  Makie.Label(fig[1, 1], "Variable")
+  label = Makie.Label(fig[1, 1], "Variable")
   menu = Makie.Menu(fig[1, 2], options=options)
-
-  # select first viewable variable
-  var = first(viewable)
 
   # initialize observables
   vals = Makie.Observable{Any}()
@@ -59,37 +49,52 @@ function viewer(data::AbstractGeoTable; kwargs...)
   lims = Makie.Observable{Any}()
   ticks = Makie.Observable{Any}()
   format = Makie.Observable{Any}()
-  vals[] = Tables.getcolumn(cols, var) |> asvalues
 
-  # initialize visualization
-  Makie.plot(fig[2, :], dom; color=vals, kwargs...)
+  function setvals(var)
+    vals[] = Tables.getcolumn(cols, var) |> asvalues
+  end
 
-  # initialize Colorbar if necessary
-  cbar = if !isconst[var]
+  function setdefaults()
     cmap[] = defaultscheme(vals[])
     lims[] = defaultlimits(vals[])
     ticks[] = defaultticks(vals[])
     format[] = defaultformat(vals[])
-    Makie.Colorbar(fig[2, 3], colormap=cmap, limits=lims, ticks=ticks, tickformat=format)
+  end
+
+  colorbar() = Makie.Colorbar(fig[2, 3], colormap=cmap, limits=lims, ticks=ticks, tickformat=format)
+
+  # select first viewable variable
+  var = first(viewable)
+
+  # initialize values for variable
+  setvals(var)
+
+  # initialize visualization
+  Makie.plot(fig[2, 1:2], dom; color=vals, kwargs...)
+
+  # initialize colorbar if necessary
+  cbar = if !isconst[var]
+    setdefaults()
+    colorbar()
   else
     nothing
   end
 
+  # map menu option to corresponding variable
+  varfrom = Dict(zip(options, viewable))
+
   # update visualization if necessary
   Makie.on(menu.selection) do opt
-    var = optmap[opt]
-    vals[] = Tables.getcolumn(cols, var) |> asvalues
+    var = varfrom[opt]
+    setvals(var)
     if !isconst[var]
-      cmap[] = defaultscheme(vals[])
-      lims[] = defaultlimits(vals[])
-      ticks[] = defaultticks(vals[])
-      format[] = defaultformat(vals[])
+      setdefaults()
       if isnothing(cbar)
-        cbar = Makie.Colorbar(fig[2, 3], colormap=cmap, limits=lims, ticks=ticks, tickformat=format)
+        cbar = colorbar()
       end
     else
       if !isnothing(cbar)
-        delete!(cbar)
+        Makie.delete!(cbar)
         cbar = nothing
       end
     end
