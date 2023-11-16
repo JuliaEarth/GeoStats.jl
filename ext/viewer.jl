@@ -25,10 +25,30 @@ function viewer(data::AbstractGeoTable; kwargs...)
       """))
   end
 
+  # constant variables
+  isconst = map(viewable) do var
+    vals = Tables.getcolumn(cols, var)
+    var => allequal(vals)
+  end |> Dict
+
+  # list of menu options
+  options = map(viewable) do var
+    if isconst[var]
+      vals = Tables.getcolumn(cols, var)
+      v = asstring(first(vals))
+      "$var = $v (constant)"
+    else
+      string(var)
+    end
+  end |> collect
+
+  # map menu option to corresponding variable
+  optmap = Dict(zip(options, viewable))
+
   # initialize figure and menu
   fig = Makie.Figure()
-  label = Makie.Label(fig[1, 1], "Variable")
-  menu = Makie.Menu(fig[1, 2], options=collect(viewable))
+  Makie.Label(fig[1, 1], "Variable")
+  menu = Makie.Menu(fig[1, 2], options=options)
 
   # select first viewable variable
   var = first(viewable)
@@ -40,22 +60,39 @@ function viewer(data::AbstractGeoTable; kwargs...)
   ticks = Makie.Observable{Any}()
   format = Makie.Observable{Any}()
   vals[] = Tables.getcolumn(cols, var) |> asvalues
-  cmap[] = defaultscheme(vals[])
-  lims[] = defaultlimits(vals[])
-  ticks[] = defaultticks(vals[])
-  format[] = defaultformat(vals[])
 
   # initialize visualization
   Makie.plot(fig[2, :], dom; color=vals, kwargs...)
-  Makie.Colorbar(fig[2, 3], colormap=cmap, limits=lims, ticks=ticks, tickformat=format)
 
-  # update visualization if necessary
-  Makie.on(menu.selection) do var
-    vals[] = Tables.getcolumn(cols, var) |> asvalues
+  # initialize Colorbar
+  cbar = if !isconst[var]
     cmap[] = defaultscheme(vals[])
     lims[] = defaultlimits(vals[])
     ticks[] = defaultticks(vals[])
     format[] = defaultformat(vals[])
+    Makie.Colorbar(fig[2, 3], colormap=cmap, limits=lims, ticks=ticks, tickformat=format)
+  else
+    nothing
+  end
+
+  # update visualization if necessary
+  Makie.on(menu.selection) do opt
+    var = optmap[opt]
+    vals[] = Tables.getcolumn(cols, var) |> asvalues
+    if !isconst[var]
+      cmap[] = defaultscheme(vals[])
+      lims[] = defaultlimits(vals[])
+      ticks[] = defaultticks(vals[])
+      format[] = defaultformat(vals[])
+      if isnothing(cbar)
+        cbar = Makie.Colorbar(fig[2, 3], colormap=cmap, limits=lims, ticks=ticks, tickformat=format)
+      end
+    else
+      if !isnothing(cbar)
+        delete!(cbar)
+        cbar = nothing
+      end
+    end
   end
 
   fig
@@ -93,7 +130,7 @@ function asstring(tick, levels)
   isassigned(levels, i) ? asstring(levels[i]) : ""
 end
 
-asstring(x) = sprint(print, x; context=:compact => true)
+asstring(x) = repr(x, context=:compact => true)
 
 isviewable(::Type) = false
 isviewable(::Type{Categorical}) = true

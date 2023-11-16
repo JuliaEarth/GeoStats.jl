@@ -10,4 +10,7 @@ ascolors(values::V{Quantity}, scheme) = ascolors(ustrip.(values), scheme)
 ascolors(values::V{DateTime}, scheme) = ascolors(datetime2unix.(values), scheme)
 ascolors(values::V{Date}, scheme) = ascolors(convert.(Ref(DateTime), values), scheme)
 
-defaultscheme(values::CategoricalArray) = cgrad(:Set3_9, length(levels(values)), categorical=true)
+function defaultscheme(values::CategoricalArray)
+  nlevels = length(levels(values))
+  cgrad(:Set3_9, nlevels > 2 ? nlevels : 2, categorical=true)
+end
