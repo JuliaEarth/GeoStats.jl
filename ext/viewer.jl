@@ -64,7 +64,7 @@ function viewer(data::AbstractGeoTable; kwargs...)
   # initialize visualization
   Makie.plot(fig[2, :], dom; color=vals, kwargs...)
 
-  # initialize Colorbar
+  # initialize Colorbar if necessary
   cbar = if !isconst[var]
     cmap[] = defaultscheme(vals[])
     lims[] = defaultlimits(vals[])
