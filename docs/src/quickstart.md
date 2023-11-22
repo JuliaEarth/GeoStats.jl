@@ -259,8 +259,8 @@ We can now georeference the table and plot some of the variables:
 Ω = georef(table, (:x, :y))
 
 fig = Mke.Figure(resolution = (800, 400))
-viz(fig[1,1], Ω.geometry, color = Ω.band4, pointsize = 2)
-viz(fig[1,2], Ω.geometry, color = Ω.crop, pointsize = 2)
+viz(fig[1,1], Ω.geometry, color = Ω.band4)
+viz(fig[1,2], Ω.geometry, color = Ω.crop)
 fig
 ```
 
@@ -272,8 +272,8 @@ its normal direction `(1,-1)`:
 ```@example quickstart
 Ωs, Ωt = geosplit(Ω, 0.2, (1.0, -1.0))
 
-viz(Ωs.geometry, pointsize = 2)
-viz!(Ωt.geometry, color = :gray90, pointsize = 2)
+viz(Ωs.geometry)
+viz!(Ωt.geometry, color = :gray90)
 Mke.current_figure()
 ```
 
@@ -320,8 +320,8 @@ example:
 
 ```@example quickstart
 fig = Mke.Figure(resolution = (800, 400))
-viz(fig[1,1], Ω̂t.geometry, color = Ω̂t.crop, pointsize = 2)
-viz(fig[1,2], Ωt.geometry, color = Ωt.crop, pointsize = 2)
+viz(fig[1,1], Ω̂t.geometry, color = Ω̂t.crop)
+viz(fig[1,2], Ωt.geometry, color = Ωt.crop)
 fig
 ```
 

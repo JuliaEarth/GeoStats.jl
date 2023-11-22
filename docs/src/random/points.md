@@ -49,9 +49,9 @@ pset = rand(proc, box, 2)
 
 fig = Mke.Figure(resolution = (800, 400))
 viz(fig[1,1], box)
-viz!(fig[1,1], pset[1], color = :black, pointsize = 3)
+viz!(fig[1,1], pset[1], color = :black)
 viz(fig[1,2], box)
-viz!(fig[1,2], pset[2], color = :black, pointsize = 3)
+viz!(fig[1,2], pset[2], color = :black)
 fig
 ```
 
@@ -78,9 +78,9 @@ pset₂ = rand(proc₂, box)
 
 fig = Mke.Figure(resolution = (800, 400))
 viz(fig[1,1], box)
-viz!(fig[1,1], pset₁, color = :black, pointsize = 3)
+viz!(fig[1,1], pset₁, color = :black)
 viz(fig[1,2], box)
-viz!(fig[1,2], pset₂, color = :black, pointsize = 3)
+viz!(fig[1,2], pset₂, color = :black)
 fig
 ```
 
@@ -100,9 +100,9 @@ pset = rand(proc, box, 2)
 
 fig = Mke.Figure(resolution = (800, 400))
 viz(fig[1,1], box)
-viz!(fig[1,1], pset[1], color = :black, pointsize = 3)
+viz!(fig[1,1], pset[1], color = :black)
 viz(fig[1,2], box)
-viz!(fig[1,2], pset[2], color = :black, pointsize = 3)
+viz!(fig[1,2], pset[2], color = :black)
 fig
 ```
 
@@ -133,9 +133,9 @@ pset₂ = rand(proc₂, box)
 
 fig = Mke.Figure(resolution = (800, 400))
 viz(fig[1,1], box)
-viz!(fig[1,1], pset₁, color = :black, pointsize = 3)
+viz!(fig[1,1], pset₁, color = :black)
 viz(fig[1,2], box)
-viz!(fig[1,2], pset₂, color = :black, pointsize = 3)
+viz!(fig[1,2], pset₂, color = :black)
 fig
 ```
 
@@ -158,9 +158,9 @@ pset = rand(proc, box, 2)
 
 fig = Mke.Figure(resolution = (800, 400))
 viz(fig[1,1], box)
-viz!(fig[1,1], pset[1], color = :black, pointsize = 3)
+viz!(fig[1,1], pset[1], color = :black)
 viz(fig[1,2], box)
-viz!(fig[1,2], pset[2], color = :black, pointsize = 3)
+viz!(fig[1,2], pset[2], color = :black)
 fig
 ```
 
@@ -183,9 +183,9 @@ pset₂ = rand(proc₂, box)
 
 fig = Mke.Figure(resolution = (800, 400))
 viz(fig[1,1], box)
-viz!(fig[1,1], pset₁, color = :black, pointsize = 3)
+viz!(fig[1,1], pset₁, color = :black)
 viz(fig[1,2], box)
-viz!(fig[1,2], pset₂, color = :black, pointsize = 3)
+viz!(fig[1,2], pset₂, color = :black)
 fig
 ```
 
@@ -204,8 +204,8 @@ pset₂ = thin(pset₁, RandomThinning(0.5))
 
 fig = Mke.Figure(resolution = (800, 400))
 viz(fig[1,1], box)
-viz!(fig[1,1], pset₁, color = :black, pointsize = 3)
+viz!(fig[1,1], pset₁, color = :black)
 viz(fig[1,2], box)
-viz!(fig[1,2], pset₂, color = :black, pointsize = 3)
+viz!(fig[1,2], pset₂, color = :black)
 fig
 ```
