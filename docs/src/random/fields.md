@@ -30,7 +30,7 @@ real = rand(proc, grid, [:Z => Float64], 100)
 We can visualize the first two realizations:
 
 ```@example fieldprocs
-fig = Mke.Figure(resolution = (800, 400))
+fig = Mke.Figure(size = (800, 400))
 viz(fig[1,1], real[1].geometry, color = real[1].Z)
 viz(fig[1,2], real[2].geometry, color = real[2].Z)
 fig
@@ -41,7 +41,7 @@ the mean and variance:
 ```@example fieldprocs
 m, v = mean(real), var(real)
 
-fig = Mke.Figure(resolution = (800, 400))
+fig = Mke.Figure(size = (800, 400))
 viz(fig[1,1], m.geometry, color = m.Z)
 viz(fig[1,2], v.geometry, color = v.Z)
 fig
@@ -53,7 +53,7 @@ or the 25th and 75th percentiles:
 q25 = quantile(real, 0.25)
 q75 = quantile(real, 0.75)
 
-fig = Mke.Figure(resolution = (800, 400))
+fig = Mke.Figure(size = (800, 400))
 viz(fig[1,1], q25.geometry, color = q25.Z)
 viz(fig[1,2], q75.geometry, color = q75.Z)
 fig
@@ -111,7 +111,7 @@ proc = GaussianProcess(GaussianVariogram(range=30.0))
 # unconditional simulation
 real = rand(proc, grid, [:Z => Float64], 2)
 
-fig = Mke.Figure(resolution = (800, 400))
+fig = Mke.Figure(size = (800, 400))
 viz(fig[1,1], real[1].geometry, color = real[1].Z)
 viz(fig[1,2], real[2].geometry, color = real[2].Z)
 fig
@@ -145,7 +145,7 @@ proc = QuiltingProcess(img, (62, 62))
 # unconditional simulation
 real = rand(proc, grid, [:facies => Int], 2)
 
-fig = Mke.Figure(resolution = (800, 400))
+fig = Mke.Figure(size = (800, 400))
 viz(fig[1,1], real[1].geometry, color = real[1].facies)
 viz(fig[1,2], real[2].geometry, color = real[2].facies)
 fig
@@ -162,7 +162,7 @@ proc = QuiltingProcess(img, (13, 13))
 # unconditional simulation
 real = rand(proc, grid, [:Z => Int], 2)
 
-fig = Mke.Figure(resolution = (800, 400))
+fig = Mke.Figure(size = (800, 400))
 viz(fig[1,1], real[1].geometry, color = real[1].Z)
 viz(fig[1,2], real[2].geometry, color = real[2].Z)
 fig
@@ -182,7 +182,7 @@ proc = QuiltingProcess(img, (30, 30))
 # conditional simulation
 real = rand(proc, grid, data, 2)
 
-fig = Mke.Figure(resolution = (800, 400))
+fig = Mke.Figure(size = (800, 400))
 viz(fig[1,1], real[1].geometry, color = real[1].facies)
 viz(fig[1,2], real[2].geometry, color = real[2].facies)
 fig
@@ -213,7 +213,7 @@ proc = QuiltingProcess(img, (62, 62), inactive = circle)
 # unconditional simulation
 real = rand(proc, grid, [:facies => Float64], 2)
 
-fig = Mke.Figure(resolution = (800, 400))
+fig = Mke.Figure(size = (800, 400))
 viz(fig[1,1], real[1].geometry, color = real[1].facies)
 viz(fig[1,2], real[2].geometry, color = real[2].facies)
 fig
@@ -247,7 +247,7 @@ proc = QuiltingProcess(img, (27, 27), soft=(data, dataTI))
 
 real = rand(proc, domain(truth), [:Z => Float64], 2)
 
-fig = Mke.Figure(resolution = (800, 400))
+fig = Mke.Figure(size = (800, 400))
 viz(fig[1,1], real[1].geometry, color = real[1].Z)
 viz(fig[1,2], real[2].geometry, color = real[2].Z)
 fig
@@ -268,7 +268,7 @@ grid = CartesianGrid(200, 200)
 # unconditional simulation
 real = rand(TuringProcess(), grid, [:z => Float64], 2)
 
-fig = Mke.Figure(resolution = (800, 400))
+fig = Mke.Figure(size = (800, 400))
 viz(fig[1,1], real[1].geometry, color = real[1].z)
 viz(fig[1,2], real[2].geometry, color = real[2].z)
 fig
@@ -295,7 +295,7 @@ T = [0.5 0.5; 0.5 0.5]
 # strata simulation
 real = rand(StrataProcess(ℰ), grid, [:z => Float64], 2)
 
-fig = Mke.Figure(resolution = (800, 400))
+fig = Mke.Figure(size = (800, 400))
 viz(fig[1,1], real[1].geometry, color = real[1].z)
 viz(fig[1,2], real[2].geometry, color = real[2].z)
 fig

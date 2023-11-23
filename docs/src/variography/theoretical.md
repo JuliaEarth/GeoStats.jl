@@ -217,7 +217,7 @@ rotation from ``0`` to ``2\pi`` clockwise:
 θs = range(0.0, step = π/4, stop = 2π - π/4)
 
 # initialize figure
-fig = Mke.Figure(resolution = (800, 1600))
+fig = Mke.Figure(size = (800, 1600))
 
 # helper function to position subfigures
 pos = i -> CartesianIndices((4, 2))[i].I

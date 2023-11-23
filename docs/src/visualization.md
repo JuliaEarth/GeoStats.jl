@@ -57,7 +57,7 @@ given lag `h`.
 
 𝒮 = sample(𝒟, UniformSampling(500))
 
-fig = Mke.Figure(resolution = (800, 400))
+fig = Mke.Figure(size = (800, 400))
 hscatter(fig[1,1], 𝒮, :Z, :Z, lag=0)
 hscatter(fig[1,2], 𝒮, :Z, :Z, lag=20)
 hscatter(fig[2,1], 𝒮, :Z, :Z, lag=40)

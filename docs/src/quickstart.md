@@ -196,7 +196,7 @@ pipe = Quantile() → StdCoords()
 Ω̂ = pipe(Ω)
 
 # plot distribution before and after pipeline
-fig = Mke.Figure(resolution = (800, 400))
+fig = Mke.Figure(size = (800, 400))
 Mke.hist(fig[1,1], Ω.Z, color = :gray)
 Mke.hist(fig[2,1], Ω̂.Z, color = :gray)
 fig
@@ -258,7 +258,7 @@ We can now georeference the table and plot some of the variables:
 ```@example quickstart
 Ω = georef(table, (:x, :y))
 
-fig = Mke.Figure(resolution = (800, 400))
+fig = Mke.Figure(size = (800, 400))
 viz(fig[1,1], Ω.geometry, color = Ω.band4)
 viz(fig[1,2], Ω.geometry, color = Ω.crop)
 fig
@@ -319,7 +319,7 @@ prediction directly, side by side with the true label in this synthetic
 example:
 
 ```@example quickstart
-fig = Mke.Figure(resolution = (800, 400))
+fig = Mke.Figure(size = (800, 400))
 viz(fig[1,1], Ω̂t.geometry, color = Ω̂t.crop)
 viz(fig[1,2], Ωt.geometry, color = Ωt.crop)
 fig

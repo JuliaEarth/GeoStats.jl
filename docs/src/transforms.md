@@ -127,7 +127,7 @@ consider the rotation of geospatial data over a Cartesian grid:
 # apply geometric transform
 Ωr = Ω |> Rotate(Angle2d(π/4))
 
-fig = Mke.Figure(resolution = (800, 400))
+fig = Mke.Figure(size = (800, 400))
 viz(fig[1,1], Ω.geometry, color = Ω.Z)
 viz(fig[1,2], Ωr.geometry, color = Ωr.Z)
 fig
@@ -172,7 +172,7 @@ r = range(-1, stop=1, length=100)
 # detrend and obtain noise component
 𝒩 = Ω |> Detrend(:Z, degree=2)
 
-fig = Mke.Figure(resolution = (800, 400))
+fig = Mke.Figure(size = (800, 400))
 viz(fig[1,1], Ω.geometry, color = Ω.Z)
 viz(fig[1,2], 𝒩.geometry, color = 𝒩.Z)
 fig
@@ -197,7 +197,7 @@ M = Z .> 0
 # trace polygons using mask
 𝒯 = Ω |> Potrace(:M)
 
-fig = Mke.Figure(resolution = (800, 400))
+fig = Mke.Figure(size = (800, 400))
 viz(fig[1,1], Ω.geometry, color = Ω.Z)
 viz(fig[1,2], 𝒯.geometry, color = 𝒯.Z)
 fig

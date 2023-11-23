@@ -27,6 +27,7 @@ name of any region in the world.
 ```@docs
 GeoIO.load
 GeoIO.save
+GeoIO.formats
 ```
 
 ## Examples
@@ -38,7 +39,7 @@ import CairoMakie as Mke
 # helper function for plotting two
 # variables named T and P side by side
 function plot(data)
-  fig = Mke.Figure(resolution = (800, 400))
+  fig = Mke.Figure(size = (800, 400))
   viz(fig[1,1], data.geometry, color = data.T)
   viz(fig[1,2], data.geometry, color = data.P)
   fig

@@ -19,7 +19,7 @@ proc = PoissonProcess(5.0)
 # sample two point patterns
 pset = rand(proc, sphere, 2)
 
-fig = Mke.Figure(resolution = (800, 400))
+fig = Mke.Figure(size = (800, 400))
 viz(fig[1,1], sphere)
 viz!(fig[1,1], pset[1], color = :black)
 viz(fig[1,2], sphere)
@@ -47,7 +47,7 @@ proc = BinomialProcess(1000)
 # sample point patterns
 pset = rand(proc, box, 2)
 
-fig = Mke.Figure(resolution = (800, 400))
+fig = Mke.Figure(size = (800, 400))
 viz(fig[1,1], box)
 viz!(fig[1,1], pset[1], color = :black)
 viz(fig[1,2], box)
@@ -76,7 +76,7 @@ proc₂ = PoissonProcess(λ)
 pset₁ = rand(proc₁, box)
 pset₂ = rand(proc₂, box)
 
-fig = Mke.Figure(resolution = (800, 400))
+fig = Mke.Figure(size = (800, 400))
 viz(fig[1,1], box)
 viz!(fig[1,1], pset₁, color = :black)
 viz(fig[1,2], box)
@@ -98,7 +98,7 @@ proc = InhibitionProcess(2.0)
 # sample point pattern
 pset = rand(proc, box, 2)
 
-fig = Mke.Figure(resolution = (800, 400))
+fig = Mke.Figure(size = (800, 400))
 viz(fig[1,1], box)
 viz!(fig[1,1], pset[1], color = :black)
 viz(fig[1,2], box)
@@ -131,7 +131,7 @@ proc₂ = ClusterProcess(
 pset₁ = rand(proc₁, box)
 pset₂ = rand(proc₂, box)
 
-fig = Mke.Figure(resolution = (800, 400))
+fig = Mke.Figure(size = (800, 400))
 viz(fig[1,1], box)
 viz!(fig[1,1], pset₁, color = :black)
 viz(fig[1,2], box)
@@ -156,7 +156,7 @@ proc  = proc₁ ∪ proc₂ # 1000 points
 
 pset = rand(proc, box, 2)
 
-fig = Mke.Figure(resolution = (800, 400))
+fig = Mke.Figure(size = (800, 400))
 viz(fig[1,1], box)
 viz!(fig[1,1], pset[1], color = :black)
 viz(fig[1,2], box)
@@ -181,7 +181,7 @@ proc₂ = thin(proc₁, RandomThinning(0.5))
 pset₁ = rand(proc₁, box)
 pset₂ = rand(proc₂, box)
 
-fig = Mke.Figure(resolution = (800, 400))
+fig = Mke.Figure(size = (800, 400))
 viz(fig[1,1], box)
 viz!(fig[1,1], pset₁, color = :black)
 viz(fig[1,2], box)
@@ -202,7 +202,7 @@ pset₁ = rand(proc, box)
 # thin point pattern with probability 0.5
 pset₂ = thin(pset₁, RandomThinning(0.5))
 
-fig = Mke.Figure(resolution = (800, 400))
+fig = Mke.Figure(size = (800, 400))
 viz(fig[1,1], box)
 viz!(fig[1,1], pset₁, color = :black)
 viz(fig[1,2], box)
