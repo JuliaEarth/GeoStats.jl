@@ -26,12 +26,13 @@ function viewer(data::AbstractGeoTable; kwargs...)
   end
 
   # constant variables
-  isconst = Dict(var => allequal(Tables.getcolumn(cols, var)) for var in viewable)
+  isconst = Dict(var => allequal(skipmissing(Tables.getcolumn(cols, var))) for var in viewable)
 
   # list of menu options
   options = map(viewable) do var
     if isconst[var]
-      val = Tables.getcolumn(cols, var) |> first |> asstring
+      vals = skipmissing(Tables.getcolumn(cols, var))
+      val = isempty(vals) ? missing : first(vals)
       "$var = $val (constant)"
     else
       "$var"
