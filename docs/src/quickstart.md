@@ -2,9 +2,10 @@
 
 A geostatistical workflow often consists of four steps:
 
-1. Creation of geospatial data
+1. Definition of geospatial data
 2. Manipulation of geospatial data
 3. Geostatistical modeling
+4. Scientific visualization
 
 In this section, we walk through these steps to illustrate some of the 
 features of the project. In the case of geostatistical modeling, 
@@ -310,7 +311,7 @@ The transform can be called with new data to generate predictions:
 Ω̂t = learn(Ωt)
 ```
 
-## Visualizing predictions
+## Scientific visualization
 
 We note that the prediction of a geostatistical learning model is a
 geospatial data object, and we can inspect it with the same methods
