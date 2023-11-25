@@ -8,10 +8,10 @@ A geostatistical workflow often consists of four steps:
 4. Scientific visualization
 
 In this section, we walk through these steps to illustrate some of the 
-features of the project. In the case of geostatistical modeling, 
-we will specifically explore geostatistical learning models. 
-If you prefer learning from video, check out
-the recording of our JuliaEO2023 workshop:
+features of the project. In the case of geostatistical modeling, we will
+specifically explore [geostatistical learning](https://www.frontiersin.org/articles/10.3389/fams.2021.689393/full)
+models. If you prefer learning from video, check out the recording of
+our JuliaEO2023 workshop:
 
 ```@raw html
 <p align="center">
