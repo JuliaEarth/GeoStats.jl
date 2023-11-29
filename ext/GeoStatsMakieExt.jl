@@ -7,7 +7,7 @@ module GeoStatsMakieExt
 using GeoStats
 
 using Tables
-using Makie: cgrad
+using Makie: cgrad, coloralpha
 using Makie.Colors: Colorant, Gray
 using Unitful: AbstractQuantity
 using DataScienceTraits: Continuous
