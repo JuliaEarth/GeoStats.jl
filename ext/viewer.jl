@@ -28,15 +28,22 @@ function viewer(data::AbstractGeoTable; kwargs...)
   # constant variables
   isconst = Dict(var => allequal(skipmissing(Tables.getcolumn(cols, var))) for var in viewable)
 
+  # distributional variables
+  isdist = Dict(var => elscitype(Tables.getcolumn(cols, var)) <: Distributional for var in viewable)
+
   # list of menu options
   options = map(viewable) do var
-    if isconst[var]
+    opt = if isconst[var]
       vals = skipmissing(Tables.getcolumn(cols, var))
       val = isempty(vals) ? missing : first(vals)
       "$var = $val (constant)"
     else
       "$var"
     end
+    if isdist[var]
+      opt = opt * " (distribution)"
+    end
+    opt
   end |> collect
 
   # initialize figure and menu
@@ -105,13 +112,15 @@ function viewer(data::AbstractGeoTable; kwargs...)
   fig
 end
 
-defaultlimits(vals) = asfloat.(extrema(skipmissing(vals)))
+defaultlimits(vals) = defaultlimits(elscitype(vals), vals)
+defaultlimits(::Type, vals) = asfloat.(extrema(skipmissing(vals)))
+defaultlimits(::Type{Distributional}, vals) = extrema(location.(skipmissing(vals)))
 defaultlimits(vals::CategoricalArray) = (0.0, asfloat(length(levels(vals))))
 
 defaultticks(vals) = range(defaultlimits(vals)..., 5)
 defaultticks(vals::CategoricalArray) = 0:length(levels(vals))
 
-defaultformat(vals::CategoricalArray) = ticks -> map(t -> asstring(t, levels(vals)), ticks)
+defaultformat(vals::CategoricalArray) = ticks -> map(t -> tick2level(t, levels(vals)), ticks)
 function defaultformat(vals)
   T = nonmissingtype(eltype(vals))
   if T <: AbstractQuantity
@@ -132,7 +141,7 @@ ascateg(x::CategoricalArray) = x
 asfloat(x) = float(x)
 asfloat(x::Quantity) = float(ustrip(x))
 
-function asstring(tick, levels)
+function tick2level(tick, levels)
   i = trunc(Int, tick)
   isassigned(levels, i) ? asstring(levels[i]) : ""
 end
@@ -140,5 +149,6 @@ end
 asstring(x) = sprint(print, x, context=:compact => true)
 
 isviewable(::Type) = false
-isviewable(::Type{Categorical}) = true
 isviewable(::Type{Continuous}) = true
+isviewable(::Type{Categorical}) = true
+isviewable(::Type{Distributional}) = true

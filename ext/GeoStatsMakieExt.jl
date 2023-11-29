@@ -12,6 +12,7 @@ using Makie.Colors: Colorant, Gray
 using Unitful: AbstractQuantity
 using DataScienceTraits: Continuous
 using DataScienceTraits: Categorical
+using DataScienceTraits: Distributional
 using DataScienceTraits: Unknown
 
 import Makie
