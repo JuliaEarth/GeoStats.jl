@@ -1,4 +1,7 @@
 ![GeoStats.jl](https://raw.githubusercontent.com/JuliaEarth/GeoStats.jl/master/docs/src/assets/logo-text.svg)
+<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+<!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 [![](https://img.shields.io/github/actions/workflow/status/JuliaEarth/GeoStats.jl/CI.yml?branch=master&style=flat-square)](https://github.com/JuliaEarth/GeoStats.jl/actions)
 [![](https://img.shields.io/badge/chat-on%20zulip-9cf?style=flat-square)](https://julialang.zulipchat.com/#narrow/stream/276201-geostats.2Ejl)
@@ -20,6 +23,21 @@ All further information is provided in the
 ## Contributors
 
 This project would not be possible without the contributions of:
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tbody>
+    <tr>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/MachSilva"><img src="https://avatars.githubusercontent.com/u/25288575?v=4?s=100" width="100px;" alt="Felipe Silva"/><br /><sub><b>Felipe Silva</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=MachSilva" title="Code">💻</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
