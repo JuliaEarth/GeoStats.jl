@@ -142,4 +142,3 @@ asstring(x) = sprint(print, x, context=:compact => true)
 isviewable(::Type) = false
 isviewable(::Type{Categorical}) = true
 isviewable(::Type{Continuous}) = true
-isviewable(::Type{Unknown}) = true
