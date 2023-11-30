@@ -21,7 +21,7 @@ The Matheron's estimator of the empirical variogram is given by
 \widehat{\gamma_M}(h) = \frac{1}{2|N(h)|} \sum_{(i,j) \in N(h)} (z_i - z_j)^2
 ```
 
-where ``N(h) = \left\{(i,j) \mid ||\x_i - \x_j|| = h\right\}`` is the set
+where ``N(h) = \left\{(i,j) \leq ||\x_i - \x_j|| = h\right\}`` is the set
 of pairs of locations at a distance ``h`` and ``|N(h)|`` is the cardinality
 of the set. Alternatively, the robust Cressie's estimator is given by
 
