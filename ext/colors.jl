@@ -10,7 +10,11 @@ function ascolors(values::V{Distribution}, scheme)
   alphas = let
     s = scale.(values)
     a, b = extrema(s)
-    @. 1 - (s - a) / (b - a)
+    if a == b
+      fill(1, length(values))
+    else
+      @. 1 - (s - a) / (b - a)
+    end
   end
   coloralpha.(colors, alphas)
 end
