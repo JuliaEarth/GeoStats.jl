@@ -27,7 +27,7 @@ ascolors(values::V{DateTime}, scheme) = ascolors(datetime2unix.(values), scheme)
 
 ascolors(values::V{Date}, scheme) = ascolors(convert.(Ref(DateTime), values), scheme)
 
-function defaultscheme(values::CategoricalArray)
+function defaultscheme(values::CategArray)
   nlevels = length(levels(values))
   cgrad(:Set3_9, nlevels > 2 ? nlevels : 2, categorical=true)
 end

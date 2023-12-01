@@ -21,6 +21,8 @@ import GeoStats: hscatter, hscatter!
 import GeoStats: varioplot, varioplot!
 import GeoStats: viewer
 
+const CategArray{T,N} = Union{CategoricalArray{T,N},SubArray{T,N,<:CategoricalArray}}
+
 # color handling
 include("colors.jl")
 
