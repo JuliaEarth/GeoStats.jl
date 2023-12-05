@@ -12,7 +12,7 @@ modeling step to ensure valid mathematical models of spatial continuity.
 Given an empirical variogram, the `fit` function can be used to perform the fit:
 
 ```@docs
-fit(::Type{Variogram}, ::EmpiricalVariogram, ::VariogramFitAlgo)
+Variography.fit(::Type{Variogram}, ::EmpiricalVariogram, ::VariogramFitAlgo)
 ```
 
 ## Example
@@ -30,7 +30,7 @@ Mke.plot(g)
 We can fit specific models to the empirical variogram:
 
 ```@example variofit
-γ = fit(SineHoleVariogram, g)
+γ = Variography.fit(SineHoleVariogram, g)
 
 Mke.plot(g)
 Mke.plot!(γ, maxlag = 25.)
@@ -40,7 +40,7 @@ Mke.current_figure()
 or let the framework find the model with minimum error:
 
 ```@example variofit
-γ = fit(Variogram, g)
+γ = Variography.fit(Variogram, g)
 
 Mke.plot(g)
 Mke.plot!(γ, maxlag = 25.)
@@ -53,7 +53,7 @@ of this example is sinusoidal.
 Optionally, we can specify a weighting function to give different weights to the lags:
 
 ```@example variofit
-γ = fit(SineHoleVariogram, g, h -> exp(-h))
+γ = Variography.fit(SineHoleVariogram, g, h -> exp(-h))
 
 Mke.plot(g)
 Mke.plot!(γ, maxlag = 25.)

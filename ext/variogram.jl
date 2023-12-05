@@ -112,7 +112,7 @@ function Makie.plot!(plot::VarioPlot{<:Tuple{EmpiricalVarioplane}})
 
   # show model range
   if rshow[]
-    ls = Makie.@lift [range(fit($rmodel, γ)) for γ in $γs]
+    ls = Makie.@lift [range(Variography.fit($rmodel, γ)) for γ in $γs]
     ls = Makie.@lift [$ls; $ls]
     zs = Makie.@lift fill(maximum($Z) + 1, length($ls))
     Makie.lines!(plot, θs, ls, zs, color=plot[:rcolor])
