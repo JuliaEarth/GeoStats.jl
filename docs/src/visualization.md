@@ -71,9 +71,7 @@ The [PairPlots.jl](https://github.com/sefffal/PairPlots.jl) package
 provides the `pairplot` function that can be used with any table, including
 tables of attributes obtained with the [`values`](@ref) function.
 
-## AlgebraOfGraphics.jl
+## Biplots.jl
 
-The [AlgebraOfGraphics.jl](https://github.com/MakieOrg/AlgebraOfGraphics.jl)
-package provides various statistical plots with a syntax that is similar to
-R's [ggplot](https://ggplot2.tidyverse.org) package. Check their official
-[gallery](https://aog.makie.org/stable/gallery) for examples.
+The [Biplot.jl](https://github.com/MakieOrg/Biplots.jl)
+package provides 2D and 3D statistical biplots.
