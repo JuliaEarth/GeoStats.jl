@@ -77,16 +77,6 @@ Plot the variogram or varioplane `γ` with given `options`.
 function varioplot end
 function varioplot! end
 
-"""
-    viewer(data; kwargs...)
-
-Basic scientific viewer for geospatial `data`.
-
-Aesthetic options are forwarded via `kwargs` to
-the [`viz`](@ref) recipe.
-"""
-function viewer end
-
 export
   # recipes
   hscatter,
