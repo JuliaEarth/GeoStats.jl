@@ -108,7 +108,7 @@ function Makie.plot!(plot::VarioPlot{<:Tuple{EmpiricalVarioplane}})
   # transpose for plotting
   Z = Makie.@lift transpose($Z)
 
-  Makie.surface!(plot, θs, rs, Z, colormap=plot[:vscheme], shading=false)
+  Makie.surface!(plot, θs, rs, Z, colormap=plot[:vscheme], shading=Makie.NoShading)
 
   # show model range
   if rshow[]
