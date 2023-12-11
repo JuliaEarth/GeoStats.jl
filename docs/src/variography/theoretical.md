@@ -62,7 +62,7 @@ Mke.plot(ExponentialVariogram())
 ### Matern
 
 ```math
-\gamma(h) = (s - n) \left[1 - \frac{2^{1-\nu}}{\Gamma(\nu)} \left(\sqrt{2\nu}\frac{h}{r}\right)^\nu K_\nu\left(\sqrt{2\nu}\frac{h}{r}\right)\right] + n \cdot \1_{(0,\infty)}(h)
+\gamma(h) = (s - n) \left[1 - \frac{2^{1-\nu}}{\Gamma(\nu)} \left(\sqrt{2\nu}\ 3\left(\frac{h}{r}\right)\right)^\nu K_\nu\left(\sqrt{2\nu}\ 3\left(\frac{h}{r}\right)\right)\right] + n \cdot \1_{(0,\infty)}(h)
 ```
 
 ```@docs
