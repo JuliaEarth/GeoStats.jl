@@ -38,7 +38,4 @@ using Reexport
 @reexport using GeoStatsSolvers
 @reexport using Chain: @chain
 
-# plots via Makie extension
-include("plots.jl")
-
 end
