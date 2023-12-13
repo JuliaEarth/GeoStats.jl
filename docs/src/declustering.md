@@ -12,9 +12,9 @@ coordinates in an attempt to correct potential sampling bias:
 The following statistics have geospatial semantics:
 
 ```@docs
-mean(::AbstractGeoTable)
-var(::AbstractGeoTable)
-quantile(::AbstractGeoTable, ::Any)
+mean(::AbstractGeoTable, ::Any)
+var(::AbstractGeoTable, ::Any)
+quantile(::AbstractGeoTable, ::Any, ::Any)
 ```
 
 A histogram with geospatial semantics is also available where the heights
