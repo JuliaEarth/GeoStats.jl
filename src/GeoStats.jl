@@ -35,7 +35,7 @@ using Reexport
 @reexport using GeoStatsModels
 @reexport using GeoStatsProcesses
 @reexport using GeoStatsTransforms
-@reexport using GeoStatsSolvers
+@reexport using GeoStatsValidation
 @reexport using Chain: @chain
 
 end

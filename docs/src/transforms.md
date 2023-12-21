@@ -80,10 +80,10 @@ describe(values(Ω))
 ```
 
 We can create a pipeline that transforms the features
-`:a` and `:c` to their normal quantile (or scores):
+to their normal quantile (or scores):
 
 ```@example transforms
-pipe = Select(:a, :c) → Quantile()
+pipe = Quantile()
 
 Ω̄, cache = apply(pipe, Ω)
 

@@ -142,6 +142,7 @@ The project is split into various packages:
 | [GeoStatsModels.jl](https://github.com/JuliaEarth/GeoStatsModels.jl) | Geostatistical models for geospatial interpolation. |
 | [GeoStatsProcesses.jl](https://github.com/JuliaEarth/GeoStatsProcesses.jl) | Geostatistical processes for geospatial simulation. |
 | [GeoStatsTransforms.jl](https://github.com/JuliaEarth/GeoStatsTransforms.jl) | Geostatistical transforms for geospatial data. |
+| [GeoStatsValidation.jl](https://github.com/JuliaEarth/GeoStatsValidation.jl) | Geostatistical validation methods. |
 
 Other packages can be installed separately for additional functionality:
 

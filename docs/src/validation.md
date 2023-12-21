@@ -1,27 +1,26 @@
 # Validation
 
 GeoStats.jl was designed to, among other things, facilitate rigorous comparison
-of different geostatistical solvers in the literature. As a user of geostatistics,
-you may be interested in trying various solvers on a given data set to pick the
+of different geostatistical models in the literature. As a user of geostatistics,
+you may be interested in trying various models on a given data set to pick the
 one with best performance. As a researcher in the field, you may be interested in
-benchmarking your new solver against other established solvers.
+benchmarking your new model against other established models.
 
-Errors of geostatistical solvers can be estimated with the [`error`](@ref) function:
+Errors of geostatistical solvers can be estimated with the [`cverror`](@ref) function:
 
 ```@docs
-error(::Any, ::Any, ::ErrorEstimationMethod)
+cverror
 ```
 
-For example, we can perform block cross-validation in a geostatistical learning problem
-to estimate the generalization error of the `PointwiseLearn` solver. First, we define
-the problem:
+For example, we can perform block cross-validation on a decision tree model using
+the following code:
 
 ```@example error
 using GeoStats
-using CSV
+using GeoIO
 
 # load geospatial data
-Ω = georef(CSV.File("data/agriculture.csv"), (:x, :y))
+Ω = GeoIO.load("data/agriculture.csv", coords = ("x", "y"))
 
 # 20%/80% split along the (1, -1) direction
 Ωₛ, Ωₜ = geosplit(Ω, 0.2, (1.0, -1.0))
@@ -30,34 +29,17 @@ using CSV
 feats = [:band1,:band2,:band3,:band4]
 label = :crop
 
-# classiication learning task
-𝒯 = ClassificationTask(feats, label)
-
-# geostatistical learning problem
-𝒫 = LearningProblem(Ωₛ, Ωₜ, 𝒯)
-```
-
-Second, we define the learning solver:
-
-```@example error
 # learning model
 model = DecisionTreeClassifier()
-	
-# learning strategy
-𝒮 = PointwiseLearn(model)
-```
 
-Finally, we define the validation method and estimate the error:
-
-```@example error
 # loss function
-ℒ = MisclassLoss()
+loss = MisclassLoss()
 
 # block cross-validation with r = 30.
-ℬ = BlockValidation(30., loss = Dict(:crop => ℒ))
+bcv = BlockValidation(30., loss = Dict(:crop => loss))
 
 # estimate of generalization error
-ϵ̂ = error(𝒮, 𝒫, ℬ)
+ϵ̂ = cverror((model, feats => label), Ωₛ, bcv)
 ```
 
 We can unhide the labels in the target domain and compute the actual
@@ -65,13 +47,13 @@ error for comparison:
 
 ```@example error
 # train in Ωₛ and predict in Ωₜ
-Ω̂ₜ = solve(𝒫, 𝒮)
+Ω̂ₜ = Ωₜ |> Learn(Ωₛ, model, feats => label)
 	
 # actual error of the model
-ϵ = mean(ℒ.(Ωₜ.crop, Ω̂ₜ.crop))
+ϵ = mean(loss.(Ωₜ.crop, Ω̂ₜ.crop))
 ```
 
-Below is the list of currently implemented error estimation methods.
+Below is the list of currently implemented validation methods.
 
 ## Leave-one-out
 
