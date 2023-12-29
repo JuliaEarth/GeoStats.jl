@@ -187,6 +187,7 @@ are supported as well as the following additional rotations from commercial
 geostatistical software:
 
 ```@docs
+MinesightAngles
 DatamineAngles
 VulcanAngles
 GslibAngles
