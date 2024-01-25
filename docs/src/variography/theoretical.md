@@ -31,6 +31,10 @@ isstationary(::Variogram)
 isisotropic(::Variogram)
 ```
 
+Corresponding covariance models are available for convenience. For example,
+the `GaussianVariogram` and the `GaussianCovariance` are two alternative
+representations of the same geostatistical behavior.
+
 ### Gaussian
 
 ```math

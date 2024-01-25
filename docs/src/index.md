@@ -113,18 +113,6 @@ viz(interp.geometry, color = interp.Z)
 
 For a more detailed example, please consult the [Quickstart](quickstart.md).
 
-## Video tutorials
-
-A set of Pluto notebooks demonstrating important geostatistical concepts
-is available in [GeoStatsTutorials](https://github.com/JuliaEarth/GeoStatsTutorials)
-with an accompanying series of videos:
-
-```@raw html
-<p align="center">
-<iframe style="width:560px;height:315px" src="https://www.youtube.com/embed/yDIK9onnZVw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-</p>
-```
-
 ## Project organization
 
 The project is split into various packages:

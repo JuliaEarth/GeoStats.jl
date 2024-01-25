@@ -11,11 +11,11 @@ In this section, we walk through these steps to illustrate some of the
 features of the project. In the case of geostatistical modeling, we will
 specifically explore [geostatistical learning](https://www.frontiersin.org/articles/10.3389/fams.2021.689393/full)
 models. If you prefer learning from video, check out the recording of
-our JuliaEO2023 workshop:
+our JuliaEO 2023 workshop:
 
 ```@raw html
 <p align="center">
-<iframe style="width:560px;height:315px" src="https://www.youtube.com/embed/1FfgjW5XQ9g?start=1682" title="GeoStats.jl workshop at JuliaEO2023" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+<iframe style="width:560px;height:315px" src="https://www.youtube.com/embed/1FfgjW5XQ9g?start=1682" title="GeoStats.jl workshop at JuliaEO 2023" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 </p>
 ```
 

@@ -3,32 +3,41 @@
 ## Overview
 
 Given a table or array containing data, we can georeference these objects
-onto a geospatial domain with the [`georef`](@ref) function. For a list of
-available domains, please see [Domains](domains.md).
+onto a geospatial [domain](domains.md) with the [`georef`](@ref) function.
+The result of the [`georef`](@ref) function is a **GeoTable**. If you would
+like to learn this concept in more depth, check out the recording of our
+JuliaEO 2024 workshop:
+
+```@raw html
+<p align="center">
+<iframe style="width:560px;height:315px" src="https://www.youtube.com/embed/r7MwEme_Y5w?si=ZGG_T0kmmKlJcVBl&amp;start=364" title="GeoTables.jl worksthop at JuliaEO 2024" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+</p>
+```
 
 ```@docs
 georef
 ```
 
-In the opposite direction, the functions [`values`](@ref) and
-[`domain`](@ref) can be used to retrieve the table of attributes
-and the underlying geospatial domain.
+The functions [`values`](@ref) and [`domain`](@ref) can be used to retrieve
+the table of attributes and the underlying geospatial domain:
 
 ```@docs
 values
 domain
 ```
 
-The [GeoIO.jl](https://github.com/JuliaEarth/GeoIO.jl) package
-can be used to load geospatial data from various file formats. It also
-provides utility functions to automatically download maps given the
-name of any region in the world.
+The [GeoIO.jl](https://github.com/JuliaEarth/GeoIO.jl) package can be used
+to load/save geospatial data from/to various file formats:
 
 ```@docs
 GeoIO.load
 GeoIO.save
 GeoIO.formats
 ```
+
+The [GeoArtifacts.jl](https://github.com/JuliaEarth/GeoArtifacts.jl) package
+provides utility functions to automatically download geospatial data from
+repositories on the internet.
 
 ## Examples
 
