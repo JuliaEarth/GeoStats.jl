@@ -66,10 +66,10 @@ the package manager:
 This will create a fresh environment called `@geo` where you can
 edit the project modules without effects on your global user
 environment. Next, go ahead and ask the package manager to
-develop the package of interest (e.g. Variography.jl):
+develop the package of interest (e.g. GeoStatsFunctions.jl):
 
 ```
-] dev Variography
+] dev GeoStatsFunctions
 ```
 
 You can modify the source code that was cloned in the `.julia/dev`

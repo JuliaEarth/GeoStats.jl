@@ -31,7 +31,7 @@ using Reexport
 @reexport using TableTransforms
 @reexport using StatsLearnModels
 @reexport using GeoStatsBase
-@reexport using Variography
+@reexport using GeoStatsFunctions
 @reexport using GeoStatsModels
 @reexport using GeoStatsProcesses
 @reexport using GeoStatsTransforms
