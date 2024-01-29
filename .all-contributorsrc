@@ -591,6 +591,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "markmbaum",
+      "name": "Mark Baum",
+      "avatar_url": "https://avatars.githubusercontent.com/u/18745581?v=4",
+      "profile": "https://github.com/markmbaum",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
