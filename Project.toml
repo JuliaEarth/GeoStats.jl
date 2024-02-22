@@ -31,7 +31,7 @@ Unitful = "1986cc42-f94f-5a68-af5c-568840ba703d"
 
 [compat]
 CategoricalArrays = "0.10"
-Chain = "0.5"
+Chain = "0.6"
 CoDa = "1.2"
 DataScienceTraits = "0.2"
 Dates = "1.9"
