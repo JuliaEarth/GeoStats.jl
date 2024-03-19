@@ -609,6 +609,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "BambOoxX",
+      "name": "BambOoxX",
+      "avatar_url": "https://avatars.githubusercontent.com/u/42067365?v=4",
+      "profile": "https://github.com/BambOoxX",
+      "contributions": [
+        "infra"
+      ]
     }
   ],
   "contributorsPerLine": 7,
