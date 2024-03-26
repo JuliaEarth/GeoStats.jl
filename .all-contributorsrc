@@ -618,6 +618,15 @@
       "contributions": [
         "infra"
       ]
+    },
+    {
+      "login": "ettersi",
+      "name": "Simon Etter",
+      "avatar_url": "https://avatars.githubusercontent.com/u/2989007?v=4",
+      "profile": "http://ettersi.github.io",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7,

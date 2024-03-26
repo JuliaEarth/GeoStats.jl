@@ -113,6 +113,7 @@ This project would not be possible without the contributions of:
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/markmbaum"><img src="https://avatars.githubusercontent.com/u/18745581?v=4?s=100" width="100px;" alt="Mark Baum"/><br /><sub><b>Mark Baum</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=markmbaum" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="http://page.romeov.me"><img src="https://avatars.githubusercontent.com/u/8644490?v=4?s=100" width="100px;" alt="RomeoV"/><br /><sub><b>RomeoV</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=RomeoV" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/BambOoxX"><img src="https://avatars.githubusercontent.com/u/42067365?v=4?s=100" width="100px;" alt="BambOoxX"/><br /><sub><b>BambOoxX</b></sub></a><br /><a href="#infra-BambOoxX" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="http://ettersi.github.io"><img src="https://avatars.githubusercontent.com/u/2989007?v=4?s=100" width="100px;" alt="Simon Etter"/><br /><sub><b>Simon Etter</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=ettersi" title="Documentation">📖</a></td>
     </tr>
   </tbody>
 </table>
