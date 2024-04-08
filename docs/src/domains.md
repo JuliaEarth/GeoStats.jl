@@ -47,7 +47,7 @@ tria = Triangle((0.0, 0.0), (1.0, 1.0), (0.0, 1.0))
 quad = Quadrangle((1.0, 1.0), (2.0, 1.0), (2.0, 2.0), (1.0, 2.0))
 gset = GeometrySet([tria, quad])
 
-viz(gset, showfacets = true)
+viz(gset, showsegments = true)
 ```
 
 ### CartesianGrid
@@ -59,5 +59,5 @@ CartesianGrid
 ```@example domains
 grid = CartesianGrid(10, 10, 10)
 
-viz(grid, showfacets = true)
+viz(grid, showsegments = true)
 ```
