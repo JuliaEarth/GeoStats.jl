@@ -84,7 +84,7 @@ methods are sometimes listed as competing alternatives. Kriging estimation
 is about minimizing variance (or estimation error), whereas spline
 interpolation is about deriving smooth estimators for *computer visualization*.
 [Kriging is a generalization of splines](https://www.sciencedirect.com/science/article/pii/009830048490030X)
-in which one has the freedom to customize spatial structure based
+in which one has the freedom to customize geospatial structure based
 on data. Besides the estimate itself, Kriging also provides the
 variance map as a function of point patterns.
 

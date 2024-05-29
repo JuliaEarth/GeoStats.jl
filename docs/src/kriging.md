@@ -107,7 +107,7 @@ GeoStatsModels.OrdinaryKriging
 
 ## Universal Kriging
 
-In Universal Kriging, the mean of the random field is assumed to be a polynomial of the spatial coordinates:
+In Universal Kriging, the mean of the random field is assumed to be a polynomial of the geospatial coordinates:
 
 ```math
 \mu(\x) = \sum_{k=1}^{N_d} \beta_k f_k(\x)
@@ -185,7 +185,7 @@ In External Drift Kriging, the mean of the random field is assumed to be a combi
 \mu(\x) = \sum_k \beta_k m_k(\x)
 ```
 
-Differently than Universal Kriging, the functions ``m_k`` are not necessarily polynomials of the spatial coordinates.
+Differently than Universal Kriging, the functions ``m_k`` are not necessarily polynomials of the geospatial coordinates.
 In practice, they represent a list of variables that is strongly correlated (and co-located) with the variable being
 estimated.
 

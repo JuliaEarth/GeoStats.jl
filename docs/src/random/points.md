@@ -64,7 +64,7 @@ PoissonProcess
 box = Box((0, 0), (100, 100))
 
 # intensity function
-λ(p) = sum(coordinates(p))^2 / 10000
+λ(p) = sum(to(p))^2 / 10000
 
 # homogeneous process
 proc₁ = PoissonProcess(0.5)
@@ -123,7 +123,7 @@ proc₁ = ClusterProcess(
 
 # inhomogeneous parent and offspring processes
 proc₂ = ClusterProcess(
-  PoissonProcess(p -> 0.1 * sum(coordinates(p) .^ 2)),
+  PoissonProcess(p -> 0.1 * sum(to(p) .^ 2)),
   p -> rand(PoissonProcess(x -> 5000 * sum((x - p).^2)), Ball(p, 0.5))
 )
 

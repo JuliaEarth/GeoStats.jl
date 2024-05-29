@@ -20,4 +20,5 @@ We provide a geospatial version of the split-apply-combine pattern:
 
 ```@docs
 geojoin
+tablejoin
 ```

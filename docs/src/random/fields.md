@@ -139,7 +139,7 @@ using GeoArtifacts
 grid = CartesianGrid(200, 200)
 
 # quilting process
-img  = GeoArtifacts.image("Strebelle")
+img  = GeoStatsImages.get("Strebelle")
 proc = QuiltingProcess(img, (62, 62))
 
 # unconditional simulation
@@ -156,7 +156,7 @@ fig
 grid = CartesianGrid(200, 200)
 
 # quilting process
-img  = GeoArtifacts.image("StoneWall")
+img  = GeoStatsImages.get("StoneWall")
 proc = QuiltingProcess(img, (13, 13))
 
 # unconditional simulation
@@ -173,7 +173,7 @@ fig
 grid = domain(img)
 
 # pre-existing observations
-img  = GeoArtifacts.image("Strebelle")
+img  = GeoStatsImages.get("Strebelle")
 data = img |> Sample(20, replace=false)
 
 # quilting process
@@ -226,10 +226,10 @@ selection of patterns from the training image.
 using ImageFiltering
 
 # image assumed as ground truth (unknown)
-truth = GeoArtifacts.image("WalkerLakeTruth")
+truth = GeoStatsImages.get("WalkerLakeTruth")
 
 # training image with similar patterns
-img = GeoArtifacts.image("WalkerLake")
+img = GeoStatsImages.get("WalkerLake")
 
 # forward model (blur filter)
 function forward(data)

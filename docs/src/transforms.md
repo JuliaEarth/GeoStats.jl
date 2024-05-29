@@ -277,6 +277,8 @@ viz(𝒞.geometry, color = 𝒞.CLUSTER)
 ```@docs
 Interpolate
 InterpolateNeighbors
+InterpolateMissing
+InterpolateNaN
 ```
 
 ```@example transforms
