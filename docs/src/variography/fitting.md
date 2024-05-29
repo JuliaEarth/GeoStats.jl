@@ -53,7 +53,7 @@ of this example is sinusoidal.
 Optionally, we can specify a weighting function to give different weights to the lags:
 
 ```@example variofit
-γ = GeoStatsFunctions.fit(SineHoleVariogram, g, h -> exp(-h))
+γ = GeoStatsFunctions.fit(SineHoleVariogram, g, h -> 1 / h^2)
 
 Mke.plot(g)
 Mke.plot!(γ, maxlag = 25.)
