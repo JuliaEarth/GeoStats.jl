@@ -116,6 +116,9 @@ This project would not be possible without the contributions of:
       <td align="center" valign="top" width="14.28%"><a href="http://ettersi.github.io"><img src="https://avatars.githubusercontent.com/u/2989007?v=4?s=100" width="100px;" alt="Simon Etter"/><br /><sub><b>Simon Etter</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=ettersi" title="Documentation">📖</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://www.remivezy.com/"><img src="https://avatars.githubusercontent.com/u/12777793?v=4?s=100" width="100px;" alt="Rémi Vezy"/><br /><sub><b>Rémi Vezy</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=VEZY" title="Code">💻</a></td>
     </tr>
+    <tr>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/disberd"><img src="https://avatars.githubusercontent.com/u/12846528?v=4?s=100" width="100px;" alt="Alberto Mengali"/><br /><sub><b>Alberto Mengali</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=disberd" title="Code">💻</a></td>
+    </tr>
   </tbody>
 </table>
 
