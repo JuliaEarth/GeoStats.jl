@@ -636,6 +636,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "disberd",
+      "name": "Alberto Mengali",
+      "avatar_url": "https://avatars.githubusercontent.com/u/12846528?v=4",
+      "profile": "https://github.com/disberd",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
