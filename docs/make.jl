@@ -12,21 +12,10 @@ using StratiGraphics
 # IO packages
 using GeoIO
 
-istravis = "TRAVIS" ∈ keys(ENV)
-
-Themes.compile(
-  joinpath(@__DIR__, "src/assets/light.scss"),
-  joinpath(@__DIR__, "src/assets/themes/documenter-light.css")
-)
-Themes.compile(joinpath(@__DIR__, "src/assets/dark.scss"), joinpath(@__DIR__, "src/assets/themes/documenter-dark.css"))
-
 makedocs(
   format=Documenter.HTML(
-    assets=[
-      "assets/favicon.ico",
-      asset("https://fonts.googleapis.com/css?family=Montserrat|Source+Code+Pro&display=swap", class=:css)
-    ],
-    prettyurls=istravis,
+    assets=["assets/favicon.ico"],
+    prettyurls=get(ENV, "CI", "false") == "true",
     mathengine=KaTeX(
       Dict(
         :macros => Dict(

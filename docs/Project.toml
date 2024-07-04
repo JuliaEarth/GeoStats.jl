@@ -19,6 +19,3 @@ StratiGraphics = "135379e1-83be-5ae7-9e8e-29dade3dc6c7"
 Tables = "bd369af6-aec1-5ad0-b16a-f7cc5008161c"
 TransformsBase = "28dd2a49-a57a-4bfb-84ca-1a49db9b96b8"
 TuringPatterns = "fde5428d-3bf0-5ade-b94a-d334303c4d77"
-
-[compat]
-Documenter = "0.27"
