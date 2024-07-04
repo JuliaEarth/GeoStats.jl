@@ -12,12 +12,10 @@ using StratiGraphics
 # IO packages
 using GeoIO
 
-istravis = "TRAVIS" ∈ keys(ENV)
-
 makedocs(
   format=Documenter.HTML(
     assets=["assets/favicon.ico"],
-    prettyurls=istravis,
+    prettyurls=get(ENV, "CI", "false") == "true",
     mathengine=KaTeX(
       Dict(
         :macros => Dict(
