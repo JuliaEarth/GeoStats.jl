@@ -2,9 +2,9 @@
 
 !!! note
 
-    This section describes the Kriging models used in the [`Interpolate`](@ref) transform.
-    Most users don't want to use models directly because they lack features such as
-    neighborhood search and change of support.
+    This section describes the Kriging models used in the [`Interpolate`](@ref) and
+    [`InterpolateNeighbors`](@ref) transforms, which provide options for neighborhood
+    search, change of support, etc.
 
 A Kriging model has the form:
 
