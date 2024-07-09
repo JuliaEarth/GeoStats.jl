@@ -645,6 +645,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "JoshuaLampert",
+      "name": "Joshua Lampert",
+      "avatar_url": "https://avatars.githubusercontent.com/u/51029046?v=4",
+      "profile": "https://www.math.uni-hamburg.de/en/home/lampert",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
