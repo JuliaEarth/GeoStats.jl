@@ -22,9 +22,7 @@ using Reexport
 @reexport using Rotations
 @reexport using CoordRefSystems
 @reexport using GeoTables
-@reexport using Distances
 @reexport using Statistics
-@reexport using Distributions
 @reexport using LossFunctions
 @reexport using CategoricalArrays
 @reexport using DataScienceTraits
