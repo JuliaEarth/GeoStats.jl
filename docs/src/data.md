@@ -66,10 +66,10 @@ using DataFrames
 table = DataFrame(T=rand(25), P=rand(25))
 ```
 
-We can georeference this table based on a given set of coordinates:
+We can georeference this table based on a given set of points:
 
 ```@example data
-georef(table, PointSet(rand(2,25))) |> plot
+georef(table, rand(Point{2}, 25)) |> plot
 ```
 
 or alternatively, georeference it on a 5x5 regular grid (5x5 = 25 samples):
@@ -78,22 +78,14 @@ or alternatively, georeference it on a 5x5 regular grid (5x5 = 25 samples):
 georef(table, CartesianGrid(5, 5)) |> plot
 ```
 
-In the first case, the [`PointSet`](@ref) domain type can be omitted, and the
-framework will understand that the matrix passed as the second argument contains
-the coordinates of a point set:
-
-```@example data
-georef(table, rand(2,25))
-```
-
 Another common pattern in geospatial data is when the coordinates of the samples
 are already part of the table as columns. In this case, we can specify the column
-names as symbols:
+names:
 
 ```@example data
 table = DataFrame(T=rand(25), P=rand(25), X=rand(25), Y=rand(25), Z=rand(25))
 
-georef(table, (:X, :Y, :Z)) |> plot
+georef(table, ("X", "Y", "Z")) |> plot
 ```
 
 ### Arrays
@@ -103,7 +95,7 @@ georeference these arrays using a named tuple, and the framework will understand
 that the shape of the arrays should be preserved in a [`CartesianGrid`](@ref):
 
 ```@example data
-T, P = rand(5,5), rand(5,5)
+T, P = rand(5, 5), rand(5, 5)
 
 georef((T=T, P=P)) |> plot
 ```
@@ -111,7 +103,7 @@ georef((T=T, P=P)) |> plot
 Alternatively, we can interpret the entries of the named tuple as columns in a table:
 
 ```@example data
-georef((T=vec(T), P=vec(P)), rand(2,25)) |> plot
+georef((T=vec(T), P=vec(P)), rand(Point{2}, 25)) |> plot
 ```
 
 ### Files
