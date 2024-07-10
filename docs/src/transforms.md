@@ -147,8 +147,8 @@ UniqueCoords
 
 ```@example transforms
 # point set with repeated points
-X = rand(2, 50)
-Ω = georef((Z=rand(100),), [X X])
+p = rand(Point{2}, 50)
+Ω = georef((Z=rand(100),), [p; p])
 ```
 
 ```@example transforms

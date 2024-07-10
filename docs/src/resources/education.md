@@ -41,6 +41,12 @@ We recommend the following educational resources.
 
 ### Workshop material
 
+- [UFMG 2024](https://github.com/Arpeggeo/UFMG2024)
+  [Portuguese] - Geociência de Dados na Mineração, UFMG 2024
+
+- [JuliaEO 2024](https://github.com/Arpeggeo/JuliaEO2024)
+  [English] - Global Workshop on Earth Observation, AIRCentre 2024
+
 - [UFMG 2023](https://github.com/Arpeggeo/UFMG2023)
   [Portuguese] - Geociência de Dados na Mineração, UFMG 2023
 
