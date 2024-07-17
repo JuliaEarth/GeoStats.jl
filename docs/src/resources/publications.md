@@ -2,6 +2,9 @@
 
 Below is a list of publications made possible with this project:
 
+- *Ko et al. 2024.* [Scaling Hawkes processes to one million COVID-19 cases]
+  (https://arxiv.org/pdf/2407.11349)
+
 - *Hoffimann, J. 2023.* [Geospatial Data Science with Julia]
   (https://juliaearth.github.io/geospatial-data-science-with-julia)
 
