@@ -69,7 +69,7 @@ table = DataFrame(T=rand(25), P=rand(25))
 We can georeference this table based on a given set of points:
 
 ```@example data
-georef(table, rand(Point{2}, 25)) |> plot
+georef(table, rand(Point, 25)) |> plot
 ```
 
 or alternatively, georeference it on a 5x5 regular grid (5x5 = 25 samples):
@@ -103,7 +103,7 @@ georef((T=T, P=P)) |> plot
 Alternatively, we can interpret the entries of the named tuple as columns in a table:
 
 ```@example data
-georef((T=vec(T), P=vec(P)), rand(Point{2}, 25)) |> plot
+georef((T=vec(T), P=vec(P)), rand(Point, 25)) |> plot
 ```
 
 ### Files

@@ -210,7 +210,7 @@ To illustrate the concept, consider the following 2D data set:
 using Random # hide
 Random.seed!(2000) # hide
 
-points = rand(Point{2}, 50) |> Scale(100)
+points = rand(Point, 50, crs=Cartesian2D) |> Scale(100)
 geotable = georef((Z=rand(50),), points)
 
 viz(geotable.geometry, color = geotable.Z)

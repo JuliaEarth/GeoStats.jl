@@ -31,7 +31,7 @@ PointSet
 ```
 
 ```@example domains
-pset = PointSet(rand(Point{3}, 100))
+pset = PointSet(rand(Point, 100))
 
 viz(pset)
 ```
