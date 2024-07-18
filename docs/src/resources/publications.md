@@ -2,6 +2,10 @@
 
 Below is a list of publications made possible with this project:
 
+- *Doherty et al. 2024* [A Method for Quantifying Uncertainty in Spatially Interpolated
+  Meteorological Data with Application to Daily Maximum Air Temperature]
+  (https://egusphere.copernicus.org/preprints/2024/egusphere-2024-1886/egusphere-2024-1886.pdf)
+
 - *Ko et al. 2024.* [Scaling Hawkes processes to one million COVID-19 cases]
   (https://arxiv.org/pdf/2407.11349)
 
