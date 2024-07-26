@@ -69,11 +69,6 @@ load any file with geospatial data into well-tested geometries from the
 using GeoIO
 
 zone = GeoIO.load("data/zone.shp")
-path = GeoIO.load("data/path.shp")
-
-viz(zone.geometry)
-viz!(path.geometry, color = :gray90)
-Mke.current_figure()
 ```
 
 Various functions are defined over these geometries, for instance:

@@ -114,9 +114,4 @@ We can easily load geospatial data from disk without any specific knowledge of f
 using GeoIO
 
 zone = GeoIO.load("data/zone.shp")
-path = GeoIO.load("data/path.shp")
-
-viz(zone.geometry)
-viz!(path.geometry, color = :gray90)
-Mke.current_figure()
 ```
