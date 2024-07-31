@@ -120,6 +120,7 @@ This project would not be possible without the contributions of:
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/disberd"><img src="https://avatars.githubusercontent.com/u/12846528?v=4?s=100" width="100px;" alt="Alberto Mengali"/><br /><sub><b>Alberto Mengali</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=disberd" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://www.math.uni-hamburg.de/en/home/lampert"><img src="https://avatars.githubusercontent.com/u/51029046?v=4?s=100" width="100px;" alt="Joshua Lampert"/><br /><sub><b>Joshua Lampert</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=JoshuaLampert" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://salbalkus.github.io/"><img src="https://avatars.githubusercontent.com/u/45985925?v=4?s=100" width="100px;" alt="Salvador Balkus"/><br /><sub><b>Salvador Balkus</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=salbalkus" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/TimG1964"><img src="https://avatars.githubusercontent.com/u/157401228?v=4?s=100" width="100px;" alt="TimG1964"/><br /><sub><b>TimG1964</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=TimG1964" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>
