@@ -35,10 +35,36 @@ Organizations using the framework:
 Would like to become a sponsor? Press the sponsor button in our
 [GitHub repository](https://github.com/JuliaEarth/GeoStats.jl).
 
-### Textbooks
+## Overview
 
-The following textbooks can be useful to learn the framework.
-Click on the cover to learn more.
+In many fields of science, such as mining engineering, hydrogeology, petroleum
+engineering, and environmental sciences, traditional statistical methods fail
+to provide unbiased estimates of resources due to the presence of geospatial
+correlation. Geostatistics (a.k.a. geospatial statistics) is the branch of
+statistics developed to overcome this limitation. Particularly, it is the
+branch that takes geospatial coordinates of data into account. Some major
+highlights of **GeoStats.jl** are:
+
+- It is **simple**: has a very short learning curve and requires writing minimal code 😌
+- It is **general**: supports all types of geospatial domains, including unstructured meshes 👍
+- It is **native**: fully written in Julia for maximum flexibility and performance 🚀
+- Has an **extensive library** of algorithms from the geostatistics literature 📚
+
+Our JuliaCon2021 talk provides an overview of
+[geostatistical learning](https://www.frontiersin.org/journals/applied-mathematics-and-statistics/articles/10.3389/fams.2021.689393/full),
+which is one of the many geostatistical problems addressed
+by the software:
+
+```@raw html
+<p align="center">
+<iframe style="width:560px;height:315px" src="https://www.youtube.com/embed/75A6zyn5pIE" title="Geostatistical Learning" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</p>
+```
+
+Consider reading the [Geospatial Data Science with Julia](https://juliaearth.github.io/geospatial-data-science-with-julia)
+book before reading this documentation. If you have questions, or would
+like to brainstorm ideas, don't hesitate to start a topic in our
+[community channel](about/community.md).
 
 ```@raw html
 <p align="center">
@@ -48,45 +74,25 @@ Click on the cover to learn more.
 </p>
 ```
 
-## Overview
-
-In many fields of science, such as mining engineering, hydrogeology, petroleum
-engineering, and environmental sciences, traditional statistical methods fail
-to provide unbiased estimates of resources due to the presence of geospatial
-correlation. Geostatistics (a.k.a. geospatial statistics) is the branch of
-statistics developed to overcome this limitation. Particularly, it is the
-branch that takes geospatial coordinates of data into account.
-
-**GeoStats.jl** is an attempt to bring together bleeding-edge research in the
-geostatistics community into a comprehensive framework for *geospatial data
-science* and *geostatistical modeling*, as well as to empower researchers and
-practitioners with a toolkit for fast assessment of different modeling approaches.
-For a guided tour, please watch our JuliaCon2021 talk:
-
-```@raw html
-<p align="center">
-<iframe style="width:560px;height:315px" src="https://www.youtube.com/embed/75A6zyn5pIE" title="Geostatistical Learning" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-</p>
-```
-
-If you have questions, feature requests, or would like to brainstorm ideas, don't
-hesitate to start a topic in our [community channel](about/community.md).
-
 ## Installation
 
 Get the latest stable release with Julia's package manager:
 
-```
-] add GeoStats
+```julia
+using Pkg
+Pkg.add("GeoStats")
 ```
 
 ## Quick example
 
-Below is a quick preview of the high-level interface:
+Below is an example of geostatistical interpolation of point data
+over a Cartesian grid with a Kriging model:
 
 ```@example overview
+# load framework
 using GeoStats
 
+# load visualization backend
 import CairoMakie as Mke
 
 # attribute table
@@ -110,8 +116,6 @@ interp = geotable |> Interpolate(grid, model)
 # visualize the solution
 viz(interp.geometry, color = interp.Z)
 ```
-
-For a more detailed example, please consult the [Quickstart](quickstart.md).
 
 ## Project organization
 
