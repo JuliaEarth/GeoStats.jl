@@ -19,6 +19,7 @@ using Reexport
 @reexport using Dates
 @reexport using Unitful
 @reexport using Meshes
+@reexport using Distances
 @reexport using Rotations
 @reexport using CoordRefSystems
 @reexport using GeoTables
@@ -36,7 +37,5 @@ using Reexport
 @reexport using GeoStatsTransforms
 @reexport using GeoStatsValidation
 @reexport using Chain: @chain
-@reexport using Distances: Euclidean
-@reexport using Distances: Haversine
 
 end
