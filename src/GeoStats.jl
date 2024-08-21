@@ -36,5 +36,7 @@ using Reexport
 @reexport using GeoStatsTransforms
 @reexport using GeoStatsValidation
 @reexport using Chain: @chain
+@reexport using Distances: Euclidean
+@reexport using Distances: Haversine
 
 end
