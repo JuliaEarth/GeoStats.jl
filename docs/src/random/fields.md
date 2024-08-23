@@ -133,13 +133,13 @@ QuiltingProcess
 
 ```@example fieldprocs
 using ImageQuilting
-using GeoArtifacts
+using GeoStatsImages
 
 # domain of interest
 grid = CartesianGrid(200, 200)
 
 # quilting process
-img  = GeoStatsImages.get("Strebelle")
+img  = geostatsimage("Strebelle")
 proc = QuiltingProcess(img, (62, 62))
 
 # unconditional simulation
@@ -156,7 +156,7 @@ fig
 grid = CartesianGrid(200, 200)
 
 # quilting process
-img  = GeoStatsImages.get("StoneWall")
+img  = geostatsimage("StoneWall")
 proc = QuiltingProcess(img, (13, 13))
 
 # unconditional simulation
@@ -173,7 +173,7 @@ fig
 grid = domain(img)
 
 # pre-existing observations
-img  = GeoStatsImages.get("Strebelle")
+img  = geostatsimage("Strebelle")
 data = img |> Sample(20, replace=false)
 
 # quilting process
@@ -226,10 +226,10 @@ selection of patterns from the training image.
 using ImageFiltering
 
 # image assumed as ground truth (unknown)
-truth = GeoStatsImages.get("WalkerLakeTruth")
+truth = geostatsimage("WalkerLakeTruth")
 
 # training image with similar patterns
-img = GeoStatsImages.get("WalkerLake")
+img = geostatsimage("WalkerLake")
 
 # forward model (blur filter)
 function forward(data)
