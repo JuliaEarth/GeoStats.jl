@@ -53,6 +53,7 @@ viz(gset, showsegments = true)
 ### CartesianGrid
 
 ```@docs
+RegularGrid
 CartesianGrid
 ```
 
