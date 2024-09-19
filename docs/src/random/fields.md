@@ -73,18 +73,12 @@ addprocs(3)
 # load code on every single process
 @everywhere using GeoStats
 
-# ------------
-# main script
-# ------------
-
-# domain of interest
+# setup simulation
 grid = CartesianGrid(100, 100)
-
-# Gaussian process
 proc = GaussianProcess(GaussianVariogram(range=30.0))
 
-# generate three realizations with three processes
-real = rand(proc, grid, [:Z => Float64], 3, pool = workers())
+# perform simulation on all worker processes
+real = rand(proc, grid, [:Z => Float64], 3, workers = workers())
 ```
 
 Please consult
