@@ -123,6 +123,7 @@ This project would not be possible without the contributions of:
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/TimG1964"><img src="https://avatars.githubusercontent.com/u/157401228?v=4?s=100" width="100px;" alt="TimG1964"/><br /><sub><b>TimG1964</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=TimG1964" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/romu545"><img src="https://avatars.githubusercontent.com/u/76394912?v=4?s=100" width="100px;" alt="Rafael Mendoza Ureche"/><br /><sub><b>Rafael Mendoza Ureche</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=romu545" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://www.linkedin.com/in/simon-kok-lupemba-434099162/"><img src="https://avatars.githubusercontent.com/u/30597266?v=4?s=100" width="100px;" alt="Simon Kok Lupemba"/><br /><sub><b>Simon Kok Lupemba</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=lupemba" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/uriele"><img src="https://avatars.githubusercontent.com/u/2747130?v=4?s=100" width="100px;" alt="Marco"/><br /><sub><b>Marco</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=uriele" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>
