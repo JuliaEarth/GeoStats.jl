@@ -59,6 +59,18 @@ viz(fig[1,2], q75.geometry, color = q75.Z)
 fig
 ```
 
+The cummulative distribution function is obtained likewise:
+
+```@example fieldprocs
+p25 = cdf(real, 0.25)
+p75 = cdf(real, 0.75)
+
+fig = Mke.Figure(size = (800, 400))
+viz(fig[1,1], p25.geometry, color = p25.Z)
+viz(fig[1,2], p75.geometry, color = p75.Z)
+fig
+```
+
 All field processes can generate realizations in parallel
 using multiple Julia processes. Doing so requires using the
 [Distributed](https://docs.julialang.org/en/v1/stdlib/Distributed/)
