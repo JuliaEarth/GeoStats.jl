@@ -26,19 +26,6 @@ values
 domain
 ```
 
-The [GeoIO.jl](https://github.com/JuliaEarth/GeoIO.jl) package can be used
-to load/save geospatial data from/to various file formats:
-
-```@docs
-GeoIO.load
-GeoIO.save
-GeoIO.formats
-```
-
-The [GeoArtifacts.jl](https://github.com/JuliaEarth/GeoArtifacts.jl) package
-provides utility functions to automatically download geospatial data from
-repositories on the internet.
-
 ## Examples
 
 ```@example data
@@ -108,10 +95,44 @@ georef((T=vec(T), P=vec(P)), rand(Point, 25)) |> plot
 
 ### Files
 
-We can easily load geospatial data from disk without any specific knowledge of file formats:
+The [GeoIO.jl](https://github.com/JuliaEarth/GeoIO.jl) package can be used
+to load/save geospatial data from/to various file formats:
+
+```@docs
+GeoIO.load
+GeoIO.save
+GeoIO.formats
+```
 
 ```@example data
 using GeoIO
 
 zone = GeoIO.load("data/zone.shp")
+```
+
+### Artifacts
+
+The [GeoArtifacts.jl](https://github.com/JuliaEarth/GeoArtifacts.jl) package
+provides utility functions to automatically download geospatial data from
+repositories on the internet.
+
+```@example data
+using GeoArtifacts
+
+# download artifacts from naturalearthdata.com
+earth    = NaturalEarth.naturalearth1("water")
+borders  = NaturalEarth.borders()
+airports = NaturalEarth.airports()
+ports    = NaturalEarth.ports()
+
+# initialize viewer with a coarse "raster"
+earth |> Upscale(10, 5) |> viewer
+
+# add other elements to the visualization
+viz!(borders.geometry, color = "cyan")
+viz!(airports.geometry, color = "black", pointsize=4, pointmarker='✈')
+viz!(ports.geometry, color = "blue", pointsize=4, pointmarker='⚓')
+
+# display current figure
+Mke.current_figure()
 ```
