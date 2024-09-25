@@ -2,6 +2,9 @@
 
 Below is a list of publications made possible with this project:
 
+- *Kim et al. 2024.* [Coal Thickness Through Compositional Kriging: An Approach Based on Geostatistics]
+  (https://www.researchgate.net/publication/384322427_Coal_Thickness_Through_Compositional_Kriging_An_Approach_Based_on_Geostatistics)
+
 - *Doherty et al. 2024* [A Method for Quantifying Uncertainty in Spatially Interpolated
   Meteorological Data with Application to Daily Maximum Air Temperature]
   (https://egusphere.copernicus.org/preprints/2024/egusphere-2024-1886/egusphere-2024-1886.pdf)
