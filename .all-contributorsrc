@@ -699,6 +699,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "davibarreira",
+      "name": "Davi Sales Barreira",
+      "avatar_url": "https://avatars.githubusercontent.com/u/6407557?v=4",
+      "profile": "http://davibarreira.github.io",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
