@@ -78,7 +78,7 @@ consider pairs of points along all directions:
 ```@example empirical
 γ = EmpiricalVariogram(𝒟, :Z, maxlag = 50.)
 
-Mke.plot(γ)
+varioplot(γ)
 ```
 
 directional variograms along a specific direction:
@@ -87,8 +87,8 @@ directional variograms along a specific direction:
 γₕ = DirectionalVariogram((1.,0.), 𝒟, :Z, maxlag = 50.)
 γᵥ = DirectionalVariogram((0.,1.), 𝒟, :Z, maxlag = 50.)
 
-Mke.plot(γₕ, vcolor = :maroon, hcolor = :maroon)
-Mke.plot!(γᵥ)
+varioplot(γₕ, vcolor = :maroon, hcolor = :maroon)
+varioplot!(γᵥ)
 Mke.current_figure()
 ```
 
@@ -98,8 +98,8 @@ or planar variograms over a specific plane:
 γᵥ = PlanarVariogram((1.,0.), 𝒟, :Z, maxlag = 50.)
 γₕ = PlanarVariogram((0.,1.), 𝒟, :Z, maxlag = 50.)
 
-Mke.plot(γₕ, vcolor = :maroon, hcolor = :maroon)
-Mke.plot!(γᵥ)
+varioplot(γₕ, vcolor = :maroon, hcolor = :maroon)
+varioplot!(γᵥ)
 Mke.current_figure()
 ```
 
@@ -125,6 +125,6 @@ for all lags and angles:
 
 fig = Mke.Figure()
 ax = Mke.PolarAxis(fig[1,1], title = "Varioplane")
-Mke.plot!(ax, γ)
+varioplot!(ax, γ)
 fig
 ```

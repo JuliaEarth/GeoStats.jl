@@ -24,7 +24,7 @@ GeoStatsFunctions.fit(::Type{Variogram}, ::EmpiricalVariogram, ::VariogramFitAlg
 # empirical variogram
 g = EmpiricalVariogram(𝒟, :Z, maxlag = 25u"m")
 
-Mke.plot(g)
+varioplot(g)
 ```
 
 We can fit specific models to the empirical variogram:
@@ -32,8 +32,8 @@ We can fit specific models to the empirical variogram:
 ```@example variofit
 γ = GeoStatsFunctions.fit(SineHoleVariogram, g)
 
-Mke.plot(g)
-Mke.plot!(γ, maxlag = 25u"m")
+varioplot(g)
+varioplot!(γ, maxlag = 25u"m")
 Mke.current_figure()
 ```
 
@@ -42,8 +42,8 @@ or let the framework find the model with minimum error:
 ```@example variofit
 γ = GeoStatsFunctions.fit(Variogram, g)
 
-Mke.plot(g)
-Mke.plot!(γ, maxlag = 25u"m")
+varioplot(g)
+varioplot!(γ, maxlag = 25u"m")
 Mke.current_figure()
 ```
 
@@ -55,8 +55,8 @@ Optionally, we can specify a weighting function to give different weights to the
 ```@example variofit
 γ = GeoStatsFunctions.fit(SineHoleVariogram, g, h -> 1 / h^2)
 
-Mke.plot(g)
-Mke.plot!(γ, maxlag = 25u"m")
+varioplot(g)
+varioplot!(γ, maxlag = 25u"m")
 Mke.current_figure()
 ```
 

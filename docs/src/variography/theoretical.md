@@ -46,7 +46,7 @@ GaussianVariogram
 ```
 
 ```@example variograms
-Mke.plot(GaussianVariogram())
+varioplot(GaussianVariogram())
 ```
 
 ### Exponential
@@ -60,7 +60,7 @@ ExponentialVariogram
 ```
 
 ```@example variograms
-Mke.plot(ExponentialVariogram())
+varioplot(ExponentialVariogram())
 ```
 
 ### Matern
@@ -74,7 +74,7 @@ MaternVariogram
 ```
 
 ```@example variograms
-Mke.plot(MaternVariogram())
+varioplot(MaternVariogram())
 ```
 
 ### Spherical
@@ -88,7 +88,7 @@ SphericalVariogram
 ```
 
 ```@example variograms
-Mke.plot(SphericalVariogram())
+varioplot(SphericalVariogram())
 ```
 
 ### Cubic
@@ -102,7 +102,7 @@ CubicVariogram
 ```
 
 ```@example variograms
-Mke.plot(CubicVariogram())
+varioplot(CubicVariogram())
 ```
 
 ### Pentaspherical
@@ -116,7 +116,7 @@ PentasphericalVariogram
 ```
 
 ```@example variograms
-Mke.plot(PentasphericalVariogram())
+varioplot(PentasphericalVariogram())
 ```
 
 ### Power
@@ -130,7 +130,7 @@ PowerVariogram
 ```
 
 ```@example variograms
-Mke.plot(PowerVariogram())
+varioplot(PowerVariogram())
 ```
 
 ### Sine hole
@@ -144,7 +144,7 @@ SineHoleVariogram
 ```
 
 ```@example variograms
-Mke.plot(SineHoleVariogram())
+varioplot(SineHoleVariogram())
 ```
 
 ### Nugget
@@ -158,7 +158,7 @@ NuggetEffect
 ```
 
 ```@example variograms
-Mke.plot(NuggetEffect(1.0))
+varioplot(NuggetEffect(1.0))
 ```
 
 ### Circular
@@ -172,7 +172,7 @@ CircularVariogram
 ```
 
 ```@example variograms
-Mke.plot(CircularVariogram())
+varioplot(CircularVariogram())
 ```
 
 ## Anisotropy
