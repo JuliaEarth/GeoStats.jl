@@ -127,6 +127,7 @@ This project would not be possible without the contributions of:
     </tr>
     <tr>
       <td align="center" valign="top" width="14.28%"><a href="http://davibarreira.github.io"><img src="https://avatars.githubusercontent.com/u/6407557?v=4?s=100" width="100px;" alt="Davi Sales Barreira"/><br /><sub><b>Davi Sales Barreira</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=davibarreira" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/mikeingold"><img src="https://avatars.githubusercontent.com/u/4054970?v=4?s=100" width="100px;" alt="Michael Ingold"/><br /><sub><b>Michael Ingold</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=mikeingold" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>
