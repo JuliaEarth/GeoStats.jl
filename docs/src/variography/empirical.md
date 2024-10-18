@@ -56,10 +56,6 @@ varioplot
 EmpiricalVariogram
 DirectionalVariogram
 PlanarVariogram
-values(::EmpiricalVariogram)
-distance(::EmpiricalVariogram)
-estimator(::EmpiricalVariogram)
-merge(::EmpiricalVariogram{V,D,E}, ::EmpiricalVariogram{V,D,E}) where {V,D,E}
 ```
 
 Consider the following example image:
@@ -87,7 +83,7 @@ directional variograms along a specific direction:
 γₕ = DirectionalVariogram((1.,0.), 𝒟, :Z, maxlag = 50.)
 γᵥ = DirectionalVariogram((0.,1.), 𝒟, :Z, maxlag = 50.)
 
-varioplot(γₕ, vcolor = :maroon, hcolor = :maroon)
+varioplot(γₕ, color = :maroon, histcolor = :maroon)
 varioplot!(γᵥ)
 Mke.current_figure()
 ```
@@ -98,7 +94,7 @@ or planar variograms over a specific plane:
 γᵥ = PlanarVariogram((1.,0.), 𝒟, :Z, maxlag = 50.)
 γₕ = PlanarVariogram((0.,1.), 𝒟, :Z, maxlag = 50.)
 
-varioplot(γₕ, vcolor = :maroon, hcolor = :maroon)
+varioplot(γₕ, color = :maroon, histcolor = :maroon)
 varioplot!(γᵥ)
 Mke.current_figure()
 ```

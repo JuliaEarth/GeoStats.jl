@@ -9,10 +9,10 @@ import CairoMakie as Mke # hide
 
 Fitting theoretical variograms to empirical observations is an important
 modeling step to ensure valid mathematical models of geospatial continuity.
-Given an empirical variogram, the `fit` function can be used to perform the fit:
+Given an empirical variogram, the following function can be used to fit models:
 
 ```@docs
-GeoStatsFunctions.fit(::Type{Variogram}, ::EmpiricalVariogram, ::VariogramFitAlgo)
+GeoStatsFunctions.fit
 ```
 
 ## Example
