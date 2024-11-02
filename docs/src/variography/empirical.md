@@ -119,8 +119,5 @@ for all lags and angles:
 ```@example empirical
 γ = EmpiricalVarioplane(𝒟, :Z, maxlag = 50.)
 
-fig = Mke.Figure()
-ax = Mke.PolarAxis(fig[1,1], title = "Varioplane")
-varioplot!(ax, γ)
-fig
+planeplot(γ)
 ```
