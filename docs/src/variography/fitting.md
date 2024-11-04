@@ -1,6 +1,6 @@
 # Fitting variograms
 
-```@example variofit
+```@example variogramfit
 using GeoStats # hide
 import CairoMakie as Mke # hide
 ```
@@ -17,7 +17,7 @@ GeoStatsFunctions.fit
 
 ## Example
 
-```@example variofit
+```@example variogramfit
 # sinusoidal data
 𝒟 = georef((Z=[sin(i/2) + sin(j/2) for i in 1:50, j in 1:50],))
 
@@ -29,7 +29,7 @@ varioplot(g)
 
 We can fit specific models to the empirical variogram:
 
-```@example variofit
+```@example variogramfit
 γ = GeoStatsFunctions.fit(SineHoleVariogram, g)
 
 varioplot(g)
@@ -39,7 +39,7 @@ Mke.current_figure()
 
 or let the framework find the model with minimum error:
 
-```@example variofit
+```@example variogramfit
 γ = GeoStatsFunctions.fit(Variogram, g)
 
 varioplot(g)
@@ -52,7 +52,7 @@ of this example is sinusoidal.
 
 Optionally, we can specify a weighting function to give different weights to the lags:
 
-```@example variofit
+```@example variogramfit
 γ = GeoStatsFunctions.fit(SineHoleVariogram, g, h -> 1 / h^2)
 
 varioplot(g)

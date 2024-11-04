@@ -1,6 +1,6 @@
 # Empirical variograms
 
-```@example empirical
+```@example empiricalvariogram
 using GeoStats # hide
 import CairoMakie as Mke # hide
 ```
@@ -42,9 +42,7 @@ The high-performance estimation procedure implemented in the framework can
 consider all pairs of locations regardless of direction (ominidirectional)
 or a specified partition of the geospatial data (e.g. directional, planar).
 
-Variograms estimated along all directions in a given plane of reference are
-called varioplanes. Both variograms and varioplanes can be plotted directly
-with the following options:
+Variograms can plotted with the following options:
 
 ```@docs
 varioplot
@@ -60,28 +58,28 @@ PlanarVariogram
 
 Consider the following example image:
 
-```@example empirical
+```@example empiricalvariogram
 using GeoStatsImages
 
-𝒟 = geostatsimage("Gaussian30x10")
+img = geostatsimage("Gaussian30x10")
 
-viz(𝒟.geometry, color = 𝒟.Z)
+img |> viewer
 ```
 
-We can compute ominidirectional variograms, which
+We can estimate ominidirectional variograms, which
 consider pairs of points along all directions:
 
-```@example empirical
-γ = EmpiricalVariogram(𝒟, :Z, maxlag = 50.)
+```@example empiricalvariogram
+γ = EmpiricalVariogram(img, :Z, maxlag = 50.)
 
 varioplot(γ)
 ```
 
 directional variograms along a specific direction:
 
-```@example empirical
-γₕ = DirectionalVariogram((1.,0.), 𝒟, :Z, maxlag = 50.)
-γᵥ = DirectionalVariogram((0.,1.), 𝒟, :Z, maxlag = 50.)
+```@example empiricalvariogram
+γₕ = DirectionalVariogram((1.,0.), img, :Z, maxlag = 50.)
+γᵥ = DirectionalVariogram((0.,1.), img, :Z, maxlag = 50.)
 
 varioplot(γₕ, color = :maroon, histcolor = :maroon)
 varioplot!(γᵥ)
@@ -90,9 +88,9 @@ Mke.current_figure()
 
 or planar variograms over a specific plane:
 
-```@example empirical
-γᵥ = PlanarVariogram((1.,0.), 𝒟, :Z, maxlag = 50.)
-γₕ = PlanarVariogram((0.,1.), 𝒟, :Z, maxlag = 50.)
+```@example empiricalvariogram
+γᵥ = PlanarVariogram((1.,0.), img, :Z, maxlag = 50.)
+γₕ = PlanarVariogram((0.,1.), img, :Z, maxlag = 50.)
 
 varioplot(γₕ, color = :maroon, histcolor = :maroon)
 varioplot!(γᵥ)
@@ -109,15 +107,17 @@ Mke.current_figure()
 
 ## Varioplanes
 
+Variograms estimated along all directions in a given plane of reference are
+called varioplanes.
+
 ```@docs
 EmpiricalVarioplane
 ```
 
-The varioplane is plotted on a polar axis
-for all lags and angles:
+The varioplane is plotted on a polar axis for all lags and angles:
 
-```@example empirical
-γ = EmpiricalVarioplane(𝒟, :Z, maxlag = 50.)
+```@example empiricalvariogram
+γ = EmpiricalVarioplane(img, :Z, maxlag = 50.)
 
 planeplot(γ)
 ```

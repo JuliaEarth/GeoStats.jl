@@ -47,6 +47,7 @@ makedocs(
       "Queries" => "queries.md",
       "Declustering" => "declustering.md",
       "Variography" => ["variography/empirical.md", "variography/theoretical.md", "variography/fitting.md"],
+      "Transiography" => ["transiography/empirical.md", "transiography/theoretical.md"],
       "Kriging" => "kriging.md",
       "Random" => ["random/points.md", "random/fields.md"],
       "Validation" => "validation.md",

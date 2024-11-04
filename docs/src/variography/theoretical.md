@@ -1,6 +1,6 @@
 # Theoretical variograms
 
-```@example variograms
+```@example theoreticalvariogram
 using GeoStats # hide
 import CairoMakie as Mke # hide
 ```
@@ -45,8 +45,22 @@ representations of the same geostatistical behavior.
 GaussianVariogram
 ```
 
-```@example variograms
+```@example theoreticalvariogram
 varioplot(GaussianVariogram())
+```
+
+### Spherical
+
+```math
+\gamma(h) = (s - n) \left[\left(\frac{3}{2}\left(\frac{h}{r}\right) + \frac{1}{2}\left(\frac{h}{r}\right)^3\right) \cdot \1_{(0,r)}(h) + \1_{[r,\infty)}(h)\right] + n \cdot \1_{(0,\infty)}(h)
+```
+
+```@docs
+SphericalVariogram
+```
+
+```@example theoreticalvariogram
+varioplot(SphericalVariogram())
 ```
 
 ### Exponential
@@ -59,7 +73,7 @@ varioplot(GaussianVariogram())
 ExponentialVariogram
 ```
 
-```@example variograms
+```@example theoreticalvariogram
 varioplot(ExponentialVariogram())
 ```
 
@@ -73,22 +87,8 @@ varioplot(ExponentialVariogram())
 MaternVariogram
 ```
 
-```@example variograms
+```@example theoreticalvariogram
 varioplot(MaternVariogram())
-```
-
-### Spherical
-
-```math
-\gamma(h) = (s - n) \left[\left(\frac{3}{2}\left(\frac{h}{r}\right) + \frac{1}{2}\left(\frac{h}{r}\right)^3\right) \cdot \1_{(0,r)}(h) + \1_{[r,\infty)}(h)\right] + n \cdot \1_{(0,\infty)}(h)
-```
-
-```@docs
-SphericalVariogram
-```
-
-```@example variograms
-varioplot(SphericalVariogram())
 ```
 
 ### Cubic
@@ -101,7 +101,7 @@ varioplot(SphericalVariogram())
 CubicVariogram
 ```
 
-```@example variograms
+```@example theoreticalvariogram
 varioplot(CubicVariogram())
 ```
 
@@ -115,22 +115,8 @@ varioplot(CubicVariogram())
 PentasphericalVariogram
 ```
 
-```@example variograms
+```@example theoreticalvariogram
 varioplot(PentasphericalVariogram())
-```
-
-### Power
-
-```math
-\gamma(h) = sh^a + n \cdot \1_{(0,\infty)}(h)
-```
-
-```@docs
-PowerVariogram
-```
-
-```@example variograms
-varioplot(PowerVariogram())
 ```
 
 ### Sine hole
@@ -143,22 +129,8 @@ varioplot(PowerVariogram())
 SineHoleVariogram
 ```
 
-```@example variograms
+```@example theoreticalvariogram
 varioplot(SineHoleVariogram())
-```
-
-### Nugget
-
-```math
-\gamma(h) = n \cdot \1_{(0,\infty)}(h)
-```
-
-```@docs
-NuggetEffect
-```
-
-```@example variograms
-varioplot(NuggetEffect(1.0))
 ```
 
 ### Circular
@@ -171,8 +143,36 @@ varioplot(NuggetEffect(1.0))
 CircularVariogram
 ```
 
-```@example variograms
+```@example theoreticalvariogram
 varioplot(CircularVariogram())
+```
+
+### Power
+
+```math
+\gamma(h) = sh^a + n \cdot \1_{(0,\infty)}(h)
+```
+
+```@docs
+PowerVariogram
+```
+
+```@example theoreticalvariogram
+varioplot(PowerVariogram())
+```
+
+### Nugget
+
+```math
+\gamma(h) = n \cdot \1_{(0,\infty)}(h)
+```
+
+```@docs
+NuggetEffect
+```
+
+```@example theoreticalvariogram
+varioplot(NuggetEffect(1.0))
 ```
 
 ## Anisotropy
@@ -182,7 +182,7 @@ place of the default Euclidean metric as shown in the following example.
 First, we create an ellipsoid that specifies the ranges and angles of
 rotation:
 
-```@example variograms
+```@example theoreticalvariogram
 ellipsoid = MetricBall((3.0, 2.0, 1.0), RotZXZ(0.0, 0.0, 0.0))
 ```
 
@@ -200,13 +200,13 @@ GslibAngles
 We pass the ellipsoid as the first argument to the variogram model
 instead of specifying a single `range` with a keyword argument:
 
-```@example variograms
+```@example theoreticalvariogram
 GaussianVariogram(ellipsoid, sill = 2.0)
 ```
 
 To illustrate the concept, consider the following 2D data set:
 
-```@example variograms
+```@example theoreticalvariogram
 using Random # hide
 Random.seed!(2000) # hide
 
@@ -219,7 +219,7 @@ viz(geotable.geometry, color = geotable.Z)
 We interpolate the data with different ellipsoids by varying the angle of
 rotation from ``0`` to ``2\pi`` clockwise:
 
-```@example variograms
+```@example theoreticalvariogram
 θs = range(0.0, step = π/4, stop = 2π - π/4)
 
 # initialize figure
@@ -263,7 +263,7 @@ function:
 structures
 ```
 
-```@example variograms
+```@example theoreticalvariogram
 γ₁ = GaussianVariogram(nugget=1, sill=2)
 γ₂ = ExponentialVariogram(nugget=2, sill=3)
 
@@ -276,10 +276,10 @@ cₒ, c, g = structures(γ)
 cₒ # matrix nugget
 ```
 
-```@example variograms
+```@example theoreticalvariogram
 c # matrix coefficients
 ```
 
-```@example variograms
+```@example theoreticalvariogram
 g # normalized structures
 ```
