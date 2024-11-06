@@ -127,6 +127,22 @@ fig
 LindgrenProcess
 ```
 
+```@example fieldprocs
+# domain of interest
+mesh = simplexify(Sphere((0, 0, 0), 1))
+
+# Lindgren process
+proc = LindgrenProcess()
+
+# unconditional simulation
+real = rand(proc, mesh, [:Z => Float64], 2)
+
+fig = Mke.Figure(size = (800, 400))
+viz(fig[1,1], real[1].geometry, color = real[1].Z)
+viz(fig[1,2], real[2].geometry, color = real[2].Z)
+fig
+```
+
 ## External
 
 The following processes are available in external packages.
