@@ -130,6 +130,7 @@ This project would not be possible without the contributions of:
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/mikeingold"><img src="https://avatars.githubusercontent.com/u/4054970?v=4?s=100" width="100px;" alt="Michael Ingold"/><br /><sub><b>Michael Ingold</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=mikeingold" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/stepanoslejsek"><img src="https://avatars.githubusercontent.com/u/102300007?v=4?s=100" width="100px;" alt="Štěpán Ošlejšek"/><br /><sub><b>Štěpán Ošlejšek</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=stepanoslejsek" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/souma4"><img src="https://avatars.githubusercontent.com/u/91837445?v=4?s=100" width="100px;" alt="Jeffrey Chandler"/><br /><sub><b>Jeffrey Chandler</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=souma4" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/CarlBittendorf"><img src="https://avatars.githubusercontent.com/u/85636219?v=4?s=100" width="100px;" alt="Carl Bittendorf"/><br /><sub><b>Carl Bittendorf</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=CarlBittendorf" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>
