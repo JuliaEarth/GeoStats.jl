@@ -249,7 +249,7 @@ GHC
 ```@example transforms
 𝒞 = Ω |> GHC(20, 1.0)
 
-viz(𝒞.geometry, color = 𝒞.CLUSTER)
+viz(𝒞.geometry, color = 𝒞.cluster)
 ```
 
 ```@docs
@@ -259,7 +259,7 @@ GSC
 ```@example transforms
 𝒞 = Ω |> GSC(50, 2.0)
 
-viz(𝒞.geometry, color = 𝒞.CLUSTER)
+viz(𝒞.geometry, color = 𝒞.cluster)
 ```
 
 ```@docs
@@ -269,7 +269,7 @@ SLIC
 ```@example transforms
 𝒞 = Ω |> SLIC(50, 0.01)
 
-viz(𝒞.geometry, color = 𝒞.CLUSTER)
+viz(𝒞.geometry, color = 𝒞.cluster)
 ```
 
 ### Interpolate

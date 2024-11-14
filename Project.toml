@@ -1,7 +1,7 @@
 name = "GeoStats"
 uuid = "dcc97b0b-8ce5-5539-9008-bb190f959ef6"
 author = "Júlio Hoffimann <julio.hoffimann@gmail.com>"
-version = "0.71.2"
+version = "0.71.3"
 
 [deps]
 CategoricalArrays = "324d7699-5711-5eae-9e2f-1d82baa6b597"
@@ -42,7 +42,7 @@ GeoStatsBase = "0.46"
 GeoStatsFunctions = "0.6"
 GeoStatsModels = "0.6"
 GeoStatsProcesses = "0.8"
-GeoStatsTransforms = "0.8"
+GeoStatsTransforms = "0.9"
 GeoStatsValidation = "0.3"
 GeoTables = "1.24"
 LossFunctions = "0.11"
