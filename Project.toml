@@ -1,7 +1,7 @@
 name = "GeoStats"
 uuid = "dcc97b0b-8ce5-5539-9008-bb190f959ef6"
 author = "Júlio Hoffimann <julio.hoffimann@gmail.com>"
-version = "0.71.3"
+version = "0.71.4"
 
 [deps]
 CategoricalArrays = "324d7699-5711-5eae-9e2f-1d82baa6b597"
@@ -33,7 +33,7 @@ Unitful = "1986cc42-f94f-5a68-af5c-568840ba703d"
 CategoricalArrays = "0.10"
 Chain = "0.6"
 CoDa = "1.2"
-CoordRefSystems = "0.15"
+CoordRefSystems = "0.16"
 DataScienceTraits = "1.0"
 Dates = "1.9"
 DensityRatioEstimation = "1.2"
