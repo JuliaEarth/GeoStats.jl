@@ -126,6 +126,7 @@ The project is split into various packages:
 | [GeoStats.jl](https://github.com/JuliaEarth/GeoStats.jl) | Main package reexporting full stack of packages for geostatistics. |
 | [Meshes.jl](https://github.com/JuliaGeometry/Meshes.jl) | Computational geometry and advanced meshing algorithms. |
 | [CoordRefSystems.jl](https://github.com/JuliaEarth/CoordRefSystems.jl) | Unitful coordinate reference systems. |
+| [CoordGridTransforms.jl](https://github.com/JuliaEarth/CoordGridTransforms.jl) | Coordinate transforms with offset grids. |
 | [GeoTables.jl](https://github.com/JuliaEarth/GeoTables.jl) | Geospatial tables compatible with the framework. |
 | [DataScienceTraits.jl](https://github.com/JuliaML/DataScienceTraits.jl) | Traits for geospatial data science. |
 | [TableTransforms.jl](https://github.com/JuliaML/TableTransforms.jl) | Transforms and pipelines with tabular data. |
