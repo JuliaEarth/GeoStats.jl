@@ -41,6 +41,9 @@ We recommend the following educational resources.
 
 ### Workshop material
 
+- [FOSS4G 2024](https://github.com/Arpeggeo/FOSS4G2024)
+  [English] - Geospatial Data Science Workshop, FOSS4G 2024
+
 - [UFMG 2024](https://github.com/Arpeggeo/UFMG2024)
   [Portuguese] - Geociência de Dados na Mineração, UFMG 2024
 
