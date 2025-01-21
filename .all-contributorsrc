@@ -753,6 +753,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "ThatcherC",
+      "name": "Thatcher Chamberlin",
+      "avatar_url": "https://avatars.githubusercontent.com/u/2112477?v=4",
+      "profile": "https://jthatch.com",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
