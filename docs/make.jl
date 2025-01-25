@@ -20,7 +20,7 @@ makedocs(
       Dict(
         :macros => Dict(
           "\\cov" => "\\text{cov}",
-          "\\x" => "\\boldsymbol{x}",
+          "\\p" => "\\boldsymbol{p}",
           "\\z" => "\\boldsymbol{z}",
           "\\l" => "\\boldsymbol{\\lambda}",
           "\\c" => "\\boldsymbol{c}",

@@ -125,7 +125,7 @@ consider the rotation of geospatial data over a Cartesian grid:
 Ω = georef((Z=rand(10, 10),))
 
 # apply geometric transform
-Ωr = Ω |> Rotate(Angle2d(π/4))
+Ωr = Ω |> Rotate(π/4)
 
 fig = Mke.Figure(size = (800, 400))
 viz(fig[1,1], Ω.geometry, color = Ω.Z)
@@ -277,8 +277,6 @@ viz(𝒞.geometry, color = 𝒞.cluster)
 ```@docs
 Interpolate
 InterpolateNeighbors
-InterpolateMissing
-InterpolateNaN
 ```
 
 ```@example transforms
@@ -290,7 +288,7 @@ grid = CartesianGrid(100, 100)
 
 model = Kriging(GaussianVariogram(range=35.))
 
-interp = geotable |> Interpolate(grid, model)
+interp = geotable |> Interpolate(grid, model=model)
 
 viz(interp.geometry, color = interp.Z)
 ```

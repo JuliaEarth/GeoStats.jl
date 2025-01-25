@@ -111,7 +111,7 @@ grid = CartesianGrid(100, 100)
 model = Kriging(GaussianVariogram(range=35.))
 
 # perform interpolation over grid
-interp = geotable |> Interpolate(grid, model)
+interp = geotable |> Interpolate(grid, model=model)
 
 # visualize the solution
 viz(interp.geometry, color = interp.Z)

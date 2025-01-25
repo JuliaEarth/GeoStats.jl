@@ -12,10 +12,10 @@ with scalars or matrix coefficients to express multivariate relations.
 ## Models
 
 In an intrinsic isotropic model, the variogram is only a function of the
-distance between any two points ``\x_1,\x_2 \in \R^m``:
+distance between any two given points ``\p_1,\p_2 \in \R^m``:
 
 ```math
-\gamma(\x_1,\x_2) = \gamma(||\x_1 - \x_2||) = \gamma(h)
+\gamma(\p_1,\p_2) = \gamma(||\p_1 - \p_2||) = \gamma(h)
 ```
 
 Under the additional assumption of 2nd-order stationarity, the well-known
@@ -105,18 +105,18 @@ CubicVariogram
 varioplot(CubicVariogram())
 ```
 
-### Pentaspherical
+### PentaSpherical
 
 ```math
 \gamma(h) = (s - n) \left[\left(\frac{15}{8}\left(\frac{h}{r}\right) - \frac{5}{4}\left(\frac{h}{r}\right)^3 + \frac{3}{8}\left(\frac{h}{r}\right)^5\right) \cdot \1_{(0,r)}(h) + \1_{[r,\infty)}(h)\right] + n \cdot \1_{(0,\infty)}(h)
 ```
 
 ```@docs
-PentasphericalVariogram
+PentaSphericalVariogram
 ```
 
 ```@example theoreticalvariogram
-varioplot(PentasphericalVariogram())
+varioplot(PentaSphericalVariogram())
 ```
 
 ### Sine hole
@@ -177,18 +177,14 @@ varioplot(NuggetEffect(1.0))
 
 ## Anisotropy
 
-Anisotropic models are easily obtained by defining an ellipsoid metric in
-place of the default Euclidean metric as shown in the following example.
-First, we create an ellipsoid that specifies the ranges and angles of
-rotation:
+Anisotropic models can be constructed from a list of `ranges` and `rotation`
+matrix from [Rotations.jl](https://github.com/JuliaGeometry/Rotations.jl):
 
 ```@example theoreticalvariogram
-ellipsoid = MetricBall((3.0, 2.0, 1.0), RotZXZ(0.0, 0.0, 0.0))
+GaussianVariogram(ranges = (3.0, 2.0, 1.0), rotation = RotZXZ(0.0, 0.0, 0.0))
 ```
 
-All rotations from [Rotations.jl](https://github.com/JuliaGeometry/Rotations.jl)
-are supported as well as the following additional rotations from commercial
-geostatistical software:
+Rotation angles from commercial geostatistical software are also provided:
 
 ```@docs
 MinesightAngles
@@ -197,14 +193,7 @@ VulcanAngles
 GslibAngles
 ```
 
-We pass the ellipsoid as the first argument to the variogram model
-instead of specifying a single `range` with a keyword argument:
-
-```@example theoreticalvariogram
-GaussianVariogram(ellipsoid, sill = 2.0)
-```
-
-To illustrate the concept, consider the following 2D data set:
+The effect of anisotropy is illustrated below for different rotation angles:
 
 ```@example theoreticalvariogram
 using Random # hide
@@ -216,9 +205,6 @@ geotable = georef((Z=rand(50),), points)
 viz(geotable.geometry, color = geotable.Z)
 ```
 
-We interpolate the data with different ellipsoids by varying the angle of
-rotation from ``0`` to ``2\pi`` clockwise:
-
 ```@example theoreticalvariogram
 θs = range(0.0, step = π/4, stop = 2π - π/4)
 
@@ -228,22 +214,20 @@ fig = Mke.Figure(size = (800, 1600))
 # helper function to position subfigures
 pos = i -> CartesianIndices((4, 2))[i].I
 
-# Kriging with different angles
+# domain of interpolation
+grid = CartesianGrid(100, 100)
+
+# anisotropic variogram with different rotation angles
 for (i, θ) in enumerate(θs)
-  # ellipsoid rotated clockwise by angle θ
-  e = MetricBall((20.,5.), Angle2d(θ))
-
   # anisotropic variogram model
-  γ = GaussianVariogram(e)
-
-  # domain of interpolation
-  grid = CartesianGrid(100, 100)
+  γ = GaussianVariogram(ranges = (20.0, 5.0), rotation = Angle2d(θ))
 
   # perform interpolation
-  sol = geotable |> Interpolate(grid, Kriging(γ))
+  interp = geotable |> Interpolate(grid, model=Kriging(γ))
 
   # visualize solution at subplot i
-  viz(fig[pos(i)...], sol.geometry, color = sol.Z,
+  viz(fig[pos(i)...],
+    interp.geometry, color = interp.Z,
     axis = (title = "θ = $(rad2deg(θ))ᵒ",)
   )
 end

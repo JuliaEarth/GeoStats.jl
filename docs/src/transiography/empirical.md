@@ -16,7 +16,7 @@ The Carle's estimator of the empirical transiogram is given by
 \widehat{t_{ab}}(h) = \frac{\sum_{(i,j) \in N(h)} {I_a}_i \cdot {I_b}_j}{\sum_{(i,j) \in N(h)} {I_a}_i}
 ```
 
-where ``N(h) = \left\{(i,j) \mid ||\x_i - \x_j|| = h\right\}`` is the set
+where ``N(h) = \left\{(i,j) \mid ||\p_i - \p_j|| = h\right\}`` is the set
 of pairs of locations at a distance ``h``, and where ``I_a`` and ``I_b``
 are the indicator variables for categorical values (or levels) ``a`` and ``b``,
 respectively.
