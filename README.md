@@ -132,6 +132,7 @@ This project would not be possible without the contributions of:
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/souma4"><img src="https://avatars.githubusercontent.com/u/91837445?v=4?s=100" width="100px;" alt="Jeffrey Chandler"/><br /><sub><b>Jeffrey Chandler</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=souma4" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/CarlBittendorf"><img src="https://avatars.githubusercontent.com/u/85636219?v=4?s=100" width="100px;" alt="Carl Bittendorf"/><br /><sub><b>Carl Bittendorf</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=CarlBittendorf" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/ghyatzo"><img src="https://avatars.githubusercontent.com/u/8601724?v=4?s=100" width="100px;" alt="cschen"/><br /><sub><b>cschen</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=ghyatzo" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://jthatch.com"><img src="https://avatars.githubusercontent.com/u/2112477?v=4?s=100" width="100px;" alt="Thatcher Chamberlin"/><br /><sub><b>Thatcher Chamberlin</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=ThatcherC" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>
