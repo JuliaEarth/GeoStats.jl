@@ -6,7 +6,7 @@ import CairoMakie as Mke # hide
 ```
 
 We provide various theoretical variogram models from the literature, which can
-can be combined with ellipsoid distances to model geometric anisotropy and nested
+be combined with ellipsoid distances to model geometric anisotropy and nested
 with scalars or matrix coefficients to express multivariate relations.
 
 ## Models
@@ -30,10 +30,6 @@ Functions are provided to query properties of variogram models programmatically:
 isstationary(::Variogram)
 isisotropic(::Variogram)
 ```
-
-Corresponding covariance models are available for convenience. For example,
-the `GaussianVariogram` and the `GaussianCovariance` are two alternative
-representations of the same geostatistical behavior.
 
 ### Gaussian
 
