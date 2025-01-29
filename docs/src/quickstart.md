@@ -98,9 +98,9 @@ given a Julia array, which is not attached to any coordinate system, we
 can georeference the array using the [`georef`](@ref) function:
 
 ```@example quickstart
-Z = [10sin(i/10) + 2j for i in 1:50, j in 1:50]
+z = [10sin(i/10) + 2j for i in 1:50, j in 1:50]
 
-Ω = georef((Z=Z,))
+Ω = georef((; z=z))
 ```
 
 Default coordinates are assigned based on the size of the array, and different
@@ -109,7 +109,7 @@ configurations can be obtained with different methods (see [Data](data.md)).
 Geospatial data can be visualized with the [`viz`](@ref) recipe function:
 
 ```@example quickstart
-viz(Ω.geometry, color = Ω.Z)
+viz(Ω.geometry, color = Ω.z)
 ```
 
 Alternatively, we provide a basic scientific [`viewer`](@ref) to visualize
@@ -148,11 +148,11 @@ there is nothing new:
 ```
 
 ```@example quickstart
-Ω[1,:geometry]
+Ω[1,"geometry"]
 ```
 
 ```@example quickstart
-Ω.Z
+Ω.z
 ```
 
 However, notice that our implementation performs some clever
@@ -193,8 +193,8 @@ pipe = Quantile() → StdCoords()
 
 # plot distribution before and after pipeline
 fig = Mke.Figure(size = (800, 400))
-Mke.hist(fig[1,1], Ω.Z, color = :gray)
-Mke.hist(fig[2,1], Ω̂.Z, color = :gray)
+Mke.hist(fig[1,1], Ω.z, color = :gray)
+Mke.hist(fig[2,1], Ω̂.z, color = :gray)
 fig
 ```
 
@@ -221,7 +221,7 @@ We provide three macros [`@groupby`](@ref), [`@transform`](@ref) and
 as well as the function [`geojoin`](@ref) for advanced geospatial joins.
 
 ```@example quickstart
-@transform(Ω, :W = 2 * :Z * area(:geometry))
+@transform(Ω, :w = 2 * :z * area(:geometry))
 ```
 
 These are very useful for geospatial data science as they hide the complexity
@@ -252,7 +252,7 @@ purpose of fitting a learning model.
 We can now georeference the table and plot some of the variables:
 
 ```@example quickstart
-Ω = georef(table, (:x, :y))
+Ω = georef(table, ("x", "y"))
 
 fig = Mke.Figure(size = (800, 400))
 viz(fig[1,1], Ω.geometry, color = Ω.band4)
@@ -286,8 +286,8 @@ Any model from the [StatsLeanModels.jl](https://github.com/JuliaML/StatsLearnMod
 model is supported, including all models from [ScikitLearn.jl](https://github.com/cstjean/ScikitLearn.jl):
 
 ```@example quickstart
-feats = [:band1, :band2, :band3, :band4]
-label = :crop
+feats = ["band1", "band2", "band3", "band4"]
+label = "crop"
 
 model = DecisionTreeClassifier()
 ```

@@ -272,27 +272,6 @@ SLIC
 viz(𝒞.geometry, color = 𝒞.cluster)
 ```
 
-### Interpolate
-
-```@docs
-Interpolate
-InterpolateNeighbors
-```
-
-```@example transforms
-table = (; Z=[1.,0.,1.])
-coord = [(25.,25.), (50.,75.), (75.,50.)]
-geotable = georef(table, coord)
-
-grid = CartesianGrid(100, 100)
-
-model = Kriging(GaussianVariogram(range=35.))
-
-interp = geotable |> Interpolate(grid, model=model)
-
-viz(interp.geometry, color = interp.Z)
-```
-
 ### Simulate
 
 ```@docs

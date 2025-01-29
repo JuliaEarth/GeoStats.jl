@@ -22,6 +22,24 @@ Domain
 Mesh
 ```
 
+The list of supported domains is continuously growing. The following
+code can be used to print an updated list in any project environment:
+
+```@example domains
+# packages to print type tree
+using InteractiveUtils
+using AbstractTrees
+
+# load framework's domains
+using GeoStats
+
+# define the tree of types
+AbstractTrees.children(T::Type) = subtypes(T)
+
+# print all currently available transforms
+AbstractTrees.print_tree(Domain)
+```
+
 ## Examples
 
 ### PointSet
@@ -50,7 +68,7 @@ gset = GeometrySet([tria, quad])
 viz(gset, showsegments = true)
 ```
 
-### CartesianGrid
+### RegularGrid
 
 ```@docs
 RegularGrid

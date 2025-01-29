@@ -1,10 +1,99 @@
-# Kriging
+# Interpolation
 
-!!! note
+```@example interpolation
+using GeoStats # hide
+import CairoMakie as Mke # hide
+```
 
-    This section describes the Kriging models used in the [`Interpolate`](@ref) and
-    [`InterpolateNeighbors`](@ref) transforms, which provide options for neighborhood
-    search, change of support, etc.
+## Overview
+
+We provide various geostatistical interpolation models that
+can be used to predict variables over geospatial domains.
+These models are used within the [`Interpolate`](@ref) and
+[`InterpolateNeighbors`](@ref) transforms with advanced
+options for change of support, probabilistic prediction
+and neighborhood search.
+
+```@docs
+Interpolate
+InterpolateNeighbors
+```
+
+All models work with general Hilbert spaces, meaning that one
+can interpolate any data type that implements scalar multiplication,
+vector addition and inner product.
+
+The framework also provides a low-level interface for advanced users
+who may need to [`GeoStatsModels.fit`](@ref) and [`GeoStatsModels.predict`](@ref)
+(or [`GeoStatsModels.predictprob`](@ref)) models in non-standard algorithms:
+
+```@docs
+GeoStatsModels.fit
+GeoStatsModels.predict
+GeoStatsModels.predictprob
+```
+
+## Models
+
+We will illustrate the models with the following geotable and grid:
+
+```@example interpolation
+gtb = georef((; z=[1.,0.,1.]), [(25.,25.), (50.,75.), (75.,50.)])
+```
+
+```@example interpolation
+grid = CartesianGrid(100, 100)
+```
+
+### NN
+
+```@docs
+NN
+```
+
+```@example interpolation
+itp = gtb |> Interpolate(grid, model=NN())
+
+viz(itp.geometry, color = itp.z)
+```
+
+### IDW
+
+```@docs
+IDW
+```
+
+```@example interpolation
+itp = gtb |> Interpolate(grid, model=IDW())
+
+viz(itp.geometry, color = itp.z)
+```
+
+### LWR
+
+```@docs
+LWR
+```
+
+```@example interpolation
+itp = gtb |> Interpolate(grid, model=LWR())
+
+viz(itp.geometry, color = itp.z)
+```
+
+### Polynomial
+
+```@docs
+Polynomial
+```
+
+```@example interpolation
+itp = gtb |> Interpolate(grid, model=Polynomial())
+
+viz(itp.geometry, color = itp.z)
+```
+
+### Kriging
 
 A Kriging model has the form:
 
@@ -20,29 +109,25 @@ This package implements the following Kriging variants:
 - Ordinary Kriging
 - Universal Kriging
 
-which can be materialized in code with the generic [`Kriging`](@ref) constructor:
+which can be materialized in code with the generic [`Kriging`](@ref) constructor.
 
 ```@docs
 Kriging
 ```
 
-All these variants follow the same interface: an object is first created with a given set
-of parameters, it is then combined with the data to obtain predictions at new geometries.
+```@example interpolation
+model = Kriging(GaussianVariogram(range=35.))
 
-The `fit` function takes care of building the Kriging system and factorizing the LHS with
-an appropriate decomposition (e.g. Bunch-Kaufman, LU), and the `predict` (or `predictprob`)
-function performs the estimation for a given set of variables and geometry.
+itp = gtb |> Interpolate(grid, model=model)
 
-```@docs
-GeoStatsModels.fit
-GeoStatsModels.predict
-GeoStatsModels.predictprob
+viz(itp.geometry, color = itp.z)
 ```
 
-All variants work with general Hilbert spaces, meaning that one can interpolate any
-data type that implements scalar multiplication, vector addition and inner product.
+#### Simple Kriging
 
-## Simple Kriging
+```@docs
+GeoStatsModels.SimpleKriging
+```
 
 In Simple Kriging, the mean ``\mu`` of the random field is assumed to be constant *and known*.
 The resulting linear system is:
@@ -78,11 +163,11 @@ or in matricial form ``\C\l = \c``. We subtract the given mean from the observat
 \sigma^2(\p_0) = cov(0) - \c^\top \l
 ```
 
-```@docs
-GeoStatsModels.SimpleKriging
-```
+#### Ordinary Kriging
 
-## Ordinary Kriging
+```@docs
+GeoStatsModels.OrdinaryKriging
+```
 
 In Ordinary Kriging the mean of the random field is assumed to be constant *and unknown*.
 The resulting linear system is:
@@ -112,11 +197,11 @@ location ``\p_0`` are given by:
 \sigma^2(\p_0) =  \begin{bmatrix} \g \\ 1 \end{bmatrix}^\top \begin{bmatrix} \l \\ \nu \end{bmatrix}
 ```
 
-```@docs
-GeoStatsModels.OrdinaryKriging
-```
+#### Universal Kriging
 
-## Universal Kriging
+```@docs
+GeoStatsModels.UniversalKriging
+```
 
 In Universal Kriging, the mean of the random field is assumed to be a linear combination of known smooth functions.
 For example, it is common to assume
@@ -183,8 +268,4 @@ variance at location ``\p_0`` are given by:
 ```
 ```math
 \sigma^2(\p_0) = \begin{bmatrix}\g \\ \f\end{bmatrix}^\top \begin{bmatrix}\l \\ \boldsymbol{\nu}\end{bmatrix}
-```
-
-```@docs
-GeoStatsModels.UniversalKriging
 ```

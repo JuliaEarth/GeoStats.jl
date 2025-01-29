@@ -40,7 +40,7 @@ Would like to become a sponsor? Press the sponsor button in our
 In many fields of science, such as mining engineering, hydrogeology, petroleum
 engineering, and environmental sciences, traditional statistical methods fail
 to provide unbiased estimates of resources due to the presence of geospatial
-correlation. Geostatistics (a.k.a. geospatial statistics) is the branch of
+association. Geostatistics (a.k.a. geospatial statistics) is the branch of
 statistics developed to overcome this limitation. Particularly, it is the
 branch that takes geospatial coordinates of data into account. Some major
 highlights of **GeoStats.jl** are:
@@ -96,7 +96,7 @@ using GeoStats
 import CairoMakie as Mke
 
 # attribute table
-table = (; Z=[1.,0.,1.])
+table = (; z=[1.,0.,1.])
 
 # coordinates for each row
 coord = [(25.,25.), (50.,75.), (75.,50.)]
@@ -114,7 +114,7 @@ model = Kriging(GaussianVariogram(range=35.))
 interp = geotable |> Interpolate(grid, model=model)
 
 # visualize the solution
-viz(interp.geometry, color = interp.Z)
+viz(interp.geometry, color = interp.z)
 ```
 
 ## Project organization
