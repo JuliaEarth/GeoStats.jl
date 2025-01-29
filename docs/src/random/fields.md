@@ -5,103 +5,19 @@ using GeoStats # hide
 import CairoMakie as Mke # hide
 ```
 
-```@docs
-Base.rand(::GeoStatsProcesses.FieldProcess, ::Domain, ::Any, ::Any)
-```
-
-Realizations are stored in an [`Ensemble`](@ref) as illustrated in
-the following example:
-
-```@docs
-Ensemble
-```
-
-```@example fieldprocs
-# domain of interest
-grid = CartesianGrid(100, 100)
-
-# Gaussian process
-proc = GaussianProcess(GaussianVariogram(range=30.0))
-
-# unconditional simulation
-real = rand(proc, grid, [:Z => Float64], 100)
-```
-
-We can visualize the first two realizations:
-
-```@example fieldprocs
-fig = Mke.Figure(size = (800, 400))
-viz(fig[1,1], real[1].geometry, color = real[1].Z)
-viz(fig[1,2], real[2].geometry, color = real[2].Z)
-fig
-```
-
-the mean and variance:
-
-```@example fieldprocs
-m, v = mean(real), var(real)
-
-fig = Mke.Figure(size = (800, 400))
-viz(fig[1,1], m.geometry, color = m.Z)
-viz(fig[1,2], v.geometry, color = v.Z)
-fig
-```
-
-or the 25th and 75th percentiles:
-
-```@example fieldprocs
-q25 = quantile(real, 0.25)
-q75 = quantile(real, 0.75)
-
-fig = Mke.Figure(size = (800, 400))
-viz(fig[1,1], q25.geometry, color = q25.Z)
-viz(fig[1,2], q75.geometry, color = q75.Z)
-fig
-```
-
-The cummulative distribution function is obtained likewise:
-
-```@example fieldprocs
-p25 = cdf(real, 0.25)
-p75 = cdf(real, 0.75)
-
-fig = Mke.Figure(size = (800, 400))
-viz(fig[1,1], p25.geometry, color = p25.Z)
-viz(fig[1,2], p75.geometry, color = p75.Z)
-fig
-```
-
-All field processes can generate realizations in parallel
-using multiple Julia processes. Doing so requires using the
-[Distributed](https://docs.julialang.org/en/v1/stdlib/Distributed/)
-standard library, like in the following example:
-
-```julia
-using Distributed
-
-# request additional processes
-addprocs(3)
-
-# load code on every single process
-@everywhere using GeoStats
-
-# setup simulation
-grid = CartesianGrid(100, 100)
-proc = GaussianProcess(GaussianVariogram(range=30.0))
-
-# perform simulation on all worker processes
-real = rand(proc, grid, [:Z => Float64], 3, workers = workers())
-```
-
-Please consult
-[The ultimate guide to distributed computing in Julia](https://github.com/Arpeggeo/julia-distributed-computing/tree/master).
-
 ## Builtin
 
-The following processes are shipped with the framework.
+The following processes are available upon loading GeoStats.jl.
 
 ```@docs
 GaussianProcess
+LindgrenProcess
+```
+
+The [`GaussianProcess`](@ref) can be simulated with various
+methods from the literature:
+
+```@docs
 LUMethod
 FFTMethod
 SEQMethod
@@ -123,10 +39,6 @@ viz(fig[1,2], real[2].geometry, color = real[2].Z)
 fig
 ```
 
-```@docs
-LindgrenProcess
-```
-
 ```@example fieldprocs
 # domain of interest
 mesh = simplexify(Sphere((0, 0, 0), 1))
@@ -145,7 +57,7 @@ fig
 
 ## External
 
-The following processes are available in external packages.
+The following processes are available upon loading external packages.
 
 ### ImageQuilting.jl
 

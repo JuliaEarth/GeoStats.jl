@@ -44,6 +44,7 @@ makedocs(
       "Data" => "data.md",
       "Domains" => "domains.md",
       "Interpolation" => "interpolation.md",
+      "Simulation" => "simulation.md",
       "Transforms" => "transforms.md",
       "Queries" => "queries.md",
       "Declustering" => "declustering.md",
