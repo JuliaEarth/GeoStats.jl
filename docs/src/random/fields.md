@@ -7,20 +7,10 @@ import CairoMakie as Mke # hide
 
 ## Builtin
 
-The following processes are available upon loading GeoStats.jl.
+The following field processes are available upon loading GeoStats.jl.
 
 ```@docs
 GaussianProcess
-LindgrenProcess
-```
-
-The [`GaussianProcess`](@ref) can be simulated with various
-methods from the literature:
-
-```@docs
-LUMethod
-FFTMethod
-SEQMethod
 ```
 
 ```@example fieldprocs
@@ -37,6 +27,20 @@ fig = Mke.Figure(size = (800, 400))
 viz(fig[1,1], real[1].geometry, color = real[1].Z)
 viz(fig[1,2], real[2].geometry, color = real[2].Z)
 fig
+```
+
+The [`GaussianProcess`](@ref) can be simulated with different methods.
+Heuristics are used to select the most appropriate method for the data
+and domain at hand.
+
+```@docs
+LUMethod
+FFTMethod
+SEQMethod
+```
+
+```@docs
+LindgrenProcess
 ```
 
 ```@example fieldprocs
@@ -57,7 +61,7 @@ fig
 
 ## External
 
-The following processes are available upon loading external packages.
+The following field processes are available upon loading external packages.
 
 ### ImageQuilting.jl
 
