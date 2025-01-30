@@ -1,9 +1,11 @@
-# Empirical transiograms
+# Transiograms
 
-```@example empiricaltransiogram
+```@example transiograms
 using GeoStats # hide
 import CairoMakie as Mke # hide
 ```
+
+## Empirical transiograms
 
 Transiograms of categorical variables are matrix-valued functions ``t_{ab}(h)``
 that measure the transition probability from categorical value ``a`` to categorical
@@ -27,7 +29,7 @@ Transiograms can be plotted with the following options:
 transioplot
 ```
 
-## (Omini)directional
+### (Omini)directional transiograms
 
 ```@docs
 EmpiricalTransiogram
@@ -37,7 +39,7 @@ PlanarTransiogram
 
 Consider the following categorical image:
 
-```@example empiricaltransiogram
+```@example transiograms
 using GeoStatsImages
 
 img = geostatsimage("Gaussian30x10")
@@ -51,13 +53,13 @@ cat |> viewer
 
 We can estimate the ominidirectional transiogram with
 
-```@example empiricaltransiogram
+```@example transiograms
 t = EmpiricalTransiogram(cat, :Z, maxlag = 50.)
 
 transioplot(t)
 ```
 
-## Transioplanes
+### Empirical transioplanes
 
 Transiograms estimated along all directions in a given plane of reference are
 called transioplanes.
@@ -68,8 +70,71 @@ EmpiricalTransioplane
 
 The transioplane is plotted on a polar axis for all lags and angles:
 
-```@example empiricaltransiogram
+```@example transiograms
 t = EmpiricalTransioplane(cat, :Z, maxlag = 50.)
 
 planeplot(t)
+```
+
+## Theoretical transiograms
+
+We provide various theoretical transiogram models from the literature, which can
+can be combined with ellipsoid distances to model geometric anisotropy.
+
+### Models
+
+#### Linear
+
+```@docs
+LinearTransiogram
+```
+
+```@example transiograms
+transioplot(LinearTransiogram())
+```
+
+#### Gaussian
+
+```@docs
+GaussianTransiogram
+```
+
+```@example transiograms
+transioplot(GaussianTransiogram())
+```
+
+#### Spherical
+
+```@docs
+SphericalTransiogram
+```
+
+```@example transiograms
+transioplot(SphericalTransiogram())
+```
+
+#### Exponential
+
+```@docs
+ExponentialTransiogram
+```
+
+```@example transiograms
+transioplot(ExponentialTransiogram())
+```
+
+#### MatrixExponential
+
+```@docs
+MatrixExponentialTransiogram
+```
+
+```@example transiograms
+transioplot(MatrixExponentialTransiogram((1.0u"m", 1.0u"m"), (0.5, 0.5)))
+```
+
+#### PiecewiseLinear
+
+```@docs
+PiecewiseLinearTransiogram
 ```

@@ -73,5 +73,5 @@ tables of attributes obtained with the [`values`](@ref) function.
 
 ## Biplots.jl
 
-The [Biplot.jl](https://github.com/MakieOrg/Biplots.jl)
+The [Biplots.jl](https://github.com/MakieOrg/Biplots.jl)
 package provides 2D and 3D statistical biplots.

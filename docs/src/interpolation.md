@@ -7,25 +7,23 @@ import CairoMakie as Mke # hide
 
 ## Overview
 
-We provide various geostatistical interpolation models that
-can be used to predict variables over geospatial domains.
-These models are used within the [`Interpolate`](@ref) and
-[`InterpolateNeighbors`](@ref) transforms with advanced
-options for change of support, probabilistic prediction
-and neighborhood search.
+Geostatistical interpolation models can be used to predict variables over
+geospatial domains. These models are used within the [`Interpolate`](@ref)
+and [`InterpolateNeighbors`](@ref) transforms with advanced options for
+change of support, probabilistic prediction and neighborhood search.
 
 ```@docs
 Interpolate
 InterpolateNeighbors
 ```
 
-All models work with general Hilbert spaces, meaning that one
-can interpolate any data type that implements scalar multiplication,
-vector addition and inner product.
+All models work with general Hilbert spaces, meaning that it is possible
+to interpolate any data type that implements scalar multiplication, vector
+addition and inner product.
 
-The framework also provides a low-level interface for advanced users
-who may need to [`GeoStatsModels.fit`](@ref) and [`GeoStatsModels.predict`](@ref)
-(or [`GeoStatsModels.predictprob`](@ref)) models in non-standard algorithms:
+The framework also provides a low-level interface for advanced users who might
+need to [`GeoStatsModels.fit`](@ref) and [`GeoStatsModels.predict`](@ref)
+(or [`GeoStatsModels.predictprob`](@ref)) models in non-standard ways:
 
 ```@docs
 GeoStatsModels.fit
@@ -35,7 +33,7 @@ GeoStatsModels.predictprob
 
 ## Models
 
-We will illustrate the models with the following geotable and grid:
+We illustrate the models with the following geotable and grid:
 
 ```@example interpolation
 gtb = georef((; z=[1.,0.,1.]), [(25.,25.), (50.,75.), (75.,50.)])
@@ -54,7 +52,7 @@ NN
 ```@example interpolation
 itp = gtb |> Interpolate(grid, model=NN())
 
-viz(itp.geometry, color = itp.z)
+itp |> viewer
 ```
 
 ### IDW
@@ -66,7 +64,7 @@ IDW
 ```@example interpolation
 itp = gtb |> Interpolate(grid, model=IDW())
 
-viz(itp.geometry, color = itp.z)
+itp |> viewer
 ```
 
 ### LWR
@@ -78,7 +76,7 @@ LWR
 ```@example interpolation
 itp = gtb |> Interpolate(grid, model=LWR())
 
-viz(itp.geometry, color = itp.z)
+itp |> viewer
 ```
 
 ### Polynomial
@@ -90,7 +88,7 @@ Polynomial
 ```@example interpolation
 itp = gtb |> Interpolate(grid, model=Polynomial())
 
-viz(itp.geometry, color = itp.z)
+itp |> viewer
 ```
 
 ### Kriging
@@ -120,7 +118,7 @@ model = Kriging(GaussianVariogram(range=35.))
 
 itp = gtb |> Interpolate(grid, model=model)
 
-viz(itp.geometry, color = itp.z)
+itp |> viewer
 ```
 
 #### Simple Kriging
