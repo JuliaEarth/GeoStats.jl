@@ -1,7 +1,7 @@
 # Declustering
 
 *Declustered statistics* are statistics that make use of geospatial
-coordinates in an attempt to correct potential sampling bias:
+coordinates to correct potential sampling bias:
 
 ```@raw html
 <p align="center">
@@ -9,7 +9,7 @@ coordinates in an attempt to correct potential sampling bias:
 </p>
 ```
 
-The following statistics have geospatial semantics:
+We provide the following declustered statistics:
 
 ```@docs
 mean(::AbstractGeoTable, ::Any)
@@ -17,8 +17,8 @@ var(::AbstractGeoTable, ::Any)
 quantile(::AbstractGeoTable, ::Any, ::Any)
 ```
 
-A histogram with geospatial semantics is also available where the heights
-of the bins are adjusted based on the coordinates of the samples:
+A histogram is also available where the heights of the bins
+are adjusted based on the coordinates of the samples:
 
 ```@docs
 EmpiricalHistogram
