@@ -19,7 +19,7 @@ processes into processes over a known (and fixed) domain, that we call
 *field processes*, and processes that simulate the domain itself, where
 the most prominent example is a *point process*.
 
-## Field process
+## Field processes
 
 ```@docs
 GeoStatsProcesses.FieldProcess
@@ -96,6 +96,11 @@ viz(fig[1,2], p75.geometry, color = p75.z)
 fig
 ```
 
+The list of available field processes, including practical examples
+can be found in the [Fields](random/fields.md) page.
+
+#### Parallel simulation
+
 All field processes support distributed parallel simulation
 with multiple Julia worker processes. Doing so requires using the
 [Distributed](https://docs.julialang.org/en/v1/stdlib/Distributed/)
@@ -121,10 +126,7 @@ real = rand(proc, grid, [:z => Float64], 3, workers = workers())
 Please consult
 [The ultimate guide to distributed computing in Julia](https://github.com/Arpeggeo/julia-distributed-computing/tree/master).
 
-The list of available field processes, including practical examples
-can be found in the [Fields](random/fields.md) page.
-
-## Point process
+## Point processes
 
 ```@docs
 GeoStatsProcesses.PointProcess
@@ -161,7 +163,10 @@ viz!(fig[1,2], pset[2], color = :black)
 fig
 ```
 
-### Operations
+The list of available point processes, including practical examples
+can be found in the [Points](random/points.md) page.
+
+#### Basic operations
 
 Point processes can be combined using basic operations.
 
@@ -233,6 +238,3 @@ viz(fig[1,2], box)
 viz!(fig[1,2], pset₂, color = :black)
 fig
 ```
-
-The list of available point processes, including practical examples
-can be found in the [Points](random/points.md) page.
