@@ -145,13 +145,6 @@ This package implements a few commonly used as well as other more exotic
 variogram models. Most of these models share a set of default parameters
 (e.g. `sill=1.0`, `range=1.0`), which can be set with keyword arguments.
 
-Functions are provided to query properties of variogram models programmatically:
-
-```@docs
-isstationary(::Variogram)
-isisotropic(::Variogram)
-```
-
 #### Gaussian
 
 ```math

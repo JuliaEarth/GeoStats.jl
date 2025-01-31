@@ -121,6 +121,12 @@ itp = gtb |> Interpolate(grid, model=model)
 itp |> viewer
 ```
 
+!!! note
+
+    Kriging models depend on geostatistical functions (e.g., variograms).
+    We support a wide variety of permissible functions documented in the
+    [Functions](functions/variograms.md) section.
+
 #### Simple Kriging
 
 ```@docs
@@ -266,4 +272,33 @@ variance at location ``\p_0`` are given by:
 ```
 ```math
 \sigma^2(\p_0) = \begin{bmatrix}\g \\ \f\end{bmatrix}^\top \begin{bmatrix}\l \\ \boldsymbol{\nu}\end{bmatrix}
+```
+
+#### CoKriging
+
+All the Kriging variants are well-defined in the multivariate setting. We can use multivariate variograms
+(or covariances) in a linear model of coregionalization, or transiograms to perform multivariate interpolation:
+
+```@example interpolation
+# 3 variables: a, b, c
+table = (; a=[1.0, 0.0, 0.0], b=[0.0, 1.0, 0.0], c=[0.0, 0.0, 1.0])
+coord = [(25.0, 25.0), (50.0, 75.0), (75.0, 50.0)]
+gtb = georef(table, coord)
+
+# 3x3 variogram
+γ = [1.0 0.3 0.1; 0.3 1.0 0.2; 0.1 0.2 1.0] * SphericalVariogram(range=35.)
+
+itp = gtb |> Interpolate(grid, model=Kriging(γ))
+```
+
+```@example interpolation
+itp |> Select("a") |> viewer
+```
+
+```@example interpolation
+itp |> Select("b") |> viewer
+```
+
+```@example interpolation
+itp |> Select("c") |> viewer
 ```
