@@ -1,4 +1,4 @@
-# Fields
+# Field processes
 
 ```@example fieldprocs
 using GeoStats # hide

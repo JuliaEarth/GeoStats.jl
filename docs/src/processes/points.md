@@ -1,4 +1,4 @@
-# Points
+# Point processes
 
 ```@example pointprocs
 using GeoStats # hide

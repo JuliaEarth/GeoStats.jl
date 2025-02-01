@@ -17,7 +17,7 @@ In the following sections, we assume some basic understanding of geospatial
 random processes. For the purposes of this documentation, we divide these
 processes into processes over a known (and fixed) domain, that we call
 *field processes*, and processes that simulate the domain itself, where
-the most prominent example is a *point process*.
+the most prominent example are *point processes*.
 
 ## Field processes
 
@@ -96,8 +96,10 @@ viz(fig[1,2], p75.geometry, color = p75.z)
 fig
 ```
 
-The list of available field processes, including practical examples
-can be found in the [Fields](random/fields.md) page.
+!!! note
+
+    The list of available field processes can be found in
+    the [Field processes](processes/fields.md) page.
 
 #### Parallel simulation
 
@@ -163,8 +165,10 @@ viz!(fig[1,2], pset[2], color = :black)
 fig
 ```
 
-The list of available point processes, including practical examples
-can be found in the [Points](random/points.md) page.
+!!! note
+
+    The list of available point processes can be found in
+    the [Point processes](processes/points.md) page.
 
 #### Basic operations
 

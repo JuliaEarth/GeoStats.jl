@@ -1,19 +1,17 @@
 # Validation
 
-GeoStats.jl was designed to, among other things, facilitate rigorous comparison
-of different geostatistical models in the literature. As a user of geostatistics,
-you may be interested in trying various models on a given data set to pick the
-one with best performance. As a researcher in the field, you may be interested in
-benchmarking your new model against other established models.
+## Overview
 
-Errors of geostatistical solvers can be estimated with the [`cverror`](@ref) function:
+We provide various geostatistical cross-validation methods to compare
+[interpolation models](interpolation.md) or [learning models](learning.md).
+These methods are accessible through the [`cverror`](@ref) function:
 
 ```@docs
 cverror
 ```
 
-For example, we can perform block cross-validation on a decision tree model using
-the following code:
+As an example, consider the block cross-validation error of the following
+decision tree learning model:
 
 ```@example error
 using GeoStats
@@ -26,8 +24,8 @@ using GeoIO
 Ωₛ, Ωₜ = geosplit(Ω, 0.2, (1.0, -1.0))
 
 # features and label for supervised learning
-feats = [:band1,:band2,:band3,:band4]
-label = :crop
+feats = ["band1", "band2", "band3", "band4"]
+label = "crop"
 
 # learning model
 model = DecisionTreeClassifier()
@@ -36,7 +34,7 @@ model = DecisionTreeClassifier()
 loss = MisclassLoss()
 
 # block cross-validation with r = 30.
-bcv = BlockValidation(30., loss = Dict(:crop => loss))
+bcv = BlockValidation(30., loss = Dict("crop" => loss))
 
 # estimate of generalization error
 ϵ̂ = cverror((model, feats => label), Ωₛ, bcv)
@@ -53,39 +51,39 @@ error for comparison:
 ϵ = mean(loss.(Ωₜ.crop, Ω̂ₜ.crop))
 ```
 
-Below is the list of currently implemented validation methods.
+## Methods
 
-## Leave-one-out
+### Leave-one-out
 
 ```@docs
 LeaveOneOut
 ```
 
-## Leave-ball-out
+### Leave-ball-out
 
 ```@docs
 LeaveBallOut
 ```
 
-## K-fold
+### K-fold
 
 ```@docs
 KFoldValidation
 ```
 
-## Block
+### Block
 
 ```@docs
 BlockValidation
 ```
 
-## Weighted
+### Weighted
 
 ```@docs
 WeightedValidation
 ```
 
-## Density-ratio
+### Density-ratio
 
 ```@docs
 DensityRatioValidation

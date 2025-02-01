@@ -280,13 +280,37 @@ All the Kriging variants are well-defined in the multivariate setting. We can us
 (or covariances) in a linear model of coregionalization, or transiograms to perform multivariate interpolation:
 
 ```@example interpolation
-# 3 variables: a, b, c
+# 3 variables
 table = (; a=[1.0, 0.0, 0.0], b=[0.0, 1.0, 0.0], c=[0.0, 0.0, 1.0])
 coord = [(25.0, 25.0), (50.0, 75.0), (75.0, 50.0)]
-gtb = georef(table, coord)
 
 # 3x3 variogram
 γ = [1.0 0.3 0.1; 0.3 1.0 0.2; 0.1 0.2 1.0] * SphericalVariogram(range=35.)
+
+gtb = georef(table, coord)
+
+itp = gtb |> Interpolate(grid, model=Kriging(γ))
+```
+
+```@example interpolation
+itp |> Select("a") |> viewer
+```
+
+```@example interpolation
+itp |> Select("b") |> viewer
+```
+
+```@example interpolation
+itp |> Select("c") |> viewer
+```
+
+Heterotopic settings are automatically detected in the presence of `missing` values:
+
+```@example interpolation
+# 3 variables with missing values
+table = (; a=[1.0, 0.0, 0.0], b=[0.0, 1.0, missing], c=[missing, 0.0, 1.0])
+
+gtb = georef(table, coord)
 
 itp = gtb |> Interpolate(grid, model=Kriging(γ))
 ```
