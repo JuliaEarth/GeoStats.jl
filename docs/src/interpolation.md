@@ -125,7 +125,8 @@ itp |> viewer
 
     Kriging models depend on geostatistical functions (e.g., variograms).
     We support a wide variety of permissible functions documented in the
-    [Functions](functions/variograms.md) section.
+    [Variograms](variograms.md), [Covariances](covariances.md) and
+    [Transiograms](transiograms.md) sections.
 
 #### Simple Kriging
 

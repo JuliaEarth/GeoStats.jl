@@ -98,8 +98,7 @@ fig
 
 !!! note
 
-    The list of available field processes can be found in
-    the [Field processes](processes/fields.md) page.
+    Please check [this page](fieldprocs.md) for more examples.
 
 #### Parallel simulation
 
@@ -167,8 +166,7 @@ fig
 
 !!! note
 
-    The list of available point processes can be found in
-    the [Point processes](processes/points.md) page.
+    Please check [this page](pointprocs.md) for more examples.
 
 #### Basic operations
 
