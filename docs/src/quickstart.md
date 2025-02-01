@@ -262,8 +262,8 @@ fig
 
 Similar to a generic statistical learning workflow, we split the data
 into "train" and "test" sets. The main difference here is that our
-geospatial `geosplit` function accepts a separating plane specified by
-its normal direction `(1,-1)`:
+geospatial [`geosplit`](@ref) function accepts a separating plane
+specified by its normal direction `(1,-1)`:
 
 ```@example quickstart
 Ωs, Ωt = geosplit(Ω, 0.2, (1.0, -1.0))
@@ -276,8 +276,8 @@ Mke.current_figure()
 We can visualize the domain of the "train" (or source) set Ωs in blue,
 and the domain of the "test" (or target) set Ωt in gray. We reserved
 20% of the samples to Ωs and 80% to Ωt. Internally, this geospatial
-`geosplit` function is implemented in terms of efficient geospatial
-partitions.
+[`geosplit`](@ref) function is implemented in terms of efficient
+geospatial partitions.
 
 Let's define our geostatistical learning model to predict the crop type
 based on the four satellite bands. We will use the `DecisionTreeClassifier` 
