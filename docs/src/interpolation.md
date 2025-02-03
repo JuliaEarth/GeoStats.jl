@@ -31,6 +31,9 @@ GeoStatsModels.predict
 GeoStatsModels.predictprob
 ```
 
+For model validation, including cross-validation error estimates, please check the
+[Validation](validation.md) section.
+
 ## Models
 
 We illustrate the models with the following geotable and grid:

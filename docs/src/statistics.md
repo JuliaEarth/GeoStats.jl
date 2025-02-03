@@ -1,6 +1,6 @@
 # Declustered statistics
 
-*Declustered statistics* are statistics that make use of geospatial
+Declustered statistics are statistics that make use of geospatial
 coordinates to correct potential sampling bias:
 
 ```@raw html

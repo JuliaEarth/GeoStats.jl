@@ -4,10 +4,13 @@ using DocumenterTools: Themes
 # transforms api
 using TransformsBase
 
-# external solvers
+# external processes
 using ImageQuilting
 using TuringPatterns
 using StratiGraphics
+
+# external docstrings
+using DecisionTree
 
 # IO packages
 using GeoIO
