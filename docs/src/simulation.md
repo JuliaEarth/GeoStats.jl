@@ -26,14 +26,10 @@ GeoStatsProcesses.FieldProcess
 Base.rand(::GeoStatsProcesses.FieldProcess, ::Domain, ::Any, ::Any)
 ```
 
-Realizations of a field process are efficiently stored in an [`Ensemble`](@ref).
-For most purposes, an ensemble is an indexable collection of geotables together
-with a few summary statistics that can be used quantify uncertainty
-(e.g., `mean`, `var`, `cdf`, `quantile`).
-
-```@docs
-Ensemble
-```
+Realizations of a field process are efficiently stored in an `Ensemble`.
+For most purposes, an ensemble is an indexable collection of geotables
+together with a few summary statistics that can be used quantify
+uncertainty (e.g., `mean`, `var`, `cdf`, `quantile`).
 
 The simulation of field processes can be performed without a geotable in an
 *unconditional* simulation. If a geotable is provided, the observed values
