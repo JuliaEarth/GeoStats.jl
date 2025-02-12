@@ -23,12 +23,6 @@ of pairs of locations at a distance ``h``, and where ``I_a`` and ``I_b``
 are the indicator variables for categorical values (or levels) ``a`` and ``b``,
 respectively.
 
-Transiograms can be plotted with the following options:
-
-```@docs
-transioplot
-```
-
 ### (Omini)directional transiograms
 
 ```@docs
@@ -56,24 +50,19 @@ We can estimate the ominidirectional transiogram with
 ```@example transiograms
 t = EmpiricalTransiogram(cat, :Z, maxlag = 50.)
 
-transioplot(t)
+funplot(t)
 ```
 
-### Empirical transioplanes
-
-Transiograms estimated along all directions in a given plane of reference are
-called transioplanes.
+### Empirical surfaces
 
 ```@docs
-EmpiricalTransioplane
+EmpiricalTransiogramSurface
 ```
 
-The transioplane is plotted on a polar axis for all lags and angles:
-
 ```@example transiograms
-t = EmpiricalTransioplane(cat, :Z, maxlag = 50.)
+t = EmpiricalTransiogramSurface(cat, :Z, maxlag = 50.)
 
-planeplot(t)
+surfplot(t)
 ```
 
 ## Theoretical transiograms
@@ -90,7 +79,7 @@ LinearTransiogram
 ```
 
 ```@example transiograms
-transioplot(LinearTransiogram())
+funplot(LinearTransiogram())
 ```
 
 #### Gaussian
@@ -100,7 +89,7 @@ GaussianTransiogram
 ```
 
 ```@example transiograms
-transioplot(GaussianTransiogram())
+funplot(GaussianTransiogram())
 ```
 
 #### Spherical
@@ -110,7 +99,7 @@ SphericalTransiogram
 ```
 
 ```@example transiograms
-transioplot(SphericalTransiogram())
+funplot(SphericalTransiogram())
 ```
 
 #### Exponential
@@ -120,7 +109,7 @@ ExponentialTransiogram
 ```
 
 ```@example transiograms
-transioplot(ExponentialTransiogram())
+funplot(ExponentialTransiogram())
 ```
 
 #### MatrixExponential
@@ -130,7 +119,7 @@ MatrixExponentialTransiogram
 ```
 
 ```@example transiograms
-transioplot(MatrixExponentialTransiogram((1.0u"m", 1.0u"m"), (0.5, 0.5)))
+funplot(MatrixExponentialTransiogram())
 ```
 
 #### PiecewiseLinear

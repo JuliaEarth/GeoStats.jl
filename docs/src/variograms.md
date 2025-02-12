@@ -52,12 +52,6 @@ DirectionalVariogram
 PlanarVariogram
 ```
 
-Variograms can plotted with the following options:
-
-```@docs
-varioplot
-```
-
 Consider the following example image:
 
 ```@example variograms
@@ -74,7 +68,7 @@ consider pairs of points along all directions:
 ```@example variograms
 γ = EmpiricalVariogram(img, :Z, maxlag = 50.)
 
-varioplot(γ)
+funplot(γ)
 ```
 
 directional variograms along a specific direction:
@@ -83,9 +77,8 @@ directional variograms along a specific direction:
 γₕ = DirectionalVariogram((1.,0.), img, :Z, maxlag = 50.)
 γᵥ = DirectionalVariogram((0.,1.), img, :Z, maxlag = 50.)
 
-varioplot(γₕ, color = :maroon, histcolor = :maroon)
-varioplot!(γᵥ)
-Mke.current_figure()
+fig = funplot(γₕ)
+funplot!(fig, γᵥ, color = :maroon, histcolor = :maroon)
 ```
 
 or planar variograms over a specific plane:
@@ -94,9 +87,8 @@ or planar variograms over a specific plane:
 γᵥ = PlanarVariogram((1.,0.), img, :Z, maxlag = 50.)
 γₕ = PlanarVariogram((0.,1.), img, :Z, maxlag = 50.)
 
-varioplot(γₕ, color = :maroon, histcolor = :maroon)
-varioplot!(γᵥ)
-Mke.current_figure()
+fig = funplot(γₕ)
+funplot!(fig, γᵥ, color = :maroon, histcolor = :maroon)
 ```
 
 !!! note
@@ -107,21 +99,16 @@ Mke.current_figure()
     interested in comparing the horizontal planar range to the
     vertical directional range.
 
-### Empirical varioplanes
-
-Variograms estimated along all directions in a given plane of reference are
-called varioplanes.
+### Empirical surfaces
 
 ```@docs
-EmpiricalVarioplane
+EmpiricalVariogramSurface
 ```
 
-The varioplane is plotted on a polar axis for all lags and angles:
-
 ```@example variograms
-γ = EmpiricalVarioplane(img, :Z, maxlag = 50.)
+γ = EmpiricalVariogramSurface(img, :Z, maxlag = 50.)
 
-planeplot(γ)
+surfplot(γ)
 ```
 
 ## Theoretical variograms
@@ -156,7 +143,7 @@ GaussianVariogram
 ```
 
 ```@example variograms
-varioplot(GaussianVariogram())
+funplot(GaussianVariogram())
 ```
 
 #### Spherical
@@ -170,7 +157,7 @@ SphericalVariogram
 ```
 
 ```@example variograms
-varioplot(SphericalVariogram())
+funplot(SphericalVariogram())
 ```
 
 #### Exponential
@@ -184,7 +171,7 @@ ExponentialVariogram
 ```
 
 ```@example variograms
-varioplot(ExponentialVariogram())
+funplot(ExponentialVariogram())
 ```
 
 #### Matern
@@ -198,7 +185,7 @@ MaternVariogram
 ```
 
 ```@example variograms
-varioplot(MaternVariogram())
+funplot(MaternVariogram())
 ```
 
 #### Cubic
@@ -212,7 +199,7 @@ CubicVariogram
 ```
 
 ```@example variograms
-varioplot(CubicVariogram())
+funplot(CubicVariogram())
 ```
 
 #### PentaSpherical
@@ -226,7 +213,7 @@ PentaSphericalVariogram
 ```
 
 ```@example variograms
-varioplot(PentaSphericalVariogram())
+funplot(PentaSphericalVariogram())
 ```
 
 #### Sine hole
@@ -240,7 +227,7 @@ SineHoleVariogram
 ```
 
 ```@example variograms
-varioplot(SineHoleVariogram())
+funplot(SineHoleVariogram())
 ```
 
 #### Circular
@@ -254,7 +241,7 @@ CircularVariogram
 ```
 
 ```@example variograms
-varioplot(CircularVariogram())
+funplot(CircularVariogram())
 ```
 
 #### Power
@@ -268,7 +255,7 @@ PowerVariogram
 ```
 
 ```@example variograms
-varioplot(PowerVariogram())
+funplot(PowerVariogram())
 ```
 
 #### Nugget
@@ -282,7 +269,7 @@ NuggetEffect
 ```
 
 ```@example variograms
-varioplot(NuggetEffect(1.0))
+funplot(NuggetEffect())
 ```
 
 ### Anisotropic models
@@ -397,7 +384,7 @@ GeoStatsFunctions.fit
 # empirical variogram
 g = EmpiricalVariogram(𝒟, :Z, maxlag = 25u"m")
 
-varioplot(g)
+funplot(g)
 ```
 
 We can fit specific models to the empirical variogram:
@@ -405,9 +392,8 @@ We can fit specific models to the empirical variogram:
 ```@example variograms
 γ = GeoStatsFunctions.fit(SineHoleVariogram, g)
 
-varioplot(g)
-varioplot!(γ, maxlag = 25u"m")
-Mke.current_figure()
+fig = funplot(g)
+funplot!(fig, γ, maxlag = 25u"m")
 ```
 
 or let the framework find the model with minimum error:
@@ -415,9 +401,8 @@ or let the framework find the model with minimum error:
 ```@example variograms
 γ = GeoStatsFunctions.fit(Variogram, g)
 
-varioplot(g)
-varioplot!(γ, maxlag = 25u"m")
-Mke.current_figure()
+fig = funplot(g)
+funplot!(fig, γ, maxlag = 25u"m")
 ```
 
 which should be a [`SineHoleVariogram`](@ref) given that the synthetic data
@@ -428,9 +413,8 @@ Optionally, we can specify a weighting function to give different weights to the
 ```@example variograms
 γ = GeoStatsFunctions.fit(SineHoleVariogram, g, h -> 1 / h^2)
 
-varioplot(g)
-varioplot!(γ, maxlag = 25u"m")
-Mke.current_figure()
+fig = funplot(g)
+funplot!(fig, γ, maxlag = 25u"m")
 ```
 
 ### Methods

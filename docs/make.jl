@@ -49,7 +49,7 @@ makedocs(
       "Transforms" => "transforms.md",
       "Grouping" => ["clustering.md", "partitioning.md"],
       "Modeling" => ["interpolation.md", "simulation.md", "learning.md"],
-      "Functions" => ["variograms.md", "covariances.md", "transiograms.md"],
+      "Functions" => ["functions.md", "variograms.md", "covariances.md", "transiograms.md"],
       "Processes" => ["fieldprocs.md", "pointprocs.md"],
       "Statistics" => "statistics.md",
       "Queries" => "queries.md",
