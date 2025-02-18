@@ -23,7 +23,7 @@ the most prominent example are *point processes*.
 
 ```@docs
 GeoStatsProcesses.FieldProcess
-Base.rand(::GeoStatsProcesses.FieldProcess, ::Domain, ::Any, ::Any)
+Base.rand(::GeoStatsProcesses.FieldProcess, ::Domain)
 ```
 
 Realizations of a field process are efficiently stored in an `Ensemble`.
@@ -45,15 +45,15 @@ grid = CartesianGrid(100, 100)
 proc = GaussianProcess(GaussianVariogram(range=30.0))
 
 # perform simulation
-real = rand(proc, grid, [:z => Float64], 100)
+real = rand(proc, grid, 100)
 ```
 
 The first two realizations of the process are shown below:
 
 ```@example simulation
 fig = Mke.Figure(size = (800, 400))
-viz(fig[1,1], real[1].geometry, color = real[1].z)
-viz(fig[1,2], real[2].geometry, color = real[2].z)
+viz(fig[1,1], real[1].geometry, color = real[1].field)
+viz(fig[1,2], real[2].geometry, color = real[2].field)
 fig
 ```
 
@@ -63,8 +63,8 @@ Likewise, we can show the mean and variance of the ensemble:
 m, v = mean(real), var(real)
 
 fig = Mke.Figure(size = (800, 400))
-viz(fig[1,1], m.geometry, color = m.z)
-viz(fig[1,2], v.geometry, color = v.z)
+viz(fig[1,1], m.geometry, color = m.field)
+viz(fig[1,2], v.geometry, color = v.field)
 fig
 ```
 
@@ -75,8 +75,8 @@ q25 = quantile(real, 0.25)
 q75 = quantile(real, 0.75)
 
 fig = Mke.Figure(size = (800, 400))
-viz(fig[1,1], q25.geometry, color = q25.z)
-viz(fig[1,2], q75.geometry, color = q75.z)
+viz(fig[1,1], q25.geometry, color = q25.field)
+viz(fig[1,2], q75.geometry, color = q75.field)
 fig
 ```
 
@@ -87,8 +87,8 @@ p25 = cdf(real, 0.25)
 p75 = cdf(real, 0.75)
 
 fig = Mke.Figure(size = (800, 400))
-viz(fig[1,1], p25.geometry, color = p25.z)
-viz(fig[1,2], p75.geometry, color = p75.z)
+viz(fig[1,1], p25.geometry, color = p25.field)
+viz(fig[1,2], p75.geometry, color = p75.field)
 fig
 ```
 
@@ -117,7 +117,7 @@ grid = CartesianGrid(100, 100)
 proc = GaussianProcess(GaussianVariogram(range=30.0))
 
 # perform simulation on all worker processes
-real = rand(proc, grid, [:z => Float64], 3, workers = workers())
+real = rand(proc, grid, 3, workers = workers())
 ```
 
 Please consult

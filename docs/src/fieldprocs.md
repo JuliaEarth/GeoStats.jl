@@ -21,11 +21,11 @@ grid = CartesianGrid(100, 100)
 proc = GaussianProcess(GaussianVariogram(range=30.0))
 
 # unconditional simulation
-real = rand(proc, grid, [:Z => Float64], 2)
+real = rand(proc, grid, 2)
 
 fig = Mke.Figure(size = (800, 400))
-viz(fig[1,1], real[1].geometry, color = real[1].Z)
-viz(fig[1,2], real[2].geometry, color = real[2].Z)
+viz(fig[1,1], real[1].geometry, color = real[1].field)
+viz(fig[1,2], real[2].geometry, color = real[2].field)
 fig
 ```
 
@@ -34,9 +34,9 @@ Heuristics are used to select the most appropriate method for the data
 and domain at hand.
 
 ```@docs
-LUMethod
-FFTMethod
-SEQMethod
+LUSIM
+FFTSIM
+SEQSIM
 ```
 
 ```@docs
@@ -51,11 +51,11 @@ mesh = simplexify(Sphere((0, 0, 0), 1))
 proc = LindgrenProcess()
 
 # unconditional simulation
-real = rand(proc, mesh, [:Z => Float64], 2)
+real = rand(proc, mesh, 2)
 
 fig = Mke.Figure(size = (800, 400))
-viz(fig[1,1], real[1].geometry, color = real[1].Z)
-viz(fig[1,2], real[2].geometry, color = real[2].Z)
+viz(fig[1,1], real[1].geometry, color = real[1].field)
+viz(fig[1,2], real[2].geometry, color = real[2].field)
 fig
 ```
 
@@ -81,7 +81,7 @@ img  = geostatsimage("Strebelle")
 proc = QuiltingProcess(img, (62, 62))
 
 # unconditional simulation
-real = rand(proc, grid, [:facies => Int], 2)
+real = rand(proc, grid, 2)
 
 fig = Mke.Figure(size = (800, 400))
 viz(fig[1,1], real[1].geometry, color = real[1].facies)
@@ -98,7 +98,7 @@ img  = geostatsimage("StoneWall")
 proc = QuiltingProcess(img, (13, 13))
 
 # unconditional simulation
-real = rand(proc, grid, [:Z => Int], 2)
+real = rand(proc, grid, 2)
 
 fig = Mke.Figure(size = (800, 400))
 viz(fig[1,1], real[1].geometry, color = real[1].Z)
@@ -118,7 +118,7 @@ data = img |> Sample(20, replace=false)
 proc = QuiltingProcess(img, (30, 30))
 
 # conditional simulation
-real = rand(proc, grid, data, 2)
+real = rand(proc, grid, 2, data=data)
 
 fig = Mke.Figure(size = (800, 400))
 viz(fig[1,1], real[1].geometry, color = real[1].facies)
@@ -149,7 +149,7 @@ end
 proc = QuiltingProcess(img, (62, 62), inactive = circle)
 
 # unconditional simulation
-real = rand(proc, grid, [:facies => Float64], 2)
+real = rand(proc, grid, 2)
 
 fig = Mke.Figure(size = (800, 400))
 viz(fig[1,1], real[1].geometry, color = real[1].facies)
@@ -183,7 +183,7 @@ dataTI = forward(img)
 
 proc = QuiltingProcess(img, (27, 27), soft=(data, dataTI))
 
-real = rand(proc, domain(truth), [:Z => Float64], 2)
+real = rand(proc, domain(truth), 2)
 
 fig = Mke.Figure(size = (800, 400))
 viz(fig[1,1], real[1].geometry, color = real[1].Z)
@@ -204,11 +204,11 @@ using TuringPatterns
 grid = CartesianGrid(200, 200)
 
 # unconditional simulation
-real = rand(TuringProcess(), grid, [:z => Float64], 2)
+real = rand(TuringProcess(), grid, 2)
 
 fig = Mke.Figure(size = (800, 400))
-viz(fig[1,1], real[1].geometry, color = real[1].z)
-viz(fig[1,2], real[2].geometry, color = real[2].z)
+viz(fig[1,1], real[1].geometry, color = real[1].field)
+viz(fig[1,2], real[2].geometry, color = real[2].field)
 fig
 ```
 
@@ -231,10 +231,10 @@ T = [0.5 0.5; 0.5 0.5]
 ℰ = Environment([p, p], T, Δ)
 
 # strata simulation
-real = rand(StrataProcess(ℰ), grid, [:z => Float64], 2)
+real = rand(StrataProcess(ℰ), grid, 2)
 
 fig = Mke.Figure(size = (800, 400))
-viz(fig[1,1], real[1].geometry, color = real[1].z)
-viz(fig[1,2], real[2].geometry, color = real[2].z)
+viz(fig[1,1], real[1].geometry, color = real[1].field)
+viz(fig[1,2], real[2].geometry, color = real[2].field)
 fig
 ```

@@ -77,8 +77,8 @@ directional variograms along a specific direction:
 γₕ = DirectionalVariogram((1.,0.), img, :Z, maxlag = 50.)
 γᵥ = DirectionalVariogram((0.,1.), img, :Z, maxlag = 50.)
 
-fig = funplot(γₕ)
-funplot!(fig, γᵥ, color = :maroon, histcolor = :maroon)
+fig = funplot(γₕ, color = :maroon, histcolor = :maroon)
+funplot!(fig, γᵥ)
 ```
 
 or planar variograms over a specific plane:
@@ -87,8 +87,8 @@ or planar variograms over a specific plane:
 γᵥ = PlanarVariogram((1.,0.), img, :Z, maxlag = 50.)
 γₕ = PlanarVariogram((0.,1.), img, :Z, maxlag = 50.)
 
-fig = funplot(γₕ)
-funplot!(fig, γᵥ, color = :maroon, histcolor = :maroon)
+fig = funplot(γₕ, color = :maroon, histcolor = :maroon)
+funplot!(fig, γᵥ)
 ```
 
 !!! note
