@@ -56,7 +56,7 @@ makedocs(
       "Validation" => "validation.md",
       "Visualization" => "visualization.md"
     ],
-    "Frequent questions" => ["faq/rasters.md", "faq/coords.md"],
+    "Frequent questions" => ["faq/rasters.md", "faq/coords.md", "faq/interpolation.md"],
     "Contributing" => "contributing.md",
     "Resources" => ["resources/education.md", "resources/publications.md", "resources/ecosystem.md"],
     "About" => ["Community" => "about/community.md", "License" => "about/license.md", "Citing" => "about/citing.md"],

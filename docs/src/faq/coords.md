@@ -9,9 +9,9 @@ Access to the raw coordinates of geometries stored in the `geometry` column is d
 If you make good use of the high-level transforms provided by the framework, you will be more
 productive.
 
-## Solid motion
+## Rigid motion
 
-Coordinates are often called for when the application requires solid motion. We provide optimized
+Coordinates are often called for when the application requires rigid motion. We provide optimized
 `Translate`, `Rotate` and `Scale` transforms for that purpose:
 
 ```@example coords
@@ -31,7 +31,7 @@ a `GeoTable` into a new coordinate reference system (`CRS`):
 data |> Proj(Polar)
 ```
 
-## Direct access
+## Raw coordinates
 
 If you really need access to the coordinates, use the `coords` function:
 
