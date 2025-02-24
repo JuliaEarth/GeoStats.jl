@@ -40,6 +40,42 @@ SEQSIM
 ```
 
 ```@docs
+IndicatorProcess
+```
+
+```@example fieldprocs
+# domain of interest
+grid = CartesianGrid(100, 100)
+
+# multivariate function modeling categorical values
+func = SphericalTransiogram(ranges=(50.0, 10.), proportions=(0.5, 0.3, 0.2))
+
+# indicator process
+proc = IndicatorProcess(func)
+
+# unconditional simulation
+real = rand(proc, grid, 2)
+
+fig = Mke.Figure(size = (800, 400))
+viz(fig[1,1], real[1].geometry, color = real[1].field)
+viz(fig[1,2], real[2].geometry, color = real[2].field)
+fig
+```
+
+```@example fieldprocs
+# data with categorical column
+table = (; facies=["shale", "sand", "clay"])
+coord = [(25.0, 25.0), (50.0, 75.0), (75.0, 25.0)]
+data = georef(table, coord)
+
+# conditional simulation
+real = rand(proc, grid, data=data)
+
+# visualize realization
+real |> viewer
+```
+
+```@docs
 LindgrenProcess
 ```
 
@@ -126,30 +162,24 @@ viz(fig[1,2], real[2].geometry, color = real[2].facies)
 fig
 ```
 
-Voxels marked with the special symbol `NaN` are treated as inactive.
-The algorithm will skip tiles that only contain inactive voxels to 
-save computation and will generate realizations that are consistent
-with the mask. This is particularly useful with complex 3D models that 
-have large inactive portions.
+The `QuiltingProcess` can be simulated over views of grids,
+as in the example below where we simulate patterns inside
+a ball:
+
 
 ```@example fieldprocs
-# domain of interest
+# domain of training image
 grid = domain(img)
 
-# skip circle at the center
-nx, ny = size(grid)
-r = 100; circle = []
-for i in 1:nx, j in 1:ny
-  if (i-nx÷2)^2 + (j-ny÷2)^2 < r^2
-    push!(circle, CartesianIndex(i, j))
-  end
-end
+# view pixels inside ball
+ball = Ball((50.0, 50.0), 25.0)
+vgrid = view(grid, ball)
 
 # quilting process
-proc = QuiltingProcess(img, (62, 62), inactive = circle)
+proc = QuiltingProcess(img, (62, 62))
 
 # unconditional simulation
-real = rand(proc, grid, 2)
+real = rand(proc, vgrid, 2)
 
 fig = Mke.Figure(size = (800, 400))
 viz(fig[1,1], real[1].geometry, color = real[1].facies)

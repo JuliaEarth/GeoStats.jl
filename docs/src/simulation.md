@@ -123,6 +123,33 @@ real = rand(proc, grid, 3, workers = workers())
 Please consult
 [The ultimate guide to distributed computing in Julia](https://github.com/Arpeggeo/julia-distributed-computing/tree/master).
 
+#### Multivariate simulation
+
+Some field processes like the [`GaussianProcess`](@ref) support
+multivariate simulation (a.k.a. cosimulation). The multivariate
+setting is automatically detected in the presence of multivariate
+geostatistical functions.
+
+In the example below, we simulate two variables jointly with a
+correlation coefficient of 0.8:
+
+```@example simulation
+# multivariate covariance function
+func = [1.0 0.8; 0.8 1.0] * SphericalCovariance(range=30.0)
+
+# multivariate Gaussian process
+proc = GaussianProcess(func)
+
+# simulate 2 variables jointly
+real = rand(proc, grid)
+
+# visualize variables side by side
+fig = Mke.Figure(size = (800, 400))
+viz(fig[1,1], real.geometry, color = real.field1)
+viz(fig[1,2], real.geometry, color = real.field2)
+fig
+```
+
 ## Point processes
 
 ```@docs

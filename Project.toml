@@ -1,7 +1,7 @@
 name = "GeoStats"
 uuid = "dcc97b0b-8ce5-5539-9008-bb190f959ef6"
 author = "Júlio Hoffimann <julio.hoffimann@gmail.com>"
-version = "0.74.2"
+version = "0.75.0"
 
 [deps]
 CategoricalArrays = "324d7699-5711-5eae-9e2f-1d82baa6b597"
@@ -43,7 +43,7 @@ Distances = "0.10"
 GeoStatsBase = "0.46"
 GeoStatsFunctions = "0.10"
 GeoStatsModels = "0.10"
-GeoStatsProcesses = "0.9"
+GeoStatsProcesses = "0.10"
 GeoStatsTransforms = "0.11"
 GeoStatsValidation = "0.3"
 GeoTables = "1.24"
