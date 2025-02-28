@@ -24,7 +24,7 @@ We illustrate this concept with the [`BisectFractionPartition`](@ref) method:
 gtb = georef((; z=rand(100, 100)))
 
 # 70%/30% partition perpendicular to (1.0, 1.0) direction
-Π = partition(gtb, BisectFractionPartition((1.0, 1.0), 0.7))
+Π = partition(gtb, BisectFractionPartition((1.0, 1.0), fraction=0.7))
 ```
 
 The result of a partitioning method is a lazy indexable collection of
@@ -99,16 +99,16 @@ PlanePartition
 DirectionPartition
 ```
 
-### Predicate
+### IndexPredicate
 
 ```@docs
-PredicatePartition
+IndexPredicatePartition
 ```
 
-### SpatialPredicate
+### PointPredicate
 
 ```@docs
-SpatialPredicatePartition
+PointPredicatePartition
 ```
 
 ### Product
