@@ -4,4 +4,4 @@ navigation instructions.
 
 Click on the image to join the channel:
 
-[![Zulip](../images/zulip.png)](https://julialang.zulipchat.com/#narrow/stream/276201-geostats.2Ejl)
+[![Zulip](../images/Zulip.png)](https://julialang.zulipchat.com/#narrow/stream/276201-geostats.2Ejl)

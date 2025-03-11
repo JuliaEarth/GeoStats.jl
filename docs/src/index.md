@@ -50,10 +50,19 @@ highlights of **GeoStats.jl** are:
 - It is **native**: fully written in Julia for maximum flexibility and performance 🚀
 - Has an **extensive library** of algorithms from the geostatistics literature 📚
 
+The following table generated on March 11, 2025 provides a
+general comparison with other software:
+
+```@raw html
+<p align="center">
+  <img src="images/SoftwareComparison.png" width="100%" hspace="20">
+</p>
+```
+
 Our JuliaCon2021 talk provides an overview of
 [geostatistical learning](https://www.frontiersin.org/journals/applied-mathematics-and-statistics/articles/10.3389/fams.2021.689393/full),
 which is one of the many geostatistical problems addressed
-by the software:
+by the framework:
 
 ```@raw html
 <p align="center">
@@ -69,7 +78,7 @@ like to brainstorm ideas, don't hesitate to start a topic in our
 ```@raw html
 <p align="center">
   <a href="https://juliaearth.github.io/geospatial-data-science-with-julia">
-    <img src="https://juliaearth.github.io/geospatial-data-science-with-julia/images/cover.svg" width="200px" hspace="20">
+    <img src="https://juliaearth.github.io/geospatial-data-science-with-julia/images/cover.svg" width="300px" hspace="20">
   </a>
 </p>
 ```
