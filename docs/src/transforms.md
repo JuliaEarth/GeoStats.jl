@@ -9,6 +9,12 @@ We provide a very powerful list of transforms that were designed to
 work seamlessly with geospatial data. These transforms are implemented
 in different packages depending on how they interact with geometries.
 
+```@raw html
+<p align="center">
+<iframe style="width:560px;height:315px" src="https://www.youtube.com/embed/Nsi-2vn7KcU?si=1wWPgdXUfX3l_rO5&amp;start=199" title="GeoStats.jl talk at JuliaEO 2024" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+</p>
+```
+
 The list of supported transforms is continuously growing. The following
 code can be used to print an updated list in any project environment:
 

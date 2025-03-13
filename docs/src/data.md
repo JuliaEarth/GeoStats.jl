@@ -10,7 +10,7 @@ JuliaEO 2024 workshop:
 
 ```@raw html
 <p align="center">
-<iframe style="width:560px;height:315px" src="https://www.youtube.com/embed/r7MwEme_Y5w?si=ZGG_T0kmmKlJcVBl&amp;start=364" title="GeoTables.jl worksthop at JuliaEO 2024" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+<iframe style="width:560px;height:315px" src="https://www.youtube.com/embed/r7MwEme_Y5w?si=ZGG_T0kmmKlJcVBl&amp;start=364" title="GeoTables.jl talk at JuliaEO 2024" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 </p>
 ```
 
