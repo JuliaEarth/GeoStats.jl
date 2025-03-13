@@ -84,7 +84,7 @@ LindgrenProcess
 mesh = simplexify(Sphere((0, 0, 0), 1))
 
 # Lindgren process
-proc = LindgrenProcess()
+proc = LindgrenProcess(0.1)
 
 # unconditional simulation
 real = rand(proc, mesh, 2)
