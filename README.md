@@ -134,6 +134,9 @@ This project would not be possible without the contributions of:
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/ghyatzo"><img src="https://avatars.githubusercontent.com/u/8601724?v=4?s=100" width="100px;" alt="cschen"/><br /><sub><b>cschen</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=ghyatzo" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://jthatch.com"><img src="https://avatars.githubusercontent.com/u/2112477?v=4?s=100" width="100px;" alt="Thatcher Chamberlin"/><br /><sub><b>Thatcher Chamberlin</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=ThatcherC" title="Code">💻</a></td>
     </tr>
+    <tr>
+      <td align="center" valign="top" width="14.28%"><a href="http://omar-elrefaei.github.io"><img src="https://avatars.githubusercontent.com/u/17922991?v=4?s=100" width="100px;" alt="Omar Elrefaei"/><br /><sub><b>Omar Elrefaei</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=Omar-Elrefaei" title="Code">💻</a></td>
+    </tr>
   </tbody>
 </table>
 
