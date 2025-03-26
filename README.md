@@ -136,6 +136,7 @@ This project would not be possible without the contributions of:
     </tr>
     <tr>
       <td align="center" valign="top" width="14.28%"><a href="http://omar-elrefaei.github.io"><img src="https://avatars.githubusercontent.com/u/17922991?v=4?s=100" width="100px;" alt="Omar Elrefaei"/><br /><sub><b>Omar Elrefaei</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=Omar-Elrefaei" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/EdoKara"><img src="https://avatars.githubusercontent.com/u/112835719?v=4?s=100" width="100px;" alt="Andrew Brown"/><br /><sub><b>Andrew Brown</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=EdoKara" title="Documentation">📖</a></td>
     </tr>
   </tbody>
 </table>
