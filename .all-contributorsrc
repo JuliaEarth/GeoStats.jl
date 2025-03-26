@@ -771,6 +771,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "EdoKara",
+      "name": "Andrew Brown",
+      "avatar_url": "https://avatars.githubusercontent.com/u/112835719?v=4",
+      "profile": "https://github.com/EdoKara",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7,
