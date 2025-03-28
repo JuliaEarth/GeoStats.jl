@@ -22,18 +22,24 @@ gtb |> viewer
 
 ## Classical
 
-## Geostatistical
+```@docs
+KMedoids
+```
 
-Unlike classical clustering methods in machine learning,
-geostatistical clustering (a.k.a. domaining) methods consider
-both the [`values`](@ref) and the [`domain`](@ref) of the data.
+```@example clustering
+ctb = gtb |> KMedoids(5)
+
+ctb |> viewer
+```
+
+## Geostatistical
 
 ```@docs
 GHC
 ```
 
 ```@example clustering
-ctb = gtb |> GHC(20, 1.0)
+ctb = gtb |> GHC(5, 1.0)
 
 ctb |> viewer
 ```
@@ -43,7 +49,7 @@ GSC
 ```
 
 ```@example clustering
-ctb = gtb |> GSC(50, 2.0)
+ctb = gtb |> GSC(5, 2.0)
 
 ctb |> viewer
 ```
@@ -53,7 +59,7 @@ SLIC
 ```
 
 ```@example clustering
-ctb = gtb |> SLIC(50, 0.01)
+ctb = gtb |> SLIC(5, 0.01)
 
 ctb |> viewer
 ```
