@@ -780,6 +780,15 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "halleysfifthinc",
+      "name": "Allen Hill",
+      "avatar_url": "https://avatars.githubusercontent.com/u/7356205?v=4",
+      "profile": "https://halleysfifthinc.github.io",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7,
