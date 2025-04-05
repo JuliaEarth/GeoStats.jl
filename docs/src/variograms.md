@@ -247,7 +247,7 @@ funplot(CircularVariogram())
 #### Power
 
 ```math
-\gamma(h) = sh^a + n \cdot \1_{(0,\infty)}(h)
+\gamma(h) = s\left(\frac{h}{l}\right)^a + n \cdot \1_{(0,\infty)}(h)
 ```
 
 ```@docs
