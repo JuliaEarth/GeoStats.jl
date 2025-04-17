@@ -19,7 +19,13 @@ InterpolateNeighbors
 
 All models work with general Hilbert spaces, meaning that it is possible
 to interpolate any data type that implements scalar multiplication, vector
-addition and inner product.
+addition and inner product:
+
+```@raw html
+<p align="center">
+<iframe style="width:560px;height:315px" src="https://www.youtube.com/embed/aQSlPDzqGPY" title="Hilbert Kriging" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</p>
+```
 
 The framework also provides a low-level interface for advanced users who might
 need to [`GeoStatsModels.fit`](@ref) and [`GeoStatsModels.predict`](@ref)
