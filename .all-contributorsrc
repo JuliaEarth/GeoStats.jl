@@ -798,6 +798,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "jamesalster",
+      "name": "jamesalster",
+      "avatar_url": "https://avatars.githubusercontent.com/u/83536617?v=4",
+      "profile": "https://github.com/jamesalster",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
