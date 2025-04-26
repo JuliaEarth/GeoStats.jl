@@ -67,12 +67,11 @@ surfplot(t)
 
 ## Theoretical transiograms
 
-We provide various theoretical transiogram models from the literature, which can
+We provide various theoretical transiograms from the literature, which can
 can be combined with ellipsoid distances to model geometric anisotropy.
+Please check the [Functions](functions.md) section for more details.
 
-### Models
-
-#### Linear
+### Linear
 
 ```@docs
 LinearTransiogram
@@ -82,7 +81,7 @@ LinearTransiogram
 funplot(LinearTransiogram())
 ```
 
-#### Gaussian
+### Gaussian
 
 ```@docs
 GaussianTransiogram
@@ -92,7 +91,7 @@ GaussianTransiogram
 funplot(GaussianTransiogram())
 ```
 
-#### Spherical
+### Spherical
 
 ```@docs
 SphericalTransiogram
@@ -102,7 +101,7 @@ SphericalTransiogram
 funplot(SphericalTransiogram())
 ```
 
-#### Exponential
+### Exponential
 
 ```@docs
 ExponentialTransiogram
@@ -112,7 +111,7 @@ ExponentialTransiogram
 funplot(ExponentialTransiogram())
 ```
 
-#### MatrixExponential
+### MatrixExponential
 
 ```@docs
 MatrixExponentialTransiogram
@@ -122,7 +121,7 @@ MatrixExponentialTransiogram
 funplot(MatrixExponentialTransiogram())
 ```
 
-#### PiecewiseLinear
+### PiecewiseLinear
 
 ```@docs
 PiecewiseLinearTransiogram

@@ -18,9 +18,7 @@ systems, and are preferred by researchers in other scientific fields.
     conversion is efficient thanks to the rich type system, and gives users the
     freedom to choose whichever function representation they prefer.
 
-### Models
-
-#### GaussianCovariance
+### GaussianCovariance
 
 ```@docs
 GaussianCovariance
@@ -30,7 +28,7 @@ GaussianCovariance
 funplot(GaussianCovariance())
 ```
 
-#### SphericalCovariance
+### SphericalCovariance
 
 ```@docs
 SphericalCovariance
@@ -40,7 +38,7 @@ SphericalCovariance
 funplot(SphericalCovariance())
 ```
 
-#### ExponentialCovariance
+### ExponentialCovariance
 
 ```@docs
 ExponentialCovariance
@@ -50,7 +48,7 @@ ExponentialCovariance
 funplot(ExponentialCovariance())
 ```
 
-#### MaternCovariance
+### MaternCovariance
 
 ```@docs
 MaternCovariance
@@ -60,7 +58,7 @@ MaternCovariance
 funplot(MaternCovariance())
 ```
 
-#### CubicCovariance
+### CubicCovariance
 
 ```@docs
 CubicCovariance
@@ -70,7 +68,7 @@ CubicCovariance
 funplot(CubicCovariance())
 ```
 
-#### PentaSphericalCovariance
+### PentaSphericalCovariance
 
 ```@docs
 PentaSphericalCovariance
@@ -80,7 +78,7 @@ PentaSphericalCovariance
 funplot(PentaSphericalCovariance())
 ```
 
-#### SineHoleCovariance
+### SineHoleCovariance
 
 ```@docs
 SineHoleCovariance
@@ -90,7 +88,7 @@ SineHoleCovariance
 funplot(SineHoleCovariance())
 ```
 
-#### CircularCovariance
+### CircularCovariance
 
 ```@docs
 CircularCovariance
