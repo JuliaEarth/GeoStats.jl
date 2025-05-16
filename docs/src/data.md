@@ -100,6 +100,7 @@ to load/save geospatial data from/to various file formats:
 
 ```@docs
 GeoIO.load
+GeoIO.loadvalues
 GeoIO.save
 GeoIO.formats
 ```
