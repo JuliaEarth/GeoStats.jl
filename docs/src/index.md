@@ -185,6 +185,7 @@ We ❤ to see our [list of publications](resources/publications.md) growing.
 
 This project would not be possible without the contributions of:
 
+```@raw html
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
 <!-- markdownlint-disable -->
@@ -313,3 +314,4 @@ This project would not be possible without the contributions of:
 <!-- prettier-ignore-end -->
 
 <!-- ALL-CONTRIBUTORS-LIST:END -->
+```
