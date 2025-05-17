@@ -180,3 +180,16 @@ If you find this software useful in your work, please consider citing it:
 ```
 
 We ❤ to see our [list of publications](resources/publications.md) growing.
+
+## Contributors
+
+This project would not be possible without the contributions of:
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
