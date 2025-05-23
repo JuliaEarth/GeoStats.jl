@@ -2,7 +2,7 @@
 
 Below is a list of publications made possible with this project:
 
-- **Cserteg et al. 2025.* [BlankLocalizationCore.jl: implementing blank localizationin Julia]
+- *Cserteg et al. 2025.* [BlankLocalizationCore.jl: implementing blank localizationin Julia]
   (https://www.researchgate.net/publication/391995236_BlankLocalizationCorejl_implementing_blank_localization_in_Julia)
 
 - *Kim et al. 2024.* [Coal Thickness Through Compositional Kriging: An Approach Based on Geostatistics]
