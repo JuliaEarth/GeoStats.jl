@@ -2,6 +2,9 @@
 
 Below is a list of publications made possible with this project:
 
+- *Liu et al. 2025.* [Mass-Balance MRV for Carbon Dioxide Removal by Enhanced Rock Weathering]
+  (https://cdrxiv.org/preprint/379)
+
 - *Cserteg et al. 2025.* [BlankLocalizationCore.jl: implementing blank localizationin Julia]
   (https://www.researchgate.net/publication/391995236_BlankLocalizationCorejl_implementing_blank_localization_in_Julia)
 
