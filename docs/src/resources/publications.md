@@ -2,6 +2,9 @@
 
 Below is a list of publications made possible with this project:
 
+- *Chen et al. 2025.* [A novel data-driven digital reconstruction method for polycrystalline microstructures]
+  (https://www.sciencedirect.com/science/article/pii/S004578252500252X)
+
 - *Liu et al. 2025.* [Mass-Balance MRV for Carbon Dioxide Removal by Enhanced Rock Weathering]
   (https://cdrxiv.org/preprint/379)
 
