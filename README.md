@@ -141,6 +141,7 @@ This project would not be possible without the contributions of:
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/nsajko"><img src="https://avatars.githubusercontent.com/u/4944410?v=4?s=70" width="70px;" alt="Neven Sajko"/><br /><sub><b>Neven Sajko</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=nsajko" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/jamesalster"><img src="https://avatars.githubusercontent.com/u/83536617?v=4?s=70" width="70px;" alt="jamesalster"/><br /><sub><b>jamesalster</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=jamesalster" title="Code">💻</a> <a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=jamesalster" title="Documentation">📖</a></td>
       <td align="center" valign="top" width="14.28%"><a href="http://luminescentai.com"><img src="https://avatars.githubusercontent.com/u/13193130?v=4?s=70" width="70px;" alt="Paul Shen"/><br /><sub><b>Paul Shen</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=paulxshen" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="http://www.debsankha.net/"><img src="https://avatars.githubusercontent.com/u/313429?v=4?s=70" width="70px;" alt="Debsankha Manik"/><br /><sub><b>Debsankha Manik</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=debsankha" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>
