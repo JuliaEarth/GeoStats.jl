@@ -827,6 +827,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "tcarion",
+      "name": "Tristan Carion",
+      "avatar_url": "https://avatars.githubusercontent.com/u/42749284?v=4",
+      "profile": "https://github.com/tcarion",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
