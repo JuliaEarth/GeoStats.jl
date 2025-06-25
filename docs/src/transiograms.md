@@ -121,8 +121,26 @@ MatrixExponentialTransiogram
 funplot(MatrixExponentialTransiogram())
 ```
 
+### CarleTransiogram
+
+```@docs
+CarleTransiogram
+```
+
+```@example transiograms
+funplot(CarleTransiogram())
+```
+
 ### PiecewiseLinear
 
 ```@docs
 PiecewiseLinearTransiogram
+```
+
+```@example transiograms
+t = EmpiricalTransiogram(cat, :Z, maxlag = 50.)
+
+τ = GeoStatsFunctions.fit(PiecewiseLinearTransiogram, t)
+
+funplot(τ)
 ```
