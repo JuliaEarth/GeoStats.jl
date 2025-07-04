@@ -145,6 +145,7 @@ This project would not be possible without the contributions of:
     </tr>
     <tr>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/tcarion"><img src="https://avatars.githubusercontent.com/u/42749284?v=4?s=70" width="70px;" alt="Tristan Carion"/><br /><sub><b>Tristan Carion</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=tcarion" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/bencherian"><img src="https://avatars.githubusercontent.com/u/9374201?v=4?s=70" width="70px;" alt="Benjamin Cherian"/><br /><sub><b>Benjamin Cherian</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=bencherian" title="Documentation">📖</a></td>
     </tr>
   </tbody>
 </table>
