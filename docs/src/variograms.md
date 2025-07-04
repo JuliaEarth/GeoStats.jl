@@ -148,7 +148,7 @@ funplot(GaussianVariogram())
 ### Spherical
 
 ```math
-\gamma(h) = (s - n) \left[\left(\frac{3}{2}\left(\frac{h}{r}\right) + \frac{1}{2}\left(\frac{h}{r}\right)^3\right) \cdot \1_{(0,r)}(h) + \1_{[r,\infty)}(h)\right] + n \cdot \1_{(0,\infty)}(h)
+\gamma(h) = (s - n) \left[\left(\frac{3}{2}\left(\frac{h}{r}\right) - \frac{1}{2}\left(\frac{h}{r}\right)^3\right) \cdot \1_{(0,r)}(h) + \1_{[r,\infty)}(h)\right] + n \cdot \1_{(0,\infty)}(h)
 ```
 
 ```@docs
