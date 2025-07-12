@@ -1,5 +1,4 @@
 using Documenter, GeoStats
-using DocumenterTools: Themes
 
 # transforms api
 using TransformsBase
