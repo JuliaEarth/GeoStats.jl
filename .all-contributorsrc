@@ -845,6 +845,15 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "FabianBarrett",
+      "name": "Ben Barrett",
+      "avatar_url": "https://avatars.githubusercontent.com/u/22241119?v=4",
+      "profile": "https://fabianbarrett.github.io/",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
