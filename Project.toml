@@ -31,7 +31,7 @@ Tables = "bd369af6-aec1-5ad0-b16a-f7cc5008161c"
 Unitful = "1986cc42-f94f-5a68-af5c-568840ba703d"
 
 [compat]
-CategoricalArrays = "0.10"
+CategoricalArrays = "0.10, 1"
 Chain = "0.6"
 CoDa = "1.2"
 CoordGridTransforms = "0.1"
