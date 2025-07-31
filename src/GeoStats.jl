@@ -17,6 +17,7 @@ using Reexport
 # reexport project modules
 @reexport using CoDa
 @reexport using Dates
+@reexport using Colors
 @reexport using Unitful
 @reexport using Meshes
 @reexport using Distances
