@@ -33,7 +33,7 @@ Unitful = "1986cc42-f94f-5a68-af5c-568840ba703d"
 
 [compat]
 CategoricalArrays = "1.0"
-Chain = "0.6"
+Chain = "0.6, 1"
 CoDa = "1.2"
 Colors = "0.13"
 CoordGridTransforms = "0.1"
