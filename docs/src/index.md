@@ -123,7 +123,7 @@ model = Kriging(GaussianVariogram(range=35.))
 interp = geotable |> Interpolate(grid, model=model)
 
 # visualize the solution
-viz(interp.geometry, color = interp.z)
+interp |> viewer
 ```
 
 ## Project organization
