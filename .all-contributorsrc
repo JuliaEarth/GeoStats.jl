@@ -854,6 +854,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "dmetivie",
+      "name": "David Métivier",
+      "avatar_url": "https://avatars.githubusercontent.com/u/46794064?v=4",
+      "profile": "https://davidmetivier.mistea.inrae.fr/",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
