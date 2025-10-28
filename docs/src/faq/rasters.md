@@ -44,7 +44,7 @@ This dataset is stored with `LatLon` coordinates. For convenience, we always sto
 can slice the Earth as follows:
 
 ```@example rasters
-raster[(800:1620, :), :] |> viewer
+raster[(1:800, :), :] |> viewer
 ```
 
 ```@example rasters
@@ -91,7 +91,7 @@ Below is an example of subgrid over the ellipsoid using `lat` and `lon` ranges:
 
 brazil = raster |> Slice(lat=(-60°, 20°), lon=(-100°, -20°))
 
-brazil |> Rotate(RotZ(90)) |> viewer
+brazil |> Rotate(RotZ(-45)) |> viewer
 ```
 
 ## Lazy loading
