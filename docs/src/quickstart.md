@@ -281,23 +281,19 @@ geospatial partitions.
 
 Let's define our geostatistical learning model to predict the crop type
 based on the four satellite bands. We will use the `DecisionTreeClassifier` 
-model, which is suitable for the task we want to perform.
-Any model from the [StatsLeanModels.jl](https://github.com/JuliaML/StatsLearnModels.jl) 
-model is supported, including all models from [ScikitLearn.jl](https://github.com/cstjean/ScikitLearn.jl):
+model, which is suitable for the task we want to perform. Any model from the
+[StatsLeanModels.jl](https://github.com/JuliaML/StatsLearnModels.jl) module
+is supported:
 
 ```@example quickstart
-feats = ["band1", "band2", "band3", "band4"]
-label = "crop"
-
 model = DecisionTreeClassifier()
 ```
 
 We will fit the model in Ωs where the features and labels are available 
-and predict in Ωt where the features are available. The `Learn` transform
-automatically fits the model to the data:
+and predict in Ωt where the features are available:
 
 ```@example quickstart
-learn = Learn(Ωs, model, feats => label)
+learn = Learn(label(Ωs, "crop"), model=model)
 ```
 
 The transform can be called with new data to generate predictions:

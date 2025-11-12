@@ -23,10 +23,6 @@ using GeoIO
 # 20%/80% split along the (1, -1) direction
 Ωₛ, Ωₜ = geosplit(Ω, 0.2, (1.0, -1.0))
 
-# features and label for supervised learning
-feats = ["band1", "band2", "band3", "band4"]
-label = "crop"
-
 # learning model
 model = DecisionTreeClassifier()
 
@@ -37,7 +33,7 @@ loss = MisclassLoss()
 bcv = BlockValidation(30., loss = Dict("crop" => loss))
 
 # estimate of generalization error
-ϵ̂ = cverror((model, feats => label), Ωₛ, bcv)
+ϵ̂ = cverror(model, label(Ωₛ, "crop"), bcv)
 ```
 
 We can unhide the labels in the target domain and compute the actual
@@ -45,7 +41,7 @@ error for comparison:
 
 ```@example error
 # train in Ωₛ and predict in Ωₜ
-Ω̂ₜ = Ωₜ |> Learn(Ωₛ, model, feats => label)
+Ω̂ₜ = Ωₜ |> Learn(label(Ωₛ, "crop"), model=model)
 	
 # actual error of the model
 ϵ = mean(loss.(Ωₜ.crop, Ω̂ₜ.crop))
