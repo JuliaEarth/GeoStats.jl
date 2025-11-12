@@ -163,11 +163,11 @@ of geometries:
 Ω.geometry
 ```
 
-We can always retrieve the table of attributes (or features)
-with the function [`values`](@ref) and the underlying geospatial
-domain with the function [`domain`](@ref). This can be useful for
-writing algorithms that are *type-stable* and depend purely on the
-feature values:
+We can always retrieve the table of attributes with the function
+[`values`](@ref) and the underlying geospatial domain with the
+function [`domain`](@ref). This can be useful for writing
+algorithms that are *type-stable* and depend purely on the
+attributes:
 
 ```@example quickstart
 values(Ω)
@@ -182,7 +182,7 @@ domain(Ω)
 ### Geospatial transforms
 
 It is easy to design advanced geospatial pipelines that operate on
-both the table of features and the underlying geospatial domain:
+both the table of attributes and the underlying geospatial domain:
 
 ```@example quickstart
 # pipeline with table transforms
@@ -289,11 +289,23 @@ is supported:
 model = DecisionTreeClassifier()
 ```
 
-We will fit the model in Ωs where the features and labels are available 
-and predict in Ωt where the features are available:
+We will fit the model in Ωs where predictors and targets are available,
+and will predict in Ωt where only predictors are available. We have to
+[`label`](@ref) the geospatial data with the target variable(s) first:
 
 ```@example quickstart
-learn = Learn(label(Ωs, "crop"), model=model)
+Ωₗ = label(Ωs, "crop")
+```
+
+!!! note
+
+    The columns of the geospatial table are colored according to their
+    role in geostatistical modeling. Predictor variables are colored in
+    sage, target variables are colored in red, and the `geometry` column
+    is colored in teal.
+
+```@example quickstart
+learn = Learn(Ωₗ, model=model)
 ```
 
 The transform can be called with new data to generate predictions:
