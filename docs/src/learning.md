@@ -54,7 +54,6 @@ GeneralizedLinearRegressor
 ```@docs
 DecisionTreeClassifier
 DecisionTreeRegressor
-DecisionTree.impurity_importance
 ```
 
 ### Random forest models

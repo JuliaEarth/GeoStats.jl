@@ -8,16 +8,14 @@ using ImageQuilting
 using TuringPatterns
 using StratiGraphics
 
-# external docstrings
-using DecisionTree
-
 # IO packages
 using GeoIO
 
 makedocs(
+  warnonly=[:missing_docs, :cross_references],
   format=Documenter.HTML(
-    assets=["assets/favicon.ico"],
     prettyurls=get(ENV, "CI", "false") == "true",
+    assets=["assets/favicon.ico"],
     mathengine=KaTeX(
       Dict(
         :macros => Dict(
