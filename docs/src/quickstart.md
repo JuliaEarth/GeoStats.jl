@@ -68,7 +68,7 @@ load any file with geospatial data into well-tested geometries from the
 ```@example quickstart
 using GeoIO
 
-zone = GeoIO.load("data/zone.shp")
+zone = GeoIO.load("data/zone.gpkg")
 ```
 
 Various functions are defined over these geometries, for instance:

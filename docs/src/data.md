@@ -108,7 +108,7 @@ GeoIO.formats
 ```@example data
 using GeoIO
 
-zone = GeoIO.load("data/zone.shp")
+zone = GeoIO.load("data/zone.gpkg")
 ```
 
 ### Artifacts
