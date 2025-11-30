@@ -872,6 +872,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "henry2004y",
+      "name": "Hongyang Zhou",
+      "avatar_url": "https://avatars.githubusercontent.com/u/20110816?v=4",
+      "profile": "https://github.com/henry2004y",
+      "contributions": [
+        "infra"
+      ]
     }
   ],
   "contributorsPerLine": 7,
