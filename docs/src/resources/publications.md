@@ -2,6 +2,10 @@
 
 Below is a list of publications made possible with this project:
 
+- *Li et al. 2025.* [A multi-facies constrained geostatistical inversion for predicting
+  fractured tight sandstone thin reservoirs: a case study in Western China]
+  (https://www.sciencedirect.com/science/article/pii/S0926985125004331)
+
 - *Chen et al. 2025.* [A novel data-driven digital reconstruction method for polycrystalline microstructures]
   (https://www.sciencedirect.com/science/article/pii/S004578252500252X)
 

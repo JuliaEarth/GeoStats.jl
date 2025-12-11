@@ -207,7 +207,7 @@ img = geostatsimage("WalkerLake")
 
 # forward model (blur filter)
 function forward(data)
-  img = asarray(data, :Z)
+  img = reshape(data.Z, size(domain(data)))
   krn = KernelFactors.IIRGaussian([10,10])
   fwd = imfilter(img, krn)
   georef((; fwd=vec(fwd)), domain(data))
