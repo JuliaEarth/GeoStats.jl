@@ -150,6 +150,7 @@ This project would not be possible without the contributions of:
       <td align="center" valign="top" width="14.28%"><a href="https://davidmetivier.mistea.inrae.fr/"><img src="https://avatars.githubusercontent.com/u/46794064?v=4?s=70" width="70px;" alt="David Métivier"/><br /><sub><b>David Métivier</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=dmetivie" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/marcosdanieldasilva"><img src="https://avatars.githubusercontent.com/u/135757954?v=4?s=70" width="70px;" alt="Marcos Daniel da Silva"/><br /><sub><b>Marcos Daniel da Silva</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=marcosdanieldasilva" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/henry2004y"><img src="https://avatars.githubusercontent.com/u/20110816?v=4?s=70" width="70px;" alt="Hongyang Zhou"/><br /><sub><b>Hongyang Zhou</b></sub></a><br /><a href="#infra-henry2004y" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/jph6366"><img src="https://avatars.githubusercontent.com/u/42678151?v=4?s=70" width="70px;" alt="Jackson Hardee"/><br /><sub><b>Jackson Hardee</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=jph6366" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>
