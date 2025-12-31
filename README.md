@@ -152,6 +152,9 @@ This project would not be possible without the contributions of:
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/henry2004y"><img src="https://avatars.githubusercontent.com/u/20110816?v=4?s=70" width="70px;" alt="Hongyang Zhou"/><br /><sub><b>Hongyang Zhou</b></sub></a><br /><a href="#infra-henry2004y" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/jph6366"><img src="https://avatars.githubusercontent.com/u/42678151?v=4?s=70" width="70px;" alt="Jackson Hardee"/><br /><sub><b>Jackson Hardee</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=jph6366" title="Code">💻</a></td>
     </tr>
+    <tr>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/jamesrhester"><img src="https://avatars.githubusercontent.com/u/762686?v=4?s=70" width="70px;" alt="James Hester"/><br /><sub><b>James Hester</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=jamesrhester" title="Code">💻</a></td>
+    </tr>
   </tbody>
 </table>
 
