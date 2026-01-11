@@ -6,15 +6,15 @@ We recommend the following educational resources.
 
 ### Textbooks
 
-- *Hoffimann, J. 2023.* [Geospatial Data Science with Julia](https://juliaearth.github.io/geospatial-data-science-with-julia) - A fresh approach to data science with geospatial data and the Julia programming language.
+- [Geospatial Data Science with Julia](https://juliaearth.github.io/geospatial-data-science-with-julia) - A fresh approach to data science with geospatial data and the Julia programming language.
 
-- *Isaaks, E. and Srivastava, R. 1990.* [An Introduction to Applied Geostatistics](https://www.amazon.com.br/Introduction-Applied-Geostatistics-Edward-Isaaks/dp/0195050134) - An introductory book on geostatistics that covers important concepts with very simple language.
+- [An Introduction to Applied Geostatistics](https://www.amazon.com.br/Introduction-Applied-Geostatistics-Edward-Isaaks/dp/0195050134) - An introductory book on geostatistics that covers important concepts with very simple language.
 
-- *Chilès, JP and Delfiner, P. 2012.* [Geostatistics: Modeling Spatial Uncertainty](https://onlinelibrary.wiley.com/doi/book/10.1002/9781118136188) - An incredible book for those with good mathematical background.
+- [Geostatistics: Modeling Spatial Uncertainty](https://onlinelibrary.wiley.com/doi/book/10.1002/9781118136188) - An incredible book for those with good mathematical background.
 
-- *Webster, R and Oliver, MA. 2007.* [Geostatistics for Environmental Scientists](https://onlinelibrary.wiley.com/doi/book/10.1002/9780470517277) - A great book with good balance between theory and practice.
+- [Geostatistics for Environmental Scientists](https://onlinelibrary.wiley.com/doi/book/10.1002/9780470517277) - A great book with good balance between theory and practice.
 
-- *Journel, A. and Huijbregts, Ch. 2003.* [Mining Geostatistics](https://www.amazon.com/Mining-Geostatistics-G-Journel/dp/1930665911) - A great book with both theoretical and practical developments.
+- [Mining Geostatistics](https://www.amazon.com/Mining-Geostatistics-G-Journel/dp/1930665911) - A great book with both theoretical and practical developments.
 
 ### Video lectures
 
