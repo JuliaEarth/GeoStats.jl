@@ -11,7 +11,7 @@ in different packages depending on how they interact with geometries.
 
 ```@raw html
 <p align="center">
-<iframe style="width:560px;height:315px" src="https://www.youtube.com/embed/A0_T_J9siPM?si=TC1dRL5sclPJsJVn" title="GeoStats.jl talk at JuliaEO 2024" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/A0_T_J9siPM" title="GeoStats.jl talk at JuliaEO 2024" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </p>
 ```
 
