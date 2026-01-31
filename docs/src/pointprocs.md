@@ -5,6 +5,10 @@ using GeoStats # hide
 import CairoMakie as Mke # hide
 ```
 
+## Builtin
+
+The following point processes are available upon loading GeoStats.jl
+
 ```@docs
 BinomialProcess
 ```

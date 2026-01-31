@@ -68,7 +68,7 @@ viz(fig[1,2], v.geometry, color = v.field)
 fig
 ```
 
-or the 25th and 75th percentiles:
+the 25th and 75th percentiles:
 
 ```@example simulation
 q25 = quantile(real, 0.25)
@@ -94,7 +94,10 @@ fig
 
 !!! note
 
-    Please check [this page](fieldprocs.md) for more examples.
+    Some field processes like [`GaussianProcess`](@ref) and
+    [`LindgrenProcess`](@ref) have efficient [`expectedvalue`](@ref)
+    implementations. Please check [this page](fieldprocs.md)
+    for more examples.
 
 #### Parallel simulation
 

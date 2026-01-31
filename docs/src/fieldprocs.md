@@ -5,6 +5,18 @@ using GeoStats # hide
 import CairoMakie as Mke # hide
 ```
 
+Besides simulation, some field processes have efficient
+[`expectedvalue`](@ref) implementation, which coincides
+with the theoretical [`mean`](@ref) when the process
+[`iscontinuous`](@ref) and [`isanalytical`](@ref).
+
+```@docs
+iscontinuous
+isanalytical
+expectedvalue
+mean(::GeoStatsProcesses.FieldProcess, ::Domain)
+```
+
 ## Builtin
 
 The following field processes are available upon loading GeoStats.jl.

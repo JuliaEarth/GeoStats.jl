@@ -203,7 +203,7 @@ funplot(g)
 ```
 
 We can fit a specific theoretical variogram such as the
-[`SphericalVariogram`](@ref) with
+[`SineHoleVariogram`](@ref) with
 
 ```@example functions
 γ = GeoStatsFunctions.fit(SineHoleVariogram, g)
