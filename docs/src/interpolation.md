@@ -23,7 +23,7 @@ addition and inner product:
 
 ```@raw html
 <p align="center">
-<iframe style="width:560px;height:315px" src="https://www.youtube.com/embed/aQSlPDzqGPY" title="Hilbert Kriging" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/aQSlPDzqGPY" title="Hilbert Kriging" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </p>
 ```
 

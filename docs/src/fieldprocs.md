@@ -115,7 +115,7 @@ The following field processes are available upon loading external packages.
 
 ```@raw html
 <p align="center">
-<iframe style="width:560px;height:315px" src="https://www.youtube.com/embed/YJs7jl_Y9yM" title="ImageQuilting.jl talk at JuliaCon 2017" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/YJs7jl_Y9yM" title="ImageQuilting.jl talk at JuliaCon 2017" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </p>
 ```
 
