@@ -8,10 +8,9 @@ import CairoMakie as Mke # hide
 ## Overview
 
 Geostatistical simulation is a powerful alternative to geostatistical
-[interpolation](interpolation.md) that preserves local features observed
-in the physical world. Instead of a single smoothed map, geostatistical
-simulation can produce hundreds of alternative maps (a.k.a. *realizations*)
-that honor the observed values stored in a geotable.
+[interpolation](interpolation.md). Instead of a single smooth map,
+geostatistical simulation can produce hundreds of alternative maps
+(a.k.a. *realizations*) that resemble natural phenomena.
 
 In the following sections, we assume some basic understanding of geospatial
 random processes. For the purposes of this documentation, we divide these
