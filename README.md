@@ -155,6 +155,7 @@ This project would not be possible without the contributions of:
     <tr>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/jamesrhester"><img src="https://avatars.githubusercontent.com/u/762686?v=4?s=70" width="70px;" alt="James Hester"/><br /><sub><b>James Hester</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=jamesrhester" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://neha-portfolio-liart.vercel.app/"><img src="https://avatars.githubusercontent.com/u/182316592?v=4?s=70" width="70px;" alt="Neha Prasad"/><br /><sub><b>Neha Prasad</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=naaa760" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="http://homepages.see.leeds.ac.uk/~earanow/"><img src="https://avatars.githubusercontent.com/u/1231209?v=4?s=70" width="70px;" alt="Andy Nowacki"/><br /><sub><b>Andy Nowacki</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=anowacki" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>
