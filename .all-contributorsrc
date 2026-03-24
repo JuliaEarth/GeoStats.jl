@@ -908,6 +908,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "anowacki",
+      "name": "Andy Nowacki",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1231209?v=4",
+      "profile": "http://homepages.see.leeds.ac.uk/~earanow/",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
