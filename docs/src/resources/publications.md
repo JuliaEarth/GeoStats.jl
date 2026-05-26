@@ -2,8 +2,7 @@
 
 Below is a list of publications made possible with this project:
 
-- *Caers et al. 2026.* [Stochastic Inversion of geophysical data by sequential Bayesian updating under a non-stationary Gaussian process prior
-](https://www.researchgate.net/publication/405072615_Stochastic_Inversion_of_geophysical_data_by_sequential_Bayesian_updating_under_a_non-stationary_Gaussian_process_prior)
+- *Caers et al. 2026.* [Stochastic Inversion of geophysical data by sequential Bayesian updating under a non-stationary Gaussian process prior](https://www.researchgate.net/publication/405072615_Stochastic_Inversion_of_geophysical_data_by_sequential_Bayesian_updating_under_a_non-stationary_Gaussian_process_prior)
 
 - *Cornes et al. 2026.* [GloMarGridding: A Python Toolkit for Flexible Spatial Interpolation in Climate Applications](https://rmets.onlinelibrary.wiley.com/doi/10.1002/gdj3.70064)
 
