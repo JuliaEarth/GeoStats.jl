@@ -917,6 +917,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "anj1",
+      "name": "A Nejati",
+      "avatar_url": "https://avatars.githubusercontent.com/u/4230149?v=4",
+      "profile": "https://anj1.github.io/research/",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
