@@ -53,15 +53,15 @@ represent all ordered pairs of values of `var1` and `var2` at a
 given lag `h`.
 
 ```@example plots
-𝒟 = georef((Z=[10sin(i/10) + j for i in 1:100, j in 1:200],))
+data = georef((Z=[10sin(i/10) + j for i in 1:100, j in 1:200],))
 
-𝒮 = sample(𝒟, UniformSampling(500))
+samp = sample(data, UniformSampling(500))
 
 fig = Mke.Figure(size = (800, 800))
-hscatter(fig[1,1], 𝒮, "Z", "Z", lag=0)
-hscatter(fig[1,2], 𝒮, "Z", "Z", lag=20)
-hscatter(fig[2,1], 𝒮, "Z", "Z", lag=40)
-hscatter(fig[2,2], 𝒮, "Z", "Z", lag=60)
+hscatter(fig[1,1], samp, "Z", "Z", lag=0)
+hscatter(fig[1,2], samp, "Z", "Z", lag=20)
+hscatter(fig[2,1], samp, "Z", "Z", lag=40)
+hscatter(fig[2,2], samp, "Z", "Z", lag=60)
 fig
 ```
 
