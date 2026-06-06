@@ -28,7 +28,7 @@ Consider the following example from the NaturalEarth dataset:
 ```@example rasters
 using GeoArtifacts
 
-raster = NaturalEarth.naturalearth1("water") |> Upscale(10, 5)
+raster = NaturalEarth.naturalearth1("water") |> Upscale(20, 10)
 
 raster |> viewer
 ```
@@ -44,15 +44,15 @@ This dataset is stored with `LatLon` coordinates. For convenience, we always sto
 can slice the Earth as follows:
 
 ```@example rasters
-raster[(1:800, :), :] |> viewer
+raster[(1:400, :), :] |> viewer
 ```
 
 ```@example rasters
-raster[(:, 1:800), :] |> viewer
+raster[(:, 1:400), :] |> viewer
 ```
 
 ```@example rasters
-raster[(:, 500:800), :] |> viewer
+raster[(:, 200:400), :] |> viewer
 ```
 
 We can also slice after 2D projections, which is more common in the literature:
@@ -64,7 +64,7 @@ projec |> viewer
 ```
 
 ```@example rasters
-projec[(300:800, 600:1400), :] |> viewer
+projec[(200:400, 400:800), :] |> viewer
 ```
 
 ### `Slice` transform syntax
@@ -75,7 +75,9 @@ To slice the `x` and `y` coordinates of the projected dataset with values in kil
 ```@example rasters
 km = u"km" # define kilometer unit
 
-projec |> Slice(x=(0km, 20000km), y=(0km, 10000km)) |> viewer
+slice = projec |> Slice(x=(0km, 20000km), y=(0km, 10000km))
+
+slice |> viewer
 ```
 
 Notice that the result is no longer a "raster" because the `Robinson` projection deforms the graticule,
