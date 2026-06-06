@@ -42,6 +42,6 @@ Focused on bringing well-established external libraries to Julia,
 **JuliaGeo** provides packages that are widely used by geospatial
 communities from other programming languages.
 [GDAL.jl](https://github.com/JuliaGeo/GDAL.jl),
-[Proj4.jl](https://github.com/JuliaGeo/Proj4.jl) and
+[Proj.jl](https://github.com/JuliaGeo/Proj.jl) and
 [LibGEOS.jl](https://github.com/JuliaGeo/LibGEOS.jl)
 are good examples of such packages.
