@@ -2,6 +2,8 @@
 
 Below is a list of publications made possible with this project:
 
+- *Rines et al. 2026.* [Interpolation of large-scale airborne geophysical data with uncertainty quantification](https://www.sciencedirect.com/science/article/abs/pii/S0098300426000981)
+
 - *Caers et al. 2026.* [Stochastic Inversion of geophysical data by sequential Bayesian updating under a non-stationary Gaussian process prior](https://www.researchgate.net/publication/405072615_Stochastic_Inversion_of_geophysical_data_by_sequential_Bayesian_updating_under_a_non-stationary_Gaussian_process_prior)
 
 - *Cornes et al. 2026.* [GloMarGridding: A Python Toolkit for Flexible Spatial Interpolation in Climate Applications](https://rmets.onlinelibrary.wiley.com/doi/10.1002/gdj3.70064)
