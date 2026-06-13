@@ -5,25 +5,17 @@ using GeoStats # hide
 import CairoMakie as Mke # hide
 ```
 
-The framework provides powerful visualization recipes for
-geospatial data science via the [Makie.jl](https://github.com/MakieOrg/Makie.jl)
-project. These recipes were carefully designed to maximize productivity
-and to protect users from GIS jargon. The main entry point is the
-[`viz`](@ref) function:
+## Scientific visualization
+
+The framework is integrated with the powerful
+[Makie.jl](https://github.com/MakieOrg/Makie.jl)
+ecosystem. The recipes documented below assume
+that a Makie backend is loaded in the same session.
 
 ```@docs
 viz
 viz!
 ```
-
-This function takes a geospatial domain as input and provides a set of
-aesthetic options to style the elements (i.e. geometries) of the domain.
-
-!!! note
-
-    Notice that the geometry column of our geospatial data type is a domain
-    (i.e. `data.geometry isa Domain`), and that this design enables several
-    optimizations in the visualization itself.
 
 Users can also call Makie's `plot` function in the geometry column as in
 
@@ -32,20 +24,20 @@ Mke.plot(data.geometry)
 ```
 
 and this is equivalent to calling the [`viz`](@ref) recipe above. The `plot`
-function also works with various other objects such as [`EmpiricalHistogram`](@ref)
-and [`EmpiricalVariogram`](@ref). That is convenient if you don't remember
-the name of the recipe.
+function also works with other objects such as [`EmpiricalHistogram`](@ref).
+That is convenient if you don't remember the name of the recipe.
 
 Additionaly, we provide a basic scientific [`viewer`](@ref) to visualize
 all viewable variables in the data:
 
 ```@docs
 viewer
+cbar
 ```
 
-Other plots are listed below that can be useful for geostatistical analysis.
+## Statistical plots
 
-## Built-in
+### Built-in
 
 A `hscatter` plot between two variables `var1` and `var2` (possibly
 with `var2` = `var1`) is a simple scatter plot in which the dots
@@ -65,13 +57,19 @@ hscatter(fig[2,2], samp, "Z", "Z", lag=60)
 fig
 ```
 
-## PairPlots.jl
+### Other plots
 
-The [PairPlots.jl](https://github.com/sefffal/PairPlots.jl) package
-provides the `pairplot` function that can be used with any table, including
-tables of attributes obtained with the [`values`](@ref) function.
+The plots below can be very useful to explore the
+distribution of [`values`](@ref) in a geotable.
 
-## Biplots.jl
+[PairPlots.jl](https://github.com/sefffal/PairPlots.jl)
+provides the `pairplot` function to explore multivariate
+continuous distributions.
 
-The [Biplots.jl](https://github.com/MakieOrg/Biplots.jl)
-package provides 2D and 3D statistical biplots.
+[AlgebraOfGraphics.jl](https://github.com/MakieOrg/AlgebraOfGraphics.jl)
+is a very flexible alternative that supports grouped and
+faceted layouts based on categorical variables.
+
+[Biplots.jl](https://github.com/MakieOrg/Biplots.jl)
+provides 2D and 3D statistical biplots for identifying
+main axes of variation.
