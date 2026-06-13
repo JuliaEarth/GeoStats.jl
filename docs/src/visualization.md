@@ -39,10 +39,9 @@ cbar
 
 ### Built-in
 
-A `hscatter` plot between two variables `var1` and `var2` (possibly
-with `var2` = `var1`) is a simple scatter plot in which the dots
-represent all ordered pairs of values of `var1` and `var2` at a
-given lag `h`.
+```@docs
+hscatter
+```
 
 ```@example plots
 data = georef((Z=[10sin(i/10) + j for i in 1:100, j in 1:200],))
