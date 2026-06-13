@@ -60,16 +60,16 @@ fig
 ### Other plots
 
 The plots below can be very useful to explore the
-distribution of [`values`](@ref) in a geotable.
+distribution of [`values`](@ref) in a geotable:
 
-[PairPlots.jl](https://github.com/sefffal/PairPlots.jl)
+- [PairPlots.jl](https://github.com/sefffal/PairPlots.jl)
 provides the `pairplot` function to explore multivariate
 continuous distributions.
 
-[AlgebraOfGraphics.jl](https://github.com/MakieOrg/AlgebraOfGraphics.jl)
+- [AlgebraOfGraphics.jl](https://github.com/MakieOrg/AlgebraOfGraphics.jl)
 is a very flexible alternative that supports grouped and
 faceted layouts based on categorical variables.
 
-[Biplots.jl](https://github.com/MakieOrg/Biplots.jl)
+- [Biplots.jl](https://github.com/MakieOrg/Biplots.jl)
 provides 2D and 3D statistical biplots for identifying
 main axes of variation.
