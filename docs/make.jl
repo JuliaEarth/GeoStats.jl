@@ -61,8 +61,8 @@ makedocs(
   ]
 )
 
-repo = "github.com/JuliaEarth/GeoStatsDocs.git"
-
-withenv("GITHUB_REPOSITORY" => repo) do
-  deploydocs(; repo, versions=["stable" => "v^", "dev" => "dev"])
-end
+deploydocs(
+  repo="github.com/JuliaEarth/GeoStats.jl",
+  deploy_repo="github.com/JuliaEarth/GeoStatsDocs.git",
+  versions=["stable" => "v^", "dev" => "dev"]
+)
