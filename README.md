@@ -156,6 +156,7 @@ This project would not be possible without the contributions of:
       <td align="center" valign="top" width="14.28%"><a href="https://neha-portfolio-liart.vercel.app/"><img src="https://avatars.githubusercontent.com/u/182316592?v=4?s=70" width="70px;" alt="Neha Prasad"/><br /><sub><b>Neha Prasad</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=naaa760" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="http://homepages.see.leeds.ac.uk/~earanow/"><img src="https://avatars.githubusercontent.com/u/1231209?v=4?s=70" width="70px;" alt="Andy Nowacki"/><br /><sub><b>Andy Nowacki</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=anowacki" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://anj1.github.io/research/"><img src="https://avatars.githubusercontent.com/u/4230149?v=4?s=70" width="70px;" alt="A Nejati"/><br /><sub><b>A Nejati</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=anj1" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://www.guido-kraemer.com"><img src="https://avatars.githubusercontent.com/u/12512930?v=4?s=70" width="70px;" alt="Guido Kraemer"/><br /><sub><b>Guido Kraemer</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=gdkrmr" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>
