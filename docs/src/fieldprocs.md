@@ -138,8 +138,8 @@ proc = QuiltingProcess(img, (62, 62))
 real = rand(proc, grid, 2)
 
 fig = Mke.Figure(size = (800, 400))
-viz(fig[1,1], real[1].geometry, color = real[1].facies)
-viz(fig[1,2], real[2].geometry, color = real[2].facies)
+viz(fig[1,1], real[1].geometry, color = real[1].code)
+viz(fig[1,2], real[2].geometry, color = real[2].code)
 fig
 ```
 
@@ -155,8 +155,8 @@ proc = QuiltingProcess(img, (13, 13))
 real = rand(proc, grid, 2)
 
 fig = Mke.Figure(size = (800, 400))
-viz(fig[1,1], real[1].geometry, color = real[1].Z)
-viz(fig[1,2], real[2].geometry, color = real[2].Z)
+viz(fig[1,1], real[1].geometry, color = real[1].value)
+viz(fig[1,2], real[2].geometry, color = real[2].value)
 fig
 ```
 
@@ -175,8 +175,8 @@ proc = QuiltingProcess(img, (30, 30))
 real = rand(proc, grid, 2, data=data)
 
 fig = Mke.Figure(size = (800, 400))
-viz(fig[1,1], real[1].geometry, color = real[1].facies)
-viz(fig[1,2], real[2].geometry, color = real[2].facies)
+viz(fig[1,1], real[1].geometry, color = real[1].code)
+viz(fig[1,2], real[2].geometry, color = real[2].code)
 fig
 ```
 
@@ -200,42 +200,8 @@ proc = QuiltingProcess(img, (62, 62))
 real = rand(proc, vgrid, 2)
 
 fig = Mke.Figure(size = (800, 400))
-viz(fig[1,1], real[1].geometry, color = real[1].facies)
-viz(fig[1,2], real[2].geometry, color = real[2].facies)
-fig
-```
-
-It is possible to incorporate auxiliary variables to guide the 
-selection of patterns from the training image.
-
-```@example fieldprocs
-using ImageFiltering
-
-# image assumed as ground truth (unknown)
-truth = geostatsimage("WalkerLakeTruth")
-
-# training image with similar patterns
-img = geostatsimage("WalkerLake")
-
-# forward model (blur filter)
-function forward(data)
-  img = reshape(data.Z, size(domain(data)))
-  krn = KernelFactors.IIRGaussian([10,10])
-  fwd = imfilter(img, krn)
-  georef((; fwd=vec(fwd)), domain(data))
-end
-
-# apply forward model to both images
-data   = forward(truth)
-dataTI = forward(img)
-
-proc = QuiltingProcess(img, (27, 27), soft=(data, dataTI))
-
-real = rand(proc, domain(truth), 2)
-
-fig = Mke.Figure(size = (800, 400))
-viz(fig[1,1], real[1].geometry, color = real[1].Z)
-viz(fig[1,2], real[2].geometry, color = real[2].Z)
+viz(fig[1,1], real[1].geometry, color = real[1].code)
+viz(fig[1,2], real[2].geometry, color = real[2].code)
 fig
 ```
 

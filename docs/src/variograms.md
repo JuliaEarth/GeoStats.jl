@@ -66,7 +66,7 @@ We can estimate ominidirectional variograms, which
 consider pairs of points along all directions:
 
 ```@example variograms
-γ = EmpiricalVariogram(img, :Z, maxlag = 50.)
+γ = EmpiricalVariogram(img, "value", maxlag = 50.)
 
 funplot(γ)
 ```
@@ -74,8 +74,8 @@ funplot(γ)
 directional variograms along a specific direction:
 
 ```@example variograms
-γₕ = DirectionalVariogram((1.,0.), img, :Z, maxlag = 50.)
-γᵥ = DirectionalVariogram((0.,1.), img, :Z, maxlag = 50.)
+γₕ = DirectionalVariogram((1.,0.), img, "value", maxlag = 50.)
+γᵥ = DirectionalVariogram((0.,1.), img, "value", maxlag = 50.)
 
 fig = funplot(γₕ, color = :maroon, histcolor = :maroon)
 funplot!(fig, γᵥ)
@@ -84,8 +84,8 @@ funplot!(fig, γᵥ)
 or planar variograms over a specific plane:
 
 ```@example variograms
-γᵥ = PlanarVariogram((1.,0.), img, :Z, maxlag = 50.)
-γₕ = PlanarVariogram((0.,1.), img, :Z, maxlag = 50.)
+γᵥ = PlanarVariogram((1.,0.), img, "value", maxlag = 50.)
+γₕ = PlanarVariogram((0.,1.), img, "value", maxlag = 50.)
 
 fig = funplot(γₕ, color = :maroon, histcolor = :maroon)
 funplot!(fig, γᵥ)
@@ -106,7 +106,7 @@ EmpiricalVariogramSurface
 ```
 
 ```@example variograms
-γ = EmpiricalVariogramSurface(img, :Z, maxlag = 50.)
+γ = EmpiricalVariogramSurface(img, "value", maxlag = 50.)
 
 surfplot(γ)
 ```

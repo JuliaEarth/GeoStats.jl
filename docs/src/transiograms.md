@@ -36,21 +36,17 @@ Consider the following categorical image:
 ```@example transiograms
 using GeoStatsImages
 
-img = geostatsimage("Gaussian30x10")
+img = geostatsimage("Ellipsoids")
 
-Z = [z < 0 ? 1 : 2 for z in img.Z]
-
-cat = georef((; Z=Z), img.geometry)
-
-cat |> viewer
+img |> viewer
 ```
 
 We can estimate the ominidirectional transiogram with
 
 ```@example transiograms
-t = EmpiricalTransiogram(cat, :Z, maxlag = 50.)
+t = EmpiricalTransiogram(img, "code", maxlag = 50.)
 
-funplot(t)
+funplot(t, names=0:1)
 ```
 
 ### Empirical surfaces
@@ -60,9 +56,9 @@ EmpiricalTransiogramSurface
 ```
 
 ```@example transiograms
-t = EmpiricalTransiogramSurface(cat, :Z, maxlag = 50.)
+t = EmpiricalTransiogramSurface(img, "code", maxlag = 50.)
 
-surfplot(t)
+surfplot(t, names=0:1)
 ```
 
 ## Theoretical transiograms
@@ -138,7 +134,7 @@ PiecewiseLinearTransiogram
 ```
 
 ```@example transiograms
-t = EmpiricalTransiogram(cat, :Z, maxlag = 50.)
+t = EmpiricalTransiogram(img, "code", maxlag = 50.)
 
 τ = GeoStatsFunctions.fit(PiecewiseLinearTransiogram, t)
 
