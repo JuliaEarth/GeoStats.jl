@@ -46,7 +46,7 @@ We can estimate the ominidirectional transiogram with
 ```@example transiograms
 t = EmpiricalTransiogram(img, "code", maxlag = 50.)
 
-funplot(t, names=0:1)
+funplot(t)
 ```
 
 ### Empirical surfaces
@@ -58,7 +58,7 @@ EmpiricalTransiogramSurface
 ```@example transiograms
 t = EmpiricalTransiogramSurface(img, "code", maxlag = 50.)
 
-surfplot(t, names=0:1)
+surfplot(t)
 ```
 
 ## Theoretical transiograms

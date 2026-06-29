@@ -15,25 +15,17 @@ that a Makie backend is loaded in the same session.
 ```@docs
 viz
 viz!
-```
-
-Users can also call Makie's `plot` function in the geometry column as in
-
-```julia
-Mke.plot(data.geometry)
-```
-
-and this is equivalent to calling the [`viz`](@ref) recipe above. The `plot`
-function also works with other objects such as [`EmpiricalHistogram`](@ref).
-That is convenient if you don't remember the name of the recipe.
-
-Additionaly, we provide a basic scientific [`viewer`](@ref) to visualize
-all viewable variables in the data:
-
-```@docs
 viewer
 cbar
 ```
+
+The [`viz`](@ref) and [`viz!`](@ref) recipes take a
+geospatial domain or a vector of geometries as input.
+The [`viewer`](@ref) takes a geotable as input and calls
+[`viz`](@ref) on all columns that can be converted to
+colors by the [Colorfy.jl](https://github.com/JuliaGraphics/Colorfy.jl)
+package. It also adds a color bar [`cbar`](@ref) with
+the same color scheme.
 
 ## Statistical plots
 
@@ -44,15 +36,14 @@ hscatter
 ```
 
 ```@example plots
-data = georef((Z=[10sin(i/10) + j for i in 1:100, j in 1:200],))
-
-samp = sample(data, UniformSampling(500))
+gtb = georef((z=[10sin(i/10) + j for i in 1:100, j in 1:200],)) |>
+      Sample(500, replace=false)
 
 fig = Mke.Figure(size = (800, 800))
-hscatter(fig[1,1], samp, "Z", "Z", lag=0)
-hscatter(fig[1,2], samp, "Z", "Z", lag=20)
-hscatter(fig[2,1], samp, "Z", "Z", lag=40)
-hscatter(fig[2,2], samp, "Z", "Z", lag=60)
+hscatter(fig[1,1], gtb, "z", "z", lag=0)
+hscatter(fig[1,2], gtb, "z", "z", lag=20)
+hscatter(fig[2,1], gtb, "z", "z", lag=40)
+hscatter(fig[2,2], gtb, "z", "z", lag=60)
 fig
 ```
 
