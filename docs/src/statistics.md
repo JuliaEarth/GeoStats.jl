@@ -1,5 +1,10 @@
 # Declustered statistics
 
+```@example statistics
+using GeoStats # hide
+using GeoIO # hide
+```
+
 Declustered statistics are statistics that make use of geospatial
 coordinates to correct potential sampling bias:
 
@@ -15,11 +20,27 @@ We provide the following declustered statistics:
 mean(::AbstractGeoTable, ::Any)
 var(::AbstractGeoTable, ::Any)
 quantile(::AbstractGeoTable, ::Any, ::Any)
+histogram(::AbstractGeoTable, ::Any)
 ```
 
-A histogram is also available where the heights of the bins
-are adjusted based on the coordinates of the samples:
+The following example shows bias towards high `Au` values:
 
-```@docs
-EmpiricalHistogram
+```@example statistics
+gtb = GeoIO.load("data/clustered.csv", coords = ("x", "y"))
+```
+
+```@example statistics
+mean(gtb."Au")
+```
+
+```@example statistics
+mean(gtb, "Au")
+```
+
+```@example statistics
+quantile(gtb."Au", 0.5)
+```
+
+```@example statistics
+quantile(gtb, "Au", 0.5)
 ```

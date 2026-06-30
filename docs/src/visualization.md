@@ -36,15 +36,17 @@ hscatter
 ```
 
 ```@example plots
-gtb = georef((z=[10sin(i/10) + j for i in 1:100, j in 1:200],)) |>
-      Sample(500, replace=false)
+data = georef((z=[10sin(i/10) + j for i in 1:100, j in 1:100],))
 
-fig = Mke.Figure(size = (800, 800))
-hscatter(fig[1,1], gtb, "z", "z", lag=0)
-hscatter(fig[1,2], gtb, "z", "z", lag=20)
-hscatter(fig[2,1], gtb, "z", "z", lag=40)
-hscatter(fig[2,2], gtb, "z", "z", lag=60)
-fig
+hscatter(data, "z", lag=0)
+```
+
+```@example plots
+hscatter(data, "z", lag=20)
+```
+
+```@example plots
+hscatter(data, "z", lag=40)
 ```
 
 ### Other plots

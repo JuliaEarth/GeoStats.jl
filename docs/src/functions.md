@@ -27,7 +27,7 @@ issymmetric(::GeoStatsFunction)
 isbanded(::GeoStatsFunction)
 metricball(::GeoStatsFunction)
 range(::GeoStatsFunction)
-nvariates(::GeoStatsFunction)
+nvariables(::GeoStatsFunction)
 ```
 
 ## Anisotropy
@@ -181,6 +181,14 @@ c # matrix coefficients
 g # normalized structures
 ```
 
+```@example functions
+funplot(γ) # multivariate funplot
+```
+
+```@example functions
+surfplot(γ) # multivariate surfplot
+```
+
 ## Fitting
 
 Fitting theoretical functions to empirical functions is an important
@@ -190,14 +198,14 @@ modeling step to ensure valid mathematical models of geospatial continuity:
 GeoStatsFunctions.fit
 ```
 
-Consider the following empirical variogram as an example:
+Consider the following [`EmpiricalVariogram`](@ref) as an example:
 
 ```@example functions
 # sinusoidal data
-𝒟 = georef((Z=[sin(i/2) + sin(j/2) for i in 1:50, j in 1:50],))
+data = georef((z=[sin(i/2) + sin(j/2) for i in 1:50, j in 1:50],))
 
 # empirical variogram
-g = EmpiricalVariogram(𝒟, :Z, maxlag = 25u"m")
+g = EmpiricalVariogram(data, "z", maxlag = 25u"m")
 
 funplot(g)
 ```
@@ -225,18 +233,32 @@ funplot!(fig, γ, maxlag = 25u"m")
 The [`SineHoleVariogram`](@ref) fits the empirical variogram
 well given that this is a sinusoidal field.
 
-Optionally, we can specify a weighting function to give different
-weights to the lags:
+We can also provide a list of candidate models and let framework
+decide which one has the best fit:
+
+```@example functions
+γ = GeoStatsFunctions.fit([GaussianVariogram, SphericalVariogram], g)
+
+fig = funplot(g)
+funplot!(fig, γ, maxlag = 25u"m")
+```
+
+Finally, we can fix specific parameters during the optimization
+by passing them as keyword arguments:
+
+```@example functions
+γ = GeoStatsFunctions.fit(SineHoleVariogram, g, sill=1.2)
+
+fig = funplot(g)
+funplot!(fig, γ, maxlag = 25u"m")
+```
+
+and can specify a custom weight function `w(h)` that informs how
+important is the misfit at any given lag `h`:
 
 ```@example functions
 γ = GeoStatsFunctions.fit(SineHoleVariogram, g, h -> 1 / h^2)
 
 fig = funplot(g)
 funplot!(fig, γ, maxlag = 25u"m")
-```
-
-The following fitting methods are available:
-
-```@docs
-WeightedLeastSquares
 ```
