@@ -935,6 +935,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "XamLe",
+      "name": "Max Lewerenz",
+      "avatar_url": "https://avatars.githubusercontent.com/u/6719061?v=4",
+      "profile": "https://www.math.uni-hamburg.de/en/home/lewerenz",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
