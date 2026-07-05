@@ -153,10 +153,12 @@ surfplot(γ)
 Composite functions of the form
 ``f(h) = c_1\cdot f_1(h) + c_2\cdot f_2(h) + \cdots + c_n\cdot f_n(h)``
 can be constructed using matrix coefficients ``c_1, c_2, \ldots, c_n``.
-The individual structures can be recovered in canonical form with the
-[`structures`](@ref) utility:
+The resulting [`CompositeFunction`](@ref) is multivariate depending on
+the size of the coefficients. The individual structures can be recovered
+in canonical form with the [`structures`](@ref) function:
 
 ```@docs
+CompositeFunction
 structures
 ```
 
@@ -196,6 +198,7 @@ modeling step to ensure valid mathematical models of geospatial continuity:
 
 ```@docs
 GeoStatsFunctions.fit
+GeoStatsFunctions.fitany
 ```
 
 Consider the following [`EmpiricalVariogram`](@ref) as an example:
@@ -233,11 +236,11 @@ funplot!(fig, γ, maxlag = 25u"m")
 The [`SineHoleVariogram`](@ref) fits the empirical variogram
 well given that this is a sinusoidal field.
 
-We can also provide a list of candidate models and let framework
+We can also provide any list of candidate models and let framework
 decide which one has the best fit:
 
 ```@example functions
-γ = GeoStatsFunctions.fit([GaussianVariogram, SphericalVariogram], g)
+γ = GeoStatsFunctions.fitany([GaussianVariogram, SphericalVariogram], g)
 
 fig = funplot(g)
 funplot!(fig, γ, maxlag = 25u"m")
