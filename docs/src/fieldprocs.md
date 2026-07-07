@@ -225,30 +225,3 @@ viz(fig[1,1], real[1].geometry, color = real[1].field)
 viz(fig[1,2], real[2].geometry, color = real[2].field)
 fig
 ```
-
-### StratiGraphics.jl
-
-```@docs
-StrataProcess
-```
-
-```@example fieldprocs
-using StratiGraphics
-
-# domain of interest
-grid = CartesianGrid(50, 50, 20)
-
-# stratigraphic environment
-p = SmoothingProcess()
-T = [0.5 0.5; 0.5 0.5]
-Δ = ExponentialDuration(1.0)
-ℰ = Environment([p, p], T, Δ)
-
-# strata simulation
-real = rand(StrataProcess(ℰ), grid, 2)
-
-fig = Mke.Figure(size = (800, 400))
-viz(fig[1,1], real[1].geometry, color = real[1].field)
-viz(fig[1,2], real[2].geometry, color = real[2].field)
-fig
-```
