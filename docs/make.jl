@@ -6,7 +6,6 @@ using TransformsBase
 # external processes
 using ImageQuilting
 using TuringPatterns
-using StratiGraphics
 
 # IO packages
 using GeoIO
