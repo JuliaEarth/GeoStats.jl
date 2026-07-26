@@ -47,9 +47,7 @@ or a specified partition of the geospatial data (e.g. directional, planar).
 ### (Omini)directional variograms
 
 ```@docs
-EmpiricalVariogram
-DirectionalVariogram
-PlanarVariogram
+variogram
 ```
 
 Consider the following example image:
@@ -66,47 +64,29 @@ We can estimate ominidirectional variograms, which
 consider pairs of points along all directions:
 
 ```@example variograms
-g = EmpiricalVariogram(img, "value", maxlag = 50.)
+g = variogram(img)
 
 funplot(g)
 ```
 
-directional variograms along a specific direction:
+or directional variograms along specific directions:
 
 ```@example variograms
-gₕ = DirectionalVariogram((1.,0.), img, "value", maxlag = 50.)
-gᵥ = DirectionalVariogram((0.,1.), img, "value", maxlag = 50.)
+gₕ = variogram(img, dir = (1.0, 0.0))
+gᵥ = variogram(img, dir = (0.0, 1.0))
 
 fig = funplot(gₕ, color = "maroon", histcolor = "maroon")
 funplot!(fig, gᵥ)
 ```
 
-or planar variograms over a specific plane:
-
-```@example variograms
-gᵥ = PlanarVariogram((1.,0.), img, "value", maxlag = 50.)
-gₕ = PlanarVariogram((0.,1.), img, "value", maxlag = 50.)
-
-fig = funplot(gₕ, color = "maroon", histcolor = "maroon")
-funplot!(fig, gᵥ)
-```
-
-!!! note
-
-    The directional and planar variograms coincide in this example
-    because planes are equal to lines in 2-dimensional space. These
-    concepts are most useful in 3-dimensional space where we may be
-    interested in comparing the horizontal planar range to the
-    vertical directional range.
-
-### Empirical surfaces
+### Variogram surfaces
 
 ```@docs
-EmpiricalVariogramSurface
+variogramsurface
 ```
 
 ```@example variograms
-g = EmpiricalVariogramSurface(img, "value", maxlag = 50.)
+g = variogramsurface(img)
 
 surfplot(g)
 ```

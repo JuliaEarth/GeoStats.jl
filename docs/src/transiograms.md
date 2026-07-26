@@ -26,9 +26,7 @@ respectively.
 ### (Omini)directional transiograms
 
 ```@docs
-EmpiricalTransiogram
-DirectionalTransiogram
-PlanarTransiogram
+transiogram
 ```
 
 Consider the following categorical image:
@@ -44,19 +42,19 @@ img |> viewer
 We can estimate the ominidirectional transiogram with
 
 ```@example transiograms
-t = EmpiricalTransiogram(img, "code", maxlag = 50.)
+t = transiogram(img)
 
 funplot(t)
 ```
 
-### Empirical surfaces
+### Transiogram surfaces
 
 ```@docs
-EmpiricalTransiogramSurface
+transiogramsurface
 ```
 
 ```@example transiograms
-t = EmpiricalTransiogramSurface(img, "code", maxlag = 50.)
+t = transiogramsurface(img)
 
 surfplot(t)
 ```
@@ -134,7 +132,7 @@ PiecewiseLinearTransiogram
 ```
 
 ```@example transiograms
-t = EmpiricalTransiogram(img, "code", maxlag = 50.)
+t = transiogram(img)
 
 τ = GeoStatsFunctions.fit(PiecewiseLinearTransiogram, t)
 
