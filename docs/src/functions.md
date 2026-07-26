@@ -220,7 +220,7 @@ We can fit a specific theoretical variogram such as the
 γ = GeoStatsFunctions.fit(SineHoleVariogram, g)
 
 fig = funplot(g)
-funplot!(fig, γ)
+funplot!(fig, γ, maxlag = 25.0)
 ```
 
 or we can let the framework find the theoretical
@@ -230,7 +230,7 @@ variogram with minimum error:
 γ = GeoStatsFunctions.fit(Variogram, g)
 
 fig = funplot(g)
-funplot!(fig, γ)
+funplot!(fig, γ, maxlag = 25.0)
 ```
 
 The [`SineHoleVariogram`](@ref) fits the empirical variogram
@@ -243,7 +243,7 @@ decide which one has the best fit:
 γ = GeoStatsFunctions.fitany([GaussianVariogram, SphericalVariogram], g)
 
 fig = funplot(g)
-funplot!(fig, γ)
+funplot!(fig, γ, maxlag = 25.0)
 ```
 
 Finally, we can fix specific parameters during the optimization
@@ -253,7 +253,7 @@ by passing them as keyword arguments:
 γ = GeoStatsFunctions.fit(SineHoleVariogram, g, sill=1.2)
 
 fig = funplot(g)
-funplot!(fig, γ)
+funplot!(fig, γ, maxlag = 25.0)
 ```
 
 and can specify a custom weight function `w(h)` that informs how
@@ -263,5 +263,5 @@ important is the misfit at any given lag `h`:
 γ = GeoStatsFunctions.fit(SineHoleVariogram, g, h -> 1 / h^2)
 
 fig = funplot(g)
-funplot!(fig, γ)
+funplot!(fig, γ, maxlag = 25.0)
 ```
