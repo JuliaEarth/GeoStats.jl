@@ -2,6 +2,8 @@
 
 Below is a list of publications made possible with this project:
 
+- *Pohle et al. 2026.* [Reconstructing a 1980s DEM of the Greenland ice sheet for model initialization](https://www.cambridge.org/core/journals/journal-of-glaciology/article/reconstructing-a-1980s-dem-of-the-greenland-ice-sheet-for-model-initialization/54C70460938B2ED85F6886E8A7BA6072)
+
 - *Langner et al. 2026.* [Investigating behavioral inertia in passively sensed smartphone parameters to differentiate affective episodes in patients with bipolar disorder](https://www.sciencedirect.com/science/article/pii/S2772408526001377)
 
 - *Rines et al. 2026.* [Interpolation of large-scale airborne geophysical data with uncertainty quantification](https://www.sciencedirect.com/science/article/abs/pii/S0098300426000981)
