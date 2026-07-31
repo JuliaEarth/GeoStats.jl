@@ -75,7 +75,7 @@ or directional variograms along specific directions:
 gₕ = variogram(img, dir = (1.0, 0.0))
 gᵥ = variogram(img, dir = (0.0, 1.0))
 
-fig = funplot(gₕ, color = "maroon", histcolor = "maroon")
+fig = funplot(gₕ, color = "salmon")
 funplot!(fig, gᵥ)
 ```
 
