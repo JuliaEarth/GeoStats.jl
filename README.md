@@ -158,6 +158,7 @@ This project would not be possible without the contributions of:
       <td align="center" valign="top" width="14.28%"><a href="https://anj1.github.io/research/"><img src="https://avatars.githubusercontent.com/u/4230149?v=4?s=70" width="70px;" alt="A Nejati"/><br /><sub><b>A Nejati</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=anj1" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://www.guido-kraemer.com"><img src="https://avatars.githubusercontent.com/u/12512930?v=4?s=70" width="70px;" alt="Guido Kraemer"/><br /><sub><b>Guido Kraemer</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=gdkrmr" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://www.math.uni-hamburg.de/en/home/lewerenz"><img src="https://avatars.githubusercontent.com/u/6719061?v=4?s=70" width="70px;" alt="Max Lewerenz"/><br /><sub><b>Max Lewerenz</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=XamLe" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="http://sites.google.com/view/phchavesmaia/home"><img src="https://avatars.githubusercontent.com/u/68562195?v=4?s=70" width="70px;" alt="Pedro H. Chaves Maia"/><br /><sub><b>Pedro H. Chaves Maia</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=phchavesmaia" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>

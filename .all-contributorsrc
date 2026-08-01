@@ -944,6 +944,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "phchavesmaia",
+      "name": "Pedro H. Chaves Maia",
+      "avatar_url": "https://avatars.githubusercontent.com/u/68562195?v=4",
+      "profile": "http://sites.google.com/view/phchavesmaia/home",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
