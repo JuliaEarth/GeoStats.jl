@@ -160,6 +160,9 @@ This project would not be possible without the contributions of:
       <td align="center" valign="top" width="14.28%"><a href="https://www.math.uni-hamburg.de/en/home/lewerenz"><img src="https://avatars.githubusercontent.com/u/6719061?v=4?s=70" width="70px;" alt="Max Lewerenz"/><br /><sub><b>Max Lewerenz</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=XamLe" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="http://sites.google.com/view/phchavesmaia/home"><img src="https://avatars.githubusercontent.com/u/68562195?v=4?s=70" width="70px;" alt="Pedro H. Chaves Maia"/><br /><sub><b>Pedro H. Chaves Maia</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=phchavesmaia" title="Code">💻</a></td>
     </tr>
+    <tr>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/barche"><img src="https://avatars.githubusercontent.com/u/966001?v=4?s=70" width="70px;" alt="Bart Janssens"/><br /><sub><b>Bart Janssens</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=barche" title="Code">💻</a></td>
+    </tr>
   </tbody>
 </table>
 
