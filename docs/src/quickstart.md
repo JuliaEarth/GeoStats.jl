@@ -300,9 +300,9 @@ and will predict in Ωt where only predictors are available. We have to
 !!! note
 
     The columns of the geospatial table are colored according to their
-    role in geostatistical modeling. Predictor variables are colored in
-    sage, target variables are colored in red, and the `geometry` column
-    is colored in teal.
+    role in geostatistical modeling. Predictor variables are displayed
+    in sage color, target variables are displayed in salmon color, and
+    the `geometry` column is displayed in teal color.
 
 ```@example quickstart
 learn = Learn(Ωₗ, model=model)
