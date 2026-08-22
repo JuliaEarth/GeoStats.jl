@@ -330,6 +330,7 @@ This project would not be possible without the contributions of:
     <tr>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/barche"><img src="https://avatars.githubusercontent.com/u/966001?v=4?s=70" width="70px;" alt="Bart Janssens"/><br /><sub><b>Bart Janssens</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=barche" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://jitendravjh.in/"><img src="https://avatars.githubusercontent.com/u/121077534?v=4?s=70" width="70px;" alt="Jitendra Verma"/><br /><sub><b>Jitendra Verma</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=jitendravjh" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="http://soumodityapramanik.in"><img src="https://avatars.githubusercontent.com/u/177980566?v=4?s=70" width="70px;" alt="Soumoditya Pramanik"/><br /><sub><b>Soumoditya Pramanik</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=Soumoditya" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>
