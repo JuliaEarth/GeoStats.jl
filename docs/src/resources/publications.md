@@ -2,6 +2,8 @@
 
 Below is a list of publications made possible with this project:
 
+- *Guth et al. 2026.* [Green space exposure predicts manic episodes in bipolar disorder: one year longitudinal analysis using smartphone-derived GPS data](https://www.nature.com/articles/s44184-026-00242-1)
+
 - *Pohle et al. 2026.* [Reconstructing a 1980s DEM of the Greenland ice sheet for model initialization](https://www.cambridge.org/core/journals/journal-of-glaciology/article/reconstructing-a-1980s-dem-of-the-greenland-ice-sheet-for-model-initialization/54C70460938B2ED85F6886E8A7BA6072)
 
 - *Langner et al. 2026.* [Investigating behavioral inertia in passively sensed smartphone parameters to differentiate affective episodes in patients with bipolar disorder](https://www.sciencedirect.com/science/article/pii/S2772408526001377)
