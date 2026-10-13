@@ -2,6 +2,8 @@
 
 Below is a list of publications made possible with this project:
 
+- *Kim, Y. & Tessum, M. 2026* [A Spatiotemporal Modeling Approach for Predicting Concentrations of Ammonia in an Agricultural Region](https://agupubs.onlinelibrary.wiley.com/doi/10.1029/2025GH001517)
+
 - *Guth et al. 2026.* [Green space exposure predicts manic episodes in bipolar disorder: one year longitudinal analysis using smartphone-derived GPS data](https://www.nature.com/articles/s44184-026-00242-1)
 
 - *Pohle et al. 2026.* [Reconstructing a 1980s DEM of the Greenland ice sheet for model initialization](https://www.cambridge.org/core/journals/journal-of-glaciology/article/reconstructing-a-1980s-dem-of-the-greenland-ice-sheet-for-model-initialization/54C70460938B2ED85F6886E8A7BA6072)
