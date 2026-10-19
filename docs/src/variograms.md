@@ -34,11 +34,8 @@ of the set. Alternatively, the robust Cressie's estimator is given by
 Both estimators are available and can be used with general distance functions
 in order to for example:
 
-- Model anisotropy (e.g. ellipsoid distance)
-- Perform simulation on sphere (e.g. haversine distance)
-
-Please see [Distances.jl](https://github.com/JuliaStats/Distances.jl)
-for a complete list of distance functions.
+- Model anisotropy (e.g. `MahalanobisDistance`)
+- Perform simulation on ellipsoid (e.g. `GeodesicDistance`)
 
 The high-performance estimation procedure implemented in the framework can
 consider all pairs of locations regardless of direction (ominidirectional)

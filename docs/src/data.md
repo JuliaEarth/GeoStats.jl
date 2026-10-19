@@ -131,8 +131,8 @@ earth |> Upscale(10, 5) |> viewer
 
 # add other elements to the visualization
 viz!(borders.geometry, color = "cyan")
-viz!(airports.geometry, color = "black", pointsize=4, pointmarker='✈')
-viz!(ports.geometry, color = "blue", pointsize=4, pointmarker='⚓')
+viz!(airports.geometry, color = "black", size=4, marker='✈')
+viz!(ports.geometry, color = "blue", size=4, marker='⚓')
 
 # display current figure
 Mke.current_figure()
