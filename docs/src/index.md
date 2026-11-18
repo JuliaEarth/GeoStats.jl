@@ -333,6 +333,7 @@ This project would not be possible without the contributions of:
       <td align="center" valign="top" width="14.28%"><a href="http://soumodityapramanik.in"><img src="https://avatars.githubusercontent.com/u/177980566?v=4&size=70" width="70px" height="70px" alt="Soumoditya Pramanik"/><br /><sub><b>Soumoditya Pramanik</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=Soumoditya" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/nhz2"><img src="https://avatars.githubusercontent.com/u/39104088?v=4&size=70" width="70px" height="70px" alt="Nathan Zimmerberg"/><br /><sub><b>Nathan Zimmerberg</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=nhz2" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/ShauryaAttreya37"><img src="https://avatars.githubusercontent.com/u/207343577?v=4&size=70" width="70px" height="70px" alt="ShauryaAttreya"/><br /><sub><b>ShauryaAttreya</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=ShauryaAttreya37" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/areynolds-IR"><img src="https://avatars.githubusercontent.com/u/212608544?v=4&size=70" width="70px" height="70px" alt="Andy Reynolds"/><br /><sub><b>Andy Reynolds</b></sub></a><br /><a href="https://github.com/JuliaEarth/GeoStats.jl/commits?author=areynolds-IR" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>
